@@ -10,9 +10,14 @@ export async function startCheckout(opts: {
   interval: 'month' | 'year';
   companyId?: string;
   lang?: string;
+  /** Required: customer expressly asked to start service and acknowledged withdrawal ends once it starts. */
+  expressStartAcknowledged: boolean;
 }): Promise<CheckoutResult> {
   if (!supabaseConfigured || !supabase) {
     return { ok: false, reason: 'not_available', message: 'Payments not yet available' };
+  }
+  if (!opts.expressStartAcknowledged) {
+    return { ok: false, reason: 'error', message: 'Express start acknowledgement required' };
   }
   const { data: sessionData } = await supabase.auth.getSession();
   if (!sessionData.session) {

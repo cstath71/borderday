@@ -19,6 +19,7 @@ export default function Pricing() {
   const [banner, setBanner] = useState<'success' | 'cancel' | null>(null);
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [expressStart, setExpressStart] = useState(false);
 
   useEffect(() => {
     const c = searchParams.get('checkout');
@@ -67,6 +68,10 @@ export default function Pricing() {
       setNote(d.pricing.needCompany);
       return;
     }
+    if (!expressStart) {
+      setNote(d.pricing.expressStartRequired);
+      return;
+    }
     setBusy(true);
     try {
       const res = await startCheckout({
@@ -74,6 +79,7 @@ export default function Pricing() {
         interval,
         companyId: plan === 'company' ? companyId ?? undefined : undefined,
         lang,
+        expressStartAcknowledged: true,
       });
       if (res.ok) {
         window.location.assign(res.url);
@@ -118,6 +124,28 @@ export default function Pricing() {
           <p style={{ fontSize: '0.9rem' }}>
             <Link to={`/${lang}/cancel`}>{d.nav.cancel}</Link>
           </p>
+          <label
+            style={{
+              display: 'flex',
+              gap: '0.75rem',
+              alignItems: 'flex-start',
+              marginTop: '1.25rem',
+              padding: '0.85rem 1rem',
+              borderRadius: 8,
+              border: '1px solid color-mix(in srgb, var(--ink-muted) 35%, transparent)',
+              fontSize: '0.9rem',
+              lineHeight: 1.45,
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={expressStart}
+              onChange={(e) => setExpressStart(e.target.checked)}
+              required
+              style={{ marginTop: '0.2rem' }}
+            />
+            <span>{d.pricing.expressStartLabel}</span>
+          </label>
           <div className="price-grid" style={{ marginTop: '1.5rem' }}>
             <article className="card price-card" style={{ borderColor: 'var(--primary)', borderWidth: 2 }}>
               <div className="meta" style={{ color: 'var(--primary)', fontWeight: 700 }}>{d.pricing.recommended}</div>

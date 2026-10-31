@@ -39,10 +39,16 @@ Deno.serve(async (req) => {
       interval: "month" | "year";
       companyId?: string;
       lang?: string;
+      expressStartAcknowledged?: boolean;
     };
+    if (!body.expressStartAcknowledged) {
+      return new Response(JSON.stringify({ available: false, message: "Express start acknowledgement required" }), {
+        status: 200, headers: { ...cors, "Content-Type": "application/json" },
+      });
+    }
     let priceId = "";
     let quantity = 1;
-    const metadata: Record<string, string> = { plan: body.plan, user_id: user.id };
+    const metadata: Record<string, string> = { plan: body.plan, user_id: user.id, express_start: "1" };
     const lang = (body.lang && /^[a-z]{2}$/.test(body.lang)) ? body.lang : "en";
 
     if (body.plan === "company") {

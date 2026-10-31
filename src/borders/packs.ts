@@ -47,7 +47,7 @@ const SRC = {
     checked: CHECKED,
   },
   fedlex: {
-    title: 'Fedlex RU 2026 104 — protocollo CH–IT (pre-print verified; published RU prevails)',
+    title: 'Fedlex RU 2026 104 — protocollo CH–IT (published)',
     url: 'https://www.fedlex.admin.ch/eli/oc/2026/104/it',
     checked: CHECKED,
   },
@@ -126,6 +126,21 @@ const SRC = {
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2021/08-aout/31-gaichel-accords-domaine-fiscal.html',
     checked: CHECKED,
   },
+  chamberBeLu34: {
+    title: 'Belgian Chamber DOC 55 3055/001 — BE–LU 34 jours ouvrables',
+    url: 'https://www.dekamer.be/FLWB/PDF/55/3055/55K3055001.pdf',
+    checked: CHECKED,
+  },
+  reg883: {
+    title: 'Regulation (EC) No 883/2004 Art. 13 (CELLAR)',
+    url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32004R0883',
+    checked: CHECKED,
+  },
+  reg987: {
+    title: 'Regulation (EC) No 987/2009 Art. 14(8)/(10) (CELLAR)',
+    url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R0987',
+    checked: CHECKED,
+  },
   luFrAvenant: {
     title: 'gouvernement.lu — avenant FR–LU du 7 novembre 2022 (34 jours)',
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2022/11-novembre/07-signature-luxembourg-france.html',
@@ -185,7 +200,7 @@ const WARN = [0.75, 0.9, 1];
  */
 function ssFramework(
   id: string,
-  sources: OfficialSource[] = [SRC.fwMemo, SRC.fwText, SRC.fps, SRC.cleiss],
+  sources: OfficialSource[] = [SRC.fwMemo, SRC.fwText, SRC.fps, SRC.reg883, SRC.reg987, SRC.cleiss],
   notesKey = 'ss_framework_note',
 ): LimitCounter {
   return {
@@ -208,7 +223,7 @@ function ssFramework(
   };
 }
 
-const LU_SS_SOURCES = [SRC.ccssParent, SRC.fwMemo, SRC.fwText, SRC.fps];
+const LU_SS_SOURCES = [SRC.ccssParent, SRC.fwMemo, SRC.fwText, SRC.fps, SRC.reg883, SRC.reg987];
 
 export const BORDER_PACKS: BorderPack[] = [
   {
@@ -454,7 +469,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.luBe34, SRC.luBe34Gov],
+        sources: [SRC.chamberBeLu34, SRC.luBe34, SRC.luBe34Gov],
         notesKey: 'lu_be_tax_note',
         overKey: 'lu_be_over_34',
       },

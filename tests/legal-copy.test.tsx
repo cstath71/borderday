@@ -179,20 +179,29 @@ describe('C6 withdrawal wording', () => {
     expect(all).not.toMatch(/once performance has begun|une fois l’exécution commencée|mit Leistungsbeginn erlischt|una volta iniziata l’esecuzione/);
   });
 
-  it('states full performance and proportionate payment', () => {
-    const fullPerformance: Record<Lang, RegExp> = {
-      en: /fully performed/,
-      fr: /pleinement exécuté/,
-      de: /vollständiger Vertragserfüllung/,
-      it: /completa esecuzione del contratto/,
+  it('states express-start loss of statutory withdrawal plus voluntary 14-day full refund', () => {
+    const express: Record<Lang, RegExp> = {
+      en: /expressly asking us to start the service/,
+      fr: /demandant expressément le démarrage du service/,
+      de: /ausdrücklich verlangen, dass der Dienst/,
+      it: /chiedete espressamente l’inizio del servizio/,
+      nl: /expressly asking us to start the service/,
     };
-    const proportionate: Record<Lang, RegExp> = { en: /in proportion/, fr: /proportionnel/, de: /im Verhältnis/, it: /proporzionale/ };
+    const voluntary: Record<Lang, RegExp> = {
+      en: /voluntary 14-day full-refund guarantee/,
+      fr: /garantie volontaire de remboursement intégral de 14 jours/,
+      de: /freiwillige 14-tägige Vollrückerstattungsgarantie/,
+      it: /garanzia volontaria di rimborso integrale di 14 giorni/,
+      nl: /voluntary 14-day full-refund guarantee/,
+    };
     for (const [lang, d] of dicts) {
-      expect(d.terms.s5EffectsBody).toMatch(fullPerformance[lang]);
-      expect(d.terms.s5EffectsBody).toMatch(proportionate[lang]);
+      expect(d.terms.s5EffectsBody, lang).toMatch(express[lang]);
+      expect(d.terms.s5EffectsBody, lang).toMatch(voluntary[lang]);
       expect(d.terms.s5Body).toMatch(/\b14\b/);
+      expect(d.pricing.expressStartLabel.length).toBeGreaterThan(40);
     }
     expect(getDict('en').terms.s5Body).toMatch(/the day you receive access/);
+    expect(getDict('en').terms.s5EffectsBody).toMatch(/C-565\/22/);
   });
 
   it('carries the Annex I(B) fields', () => {
@@ -202,12 +211,16 @@ describe('C6 withdrawal wording', () => {
     expect(getDict('it').terms.s5Form).toMatch(/Ordinato il \/ ricevuto il.*Nome del consumatore.*Indirizzo del consumatore.*Firma.*Data/s);
   });
 
-  it('H12: says a renewed yearly plan can be cancelled at any time after the first year, and promises no invented refund', () => {
+  it('H12: says a renewed yearly plan can be cancelled at any time after the first year, and cites L215-1 without invented refund maths', () => {
     expect(getDict('en').terms.s3YearlyBody).toMatch(/After the first year you can cancel a renewed yearly plan at any time/);
     expect(getDict('de').terms.s3YearlyBody).toMatch(/Nach dem ersten Jahr/);
     expect(getDict('fr').terms.s3YearlyBody).toMatch(/Après la première année/);
     expect(getDict('it').terms.s3YearlyBody).toMatch(/Dopo il primo anno/);
-    for (const [, d] of dicts) expect(d.terms.s3YearlyBody).not.toMatch(/\d/);
+    for (const [, d] of dicts) {
+      expect(d.terms.s3YearlyBody).toMatch(/L215-1/);
+      // No invented euro/day refund maths — article cites and worded month windows only.
+      expect(d.terms.s3YearlyBody).not.toMatch(/€\d|\d+%/);
+    }
   });
 });
 

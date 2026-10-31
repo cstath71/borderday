@@ -149,6 +149,10 @@ describe('bd-create-checkout Managed Payments + trial', () => {
     expect(src).toContain('trial_period_days: TRIAL_DAYS');
     expect(src).not.toMatch(/trial_period_days:\s*14/);
   });
+  it('requires expressStartAcknowledged before creating a Managed Payments session', () => {
+    expect(src).toContain('expressStartAcknowledged');
+    expect(src).toContain('Express start acknowledgement required');
+  });
 });
 
 describe('bd-stripe-webhook Deno signature verify', () => {

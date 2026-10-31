@@ -22,19 +22,6 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - run: cp dist/index.html dist/404.html
-      - name: SPA path shells (200 for lang/auth)
-        run: |
-          for lang in en fr de it; do
-            mkdir -p "dist/$lang/auth/sign-in" "dist/$lang/auth/sign-up" "dist/$lang/auth/callback" \
-              "dist/$lang/pricing" "dist/$lang/company/signup"
-            cp dist/index.html "dist/$lang/index.html"
-            cp dist/index.html "dist/$lang/auth/sign-in/index.html"
-            cp dist/index.html "dist/$lang/auth/sign-up/index.html"
-            cp dist/index.html "dist/$lang/auth/callback/index.html"
-            cp dist/index.html "dist/$lang/pricing/index.html"
-            cp dist/index.html "dist/$lang/company/signup/index.html"
-          done
       - uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -50,3 +37,16 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Wait for Pages CDN
+        run: sleep 45
+      - name: Ping IndexNow
+        run: node scripts/indexnow.mjs
+        continue-on-error: true

@@ -17,16 +17,19 @@ export default function Faq() {
 
   return (
     <>
-      <Seo lang={lang} title={`${d.faq.title} — BorderDay`} description={d.meta.description} path="faq" />
+      <Seo lang={lang} title={`${d.faq.title} — BorderDay`} description={d.meta.description} path="faq" faq={items} />
       <section className="section">
         <div className="container prose">
           <h1>{d.faq.title}</h1>
+          <p id="summary" className="lead"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
+          <div className="faq" id="faq">
           {items.map(([q, a]) => (
             <div key={q}>
-              <h2>{q}</h2>
+              <h3>{q}</h3>
               <p>{a}</p>
             </div>
           ))}
+          </div>
         </div>
       </section>
     </>

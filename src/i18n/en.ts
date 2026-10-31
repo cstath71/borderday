@@ -65,6 +65,9 @@ const en = {
     disclaimerShort:
       'BorderDay is a tracking and reminder tool for day classifications. It is not tax advice or legal advice. Always verify with the competent authority or a qualified adviser.',
     demoBanner: 'Screenshots and the seeded company use clearly labeled DEMO data — not real employees.',
+    inShort:
+      'BorderDay helps HR track telework, on-site and travel days per employee against official tax and social-security day limits on five borders. Company plan: €5 per active employee per month (€39 minimum); individuals €4.99/month or €49/year. 7-day trial with card required. A tracking tool — not tax or legal advice.',
+    inShortLabel: 'In short',
   },
   borders: {
     geneva_fr: 'Geneva / Romandie ← France',

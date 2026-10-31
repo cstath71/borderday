@@ -1,10 +1,15 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import en from '../src/i18n/en';
 import fr from '../src/i18n/fr';
 import de from '../src/i18n/de';
 import itDict from '../src/i18n/it';
+import { llmsFullTxt, llmsTxt, robotsTxt, sitemapXml, softwareApplicationLd } from '../scripts/seo.mjs';
 
 const MARKERS = ['PrimeLogic', 'CHE-312.418.158', 'Cours des Bastions'];
+const OWNER_BANNED = /PrimeLogic|Stathopoulos|CHE-312\.418\.158|Cours des Bastions/i;
+const ROOT = join(import.meta.dirname, '..');
 
 function collectStrings(value: unknown, path = ''): { path: string; text: string }[] {
   if (typeof value === 'string') return [{ path, text: value }];
@@ -40,5 +45,45 @@ describe('controller identity surface', () => {
     expect(fr.privacy.controllerBody).toMatch(/LPD \/ nLPD/);
     expect(de.privacy.controllerBody).toMatch(/DSG \/ nDSG/);
     expect(itDict.privacy.controllerBody).toMatch(/LPD \/ nLPD/);
+  });
+
+  it('SEO generators never mention controller identity', () => {
+    for (const blob of [robotsTxt(), sitemapXml(), llmsTxt(), llmsFullTxt(), JSON.stringify(softwareApplicationLd())]) {
+      expect(blob).not.toMatch(OWNER_BANNED);
+    }
+  });
+
+  it('public SEO files on disk (if present) stay clean of controller identity', () => {
+    for (const rel of ['public/robots.txt', 'public/sitemap.xml', 'public/llms.txt', 'public/llms-full.txt']) {
+      const p = join(ROOT, rel);
+      if (!existsSync(p)) continue;
+      expect(readFileSync(p, 'utf8')).not.toMatch(OWNER_BANNED);
+    }
+  });
+
+  it('prerendered dist HTML (if built) keeps PrimeLogic off marketing pages', () => {
+    const sample = join(ROOT, 'dist/en/index.html');
+    if (!existsSync(sample)) return;
+    for (const rel of [
+      'en/index.html',
+      'en/pricing/index.html',
+      'en/faq/index.html',
+      'fr/index.html',
+      'de/index.html',
+      'it/index.html',
+      'robots.txt',
+      'sitemap.xml',
+      'llms.txt',
+      'llms-full.txt',
+    ]) {
+      const text = readFileSync(join(ROOT, 'dist', rel), 'utf8');
+      expect(text).not.toMatch(OWNER_BANNED);
+    }
+    // Privacy/terms prerendered shells use marketing summaries only (full legal body is client-rendered)
+    for (const rel of ['en/privacy/index.html', 'en/terms/index.html']) {
+      const text = readFileSync(join(ROOT, 'dist', rel), 'utf8');
+      // prerender summary must not leak controller; live React page still has it in i18n only
+      expect(text).not.toMatch(OWNER_BANNED);
+    }
   });
 });

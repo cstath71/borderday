@@ -67,6 +67,9 @@ const it: Dict = {
     disclaimerShort:
       'BorderDay è uno strumento di tracciamento e promemoria delle classificazioni dei giorni. Non è consulenza fiscale o legale. Verificate sempre con l’autorità competente o un consulente qualificato.',
     demoBanner: 'Gli screenshot e l’azienda precaricata usano dati DEMO chiaramente etichettati — non collaboratori reali.',
+    inShort:
+      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e missioni per collaboratore rispetto alle soglie ufficiali fiscali e di sicurezza sociale su cinque frontiere. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €); individuali 4,99 €/mese o 49 €/anno. Prova di 7 giorni con carta richiesta. Strumento di tracciamento — non consulenza fiscale o legale.',
+    inShortLabel: 'In breve',
   },
   borders: {
     geneva_fr: 'Ginevra / Romandia ← Francia',

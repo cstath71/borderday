@@ -67,6 +67,9 @@ const de: Dict = {
     disclaimerShort:
       'BorderDay ist ein Tracking- und Erinnerungstool für Tagesklassifikationen. Keine Steuer- oder Rechtsberatung. Immer bei der zuständigen Behörde oder einer Fachperson prüfen.',
     demoBanner: 'Screenshots und das vorgeladene Unternehmen nutzen klar gekennzeichnete DEMO-Daten — keine echten Mitarbeitenden.',
+    inShort:
+      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden an offiziellen Steuer- und Sozialversicherungsschwellen auf fünf Grenzen zu messen. Unternehmensplan: 5 € je aktive Mitarbeitende und Monat (Minimum 39 €); Einzelpersonen 4,99 €/Monat oder 49 €/Jahr. 7-Tage-Test mit Karte. Tracking-Tool — keine Steuer- oder Rechtsberatung.',
+    inShortLabel: 'Kurz gesagt',
   },
   borders: {
     geneva_fr: 'Genf / Romandie ← Frankreich',

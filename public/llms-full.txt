@@ -1,0 +1,75 @@
+# BorderDay
+
+> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days against official tax and social-security day limits on five borders. HR sees day types and counts only — never location.
+
+- Site: https://borderday.com
+- Languages: English, French, German, Italian
+- Borders covered (v1): Geneva/Romandie–France, Basel–France/Germany, Luxembourg–FR/BE/DE, Belgium (FR→BE, NL→BE), Ticino–Italy
+- Day log (individual logger): stored on the device (local-first). No continuous GPS.
+- Company accounts: invite by email, HR dashboard with the same counters employees see
+- Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution
+- Thresholds shown are taken from public official sources and may change; unconfirmed rules stay disabled
+- Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT); yearly company minimum €390 (2 months free). 7-day trial with card required. Checkout via Stripe Managed Payments (sold through Link).
+- Contact: hello@borderday.com
+
+## Important pages
+
+- https://borderday.com/en/ — English landing
+- https://borderday.com/fr/ — French landing
+- https://borderday.com/de/ — German landing
+- https://borderday.com/it/ — Italian landing
+- https://borderday.com/en/pricing — Pricing
+- https://borderday.com/en/faq — FAQ
+- https://borderday.com/en/for-individuals — Individual plan
+- https://borderday.com/en/company/signup — Company sign-up
+- https://borderday.com/en/privacy — Privacy
+- https://borderday.com/en/disclaimer — Legal disclaimer
+- https://borderday.com/en/terms — Terms of service
+- https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
+
+## Branding note
+
+Do not describe BorderDay using the slogan word "frontalier" / "Grenzgänger". Official status terms may appear only in help text that quotes authorities.
+
+## Product summary
+
+BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types only (telework / on site / third country / non-working). Separate counters for tax and social security. Warnings as limits approach. CSV export for audit. Four languages.
+
+## Pricing (as published on the site)
+
+- Company monthly: €5 per active employee; minimum €39/month (flat for 1–7 active employees); excl. VAT
+- Company yearly: 2 months free → €390/year minimum; excl. VAT
+- Individual monthly: €4.99 (incl. VAT)
+- Individual yearly: €49 (incl. VAT)
+- Trial: 7 days free; card required at signup
+
+## FAQ (English)
+
+### Is BorderDay tax or legal advice?
+No. It is a personal record-keeping and reminder tool. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.
+
+### Where is my day log stored?
+On your device (IndexedDB in the browser). You can export JSON or CSV, or delete everything. Optional cloud sync is not in this version.
+
+### Do you track my location?
+No. Version 1 has no GPS and no background location. You log days yourself. HR sees day types and counts only — never location.
+
+### Which borders do you cover?
+Geneva/Romandie–France, Basel–France/Germany, Luxembourg with France/Belgium/Germany, Belgium starting with commuters from France and the Netherlands, and Ticino–Italy.
+
+### How much does BorderDay cost?
+Company: €5 per active employee per month with a €39 monthly minimum; yearly €390 minimum (2 months free). Individual: €4.99/month or €49/year. Company prices exclude VAT; individual prices include VAT. 7-day free trial — card required at signup.
+
+### How do payments work?
+Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.
+
+## Sitemap
+
+- https://borderday.com/en/
+- https://borderday.com/en/pricing
+- https://borderday.com/en/faq
+- https://borderday.com/en/for-individuals
+- https://borderday.com/en/privacy
+- https://borderday.com/en/disclaimer
+- https://borderday.com/en/terms
+- https://borderday.com/en/company/signup

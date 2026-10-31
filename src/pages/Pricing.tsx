@@ -80,6 +80,7 @@ export default function Pricing() {
       <section className="section">
         <div className="container">
           <h1>{d.pricing.title}</h1>
+          <p id="summary"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
           <p>{d.pricing.subtitle}</p>
           {bannerText && (
             <p

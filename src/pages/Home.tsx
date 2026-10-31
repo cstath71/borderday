@@ -18,6 +18,7 @@ export default function Home() {
             {d.home.demoBanner}
           </p>
           <h1>{d.home.heroTitle}</h1>
+          <p id="summary" className="lead"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
           <p className="lead">{d.home.heroBody}</p>
           <div className="hero-cta">
             <Link className="btn btn-primary" to={`/${lang}/auth/sign-up`}>{d.home.ctaPrimary}

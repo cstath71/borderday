@@ -1,27 +1,31 @@
 # BorderDay
 
-> BorderDay is a personal record-keeping and reminder tool for people who live in one country and work in another. It counts days worked from home, on site, or in a third country, and warns before tax and social-security day limits that apply to their border.
+> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days against official tax and social-security day limits on five borders. HR sees day types and counts only — never location.
 
 - Site: https://borderday.com
 - Languages: English, French, German, Italian
 - Borders covered (v1): Geneva/Romandie–France, Basel–France/Germany, Luxembourg–FR/BE/DE, Belgium (FR→BE, NL→BE), Ticino–Italy
-- Day log is stored on the device (local-first). No continuous GPS.
-- Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution.
-- Thresholds shown are taken from public official sources and may change.
-- Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT). 7-day trial with card required. Checkout via Stripe Managed Payments (sold through Link).
+- Day log (individual logger): stored on the device (local-first). No continuous GPS.
+- Company accounts: invite by email, HR dashboard with the same counters employees see
+- Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution
+- Thresholds shown are taken from public official sources and may change; unconfirmed rules stay disabled
+- Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT); yearly company minimum €390 (2 months free). 7-day trial with card required. Checkout via Stripe Managed Payments (sold through Link).
+- Contact: hello@borderday.com
 
 ## Important pages
 
-- /en/ — English landing
-- /fr/ — French landing
-- /de/ — German landing
-- /it/ — Italian landing
-- /en/app — Day logger (PWA)
-- /en/pricing — Pricing
-- /en/faq — FAQ
-- /en/privacy — Privacy (local-first)
-- /en/disclaimer — Legal disclaimer
-- /en/terms — Terms of service (trial, cancellation, VAT, EU 14-day withdrawal)
+- https://borderday.com/en/ — English landing
+- https://borderday.com/fr/ — French landing
+- https://borderday.com/de/ — German landing
+- https://borderday.com/it/ — Italian landing
+- https://borderday.com/en/pricing — Pricing
+- https://borderday.com/en/faq — FAQ
+- https://borderday.com/en/for-individuals — Individual plan
+- https://borderday.com/en/company/signup — Company sign-up
+- https://borderday.com/en/privacy — Privacy
+- https://borderday.com/en/disclaimer — Legal disclaimer
+- https://borderday.com/en/terms — Terms of service
+- https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note
 

@@ -67,6 +67,9 @@ const fr: Dict = {
     disclaimerShort:
       'BorderDay est un outil de suivi et de rappel des classifications de jours. Ce n’est pas un conseil fiscal ou juridique. Vérifiez toujours auprès de l’autorité compétente ou d’un conseiller qualifié.',
     demoBanner: 'Les captures et l’entreprise préchargée utilisent des données DEMO clairement étiquetées — pas de vrais collaborateurs.',
+    inShort:
+      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur au regard des seuils officiels fiscaux et de sécurité sociale sur cinq frontières. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €) ; particuliers 4,99 €/mois ou 49 €/an. Essai de 7 jours avec carte requise. Outil de suivi — pas un conseil fiscal ou juridique.',
+    inShortLabel: 'En bref',
   },
   borders: {
     geneva_fr: 'Genève / Romandie ← France',

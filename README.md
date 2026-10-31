@@ -12,7 +12,7 @@ Multilingual PWA for HR and employees to track telework / on-site / third-countr
 
 ## Auth
 
-Email (password + magic link) and **Google** only. No Apple sign-in.
+Email (password + magic link) and **Google** OAuth.
 
 ## Local
 

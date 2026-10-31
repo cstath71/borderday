@@ -311,7 +311,7 @@ const en = {
   },
   auth: {
     signInTitle: 'Sign in',
-    signInSubtitle: 'Email (password or magic link) or Google. No Apple sign-in.',
+    signInSubtitle: 'Email (password or magic link) or Google.',
     signUpTitle: 'Create your account',
     signUpSubtitle: 'Use work email and a password, or continue with Google.',
     email: 'Email',

@@ -313,7 +313,7 @@ const de: Dict = {
   },
   auth: {
     signInTitle: 'Anmelden',
-    signInSubtitle: 'E-Mail (Passwort oder Magic Link) oder Google. Keine Apple-Anmeldung.',
+    signInSubtitle: 'E-Mail (Passwort oder Magic Link) oder Google.',
     signUpTitle: 'Konto erstellen',
     signUpSubtitle: 'Geschäftliche E-Mail und Passwort, oder mit Google fortfahren.',
     email: 'E-Mail',

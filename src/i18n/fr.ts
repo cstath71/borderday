@@ -313,7 +313,7 @@ const fr: Dict = {
   },
   auth: {
     signInTitle: 'Connexion',
-    signInSubtitle: 'E-mail (mot de passe ou lien magique) ou Google. Pas de connexion Apple.',
+    signInSubtitle: 'E-mail (mot de passe ou lien magique) ou Google.',
     signUpTitle: 'Créer un compte',
     signUpSubtitle: 'E-mail professionnel et mot de passe, ou continuer avec Google.',
     email: 'E-mail',

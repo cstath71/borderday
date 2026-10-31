@@ -236,9 +236,9 @@ export const BORDER_PACKS: BorderPack[] = [
   },
   {
     // 1983 agreement: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel, Jura.
-    // Taxed in France. Its rules (one excess mission day in France ends the regime; 45 nights in
-    // Switzerland or a third state) need missions split by state, which the day model cannot do yet,
-    // so no tax counter runs: a wrong green light is worse than none.
+    // Taxed in France (France remits 4.5% to Switzerland). Same 40%/10-day mission split as the
+    // convention regime, plus a 45 work-night cap. Any excess mission day in France ends the regime;
+    // BorderDay cannot tell France from a third state, so every excess mission day is a warning.
     id: 'basel_fr',
     nameKey: 'basel_fr',
     residenceCountries: ['FR'],
@@ -247,15 +247,67 @@ export const BORDER_PACKS: BorderPack[] = [
     defaultAnnualWorkingDays: 240,
     counters: [
       {
-        id: 'basel_fr_tax_1983',
+        id: 'basel_fr_tax_telework_40',
         kind: 'tax',
-        labelKey: 'ch_fr_1983_label',
-        enabled: false,
-        countsAs: {},
+        labelKey: 'ch_fr_1983_telework_40',
+        enabled: true,
+        limit: 40,
+        inclusive: true,
+        missionRole: 'share',
+        unit: 'percent_of_working_time',
+        countsAs: {
+          telework: 'toward_percent',
+          onsite: 'none',
+          third_country: 'mission',
+          non_working: 'none',
+        },
         warningAt: WARN,
         sources: [SRC.ai1983, SRC.ex1983, SRC.impotsCantons, SRC.jura],
-        pendingReasonKey: 'ch_fr_1983_note',
-        pendingValueKey: 'ch_fr_1983_value',
+        notesKey: 'ch_fr_1983_tax_note',
+        overKey: 'ch_fr_1983_over_40',
+        missionExcessKey: 'ch_fr_1983_mission_excess',
+      },
+      {
+        id: 'basel_fr_tax_missions_10',
+        kind: 'tax',
+        labelKey: 'ch_fr_1983_missions_10',
+        enabled: true,
+        limit: 10,
+        inclusive: true,
+        missionRole: 'missions',
+        prorate: 'ceil',
+        unit: 'days_per_year',
+        countsAs: {
+          telework: 'none',
+          onsite: 'none',
+          third_country: 'mission',
+          non_working: 'none',
+        },
+        warningAt: WARN,
+        sources: [SRC.ai1983, SRC.ex1983, SRC.jura],
+        notesKey: 'ch_fr_1983_missions_note',
+        overKey: 'ch_fr_1983_over_mission',
+        missionExcessKey: 'ch_fr_1983_mission_excess',
+      },
+      {
+        id: 'basel_fr_tax_nights_45',
+        kind: 'tax',
+        labelKey: 'ch_fr_1983_nights_45',
+        enabled: true,
+        limit: 45,
+        inclusive: true,
+        countsOvernight: true,
+        unit: 'days_per_year',
+        countsAs: {
+          telework: 'none',
+          onsite: 'none',
+          third_country: 'none',
+          non_working: 'none',
+        },
+        warningAt: WARN,
+        sources: [SRC.ai1983, SRC.ex1983, SRC.jura, SRC.impotsCantons],
+        notesKey: 'ch_fr_1983_nights_note',
+        overKey: 'ch_fr_1983_over_45',
       },
       ssFramework('basel_fr_ss_50'),
     ],
@@ -511,7 +563,8 @@ export function listBorderPacks(): BorderPack[] {
 
 /** Corridors with a running treaty or statute tax counter. Marketing copy must match this list. */
 export function hasTaxCounter(pack: BorderPack): boolean {
-  return pack.counters.some((c) => c.kind === 'tax' && c.enabled);
+  // Profile-gated counters (e.g. FR→BE pre-2012) are optional and must not claim general tax coverage.
+  return pack.counters.some((c) => c.kind === 'tax' && c.enabled && !c.requiresProfileFlag);
 }
 
 export function hasSocialSecurityCounter(pack: BorderPack): boolean {

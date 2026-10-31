@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BORDER_PACKS, getBorderPack } from '../src/borders/packs';
+import { BORDER_PACKS, getBorderPack, hasTaxCounter } from '../src/borders/packs';
 import type { BorderPack, DayEntry, DayType } from '../src/borders/types';
 import {
   allowedDaysForPercent,
@@ -320,22 +320,47 @@ describe('C: A1 social-security bands (under 25%, 25% to under 50%, 50% or more)
 describe('C: basel_fr is the 1983 regime, not Geneva', () => {
   const pack = getBorderPack('basel_fr')!;
 
-  it('runs no tax counter: under review rather than a false green light', () => {
-    const results = evaluatePack(pack, run(46, 'telework'), { year: 2026, annualWorkingDays: 240 });
-    for (const c of pack.counters.filter((x) => x.kind === 'tax')) {
-      const r = results.find((x) => x.counterId === c.id)!;
-      expect(r.enabled).toBe(false);
-      expect(r.status).toBe('disabled');
-      expect(r.limit).toBeNull();
-      expect(c.pendingReasonKey).toBe('ch_fr_1983_note');
-      expect(c.pendingValueKey).toBe('ch_fr_1983_value');
-    }
+  it('runs 40% telework, 10 missions and 45 nights tax counters', () => {
+    expect(counterOf(pack, 'basel_fr_tax_telework_40').enabled).toBe(true);
+    expect(counterOf(pack, 'basel_fr_tax_missions_10').enabled).toBe(true);
+    expect(counterOf(pack, 'basel_fr_tax_nights_45').enabled).toBe(true);
+    expect(counterOf(pack, 'basel_fr_tax_telework_40').limit).toBe(40);
+    expect(counterOf(pack, 'basel_fr_tax_missions_10').limit).toBe(10);
+    expect(counterOf(pack, 'basel_fr_tax_nights_45').limit).toBe(45);
+    expect(counterOf(pack, 'basel_fr_tax_nights_45').inclusive).toBe(true);
+    expect(counterOf(pack, 'basel_fr_tax_nights_45').countsOvernight).toBe(true);
+  });
+
+  it('counts telework toward 40% and warns that excess FR missions end the regime', () => {
+    const tele = run(90, 'telework'); // 90/240 = 37.5% under 40%
+    const missions = run(15, 'third_country', '2026-06-01');
+    const results = evaluatePack(pack, [...tele, ...missions], { year: 2026, annualWorkingDays: 240 });
+    const share = results.find((r) => r.counterId === 'basel_fr_tax_telework_40')!;
+    expect(share.enabled).toBe(true);
+    expect(share.messages.some((m) => m.key === 'ch_fr_1983_mission_excess')).toBe(true);
+    const miss = results.find((r) => r.counterId === 'basel_fr_tax_missions_10')!;
+    expect(miss.used).toBe(15);
+    expect(miss.status).toBe('over');
+    expect(miss.messages.some((m) => m.key === 'ch_fr_1983_over_mission' || m.key === 'ch_fr_1983_mission_excess')).toBe(
+      true,
+    );
+  });
+
+  it('counts overnight work nights toward 45 and goes over at 46', () => {
+    const nights = run(46, 'onsite', '2026-01-01', { overnightAway: true });
+    const r = evaluatePack(pack, nights, { year: 2026, annualWorkingDays: 240 }).find(
+      (x) => x.counterId === 'basel_fr_tax_nights_45',
+    )!;
+    expect(r.used).toBe(46);
+    expect(r.status).toBe('over');
+    expect(r.messages.some((m) => m.key === 'ch_fr_1983_over_45')).toBe(true);
   });
 
   it('cites the 1983 sources, and not the fiche titled "hors régime frontalier"', () => {
     const urls = pack.counters.filter((c) => c.kind === 'tax').flatMap((c) => c.sources.map((s) => s.url));
     expect(urls.some((u) => u.includes('accord_frontalier_1983'))).toBe(true);
-    expect(urls.some((u) => u.includes('ai-1983'))).toBe(true);
+    expect(urls.some((u) => u.includes('ai-1983') || u.includes('exemplare-ai-1983'))).toBe(true);
+    expect(urls.some((u) => u.includes('jura.ch'))).toBe(true);
     expect(urls.some((u) => u.includes('accords-interpretatifs-10-jours-cdi'))).toBe(false);
     expect(pack.counters.some((c) => c.notesKey === 'ch_fr_tax_note')).toBe(false);
   });
@@ -687,10 +712,18 @@ describe('M: inclusive and strict limits', () => {
 });
 
 describe('Honest coverage per corridor', () => {
-  const taxOn = BORDER_PACKS.filter((p) => p.counters.some((c) => c.kind === 'tax' && c.enabled)).map((p) => p.id);
+  const taxOn = BORDER_PACKS.filter(hasTaxCounter).map((p) => p.id);
 
-  it('tax counters run on exactly these six', () => {
-    expect(taxOn).toEqual(['geneva_fr', 'basel_de', 'luxembourg_fr', 'luxembourg_be', 'luxembourg_de', 'ticino_it']);
+  it('tax counters run on exactly these seven', () => {
+    expect(taxOn).toEqual([
+      'geneva_fr',
+      'basel_fr',
+      'basel_de',
+      'luxembourg_fr',
+      'luxembourg_be',
+      'luxembourg_de',
+      'ticino_it',
+    ]);
   });
 
   it('every corridor has a social-security counter', () => {

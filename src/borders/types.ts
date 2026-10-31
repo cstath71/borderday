@@ -39,6 +39,10 @@ export interface LimitCounter {
   a1FromPercent?: number;
   /** CH–FR rule: missions count inside the 40% only after ordinary telework, up to the 10-day cap. */
   missionRole?: 'share' | 'missions';
+  /** i18n key for excess mission days (default ch_fr_mission_excess). */
+  missionExcessKey?: string;
+  /** Only evaluate when this EmploymentProfile boolean is true; otherwise treat as disabled. */
+  requiresProfileFlag?: 'frontierBefore2012';
   /** Shown when the counter is over its limit: the consequence, not just the overshoot. */
   overKey?: string;
   /** Shown when enabled=false */
@@ -89,6 +93,8 @@ export interface EmploymentProfile {
   employmentPercent?: number | null;
   a1InPlace?: boolean | null;
   a1ValidUntil?: string | null; // YYYY-MM-DD
+  /** FR→BE legacy: frontier worker before 1 Jan 2012 (30-day border-zone rule until 2033). */
+  frontierBefore2012?: boolean | null;
 }
 
 export interface CounterMessage {

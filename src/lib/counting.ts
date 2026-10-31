@@ -278,6 +278,9 @@ export function evaluateCounter(
   opts: EvaluateOptions = { year: new Date().getFullYear() },
 ): CounterResult {
   if (!counter.enabled || counter.limit == null || !counter.unit) return disabledResult(counter);
+  if (counter.requiresProfileFlag === 'frontierBefore2012' && !opts.profile?.frontierBefore2012) {
+    return disabledResult(counter);
+  }
 
   const today = opts.today ?? zurichToday();
   if (counter.direction === 'floor') {
@@ -338,7 +341,7 @@ export function evaluateCounter(
       if (status === 'over' && counter.overKey) messages.push({ key: counter.overKey, tone: 'warn' });
       if (split && split.excess > 0 && !split.regimeLost) {
         messages.push({
-          key: 'ch_fr_mission_excess',
+          key: counter.missionExcessKey ?? 'ch_fr_mission_excess',
           tone: 'warn',
           vars: { counted: split.counted, excess: split.excess },
         });
@@ -397,7 +400,7 @@ export function evaluateCounter(
     const split = missionSplit();
     if (split.excess > 0) {
       messages.push({
-        key: 'ch_fr_mission_excess',
+        key: counter.missionExcessKey ?? 'ch_fr_mission_excess',
         tone: 'warn',
         vars: { counted: split.counted, excess: split.excess },
       });

@@ -1,13 +1,13 @@
 # BorderDay
 
-> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on six. HR sees day types per date, night-away marks and counts, never GPS or device location.
+> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on seven. HR sees day types per date, night-away marks and counts, never GPS or device location.
 
 - Site: https://borderday.com
 - Languages: English, French, German, Italian
 - Corridors covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
-- Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
-- No tax counter yet: 1983-agreement cantons←France (Basel and others, regime under review), France→Belgium, Netherlands→Belgium. Do not describe BorderDay as tracking tax limits on these corridors.
+- Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
+- No general tax counter yet: France→Belgium, Netherlands→Belgium. Do not describe BorderDay as tracking tax limits on these corridors.
 - Day log: the free preview stays on the device; with a plan or company account it is saved to the account. No GPS or device location.
 - Company accounts: invite by email, HR dashboard with the same counters employees see
 - Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution
@@ -62,7 +62,7 @@ Without a plan, only on your device (IndexedDB in the browser). With an active p
 No. You log days yourself. No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.
 
 ### Which borders do you cover?
-Nine corridors in five regions. Social-security counters on all nine. Tax counters on six: Geneva and other non-1983 cantons←France, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No tax counter yet: the 1983-agreement cantons←France (Basel and others), France→Belgium and Netherlands→Belgium.
+Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter yet: France→Belgium and Netherlands→Belgium.
 
 ### How much does BorderDay cost?
 Company: €5 per active employee per month with a €39 monthly minimum; yearly €390 minimum (2 months free). Individual: €4.99/month or €49/year. Company prices exclude VAT; individual prices include VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup.

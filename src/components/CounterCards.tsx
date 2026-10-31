@@ -59,6 +59,8 @@ export default function CounterCards({
     <div>
       {pack.counters.map((counter) => {
         const result = results.find((r) => r.counterId === counter.id)!;
+        // Optional counters (e.g. FR→BE pre-2012) stay hidden until the profile flag is set.
+        if (counter.requiresProfileFlag && !result.enabled) return null;
         const status = result.status;
         const pct =
           result.ratio != null ? Math.min(100, Math.round(result.ratio * 1000) / 10) : 0;

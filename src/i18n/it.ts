@@ -5,7 +5,7 @@ const it: Dict = {
     siteName: 'BorderDay',
     tagline: 'Soglie di giorni fiscali e previdenziali per HR e collaboratori — prima delle sorprese.',
     description:
-      'BorderDay aiuta HR e collaboratori a registrare telelavoro, giorni in sede e trasferte. Contatori di sicurezza sociale su tutti i nove corridoi; contatori fiscali su sei: Ginevra e altri cantoni fuori dall’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Strumento di registrazione — non consulenza fiscale o legale.',
+      'BorderDay aiuta HR e collaboratori a registrare telelavoro, giorni in sede e trasferte. Contatori di sicurezza sociale su tutti i nove corridoi; contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983, cantoni dell’accordo del 1983←Francia, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Strumento di registrazione — non consulenza fiscale o legale.',
   },
   nav: {
     home: 'Home',
@@ -42,7 +42,7 @@ const it: Dict = {
   home: {
     heroTitle: 'Un solo strumento per tutti i confini dei vostri team',
     heroBody:
-      'Per HR e responsabili finanziari a Ginevra, Basilea, in Ticino, Lussemburgo e Belgio: contatori di giorni per collaboratore, prima di un cambio di affiliazione o del superamento di una soglia fiscale. Contatori di sicurezza sociale su tutti i nove corridoi, contatori fiscali su sei, e ogni corridoio indica cosa copre. Quattro lingue, fisco e sicurezza sociale seguiti separatamente.',
+      'Per HR e responsabili finanziari a Ginevra, Basilea, in Ticino, Lussemburgo e Belgio: contatori di giorni per collaboratore, prima di un cambio di affiliazione o del superamento di una soglia fiscale. Contatori di sicurezza sociale su tutti i nove corridoi, contatori fiscali su sette, e ogni corridoio indica cosa copre. Quattro lingue, fisco e sicurezza sociale seguiti separatamente.',
     ctaPrimary: 'Crea account azienda',
     ctaSecondary: 'Vedi prezzi azienda',
     ctaIndividuals: 'Sono un collaboratore individuale',
@@ -52,7 +52,7 @@ const it: Dict = {
       'Secondo l’accordo quadro UE/SEE/CH, il telelavoro nello Stato di residenza pari o superiore al 25% del tempo di lavoro vi trasferisce di norma la sicurezza sociale, salvo richiesta di un certificato A1. Dal 50% l’accordo quadro non è più disponibile. BorderDay mostra le tre fasce, separate dal fisco: sotto il 25%, dal 25% a meno del 50% (A1 richiesto) e 50% o più.',
     risk2Title: 'Soglie fiscali di giorni',
     risk2Body:
-      'Oggi i contatori fiscali funzionano su sei corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale), Belgio→Lussemburgo (34 giorni, non ridotti per il tempo parziale), Germania→Lussemburgo (34 giorni, non ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Gli altri tre dichiarano chiaramente che nessun contatore fiscale è attivo. Non inventiamo mai un numero.',
+      'Oggi i contatori fiscali funzionano su sette corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), cantoni dell’accordo del 1983←Francia (40% / 10 impieghi temporanei / 45 notti, tassati in Francia), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale), Belgio→Lussemburgo (34 giorni, non ridotti per il tempo parziale), Germania→Lussemburgo (34 giorni, non ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Francia→Belgio e Paesi Bassi→Belgio dichiarano chiaramente che nessun contatore fiscale generale è attivo. Non inventiamo mai un numero.',
     risk3Title: 'Team multi-confine',
     risk3Body:
       'Una dashboard aziendale per collaboratori su confini diversi. Filtri per confine o situazione. Export CSV. I collaboratori vedono, per i propri giorni, gli stessi contatori che l’HR vede per loro.',
@@ -82,7 +82,7 @@ const it: Dict = {
       'BorderDay è uno strumento di registrazione e promemoria delle classificazioni dei giorni. Non è consulenza fiscale o legale. Verificate sempre con l’autorità competente o un consulente qualificato.',
     demoBanner: 'Gli screenshot e l’azienda precaricata usano dati DEMO chiaramente etichettati — non collaboratori reali.',
     inShort:
-      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sei di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
+      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
     inShortLabel: 'In breve',
     chipTaxYes: 'Fisco: sì',
     chipTaxNo: 'Fisco: non ancora',
@@ -174,10 +174,27 @@ const it: Dict = {
       'Oltre il 40%: i giorni di telelavoro sono imponibili in Francia dal primo giorno, non solo l’eccedenza, e i giorni di impiego temporaneo non contano più come telelavoro. Verificate con la vostra autorità fiscale.',
     ch_fr_mission_excess:
       'Dei vostri giorni di impiego temporaneo, {counted} contano nel 40% e {excess} no: questi sono imponibili in Francia, fatta salva una convenzione con uno Stato terzo.',
-    ch_fr_1983_label: 'Fisco Francia–Svizzera (accordo del 1983): regime in esame',
-    ch_fr_1983_value: 'Regime in esame: verificate con la vostra autorità',
+    ch_fr_1983_telework_40: 'Quota di telelavoro (max 40% del tempo di lavoro annuo, regime 1983)',
+    ch_fr_1983_missions_10: 'Impieghi temporanei fuori dalla Svizzera (max 10 giorni/anno, 1983)',
+    ch_fr_1983_nights_45: 'Notti di lavoro fuori casa (max 45/anno, 1983)',
+    ch_fr_1983_tax_note:
+      'Accordo frontaliero del 1983 (Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel, Giura): i residenti in Francia sono tassati in Francia; la Francia versa il 4,5% del salario lordo alla Svizzera. Il telelavoro dalla Francia fino al 40% del tempo di lavoro annuo resta in quel regime. Fino a 10 giorni di impiego temporaneo all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. Fonti: accordo amichevole del 30 giugno 2023 (impots.gouv.fr); scheda ESTV; Cantone del Giura.',
+    ch_fr_1983_missions_note:
+      'Impieghi temporanei in Francia o in uno Stato terzo: fino a 10 giorni all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. Tempo parziale o anno parziale: i 10 giorni sono ridotti in proporzione e arrotondati per eccesso. Qualsiasi giorno di impiego temporaneo in eccesso in Francia fa cessare il regime del 1983. BorderDay non distingue la Francia da uno Stato terzo: trattate ogni giorno di impiego temporaneo in eccesso come un rischio. Fonti: scheda ESTV; accordo amichevole 1983 impots.gouv.fr.',
+    ch_fr_1983_nights_note:
+      'Non più di 45 notti all’anno fuori casa per lavoro in Svizzera o in uno Stato terzo (incluso). BorderDay conta solo i giorni segnati «notte fuori per lavoro» su un giorno in sede o in trasferta. Oltre, il regime del 1983 cessa. Fonte: Cantone del Giura; scheda ESTV.',
+    ch_fr_1983_over_40:
+      'Oltre il 40%: il regime frontaliero del 1983 viene meno. Verificate con la vostra autorità fiscale.',
+    ch_fr_1983_over_mission:
+      'Giorni di impiego temporaneo oltre il tetto di 10 (e oltre quanto ancora rientra sotto il 40%): qualsiasi giorno di quel tipo effettuato in Francia fa cessare il regime del 1983. BorderDay non distingue la Francia da uno Stato terzo. Verificate con la vostra autorità fiscale.',
+    ch_fr_1983_over_45:
+      'Oltre 45 notti di lavoro fuori casa: il regime frontaliero del 1983 viene meno. Verificate con la vostra autorità fiscale.',
+    ch_fr_1983_mission_excess:
+      'Dei vostri giorni di impiego temporaneo, {counted} contano nel 40% e {excess} no. Qualsiasi giorno in eccesso in Francia fa cessare il regime del 1983; BorderDay non distingue la Francia da uno Stato terzo.',
+    ch_fr_1983_label: 'Fisco Francia–Svizzera (accordo del 1983)',
+    ch_fr_1983_value: 'Vedere i contatori 40% / 10 impieghi temporanei / 45 notti',
     ch_fr_1983_note:
-      'Questi cantoni non seguono la regola di Ginevra. Secondo l’accordo del 1983, i residenti in Francia sono in genere tassati in Francia, che versa alla Svizzera il 4,5% del salario lordo. Le condizioni pubblicate comprendono telelavoro fino al 40% del tempo di lavoro, fino a 10 giorni di impiego temporaneo in quel 40% e al massimo 45 notti all’anno in Svizzera o in uno Stato terzo. Un solo giorno di missione in Francia oltre questi limiti mette fine al regime. BorderDay non sa ancora distinguere gli impieghi in Francia dagli altri, quindi qui non mostra un contatore fiscale piuttosto che un falso via libera. I cittadini svizzeri del settore pubblico e i residenti settimanali sono trattati diversamente. Verificate con la vostra autorità fiscale cantonale.',
+      'Questi cantoni seguono l’accordo del 1983: tassati in Francia (la Francia versa il 4,5% alla Svizzera). I contatori seguono il telelavoro fino al 40%, fino a 10 giorni di impiego temporaneo e al massimo 45 notti di lavoro fuori casa.',
     lu_over_34:
       'Limite superato: la Francia può tassare il tempo effettivamente lavorato in Francia o in uno Stato terzo, dal primo giorno. Verificate con la vostra autorità fiscale.',
     lu_be_tax_note:
@@ -223,9 +240,16 @@ const it: Dict = {
     be_nl_value: 'Nessuna regola confermata: verificate con la vostra autorità',
     lu_announced_value: '34 giorni annunciati: nessun contatore per ora',
     pending_be_fr_tax:
-      'Nessuna tolleranza in giorni trovata. I giorni lavorati dalla Francia sono in genere tassati in Francia, in proporzione, dal primo giorno (risposta del ministro francese del 28 maggio 2024). Chi è diventato frontaliere prima del 1° gen. 2012 mantiene un regime distinto fino al 2033, con un limite di 30 giorni fuori dalla zona di frontiera belga. Una convenzione firmata nel 2021 era ancora in attesa di ratifica a quella data. Qui non è attivo alcun contatore: verificate con la vostra autorità.',
+      'Nessuna tolleranza in giorni trovata. I giorni di lavoro da casa in Francia sono tassati in Francia, in proporzione, dal primo giorno (art. 11 della convenzione Francia–Belgio; risposta del ministro francese del 28 maggio 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). Chi è diventato frontaliere prima del 1° gennaio 2012 mantiene un regime distinto fino al 2033: spuntate questa opzione qui sotto per aprire il contatore di 30 giorni. Qui non è attivo alcun contatore fiscale generale.',
+    be_fr_pre2012_30: 'Giorni fuori dalla zona di frontiera belga (max 30/anno, frontalieri prima del 2012)',
+    be_fr_pre2012_note:
+      'Solo per chi era frontaliere secondo il regime Francia–Belgio prima del 1° gennaio 2012. Fino al 2033 mantiene un limite annuale di 30 giorni di lavoro fuori dalla zona di frontiera belga. Oltre, vale la regola normale dell’art. 11. Fonti: risposta ministeriale del 28 maggio 2024; BOFiP.',
+    be_fr_pre2012_over:
+      'Oltre 30 giorni fuori dalla zona di frontiera: il regime transitorio anteriore al 2012 non copre più quei giorni. Verificate con la vostra autorità fiscale.',
+    be_fr_pre2012_pending:
+      'Contatore opzionale per i frontalieri prima del 2012. Spuntate «frontaliere prima del 2012» nelle impostazioni per attivarlo.',
     pending_be_nl_tax:
-      'Nessuna tolleranza per il lavoro da casa sulla pagina del fisco olandese, che non tratta questi giorni, e nessun testo primario belga trovato. Qui non è attivo alcun contatore: verificate con un consulente o con la vostra autorità.',
+      'Nessuna tolleranza per il lavoro da casa trovata sulla pagina del fisco olandese; verificate con un consulente.',
     pace_line:
       'Ritmo attuale: {pct}% dei giorni lavorativi registrati finora ({days}).',
     pace_above:
@@ -357,7 +381,7 @@ const it: Dict = {
       'No. Registrate voi i giorni. Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
     q5: 'Quali confini coprite?',
     a5:
-      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sei: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale per ora: cantoni dell’accordo del 1983←Francia (Basilea e altri), Francia→Belgio e Paesi Bassi→Belgio.',
+      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale per ora: Francia→Belgio e Paesi Bassi→Belgio.',
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',

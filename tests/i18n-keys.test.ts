@@ -193,7 +193,7 @@ describe('Phase 2 rule copy, all four languages', () => {
   it('marketing no longer promises tax limits on every corridor', () => {
     expect(JSON.stringify(en)).not.toMatch(/five borders|official tax and social-security/);
     for (const [lang, d] of all) {
-      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(six|sei|sechs)\b/i);
+      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(seven|sept|sette|sieben)\b/i);
     }
   });
 
@@ -214,7 +214,8 @@ describe('Phase 2 rule copy, all four languages', () => {
     expect(en.counters.pending_lu_be_tax).toMatch(/34/);
     expect(en.counters.pending_be_fr_tax).toMatch(/No day tolerance found/);
     expect(en.counters.pending_be_fr_tax).toMatch(/first day/);
-    expect(en.counters.pending_be_nl_tax).toMatch(/check with/);
+    expect(en.counters.pending_be_nl_tax).toMatch(/No home-working tolerance found on the Dutch tax authority page/);
+    expect(en.counters.pending_be_nl_tax).toMatch(/check with an adviser/);
     expect(en.counters.lu_fr_tax_note).toMatch(/rounded down/);
     expect(en.dayTypes.logHint_luxembourg_fr).toMatch(/whole day/);
     expect(en.dayTypes.teleworkHint_ticino).toMatch(/your home/);

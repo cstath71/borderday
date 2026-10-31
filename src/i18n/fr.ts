@@ -6,7 +6,7 @@ const fr: Dict = {
     tagline:
       'Seuils de jours fiscaux et sociaux pour les RH et les collaborateurs — avant les mauvaises surprises.',
     description:
-      'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf corridors ; compteurs fiscaux sur six : Genève et autres cantons hors accord de 1983, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
+      'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf corridors ; compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983, cantons de l’accord de 1983←France, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
   },
   nav: {
     home: 'Accueil',
@@ -43,7 +43,7 @@ const fr: Dict = {
   home: {
     heroTitle: 'Un seul outil pour toutes les frontières de vos équipes',
     heroBody:
-      'Pour les RH et responsables finance à Genève, Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur six, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
+      'Pour les RH et responsables finance à Genève, Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur sept, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
     ctaPrimary: 'Créer un compte entreprise',
     ctaSecondary: 'Voir les tarifs entreprise',
     ctaIndividuals: 'Je suis un collaborateur individuel',
@@ -53,7 +53,7 @@ const fr: Dict = {
       'Selon l’accord-cadre UE/EEE/CH, un télétravail dans l’État de résidence de 25 % ou plus du temps de travail y transfère normalement la sécurité sociale, sauf demande d’attestation A1. À partir de 50 %, l’accord-cadre n’est plus disponible. BorderDay affiche les trois tranches, séparément de la fiscalité : moins de 25 %, de 25 % à moins de 50 % (A1 requise) et 50 % ou plus.',
     risk2Title: 'Seuils fiscaux de jours',
     risk2Body:
-      'Des compteurs fiscaux fonctionnent aujourd’hui sur six corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), Allemagne→Suisse (60 jours de non-retour), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). Les trois autres indiquent clairement qu’aucun compteur fiscal ne fonctionne. Nous n’inventons jamais de chiffre.',
+      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits, imposés en France), Allemagne→Suisse (60 jours de non-retour), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
     risk3Title: 'Équipes multi-frontières',
     risk3Body:
       'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient, pour leurs propres jours, les mêmes compteurs que les RH voient pour eux.',
@@ -83,7 +83,7 @@ const fr: Dict = {
       'BorderDay est un outil de suivi et de rappel des classifications de jours. Ce n’est pas un conseil fiscal ou juridique. Vérifiez toujours auprès de l’autorité compétente ou d’un conseiller qualifié.',
     demoBanner: 'Les captures et l’entreprise préchargée utilisent des données DEMO clairement étiquetées — pas de vrais collaborateurs.',
     inShort:
-      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur six d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
+      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
     inShortLabel: 'En bref',
     chipTaxYes: 'Fiscalité : oui',
     chipTaxNo: 'Fiscalité : pas encore',
@@ -176,10 +176,27 @@ const fr: Dict = {
       'Au-delà de 40 % : les jours de télétravail sont imposables en France dès le premier jour, pas seulement le dépassement, et les jours de mission ne comptent plus comme télétravail. Vérifiez auprès de votre autorité fiscale.',
     ch_fr_mission_excess:
       'Parmi vos jours de mission, {counted} comptent dans les 40 % et {excess} non : ceux-ci sont imposables en France, sous réserve d’une convention avec un État tiers.',
-    ch_fr_1983_label: 'Fiscalité France–Suisse (accord de 1983) : régime en cours d’examen',
-    ch_fr_1983_value: 'Régime en cours d’examen : vérifiez auprès de votre autorité',
+    ch_fr_1983_telework_40: 'Part de télétravail (max 40 % du temps de travail annuel, régime 1983)',
+    ch_fr_1983_missions_10: 'Missions temporaires hors de Suisse (max 10 jours/an, 1983)',
+    ch_fr_1983_nights_45: 'Nuits de travail hors du domicile (max 45/an, 1983)',
+    ch_fr_1983_tax_note:
+      'Accord frontalier de 1983 (Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel, Jura) : les résidents de France sont imposés en France ; la France reverse 4,5 % du salaire brut à la Suisse. Le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste dans ce régime. Jusqu’à 10 jours de mission par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. Sources : accord amiable du 30 juin 2023 (impots.gouv.fr) ; fiche ESTV ; Canton du Jura.',
+    ch_fr_1983_missions_note:
+      'Missions temporaires en France ou dans un État tiers : jusqu’à 10 jours par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. Temps partiel ou année partielle : les 10 jours sont réduits au prorata et arrondis vers le haut. Tout jour de mission en France au-delà met fin au régime de 1983. BorderDay ne distingue pas la France d’un État tiers : traitez chaque jour de mission en excès comme un risque. Sources : fiche ESTV ; accord amiable 1983 impots.gouv.fr.',
+    ch_fr_1983_nights_note:
+      'Pas plus de 45 nuits par an hors du domicile pour le travail en Suisse ou dans un État tiers (inclus). BorderDay ne compte que les jours marqués « nuit hors du domicile pour le travail » sur un jour sur site ou en déplacement. Au-delà, le régime de 1983 cesse. Source : Canton du Jura ; fiche ESTV.',
+    ch_fr_1983_over_40:
+      'Au-delà de 40 % : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
+    ch_fr_1983_over_mission:
+      'Jours de mission au-delà du plafond de 10 (et de ce qui rentre encore sous 40 %) : tout jour de ce type effectué en France met fin au régime de 1983. BorderDay ne distingue pas la France d’un État tiers. Vérifiez auprès de votre autorité fiscale.',
+    ch_fr_1983_over_45:
+      'Au-delà de 45 nuits de travail hors du domicile : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
+    ch_fr_1983_mission_excess:
+      'Sur vos jours de mission, {counted} comptent dans les 40 % et {excess} non. Tout jour en excès en France met fin au régime de 1983 ; BorderDay ne distingue pas la France d’un État tiers.',
+    ch_fr_1983_label: 'Fiscalité France–Suisse (accord de 1983)',
+    ch_fr_1983_value: 'Voir les compteurs 40 % / 10 missions / 45 nuits',
     ch_fr_1983_note:
-      'Ces cantons ne suivent pas la règle genevoise. Selon l’accord de 1983, les résidents de France sont en général imposés en France, qui reverse à la Suisse 4,5 % du salaire brut. Les conditions publiées comprennent le télétravail jusqu’à 40 % du temps de travail, jusqu’à 10 jours de mission dans ces 40 % et au plus 45 nuits par an en Suisse ou dans un État tiers. Un seul jour de mission en France au-delà de ces limites met fin au régime. BorderDay ne sait pas encore distinguer les missions en France des autres : il n’affiche donc pas de compteur fiscal ici plutôt qu’un faux feu vert. Les Suisses du secteur public et les résidents à la semaine sont traités autrement. Vérifiez auprès de votre autorité fiscale cantonale.',
+      'Ces cantons suivent l’accord de 1983 : imposés en France (la France reverse 4,5 % à la Suisse). Les compteurs suivent le télétravail jusqu’à 40 %, jusqu’à 10 jours de mission et au plus 45 nuits de travail hors du domicile.',
     lu_over_34:
       'Seuil dépassé : la France peut imposer le temps réellement travaillé en France ou dans un État tiers, dès le premier jour. Vérifiez auprès de votre autorité fiscale.',
     lu_be_tax_note:
@@ -225,9 +242,16 @@ const fr: Dict = {
     be_nl_value: 'Aucune règle confirmée : vérifiez auprès de votre autorité',
     lu_announced_value: '34 jours annoncés : pas encore de compteur',
     pending_be_fr_tax:
-      'Aucune tolérance en jours trouvée. Les jours travaillés depuis la France sont en général imposés en France, au prorata, dès le premier jour (réponse ministérielle du 28 mai 2024). Les personnes devenues frontalières avant le 1er janv. 2012 gardent un régime distinct jusqu’en 2033, avec une limite de 30 jours hors de la zone frontalière belge. Une convention signée en 2021 attendait encore sa ratification à cette date. Aucun compteur ici : vérifiez auprès de votre autorité.',
+      'Aucune tolérance en jours trouvée. Les jours de travail à domicile en France sont imposés en France, au prorata, dès le premier jour (art. 11 de la convention France–Belgique ; réponse ministérielle du 28 mai 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm ; BOFiP). Les personnes devenues frontalières avant le 1er janvier 2012 gardent un régime distinct jusqu’en 2033 : cochez cette option ci-dessous pour ouvrir le compteur de 30 jours. Aucun compteur fiscal général ne fonctionne ici.',
+    be_fr_pre2012_30: 'Jours hors de la zone frontalière belge (max 30/an, frontaliers avant 2012)',
+    be_fr_pre2012_note:
+      'Uniquement pour les personnes frontalières au sens du régime France–Belgique avant le 1er janvier 2012. Jusqu’en 2033 elles gardent une limite annuelle de 30 jours de travail hors de la zone frontalière belge. Au-delà, la règle normale de l’art. 11 s’applique. Sources : réponse ministérielle du 28 mai 2024 ; BOFiP.',
+    be_fr_pre2012_over:
+      'Au-delà de 30 jours hors de la zone frontalière : le régime transitoire antérieur à 2012 ne couvre plus ces jours. Vérifiez auprès de votre autorité fiscale.',
+    be_fr_pre2012_pending:
+      'Compteur optionnel pour les frontaliers avant 2012. Cochez « frontalier avant 2012 » dans les réglages pour l’activer.',
     pending_be_nl_tax:
-      'Aucune tolérance pour le travail à domicile sur la page de l’administration fiscale néerlandaise, qui n’aborde pas ces jours, et aucun texte primaire belge trouvé. Aucun compteur ici : vérifiez auprès d’un conseiller ou de votre autorité.',
+      'Aucune tolérance pour le travail à domicile trouvée sur la page de l’administration fiscale néerlandaise ; vérifiez auprès d’un conseiller.',
     pace_line:
       'Rythme actuel : {pct} % des jours travaillés consignés ({days}).',
     pace_above:
@@ -356,7 +380,7 @@ const fr: Dict = {
       'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
     q5: 'Quelles frontières couvrez-vous ?',
     a5:
-      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur six : Genève et autres cantons hors accord de 1983←France, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal : cantons de l’accord de 1983←France (Bâle et autres), France→Belgique et Pays-Bas→Belgique.',
+      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal général : France→Belgique et Pays-Bas→Belgique.',
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',

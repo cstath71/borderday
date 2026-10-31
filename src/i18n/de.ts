@@ -25,6 +25,7 @@ const de: Dict = {
     withdraw: 'Vertrag widerrufen',
     cancel: 'Verträge hier kündigen',
     accessibility: 'Barrierefreiheit',
+    dpa: 'Auftragsverarbeitungsvertrag',
     account: 'Konto',
     menu: 'Menü',
     skipToContent: 'Zum Hauptinhalt springen',
@@ -367,7 +368,7 @@ const de: Dict = {
       'Die PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (UID CHE-312.418.158) ist Verantwortliche im Sinne der DSGVO und des schweizerischen Bundesgesetzes über den Datenschutz (DSG) für diese Website, Einzelpläne, Benutzerkonten, die Verwaltung von Unternehmenskonten, die Abrechnung, den Support und die Sicherheit. Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com. Personen in der EU/im EWR können dieselben Adressen nutzen.',
     rolesTitle: 'Wer für die Tagesprotokolle der Mitarbeitenden verantwortlich ist',
     rolesBody:
-      'In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage seiner Mitarbeitenden erfasst werden. Der Arbeitgeber ist daher Verantwortlicher für diese Tagesprotokolle und deren Nutzung durch HR, einschliesslich der Rechtsgrundlage, und BorderDay bearbeitet sie für ihn als Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Fragen dazu, warum Ihr Arbeitgeber diese Tage erfasst oder welche Unterlagen er aufbewahren muss, richten Sie zuerst an ihn; an privacy@borderday.com gesendete Anfragen leiten wir weiter. Auf dieser Website ist noch kein Auftragsverarbeitungsvertrag veröffentlicht: Arbeitgeber, die einen benötigen, können ihn unter derselben Adresse anfragen.',
+      'In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage seiner Mitarbeitenden erfasst werden. Der Arbeitgeber ist daher Verantwortlicher für diese Tagesprotokolle und deren Nutzung durch HR, einschliesslich der Rechtsgrundlage, und BorderDay bearbeitet sie für ihn als Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Fragen dazu, warum Ihr Arbeitgeber diese Tage erfasst oder welche Unterlagen er aufbewahren muss, richten Sie zuerst an ihn; an privacy@borderday.com gesendete Anfragen leiten wir weiter. Der öffentliche Auftragsverarbeitungsvertrag für Unternehmenskonten steht unter /dpa/ (verlinkt von Preisen, Unternehmensanmeldung und den Nutzungsbedingungen).',
     s1Title: 'Was wir erheben',
     s1Body:
       'Kostenlose Vorschau, auf Ihrem Gerät: Grenzpaket, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad und A1, falls eingetragen. Einzelplan: dieselben Daten, in Ihrem Konto gespeichert. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzpaket, Tagesarten und Daten, Markierungen auswärtiger Übernachtung, Beschäftigungsgrad und A1, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
@@ -594,7 +595,7 @@ const de: Dict = {
       'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzkorridoren. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, eine qualifizierte Beratung oder eine zuständige Behörde. Siehe Rechtlicher Hinweis.',
     s2Title: 'Konten und Unternehmensnutzung',
     s2Body:
-      'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen ein Grenzpaket und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Auf dieser Website ist noch kein Auftragsverarbeitungsvertrag veröffentlicht: Arbeitgeber, die einen benötigen, können ihn unter privacy@borderday.com anfragen. Sie sind für die Richtigkeit der erfassten Tage verantwortlich.',
+      'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen ein Grenzpaket und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich.',
     s3Title: 'Abonnements, Testphase, Verlängerung und Kündigung',
     s3Body:
       'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung stoppt künftige Verlängerungen. Bereits eingezogene Beträge für eine begonnene Periode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsrichtlinien von Link es verlangen; Ihr Widerrufsrecht unten bleibt unberührt.',
@@ -716,6 +717,68 @@ const de: Dict = {
     feedbackTitle: 'Rückmeldung',
     feedbackBody:
       'Wenn Sie auf eine Barriere stossen, schreiben Sie an hello@borderday.com mit Seiten-URL, Browser oder Hilfsmittel und dem Ziel Ihrer Aktion. Wir streben eine Antwort innerhalb von fünf Werktagen an.',
+  },
+  dpa: {
+    title: 'Auftragsverarbeitungsvertrag (Unternehmenskonten)',
+    updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
+    intro:
+      'Dieser Auftragsverarbeitungsvertrag («AVV») gilt, wenn ein Arbeitgeber ein BorderDay-Unternehmenskonto nutzt, damit BorderDay personenbezogene Daten der Mitarbeitenden dieses Arbeitgebers (Tagesprotokolle und zugehörige Mitgliedschaftsdaten) verarbeitet. Er wird nach Artikel 28 DSGVO und nach dem schweizerischen Datenschutzgesetz (DSG) für die Verarbeitung durch einen Auftragsbearbeiter angeboten. Das Anlegen oder Nutzen eines Unternehmenskontos bzw. die weitere Nutzung nach Veröffentlichung dieser Seite gilt als Annahme dieses AVV durch den Arbeitgeber für diese Verarbeitung.',
+    partiesTitle: 'Parteien',
+    partiesBody:
+      'Verantwortlicher (Arbeitgeber): die juristische Person, die das BorderDay-Unternehmenskonto hält und entscheidet, warum und wie die Tagesprotokolle ihrer Mitarbeitenden erfasst werden. Auftragsbearbeiter (Anbieter): PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (UID CHE-312.418.158), Betreiberin von BorderDay. Kontakt: privacy@borderday.com · hello@borderday.com.',
+    rolesTitle: 'Rollen',
+    rolesBody:
+      'Für Tagesprotokolle der Mitarbeitenden, Einladungen und die daraus abgeleiteten HR-Zähler ist der Arbeitgeber Verantwortlicher und PrimeLogic Advisory Sàrl Auftragsbearbeiterin. Für die BorderDay-Website, Einzelangebote, Benutzerkonten, Verwaltung des Unternehmenskontos, Abrechnung, Support und Sicherheit bleibt PrimeLogic Advisory Sàrl Verantwortliche im Sinne der Datenschutzerklärung. Stripe und Link handeln als unabhängige Verantwortliche für den Zahlungsvorgang nach ihren eigenen Hinweisen; sie sind keine Auftragsbearbeiter der Tagesprotokolle unter diesem AVV.',
+    subjectTitle: 'Gegenstand und Art der Verarbeitung',
+    subjectBody:
+      'Gegenstand: Hosting, Speicherung, Abruf, Übermittlung und Anzeige von Mitgliedschafts- und Tagesprotokolldaten, damit der Arbeitgeber Telework- und Steuerzähler führen kann. Art: automatisierte Verarbeitung in einer gehosteten Anwendung (Erstellen, Lesen, Aktualisieren, Löschen; Aggregation zu Zählern; Einladungs-E-Mail). Zweck: nur die Zwecke, die der Arbeitgeber über die BorderDay-Unternehmensfunktionen anweist, und wie in der Datenschutzerklärung beschrieben. Betroffene: Mitarbeitende und andere natürliche Personen, die der Arbeitgeber zum Unternehmenskonto einlädt. Datenkategorien: Name, E-Mail, Rolle, Grenzpendler-Paket, vertragliche Arbeitstage, Beschäftigungsgrad und A1-Angabe falls erfasst, Tagesart und Datum, Übernachtung-ausserhalb-Marke, Zähler sowie der Vermerk, dass der Hinweis «was HR sieht» gezeigt wurde. Notizen bleiben privat beim Mitarbeitenden. Es werden keine GPS- oder Gerätedstandortdaten erhoben.',
+    durationTitle: 'Dauer',
+    durationBody:
+      'Die Verarbeitung dauert für die Lebensdauer des Unternehmenskontos und der Mitgliedschaft und danach nur so lange, wie zur Löschung oder Rückgabe nach diesem AVV und den in der Datenschutzerklärung genannten Aufbewahrungsfristen (einschliesslich einer Unternehmens-Aufbewahrungseinstellung) erforderlich.',
+    instructionsTitle: 'Dokumentierte Weisungen (Art. 28 Abs. 3 lit. a DSGVO)',
+    instructionsBody:
+      'Die Auftragsbearbeiterin verarbeitet Tagesprotokolldaten nur auf dokumentierte Weisungen des Verantwortlichen. Die BorderDay-Nutzungsbedingungen, dieser AVV, die Datenschutzerklärung und die Handlungen der Kontoinhaber im Produkt (Einladen, Entfernen, Aufbewahrungseinstellung, Exportanfragen) sind die Weisungen. Die Auftragsbearbeiterin informiert den Arbeitgeber, wenn eine Weisung ihrer Ansicht nach gegen die DSGVO oder das DSG verstösst.',
+    securityTitle: 'Sicherheit (Art. 28 Abs. 3 lit. c DSGVO; Art. 8 DSG)',
+    securityBody:
+      'Die Auftragsbearbeiterin trifft angemessene technische und organisatorische Massnahmen, einschliesslich Zugangskontrolle und Verschlüsselung bei der Übertragung zur gehosteten Datenbank, rollenbasierter Isolation zwischen Unternehmenskonten (RLS) und Beschränkung des Mitarbeiterzugangs auf das für Support und Sicherheit Erforderliche. Hosting-Details stehen unter Unterauftragsbearbeitern.',
+    subTitle: 'Zugelassene Unterauftragsbearbeiter',
+    subIntro:
+      'Der Arbeitgeber erteilt eine allgemeine Genehmigung für die folgenden Unterauftragsbearbeiter für die beschriebene Verarbeitung. Die unten genannten Regionen sind die heute verifizierbaren; die Anbieterunternehmen können weiterhin ausserhalb dieser Regionen niedergelassen sein.',
+    subprocessors: [
+      'Supabase (Datenbank und Authentifizierung): Primärdatenbank und Auth für Projekt uufmlmwgvoqhhtqgrclu in AWS-Region eu-central-1 (Frankfurt, EU), verifiziert am 31. Okt. 2026. US-Anbieter; Übermittlungen nach veröffentlichtem AVV / SCCs. https://supabase.com/legal/dpa',
+      'Resend (transaktionale E-Mail für Anmeldung und Unternehmenseinladungen): US-Anbieter; veröffentlichter AVV mit SCCs / Schweizer Klauseln. https://resend.com/legal/dpa',
+      'GitHub Pages (statisches Website-Hosting): empfängt Besucher-IP-Adressen in Host-Logs. Vereinigte Staaten. https://docs.github.com/en/pages',
+      'Google (optionale Anmeldung nur wenn der Nutzer Google wählt): Vereinigte Staaten; eigene Google-Bedingungen für die Anmeldung.',
+      'Stripe / Link (Checkout und Zahlung für das Unternehmensabonnement): unabhängige Verantwortliche für Zahlung, Steuer und Bestelldaten nach ihren Hinweisen — keine Auftragsbearbeiter der Tagesprotokolle. Hier gelistet, weil die Unternehmensabrechnung sie nutzt. https://stripe.com/legal/dpa · https://link.com/terms',
+    ],
+    subChangeBody:
+      'Wesentliche Änderungen dieser Liste werden auf dieser Seite abgebildet. Der Arbeitgeber kann aus berechtigten datenschutzrechtlichen Gründen innerhalb von 14 Tagen nach dem Update per E-Mail an privacy@borderday.com widersprechen; wird keine praktikable Alternative vereinbart, kann der Arbeitgeber die Unternehmensfunktionen einstellen, die vom neuen Unterauftragsbearbeiter abhängen.',
+    transfersTitle: 'Internationale Übermittlungen',
+    transfersBody:
+      'Der Verantwortliche ist typischerweise in der EU/EWR, der Schweiz oder einem anderen Staat. Die Auftragsbearbeiterin ist in der Schweiz (Angemessenheit). Das Datenbank-Hosting für BorderDay ist in der EU (eu-central-1). Ist ein Unterauftragsbearbeiter in den USA oder anderswo, stützen sich Übermittlungen auf die EU–US- und Swiss–US Data Privacy Frameworks, soweit der Anbieter zertifiziert ist, andernfalls auf die Standardvertragsklauseln (mit Schweizer Anpassungen) in den veröffentlichten Bedingungen dieses Anbieters. Eine Kopie der Garantien kann unter privacy@borderday.com angefordert werden.',
+    assistanceTitle: 'Unterstützung bei Betroffenenrechten und Compliance (Art. 28 Abs. 3 lit. e–f)',
+    assistanceBody:
+      'Unter Berücksichtigung der Art der Verarbeitung unterstützt die Auftragsbearbeiterin den Arbeitgeber durch Produktfunktionen (Export/Löschung soweit verfügbar) und durch Weiterleitung von Anfragen an privacy@borderday.com, die klar die Mitarbeitenden dieses Arbeitgebers betreffen. Der Arbeitgeber bleibt für die Beantwortung seiner Mitarbeitenden verantwortlich. Die Auftragsbearbeiterin unterstützt auf Anfrage und zu angemessenen Kosten, soweit das Recht es erlaubt, auch bei Datenschutz-Folgenabschätzungen und vorherigen Konsultationen zu BorderDay-Unternehmensfunktionen.',
+    breachTitle: 'Verletzungen des Schutzes personenbezogener Daten (Art. 28 Abs. 3 lit. f; Art. 24 DSG)',
+    breachBody:
+      'Die Auftragsbearbeiterin benachrichtigt den Arbeitgeber unverzüglich, nachdem sie von einer Verletzung Kenntnis erlangt hat, die personenbezogene Daten der Mitarbeitenden dieses Arbeitgebers unter diesem AVV betrifft, mit den dann verfügbaren Informationen zur Erfüllung der eigenen Meldepflichten des Arbeitgebers.',
+    deletionTitle: 'Rückgabe und Löschung (Art. 28 Abs. 3 lit. g)',
+    deletionBody:
+      'Endet das Unternehmenskonto oder früher auf schriftliche Weisung, löscht oder gibt die Auftragsbearbeiterin die Tagesprotokolldaten zurück (ausser soweit Unions-, Mitgliedstaaten- oder Schweizer Recht Speicherung verlangt — etwa Buchhaltungsunterlagen des Abonnements selbst). Exportfunktionen im Produkt sind, soweit vorhanden, der primäre Rückgabeweg.',
+    auditTitle: 'Informationen und Prüfungen (Art. 28 Abs. 3 lit. h)',
+    auditBody:
+      'Die Auftragsbearbeiterin stellt Informationen zur Verfügung, die zur Nachweis der Einhaltung dieses AVV erforderlich sind, einschliesslich dieser Seite, der Datenschutzerklärung und der aktuellen Unterauftragsbearbeiter-Dokumentation. Vor-Ort-Audits sind auf einmal pro Jahr beschränkt (es sei denn, eine zuständige Behörde verlangt mehr), mit angemessener Vorankündigung, während der Geschäftszeiten, ohne Störung anderer Kunden, und auf Kosten des Arbeitgebers, sofern kein wesentlicher Verstoss der Auftragsbearbeiterin festgestellt wird.',
+    liabilityTitle: 'Vertraulichkeit und Haftung',
+    liabilityBody:
+      'Zur Verarbeitung befugte Personen sind zur Vertraulichkeit verpflichtet. Die Haftung jeder Partei gegenüber der anderen aus diesem AVV folgt den BorderDay-Nutzungsbedingungen, ohne zwingende Betroffenenrechte nach DSGVO oder DSG zu beschränken.',
+    lawTitle: 'Anwendbares Recht und Rangfolge',
+    lawBody:
+      'Dieser AVV untersteht schweizerischem Recht, unbeschadet zwingender DSGVO-Bestimmungen, die auf die Verarbeitung anwendbar sind. Bei Konflikt mit den Nutzungsbedingungen zu rein kommerziellen Punkten gehen die Nutzungsbedingungen vor; zu Datenschutzpflichten für Tagesprotokolle geht dieser AVV vor. Zwingendes Verbraucher- oder Arbeitsrecht bleibt unberührt.',
+    contactTitle: 'Kontakt',
+    contactBody:
+      'Datenschutzkontakt der Auftragsbearbeiterin: privacy@borderday.com. Allgemein: hello@borderday.com. Post: PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz.',
+    disclaimer:
+      'Dieser AVV ist ein öffentlicher Standardtext für BorderDay-Unternehmenskonten. Er ist keine Rechtsberatung. Arbeitgeber mit besonderen Anforderungen (Branchenregeln, Betriebsvereinbarungen, zusätzliche SCCs) sollten eigenen Rat einholen und privacy@borderday.com kontaktieren, bevor sie BorderDay für regulierte Verarbeitung nutzen.',
   },
   footer: {
     tagline: 'Tageserfassung für grenzüberschreitende Teams und Mitarbeitende.',

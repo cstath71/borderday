@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import Dpa from './pages/Dpa';
 import Withdrawal from './pages/Withdrawal';
 import CompanySignup from './pages/company/Signup';
 import CompanyDashboard from './pages/company/Dashboard';
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="disclaimer" element={<Disclaimer />} />
         <Route path="accessibility" element={<Accessibility />} />
         <Route path="terms" element={<Terms />} />
+        <Route path="dpa" element={<Dpa />} />
         <Route path="withdrawal" element={<Withdrawal />} />
         <Route path="cancel" element={<Cancel />} />
         <Route path="account" element={<Account />} />

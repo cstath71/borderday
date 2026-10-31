@@ -24,6 +24,7 @@ const it: Dict = {
     withdraw: 'Recedere dal contratto',
     cancel: 'Disdire il contratto',
     accessibility: 'Accessibilità',
+    dpa: 'Accordo sul trattamento dei dati',
     account: 'Account',
     menu: 'Menu',
     skipToContent: 'Vai al contenuto principale',
@@ -368,7 +369,7 @@ const it: Dict = {
       'PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDI CHE-312.418.158) è il titolare del trattamento ai sensi del GDPR e della legge federale svizzera sulla protezione dei dati (LPD) per questo sito, i piani individuali, gli account utente, l’amministrazione degli account aziendali, la fatturazione, il supporto e la sicurezza. Contatto: hello@borderday.com · Privacy: privacy@borderday.com. Le persone nell’UE/SEE possono usare gli stessi indirizzi.',
     rolesTitle: 'Chi è responsabile dei registri dei giorni dei dipendenti',
     rolesBody:
-      'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. Su questo sito non è ancora pubblicato un accordo sul trattamento dei dati: i datori di lavoro che ne hanno bisogno possono chiederlo allo stesso indirizzo.',
+      'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni).',
     s1Title: 'Cosa raccogliamo',
     s1Body:
       'Anteprima gratuita, sul vostro dispositivo: pacchetto confine, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego e A1 se inseriti. Piano individuale: gli stessi dati, salvati nel vostro account. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, pacchetto confine, tipi e date dei giorni, segni di notte fuori, percentuale d’impiego e A1 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
@@ -598,7 +599,7 @@ const it: Dict = {
       'BorderDay è uno strumento di registrazione e promemoria delle classificazioni giornaliere per datori di lavoro e dipendenti su determinati corridoi transfrontalieri. Non è consulenza fiscale o legale, né sostituisce il datore di lavoro, un consulente qualificato o un’autorità competente. Vedete l’Avvertenza.',
     s2Title: 'Account e uso aziendale',
     s2Body:
-      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un pacchetto confine e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. Su questo sito non è ancora pubblicato un accordo sul trattamento dei dati: i datori di lavoro che ne hanno bisogno possono chiederlo a privacy@borderday.com. Siete responsabili dell’accuratezza dei giorni registrati.',
+      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un pacchetto confine e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati.',
     s3Title: 'Abbonamenti, prova, rinnovo e disdetta',
     s3Body:
       'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo avviato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link, e il diritto di recesso qui sotto non è pregiudicato.',
@@ -717,6 +718,68 @@ const it: Dict = {
     feedbackTitle: 'Feedback',
     feedbackBody:
       'Se trovate una barriera, scrivete a hello@borderday.com indicando l’URL della pagina, il browser o la tecnologia assistiva e ciò che stavate cercando di fare. Miriamo a rispondere entro cinque giorni lavorativi.',
+  },
+  dpa: {
+    title: 'Accordo sul trattamento dei dati (account aziendali)',
+    updated: 'Ultimo aggiornamento: 31 ott. 2026 (Europe/Zurich)',
+    intro:
+      'Il presente accordo sul trattamento dei dati («ATD») si applica quando un datore di lavoro usa un account aziendale BorderDay affinché BorderDay tratti dati personali dei dipendenti di quel datore (registri dei giorni e dati di appartenenza correlati). È offerto ai sensi dell’articolo 28 del GDPR e della legge federale svizzera sulla protezione dei dati (LPD) per il trattamento da parte di un responsabile del trattamento. La creazione o l’uso di un account aziendale, o la prosecuzione dell’uso dopo la pubblicazione di questa pagina, costituisce accettazione di questo ATD da parte del datore per tale trattamento.',
+    partiesTitle: 'Parti',
+    partiesBody:
+      'Titolare del trattamento (datore di lavoro): la persona giuridica titolare dell’account aziendale BorderDay che decide perché e come vengono registrati i registri dei giorni dei propri dipendenti. Responsabile del trattamento (fornitore): PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDI CHE-312.418.158), che gestisce BorderDay. Contatto: privacy@borderday.com · hello@borderday.com.',
+    rolesTitle: 'Ruoli',
+    rolesBody:
+      'Per i registri dei giorni dei dipendenti, gli inviti e i contatori HR da essi derivati, il datore è titolare e PrimeLogic Advisory Sàrl è responsabile del trattamento. Per il sito BorderDay, i piani individuali, gli account utente, l’amministrazione dell’account aziendale, la fatturazione, il supporto e la sicurezza, PrimeLogic Advisory Sàrl resta titolare ai sensi dell’informativa sulla privacy. Stripe e Link agiscono come titolari indipendenti per il pagamento secondo le proprie informative; non sono responsabili del trattamento dei registri dei giorni ai sensi del presente ATD.',
+    subjectTitle: 'Oggetto e natura del trattamento',
+    subjectBody:
+      'Oggetto: hosting, archiviazione, recupero, trasmissione e visualizzazione dei dati di appartenenza e dei registri dei giorni affinché il datore possa gestire i contatori di telelavoro e fiscali. Natura: trattamento automatizzato in un’applicazione ospitata (creazione, lettura, aggiornamento, cancellazione; aggregazione in contatori; e-mail di invito). Finalità: solo le finalità istruite dal datore tramite le funzioni aziendali BorderDay, e come descritte nell’informativa sulla privacy. Categorie di interessati: dipendenti e altre persone fisiche che il datore invita all’account aziendale. Categorie di dati: nome, e-mail, ruolo, pacchetto frontaliero, giorni contrattuali, percentuale di attività e scheda A1 se inserita, tipo e data del giorno, contrassegno pernottamento fuori casa, contatori, e la registrazione che è stato mostrato l’avviso «cosa vedono le HR». Le note restano private del dipendente. Non viene raccolta alcuna localizzazione GPS o del dispositivo.',
+    durationTitle: 'Durata',
+    durationBody:
+      'Il trattamento dura per la vita dell’account aziendale e dell’appartenenza e, successivamente, solo quanto necessario per cancellare o restituire i dati ai sensi del presente ATD e dei periodi di conservazione dell’informativa sulla privacy (incluso eventuali impostazioni di conservazione aziendali).',
+    instructionsTitle: 'Istruzioni documentate (art. 28, par. 3, lett. a)',
+    instructionsBody:
+      'Il responsabile tratta i registri dei giorni solo su istruzioni documentate del titolare. I Termini BorderDay, il presente ATD, l’informativa sulla privacy e le azioni dei titolari dell’account nel prodotto (invito, rimozione, impostazione di conservazione, richieste di esportazione) costituiscono le istruzioni. Il responsabile informa il datore se, a suo parere, un’istruzione viola il GDPR o la LPD.',
+    securityTitle: 'Sicurezza (art. 28, par. 3, lett. c; art. 8 LPD)',
+    securityBody:
+      'Il responsabile adotta misure tecniche e organizzative appropriate, tra cui controllo degli accessi e cifratura in transito verso il database ospitato, isolamento basato sui ruoli tra account aziendali (RLS) e limitazione dell’accesso del personale a quanto necessario per supporto e sicurezza. I dettagli di hosting figurano sotto i sub-responsabili.',
+    subTitle: 'Sub-responsabili autorizzati',
+    subIntro:
+      'Il datore concede un’autorizzazione generale ai seguenti sub-responsabili per il trattamento descritto. Le regioni indicate sono quelle verificabili oggi; le società fornitrici possono comunque essere stabilite fuori da tali regioni.',
+    subprocessors: [
+      'Supabase (database e autenticazione): database primario e Auth del progetto uufmlmwgvoqhhtqgrclu in regione AWS eu-central-1 (Francoforte, UE), verificato il 31 ott. 2026. Fornitore con sede negli Stati Uniti; trasferimenti secondo il suo ATD / SCC pubblicati. https://supabase.com/legal/dpa',
+      'Resend (e-mail transazionale per accesso e inviti aziendali): fornitore con sede negli Stati Uniti; ATD pubblicato con SCC / clausole svizzere. https://resend.com/legal/dpa',
+      'GitHub Pages (hosting del sito statico): riceve gli indirizzi IP dei visitatori nei log dell’host. Stati Uniti. https://docs.github.com/en/pages',
+      'Google (accesso opzionale solo se l’utente sceglie Google): Stati Uniti; termini propri di Google per l’accesso.',
+      'Stripe / Link (checkout e pagamento dell’abbonamento aziendale): titolari indipendenti per pagamento, fiscalità e dati d’ordine secondo le loro informative — non responsabili del trattamento dei registri dei giorni. Elencati qui perché la fatturazione aziendale li usa. https://stripe.com/legal/dpa · https://link.com/terms',
+    ],
+    subChangeBody:
+      'Le modifiche sostanziali a questo elenco saranno riflesse su questa pagina. Il datore può opporsi per motivi ragionevoli di protezione dei dati scrivendo a privacy@borderday.com entro 14 giorni dall’aggiornamento; se non si concorda un’alternativa praticabile, il datore può smettere di usare le funzioni aziendali che dipendono dal nuovo sub-responsabile.',
+    transfersTitle: 'Trasferimenti internazionali',
+    transfersBody:
+      'Il titolare è tipicamente nell’UE/SEE, in Svizzera o in un altro Stato. Il responsabile è in Svizzera (adeguatezza). L’hosting del database BorderDay è nell’UE (eu-central-1). Quando un sub-responsabile è negli Stati Uniti o altrove, i trasferimenti si basano sui quadri UE–USA e Svizzera–USA (Data Privacy Framework) se il fornitore è certificato, altrimenti sulle clausole contrattuali tipo (con adattamenti svizzeri) nei termini pubblicati di quel fornitore. Una copia delle garanzie può essere richiesta a privacy@borderday.com.',
+    assistanceTitle: 'Assistenza per i diritti e la conformità (art. 28, par. 3, lett. e–f)',
+    assistanceBody:
+      'Tenuto conto della natura del trattamento, il responsabile assiste il datore con funzioni di prodotto (esportazione/cancellazione ove disponibili) e inoltrando le richieste inviate a privacy@borderday.com che riguardano chiaramente i dipendenti di quel datore. Il datore resta responsabile di rispondere ai propri dipendenti. Il responsabile assiste anche, su richiesta e a un costo ragionevole ove la legge lo consenta, per le valutazioni d’impatto e le consultazioni preventive relative alle funzioni aziendali BorderDay.',
+    breachTitle: 'Violazioni dei dati personali (art. 28, par. 3, lett. f; art. 24 LPD)',
+    breachBody:
+      'Il responsabile notifica il datore senza indebito ritardo dopo aver preso conoscenza di una violazione dei dati personali che interessa i dati dei dipendenti di quel datore trattati ai sensi del presente ATD, con le informazioni allora disponibili per aiutare il datore a assolvere i propri obblighi di notifica.',
+    deletionTitle: 'Restituzione e cancellazione (art. 28, par. 3, lett. g)',
+    deletionBody:
+      'Quando l’account aziendale termina, o prima su istruzione scritta, il responsabile cancella o restituisce i registri dei giorni (salvo obblighi di conservazione del diritto dell’Unione, di uno Stato membro o svizzero — ad esempio documenti contabili dell’abbonamento stesso). Gli strumenti di esportazione nel prodotto, ove disponibili, sono il metodo primario di restituzione.',
+    auditTitle: 'Informazioni e audit (art. 28, par. 3, lett. h)',
+    auditBody:
+      'Il responsabile mette a disposizione le informazioni necessarie a dimostrare la conformità al presente ATD, inclusa questa pagina, l’informativa sulla privacy e la documentazione attuale dei sub-responsabili. Gli audit in loco sono limitati a una volta all’anno (salvo richiesta di un’autorità competente), con preavviso ragionevole, in orario lavorativo, senza disturbare altri clienti, e a spese del datore salvo accertamento di una violazione sostanziale del responsabile.',
+    liabilityTitle: 'Riservatezza e responsabilità',
+    liabilityBody:
+      'Le persone autorizzate a trattare i dati sono vincolate alla riservatezza. La responsabilità di ciascuna parte verso l’altra per il presente ATD segue i Termini BorderDay, senza limitare i diritti obbligatori degli interessati ai sensi del GDPR o della LPD.',
+    lawTitle: 'Legge applicabile e gerarchia',
+    lawBody:
+      'Il presente ATD è regolato dal diritto svizzero, fatti salvi i disposti imperativi del GDPR applicabili al trattamento. In caso di conflitto con i Termini su punti puramente commerciali, prevalgono i Termini; sugli obblighi di protezione dei dati relativi ai registri dei giorni, prevale il presente ATD. Il diritto imperativo dei consumatori o del lavoro non è pregiudicato.',
+    contactTitle: 'Contatto',
+    contactBody:
+      'Contatto per la protezione dei dati del responsabile: privacy@borderday.com. Generale: hello@borderday.com. Posta: PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera.',
+    disclaimer:
+      'Il presente ATD è un testo standard pubblico per gli account aziendali BorderDay. Non costituisce consulenza legale. I datori con requisiti particolari (norme di settore, accordi sindacali, SCC aggiuntive) dovrebbero ottenere un proprio parere e contattare privacy@borderday.com prima di affidarsi a BorderDay per un trattamento regolamentato.',
   },
   footer: {
     tagline: 'Registrazione dei giorni per team e collaboratori che lavorano oltre confine.',

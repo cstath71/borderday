@@ -22,6 +22,7 @@ const en = {
     withdraw: 'Withdraw from contract',
     cancel: 'Cancel subscription',
     accessibility: 'Accessibility',
+    dpa: 'Data processing agreement',
     account: 'Account',
     menu: 'Menu',
     skipToContent: 'Skip to main content',
@@ -360,7 +361,7 @@ const en = {
       'PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (UID CHE-312.418.158) is the data controller under the GDPR and the controller under the Swiss Federal Act on Data Protection (FADP) for this website, individual plans, user accounts, company account administration, billing, support and security. Contact: hello@borderday.com · Privacy: privacy@borderday.com. People in the EU/EEA can use the same addresses.',
     rolesTitle: 'Who is responsible for employee day logs',
     rolesBody:
-      'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. No data-processing agreement is published on this site yet: employers who need one can ask at the same address.',
+      'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. The public data processing agreement for company accounts is at /dpa/ (linked from Pricing, company sign-up and the Terms).',
     s1Title: 'What we collect',
     s1Body:
       'Free preview, on your device: border pack, each day’s type (telework, on site, work trip / third State, non-working), whether you marked a night away for work, optional notes, contractual working days per year, employment percentage and A1 record if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border pack, day types and dates, night-away marks, employment percentage and A1 record if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
@@ -587,7 +588,7 @@ const en = {
       'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border corridors. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',
     s2Title: 'Accounts and company use',
     s2Body:
-      'You must provide accurate account details. Company account owners invite employees; employees choose a border pack and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. The provider is the controller of accounts, billing and security. No data-processing agreement is published on this site yet: employers who need one can ask at privacy@borderday.com. You are responsible for the accuracy of the days you log.',
+      'You must provide accurate account details. Company account owners invite employees; employees choose a border pack and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. The provider is the controller of accounts, billing and security. The data processing agreement for employee day logs is published at /dpa/. You are responsible for the accuracy of the days you log.',
     s3Title: 'Subscriptions, trial, renewal and cancellation',
     s3Body:
       'Paid plans are subscriptions. Company and individual plans start with a 7-day free trial, and a payment card is required at signup. After 7 days the plan becomes paid at the stated price: your card is charged automatically on day 8 and the subscription then renews each month or year until you cancel. If you cancel before day 8, nothing is charged. If no valid payment method is on file when the trial ends, the subscription is cancelled. You can cancel at any time through the Cancel subscription link in the footer of every page, which leads to the customer portal, your Link order tools or an email request. Cancellation stops future renewals. Amounts already collected for a started billing period are not pro-rated unless the law or Link’s refund terms require it, and your right of withdrawal below is not affected.',
@@ -704,6 +705,69 @@ const en = {
     feedbackTitle: 'Feedback',
     feedbackBody:
       'If you find a barrier, email hello@borderday.com with the page URL, your browser or assistive technology, and what you were trying to do. We aim to reply within five working days.',
+  },
+
+  dpa: {
+    title: 'Data processing agreement (company accounts)',
+    updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    intro:
+      'This data processing agreement (“DPA”) applies when an employer uses a BorderDay company account so that BorderDay processes personal data of that employer’s employees (day logs and related membership data). It is offered under Article 28 of the GDPR and under the Swiss Federal Act on Data Protection (FADP / LPD / DSG) for processing by a processor / Auftragsbearbeiter. Creating or using a company account, or continuing to use one after this page is published, constitutes the employer’s acceptance of this DPA for that processing.',
+    partiesTitle: 'Parties',
+    partiesBody:
+      'Controller (employer): the legal person that holds the BorderDay company account and decides why and how its employees’ day logs are recorded. Processor (provider): PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (UID CHE-312.418.158), which operates BorderDay. Contact: privacy@borderday.com · hello@borderday.com.',
+    rolesTitle: 'Roles',
+    rolesBody:
+      'For employee day logs, invitations and the HR counters derived from them, the employer is the controller and PrimeLogic Advisory Sàrl is the processor. For the BorderDay website, individual plans, user accounts, company account administration, billing, support and security, PrimeLogic Advisory Sàrl remains controller under the Privacy notice. Stripe and Link act as independent controllers for checkout and payment under their own notices; they are not processors of employee day logs under this DPA.',
+    subjectTitle: 'Subject-matter and nature of the processing',
+    subjectBody:
+      'Subject-matter: hosting, storage, retrieval, transmission and display of employee membership and day-log data so the employer can run telework and tax day counters. Nature: automated processing in a hosted application (create, read, update, delete; aggregation into counters; invitation email). Purpose: only the purposes instructed by the employer through the BorderDay company features, and as described in the Privacy notice. Categories of data subjects: employees and other natural persons the employer invites to the company account. Categories of personal data: name, email, role, border pack, contractual working days, employment percentage and A1 record if entered, day type and date, overnight-away mark, counters, and the record that the “what HR can see” notice was shown. Notes stay private to the employee and are not shown to HR. No GPS or device location is collected.',
+    durationTitle: 'Duration',
+    durationBody:
+      'Processing lasts for the life of the company account and membership, and thereafter only as needed to delete or return data under this DPA and the retention periods stated in the Privacy notice (including any company retention setting).',
+    instructionsTitle: 'Documented instructions (Art. 28(3)(a))',
+    instructionsBody:
+      'The processor processes employee day-log data only on documented instructions from the controller. The BorderDay Terms, this DPA, the Privacy notice and the actions the employer’s account owners take in the product (invite, remove, retention setting, export requests) are the instructions. The processor informs the employer if, in its opinion, an instruction infringes the GDPR or FADP.',
+    securityTitle: 'Security (Art. 28(3)(c); FADP Art. 8)',
+    securityBody:
+      'The processor implements appropriate technical and organisational measures, including access control and encryption in transit to the hosted database, role-based isolation between company accounts (RLS), and limiting staff access to what is needed for support and security. Details of hosting appear under sub-processors.',
+    subTitle: 'Authorised sub-processors',
+    subIntro:
+      'The employer gives a general authorisation to the following sub-processors for the processing described. Regions stated below are those we can verify today; provider companies may still be established outside those regions.',
+    subprocessors: [
+      'Supabase (database and authentication): primary database and Auth for project uufmlmwgvoqhhtqgrclu in AWS region eu-central-1 (Frankfurt, EU), verified 31 Oct 2026. US-based provider; transfers under its published DPA / SCCs. https://supabase.com/legal/dpa',
+      'Resend (transactional email for sign-in and company invitations): US-based provider; published DPA with SCCs / Swiss terms. https://resend.com/legal/dpa',
+      'GitHub Pages (static website hosting): receives visitor IP addresses in host logs. United States. https://docs.github.com/en/pages',
+      'Google (optional sign-in only if the user chooses Google): United States; Google’s own terms for the sign-in.',
+      'Stripe / Link (checkout and payment for the company subscription): independent controllers for payment, tax and Order data under their notices — not processors of employee day logs. Listed here because company billing uses them. https://stripe.com/legal/dpa · https://link.com/terms',
+    ],
+    subChangeBody:
+      'Material changes to this list will be reflected on this page. The employer may object on reasonable data-protection grounds by emailing privacy@borderday.com within 14 days of the update; if no workable alternative is agreed, the employer may stop using the company features that depend on the new sub-processor.',
+    transfersTitle: 'International transfers',
+    transfersBody:
+      'The controller is typically in the EU/EEA, Switzerland or another state. The processor is in Switzerland (adequacy). Database hosting for BorderDay is in the EU (eu-central-1). Where a sub-processor is in the United States or elsewhere, transfers rely on the EU–US and Swiss–US Data Privacy Frameworks where the provider is certified, otherwise on the standard contractual clauses (with Swiss adaptations) in that provider’s published terms. A copy of the safeguards can be requested at privacy@borderday.com.',
+    assistanceTitle: 'Assistance with data-subject rights and compliance (Art. 28(3)(e)–(f))',
+    assistanceBody:
+      'Taking into account the nature of the processing, the processor assists the employer by product features (export/delete where available) and by forwarding requests sent to privacy@borderday.com that clearly relate to that employer’s employees. The employer remains responsible for answering its employees. The processor also assists, on request and at reasonable cost where the law allows, with data-protection impact assessments and prior consultation where they relate to BorderDay company features.',
+    breachTitle: 'Personal-data breaches (Art. 28(3)(f); FADP Art. 24)',
+    breachBody:
+      'The processor notifies the employer without undue delay after becoming aware of a personal-data breach affecting that employer’s employee data processed under this DPA, with information then available to help the employer meet its own notification duties.',
+    deletionTitle: 'Return and deletion (Art. 28(3)(g))',
+    deletionBody:
+      'When the company account ends, or earlier on written instruction, the processor deletes or returns employee day-log data (except where Union, Member State or Swiss law requires storage — for example accounting records of the subscription itself). Export tools in the product, where available, are the primary return method.',
+    auditTitle: 'Information and audits (Art. 28(3)(h))',
+    auditBody:
+      'The processor makes available information necessary to demonstrate compliance with this DPA, including this page, the Privacy notice and current sub-processor documentation. On-site audits are limited to once per year (unless a competent authority requires more), on reasonable notice, during business hours, without disrupting other customers, and at the employer’s expense unless a material breach by the processor is found.',
+    liabilityTitle: 'Confidentiality and liability',
+    liabilityBody:
+      'Persons authorised to process the data are committed to confidentiality. Each party’s liability toward the other for this DPA follows the BorderDay Terms, without limiting mandatory rights of data subjects under the GDPR or FADP.',
+    lawTitle: 'Governing law and hierarchy',
+    lawBody:
+      'This DPA is governed by Swiss law, without prejudice to mandatory provisions of the GDPR that apply to the processing. If this DPA conflicts with the Terms on pure commercial points, the Terms prevail; on data-protection obligations for employee day logs, this DPA prevails. Mandatory consumer or employment law is not affected.',
+    contactTitle: 'Contact',
+    contactBody:
+      'Data-protection contact for the processor: privacy@borderday.com. General: hello@borderday.com. Postal: PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland.',
+    disclaimer:
+      'This DPA is a public standard text for BorderDay company accounts. It is not legal advice. Employers with special requirements (sector rules, works-council agreements, extra SCCs) should take their own advice and contact privacy@borderday.com before relying on BorderDay for regulated processing.',
   },
   footer: {
     tagline: 'Day tracking for cross-border teams and employees.',

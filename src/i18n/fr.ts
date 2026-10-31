@@ -25,6 +25,7 @@ const fr: Dict = {
     withdraw: 'Se rétracter du contrat',
     cancel: 'Résilier votre contrat',
     accessibility: 'Accessibilité',
+    dpa: 'Accord de traitement des données',
     account: 'Compte',
     menu: 'Menu',
     skipToContent: 'Aller au contenu principal',
@@ -366,7 +367,7 @@ const fr: Dict = {
       'PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse (IDE CHE-312.418.158) est le responsable du traitement au sens du RGPD et de la loi fédérale suisse sur la protection des données (LPD) pour ce site, les offres individuelles, les comptes utilisateurs, l’administration des comptes entreprise, la facturation, le support et la sécurité. Contact : hello@borderday.com · Confidentialité : privacy@borderday.com. Les personnes dans l’UE/EEE peuvent utiliser les mêmes adresses.',
     rolesTitle: 'Qui est responsable des journaux de jours des collaborateurs',
     rolesBody:
-      'Dans un compte entreprise, l’employeur décide pourquoi et comment les jours de ses collaborateurs sont enregistrés. L’employeur est donc responsable du traitement de ces journaux et de leur usage par les RH, y compris la base légale, et BorderDay les traite pour lui en tant que sous-traitant. Les questions sur les raisons de cet enregistrement ou sur les documents que l’employeur doit conserver s’adressent d’abord à lui ; nous transmettons les demandes envoyées à privacy@borderday.com. Aucun contrat de sous-traitance n’est encore publié sur ce site : les employeurs qui en ont besoin peuvent le demander à la même adresse.',
+      'Dans un compte entreprise, l’employeur décide pourquoi et comment les jours de ses collaborateurs sont enregistrés. L’employeur est donc responsable du traitement de ces journaux et de leur usage par les RH, y compris la base légale, et BorderDay les traite pour lui en tant que sous-traitant. Les questions sur les raisons de cet enregistrement ou sur les documents que l’employeur doit conserver s’adressent d’abord à lui ; nous transmettons les demandes envoyées à privacy@borderday.com. L’accord public de traitement des données pour les comptes entreprise est disponible à /dpa/ (lié depuis Tarifs, l’inscription entreprise et les Conditions).',
     s1Title: 'Ce que nous collectons',
     s1Body:
       'Aperçu gratuit, sur votre appareil : pack frontière, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi et A1 si vous les indiquez. Offre individuelle : les mêmes données, enregistrées dans votre compte. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, pack frontière, types et dates de jours, marques de nuit hors du domicile, taux d’emploi et A1 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
@@ -596,7 +597,7 @@ const fr: Dict = {
       'BorderDay est un outil de suivi et de rappel des classifications de jours pour employeurs et collaborateurs sur certains corridors transfrontaliers. Ce n’est pas un conseil fiscal ou juridique, ni un substitut à votre employeur, à un conseiller qualifié ou à une autorité compétente. Voir l’Avertissement.',
     s2Title: 'Comptes et usage entreprise',
     s2Body:
-      'Vous devez fournir des informations de compte exactes. Les administrateurs du compte entreprise invitent les collaborateurs ; ceux-ci choisissent un pack frontière et enregistrent uniquement le type de jour (ni GPS ni localisation de l’appareil). Les RH voient les mêmes compteurs que le collaborateur. Dans un compte entreprise, l’employeur décide pourquoi et comment les jours sont enregistrés : il est responsable du traitement de ces journaux, de la base légale, de l’information des collaborateurs et de toute consultation exigée par son droit, et le prestataire agit comme son sous-traitant. Le prestataire est responsable du traitement des comptes, de la facturation et de la sécurité. Aucun contrat de sous-traitance n’est encore publié sur ce site : les employeurs qui en ont besoin peuvent le demander à privacy@borderday.com. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
+      'Vous devez fournir des informations de compte exactes. Les administrateurs du compte entreprise invitent les collaborateurs ; ceux-ci choisissent un pack frontière et enregistrent uniquement le type de jour (ni GPS ni localisation de l’appareil). Les RH voient les mêmes compteurs que le collaborateur. Dans un compte entreprise, l’employeur décide pourquoi et comment les jours sont enregistrés : il est responsable du traitement de ces journaux, de la base légale, de l’information des collaborateurs et de toute consultation exigée par son droit, et le prestataire agit comme son sous-traitant. Le prestataire est responsable du traitement des comptes, de la facturation et de la sécurité. L’accord de traitement des données pour les journaux de jours des collaborateurs est publié à /dpa/. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
     s3Title: 'Abonnements, essai, renouvellement et résiliation',
     s3Body:
       'Les offres payantes sont des abonnements. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. Après 7 jours, l’offre devient payante au prix indiqué : votre carte est débitée automatiquement le 8e jour et l’abonnement se renouvelle ensuite chaque mois ou chaque année jusqu’à votre résiliation. Si vous résiliez avant le 8e jour, rien n’est débité. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier à tout moment via le lien « Résilier votre contrat » en bas de chaque page, qui mène au portail client, aux outils de commande Link ou à une demande par e-mail. La résiliation arrête les renouvellements futurs. Les montants déjà encaissés pour une période commencée ne sont pas remboursés au prorata, sauf obligation légale ou conditions de remboursement de Link, et votre droit de rétractation ci-dessous n’est pas affecté.',
@@ -715,6 +716,68 @@ const fr: Dict = {
     feedbackTitle: 'Retour',
     feedbackBody:
       'Si vous rencontrez un obstacle, écrivez à hello@borderday.com avec l’URL de la page, votre navigateur ou technologie d’assistance, et ce que vous essayiez de faire. Nous visons une réponse sous cinq jours ouvrables.',
+  },
+  dpa: {
+    title: 'Accord de traitement des données (comptes entreprise)',
+    updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
+    intro:
+      'Le présent accord de traitement des données (« ATD ») s’applique lorsqu’un employeur utilise un compte entreprise BorderDay afin que BorderDay traite des données personnelles des collaborateurs de cet employeur (journaux de jours et données d’appartenance associées). Il est proposé au titre de l’article 28 du RGPD et de la loi fédérale suisse sur la protection des données (LPD) pour un traitement par un sous-traitant. La création ou l’utilisation d’un compte entreprise, ou la poursuite de son utilisation après la publication de cette page, vaut acceptation de cet ATD par l’employeur pour ce traitement.',
+    partiesTitle: 'Parties',
+    partiesBody:
+      'Responsable du traitement (employeur) : la personne morale titulaire du compte entreprise BorderDay qui décide pourquoi et comment les journaux de jours de ses collaborateurs sont enregistrés. Sous-traitant (prestataire) : PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse (IDE CHE-312.418.158), qui exploite BorderDay. Contact : privacy@borderday.com · hello@borderday.com.',
+    rolesTitle: 'Rôles',
+    rolesBody:
+      'Pour les journaux de jours des collaborateurs, les invitations et les compteurs RH qui en dérivent, l’employeur est responsable du traitement et PrimeLogic Advisory Sàrl est sous-traitant. Pour le site BorderDay, les offres individuelles, les comptes utilisateurs, l’administration du compte entreprise, la facturation, le support et la sécurité, PrimeLogic Advisory Sàrl reste responsable du traitement au sens de l’avis de confidentialité. Stripe et Link agissent comme responsables indépendants pour le paiement selon leurs propres avis ; ils ne sont pas sous-traitants des journaux de jours au titre du présent ATD.',
+    subjectTitle: 'Objet et nature du traitement',
+    subjectBody:
+      'Objet : hébergement, stockage, consultation, transmission et affichage des données d’appartenance et des journaux de jours afin que l’employeur puisse faire tourner les compteurs de télétravail et de jours fiscaux. Nature : traitement automatisé dans une application hébergée (création, lecture, mise à jour, suppression ; agrégation en compteurs ; e-mail d’invitation). Finalité : uniquement les finalités instructées par l’employeur via les fonctions entreprise BorderDay, et telles que décrites dans l’avis de confidentialité. Catégories de personnes concernées : collaborateurs et autres personnes physiques que l’employeur invite au compte entreprise. Catégories de données : nom, e-mail, rôle, pack frontalier, jours contractuels, taux d’activité et fiche A1 le cas échéant, type et date de jour, marque « nuitée hors domicile », compteurs, et l’enregistrement que l’avis « ce que les RH voient » a été montré. Les notes restent privées au collaborateur. Aucune localisation GPS ou d’appareil n’est collectée.',
+    durationTitle: 'Durée',
+    durationBody:
+      'Le traitement dure pendant la vie du compte entreprise et de l’appartenance, puis seulement le temps nécessaire pour supprimer ou restituer les données au titre du présent ATD et des durées de conservation de l’avis de confidentialité (y compris tout paramètre de conservation entreprise).',
+    instructionsTitle: 'Instructions documentées (art. 28, § 3, a)',
+    instructionsBody:
+      'Le sous-traitant ne traite les journaux de jours que sur instructions documentées du responsable. Les Conditions BorderDay, le présent ATD, l’avis de confidentialité et les actions des administrateurs du compte dans le produit (invitation, retrait, paramètre de conservation, demandes d’export) constituent les instructions. Le sous-traitant informe l’employeur si, selon lui, une instruction enfreint le RGPD ou la LPD.',
+    securityTitle: 'Sécurité (art. 28, § 3, c ; LPD art. 8)',
+    securityBody:
+      'Le sous-traitant met en œuvre des mesures techniques et organisationnelles appropriées, notamment le contrôle d’accès et le chiffrement en transit vers la base hébergée, l’isolation par rôles entre comptes entreprise (RLS), et la limitation de l’accès du personnel au strict nécessaire pour le support et la sécurité. Les détails d’hébergement figurent sous sous-traitants ultérieurs.',
+    subTitle: 'Sous-traitants ultérieurs autorisés',
+    subIntro:
+      'L’employeur donne une autorisation générale aux sous-traitants ultérieurs suivants pour le traitement décrit. Les régions indiquées sont celles que nous pouvons vérifier à ce jour ; les sociétés prestataires peuvent toujours être établies hors de ces régions.',
+    subprocessors: [
+      'Supabase (base de données et authentification) : base et Auth du projet uufmlmwgvoqhhtqgrclu en région AWS eu-central-1 (Francfort, UE), vérifié le 31 oct. 2026. Prestataire établi aux États-Unis ; transferts selon son ATD / CCT publiés. https://supabase.com/legal/dpa',
+      'Resend (e-mail transactionnel pour connexion et invitations entreprise) : prestataire établi aux États-Unis ; ATD publié avec CCT / clauses suisses. https://resend.com/legal/dpa',
+      'GitHub Pages (hébergement du site statique) : reçoit les adresses IP des visiteurs dans les journaux d’hôte. États-Unis. https://docs.github.com/en/pages',
+      'Google (connexion optionnelle uniquement si l’utilisateur choisit Google) : États-Unis ; conditions propres à Google pour la connexion.',
+      'Stripe / Link (paiement de l’abonnement entreprise) : responsables indépendants pour le paiement, la fiscalité et les données de commande selon leurs avis — pas sous-traitants des journaux de jours. Listés ici car la facturation entreprise les utilise. https://stripe.com/legal/dpa · https://link.com/terms',
+    ],
+    subChangeBody:
+      'Les changements matériels à cette liste seront reflétés sur cette page. L’employeur peut s’y opposer pour des motifs raisonnables de protection des données en écrivant à privacy@borderday.com dans les 14 jours suivant la mise à jour ; à défaut d’alternative viable, l’employeur peut cesser d’utiliser les fonctions entreprise qui dépendent du nouveau sous-traitant ultérieur.',
+    transfersTitle: 'Transferts internationaux',
+    transfersBody:
+      'Le responsable est en général dans l’UE/EEE, en Suisse ou dans un autre État. Le sous-traitant est en Suisse (adéquation). L’hébergement de la base BorderDay est dans l’UE (eu-central-1). Lorsqu’un sous-traitant ultérieur est aux États-Unis ou ailleurs, les transferts reposent sur les cadres UE–États-Unis et Suisse–États-Unis (Data Privacy Framework) lorsque le prestataire est certifié, sinon sur les clauses contractuelles types (avec adaptations suisses) dans les conditions publiées de ce prestataire. Une copie des garanties peut être demandée à privacy@borderday.com.',
+    assistanceTitle: 'Assistance aux droits et à la conformité (art. 28, § 3, e–f)',
+    assistanceBody:
+      'Compte tenu de la nature du traitement, le sous-traitant assiste l’employeur par des fonctions produit (export/suppression le cas échéant) et en transmettant les demandes envoyées à privacy@borderday.com qui concernent clairement les collaborateurs de cet employeur. L’employeur reste responsable de répondre à ses collaborateurs. Le sous-traitant assiste aussi, sur demande et à un coût raisonnable lorsque le droit le permet, pour les analyses d’impact et les consultations préalables liées aux fonctions entreprise BorderDay.',
+    breachTitle: 'Violations de données (art. 28, § 3, f ; LPD art. 24)',
+    breachBody:
+      'Le sous-traitant notifie l’employeur sans retard injustifié après avoir pris connaissance d’une violation de données personnelles affectant les données de collaborateurs de cet employeur traitées au titre du présent ATD, avec les informations alors disponibles pour aider l’employeur à remplir ses propres obligations de notification.',
+    deletionTitle: 'Restitution et suppression (art. 28, § 3, g)',
+    deletionBody:
+      'Lorsque le compte entreprise prend fin, ou plus tôt sur instruction écrite, le sous-traitant supprime ou restitue les journaux de jours (sauf obligation de conservation issue du droit de l’Union, d’un État membre ou suisse — par exemple les pièces comptables de l’abonnement). Les outils d’export du produit, lorsqu’ils existent, sont le mode principal de restitution.',
+    auditTitle: 'Informations et audits (art. 28, § 3, h)',
+    auditBody:
+      'Le sous-traitant met à disposition les informations nécessaires pour démontrer le respect du présent ATD, y compris cette page, l’avis de confidentialité et la documentation actuelle des sous-traitants ultérieurs. Les audits sur site sont limités à une fois par an (sauf exigence d’une autorité compétente), sur préavis raisonnable, pendant les heures ouvrables, sans perturber les autres clients, et aux frais de l’employeur sauf constatation d’une violation matérielle du sous-traitant.',
+    liabilityTitle: 'Confidentialité et responsabilité',
+    liabilityBody:
+      'Les personnes autorisées à traiter les données sont tenues à la confidentialité. La responsabilité de chaque partie envers l’autre au titre du présent ATD suit les Conditions BorderDay, sans limiter les droits obligatoires des personnes concernées au titre du RGPD ou de la LPD.',
+    lawTitle: 'Droit applicable et hiérarchie',
+    lawBody:
+      'Le présent ATD est régi par le droit suisse, sans préjudice des dispositions impératives du RGPD applicables au traitement. En cas de conflit avec les Conditions sur des points purement commerciaux, les Conditions prévalent ; sur les obligations de protection des données relatives aux journaux de jours, le présent ATD prévaut. Le droit impératif de la consommation ou du travail n’est pas affecté.',
+    contactTitle: 'Contact',
+    contactBody:
+      'Contact protection des données du sous-traitant : privacy@borderday.com. Général : hello@borderday.com. Courrier : PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse.',
+    disclaimer:
+      'Le présent ATD est un texte standard public pour les comptes entreprise BorderDay. Ce n’est pas un conseil juridique. Les employeurs ayant des exigences particulières (règles sectorielles, accords d’entreprise, CCT supplémentaires) doivent prendre leur propre conseil et contacter privacy@borderday.com avant de s’appuyer sur BorderDay pour un traitement réglementé.',
   },
   footer: {
     tagline:

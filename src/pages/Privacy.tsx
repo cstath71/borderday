@@ -25,6 +25,9 @@ export default function Privacy() {
           <p>{p.controllerBody}</p>
           <h2>{p.rolesTitle}</h2>
           <p>{p.rolesBody}</p>
+          <p>
+            <Link to={`/${lang}/dpa`}>{d.nav.dpa}</Link>
+          </p>
           <h2>{p.s1Title}</h2>
           <p>{p.s1Body}</p>
           <h2>{p.s2Title}</h2>

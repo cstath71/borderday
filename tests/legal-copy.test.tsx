@@ -72,17 +72,17 @@ describe('C1 Privacy content', () => {
     }
   });
 
-  it('is honest about US transfers and does not claim a signed DPA', () => {
+  it('is honest about US transfers and points to the public DPA (not a separately signed one)', () => {
     for (const [, d] of dicts) {
       const blob = flat(d.privacy);
       expect(d.privacy.transfersBody).toMatch(/Data Privacy Framework/);
       expect(blob).toMatch(/eu-central-1/);
       expect(blob).not.toMatch(/signed (DPA|data)|DPA signé|unterzeichnete/i);
     }
-    expect(getDict('en').privacy.rolesBody).toMatch(/No data-processing agreement is published/);
-    expect(getDict('fr').privacy.rolesBody).toMatch(/Aucun contrat de sous-traitance n’est encore publié/);
-    expect(getDict('de').privacy.rolesBody).toMatch(/noch kein Auftragsverarbeitungsvertrag veröffentlicht/);
-    expect(getDict('it').privacy.rolesBody).toMatch(/non è ancora pubblicato un accordo/);
+    expect(getDict('en').privacy.rolesBody).toMatch(/public data processing agreement.*\/dpa\//);
+    expect(getDict('fr').privacy.rolesBody).toMatch(/accord public de traitement.*\/dpa\//);
+    expect(getDict('de').privacy.rolesBody).toMatch(/öffentliche Auftragsverarbeitungsvertrag.*\/dpa\//);
+    expect(getDict('it').privacy.rolesBody).toMatch(/accordo pubblico sul trattamento.*\/dpa\//);
   });
 
   it('H6: names every recipient and Stripe/Link as independent controllers', () => {

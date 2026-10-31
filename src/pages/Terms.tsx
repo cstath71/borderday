@@ -22,6 +22,9 @@ export default function Terms() {
           <p>{t.s1Body}</p>
           <h2>{t.s2Title}</h2>
           <p>{t.s2Body}</p>
+          <p>
+            <Link to={`/${lang}/dpa`}>{d.nav.dpa}</Link>
+          </p>
           <h2>{t.s3Title}</h2>
           <p>{t.s3Body}</p>
           <p>{t.s3YearlyBody}</p>

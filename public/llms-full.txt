@@ -26,6 +26,7 @@
 - https://borderday.com/en/for-individuals/ — Individual plan
 - https://borderday.com/en/company/signup/ — Company sign-up
 - https://borderday.com/en/privacy/ — Privacy
+- https://borderday.com/en/dpa/ — Data processing agreement (company accounts)
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
 - https://borderday.com/en/accessibility/ — Accessibility
 - https://borderday.com/en/terms/ — Terms and legal notice
@@ -79,6 +80,7 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/en/faq/
 - https://borderday.com/en/for-individuals/
 - https://borderday.com/en/privacy/
+- https://borderday.com/en/dpa/
 - https://borderday.com/en/disclaimer/
 - https://borderday.com/en/accessibility/
 - https://borderday.com/en/terms/

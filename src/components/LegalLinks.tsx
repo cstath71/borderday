@@ -9,6 +9,8 @@ export default function LegalLinks({ d, lang, intro }: { d: Dict; lang: Lang; in
       {' · '}
       <Link to={`/${lang}/privacy`}>{d.nav.privacy}</Link>
       {' · '}
+      <Link to={`/${lang}/dpa`}>{d.nav.dpa}</Link>
+      {' · '}
       <Link to={`/${lang}/withdrawal`}>{d.nav.withdraw}</Link>
     </p>
   );

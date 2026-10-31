@@ -50,6 +50,7 @@ export const PUBLIC_PATHS = [
   'faq',
   'for-individuals',
   'privacy',
+  'dpa',
   'disclaimer',
   'accessibility',
   'terms',
@@ -375,6 +376,57 @@ export const PAGES = {
       crumbs: [
         ['Home', ''],
         ['Avvertenza', 'disclaimer'],
+      ],
+    },
+  },
+
+  dpa: {
+    en: {
+      title: 'Data processing agreement — BorderDay',
+      description:
+        'Public data processing agreement for BorderDay company accounts under GDPR Art. 28 and the Swiss FADP: roles, security, sub-processors and transfers.',
+      h1: 'Data processing agreement',
+      summary:
+        'When an employer uses a BorderDay company account, BorderDay processes employee day logs as a processor under GDPR Art. 28 and the Swiss FADP. This page is the public DPA for that processing. Sub-processors include Supabase (eu-central-1), Resend, GitHub Pages and optional Google sign-in; Stripe/Link are independent controllers for payment.',
+      crumbs: [
+        ['Home', ''],
+        ['Data processing agreement', 'dpa'],
+      ],
+    },
+    fr: {
+      title: 'Accord de traitement des données — BorderDay',
+      description:
+        'Accord public de traitement des données pour les comptes entreprise BorderDay (art. 28 RGPD et LPD suisse) : rôles, sécurité, sous-traitants et transferts.',
+      h1: 'Accord de traitement des données',
+      summary:
+        'Lorsqu’un employeur utilise un compte entreprise BorderDay, BorderDay traite les journaux de jours des collaborateurs en tant que sous-traitant (art. 28 RGPD et LPD). Cette page est l’ATD public pour ce traitement. Sous-traitants : Supabase (eu-central-1), Resend, GitHub Pages et Google optionnel ; Stripe/Link sont responsables indépendants pour le paiement.',
+      crumbs: [
+        ['Accueil', ''],
+        ['Accord de traitement des données', 'dpa'],
+      ],
+    },
+    de: {
+      title: 'Auftragsverarbeitungsvertrag — BorderDay',
+      description:
+        'Öffentlicher Auftragsverarbeitungsvertrag für BorderDay-Unternehmenskonten (Art. 28 DSGVO und schweizerisches DSG): Rollen, Sicherheit, Unterauftragsbearbeiter und Übermittlungen.',
+      h1: 'Auftragsverarbeitungsvertrag',
+      summary:
+        'Nutzt ein Arbeitgeber ein BorderDay-Unternehmenskonto, verarbeitet BorderDay Tagesprotokolle der Mitarbeitenden als Auftragsbearbeiter nach Art. 28 DSGVO und dem DSG. Diese Seite ist der öffentliche AVV. Unterauftragsbearbeiter: Supabase (eu-central-1), Resend, GitHub Pages und optionales Google; Stripe/Link sind unabhängige Verantwortliche für die Zahlung.',
+      crumbs: [
+        ['Home', ''],
+        ['Auftragsverarbeitungsvertrag', 'dpa'],
+      ],
+    },
+    it: {
+      title: 'Accordo sul trattamento dei dati — BorderDay',
+      description:
+        'Accordo pubblico sul trattamento dei dati per gli account aziendali BorderDay (art. 28 GDPR e LPD svizzera): ruoli, sicurezza, sub-responsabili e trasferimenti.',
+      h1: 'Accordo sul trattamento dei dati',
+      summary:
+        'Quando un datore usa un account aziendale BorderDay, BorderDay tratta i registri dei giorni dei dipendenti come responsabile del trattamento ai sensi dell’art. 28 GDPR e della LPD. Questa pagina è l’ATD pubblico. Sub-responsabili: Supabase (eu-central-1), Resend, GitHub Pages e Google opzionale; Stripe/Link sono titolari indipendenti per il pagamento.',
+      crumbs: [
+        ['Home', ''],
+        ['Accordo sul trattamento dei dati', 'dpa'],
       ],
     },
   },
@@ -936,6 +988,7 @@ export function llmsTxt() {
 - ${BASE}/en/for-individuals/ — Individual plan
 - ${BASE}/en/company/signup/ — Company sign-up
 - ${BASE}/en/privacy/ — Privacy
+- ${BASE}/en/dpa/ — Data processing agreement (company accounts)
 - ${BASE}/en/disclaimer/ — Legal disclaimer
 - ${BASE}/en/accessibility/ — Accessibility
 - ${BASE}/en/terms/ — Terms and legal notice

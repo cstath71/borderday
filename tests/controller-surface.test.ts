@@ -24,13 +24,24 @@ function collectStrings(value: unknown, path = ''): { path: string; text: string
 describe('controller identity surface', () => {
   const locales = { en, fr, de, it: itDict } as const;
   for (const [lang, dict] of Object.entries(locales)) {
-    it(`${lang}: PrimeLogic only in privacy.controllerBody and terms.providerBody`, () => {
+    it(`${lang}: PrimeLogic only in privacy.controllerBody, terms.providerBody, and dpa party/contact/roles bodies`, () => {
       const hits = collectStrings(dict).filter(({ text }) =>
         MARKERS.some((m) => text.includes(m)),
       );
       const paths = hits.map((h) => h.path).sort();
-      expect(paths).toEqual(['privacy.controllerBody', 'terms.providerBody']);
-      expect(hits.every((h) => h.text.includes('hello@borderday.com'))).toBe(true);
+      expect(paths).toEqual([
+        'dpa.contactBody',
+        'dpa.partiesBody',
+        'dpa.rolesBody',
+        'privacy.controllerBody',
+        'terms.providerBody',
+      ]);
+      // Identity contact must appear on the controller / provider / DPA party surfaces (rolesBody names the processor without repeating the mailbox).
+      expect(
+        hits
+          .filter((h) => h.path !== 'dpa.rolesBody')
+          .every((h) => h.text.includes('hello@borderday.com')),
+      ).toBe(true);
       expect(hits.some((h) => /Stathopoulos/i.test(h.text))).toBe(false);
     });
   }
@@ -103,8 +114,10 @@ describe('controller identity surface', () => {
       expect(text).not.toMatch(OWNER_BANNED);
     }
     // Privacy/terms prerendered shells use marketing summaries only (full legal body is client-rendered)
-    for (const rel of ['en/privacy/index.html', 'en/terms/index.html']) {
-      const text = readFileSync(join(ROOT, 'dist', rel), 'utf8');
+    for (const rel of ['en/privacy/index.html', 'en/terms/index.html', 'en/dpa/index.html']) {
+      const file = join(ROOT, 'dist', rel);
+      if (!existsSync(file)) continue;
+      const text = readFileSync(file, 'utf8');
       // prerender summary must not leak controller; live React page still has it in i18n only
       expect(text).not.toMatch(OWNER_BANNED);
     }

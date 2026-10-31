@@ -26,6 +26,7 @@
 - https://borderday.com/en/for-individuals/ — Individual plan
 - https://borderday.com/en/company/signup/ — Company sign-up
 - https://borderday.com/en/privacy/ — Privacy
+- https://borderday.com/en/dpa/ — Data processing agreement (company accounts)
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
 - https://borderday.com/en/accessibility/ — Accessibility
 - https://borderday.com/en/terms/ — Terms and legal notice

@@ -59,10 +59,10 @@ function worse(a: AggregateStatus, b: CounterResult['status']): AggregateStatus 
   return (rank[b] ?? 0) > (rank[a] ?? 0) ? (b as AggregateStatus) : a;
 }
 
-type CountedLog = Pick<DayLog, 'workDate' | 'dayType' | 'note' | 'overnightAway'>;
+type CountedLog = Pick<DayLog, 'workDate' | 'dayType' | 'note' | 'overnightAway' | 'dayShare'>;
 
 export function dayLogsToEntries(logs: CountedLog[]): DayEntry[] {
-  return logs.map((l) => ({ date: l.workDate, type: l.dayType, note: l.note, overnightAway: l.overnightAway }));
+  return logs.map((l) => ({ date: l.workDate, type: l.dayType, note: l.note, overnightAway: l.overnightAway, dayShare: l.dayShare }));
 }
 
 export function summarizeEmployee(opts: {

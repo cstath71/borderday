@@ -27,6 +27,10 @@ const DAY_TYPES: DayType[] = ['telework', 'onsite', 'third_country', 'non_workin
 /** Colour is not the only cue: each logged cell also shows a shape. The aria-label carries the words. */
 const DAY_MARKS: Record<DayType, string> = { telework: '⌂', onsite: '▣', third_country: '✈', non_working: '–' };
 
+function canBeHalfDay(type: DayType): boolean {
+  return type === 'telework' || type === 'onsite' || type === 'third_country';
+}
+
 /** Sleeping away for work only makes sense on a day worked away from home. */
 function canBeOvernight(type: DayType): boolean {
   return type === 'onsite' || type === 'third_country';
@@ -170,12 +174,12 @@ export default function AppPage() {
     }
   }
 
-  async function logDay(type: DayType, overnightAway: boolean) {
+  async function logDay(type: DayType, overnightAway: boolean, dayShare: 0.5 | 1) {
     if (!store || !canLogSelected) return;
     setBusy(true);
     setError(null);
     try {
-      await store.put({ date: selectedDate, type, overnightAway }, borderId);
+      await store.put({ date: selectedDate, type, overnightAway, dayShare }, borderId);
       await refresh();
     } catch {
       setError(d.app.saveError);
@@ -359,7 +363,13 @@ export default function AppPage() {
                 className={`day-type-btn ${selectedEntry?.type === type ? 'selected' : ''}`}
                 aria-pressed={selectedEntry?.type === type}
                 disabled={busy || !canLogSelected}
-                onClick={() => void logDay(type, canBeOvernight(type) && !!selectedEntry?.overnightAway)}
+                onClick={() =>
+                  void logDay(
+                    type,
+                    canBeOvernight(type) && !!selectedEntry?.overnightAway,
+                    canBeHalfDay(type) && selectedEntry?.dayShare === 0.5 ? 0.5 : 1,
+                  )
+                }
               >
                 <strong>{(d.dayTypes as Record<string, string>)[type]}</strong>
                 <span>{(d.dayTypes as Record<string, string>)[pack?.dayHintKeys?.[type] ?? `${type}Hint`]}</span>
@@ -372,10 +382,34 @@ export default function AppPage() {
                 type="checkbox"
                 checked={!!selectedEntry.overnightAway}
                 disabled={busy || !canLogSelected}
-                onChange={(e) => void logDay(selectedEntry.type, e.target.checked)}
+                onChange={(e) =>
+                  void logDay(
+                    selectedEntry.type,
+                    e.target.checked,
+                    selectedEntry.dayShare === 0.5 ? 0.5 : 1,
+                  )
+                }
               />{' '}
               <strong>{d.dayTypes.overnightAway}</strong>
               <div className="meta">{d.dayTypes.overnightAwayHint}</div>
+            </label>
+          )}
+          {selectedEntry && canBeHalfDay(selectedEntry.type) && (
+            <label style={{ display: 'block', marginTop: '0.75rem' }}>
+              <input
+                type="checkbox"
+                checked={selectedEntry.dayShare === 0.5}
+                disabled={busy || !canLogSelected}
+                onChange={(e) =>
+                  void logDay(
+                    selectedEntry.type,
+                    canBeOvernight(selectedEntry.type) && !!selectedEntry.overnightAway,
+                    e.target.checked ? 0.5 : 1,
+                  )
+                }
+              />{' '}
+              <strong>{d.dayTypes.halfDay}</strong>
+              <div className="meta">{d.dayTypes.halfDayHint}</div>
             </label>
           )}
         </div>

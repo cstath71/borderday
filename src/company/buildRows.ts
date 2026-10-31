@@ -21,6 +21,7 @@ export interface RowLog {
   workDate: string;
   dayType: DayType;
   overnightAway?: boolean;
+  dayShare?: 0.5 | 1;
 }
 
 export function buildEmployeeRow(

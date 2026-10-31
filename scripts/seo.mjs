@@ -236,7 +236,7 @@ export const PAGES = {
         'Log your own telework and border days: social-security counters on every corridor, tax counters where the rule can be counted today. €4.99/month or €49/year incl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
       h1: 'Log your own border days',
       summary:
-        'Employees and self-trackers can log telework, on-site, trip and non-working days. Social-security counters run on every corridor; tax counters run on seven. Individual plan: €4.99/month or €49/year (incl. VAT). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
+        'Employees and individual users can log telework, on-site, trip and non-working days. Social-security counters run on every corridor; tax counters run on seven. Individual plan: €4.99/month or €49/year (incl. VAT). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
       crumbs: [
         ['Home', ''],
         ['For individuals', 'for-individuals'],
@@ -272,7 +272,7 @@ export const PAGES = {
         'Registrate telelavoro e giorni di confine. 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
       h1: 'Registrate i vostri giorni di confine',
       summary:
-        'Dipendenti e chi tiene il proprio registro possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati. Contatori di sicurezza sociale su ogni corridoio, contatori fiscali su sette. Piano individuale: 4,99 €/mese o 49 €/anno (IVA inclusa). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
+        'Dipendenti e utenti individuali possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati. Contatori di sicurezza sociale su ogni corridoio, contatori fiscali su sette. Piano individuale: 4,99 €/mese o 49 €/anno (IVA inclusa). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
       crumbs: [
         ['Home', ''],
         ['Per i privati', 'for-individuals'],

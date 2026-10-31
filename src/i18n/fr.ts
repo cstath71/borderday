@@ -112,16 +112,22 @@ const fr: Dict = {
     onsite: 'Sur le lieu de travail',
     third_country: 'Déplacement professionnel / État tiers',
     non_working: 'Jour non travaillé',
-    teleworkHint: 'Jour de travail effectué dans le pays de résidence (domicile ou espace de coworking local).',
+    teleworkHint: 'Jour de travail effectué dans le pays de résidence, en principe à domicile.',
     onsiteHint: 'Jour de travail dans les locaux de l’employeur dans le pays du lieu de travail.',
     third_countryHint: 'Déplacement professionnel, formation, visite client ou mission temporaire hors du pays du lieu de travail.',
     non_workingHint: 'Congé, jour férié non travaillé, maladie ou jour de repos.',
     teleworkHint_ticino:
       'Jour de travail à votre domicile en Italie. Le protocole dit « au domicile » : la prise en compte d’un jour en coworking n’est pas confirmée, vérifiez auprès de votre autorité.',
+    teleworkHint_ch_fr:
+      'Jour de travail en France (domicile ou espace de coworking local). Le régime conventionnel CH–FR n’est pas limité au domicile.',
     third_countryHint_basel_de:
       'Travail hors d’Allemagne et de Suisse : toujours un jour de non-retour, même avec retour le soir. Ne l’utilisez pas pour un déplacement d’une journée en Allemagne ou en Suisse.',
     logHint_luxembourg_fr:
       'Toute fraction de journée hors du Luxembourg compte comme une journée entière : consignez toute la journée en télétravail ou déplacement.',
+    halfDay: 'Demi-journée',
+    halfDayHint:
+      'Seule une partie de ce jour correspond au type ci-dessus (par ex. matin sur site, après-midi en télétravail). Pour le Luxembourg, toute fraction hors Luxembourg compte quand même comme une journée entière.',
+    halfDayShort: 'Demi',
     overnightAway: 'Nuit hors du domicile pour le travail (pas de retour à la maison)',
     overnightAwayHint:
       'Un oui ou un non, jamais un lieu. Certains seuils comptent ces jours. Dans un compte entreprise, les RH le voient avec le type de jour.',
@@ -366,7 +372,7 @@ const fr: Dict = {
     readBefore: 'Avant de vous abonner, lisez :',
     companyBusinessOnly: 'Pour les entreprises. Les consommateurs choisissent l’offre individuelle.',
     yearlyRenewal:
-      'Les offres annuelles se renouvellent pour un an jusqu’à votre résiliation. Après la première année, vous pouvez résilier à tout moment une offre renouvelée, selon les CGU.',
+      'Les offres individuelles annuelles (49 €) se renouvellent pour une année supplémentaire au prix alors en vigueur jusqu’à résiliation. BorderDay envoie un rappel par e-mail avant chaque prélèvement annuel. Résiliez à tout moment via Résilier l’abonnement dans le pied de page (portail client). Après la première année, vous pouvez résilier une offre renouvelée à tout moment ; le remboursement de la période non utilisée s’applique lorsque le droit de la consommation l’impose.',
   },
   faq: {
     title: 'FAQ',
@@ -643,7 +649,7 @@ const fr: Dict = {
     s3Body:
       'Les offres payantes sont des abonnements. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. Après 7 jours, l’offre devient payante au prix indiqué : votre carte est débitée automatiquement le 8e jour et l’abonnement se renouvelle ensuite chaque mois ou chaque année jusqu’à votre résiliation. Si vous résiliez avant le 8e jour, rien n’est débité. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier à tout moment via le lien « Résilier votre contrat » en bas de chaque page, qui mène au portail client, aux outils de commande Link ou à une demande par e-mail. La résiliation arrête les renouvellements futurs. Les montants déjà encaissés pour une période commencée ne sont pas remboursés au prorata, sauf obligation légale ou conditions de remboursement de Link, et votre droit de rétractation ci-dessous n’est pas affecté.',
     s3YearlyBody:
-      'Les offres individuelles annuelles se renouvellent pour un an jusqu’à votre résiliation. Une résiliation pendant la première année arrête le prochain renouvellement. Après la première année, vous pouvez résilier à tout moment une offre annuelle renouvelée ; elle prend alors fin, et tout remboursement de la partie non utilisée s’applique, selon ce qu’exige le droit impératif de la consommation de votre pays.',
+      'Les offres individuelles annuelles se renouvellent pour une année supplémentaire jusqu’à résiliation. BorderDay envoie un rappel de renouvellement par e-mail avant chaque renouvellement annuel. Une résiliation pendant la première année empêche le renouvellement suivant. Après la première année, vous pouvez résilier à tout moment une offre annuelle renouvelée ; elle prend alors fin, et tout remboursement de la partie non utilisée s’applique, comme l’exige le droit impératif de la consommation de votre pays. Résiliez via le lien Résilier l’abonnement en pied de page (portail client), vos outils de commande Link, ou par e-mail.',
     s4Title: 'Tarifs, TVA et marchand officiel',
     s4Body:
       'Entreprise : 5 € par collaborateur actif et par mois, minimum 39 € par mois, ou facturation annuelle avec 2 mois offerts (minimum 390 € par an), le tout hors TVA. Individuel : 4,99 € par mois ou 49 € par an, TVA incluse. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le marchand officiel (merchant of record) pour la perception de la TVA et le dépôt des déclarations lorsque Managed Payments s’applique. Les prix peuvent être convertis en devise locale au checkout.',

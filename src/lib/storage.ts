@@ -116,10 +116,10 @@ export async function exportJson(source?: DayEntry[]): Promise<string> {
 
 export async function exportCsv(source?: DayEntry[]): Promise<string> {
   const days = source ?? (await listDays());
-  const lines = ['date,type,overnight_away_for_work,note'];
+  const lines = ['date,type,overnight_away_for_work,day_share,note'];
   for (const d of days) {
     const note = (d.note ?? '').replaceAll('"', '""');
-    lines.push(`${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},"${note}"`);
+    lines.push(`${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},${d.dayShare === 0.5 ? '0.5' : '1'},"${note}"`);
   }
   return lines.join('\n');
 }

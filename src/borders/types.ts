@@ -35,6 +35,8 @@ export interface LimitCounter {
   prorate?: 'floor' | 'ceil';
   /** Days flagged overnightAway (on-site or trip days) count even if the day type does not. */
   countsOvernight?: boolean;
+  /** FR–LU style: any logged fraction of a matching day counts as one whole day. */
+  fractionCountsAsFull?: boolean;
   /** Framework bands: from this percent an A1 is needed to stay in the employer's state. */
   a1FromPercent?: number;
   /** CH–FR rule: missions count inside the 40% only after ordinary telework, up to the 10-day cap. */
@@ -85,6 +87,8 @@ export interface DayEntry {
   note?: string;
   /** Did not return home for work reasons. A day attribute, never a location. */
   overnightAway?: boolean;
+  /** Share of the day for this type: 1 = full (default), 0.5 = half. */
+  dayShare?: 0.5 | 1;
 }
 
 /** Per-person facts some rules depend on. Null or absent means not provided. */

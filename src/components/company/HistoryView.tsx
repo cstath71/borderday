@@ -8,7 +8,7 @@ import CounterTable from './CounterTable';
 export default function HistoryView(props: {
   d: Dict;
   row: EmployeeDashboardRow;
-  logs: Array<{ workDate: string; dayType: DayType; overnightAway?: boolean }>;
+  logs: Array<{ workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>;
   backHref: string;
   backLabel: string;
   isDemo?: boolean;
@@ -40,6 +40,7 @@ export default function HistoryView(props: {
           <tr>
             <th>{d.company.colDate}</th>
             <th>{d.company.colDayType}</th>
+            <th>{d.dayTypes.halfDayShort}</th>
             <th>{d.dayTypes.overnightAwayShort}</th>
           </tr>
         </thead>
@@ -48,6 +49,7 @@ export default function HistoryView(props: {
             <tr key={l.workDate}>
               <td>{l.workDate}</td>
               <td>{(d.dayTypes as Record<string, string>)[l.dayType] ?? l.dayType}</td>
+              <td>{l.dayShare === 0.5 ? '½' : ''}</td>
               <td>{l.overnightAway ? '✓' : ''}</td>
             </tr>
           ))}

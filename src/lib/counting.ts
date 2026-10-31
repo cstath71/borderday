@@ -43,6 +43,17 @@ function contribution(
   return counter.countsAs[type] ?? 'none';
 }
 
+/** Weight of one logged day for this counter (0.5 or 1; LU fractionCountsAsFull → always 1). */
+function entryWeight(counter: LimitCounter, e: DayEntry): number {
+  const share = e.dayShare === 0.5 ? 0.5 : 1;
+  if (counter.fractionCountsAsFull) return share > 0 ? 1 : 0;
+  return share;
+}
+
+function sumWeights(entries: DayEntry[], counter: LimitCounter, pred: (e: DayEntry) => boolean): number {
+  return entries.reduce((sum, e) => (pred(e) ? sum + entryWeight(counter, e) : sum), 0);
+}
+
 function statusFor(ratio: number | null, counter: LimitCounter): CounterStatus {
   if (ratio === null) return 'ok';
   if (ratio > 1) return 'over';
@@ -298,7 +309,8 @@ export function evaluateCounter(
       : missionsCounter!.limit!;
   const shareCounter = pack.counters.find((c) => c.missionRole === 'share');
   const missionSplit = () => {
-    const by = (type: DayType) => yearEntries.filter((e) => e.type === type).length;
+    const by = (type: DayType) =>
+      yearEntries.reduce((sum, e) => (e.type === type ? sum + (e.dayShare === 0.5 ? 0.5 : 1) : sum), 0);
     return chFrMissionSplit({
       telework: by('telework'),
       missions: by('third_country'),
@@ -313,10 +325,10 @@ export function evaluateCounter(
     const split = counter.missionRole === 'share' ? missionSplit() : null;
     const usedDays = split
       ? split.rateDays
-      : yearEntries.filter((e) => {
+      : sumWeights(yearEntries, counter, (e) => {
           const c = contribution(counter, e.type);
           return c === 'toward_percent' || c === 'full';
-        }).length;
+        });
     const allowedDays = allowedDaysForPercent(limit, annualWorkingDays);
     const percentOfAnnual =
       annualWorkingDays > 0
@@ -376,7 +388,7 @@ export function evaluateCounter(
     counter.period === 'month'
       ? entries.filter((e) => monthOf(e.date) === (opts.referenceMonth ?? monthOf(today)))
       : yearEntries;
-  const used = inPeriod.filter((e) => countsAsDay(counter, e)).length;
+  const used = sumWeights(inPeriod, counter, (e) => countsAsDay(counter, e));
 
   let limit = counter.limit;
   const messages: CounterMessage[] = [];

@@ -367,18 +367,26 @@ export interface DayLogView {
   workDate: string;
   dayType: DayType;
   overnightAway: boolean;
+  dayShare: 0.5 | 1;
 }
 
 /**
- * Before the Phase 2 migration the flag has no column. Clearing it is harmless to drop;
- * setting it must fail visibly, or a counted day would silently vanish.
+ * Before Phase 2/3 migrations the overnight / day_share columns may be missing.
+ * Clearing defaults is harmless to drop; setting a non-default must fail visibly.
  */
-async function upsertWithOvernight(
-  overnightAway: boolean | undefined,
-  run: (extra: { overnight_away_for_work?: boolean }) => PromiseLike<{ error: unknown }>,
+async function upsertWithDayAttrs(
+  attrs: { overnightAway?: boolean; dayShare?: 0.5 | 1 },
+  run: (extra: { overnight_away_for_work?: boolean; day_share?: number }) => PromiseLike<{ error: unknown }>,
 ): Promise<void> {
-  let { error } = await run({ overnight_away_for_work: !!overnightAway });
-  if (isSchemaLag(error) && !overnightAway) ({ error } = await run({}));
+  const overnight = !!attrs.overnightAway;
+  const share = attrs.dayShare === 0.5 ? 0.5 : 1;
+  let { error } = await run({ overnight_away_for_work: overnight, day_share: share });
+  if (isSchemaLag(error)) {
+    // Drop day_share only when it was the default (1). A set half-day must fail visibly.
+    if (share === 0.5) throw error;
+    ({ error } = await run({ overnight_away_for_work: overnight }));
+    if (isSchemaLag(error) && !overnight) ({ error } = await run({}));
+  }
   if (error) throw error;
 }
 
@@ -387,29 +395,38 @@ export async function upsertDayLog(opts: {
   workDate: string;
   dayType: DayType;
   overnightAway?: boolean;
+  dayShare?: 0.5 | 1;
 }): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
-  await upsertWithOvernight(opts.overnightAway, (extra) =>
-    client()
-      .from('bd_day_logs')
-      .upsert(
-        {
-          company_id: opts.companyId,
-          employee_user_id: userId,
-          work_date: opts.workDate,
-          day_type: opts.dayType,
-          updated_at: new Date().toISOString(),
-          ...extra,
-        },
-        { onConflict: 'employee_user_id,work_date' },
-      ),
+  await upsertWithDayAttrs(
+    { overnightAway: opts.overnightAway, dayShare: opts.dayShare },
+    (extra) =>
+      client()
+        .from('bd_day_logs')
+        .upsert(
+          {
+            company_id: opts.companyId,
+            employee_user_id: userId,
+            work_date: opts.workDate,
+            day_type: opts.dayType,
+            updated_at: new Date().toISOString(),
+            ...extra,
+          },
+          { onConflict: 'employee_user_id,work_date' },
+        ),
   );
 }
 
 /** HR and self both read through the RPCs: employee, date, day type and overnight flag, never `note`. */
 export async function listDayLogs(companyId: string, employeeUserId?: string): Promise<DayLogView[]> {
-  type Row = { employee_user_id: string; work_date: string; day_type: DayType; overnight_away_for_work?: boolean };
+  type Row = {
+    employee_user_id: string;
+    work_date: string;
+    day_type: DayType;
+    overnight_away_for_work?: boolean;
+    day_share?: number;
+  };
   const read = (rpc: 'bd_list_day_records' | 'bd_list_day_types') =>
     allPages<Row>((from, to) =>
       client()
@@ -425,6 +442,7 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     workDate: r.work_date,
     dayType: r.day_type,
     overnightAway: !!r.overnight_away_for_work,
+    dayShare: r.day_share === 0.5 ? 0.5 : 1,
   }));
 }
 
@@ -456,7 +474,13 @@ export async function hasIndividualAccess(): Promise<boolean> {
 export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPackId: BorderId | null }>> {
   const userId = await currentUserId();
   if (!userId) return [];
-  type Row = { work_date: string; day_type: DayType; border_pack_id: BorderId | null; overnight_away_for_work?: boolean };
+  type Row = {
+    work_date: string;
+    day_type: DayType;
+    border_pack_id: BorderId | null;
+    overnight_away_for_work?: boolean;
+    day_share?: number;
+  };
   const read = (columns: string) =>
     allPages<Row>((from, to) =>
       client()
@@ -467,15 +491,21 @@ export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPa
         .range(from, to),
     );
   const base = 'work_date, day_type, border_pack_id';
-  const rows = await read(`${base}, overnight_away_for_work`).catch((e) => {
-    if (isSchemaLag(e)) return read(base);
-    throw e;
+  const withOvernight = `${base}, overnight_away_for_work`;
+  const withShare = `${withOvernight}, day_share`;
+  const rows = await read(withShare).catch((e) => {
+    if (!isSchemaLag(e)) throw e;
+    return read(withOvernight).catch((e2) => {
+      if (isSchemaLag(e2)) return read(base);
+      throw e2;
+    });
   });
   return rows.map((r) => ({
     date: r.work_date,
     type: r.day_type,
     borderPackId: r.border_pack_id,
     overnightAway: !!r.overnight_away_for_work,
+    dayShare: r.day_share === 0.5 ? 0.5 : 1,
   }));
 }
 
@@ -484,23 +514,26 @@ export async function upsertPersonalDayLog(opts: {
   dayType: DayType;
   borderPackId: BorderId | null;
   overnightAway?: boolean;
+  dayShare?: 0.5 | 1;
 }): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
-  await upsertWithOvernight(opts.overnightAway, (extra) =>
-    client()
-      .from('bd_personal_day_logs')
-      .upsert(
-        {
-          user_id: userId,
-          work_date: opts.workDate,
-          day_type: opts.dayType,
-          border_pack_id: opts.borderPackId,
-          updated_at: new Date().toISOString(),
-          ...extra,
-        },
-        { onConflict: 'user_id,work_date' },
-      ),
+  await upsertWithDayAttrs(
+    { overnightAway: opts.overnightAway, dayShare: opts.dayShare },
+    (extra) =>
+      client()
+        .from('bd_personal_day_logs')
+        .upsert(
+          {
+            user_id: userId,
+            work_date: opts.workDate,
+            day_type: opts.dayType,
+            border_pack_id: opts.borderPackId,
+            updated_at: new Date().toISOString(),
+            ...extra,
+          },
+          { onConflict: 'user_id,work_date' },
+        ),
   );
 }
 

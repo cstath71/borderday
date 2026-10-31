@@ -820,3 +820,33 @@ describe('Honest coverage per corridor', () => {
     }
   });
 });
+
+describe('R-h9: dayShare and LU fractionCountsAsFull', () => {
+  const pack = getBorderPack('luxembourg_fr')!;
+  const tax = pack.counters.find((c) => c.id === 'lu_fr_tax_34')!;
+
+  it('marks LU tax counters fractionCountsAsFull', () => {
+    expect(tax.fractionCountsAsFull).toBe(true);
+    for (const id of ['luxembourg_be', 'luxembourg_de'] as const) {
+      const p = getBorderPack(id)!;
+      expect(p.counters.find((c) => c.id.includes('tax_34'))!.fractionCountsAsFull).toBe(true);
+      expect(p.logHintKey).toBe('logHint_luxembourg_fr');
+    }
+  });
+
+  it('counts a half telework day as a whole LU tax day', () => {
+    const entries: DayEntry[] = [{ date: '2026-03-02', type: 'telework', dayShare: 0.5 }];
+    expect(evaluateCounter(pack, tax, entries, { year: 2026 }).used).toBe(1);
+  });
+
+  it('weights CH–FR telework half days at 0.5 toward the share', () => {
+    const g = getBorderPack('geneva_fr')!;
+    const share = g.counters.find((c) => c.missionRole === 'share')!;
+    const entries: DayEntry[] = [
+      { date: '2026-01-05', type: 'telework', dayShare: 0.5 },
+      { date: '2026-01-06', type: 'telework', dayShare: 0.5 },
+    ];
+    expect(evaluateCounter(g, share, entries, { year: 2026, annualWorkingDays: 240 }).usedDays).toBe(1);
+  });
+});
+

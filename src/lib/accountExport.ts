@@ -14,7 +14,7 @@ export interface AccountExport {
     employmentPercent: number | null;
     a1InPlace: boolean;
     a1ValidUntil: string | null;
-    days: Array<{ date: string; type: DayType; overnightAway: boolean }>;
+    days: Array<{ date: string; type: DayType; overnightAway: boolean; dayShare?: 0.5 | 1 }>;
   }>;
 }
 
@@ -32,7 +32,7 @@ export async function collectAccountExport(user: { id: string; email?: string | 
         employmentPercent: c.profile?.employmentPercent ?? null,
         a1InPlace: !!c.profile?.a1InPlace,
         a1ValidUntil: c.profile?.a1ValidUntil ?? null,
-        days: logs.map((l) => ({ date: l.workDate, type: l.dayType, overnightAway: l.overnightAway })),
+        days: logs.map((l) => ({ date: l.workDate, type: l.dayType, overnightAway: l.overnightAway, dayShare: l.dayShare })),
       };
     }),
   );
@@ -52,13 +52,13 @@ function csvCell(value: string): string {
 }
 
 export function accountExportCsv(data: AccountExport): string {
-  const lines = ['source,date,type,overnight_away_for_work'];
+  const lines = ['source,date,type,overnight_away_for_work,day_share'];
   for (const d of data.individualPlan.days) {
-    lines.push(`${csvCell('individual plan')},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'}`);
+    lines.push(`${csvCell('individual plan')},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},${d.dayShare === 0.5 ? '0.5' : '1'}`);
   }
   for (const c of data.companies) {
     for (const d of c.days) {
-      lines.push(`${csvCell(c.company)},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'}`);
+      lines.push(`${csvCell(c.company)},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},${d.dayShare === 0.5 ? '0.5' : '1'}`);
     }
   }
   return `${lines.join('\n')}\n`;

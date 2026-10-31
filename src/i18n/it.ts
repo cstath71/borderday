@@ -111,16 +111,22 @@ const it: Dict = {
     onsite: 'In sede',
     third_country: 'Trasferta / Stato terzo',
     non_working: 'Giorno non lavorato',
-    teleworkHint: 'Giorno di lavoro svolto nel paese di residenza (domicilio o coworking locale).',
+    teleworkHint: 'Giorno di lavoro svolto nel paese di residenza, di regola a domicilio.',
     onsiteHint: 'Giorno di lavoro presso la sede del datore di lavoro nel paese del luogo di lavoro.',
     third_countryHint: 'Trasferta, formazione, visita cliente o impiego temporaneo fuori dal paese del luogo di lavoro.',
     non_workingHint: 'Ferie, festivo non lavorato, malattia o giorno di riposo.',
     teleworkHint_ticino:
       'Giorno di lavoro presso il vostro domicilio in Italia. Il protocollo dice «presso il proprio domicilio»: non è confermato se un giorno in co-working conti, verificate con la vostra autorità.',
+    teleworkHint_ch_fr:
+      'Giorno di lavoro in Francia (domicilio o coworking locale). Il regime convenzionale CH–FR non è limitato al domicilio.',
     third_countryHint_basel_de:
       'Lavoro fuori da Germania e Svizzera: sempre un giorno di mancato rientro, anche con rientro la sera. Non usatelo per una trasferta di un giorno in Germania o in Svizzera.',
     logHint_luxembourg_fr:
       'Ogni frazione di giornata fuori dal Lussemburgo conta come giornata intera: registrate l’intera giornata come telelavoro o trasferta.',
+    halfDay: 'Mezza giornata',
+    halfDayHint:
+      'Solo una parte di questo giorno corrisponde al tipo sopra (ad es. mattina in sede, pomeriggio in telelavoro). Per il Lussemburgo, qualsiasi frazione fuori dal Lussemburgo conta comunque come giornata intera.',
+    halfDayShort: 'Mezza',
     overnightAway: 'Notte fuori per lavoro (nessun rientro a casa)',
     overnightAwayHint:
       'Un sì o un no, mai un luogo. Alcune soglie contano questi giorni. In un account aziendale, HR lo vede con il tipo di giorno.',
@@ -366,7 +372,7 @@ const it: Dict = {
     readBefore: 'Prima di abbonarvi, leggete:',
     companyBusinessOnly: 'Per le aziende. I consumatori scelgono il piano individuale.',
     yearlyRenewal:
-      'I piani annuali si rinnovano per un altro anno fino alla disdetta. Dopo il primo anno potete disdire in qualsiasi momento un piano rinnovato, come indicato nelle Condizioni.',
+      'I piani individuali annuali (49 €) si rinnovano per un altro anno al prezzo allora vigente fino alla disdetta. BorderDay invia un promemoria via e-mail prima di ogni addebito annuale. Disdite in qualsiasi momento tramite Disdici abbonamento nel piè di pagina (portale clienti). Dopo il primo anno potete disdire in qualsiasi momento un piano rinnovato; i rimborsi della parte non utilizzata si applicano ove il diritto imperativo dei consumatori lo richieda.',
   },
   faq: {
     title: 'FAQ',
@@ -532,7 +538,7 @@ const it: Dict = {
     title: 'BorderDay per i privati',
     heroTitle: 'Registrate i vostri giorni di confine',
     heroBody:
-      'Dipendenti e chi tiene il proprio registro possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati: contatori di sicurezza sociale su ogni corridoio, contatori fiscali dove la regola è oggi conteggiabile. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
+      'Dipendenti e utenti individuali possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati: contatori di sicurezza sociale su ogni corridoio, contatori fiscali dove la regola è oggi conteggiabile. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
     ctaApp: 'Apri l’app collaboratore',
     ctaPricing: 'Prezzo individuale',
     ctaCompanies: 'Il mio datore di lavoro ha bisogno del piano azienda',
@@ -644,7 +650,7 @@ const it: Dict = {
     s3Body:
       'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo avviato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link, e il diritto di recesso qui sotto non è pregiudicato.',
     s3YearlyBody:
-      'I piani individuali annuali si rinnovano per un altro anno fino alla disdetta. La disdetta durante il primo anno interrompe il rinnovo successivo. Dopo il primo anno potete disdire in qualsiasi momento un piano annuale rinnovato; il piano termina allora, e ogni rimborso della parte non utilizzata si applica, come richiesto dal diritto imperativo dei consumatori del vostro paese.',
+      'I piani individuali annuali si rinnovano per un altro anno fino alla disdetta. BorderDay invia un promemoria di rinnovo via e-mail prima di ogni rinnovo annuale. La disdetta durante il primo anno interrompe il rinnovo successivo. Dopo il primo anno potete disdire in qualsiasi momento un piano annuale rinnovato; il piano termina allora, e ogni rimborso della parte non utilizzata si applica, come richiesto dal diritto imperativo dei consumatori del vostro paese. Disdite tramite il link Disdici abbonamento nel piè di pagina (portale clienti), gli strumenti ordine Link, o via e-mail.',
     s4Title: 'Prezzi, IVA e merchant of record',
     s4Body:
       'Azienda: 5 € per collaboratore attivo al mese, minimo 39 € al mese, o fatturazione annuale con 2 mesi gratis (minimo 390 € all’anno), tutto IVA esclusa. Individuale: 4,99 € al mese o 49 € all’anno, IVA inclusa. Il checkout usa Stripe Managed Payments: gli acquisti risultano venduti tramite Link, e Link è il merchant of record per la riscossione, la dichiarazione e il versamento dell’IVA ove Managed Payments si applica. I prezzi visualizzati possono essere convertiti in valuta locale al checkout.',

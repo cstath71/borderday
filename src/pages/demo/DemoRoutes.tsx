@@ -72,6 +72,7 @@ function loadLogs(companyId: string, userId: string) {
     workDate: l.workDate,
     dayType: l.dayType,
     overnightAway: l.overnightAway,
+    dayShare: l.dayShare,
   }));
 }
 

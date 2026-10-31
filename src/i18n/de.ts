@@ -113,16 +113,22 @@ const de: Dict = {
     onsite: 'Vor Ort am Arbeitsplatz',
     third_country: 'Dienstreise / Drittstaat',
     non_working: 'Arbeitsfreier Tag',
-    teleworkHint: 'Arbeitstag im Wohnstaat (Zuhause oder lokales Coworking).',
+    teleworkHint: 'Arbeitstag im Wohnstaat, in der Regel zu Hause.',
     onsiteHint: 'Arbeitstag in den Räumen des Arbeitgebers im Staat des Arbeitsorts.',
     third_countryHint: 'Dienstreise, Schulung, Kundenbesuch oder temporärer Einsatz ausserhalb des Staats des Arbeitsorts.',
     non_workingHint: 'Urlaub, nicht gearbeiteter Feiertag, Krankheit oder Ruhetag.',
     teleworkHint_ticino:
       'Arbeitstag zu Hause in Italien. Das Protokoll spricht vom «eigenen Wohnsitz»: Ob ein Coworking-Tag zählt, ist nicht bestätigt, fragen Sie Ihre Behörde.',
+    teleworkHint_ch_fr:
+      'Arbeitstag in Frankreich (Zuhause oder lokales Coworking). Das CH–FR-Abkommensregime ist nicht auf den Wohnsitz beschränkt.',
     third_countryHint_basel_de:
       'Arbeit ausserhalb von Deutschland und der Schweiz: immer ein Nichtrückkehrtag, auch bei Rückkehr am selben Abend. Nicht für eintägige Reisen innerhalb von Deutschland oder der Schweiz verwenden.',
     logHint_luxembourg_fr:
       'Jeder Teil eines Arbeitstags ausserhalb Luxemburgs zählt als ganzer Tag: Erfassen Sie den ganzen Tag als Telearbeit oder Reise.',
+    halfDay: 'Halber Tag',
+    halfDayHint:
+      'Nur ein Teil dieses Tages entspricht dem Typ oben (z. B. Vormittag vor Ort, Nachmittag Telearbeit). Für Luxemburg zählt jeder Bruchteil ausserhalb Luxemburgs weiterhin als ganzer Tag.',
+    halfDayShort: 'Halb',
     overnightAway: 'Beruflich auswärts übernachtet (nicht nach Hause zurückgekehrt)',
     overnightAwayHint:
       'Ein Ja oder Nein, nie ein Ort. Manche Grenzen zählen diese Tage. In einem Unternehmenskonto sieht HR dies zusammen mit der Tagesart.',
@@ -367,7 +373,7 @@ const de: Dict = {
     readBefore: 'Bitte vor dem Abschluss lesen:',
     companyBusinessOnly: 'Für Unternehmen. Verbraucher wählen den Einzelplan.',
     yearlyRenewal:
-      'Jahrespläne verlängern sich um ein weiteres Jahr bis zu Ihrer Kündigung. Nach dem ersten Jahr können Sie einen verlängerten Plan jederzeit kündigen, wie in den AGB beschrieben.',
+      'Jährliche Einzelpläne (49 €) verlängern sich um ein weiteres Jahr zum dann geltenden Preis, bis Sie kündigen. BorderDay sendet vor jeder Jahresabbuchung eine Erinnerung per E-Mail. Jederzeit kündigen über Abo kündigen in der Fusszeile (Kundenportal). Nach dem ersten Jahr können Sie ein verlängertes Jahresabo jederzeit beenden; anteilige Erstattung ungenutzter Zeit gilt, soweit zwingendes Verbraucherrecht es verlangt.',
   },
   faq: {
     title: 'FAQ',
@@ -641,7 +647,7 @@ const de: Dict = {
     s3Body:
       'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung stoppt künftige Verlängerungen. Bereits eingezogene Beträge für eine begonnene Periode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsrichtlinien von Link es verlangen; Ihr Widerrufsrecht unten bleibt unberührt.',
     s3YearlyBody:
-      'Jährliche Einzelpläne verlängern sich um ein weiteres Jahr bis zu Ihrer Kündigung. Eine Kündigung im ersten Jahr stoppt die nächste Verlängerung. Nach dem ersten Jahr können Sie einen verlängerten Jahresplan jederzeit kündigen; er endet dann, und eine Erstattung des ungenutzten Teils erfolgt, wie es das zwingende Verbraucherrecht Ihres Landes verlangt.',
+      'Jährliche Einzelpläne verlängern sich um ein weiteres Jahr, bis Sie kündigen. BorderDay sendet vor jeder jährlichen Verlängerung eine Erinnerung per E-Mail. Eine Kündigung im ersten Jahr stoppt die nächste Verlängerung. Nach dem ersten Jahr können Sie ein verlängertes Jahresabo jederzeit kündigen; es endet dann, und eine Erstattung des ungenutzten Teils gilt, soweit das zwingende Verbraucherrecht Ihres Landes es verlangt. Kündigung über den Link Abo kündigen in der Fusszeile (Kundenportal), Ihre Link-Bestelltools oder per E-Mail.',
     s4Title: 'Preise, MwSt. und Merchant of Record',
     s4Body:
       'Unternehmen: 5 € je aktive mitarbeitende Person und Monat, mindestens 39 € pro Monat, oder Jahresabrechnung mit 2 Monaten gratis (mindestens 390 € pro Jahr), jeweils zzgl. MwSt. Einzelperson: 4,99 € pro Monat oder 49 € pro Jahr, inkl. MwSt. Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record für Erhebung, Erklärung und Abführung der MwSt., soweit Managed Payments gilt. Angezeigte Preise können im Checkout in Landeswährung umgerechnet werden.',

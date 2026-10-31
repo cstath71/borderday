@@ -52,6 +52,7 @@ export interface DayLog {
   dayType: DayType;
   note?: string;
   overnightAway?: boolean;
+  dayShare?: 0.5 | 1;
 }
 
 export interface Consent {

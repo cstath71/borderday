@@ -108,16 +108,22 @@ const en = {
     onsite: 'On site at workplace',
     third_country: 'Work trip / third State',
     non_working: 'Non-working day',
-    teleworkHint: 'Workday performed in your residence country (home or local co-working).',
+    teleworkHint: 'Workday performed in your residence country, typically at home.',
     onsiteHint: 'Workday at the employer’s premises in the work country.',
     third_countryHint: 'Business trip, training, client visit or temporary mission outside the work country.',
     non_workingHint: 'Leave, public holiday not worked, sickness, or rest day.',
     teleworkHint_ticino:
       'Workday at your home in Italy. The protocol says “at your domicile”: whether a co-working day counts is not confirmed, so check with your authority.',
+    teleworkHint_ch_fr:
+      'Workday in France (home or local co-working). The CH–FR convention regime is not limited to the domicile.',
     third_countryHint_basel_de:
       'Work outside Germany and Switzerland: always a non-return day, even if you return that evening. Do not use it for a same-day trip inside Germany or Switzerland.',
     logHint_luxembourg_fr:
       'Any part of a workday outside Luxembourg counts as a whole day: log the whole day as telework or trip.',
+    halfDay: 'Half day',
+    halfDayHint:
+      'Only part of this day matches the type above (for example morning on site, afternoon telework). For Luxembourg tax, any fraction outside Luxembourg still counts as a whole day.',
+    halfDayShort: 'Half',
     overnightAway: 'Stayed away overnight for work (did not return home)',
     overnightAwayHint:
       'A yes or no, never a place. Some limits count these days. In a company account, HR sees it with the day type.',
@@ -360,7 +366,7 @@ const en = {
     readBefore: 'Before you subscribe, read:',
     companyBusinessOnly: 'For businesses. Consumers should choose the individual plan.',
     yearlyRenewal:
-      'Yearly plans renew for a further year until you cancel. After the first year you can cancel a renewed plan at any time, as set out in the Terms.',
+      'Yearly individual plans (€49) renew for a further year at the then-current price until you cancel. BorderDay emails a renewal reminder before each yearly charge. Cancel anytime via Cancel subscription in the footer (customer portal). After the first year you can cancel a renewed plan at any time; unused-period refunds apply where mandatory consumer law requires them.',
   },
   faq: {
     title: 'FAQ',
@@ -526,7 +532,7 @@ const en = {
     title: 'BorderDay for individuals',
     heroTitle: 'Log your own border days',
     heroBody:
-      'Employees and self-trackers can log telework, on-site, trip and non-working days: social-security counters on every corridor, tax counters where the rule can be counted today. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
+      'Employees and individual users can log telework, on-site, trip and non-working days: social-security counters on every corridor, tax counters where the rule can be counted today. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
     ctaApp: 'Open employee app',
     ctaPricing: 'Individual pricing',
     ctaCompanies: 'My employer needs the company plan',
@@ -634,7 +640,7 @@ const en = {
     s3Body:
       'Paid plans are subscriptions. Company and individual plans start with a 7-day free trial, and a payment card is required at signup. After 7 days the plan becomes paid at the stated price: your card is charged automatically on day 8 and the subscription then renews each month or year until you cancel. If you cancel before day 8, nothing is charged. If no valid payment method is on file when the trial ends, the subscription is cancelled. You can cancel at any time through the Cancel subscription link in the footer of every page, which leads to the customer portal, your Link order tools or an email request. Cancellation stops future renewals. Amounts already collected for a started billing period are not pro-rated unless the law or Link’s refund terms require it, and your right of withdrawal below is not affected.',
     s3YearlyBody:
-      'Yearly individual plans renew for a further year until you cancel. Cancelling during the first year stops the next renewal. After the first year you can cancel a renewed yearly plan at any time; it then ends, and any refund of the unused part applies, as mandatory consumer law in your country requires.',
+      'Yearly individual plans renew for a further year until you cancel. BorderDay sends a renewal reminder by email before each yearly renewal. Cancelling during the first year stops the next renewal. After the first year you can cancel a renewed yearly plan at any time; it then ends, and any refund of the unused part applies, as mandatory consumer law in your country requires. Cancel through the Cancel subscription link in the footer (customer portal), your Link order tools, or email.',
     s4Title: 'Prices, VAT and merchant of record',
     s4Body:
       'Company: €5 per active employee per month, minimum €39 per month, or yearly billing with 2 months free (minimum €390 per year), all excluding VAT. Individual: €4.99 per month or €49 per year, including VAT. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record for tax collection and filing where Managed Payments applies. Displayed prices may be converted to local currency at checkout.',

@@ -190,6 +190,7 @@ export const BORDER_PACKS: BorderPack[] = [
     workCountries: ['CH'],
     regionNoteKey: 'geneva_region',
     defaultAnnualWorkingDays: 240,
+    dayHintKeys: { telework: 'teleworkHint_ch_fr' },
     counters: [
       {
         id: 'geneva_tax_telework_40',
@@ -245,6 +246,7 @@ export const BORDER_PACKS: BorderPack[] = [
     workCountries: ['CH'],
     regionNoteKey: 'ch_fr_1983_region',
     defaultAnnualWorkingDays: 240,
+    dayHintKeys: { telework: 'teleworkHint_ch_fr' },
     counters: [
       {
         id: 'basel_fr_tax_telework_40',
@@ -380,6 +382,7 @@ export const BORDER_PACKS: BorderPack[] = [
         limit: 34,
         inclusive: true, // "n'excédant pas au total"
         prorate: 'floor', // accord §1.b: "le nombre inférieur de journées entières"
+        fractionCountsAsFull: true, // "Toute fraction de journée compte comme une journée entière"
         unit: 'days_per_year',
         countsAs: {
           telework: 'full',
@@ -401,6 +404,7 @@ export const BORDER_PACKS: BorderPack[] = [
     residenceCountries: ['BE'],
     workCountries: ['LU'],
     defaultAnnualWorkingDays: 220,
+    logHintKey: 'logHint_luxembourg_fr',
     counters: [
       {
         // Official LU PDF: 34 days; part-time and part-year are NOT reduced; fraction of a day = full day.
@@ -410,6 +414,7 @@ export const BORDER_PACKS: BorderPack[] = [
         enabled: true,
         limit: 34,
         inclusive: true,
+        fractionCountsAsFull: true,
         unit: 'days_per_year',
         countsAs: {
           telework: 'full',
@@ -431,6 +436,7 @@ export const BORDER_PACKS: BorderPack[] = [
     residenceCountries: ['DE'],
     workCountries: ['LU'],
     defaultAnnualWorkingDays: 220,
+    logHintKey: 'logHint_luxembourg_fr',
     counters: [
       {
         // BMF Konsultationsvereinbarung 11 Jan 2024: 34 days; part-time/part-year NOT reduced.
@@ -441,6 +447,7 @@ export const BORDER_PACKS: BorderPack[] = [
         enabled: true,
         limit: 34,
         inclusive: true,
+        fractionCountsAsFull: true,
         unit: 'days_per_year',
         countsAs: {
           telework: 'full',

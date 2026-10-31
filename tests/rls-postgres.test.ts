@@ -434,7 +434,7 @@ describe('real Postgres: day logs', () => {
       [company, emp],
     );
     const { rows } = await as(hr, `select * from public.bd_list_day_records($1, $2)`, [company, emp]);
-    expect(Object.keys(rows[0]).sort()).toEqual(['day_type', 'employee_user_id', 'overnight_away_for_work', 'work_date']);
+    expect(Object.keys(rows[0]).sort()).toEqual(['day_share', 'day_type', 'employee_user_id', 'overnight_away_for_work', 'work_date']);
     expect(rows[0].overnight_away_for_work).toBe(true);
     expect(JSON.stringify(rows)).not.toContain('Lugano');
     const self = await as(emp, `select * from public.bd_list_day_records($1)`, [company]);

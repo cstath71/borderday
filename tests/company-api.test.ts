@@ -104,7 +104,7 @@ describe('companyApi', () => {
     expect(state.calls[0].args).toEqual({ cid: 'c1', employee: 'e1' });
     expect(op(state.calls[1], 'range')[0]).toEqual([1000, 1999]);
     expect(logs).toHaveLength(1001);
-    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false });
+    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1 });
     expect(JSON.stringify(logs)).not.toContain('secret');
   });
 
@@ -120,7 +120,7 @@ describe('companyApi', () => {
           : { data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'telework' }], error: null };
       const logs = await api.listDayLogs('c1');
       expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_records', 'bd_list_day_types']);
-      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false }]);
+      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1 }]);
     });
 
     it('listDayLogs still throws on a real error', async () => {
@@ -158,16 +158,28 @@ describe('companyApi', () => {
     it('logging a plain day still works: the unset flag is dropped', async () => {
       state.respond = (call) => {
         const row = op(call, 'upsert')[0]?.[0] as Record<string, unknown>;
-        return 'overnight_away_for_work' in row ? missingWriteCol : { data: null, error: null };
+        // Phase 3: first write includes day_share; Phase 2: overnight. Both lag until bare row.
+        return 'day_share' in row || 'overnight_away_for_work' in row
+          ? missingWriteCol
+          : { data: null, error: null };
       };
       await api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'onsite', overnightAway: false });
-      expect(state.calls).toHaveLength(2);
+      expect(state.calls).toHaveLength(3);
     });
 
     it('a set flag fails visibly: a counted day must not vanish silently', async () => {
       state.respond = () => missingWriteCol;
       await expect(
         api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'onsite', overnightAway: true }),
+      ).rejects.toMatchObject({ code: 'PGRST204' });
+      // First try includes day_share; second drops share but keeps overnight; then throw.
+      expect(state.calls).toHaveLength(2);
+    });
+
+    it('a set half-day fails visibly when day_share is missing', async () => {
+      state.respond = () => missingWriteCol;
+      await expect(
+        api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'telework', dayShare: 0.5 }),
       ).rejects.toMatchObject({ code: 'PGRST204' });
       expect(state.calls).toHaveLength(1);
     });
@@ -180,7 +192,7 @@ describe('companyApi', () => {
           : { data: [{ work_date: '2026-01-05', day_type: 'onsite', border_pack_id: 'ticino_it' }], error: null };
       };
       const rows = await api.listPersonalDayLogs();
-      expect(rows).toEqual([{ date: '2026-01-05', type: 'onsite', borderPackId: 'ticino_it', overnightAway: false }]);
+      expect(rows).toEqual([{ date: '2026-01-05', type: 'onsite', borderPackId: 'ticino_it', overnightAway: false, dayShare: 1 }]);
     });
   });
 

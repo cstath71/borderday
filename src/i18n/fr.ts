@@ -338,7 +338,7 @@ const fr: Dict = {
     yearly: '49 € / an',
     yearlyNote: 'Environ deux mois offerts vs mensuel.',
     companyPrice: '5 € / collaborateur actif / mois',
-    companyMin: 'Minimum 39 € / mois (couvre jusqu’à 7 collaborateurs actifs)',
+    companyMin: 'Minimum 39 € / mois (le forfait couvre jusqu’à 7 collaborateurs actifs ; au-delà, facturation au siège)',
     companyYearly: 'Facturation annuelle : 2 mois offerts (minimum 390 € / an)',
     activeEmployeeDef:
       'Collaborateur actif : membre de l\'entreprise ayant accepté l\'invitation et non désactivé. La facturation utilise l\'effectif actif courant chaque période (minimum 39 € / mois).',
@@ -415,7 +415,7 @@ const fr: Dict = {
       'Aperçu gratuit, sur votre appareil : pack frontière, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi et A1 si vous les indiquez. Offre individuelle : les mêmes données, enregistrées dans votre compte. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, pack frontière, types et dates de jours, marques de nuit hors du domicile, taux d’emploi et A1 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
     s2Title: 'Ce que nous ne collectons pas',
     s2Body:
-      'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi le taux d’emploi et l’A1 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaires. Pas de vente de données personnelles.',
+      'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi le taux d’emploi et l’A1 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaireslicitaires. Pas de vente de données personnelles.',
     tableTitle: 'Finalités, bases légales, destinataires, transferts et conservation',
     tableIntro:
       'Les numéros d’articles renvoient au RGPD. La LPD suisse n’énumère pas les bases légales de la même façon ; les mêmes finalités, destinataires et pays s’appliquent.',
@@ -518,6 +518,7 @@ const fr: Dict = {
       'Limitation : restriction du traitement dans certains cas.',
       'Opposition : vous opposer aux traitements fondés sur des intérêts légitimes.',
       'Portabilité : vos données dans un format structuré et lisible par machine.',
+      'Retrait du consentement : le cas échéant, retirer votre consentement sans affecter la licéité du traitement effectué avant le retrait.',
     ],
     rightsHow:
       'Utilisez la page Compte pour exporter vos journaux ou demander la suppression, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement et peut devoir conserver certains documents.',
@@ -793,7 +794,7 @@ const fr: Dict = {
     subIntro:
       'L’employeur donne une autorisation générale aux sous-traitants ultérieurs suivants pour le traitement décrit. Les régions indiquées sont celles que nous pouvons vérifier à ce jour ; les sociétés prestataires peuvent toujours être établies hors de ces régions.',
     subprocessors: [
-      'Supabase (base de données et authentification) : base et Auth du projet uufmlmwgvoqhhtqgrclu en région AWS eu-central-1 (Francfort, UE), vérifié le 31 oct. 2026. Prestataire établi aux États-Unis ; transferts selon son ATD / CCT publiés. https://supabase.com/legal/dpa',
+      'Supabase (base de données et authentification) : base et authentification du projet uufmlmwgvoqhhtqgrclu en région AWS eu-central-1 (Francfort, UE), vérifié le 31 oct. 2026. Prestataire établi aux États-Unis ; transferts selon son ATD / CCT publiés. https://supabase.com/legal/dpa',
       'Resend (e-mail transactionnel pour connexion et invitations entreprise) : prestataire établi aux États-Unis ; ATD publié avec CCT / clauses suisses. https://resend.com/legal/dpa',
       'GitHub Pages (hébergement du site statique) : reçoit les adresses IP des visiteurs dans les journaux d’hôte. États-Unis. https://docs.github.com/en/pages',
       'Google (connexion optionnelle uniquement si l’utilisateur choisit Google) : États-Unis ; conditions propres à Google pour la connexion.',

@@ -15,7 +15,7 @@ const de: Dict = {
     faq: 'FAQ',
     privacy: 'Datenschutz',
     disclaimer: 'Rechtlicher Hinweis',
-    terms: 'AGB & Impressum',
+    terms: 'Nutzungsbedingungen & Impressum',
     openApp: 'App öffnen',
     joinWaitlist: 'Anmelden',
     forIndividuals: 'Für Einzelpersonen',
@@ -339,7 +339,7 @@ const de: Dict = {
     yearly: '49 € / Jahr',
     yearlyNote: 'Etwa zwei Monate gratis gegenüber monatlich.',
     companyPrice: '5 € / aktive Mitarbeitende / Monat',
-    companyMin: 'Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab)',
+    companyMin: 'Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab; darüber hinaus Abrechnung je Sitz)',
     companyYearly: 'Jahresabrechnung: 2 Monate gratis (Mindestbetrag 390 € / Jahr)',
     activeEmployeeDef:
       'Aktive Mitarbeitende: Unternehmensmitglied mit angenommener Einladung, das nicht deaktiviert wurde. Die Abrechnung nutzt die aktuelle aktive Kopfzahl je Periode (Mindestbetrag 39 € / Monat).',
@@ -395,7 +395,7 @@ const de: Dict = {
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
     a7:
-      'Checkout nutzt Stripe Managed Payments: Link ist der Merchant of Record und übernimmt MwSt./GST im Checkout. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; eine Karte ist bei der Anmeldung nötig. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig (Einzelperson 4,99 €/Monat oder 49 €/Jahr inkl. MwSt.; Unternehmen 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €/Monat, oder mindestens 390 €/Jahr, zzgl. MwSt.), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Aktionscodes werden akzeptiert. Siehe AGB zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
+      'Checkout nutzt Stripe Managed Payments: Link ist der Merchant of Record und übernimmt MwSt./GST im Checkout. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; eine Karte ist bei der Anmeldung nötig. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig (Einzelperson 4,99 €/Monat oder 49 €/Jahr inkl. MwSt.; Unternehmen 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €/Monat, oder mindestens 390 €/Jahr, zzgl. MwSt.), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Aktionscodes werden akzeptiert. Siehe Nutzungsbedingungen zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
     q8: 'Was deckt BorderDay nicht ab?',
     a8:
       'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die von manchen Kantonen verlangte jährliche Telearbeitsquote. Im Zweifel fragen Sie Ihre Behörde.',
@@ -519,6 +519,7 @@ const de: Dict = {
       'Einschränkung: Einschränkung der Bearbeitung in bestimmten Fällen.',
       'Widerspruch: Widerspruch gegen Bearbeitungen auf Grundlage berechtigter Interessen.',
       'Datenübertragbarkeit: Ihre Daten in einem strukturierten, maschinenlesbaren Format.',
+      'Widerruf der Einwilligung: soweit anwendbar, Widerruf der Einwilligung, ohne die Rechtmässigkeit der vorherigen Bearbeitung zu berühren.',
     ],
     rightsHow:
       'Nutzen Sie die Kontoseite, um Ihre Tagesprotokolle zu exportieren oder die Löschung zu beantragen, oder schreiben Sie an privacy@borderday.com. Die DSGVO gibt uns einen Monat für die Antwort, das DSG 30 Tage. Bei Tagesprotokollen in einem Unternehmenskonto ist der Arbeitgeber Verantwortlicher und muss möglicherweise bestimmte Unterlagen aufbewahren.',
@@ -633,7 +634,7 @@ const de: Dict = {
   },
 
   terms: {
-    title: 'AGB & Impressum',
+    title: 'Nutzungsbedingungen & Impressum',
     updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
     providerTitle: 'Impressum: Anbieter und Vertragspartner',
     providerBody:
@@ -687,7 +688,7 @@ const de: Dict = {
     linkNote:
       'Sie können auch den Link-Support zu Ihrer Bestellung kontaktieren oder eine Widerrufsoption auf Ihrer Link-Bestellseite nutzen. Eine Widerrufsfunktion mit einem Klick konnten wir dort nicht überprüfen, daher bleiben diese Seite und die obige E-Mail-Adresse verfügbar.',
     scopeNote:
-      'Alle Einzelheiten und das Muster-Formular finden Sie unter AGB & Impressum. Unternehmenspläne werden für die geschäftliche Nutzung verkauft.',
+      'Alle Einzelheiten und das Muster-Formular finden Sie unter Nutzungsbedingungen & Impressum. Unternehmenspläne werden für die geschäftliche Nutzung verkauft.',
     orderedOn: 'Bestell- oder Zugangsdatum',
     submit: 'Weiter zur Bestätigung',
     confirm: 'Widerruf bestätigen',
@@ -794,7 +795,7 @@ const de: Dict = {
     subIntro:
       'Der Arbeitgeber erteilt eine allgemeine Genehmigung für die folgenden Unterauftragsbearbeiter für die beschriebene Verarbeitung. Die unten genannten Regionen sind die heute verifizierbaren; die Anbieterunternehmen können weiterhin ausserhalb dieser Regionen niedergelassen sein.',
     subprocessors: [
-      'Supabase (Datenbank und Authentifizierung): Primärdatenbank und Auth für Projekt uufmlmwgvoqhhtqgrclu in AWS-Region eu-central-1 (Frankfurt, EU), verifiziert am 31. Okt. 2026. US-Anbieter; Übermittlungen nach veröffentlichtem AVV / SCCs. https://supabase.com/legal/dpa',
+      'Supabase (Datenbank und Authentifizierung): Primärdatenbank und Authentifizierung für Projekt uufmlmwgvoqhhtqgrclu in AWS-Region eu-central-1 (Frankfurt, EU), verifiziert am 31. Okt. 2026. US-Anbieter; Übermittlungen nach veröffentlichtem AVV / SCCs. https://supabase.com/legal/dpa',
       'Resend (transaktionale E-Mail für Anmeldung und Unternehmenseinladungen): US-Anbieter; veröffentlichter AVV mit SCCs / Schweizer Klauseln. https://resend.com/legal/dpa',
       'GitHub Pages (statisches Website-Hosting): empfängt Besucher-IP-Adressen in Host-Logs. Vereinigte Staaten. https://docs.github.com/en/pages',
       'Google (optionale Anmeldung nur wenn der Nutzer Google wählt): Vereinigte Staaten; eigene Google-Bedingungen für die Anmeldung.',
@@ -853,7 +854,7 @@ const de: Dict = {
     checkEmail: 'E-Mail prüfen zur Bestätigung (falls nötig), dann weiter.',
     noAccount: 'Noch kein Konto?',
     hasAccount: 'Bereits ein Konto?',
-    notConfigured: 'Auth ist in diesem Build nicht konfiguriert.',
+    notConfigured: 'Die Authentifizierung ist in diesem Build nicht konfiguriert.',
     completing: 'Anmeldung wird abgeschlossen…',
     callbackFailed: 'Anmeldung fehlgeschlagen. Erneut versuchen.',
     paymentsUnavailable: 'Checkout konnte nicht gestartet werden — erneut versuchen oder Support kontaktieren.',

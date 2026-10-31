@@ -137,7 +137,7 @@ const en = {
     ch_fr_tax_note:
       'Convention regime: telework from France up to 40% of annual working time stays taxable in Switzerland. Up to 10 mission days a year count as telework, only as far as they fit under 40% after ordinary telework. Extra mission days are taxed differently. Above 40%, telework is taxable in France from the first day. On-call time counts only if you actually intervened. Sources: amendment of 27 Jun 2023 (additional protocol) for the 40% rule; FTA amicable agreement of 29 Apr 2026 for mission days; ge.ch.',
     ch_fr_missions_note:
-      'Temporary missions in France or a third country: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Days outside those limits are taxable in France, subject to any treaty with the third state. Sources: FTA amicable agreement of 29 Apr 2026; impots.gouv.fr fact sheet.',
+      'Temporary missions in France or a third State: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Days outside those limits are taxable in France, subject to any treaty with the third state. Sources: FTA amicable agreement of 29 Apr 2026; impots.gouv.fr fact sheet.',
     lu_tax_tolerance_34: 'Days outside Luxembourg (up to 34 days/year)',
     lu_tax_tolerance_pending: 'Days outside Luxembourg (tax tolerance)',
     lu_fr_tax_note:
@@ -156,7 +156,7 @@ const en = {
     basel_de_employer_commute:
       'Basel-Stadt staff rule: on-site days this month (minimum 5, or 1 a week)',
     basel_de_employer_note:
-      'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): home office only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. Other employers may apply different rules, and it is not a general tax limit. Source: Basel-Stadt Finance Department.',
+      'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): telework from home only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. Other employers may apply different rules, and it is not a general tax limit. Source: Basel-Stadt Finance Department.',
     pending_lu_be_tax:
       'The Luxembourg government announced 34 days from 2022 for residents of Belgium. The Belgian text settling part-time reduction and what counts was not found, so no counter runs. Check with your authority.',
     pending_lu_de_tax:
@@ -183,7 +183,7 @@ const en = {
     ch_fr_1983_tax_note:
       '1983 frontier agreement (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel, Jura): residents of France are taxed in France; France remits 4.5% of gross salary to Switzerland. Telework from France up to 40% of annual working time stays in that regime. Up to 10 mission days a year count inside the 40%, only as far as they fit after ordinary telework. Sources: interpretative agreement of 30 June 2023 (impots.gouv.fr); ESTV practical sheet; Canton of Jura.',
     ch_fr_1983_missions_note:
-      'Temporary missions in France or a third country: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Any excess mission day in France ends the 1983 regime. BorderDay cannot tell France from a third state, so treat every excess mission day as a risk. Sources: ESTV practical sheet; impots.gouv.fr 1983 interpretative agreement.',
+      'Temporary missions in France or a third State: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Any excess mission day in France ends the 1983 regime. BorderDay cannot tell France from a third state, so treat every excess mission day as a risk. Sources: ESTV practical sheet; impots.gouv.fr 1983 interpretative agreement.',
     ch_fr_1983_nights_note:
       'No more than 45 nights a year spent away from home for work in Switzerland or a third state (inclusive). BorderDay counts only days you mark “stayed away overnight for work” on an on-site or trip day. Excess nights end the 1983 regime. Source: Canton of Jura; ESTV practical sheet.',
     ch_fr_1983_over_40:
@@ -512,6 +512,7 @@ const en = {
       'Restriction: limiting processing in certain cases.',
       'Objection: objecting to processing based on legitimate interests.',
       'Portability: your data in a structured, machine-readable format.',
+      'Withdrawal of consent: where applicable, withdrawing consent without affecting the lawfulness of processing before withdrawal.',
     ],
     rightsHow:
       'Use the Account page to export your day logs or request deletion, or write to privacy@borderday.com. The GDPR gives us one month to answer and the FADP 30 days. For day logs in a company account the employer is the controller, and it may need to keep some records.',
@@ -783,7 +784,7 @@ const en = {
     subIntro:
       'The employer gives a general authorisation to the following sub-processors for the processing described. Regions stated below are those we can verify today; provider companies may still be established outside those regions.',
     subprocessors: [
-      'Supabase (database and authentication): primary database and Auth for project uufmlmwgvoqhhtqgrclu in AWS region eu-central-1 (Frankfurt, EU), verified 31 Oct 2026. US-based provider; transfers under its published DPA / SCCs. https://supabase.com/legal/dpa',
+      'Supabase (database and authentication): primary database and authentication for project uufmlmwgvoqhhtqgrclu in AWS region eu-central-1 (Frankfurt, EU), verified 31 Oct 2026. US-based provider; transfers under its published DPA / SCCs. https://supabase.com/legal/dpa',
       'Resend (transactional email for sign-in and company invitations): US-based provider; published DPA with SCCs / Swiss terms. https://resend.com/legal/dpa',
       'GitHub Pages (static website hosting): receives visitor IP addresses in host logs. United States. https://docs.github.com/en/pages',
       'Google (optional sign-in only if the user chooses Google): United States; Google’s own terms for the sign-in.',
@@ -842,7 +843,7 @@ const en = {
     checkEmail: 'Check your email to confirm your account (if required), then continue.',
     noAccount: 'No account yet?',
     hasAccount: 'Already have an account?',
-    notConfigured: 'Auth backend is not configured in this build.',
+    notConfigured: 'The authentication backend is not configured in this build.',
     completing: 'Completing sign-in…',
     callbackFailed: 'Could not complete sign-in. Try again.',
     paymentsUnavailable: 'Could not start checkout — try again or contact support.',

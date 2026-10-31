@@ -306,7 +306,7 @@ describe('H13 / M1 links before buying', () => {
 
   it('labels the footer link as a legal notice in each language', () => {
     expect(getDict('en').nav.terms).toBe('Terms & legal notice');
-    expect(getDict('de').nav.terms).toBe('AGB & Impressum');
+    expect(getDict('de').nav.terms).toBe('Nutzungsbedingungen & Impressum');
     expect(getDict('fr').nav.terms).toBe('CGU et mentions légales');
     expect(getDict('it').nav.terms).toBe('Condizioni e note legali');
   });

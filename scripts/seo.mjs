@@ -122,10 +122,10 @@ export const PAGES = {
     it: {
       title: 'BorderDay — Soglie di giorni fiscali e previdenziali per HR',
       description:
-        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove corridoi, fisco su sei. Azienda da 5 €/collaboratore attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove corridoi, fisco su sei. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
       h1: 'Un solo strumento per tutti i confini dei vostri team',
       summary:
-        'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
+        'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per dipendente: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per dipendente attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
       crumbs: [['Home', '']],
     },
   },
@@ -169,10 +169,10 @@ export const PAGES = {
     it: {
       title: 'Prezzi — BorderDay',
       description:
-        'Azienda: 5 € per collaboratore attivo / mese, minimo 39 €, annuale minimo 390 €, IVA esclusa. Individuale: 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Azienda: 5 € per dipendente attivo / mese, minimo 39 €, annuale minimo 390 €, IVA esclusa. Individuale: 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
       h1: 'Prezzi',
       summary:
-        'Azienda / HR: 5 € per collaboratore attivo al mese, minimo 39 € / mese (copre fino a 7 collaboratori attivi); annuale minimo 390 € (2 mesi gratis). Individuale: 4,99 € / mese o 49 € / anno. Prezzi azienda IVA esclusa; individuali IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Checkout tramite Stripe Managed Payments (venduto tramite Link).',
+        'Azienda / HR: 5 € per dipendente attivo al mese, minimo 39 € / mese (copre fino a 7 dipendenti attivi); annuale minimo 390 € (2 mesi gratis). Individuale: 4,99 € / mese o 49 € / anno. Prezzi azienda IVA esclusa; individuali IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Checkout tramite Stripe Managed Payments (venduto tramite Link).',
       crumbs: [
         ['Home', ''],
         ['Prezzi', 'pricing'],
@@ -319,10 +319,10 @@ export const PAGES = {
     it: {
       title: 'Privacy — BorderDay',
       description:
-        'Come BorderDay tratta i dati personali: finalità, basi giuridiche, destinatari, trasferimenti, conservazione e vostri diritti (GDPR e LPD svizzera). Niente GPS né posizione del dispositivo.',
+        'Come BorderDay tratta i dati personali: finalità, basi giuridiche, destinatari, trasferimenti, conservazione e vostri diritti (GDPR e LPD svizzera). Nessuna localizzazione GPS né posizione del dispositivo.',
       h1: 'Privacy',
       summary:
-        'Niente GPS né posizione del dispositivo: l’HR vede per data il tipo di giorno e la notte fuori sì/no, una categoria di paese, mai coordinate. Il datore di lavoro è titolare dei registri dei dipendenti. Destinatari: Supabase (hosting UE), Resend, GitHub Pages, Zoho, Google se scelto, e Stripe/Link come titolari autonomi. Contatto privacy@borderday.com.',
+        'Nessuna localizzazione GPS né posizione del dispositivo: l’HR vede per data il tipo di giorno e la notte fuori sì/no, una categoria di paese, mai coordinate. Il datore di lavoro è titolare dei registri dei dipendenti. Destinatari: Supabase (hosting UE), Resend, GitHub Pages, Zoho, Google se scelto, e Stripe/Link come titolari autonomi. Contatto privacy@borderday.com.',
       crumbs: [
         ['Home', ''],
         ['Privacy', 'privacy'],
@@ -507,10 +507,10 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'AGB & Impressum — BorderDay',
+      title: 'Nutzungsbedingungen & Impressum — BorderDay',
       description:
-        'AGB und Impressum von BorderDay: Testphase und automatische Verlängerung, Kündigung, MwSt., 14-tägiges EU-Widerrufsrecht für Verbraucher.',
-      h1: 'AGB & Impressum',
+        'Nutzungsbedingungen und Impressum von BorderDay: Testphase und automatische Verlängerung, Kündigung, MwSt., 14-tägiges EU-Widerrufsrecht für Verbraucher.',
+      h1: 'Nutzungsbedingungen & Impressum',
       summary:
         'Abos beginnen mit einer 7-tägigen kostenlosen Testphase: Danach wird der Plan zum angegebenen Preis kostenpflichtig, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Unternehmenspreise zzgl. MwSt.; Einzelpreise inkl. MwSt. EU-Widerruf und Kündigung sind auf dieser Seite beschrieben.',
       crumbs: [
@@ -655,10 +655,10 @@ export const PAGES = {
     it: {
       title: 'Registrazione azienda — BorderDay',
       description:
-        'Create un account aziendale BorderDay per il conteggio HR su nove corridoi. Poi abbonatevi (5 €/collaboratore attivo/mese, min. 39 €, IVA esclusa).',
+        'Create un account aziendale BorderDay per il conteggio HR su nove corridoi. Poi abbonatevi (5 €/dipendente attivo/mese, min. 39 €, IVA esclusa).',
       h1: 'Registrazione azienda',
       summary:
-        'Create un account aziendale con e-mail o Google, invitate i collaboratori e abbonatevi in Prezzi. Piano: 5 € per collaboratore attivo al mese, minimo 39 €, IVA esclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione.',
+        'Create un account aziendale con e-mail o Google, invitate i dipendenti e abbonatevi in Prezzi. Piano: 5 € per dipendente attivo al mese, minimo 39 €, IVA esclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione.',
       crumbs: [
         ['Home', ''],
         ['Registrazione azienda', 'company/signup'],
@@ -755,7 +755,7 @@ export const FAQ = {
     ],
     [
       'Wie funktionieren Zahlungen?',
-      'Checkout über Stripe Managed Payments: Link ist Merchant of Record und handhabt MwSt./GST. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe AGB.',
+      'Checkout über Stripe Managed Payments: Link ist Merchant of Record und handhabt MwSt./GST. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
     ],
     [
       'Was deckt BorderDay nicht ab?',
@@ -773,7 +773,7 @@ export const FAQ = {
     ],
     [
       'Tracciate la mia posizione?',
-      'No. Registrate voi i giorni. Niente GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
+      'No. Registrate voi i giorni. Nessuna localizzazione GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
     ],
     [
       'Quali confini coprite?',
@@ -781,7 +781,7 @@ export const FAQ = {
     ],
     [
       'Quanto costa BorderDay?',
-      'Azienda: 5 € per collaboratore attivo al mese, minimo 39 €; annuale minimo 390 € (2 mesi gratis). Individuale: 4,99 €/mese o 49 €/anno. Prezzi azienda IVA esclusa; individuali IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione.',
+      'Azienda: 5 € per dipendente attivo al mese, minimo 39 €; annuale minimo 390 € (2 mesi gratis). Individuale: 4,99 €/mese o 49 €/anno. Prezzi azienda IVA esclusa; individuali IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione.',
     ],
     [
       'Come funzionano i pagamenti?',

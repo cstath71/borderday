@@ -23,6 +23,10 @@ export default function Privacy() {
           <p>{d.privacy.s4Body}</p>
           <h2>{d.privacy.s5Title}</h2>
           <p>{d.privacy.s5Body}</p>
+          <h2>{d.privacy.s6Title}</h2>
+          <p>{d.privacy.s6Body}</p>
+          <h2>{d.privacy.s7Title}</h2>
+          <p>{d.privacy.s7Body}</p>
           <p>{d.privacy.contact}</p>
         </div>
       </section>

@@ -73,6 +73,8 @@ export default function Layout() {
           <div>
             <Link to={`/${lang}/privacy`}>{d.nav.privacy}</Link>
             {' · '}
+            <Link to={`/${lang}/terms`}>{d.nav.terms}</Link>
+            {' · '}
             <Link to={`/${lang}/disclaimer`}>{d.nav.disclaimer}</Link>
             {' · '}
             <Link to={`/${lang}/pricing`}>{d.nav.pricing}</Link>

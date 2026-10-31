@@ -12,6 +12,7 @@ const en = {
     faq: 'FAQ',
     privacy: 'Privacy',
     disclaimer: 'Disclaimer',
+    terms: 'Terms',
     openApp: 'Open the app',
     joinWaitlist: 'Sign in',
     forIndividuals: 'For individuals',
@@ -47,8 +48,8 @@ const en = {
     feature1Body: 'Independent counters with official sources linked. Warnings at 75%, 90% and 100% of the real allowance.',
     feature2Title: 'Invite by email link',
     feature2Body: 'Employees join your company, pick their border pack, and log day types only — never GPS location.',
-    feature3Title: 'Privacy by design',
-    feature3Body: 'GDPR and Swiss nLPD oriented: company isolation, export and delete, clear consent, retention note. HR sees day types and counts, not location.',
+    feature3Title: 'Data protection by design',
+    feature3Body: 'GDPR and Swiss FADP (nLPD) oriented: company isolation, export and delete, clear consent, retention note. HR sees day types and counts, not location.',
     bordersTitle: 'Borders covered in version 1',
     bordersIntro: 'Rules from public official sources. Counters still being confirmed stay disabled — we never invent a number.',
     howTitle: 'How companies use BorderDay',
@@ -164,15 +165,17 @@ const en = {
   },
   pricing: {
     title: 'Pricing',
-    subtitle: 'Company plan first. Subscriptions via Stripe — checkout shows "not yet available" until billing is connected.',
+    subtitle: 'Company plan first. Subscriptions via Stripe Managed Payments (sold through Link).',
     individual: 'Individual (employee)',
     company: 'Company / HR',
     monthly: '€4.99 / month',
     yearly: '€49 / year',
     yearlyNote: 'About two months free vs monthly.',
     companyPrice: '€5 / active employee / month',
-    companyMin: 'Minimum €39 / month',
-    companyYearly: 'Yearly billing: 2 months free',
+    companyMin: 'Minimum €39 / month (covers up to 7 active employees)',
+    companyYearly: 'Yearly billing: 2 months free (€390 / year minimum)',
+    activeEmployeeDef:
+      'Active employee: a company member with an accepted invite who has not been deactivated. Billing uses the current active headcount each period (minimum €39 / month).',
     companyTax: 'excl. VAT',
     individualTax: 'incl. VAT',
     includes: 'Includes',
@@ -185,7 +188,7 @@ const en = {
     companyInclude1: 'HR dashboard with per-employee counters and filters',
     companyInclude2: 'Email invites, roles (owner / HR viewer), CSV audit export',
     companyInclude3: 'Employees see the same counters HR sees',
-    companyInclude4: 'Privacy by design (day types only — no location)',
+    companyInclude4: 'Data protection by design (day types only — no location)',
     comingSoon: 'Live checkout',
     subscribeMonthly: 'Start monthly',
     subscribeYearly: 'Start yearly',
@@ -213,14 +216,14 @@ const en = {
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',
-    a7: 'Stripe Managed Payments (merchant of record) handles tax in Checkout. Company and individual plans include a 7-day free trial; a card is required at signup. Promo codes are supported at checkout.',
+    a7: 'Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Company and individual plans include a 7-day free trial; a card is required at signup. Promo codes are supported at checkout. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
   },
   privacy: {
     title: 'Privacy',
     updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
     s1Title: 'What we collect',
     s1Body:
-      'Individual logger (device): border pack, each day’s type (telework, on site, third country, non-working), optional notes, contractual working days per year. Company accounts (when used): company name, member emails/names, roles, border pack, day types and dates, consent records. Designed for GDPR and Swiss nLPD.',
+      'Individual logger (device): border pack, each day’s type (telework, on site, third country, non-working), optional notes, contractual working days per year. Company accounts (when used): company name, member emails/names, roles, border pack, day types and dates, consent records. Designed for GDPR and the Swiss Federal Act on Data Protection (FADP / nLPD).',
     s2Title: 'What we do not collect',
     s2Body:
       'No GPS, no continuous location, no IP geolocation stored as a work location. HR sees day types and counts only — the same counters the employee sees. No advertising trackers. No sale of personal data.',
@@ -230,9 +233,9 @@ const en = {
     s4Title: 'Your rights (employees and HR)',
     s4Body:
       'Employees can export and delete their day log. Employees see exactly what HR sees for their counters. You may withdraw consent for company processing where applicable and request erasure via privacy@borderday.com.',
-    s5Title: 'Processors and residency (planned)',
+    s5Title: 'Processors and residency',
     s5Body:
-      'Production uses Supabase (EU, eu-central-1). Planned processors: Resend (invite email), Stripe (payments). Auth: email and Google.',
+      'Production uses Supabase (EU, eu-central-1). Processors: Resend (transactional email, including invites and auth mail), Stripe / Link (payments under Managed Payments). Auth: email and Google.',
     s6Title: 'Data retention',
     s6Body:
       'Default retention for company day logs is 24 months unless your company sets a different window (1–120 months) or applicable law requires longer. After retention, day logs are deleted or anonymised. Demo data is labeled DEMO and may be reset anytime.',
@@ -256,7 +259,7 @@ const en = {
   },
   company: {
     signupTitle: 'Create a company account',
-    signupSubtitle: 'Sign in with email or Google, then create your company. Payments stay gated until Stripe is connected.',
+    signupSubtitle: 'Sign in with email or Google, then create your company. Subscribe on the Pricing page when ready.',
     companyName: 'Company name',
     yourName: 'Your name',
     workEmail: 'Work email',
@@ -264,7 +267,7 @@ const en = {
     created: 'Company created. You are the owner.',
     openDashboard: 'Open HR dashboard',
     inviteTitle: 'Invite employees',
-    inviteSubtitle: 'Generate an invite link. Email delivery waits on the Resend domain; the link works either way.',
+    inviteSubtitle: 'Generate an invite link. We email the invite when possible; you can always copy and share the link.',
     inviteEmail: 'Employee email',
     inviteRole: 'Role',
     roleOwner: 'Owner',
@@ -308,6 +311,33 @@ const en = {
     colDate: 'Date',
     colDayType: 'Day type',
     emptyCounters: 'Employee has not chosen a border pack yet.',
+  },
+
+  terms: {
+    title: 'Terms of service',
+    updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    s1Title: 'Service',
+    s1Body:
+      'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border corridors. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',
+    s2Title: 'Accounts and company use',
+    s2Body:
+      'You must provide accurate account details. Company owners invite employees; employees choose a border pack and log day types only (no location). HR sees the same counters the employee sees. You are responsible for the accuracy of days you log and for lawful use of employee data under GDPR and, where applicable, Swiss FADP.',
+    s3Title: 'Subscriptions, trial and cancellation',
+    s3Body:
+      'Paid plans are subscriptions. Company and individual plans include a 7-day free trial; a payment card is required at signup. If no valid payment method is on file when the trial ends, the subscription cancels. You can cancel via the Link order tools or the Stripe customer portal linked from your account. Cancellation stops future renewals; charges already collected for a started billing period are not pro-rated unless required by law or by Link’s refund policy.',
+    s4Title: 'Prices, VAT and merchant of record',
+    s4Body:
+      'Company: €5 per active employee per month, minimum €39 per month (or yearly equivalent with 2 months free), excluding VAT. Individual: €4.99 per month or €49 per year, including VAT. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record for tax collection and filing where Managed Payments applies. Displayed prices may be converted to local currency at checkout.',
+    s5Title: 'EU consumer right of withdrawal (14 days)',
+    s5Body:
+      'If you buy an individual plan as a consumer in the EU/EEA, Directive 2011/83/EU gives you a 14-day right of withdrawal from the day the contract is concluded, without giving a reason. To exercise it, contact Link support for the Order (sold through Link) and/or privacy@borderday.com with your account email and order reference. For digital services, starting the service during the withdrawal period after you gave prior express consent and acknowledged that you lose the right once performance has begun may limit or end that right under Article 16 of the Directive — checkout and Link’s Sold through Link terms describe how this is handled for your Order. Business (company) purchases are not consumer distance contracts.',
+    s6Title: 'Refunds and payment support',
+    s6Body:
+      'Payment, receipt, tax invoice and Order-level refund requests for Managed Payments are handled by Link under Stripe’s Sold through Link / Purchase terms. Product questions (how BorderDay works, account access, data export) go to hello@borderday.com or privacy@borderday.com.',
+    s7Title: 'Changes',
+    s7Body:
+      'We may update these Terms. The “Last updated” date above changes when we do. Continued use after an update means you accept the revised Terms, except where mandatory consumer law requires a different process.',
+    contact: 'Contact: hello@borderday.com · Privacy: privacy@borderday.com',
   },
   disclaimer: {
     title: 'Disclaimer',

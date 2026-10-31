@@ -112,10 +112,15 @@ describe('trial length', () => {
   });
   const locales = { en, fr, de, it: itDict } as const;
   for (const [lang, dict] of Object.entries(locales)) {
-    it(`${lang}: trial copy says 7, never 14`, () => {
-      const blob = [dict.pricing.trialNote, dict.faq.a7, dict.home.waitlistNote].join(' | ');
+    it(`${lang}: pricing/home trial copy says 7, never 14`, () => {
+      const blob = [dict.pricing.trialNote, dict.home.waitlistNote].join(' | ');
       expect(blob).toMatch(/\b7\b/);
       expect(blob).not.toMatch(/\b14\b/);
+    });
+    it(`${lang}: FAQ mentions 7-day trial and EU 14-day withdrawal`, () => {
+      expect(dict.faq.a7).toMatch(/\b7\b/);
+      expect(dict.faq.a7).toMatch(/\b14\b/);
+      expect(dict.terms.s5Body).toMatch(/\b14\b/);
     });
   }
 });

@@ -14,6 +14,7 @@ const de: Dict = {
     faq: 'FAQ',
     privacy: 'Datenschutz',
     disclaimer: 'Haftungsausschluss',
+    terms: 'AGB',
     openApp: 'App öffnen',
     joinWaitlist: 'Anmelden',
     forIndividuals: 'Für Privatpersonen',
@@ -49,8 +50,8 @@ const de: Dict = {
     feature1Body: 'Unabhängige Zähler mit verlinkten amtlichen Quellen. Warnungen bei 75 %, 90 % und 100 % der realen Quote.',
     feature2Title: 'Einladung per E-Mail-Link',
     feature2Body: 'Mitarbeitende treten bei, wählen ihr Grenzpaket und erfassen nur den Tagestyp — niemals GPS-Standort.',
-    feature3Title: 'Privacy by Design',
-    feature3Body: 'An DSGVO und Schweizer nDSG ausgerichtet: Mandantentrennung, Export und Löschung, klare Einwilligung, Aufbewahrungshinweis. HR sieht Tagestypen und Anzahlen, keinen Standort.',
+    feature3Title: 'Datenschutz durch Technikgestaltung',
+    feature3Body: 'An DSGVO und das schweizerische Bundesgesetz über den Datenschutz (DSG / nDSG) ausgerichtet: Mandantentrennung, Export und Löschung, klare Einwilligung, Aufbewahrungshinweis. HR sieht Tagestypen und Anzahlen, keinen Standort.',
     bordersTitle: 'Abgedeckte Grenzen in Version 1',
     bordersIntro: 'Regeln aus öffentlichen amtlichen Quellen. Noch nicht bestätigte Zähler bleiben deaktiviert — keine erfundenen Zahlen.',
     howTitle: 'So nutzen Unternehmen BorderDay',
@@ -106,9 +107,9 @@ const de: Dict = {
       'Für in Frankreich ansässige Beschäftigte in Luxemburg: 34 Tage je Besteuerungszeitraum physisch in Frankreich und/oder einem Drittstaat zur Ausübung der Beschäftigung, ohne die luxemburgische Besteuerung für den gesamten Zeitraum zu verlieren. Jeder Bruchteil eines Tages zählt als voller Tag. Urlaub, Wochenruhe, Feiertage (ohne Arbeitspflicht), Krankheit und höhere Gewalt sind ausgenommen. Quelle: Verständigungsvereinbarung impots.gouv.fr.',
     ss_framework_under_50: 'Grenzüberschreitende Telearbeit (Rahmenvereinbarung: unter 50 %)',
     ss_framework_note:
-      'Nach der Rahmenvereinbarung EU/EWR/CH zur grenzüberschreitenden Telearbeit kann gewöhnliche Telearbeit im Wohnsitzstaat unter 50 % der gesamten Arbeitszeit die Sozialversicherung des Arbeitgeberstaats belassen, wenn beide Staaten unterzeichnet haben und eine A1-Bescheinigung beantragt wird. Quelle: FÖD Soziale Sicherheit Belgien (Verwahrer); CLEISS.',
+      'Nach der Rahmenvereinbarung EU/EWR/CH zur grenzüberschreitenden Telearbeit kann gewöhnliche Telearbeit im Wohnsitzstaat unter 50 % der gesamten Arbeitszeit die sozialversicherungsrechtliche Zuständigkeit des Arbeitgeberstaats beibehalten, wenn beide Staaten unterzeichnet haben und eine A1-Bescheinigung (portables Dokument A1) beantragt wird. Quelle: FÖD Soziale Sicherheit Belgien (Verwahrer); CLEISS.',
     ss_framework_lu_note:
-      'CCSS Luxemburg: Telearbeit ausschließlich im Wohnsitzstaat, zwischen 25 % und unter 50 % der gesamten Arbeitszeit, beide Staaten unterzeichnet → Arbeitgeber kann A1 beantragen, damit luxemburgischer Schutz fortbesteht. Gewöhnliche Nicht-Telearbeit im Wohnsitzstaat oder Arbeit in einem anderen Mitgliedstaat kann aus dem Rahmen fallen. Quelle: CCSS.',
+      'CCSS Luxemburg: Telearbeit ausschließlich im Wohnsitzstaat, zwischen 25 % und unter 50 % der gesamten Arbeitszeit, beide Staaten unterzeichnet → Arbeitgeber kann A1 beantragen, damit luxemburgischer Schutz fortbesteht. Eine gewöhnliche Tätigkeit, die keine Telearbeit ist, im Wohnsitzstaat oder Arbeit in einem anderen Mitgliedstaat kann die Anwendung der Rahmenvereinbarung entfallen lassen. Quelle: CCSS.',
     ch_it_tax_telework_25: 'Telearbeit am Wohnsitz (max. 25 % der unselbständigen Tätigkeit)',
     ch_it_tax_nonreturn_45: 'Tage ohne tägliche Rückkehr nach Hause (max. 45 Tage/Jahr)',
     ch_it_tax_note:
@@ -167,15 +168,17 @@ const de: Dict = {
   },
   pricing: {
     title: 'Preise',
-    subtitle: 'Zuerst Firmenplan. Abos über Stripe — Checkout zeigt „noch nicht verfügbar“, bis Billing verbunden ist.',
+    subtitle: 'Zuerst Firmenplan. Abos über Stripe Managed Payments (verkauft über Link).',
     individual: 'Einzelperson (Mitarbeitende)',
     company: 'Unternehmen / HR',
     monthly: '€4,99 / Monat',
     yearly: '€49 / Jahr',
     yearlyNote: 'Etwa zwei Monate gratis gegenüber monatlich.',
     companyPrice: '€5 / aktive Mitarbeitende / Monat',
-    companyMin: 'Minimum €39 / Monat',
-    companyYearly: 'Jahresabrechnung: 2 Monate gratis',
+    companyMin: 'Minimum €39 / Monat (bis zu 7 aktive Mitarbeitende)',
+    companyYearly: 'Jahresabrechnung: 2 Monate gratis (Mindestbetrag €390 / Jahr)',
+    activeEmployeeDef:
+      'Aktive Mitarbeitende: Firmenmitglied mit angenommener Einladung, das nicht deaktiviert wurde. Die Abrechnung nutzt die aktuelle aktive Kopfzahl je Periode (Mindestbetrag €39 / Monat).',
     companyTax: 'zzgl. MwSt.',
     individualTax: 'inkl. MwSt.',
     includes: 'Enthalten',
@@ -188,7 +191,7 @@ const de: Dict = {
     companyInclude1: 'HR-Dashboard mit Zählern pro Person und Filtern',
     companyInclude2: 'E-Mail-Einladungen, Rollen (Owner / HR-Ansicht), CSV-Audit-Export',
     companyInclude3: 'Mitarbeitende sehen dieselben Zähler wie HR',
-    companyInclude4: 'Privacy by Design (nur Tagestypen — kein Standort)',
+    companyInclude4: 'Datenschutz durch Technikgestaltung (nur Tagestypen — kein Standort)',
     comingSoon: 'Checkout live',
     subscribeMonthly: 'Monatlich starten',
     subscribeYearly: 'Jährlich starten',
@@ -216,14 +219,14 @@ const de: Dict = {
     q6: 'Und der App Store?',
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
-    a7: 'Stripe Managed Payments (Verkäufer) übernimmt die Steuer im Checkout. Firmen- und Einzelpläne beinhalten eine 7-Tage-Testphase; eine Karte ist bei der Anmeldung nötig. Aktionscodes werden akzeptiert.',
+    a7: 'Checkout nutzt Stripe Managed Payments: Link ist der Merchant of Record und übernimmt MwSt./GST im Checkout. Firmen- und Einzelpläne beinhalten eine 7-Tage-Testphase; eine Karte ist bei der Anmeldung nötig. Aktionscodes werden akzeptiert. Siehe AGB zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
   },
   privacy: {
     title: 'Datenschutz',
     updated: 'Zuletzt aktualisiert: 31.10.2026 (Europe/Zurich)',
     s1Title: 'Was wir erheben',
     s1Body:
-      'Einzel-Logger (Gerät): Grenzpaket, Tagestyp (Telearbeit, vor Ort, Drittstaat, nicht gearbeitet), optionale Notizen, vertragliche Arbeitstage/Jahr. Unternehmenskonten: Firmenname, E-Mails/Namen, Rollen, Grenzpaket, Tagestypen und Daten, Einwilligungen. Ausgerichtet auf DSGVO und Schweizer nDSG.',
+      'Einzel-Logger (Gerät): Grenzpaket, Tagestyp (Telearbeit, vor Ort, Drittstaat, nicht gearbeitet), optionale Notizen, vertragliche Arbeitstage/Jahr. Unternehmenskonten: Firmenname, E-Mails/Namen, Rollen, Grenzpaket, Tagestypen und Daten, Einwilligungen. Ausgerichtet auf DSGVO und das schweizerische Bundesgesetz über den Datenschutz (DSG / nDSG).',
     s2Title: 'Was wir nicht erheben',
     s2Body:
       'Kein GPS, keine Dauerstandortbestimmung, keine IP-Geolokalisierung als Arbeitsort. HR sieht Tagestypen und Anzahlen — dieselben Zähler wie die Mitarbeitenden. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
@@ -233,9 +236,9 @@ const de: Dict = {
     s4Title: 'Ihre Rechte (Mitarbeitende und HR)',
     s4Body:
       'Mitarbeitende können ihr Tagesprotokoll exportieren und löschen und sehen genau dasselbe wie HR. Einwilligung widerrufen und Löschung anfordern: privacy@borderday.com.',
-    s5Title: 'Auftragsverarbeiter und Speicherort (geplant)',
+    s5Title: 'Auftragsverarbeiter und Speicherort',
     s5Body:
-      'Produktion auf Supabase (EU, eu-central-1). Geplante Prozessoren: Resend (Einladungen), Stripe (Zahlungen). Auth: E-Mail und Google.',
+      'Produktion auf Supabase (EU, eu-central-1). Auftragsverarbeiter: Resend (Transaktions-E-Mail inkl. Einladungen und Auth), Stripe / Link (Zahlungen unter Managed Payments). Auth: E-Mail und Google.',
     s6Title: 'Aufbewahrung',
     s6Body:
       'Standard für Unternehmens-Tagesprotokolle: 24 Monate, sofern die Firma nicht anders einstellt (1–120) oder Recht längeres verlangt. Danach Löschung oder Anonymisierung. DEMO-Daten sind gekennzeichnet und jederzeit zurücksetzbar.',
@@ -258,7 +261,7 @@ const de: Dict = {
   },
   company: {
     signupTitle: 'Unternehmenkonto anlegen',
-    signupSubtitle: 'Mit E-Mail oder Google anmelden, dann Unternehmen anlegen. Zahlungen bleiben bis Stripe gesperrt.',
+    signupSubtitle: 'Mit E-Mail oder Google anmelden, dann Unternehmen anlegen. Abonnieren Sie auf der Preisseite, wenn Sie bereit sind.',
     companyName: 'Firmenname',
     yourName: 'Ihr Name',
     workEmail: 'Geschäfts-E-Mail',
@@ -266,7 +269,7 @@ const de: Dict = {
     created: 'Unternehmen angelegt. Sie sind Owner.',
     openDashboard: 'HR-Dashboard öffnen',
     inviteTitle: 'Mitarbeitende einladen',
-    inviteSubtitle: 'Einladungslink erzeugen. E-Mail-Versand wartet auf Resend-Domain; der Link funktioniert trotzdem.',
+    inviteSubtitle: 'Einladungslink erzeugen. Wir senden die Einladungs-E-Mail wenn möglich; Sie können den Link jederzeit kopieren und teilen.',
     inviteEmail: 'E-Mail der Person',
     inviteRole: 'Rolle',
     roleOwner: 'Owner',
@@ -310,6 +313,33 @@ const de: Dict = {
     colDate: 'Datum',
     colDayType: 'Tagesart',
     emptyCounters: 'Noch kein Grenzpaket gewählt.',
+  },
+
+  terms: {
+    title: 'Nutzungsbedingungen',
+    updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
+    s1Title: 'Dienst',
+    s1Body:
+      'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzkorridoren. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, einen qualifizierten Berater oder eine zuständige Behörde. Siehe Haftungsausschluss.',
+    s2Title: 'Konten und Firmennutzung',
+    s2Body:
+      'Sie müssen korrekte Kontodaten angeben. Firmeneigentümer laden Mitarbeitende ein; diese wählen ein Grenzpaket und erfassen nur den Tagestyp (keinen Standort). HR sieht dieselben Zähler wie der Mitarbeitende. Sie sind für die Richtigkeit der erfassten Tage und für die rechtmäßige Verarbeitung von Beschäftigtendaten nach DSGVO und ggf. schweizerischem DSG verantwortlich.',
+    s3Title: 'Abonnements, Testphase und Kündigung',
+    s3Body:
+      'Bezahlte Pläne sind Abonnements. Firmen- und Einzelpläne enthalten eine 7-tägige kostenlose Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo gekündigt. Kündigung über die Link-Bestellwerkzeuge oder das Stripe-Kundenportal. Die Kündigung stoppt künftige Verlängerungen; bereits eingezogene Beträge für eine begonnene Periode werden nicht anteilig erstattet, sofern nicht gesetzlich oder nach Links Rückerstattungspolitik erforderlich.',
+    s4Title: 'Preise, MwSt. und Merchant of Record',
+    s4Body:
+      'Firma: 5 € je aktiver Mitarbeitender und Monat, mindestens 39 € / Monat (oder Jahresäquivalent mit 2 Monaten gratis), zzgl. MwSt. Einzelperson: 4,99 € / Monat oder 49 € / Jahr, inkl. MwSt. Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record für Erhebung und Abführung der MwSt., soweit Managed Payments gilt. Angezeigte Preise können im Checkout in Landeswährung umgerechnet werden.',
+    s5Title: 'Widerrufsrecht für EU-Verbraucher (14 Tage)',
+    s5Body:
+      'Kaufen Sie einen Einzelplan als Verbraucher in der EU/im EWR, gewährt Richtlinie 2011/83/EU ein 14-tägiges Widerrufsrecht ab Vertragsschluss ohne Angabe von Gründen. Ausübung über den Link-Support zur Bestellung (verkauft über Link) und/oder privacy@borderday.com mit Konto-E-Mail und Bestellreferenz. Bei digitalen Dienstleistungen kann der Beginn der Leistung während der Widerrufsfrist nach vorheriger ausdrücklicher Zustimmung und Kenntnisnahme, dass das Recht mit Leistungsbeginn erlischt, dieses Recht nach Art. 16 einschränken oder beenden — Checkout und Links Sold-through-Link-Bedingungen beschreiben die Abwicklung für Ihre Bestellung. Firmenkäufe sind keine Verbraucherverträge im Fernabsatz.',
+    s6Title: 'Erstattungen und Zahlungs-Support',
+    s6Body:
+      'Zahlung, Beleg, Steuerrechnung und Erstattungsanfragen auf Bestellebene bei Managed Payments bearbeitet Link nach den Sold-through-Link- / Purchase-Bedingungen von Stripe. Produktfragen (Funktion, Zugang, Export): hello@borderday.com oder privacy@borderday.com.',
+    s7Title: 'Änderungen',
+    s7Body:
+      'Wir können diese Bedingungen aktualisieren. Das Datum „Zuletzt aktualisiert“ ändert sich dann. Fortgesetzte Nutzung nach einer Aktualisierung gilt als Zustimmung, sofern zwingendes Verbraucherrecht kein anderes Verfahren verlangt.',
+    contact: 'Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com',
   },
   disclaimer: {
     title: 'Haftungsausschluss',

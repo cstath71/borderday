@@ -111,6 +111,7 @@ export default function Pricing() {
               <div>{d.pricing.companyMin}</div>
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.companyYearly}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyTax}</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.activeEmployeeDef}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.trialNote}</p>
               <h3>{d.pricing.includes}</h3>
               <ul>

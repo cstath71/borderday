@@ -14,6 +14,7 @@ const it: Dict = {
     faq: 'FAQ',
     privacy: 'Privacy',
     disclaimer: 'Avvertenza',
+    terms: 'Condizioni',
     openApp: 'Apri l’app',
     joinWaitlist: 'Accedi',
     forIndividuals: 'Per i privati',
@@ -49,8 +50,8 @@ const it: Dict = {
     feature1Body: 'Contatori indipendenti con fonti ufficiali. Avvisi al 75%, 90% e 100% dell’allocazione reale.',
     feature2Title: 'Invito tramite link e-mail',
     feature2Body: 'I collaboratori entrano in azienda, scelgono il pacchetto confine e registrano solo il tipo di giorno — mai la posizione GPS.',
-    feature3Title: 'Privacy by design',
-    feature3Body: 'Orientato a GDPR e nLPD svizzera: isolamento per azienda, export e cancellazione, consenso chiaro, nota di conservazione. L’HR vede tipi di giorno e conteggi, non la posizione.',
+    feature3Title: 'Protezione dei dati fin dalla progettazione',
+    feature3Body: 'Orientato a GDPR e alla Legge federale svizzera sulla protezione dei dati (LPD / nLPD): isolamento per azienda, export e cancellazione, consenso chiaro, nota di conservazione. L’HR vede tipi di giorno e conteggi, non la posizione.',
     bordersTitle: 'Confini coperti nella versione 1',
     bordersIntro: 'Regole da fonti ufficiali pubbliche. I contatori ancora da confermare restano disabilitati — nessun numero inventato.',
     howTitle: 'Come le aziende usano BorderDay',
@@ -106,15 +107,15 @@ const it: Dict = {
       'Per i residenti in Francia impiegati in Lussemburgo: 34 giorni per periodo d’imposta fisicamente presenti in Francia e/o in uno Stato terzo per esercitare l’impiego, senza perdere l’imposizione lussemburghese per l’intero periodo. Qualsiasi frazione di giorno conta come giorno intero. Ferie, riposo settimanale, festivi (quando non c’è obbligo di lavorare), malattia e forza maggiore sono esclusi. Fonte: accordo amichevole impots.gouv.fr.',
     ss_framework_under_50: 'Telelavoro transfrontaliero (accordo quadro: sotto il 50%)',
     ss_framework_note:
-      'Secondo l’accordo quadro UE/SEE/CH sul telelavoro transfrontaliero, il telelavoro abituale nello Stato di residenza sotto il 50% del tempo di lavoro totale può mantenere la sicurezza sociale dello Stato del datore di lavoro se entrambi gli Stati hanno firmato e viene richiesto un documento portatile A1. Fonte: SPF Sicurezza sociale belga (depositario); CLEISS.',
+      'Secondo l’accordo quadro UE/SEE/CH sul telelavoro transfrontaliero, il telelavoro abituale nello Stato di residenza inferiore al 50% del tempo di lavoro totale può consentire il mantenimento della legislazione di sicurezza sociale dello Stato del datore di lavoro se entrambi gli Stati hanno firmato e viene richiesto un documento portatile A1. Fonte: SPF Sicurezza sociale belga (depositario); CLEISS.',
     ss_framework_lu_note:
-      'CCSS Lussemburgo: telelavoro esclusivamente nello Stato di residenza, tra il 25% e sotto il 50% del tempo di lavoro totale, entrambi gli Stati hanno firmato → il datore può richiedere un A1 affinché la copertura lussemburghese continui. Un’attività abituale non di telelavoro nello Stato di residenza o lavoro in un altro Stato membro può uscire dal quadro. Fonte: CCSS.',
+      'CCSS Lussemburgo: telelavoro esclusivamente nello Stato di residenza, tra il 25% e sotto il 50% del tempo di lavoro totale, entrambi gli Stati hanno firmato → il datore può richiedere un A1 affinché la copertura lussemburghese continui. Un’attività abituale diversa dal telelavoro nello Stato di residenza o un lavoro in un altro Stato membro può far decadere l’applicazione dell’accordo quadro. Fonte: CCSS.',
     ch_it_tax_telework_25: 'Telelavoro al domicilio (max 25% dell’attività dipendente)',
     ch_it_tax_nonreturn_45: 'Giorni senza rientro giornaliero a casa (max 45 giorni/anno)',
     ch_it_tax_note:
-      'Secondo il protocollo modificativo dell’accordo Italia–Svizzera, un lavoratore frontaliere può svolgere al massimo il 25 per cento dell’attività dipendente in modalità di telelavoro al domicilio nello Stato di residenza in un anno civile senza modificare lo status né il trattamento fiscale di tale telelavoro. Fonte: Fedlex RU 2026 104; DFI (SIF).',
+      'Secondo il protocollo modificativo dell’accordo Italia–Svizzera sui lavoratori frontalieri, un lavoratore frontaliere può svolgere al massimo il 25 per cento dell’attività di lavoro dipendente presso il proprio domicilio nello Stato di residenza in un anno civile senza modificare lo status né il trattamento fiscale di tale telelavoro. Fonte: Fedlex RU 2026 104; DFI (SIF).',
     ch_it_nonreturn_note:
-      'In linea di principio, fino a 45 giorni in un anno civile senza rientro giornaliero a casa per motivi professionali (ferie e giorni di malattia non conteggiati in tali 45). Fonte: protocollo modificativo Fedlex.',
+      'In linea di principio, fino a 45 giorni in un anno civile in cui il lavoratore frontaliere non rientra quotidianamente al proprio domicilio per motivi professionali (ferie e giorni di malattia non conteggiati in tali 45). Fonte: protocollo modificativo Fedlex RU 2026 104.',
     basel_de_tax_pending: 'Regole fiscali sui giorni Germania–Svizzera',
     basel_de_employer_commute: 'Prassi datore (Basilea Città): giorni in sede questo mese (soglia ≈ 5)',
     basel_de_employer_note:
@@ -167,15 +168,17 @@ const it: Dict = {
   },
   pricing: {
     title: 'Prezzi',
-    subtitle: 'Prima il piano azienda. Abbonamenti via Stripe — il checkout mostra "non ancora disponibile" finché la fatturazione non è collegata.',
+    subtitle: 'Prima il piano azienda. Abbonamenti via Stripe Managed Payments (venduto tramite Link).',
     individual: 'Individuale (collaboratore)',
     company: 'Azienda / HR',
     monthly: '€4,99 / mese',
     yearly: '€49 / anno',
     yearlyNote: 'Circa due mesi gratis rispetto al mensile.',
     companyPrice: '€5 / collaboratore attivo / mese',
-    companyMin: 'Minimo €39 / mese',
-    companyYearly: 'Fatturazione annuale: 2 mesi gratis',
+    companyMin: 'Minimo €39 / mese (fino a 7 collaboratori attivi)',
+    companyYearly: 'Fatturazione annuale: 2 mesi gratis (minimo €390 / anno)',
+    activeEmployeeDef:
+      'Collaboratore attivo: membro dell\'azienda che ha accettato l\'invito e non è stato disattivato. La fatturazione usa l\'organico attivo corrente in ciascun periodo (minimo €39 / mese).',
     companyTax: 'IVA esclusa',
     individualTax: 'IVA inclusa',
     includes: 'Include',
@@ -188,7 +191,7 @@ const it: Dict = {
     companyInclude1: 'Dashboard HR con contatori per collaboratore e filtri',
     companyInclude2: 'Inviti e-mail, ruoli (owner / HR in lettura), export CSV di audit',
     companyInclude3: 'I collaboratori vedono gli stessi contatori dell’HR',
-    companyInclude4: 'Privacy by design (solo tipi di giorno — nessuna posizione)',
+    companyInclude4: 'Protezione dei dati fin dalla progettazione (solo tipi di giorno — nessuna posizione)',
     comingSoon: 'Checkout attivo',
     subscribeMonthly: 'Inizia mensile',
     subscribeYearly: 'Inizia annuale',
@@ -216,14 +219,14 @@ const it: Dict = {
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',
-    a7: 'Stripe Managed Payments (venditore) gestisce le imposte nel checkout. I piani azienda e individuale includono una prova gratuita di 7 giorni; è richiesta una carta all\'iscrizione. I codici promo sono accettati.',
+    a7: 'Il checkout usa Stripe Managed Payments: Link è il merchant of record e gestisce IVA/GST nel checkout. I piani azienda e individuale includono una prova gratuita di 7 giorni; è richiesta una carta all\'iscrizione. I codici promo sono accettati. Vedi le Condizioni per la disdetta e il diritto di recesso di 14 giorni (consumatori UE).',
   },
   privacy: {
     title: 'Privacy',
     updated: 'Ultimo aggiornamento: 31 ott 2026 (Europe/Zurich)',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Diario individuale (dispositivo): pacchetto confine, tipo di giorno (telelavoro, in sede, paese terzo, non lavorato), note opzionali, giorni lavorativi contrattuali/anno. Account azienda: nome, e-mail/nomi, ruoli, pacchetto confine, tipi e date dei giorni, consensi. Progettato per GDPR e nLPD svizzera.',
+      'Diario individuale (dispositivo): pacchetto confine, tipo di giorno (telelavoro, in sede, paese terzo, non lavorato), note opzionali, giorni lavorativi contrattuali/anno. Account azienda: nome, e-mail/nomi, ruoli, pacchetto confine, tipi e date dei giorni, consensi. Progettato per il GDPR e la Legge federale svizzera sulla protezione dei dati (LPD / nLPD).',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
       'Niente GPS, niente localizzazione continua, niente geolocalizzazione IP come luogo di lavoro. L’HR vede tipi di giorno e conteggi — gli stessi contatori del collaboratore. Niente tracker pubblicitari. Niente vendita di dati personali.',
@@ -233,9 +236,9 @@ const it: Dict = {
     s4Title: 'I vostri diritti (collaboratori e HR)',
     s4Body:
       'I collaboratori possono esportare e cancellare il diario e vedono esattamente ciò che vede l’HR. Revoca del consenso e cancellazione: privacy@borderday.com.',
-    s5Title: 'Responsabili del trattamento e residenza (previsti)',
+    s5Title: 'Responsabili del trattamento e residenza',
     s5Body:
-      'Produzione su Supabase (UE, eu-central-1). Processori previsti: Resend (inviti), Stripe (pagamenti). Auth: email e Google.',
+      'Produzione su Supabase (UE, eu-central-1). Responsabili del trattamento: Resend (e-mail transazionali, inclusi inviti e auth), Stripe / Link (pagamenti Managed Payments). Auth: email e Google.',
     s6Title: 'Conservazione dei dati',
     s6Body:
       'Conservazione predefinita dei diari azienda: 24 mesi, salvo diversa impostazione (1–120) o obbligo di legge più lungo. Poi cancellazione o anonimizzazione. I dati DEMO sono etichettati e resettabili.',
@@ -258,7 +261,7 @@ const it: Dict = {
   },
   company: {
     signupTitle: 'Crea un account azienda',
-    signupSubtitle: 'Accedi con email o Google, poi crea l\'azienda. I pagamenti restano bloccati fino a Stripe.',
+    signupSubtitle: 'Accedi con email o Google, poi crea l\'azienda. Abbonati dalla pagina Prezzi quando sei pronto.',
     companyName: 'Nome azienda',
     yourName: 'Il tuo nome',
     workEmail: 'E-mail di lavoro',
@@ -266,7 +269,7 @@ const it: Dict = {
     created: 'Azienda creata. Sei owner.',
     openDashboard: 'Apri dashboard HR',
     inviteTitle: 'Invita collaboratori',
-    inviteSubtitle: 'Genera un link di invito. L\'invio email attende il dominio Resend; il link funziona comunque.',
+    inviteSubtitle: 'Genera un link di invito. Inviamo l\'e-mail di invito quando possibile; puoi sempre copiare e condividere il link.',
     inviteEmail: 'E-mail del collaboratore',
     inviteRole: 'Ruolo',
     roleOwner: 'Owner',
@@ -310,6 +313,33 @@ const it: Dict = {
     colDate: 'Data',
     colDayType: 'Tipo di giorno',
     emptyCounters: 'Il collaboratore non ha ancora scelto un pacchetto confine.',
+  },
+
+  terms: {
+    title: 'Condizioni di servizio',
+    updated: 'Ultimo aggiornamento: 31 ott. 2026 (Europe/Zurich)',
+    s1Title: 'Servizio',
+    s1Body:
+      'BorderDay è uno strumento di tracciamento e promemoria delle classificazioni giornaliere per datori di lavoro e collaboratori su determinati corridoi transfrontalieri. Non è consulenza fiscale o legale, né un sostituto del datore di lavoro, di un consulente qualificato o di un’autorità competente. Vedi l’Avvertenza.',
+    s2Title: 'Account e uso aziendale',
+    s2Body:
+      'Devi fornire dati di account corretti. I titolari aziendali invitano i collaboratori; questi scelgono un pacchetto confine e registrano solo il tipo di giorno (nessuna posizione). L’HR vede gli stessi contatori del collaboratore. Sei responsabile dell’accuratezza dei giorni registrati e del trattamento lecito dei dati dei dipendenti ai sensi del GDPR e, se applicabile, della LPD svizzera.',
+    s3Title: 'Abbonamenti, prova e disdetta',
+    s3Body:
+      'I piani a pagamento sono abbonamenti. Azienda e individuale includono una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Puoi disdire tramite gli strumenti ordine Link o il portale clienti Stripe. La disdetta interrompe i rinnovi futuri; gli importi già riscosati per un periodo avviato non sono proratati, salvo obblighi di legge o politica di rimborso di Link.',
+    s4Title: 'Prezzi, IVA e merchant of record',
+    s4Body:
+      'Azienda: €5 per collaboratore attivo al mese, minimo €39 / mese (o equivalente annuale con 2 mesi gratis), IVA esclusa. Individuale: €4,99 / mese o €49 / anno, IVA inclusa. Il checkout usa Stripe Managed Payments: gli acquisti risultano venduti tramite Link, e Link è il merchant of record per la riscossione e il versamento dell’IVA ove Managed Payments si applica. I prezzi visualizzati possono essere convertiti in valuta locale al checkout.',
+    s5Title: 'Diritto di recesso dei consumatori UE (14 giorni)',
+    s5Body:
+      'Se acquisti un piano individuale come consumatore nell’UE/SEE, la direttiva 2011/83/UE ti riconosce un diritto di recesso di 14 giorni dalla conclusione del contratto, senza motivazione. Per esercitarlo, contatta il supporto Link per l’ordine (venduto tramite Link) e/o privacy@borderday.com con l’e-mail dell’account e il riferimento. Per i servizi digitali, l’inizio dell’esecuzione durante il periodo di recesso dopo consenso espresso preventivo e riconoscimento della perdita del diritto una volta iniziata l’esecuzione può limitare o estinguere tale diritto (art. 16) — il checkout e le condizioni Sold through Link di Link descrivono la gestione per il tuo ordine. Gli acquisti aziendali non sono contratti a distanza con i consumatori.',
+    s6Title: 'Rimborsi e supporto pagamenti',
+    s6Body:
+      'Pagamento, ricevuta, fattura fiscale e richieste di rimborso a livello di ordine Managed Payments sono gestiti da Link secondo le condizioni Sold through Link / Purchase di Stripe. Domande sul prodotto (funzionamento, accesso, export): hello@borderday.com o privacy@borderday.com.',
+    s7Title: 'Modifiche',
+    s7Body:
+      'Possiamo aggiornare queste Condizioni. La data «Ultimo aggiornamento» cambia di conseguenza. L’uso continuato dopo un aggiornamento vale come accettazione, salvo processo diverso imposto dal diritto dei consumatori.',
+    contact: 'Contatto: hello@borderday.com · Privacy: privacy@borderday.com',
   },
   disclaimer: {
     title: 'Avvertenza',

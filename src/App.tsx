@@ -7,6 +7,7 @@ import ForIndividuals from './pages/ForIndividuals';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import CompanySignup from './pages/company/Signup';
 import CompanyDashboard from './pages/company/Dashboard';
 import CompanyInvite from './pages/company/Invite';
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="disclaimer" element={<Disclaimer />} />
+        <Route path="terms" element={<Terms />} />
         <Route path="auth/sign-in" element={<SignIn />} />
         <Route path="auth/sign-up" element={<SignUp />} />
         <Route path="auth/callback" element={<AuthCallback />} />

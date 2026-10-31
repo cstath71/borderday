@@ -14,6 +14,7 @@ const fr: Dict = {
     faq: 'FAQ',
     privacy: 'Confidentialité',
     disclaimer: 'Avertissement',
+    terms: 'Conditions',
     openApp: 'Ouvrir l’app',
     joinWaitlist: 'Connexion',
     forIndividuals: 'Pour les particuliers',
@@ -49,8 +50,8 @@ const fr: Dict = {
     feature1Body: 'Compteurs indépendants avec sources officielles. Alertes à 75 %, 90 % et 100 % de l’allocation réelle.',
     feature2Title: 'Invitation par lien e-mail',
     feature2Body: 'Les collaborateurs rejoignent votre entreprise, choisissent leur pack frontière et journalisent uniquement le type de jour — jamais la localisation GPS.',
-    feature3Title: 'Confidentialité by design',
-    feature3Body: 'Orienté RGPD et nLPD suisse : isolation par entreprise, export et suppression, consentement clair, note de conservation. Les RH voient types de jours et totaux, pas la localisation.',
+    feature3Title: 'Protection des données dès la conception',
+    feature3Body: 'Orienté RGPD et LPD suisse (nLPD) : isolation par entreprise, export et suppression, consentement clair, note de conservation. Les RH voient types de jours et totaux, pas la localisation.',
     bordersTitle: 'Frontières couvertes en version 1',
     bordersIntro: 'Règles issues de sources officielles publiques. Les compteurs encore en confirmation restent désactivés — aucun chiffre inventé.',
     howTitle: 'Comment les entreprises utilisent BorderDay',
@@ -106,9 +107,9 @@ const fr: Dict = {
       'Pour les résidents de France employés au Luxembourg : 34 jours par période d’imposition physiquement présents en France et/ou dans un État tiers pour exercer l’emploi, sans perdre l’imposition luxembourgeoise pour toute la période. Toute fraction de jour compte pour un jour entier. Congés, repos hebdomadaire, jours fériés (lorsqu’il n’y a pas d’obligation de travailler), maladie et force majeure sont exclus. Source : accord amiable impots.gouv.fr.',
     ss_framework_under_50: 'Télétravail transfrontalier (accord-cadre : moins de 50 %)',
     ss_framework_note:
-      'Selon l’accord-cadre UE/EEE/CH sur le télétravail transfrontalier, un télétravail habituel dans l’État de résidence inférieur à 50 % du temps de travail total peut permettre de conserver la sécurité sociale de l’État de l’employeur si les deux États ont signé et qu’un document portable A1 est demandé. Source : SPF Sécurité sociale belge (dépositaire) ; CLEISS.',
+      'Selon l’accord-cadre UE/EEE/CH sur le télétravail transfrontalier, un télétravail habituel dans l’État de résidence inférieur à 50 % du temps de travail total peut permettre le maintien à la législation de sécurité sociale de l’État de l’employeur si les deux États ont signé et qu’un document portable A1 est demandé. Source : SPF Sécurité sociale belge (dépositaire) ; CLEISS.',
     ss_framework_lu_note:
-      'CCSS Luxembourg : télétravail exclusivement dans l’État de résidence, entre 25 % et moins de 50 % du temps de travail total, les deux États ont signé → l’employeur peut demander un A1 pour maintenir la couverture luxembourgeoise. Une activité habituelle non télétravail dans l’État de résidence ou un travail dans un autre État membre peut sortir du cadre. Source : CCSS.',
+      'CCSS Luxembourg : télétravail exclusivement dans l’État de résidence, entre 25 % et moins de 50 % du temps de travail total, les deux États ont signé → l’employeur peut demander un A1 pour maintenir la couverture luxembourgeoise. Une activité habituelle autre que le télétravail dans l’État de résidence ou un travail dans un autre État membre peut faire sortir la situation du champ d’application de l’accord-cadre. Source : CCSS.',
     ch_it_tax_telework_25: 'Télétravail au domicile (max. 25 % de l’activité salariée)',
     ch_it_tax_nonreturn_45: 'Jours sans retour quotidien au domicile (max. 45 jours/an)',
     ch_it_tax_note:
@@ -167,15 +168,17 @@ const fr: Dict = {
   },
   pricing: {
     title: 'Tarifs',
-    subtitle: 'Offre entreprise en premier. Abonnements via Stripe — le paiement affiche « pas encore disponible » tant que la facturation n\'est pas connectée.',
+    subtitle: 'Offre entreprise en premier. Abonnements via Stripe Managed Payments (vendu via Link).',
     individual: 'Individuel (collaborateur)',
     company: 'Entreprise / RH',
     monthly: '4,99 € / mois',
     yearly: '49 € / an',
     yearlyNote: 'Environ deux mois offerts vs mensuel.',
     companyPrice: '5 € / collaborateur actif / mois',
-    companyMin: 'Minimum 39 € / mois',
-    companyYearly: 'Facturation annuelle : 2 mois offerts',
+    companyMin: 'Minimum 39 € / mois (jusqu\'à 7 collaborateurs actifs)',
+    companyYearly: 'Facturation annuelle : 2 mois offerts (minimum 390 € / an)',
+    activeEmployeeDef:
+      'Collaborateur actif : membre de l\'entreprise ayant accepté l\'invitation et non désactivé. La facturation utilise l\'effectif actif courant chaque période (minimum 39 € / mois).',
     companyTax: 'hors TVA',
     individualTax: 'TVA incluse',
     includes: 'Inclus',
@@ -188,7 +191,7 @@ const fr: Dict = {
     companyInclude1: 'Tableau RH avec compteurs par collaborateur et filtres',
     companyInclude2: 'Invitations e-mail, rôles (owner / RH lecture), export CSV d’audit',
     companyInclude3: 'Les collaborateurs voient les mêmes compteurs que les RH',
-    companyInclude4: 'Confidentialité by design (types de jours seulement — pas de localisation)',
+    companyInclude4: 'Protection des données dès la conception (types de jours seulement — pas de localisation)',
     comingSoon: 'Paiement en ligne',
     subscribeMonthly: 'Commencer au mois',
     subscribeYearly: 'Commencer à l\'année',
@@ -216,14 +219,14 @@ const fr: Dict = {
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',
-    a7: 'Stripe Managed Payments (vendeur) gère la fiscalité au paiement. Les offres entreprise et individuel incluent un essai gratuit de 7 jours ; une carte est requise à l\'inscription. Les codes promo sont acceptés.',
+    a7: 'Le paiement utilise Stripe Managed Payments : Link est le commerçant enregistré (merchant of record) et gère la TVA/GST au checkout. Les offres entreprise et individuel incluent un essai gratuit de 7 jours ; une carte est requise à l\'inscription. Les codes promo sont acceptés. Voir les Conditions pour la résiliation et le droit de rétractation de 14 jours (consommateurs UE).',
   },
   privacy: {
     title: 'Confidentialité',
     updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
     s1Title: 'Ce que nous collectons',
     s1Body:
-      'Journal individuel (appareil) : pack frontière, type de chaque jour (télétravail, sur site, pays tiers, non travaillé), notes optionnelles, jours travaillés contractuels / an. Comptes entreprise : nom, e-mails/noms des membres, rôles, pack frontière, types et dates de jours, consentements. Conçu pour le RGPD et la nLPD suisse.',
+      'Journal individuel (appareil) : pack frontière, type de chaque jour (télétravail, sur site, pays tiers, non travaillé), notes optionnelles, jours travaillés contractuels / an. Comptes entreprise : nom, e-mails/noms des membres, rôles, pack frontière, types et dates de jours, consentements. Conçu pour le RGPD et la Loi fédérale suisse sur la protection des données (LPD / nLPD).',
     s2Title: 'Ce que nous ne collectons pas',
     s2Body:
       'Pas de GPS, pas de localisation continue, pas de géolocalisation IP stockée comme lieu de travail. Les RH voient types de jours et totaux — les mêmes compteurs que le collaborateur. Pas de traceurs pub. Pas de vente de données.',
@@ -233,9 +236,9 @@ const fr: Dict = {
     s4Title: 'Vos droits (collaborateurs et RH)',
     s4Body:
       'Les collaborateurs peuvent exporter et supprimer leur journal. Ils voient exactement ce que voient les RH pour leurs compteurs. Retrait du consentement et effacement possibles via privacy@borderday.com.',
-    s5Title: 'Sous-traitants et résidence (prévu)',
+    s5Title: 'Sous-traitants et résidence',
     s5Body:
-      'Production sur Supabase (UE, eu-central-1). Processeurs prévus : Resend (invitations), Stripe (paiements). Auth : e-mail et Google.',
+      'Production sur Supabase (UE, eu-central-1). Sous-traitants : Resend (e-mails transactionnels, invitations et auth), Stripe / Link (paiements Managed Payments). Auth : e-mail et Google.',
     s6Title: 'Conservation des données',
     s6Body:
       'Conservation par défaut des journaux entreprise : 24 mois, sauf réglage entreprise (1–120 mois) ou obligation légale plus longue. Ensuite suppression ou anonymisation. Les données DEMO sont étiquetées et réinitialisables.',
@@ -258,7 +261,7 @@ const fr: Dict = {
   },
   company: {
     signupTitle: 'Créer un compte entreprise',
-    signupSubtitle: 'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Les paiements restent verrouillés jusqu\'à Stripe.',
+    signupSubtitle: 'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Abonnez-vous sur la page Tarifs quand vous êtes prêt.',
     companyName: 'Nom de l’entreprise',
     yourName: 'Votre nom',
     workEmail: 'E-mail professionnel',
@@ -266,7 +269,7 @@ const fr: Dict = {
     created: 'Entreprise créée. Vous êtes owner.',
     openDashboard: 'Ouvrir le tableau RH',
     inviteTitle: 'Inviter des collaborateurs',
-    inviteSubtitle: 'Générez un lien d\'invitation. L\'envoi e-mail attend le domaine Resend ; le lien fonctionne dans tous les cas.',
+    inviteSubtitle: 'Générez un lien d\'invitation. Nous envoyons l\'e-mail d\'invitation lorsque c\'est possible ; vous pouvez toujours copier et partager le lien.',
     inviteEmail: 'E-mail du collaborateur',
     inviteRole: 'Rôle',
     roleOwner: 'Owner',
@@ -310,6 +313,33 @@ const fr: Dict = {
     colDate: 'Date',
     colDayType: 'Type de jour',
     emptyCounters: 'Le collaborateur n’a pas encore choisi de pack frontière.',
+  },
+
+  terms: {
+    title: 'Conditions d’utilisation',
+    updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
+    s1Title: 'Service',
+    s1Body:
+      'BorderDay est un outil de suivi et de rappel des classifications de jours pour employeurs et collaborateurs sur certains corridors transfrontaliers. Ce n’est pas un conseil fiscal ou juridique, ni un substitut à votre employeur, à un conseiller qualifié ou à une autorité compétente. Voir l’Avertissement.',
+    s2Title: 'Comptes et usage entreprise',
+    s2Body:
+      'Vous devez fournir des informations de compte exactes. Les owners d’entreprise invitent les collaborateurs ; ceux-ci choisissent un pack frontière et journalisent uniquement le type de jour (pas de localisation). Les RH voient les mêmes compteurs que le collaborateur. Vous êtes responsable de l’exactitude des jours journalisés et du traitement licite des données sous le RGPD et, le cas échéant, la LPD suisse.',
+    s3Title: 'Abonnements, essai et résiliation',
+    s3Body:
+      'Les offres payantes sont des abonnements. Entreprise et individuel incluent un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier via les outils de commande Link ou le portail client Stripe. La résiliation arrête les renouvellements futurs ; les montants déjà encaissés pour une période commencée ne sont pas proratisés, sauf obligation légale ou politique de remboursement Link.',
+    s4Title: 'Tarifs, TVA et commerçant enregistré',
+    s4Body:
+      'Entreprise : 5 € par collaborateur actif et par mois, minimum 39 € / mois (ou équivalent annuel avec 2 mois offerts), hors TVA. Individuel : 4,99 € / mois ou 49 € / an, TVA incluse. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le commerçant enregistré pour la collecte et le dépôt de la TVA là où Managed Payments s’applique. Les prix peuvent être convertis en devise locale au checkout.',
+    s5Title: 'Droit de rétractation des consommateurs UE (14 jours)',
+    s5Body:
+      'Si vous achetez une offre individuelle en tant que consommateur dans l’UE/EEE, la directive 2011/83/UE vous confère un droit de rétractation de 14 jours à compter de la conclusion du contrat, sans motif. Pour l’exercer, contactez le support Link pour la commande (vendue via Link) et/ou privacy@borderday.com avec l’e-mail du compte et la référence. Pour les services numériques, le début d’exécution pendant le délai après consentement exprès préalable et reconnaissance de la perte du droit une fois l’exécution commencée peut limiter ou éteindre ce droit (art. 16) — le checkout et les conditions Sold through Link de Link décrivent le traitement pour votre commande. Les achats entreprise ne sont pas des contrats à distance de consommation.',
+    s6Title: 'Remboursements et support paiement',
+    s6Body:
+      'Les demandes de paiement, reçu, facture fiscale et remboursement au niveau de la commande Managed Payments sont gérées par Link selon les conditions Sold through Link / Purchase de Stripe. Les questions produit (fonctionnement, accès, export) : hello@borderday.com ou privacy@borderday.com.',
+    s7Title: 'Modifications',
+    s7Body:
+      'Nous pouvons mettre à jour ces Conditions. La date « Dernière mise à jour » change alors. L’usage continu après une mise à jour vaut acceptation, sauf processus différent imposé par le droit de la consommation.',
+    contact: 'Contact : hello@borderday.com · Confidentialité : privacy@borderday.com',
   },
   disclaimer: {
     title: 'Avertissement',

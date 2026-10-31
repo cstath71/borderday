@@ -193,4 +193,36 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer"/>
   </url>
+  <url>
+    <loc>https://borderday.com/en/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms"/>
+  </url>
 </urlset>

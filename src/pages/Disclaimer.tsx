@@ -13,6 +13,8 @@ export default function Disclaimer() {
         <div className="container prose">
           <h1>{d.disclaimer.title}</h1>
           <p>{d.disclaimer.body}</p>
+          <h2>{d.faq.q8}</h2>
+          <p>{d.faq.a8}</p>
         </div>
       </section>
     </>

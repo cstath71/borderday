@@ -58,6 +58,7 @@ const company = (over: Partial<api.MyCompany> = {}): api.MyCompany => ({
   seat_count: 1,
   borderPackId: null,
   annualWorkingDays: null,
+  profile: { employmentPercent: null, a1InPlace: false, a1ValidUntil: null },
   ...over,
 });
 
@@ -99,12 +100,127 @@ describe('companyApi', () => {
       return { data: from === 0 ? Array.from({ length: 1000 }, (_, i) => row(i)) : [row(1000)], error: null };
     };
     const logs = await api.listDayLogs('c1', 'e1');
-    expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_types', 'bd_list_day_types']);
+    expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_records', 'bd_list_day_records']);
     expect(state.calls[0].args).toEqual({ cid: 'c1', employee: 'e1' });
     expect(op(state.calls[1], 'range')[0]).toEqual([1000, 1999]);
     expect(logs).toHaveLength(1001);
-    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework' });
+    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false });
     expect(JSON.stringify(logs)).not.toContain('secret');
+  });
+
+  describe('Phase 2 schema not live yet (site deployed before the migration)', () => {
+    const missingFn = { data: null, error: { code: 'PGRST202', message: 'function not found' } };
+    const missingCol = { data: null, error: { code: '42703', message: 'column does not exist' } };
+    const missingWriteCol = { data: null, error: { code: 'PGRST204', message: 'column not in schema cache' } };
+
+    it('listDayLogs falls back to bd_list_day_types and reports no flags', async () => {
+      state.respond = (call) =>
+        call.rpc === 'bd_list_day_records'
+          ? missingFn
+          : { data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'telework' }], error: null };
+      const logs = await api.listDayLogs('c1');
+      expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_records', 'bd_list_day_types']);
+      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false }]);
+    });
+
+    it('listDayLogs still throws on a real error', async () => {
+      state.respond = () => ({ data: null, error: { code: '42501', message: 'denied' } });
+      await expect(api.listDayLogs('c1')).rejects.toMatchObject({ code: '42501' });
+      expect(state.calls).toHaveLength(1);
+    });
+
+    it('listMembers and listMyCompanies retry without the new columns', async () => {
+      const selected = (call: Call) => String(op(call, 'select')[0]?.[0]);
+      state.respond = (call) =>
+        selected(call).includes('employment_percent')
+          ? missingCol
+          : {
+              data: [
+                {
+                  id: 'm1',
+                  role: 'employee',
+                  border_pack_id: 'luxembourg_fr',
+                  annual_working_days: 220,
+                  user_id: 'e1',
+                  active: true,
+                  bd_profiles: { email: 'e@x.test', display_name: 'E' },
+                  bd_companies: { id: 'c1', name: 'Acme', subscription_status: 'active', trial_ends_at: null, seat_count: 1 },
+                },
+              ],
+              error: null,
+            };
+      const [member] = await api.listMembers('c1');
+      expect(member).toMatchObject({ userId: 'e1', employmentPercent: null, a1InPlace: false, a1ValidUntil: null });
+      const [mine] = await api.listMyCompanies();
+      expect(mine.profile).toEqual({ employmentPercent: null, a1InPlace: false, a1ValidUntil: null });
+    });
+
+    it('logging a plain day still works: the unset flag is dropped', async () => {
+      state.respond = (call) => {
+        const row = op(call, 'upsert')[0]?.[0] as Record<string, unknown>;
+        return 'overnight_away_for_work' in row ? missingWriteCol : { data: null, error: null };
+      };
+      await api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'onsite', overnightAway: false });
+      expect(state.calls).toHaveLength(2);
+    });
+
+    it('a set flag fails visibly: a counted day must not vanish silently', async () => {
+      state.respond = () => missingWriteCol;
+      await expect(
+        api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'onsite', overnightAway: true }),
+      ).rejects.toMatchObject({ code: 'PGRST204' });
+      expect(state.calls).toHaveLength(1);
+    });
+
+    it('personal logs behave the same way', async () => {
+      state.respond = (call) => {
+        if (op(call, 'upsert').length) return { data: null, error: null };
+        return String(op(call, 'select')[0]?.[0]).includes('overnight')
+          ? missingCol
+          : { data: [{ work_date: '2026-01-05', day_type: 'onsite', border_pack_id: 'ticino_it' }], error: null };
+      };
+      const rows = await api.listPersonalDayLogs();
+      expect(rows).toEqual([{ date: '2026-01-05', type: 'onsite', borderPackId: 'ticino_it', overnightAway: false }]);
+    });
+  });
+
+  it('writes and reads the overnight flag once the column exists', async () => {
+    await api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'onsite', overnightAway: true });
+    expect(op(state.calls[0], 'upsert')[0][0]).toMatchObject({ overnight_away_for_work: true });
+    state.calls.length = 0;
+    state.respond = () => ({
+      data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'onsite', overnight_away_for_work: true }],
+      error: null,
+    });
+    expect((await api.listDayLogs('c1'))[0].overnightAway).toBe(true);
+  });
+
+  it('updateMyProfile uses the RPC and carries no role', async () => {
+    await api.updateMyProfile('c1', { employmentPercent: 80, a1InPlace: true, a1ValidUntil: '2027-06-30' });
+    expect(state.calls[0].rpc).toBe('bd_update_member_profile');
+    expect(state.calls[0].args).toEqual({
+      p_company_id: 'c1',
+      p_employment_percent: 80,
+      p_a1_in_place: true,
+      p_a1_valid_until: '2027-06-30',
+    });
+  });
+
+  it('updateEmployeeProfile scopes to the employee and treats "no row updated" as a refusal', async () => {
+    state.respond = () => ({ data: [{ id: 'm1' }], error: null });
+    const profile = { employmentPercent: 50, a1InPlace: false, a1ValidUntil: null };
+    await api.updateEmployeeProfile('c1', 'e1', profile);
+    expect(op(state.calls[0], 'eq')).toEqual([
+      ['company_id', 'c1'],
+      ['user_id', 'e1'],
+    ]);
+    expect(Object.keys(op(state.calls[0], 'update')[0][0] as object).sort()).toEqual([
+      'a1_in_place',
+      'a1_valid_until',
+      'employment_percent',
+    ]);
+    state.respond = () => ({ data: [], error: null });
+    await expect(api.updateEmployeeProfile('c1', 'e1', profile)).rejects.toThrow(/denied/);
   });
 
   it('updateMemberSelf uses the RPC and cannot send a role', async () => {

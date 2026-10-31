@@ -15,6 +15,7 @@ import {
   getCompany,
   listAllMembers,
   listDayLogsForEmployee,
+  updateEmployeeProfile,
   listInvitations,
   peekInvitation,
   recordConsent,
@@ -59,6 +60,9 @@ function toRowMember({ member, profile }: { member: CompanyMember; profile: Prof
     email: profile.email,
     borderPackId: member.borderPackId,
     annualWorkingDays: member.annualWorkingDays,
+    employmentPercent: member.employmentPercent,
+    a1InPlace: member.a1InPlace,
+    a1ValidUntil: member.a1ValidUntil,
   };
 }
 
@@ -67,6 +71,7 @@ function loadLogs(companyId: string, userId: string) {
     employeeUserId: l.employeeUserId,
     workDate: l.workDate,
     dayType: l.dayType,
+    overnightAway: l.overnightAway,
   }));
 }
 
@@ -105,6 +110,10 @@ function DemoDashboard() {
       companyBase={`/${lang}/demo/company/${companyId}`}
       joinBase={`/${lang}/demo/join`}
       onRefresh={() => setTick((x) => x + 1)}
+      onSaveProfile={async (userId, profile) => {
+        updateEmployeeProfile(companyId, userId, profile);
+        setTick((x) => x + 1);
+      }}
     />
   );
 }

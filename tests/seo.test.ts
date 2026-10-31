@@ -13,6 +13,7 @@ import {
   NOINDEX_PATHS,
   PAGES,
   PUBLIC_PATHS,
+  TAX_COUNTER_CORRIDORS,
   absUrl,
   breadcrumbLd,
   faqLd,
@@ -24,6 +25,8 @@ import {
   softwareApplicationLd,
   websiteLd,
 } from '../scripts/seo.mjs';
+
+import { BORDER_PACKS, hasTaxCounter } from '../src/borders/packs';
 
 const OWNER = /PrimeLogic|Stathopoulos|CHE-312\.418\.158|Cours des Bastions/i;
 const SLOGAN = /\bfrontalier\b|\bGrenzgänger\b/i;
@@ -149,7 +152,36 @@ describe('SEO generators', () => {
   });
 });
 
+describe('honest coverage in SEO copy', () => {
+  it('the published corridor list matches what the packs actually do', () => {
+    expect(TAX_COUNTER_CORRIDORS).toEqual(BORDER_PACKS.filter(hasTaxCounter).map((p) => p.id));
+  });
+
+  it('llms names which corridors have tax counters and which do not', () => {
+    const short = llmsTxt();
+    expect(short).toMatch(/Tax counters running: Geneva and other non-1983 cantons/);
+    expect(short).toMatch(/No tax counter yet: 1983-agreement cantons/);
+    expect(short).toMatch(/Belgium→Luxembourg, Germany→Luxembourg, France→Belgium, Netherlands→Belgium/);
+    expect(short).toMatch(/25%/);
+    expect(short).not.toMatch(/Romandie|five borders|official tax and social-security/);
+  });
+
+  it('no page copy in any language keeps the old claims', () => {
+    const blob = JSON.stringify(PAGES) + JSON.stringify(FAQ) + llmsFullTxt();
+    expect(blob).not.toMatch(/Romandi[ea]|five borders|cinq frontières|fünf Grenzen|cinque frontiere/);
+  });
+
+  it('FAQ has an out-of-scope answer in every language', () => {
+    for (const lang of LANGS) expect(FAQ[lang].some(([, a]: string[]) => a.includes('CSV'))).toBe(true);
+  });
+});
+
 describe('SEO artifacts on disk', () => {
+  it('public/llms*.txt match the generators', () => {
+    expect(readFileSync(join(ROOT, 'public/llms.txt'), 'utf8')).toBe(llmsTxt());
+    expect(readFileSync(join(ROOT, 'public/llms-full.txt'), 'utf8')).toBe(llmsFullTxt());
+  });
+
   it('public/og.png exists and is a PNG', () => {
     const buf = readFileSync(join(ROOT, 'public/og.png'));
     expect(buf[0]).toBe(0x89);

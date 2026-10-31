@@ -26,6 +26,9 @@ export interface CompanyMember {
   borderPackId: BorderId | null;
   annualWorkingDays: number | null;
   joinedAt: string;
+  employmentPercent?: number | null;
+  a1InPlace?: boolean;
+  a1ValidUntil?: string | null;
 }
 
 export interface Invitation {
@@ -47,6 +50,7 @@ export interface DayLog {
   workDate: string; // YYYY-MM-DD
   dayType: DayType;
   note?: string;
+  overnightAway?: boolean;
 }
 
 export interface Consent {
@@ -73,4 +77,4 @@ export interface TenantDb {
   session: Session | null;
 }
 
-export const CONSENT_VERSION = '2026-10-31-v1';
+export const CONSENT_VERSION = '2026-10-31-v2';

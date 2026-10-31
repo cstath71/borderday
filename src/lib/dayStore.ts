@@ -30,10 +30,10 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
       list: async () => {
         const logs = await listDayLogs(companyId, userId);
         return logs
-          .map((l) => ({ date: l.workDate, type: l.dayType }))
+          .map((l) => ({ date: l.workDate, type: l.dayType, overnightAway: l.overnightAway }))
           .sort((a, b) => a.date.localeCompare(b.date));
       },
-      put: (entry) => upsertDayLog({ companyId, workDate: entry.date, dayType: entry.type }),
+      put: (entry) => upsertDayLog({ companyId, workDate: entry.date, dayType: entry.type, overnightAway: entry.overnightAway }),
       clear: () => deleteMyDayLogs(companyId),
     };
   }
@@ -41,7 +41,12 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
     return {
       list: listPersonalDayLogs,
       put: (entry, borderId) =>
-        upsertPersonalDayLog({ workDate: entry.date, dayType: entry.type, borderPackId: borderId }),
+        upsertPersonalDayLog({
+          workDate: entry.date,
+          dayType: entry.type,
+          borderPackId: borderId,
+          overnightAway: entry.overnightAway,
+        }),
       clear: deleteMyPersonalDayLogs,
     };
   }

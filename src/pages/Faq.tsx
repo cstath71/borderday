@@ -13,6 +13,7 @@ export default function Faq() {
     [d.faq.q5, d.faq.a5],
     [d.faq.q6, d.faq.a6],
     [d.faq.q7, d.faq.a7],
+    [d.faq.q8, d.faq.a8],
   ] as const;
 
   return (

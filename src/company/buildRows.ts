@@ -10,12 +10,16 @@ export interface RowMember {
   email: string;
   borderPackId: BorderId | null;
   annualWorkingDays: number | null;
+  employmentPercent?: number | null;
+  a1InPlace?: boolean;
+  a1ValidUntil?: string | null;
 }
 
 export interface RowLog {
   employeeUserId: string;
   workDate: string;
   dayType: DayType;
+  overnightAway?: boolean;
 }
 
 export function buildEmployeeRow(
@@ -30,6 +34,11 @@ export function buildEmployeeRow(
     email: member.email,
     borderPackId: member.borderPackId,
     annualWorkingDays: member.annualWorkingDays,
+    profile: {
+      employmentPercent: member.employmentPercent,
+      a1InPlace: member.a1InPlace,
+      a1ValidUntil: member.a1ValidUntil,
+    },
     logs,
     year,
     isDemo,

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { listBorderPacks } from '../borders/packs';
+import { hasSocialSecurityCounter, hasTaxCounter, listBorderPacks } from '../borders/packs';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
@@ -82,7 +82,8 @@ export default function Home() {
               <div className="border-chip" key={p.id}>
                 <strong>{(d.borders as Record<string, string>)[p.nameKey]}</strong>
                 <span style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>
-                  {p.counters.filter((c) => c.enabled).length}/{p.counters.length} ✓
+                  {hasTaxCounter(p) ? d.home.chipTaxYes : d.home.chipTaxNo}
+                  {hasSocialSecurityCounter(p) && ` · ${d.home.chipSsYes}`}
                 </span>
               </div>
             ))}

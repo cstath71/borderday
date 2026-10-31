@@ -265,6 +265,22 @@ export function recordConsent(companyId: string, textLang: string): Consent {
   return consent;
 }
 
+/** Mirrors bd_members_update: HR and owners record an employee's employment % and A1. */
+export function updateEmployeeProfile(
+  companyId: string,
+  employeeUserId: string,
+  patch: { employmentPercent: number | null; a1InPlace: boolean; a1ValidUntil: string | null },
+): CompanyMember {
+  const db = load();
+  const session = requireSession(db);
+  if (!isHrOrOwner(db, companyId, session.userId)) throw new RlsError('HR or owner required');
+  const m = memberOf(db, companyId, employeeUserId);
+  if (!m) throw new RlsError('company isolation');
+  Object.assign(m, patch);
+  save(db);
+  return m;
+}
+
 export function updateMemberSelf(
   companyId: string,
   patch: { borderPackId?: BorderId | null; annualWorkingDays?: number | null; displayName?: string },

@@ -125,7 +125,9 @@ img { max-width: 100%; height: auto; }
 .bar > span { display: block; height: 100%; background: var(--accent); }
 .bar.warn > span { background: var(--warn); }
 .bar.critical > span { background: var(--critical); }
+.bar.at_limit > span { background: var(--critical); }
 .bar.over > span { background: var(--over); }
+.counter-message.warn { color: var(--warn); font-weight: 600; }
 .bar.disabled { background: #e2e8f0; }
 .badge {
   display: inline-block; font-size: 0.75rem; font-weight: 700;
@@ -134,6 +136,7 @@ img { max-width: 100%; height: auto; }
 .badge.ok { background: #D1FAE5; color: var(--ok); }
 .badge.warn { background: #FEF3C7; color: var(--warn); }
 .badge.critical { background: #FFEDD5; color: var(--critical); }
+.badge.at_limit { background: #FFEDD5; color: var(--critical); }
 .badge.over { background: #FEE2E2; color: var(--over); }
 .badge.disabled { background: #E2E8F0; color: var(--disabled); }
 

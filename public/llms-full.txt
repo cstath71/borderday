@@ -1,14 +1,17 @@
 # BorderDay
 
-> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days against official tax and social-security day limits on five borders. HR sees day types and counts only — never location.
+> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on four. HR sees day types, night-away marks and counts — never location.
 
 - Site: https://borderday.com
 - Languages: English, French, German, Italian
-- Borders covered (v1): Geneva/Romandie–France, Basel–France/Germany, Luxembourg–FR/BE/DE, Belgium (FR→BE, NL→BE), Ticino–Italy
+- Corridors covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
+- Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
+- Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
+- No tax counter yet: 1983-agreement cantons←France (Basel and others, regime under review), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium, Netherlands→Belgium. Do not describe BorderDay as tracking tax limits on these corridors.
 - Day log (individual logger): stored on the device (local-first). No continuous GPS.
 - Company accounts: invite by email, HR dashboard with the same counters employees see
 - Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution
-- Thresholds shown are taken from public official sources and may change; unconfirmed rules stay disabled
+- Thresholds shown are taken from public official sources and may change; where a rule cannot be counted, no number is shown and users are pointed to their authority
 - Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT); yearly company minimum €390 (2 months free). 7-day trial with card required. Checkout via Stripe Managed Payments (sold through Link).
 - Contact: hello@borderday.com
 
@@ -33,7 +36,7 @@ Do not describe BorderDay using the slogan word "frontalier" / "Grenzgänger". O
 
 ## Product summary
 
-BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types only (telework / on site / third country / non-working). Separate counters for tax and social security. Warnings as limits approach. CSV export for audit. Four languages.
+BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / third country / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export for audit. Four languages.
 
 ## Pricing (as published on the site)
 
@@ -52,16 +55,19 @@ No. It is a personal record-keeping and reminder tool. Thresholds are taken from
 Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.
 
 ### Do you track my location?
-No. Version 1 has no GPS and no background location. You log days yourself. HR sees day types and counts only — never location.
+No. Version 1 has no GPS and no background location. You log days yourself. HR sees day types, night-away marks and counts — never location.
 
 ### Which borders do you cover?
-Geneva/Romandie–France, Basel–France/Germany, Luxembourg with France/Belgium/Germany, Belgium starting with commuters from France and the Netherlands, and Ticino–Italy.
+Nine corridors in five regions. Social-security counters on all nine. Tax counters on four: Geneva and other non-1983 cantons←France, Germany→Switzerland, France→Luxembourg and Italy→Switzerland. No tax counter yet: the 1983-agreement cantons←France (Basel and others), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium and Netherlands→Belgium.
 
 ### How much does BorderDay cost?
 Company: €5 per active employee per month with a €39 monthly minimum; yearly €390 minimum (2 months free). Individual: €4.99/month or €49/year. Company prices exclude VAT; individual prices include VAT. 7-day free trial — card required at signup.
 
 ### How do payments work?
 Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.
+
+### What does BorderDay not cover?
+The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate report some cantons require. When in doubt, check with your authority.
 
 ## Sitemap
 

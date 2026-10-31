@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getBorderPack, listBorderPacks } from '../borders/packs';
+import { getBorderPack, listBorderPacks, tracksOvernight } from '../borders/packs';
 import type { BorderId, DayEntry, DayType } from '../borders/types';
 import CounterCards from '../components/CounterCards';
+import ProfileFields, { type ProfileValues } from '../components/ProfileFields';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
-import { resolveAppAccess, updateMemberSelf, type AppAccess } from '../lib/companyApi';
+import { resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
 import { evaluatePack } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import {
@@ -22,6 +23,11 @@ import {
 } from '../lib/storage';
 
 const DAY_TYPES: DayType[] = ['telework', 'onsite', 'third_country', 'non_working'];
+
+/** Sleeping away for work only makes sense on a day worked away from home. */
+function canBeOvernight(type: DayType): boolean {
+  return type === 'onsite' || type === 'third_country';
+}
 
 function monthMatrix(year: number, month0: number): (Date | null)[] {
   const first = new Date(year, month0, 1);
@@ -93,8 +99,8 @@ export default function AppPage() {
     const [localMeta, list] = await Promise.all([getMeta(), store.list()]);
     if (access.mode === 'company') {
       // Member settings live on the server; keep what this session already saved over the initial load.
-      const { borderPackId, annualWorkingDays } = access.company;
-      setMetaState((prev) => prev ?? { ...localMeta, borderId: borderPackId, annualWorkingDays });
+      const { borderPackId, annualWorkingDays, profile } = access.company;
+      setMetaState((prev) => prev ?? { ...localMeta, borderId: borderPackId, annualWorkingDays, ...profile });
     } else if (access.mode === 'individual' && !localMeta.borderId) {
       // Another device: the account's rows remember the border, this device's settings do not.
       const rows = list as Array<DayEntry & { borderPackId?: BorderId | null }>;
@@ -115,14 +121,22 @@ export default function AppPage() {
   const pack = borderId ? getBorderPack(borderId) : undefined;
   const annual = meta?.annualWorkingDays ?? pack?.defaultAnnualWorkingDays;
 
+  const profile: ProfileValues = {
+    employmentPercent: meta?.employmentPercent ?? null,
+    a1InPlace: !!meta?.a1InPlace,
+    a1ValidUntil: meta?.a1ValidUntil ?? null,
+  };
+  const { employmentPercent, a1InPlace, a1ValidUntil } = profile;
+
   const results = useMemo(() => {
     if (!pack) return [];
     return evaluatePack(pack, days, {
       year: viewYear,
       annualWorkingDays: annual,
       referenceMonth: `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}`,
+      profile: { employmentPercent, a1InPlace, a1ValidUntil },
     });
-  }, [pack, days, viewYear, viewMonth, annual]);
+  }, [pack, days, viewYear, viewMonth, annual, employmentPercent, a1InPlace, a1ValidUntil]);
 
   const selectedEntry = days.find((e) => e.date === selectedDate);
   const byDate = useMemo(() => {
@@ -150,12 +164,24 @@ export default function AppPage() {
     }
   }
 
-  async function logType(type: DayType) {
+  async function saveProfile(next: ProfileValues) {
+    if (!meta) return;
+    setMetaState({ ...meta, ...next });
+    setError(null);
+    try {
+      if (access?.mode === 'company') await updateMyProfile(access.company.id, next);
+      else await setMeta({ ...meta, ...next });
+    } catch {
+      setError(d.app.saveError);
+    }
+  }
+
+  async function logDay(type: DayType, overnightAway: boolean) {
     if (!store || !canLogSelected) return;
     setBusy(true);
     setError(null);
     try {
-      await store.put({ date: selectedDate, type }, borderId);
+      await store.put({ date: selectedDate, type, overnightAway }, borderId);
       await refresh();
     } catch {
       setError(d.app.saveError);
@@ -279,6 +305,9 @@ export default function AppPage() {
               </option>
             ))}
           </select>
+          {pack?.regionNoteKey && (
+            <p className="meta">{(d.borders as Record<string, string>)[pack.regionNoteKey]}</p>
+          )}
           {pack && (
             <label style={{ display: 'block', marginTop: '0.75rem' }}>
               <strong>{d.app.annualWorkingDays}</strong>
@@ -303,6 +332,15 @@ export default function AppPage() {
               />
             </label>
           )}
+          {pack && meta && (
+            <ProfileFields
+              d={d}
+              idPrefix="my-profile"
+              value={profile}
+              onChange={(next) => setMetaState({ ...meta, ...next })}
+              onCommit={(next) => void saveProfile(next)}
+            />
+          )}
         </div>
 
         <div className="card" style={{ marginBottom: '1rem' }}>
@@ -317,6 +355,7 @@ export default function AppPage() {
           <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>
             {canLogSelected ? d.app.logDay : d.app.previewMonthOnly}
           </p>
+          {pack?.logHintKey && <p className="meta">{(d.dayTypes as Record<string, string>)[pack.logHintKey]}</p>}
           <div className="day-type-grid">
             {DAY_TYPES.map((type) => (
               <button
@@ -324,13 +363,25 @@ export default function AppPage() {
                 type="button"
                 className={`day-type-btn ${selectedEntry?.type === type ? 'selected' : ''}`}
                 disabled={busy || !canLogSelected}
-                onClick={() => void logType(type)}
+                onClick={() => void logDay(type, canBeOvernight(type) && !!selectedEntry?.overnightAway)}
               >
                 <strong>{(d.dayTypes as Record<string, string>)[type]}</strong>
-                <span>{(d.dayTypes as Record<string, string>)[`${type}Hint`]}</span>
+                <span>{(d.dayTypes as Record<string, string>)[pack?.dayHintKeys?.[type] ?? `${type}Hint`]}</span>
               </button>
             ))}
           </div>
+          {pack && tracksOvernight(pack) && selectedEntry && canBeOvernight(selectedEntry.type) && (
+            <label style={{ display: 'block', marginTop: '0.75rem' }}>
+              <input
+                type="checkbox"
+                checked={!!selectedEntry.overnightAway}
+                disabled={busy || !canLogSelected}
+                onChange={(e) => void logDay(selectedEntry.type, e.target.checked)}
+              />{' '}
+              <strong>{d.dayTypes.overnightAway}</strong>
+              <div className="meta">{d.dayTypes.overnightAwayHint}</div>
+            </label>
+          )}
         </div>
 
         <div className="card" style={{ marginBottom: '1rem' }}>

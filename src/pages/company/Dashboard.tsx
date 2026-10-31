@@ -155,6 +155,10 @@ export default function CompanyDashboard() {
           companyBase={`/${lang}/company/${companyId}`}
           joinBase={`/${lang}/join`}
           onRefresh={() => setTick((x) => x + 1)}
+          onSaveProfile={async (employeeId, profile) => {
+            await api.updateEmployeeProfile(companyId!, employeeId, profile);
+            setTick((x) => x + 1);
+          }}
         />
       </>
     );

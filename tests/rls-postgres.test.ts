@@ -422,6 +422,117 @@ describe('real Postgres: day logs', () => {
     expect(own.rows[0].note).toBe('dentist appointment');
   });
 
+  it('Phase 2: HR sees the overnight flag through bd_list_day_records, never the note', async () => {
+    const owner = await newUser('p2a@example.com');
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const emp = await addMember(owner, company);
+    await as(
+      emp,
+      `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type, note, overnight_away_for_work)
+       values ($1, $2, '2026-03-03', 'onsite', 'hotel in Lugano', true)`,
+      [company, emp],
+    );
+    const { rows } = await as(hr, `select * from public.bd_list_day_records($1, $2)`, [company, emp]);
+    expect(Object.keys(rows[0]).sort()).toEqual(['day_type', 'employee_user_id', 'overnight_away_for_work', 'work_date']);
+    expect(rows[0].overnight_away_for_work).toBe(true);
+    expect(JSON.stringify(rows)).not.toContain('Lugano');
+    const self = await as(emp, `select * from public.bd_list_day_records($1)`, [company]);
+    expect(self.rowCount).toBe(1);
+    // The old RPC keeps working for installed PWAs and keeps its old shape.
+    const old = await as(hr, `select * from public.bd_list_day_types($1, $2)`, [company, emp]);
+    expect(Object.keys(old.rows[0]).sort()).toEqual(['day_type', 'employee_user_id', 'work_date']);
+  });
+
+  it('Phase 2: bd_list_day_records keeps other employees and other companies out', async () => {
+    const owner = await newUser('p2b@example.com');
+    const company = await newCompany(owner);
+    const e1 = await addMember(owner, company);
+    const e2 = await addMember(owner, company);
+    await logDay(e1, company, '2026-03-04');
+    await expect(as(e2, `select * from public.bd_list_day_records($1, $2)`, [company, e1])).rejects.toThrow(/denied/);
+    expect((await as(e2, `select * from public.bd_list_day_records($1)`, [company])).rowCount).toBe(0);
+    const stranger = await newUser('p2c@example.com');
+    await newCompany(stranger, 'Other');
+    expect((await as(stranger, `select * from public.bd_list_day_records($1)`, [company])).rowCount).toBe(0);
+    await expect(as(null, `select * from public.bd_list_day_records($1)`, [company])).rejects.toThrow();
+  });
+
+  it('Phase 2: employees set their own employment % and A1 through the RPC only', async () => {
+    const owner = await newUser('p2d@example.com');
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    await as(emp, `select public.bd_update_member_profile($1, 80, true, '2027-06-30')`, [company]);
+    const { rows } = await db.query(
+      `select role, employment_percent, a1_in_place, a1_valid_until::text from public.bd_company_members
+       where company_id = $1 and user_id = $2`,
+      [company, emp],
+    );
+    expect(rows[0]).toEqual({ role: 'employee', employment_percent: 80, a1_in_place: true, a1_valid_until: '2027-06-30' });
+
+    const direct = await as(
+      emp,
+      `update public.bd_company_members set employment_percent = 10 where company_id = $1 and user_id = $2`,
+      [company, emp],
+    );
+    expect(direct.rowCount).toBe(0);
+    await expect(as(emp, `select public.bd_update_member_profile($1, 150, false, null)`, [company])).rejects.toThrow(/check/);
+    const stranger = await newUser('p2e@example.com');
+    await expect(as(stranger, `select public.bd_update_member_profile($1, 80, false, null)`, [company])).rejects.toThrow(
+      /not a member/,
+    );
+    await expect(as(null, `select public.bd_update_member_profile($1, 80, false, null)`, [company])).rejects.toThrow();
+  });
+
+  it('Phase 2: HR records an employee A1, but HR of another company cannot', async () => {
+    const owner = await newUser('p2f@example.com');
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const emp = await addMember(owner, company);
+    const ok = await as(
+      hr,
+      `update public.bd_company_members set a1_in_place = true, a1_valid_until = '2028-01-01', employment_percent = 60
+       where company_id = $1 and user_id = $2 returning id`,
+      [company, emp],
+    );
+    expect(ok.rowCount).toBe(1);
+
+    const otherOwner = await newUser('p2g@example.com');
+    await newCompany(otherOwner, 'Other');
+    const denied = await as(
+      otherOwner,
+      `update public.bd_company_members set a1_in_place = false where company_id = $1 and user_id = $2 returning id`,
+      [company, emp],
+    );
+    expect(denied.rowCount).toBe(0);
+
+    const peer = await addMember(owner, company);
+    const peerTry = await as(
+      peer,
+      `update public.bd_company_members set a1_in_place = false where company_id = $1 and user_id = $2 returning id`,
+      [company, emp],
+    );
+    expect(peerTry.rowCount).toBe(0);
+  });
+
+  it('Phase 2: the personal log keeps the flag and stays self-only', async () => {
+    const me = await newUser('p2h@example.com');
+    await db.query(
+      `insert into public.bd_subscriptions (user_id, plan_kind, status) values ($1, 'individual', 'active')`,
+      [me],
+    );
+    await as(
+      me,
+      `insert into public.bd_personal_day_logs (user_id, work_date, day_type, overnight_away_for_work)
+       values ($1, '2026-03-05', 'onsite', true)`,
+      [me],
+    );
+    const mine = await as(me, `select overnight_away_for_work from public.bd_personal_day_logs where user_id = $1`, [me]);
+    expect(mine.rows[0].overnight_away_for_work).toBe(true);
+    const other = await newUser('p2i@example.com');
+    expect((await as(other, `select 1 from public.bd_personal_day_logs where user_id = $1`, [me])).rowCount).toBe(0);
+  });
+
   it('HR of another company reads nothing', async () => {
     const ownerA = await newUser('o21@example.com');
     const ownerB = await newUser('o21b@example.com');

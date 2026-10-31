@@ -6,9 +6,55 @@ import type { AggregateStatus, EmployeeDashboardRow } from '../../company/dashbo
 import { filterRows, rowsToCsv } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import type { Dict } from '../../i18n';
+import ProfileFields, { type ProfileValues } from '../ProfileFields';
 import CounterTable, { statusLabel } from './CounterTable';
 
-const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'over', 'disabled'];
+const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'at_limit', 'over', 'disabled'];
+
+/** HR records what an employee's limits depend on. Status shows only after a real save. */
+function EmployeeProfileForm(props: {
+  d: Dict;
+  row: EmployeeDashboardRow;
+  onSave: (userId: string, profile: ProfileValues) => Promise<void>;
+}) {
+  const { d, row, onSave } = props;
+  const [value, setValue] = useState<ProfileValues>({
+    employmentPercent: row.profile.employmentPercent ?? null,
+    a1InPlace: !!row.profile.a1InPlace,
+    a1ValidUntil: row.profile.a1ValidUntil ?? null,
+  });
+  const [state, setState] = useState<'idle' | 'saved' | 'error'>('idle');
+  return (
+    <details style={{ marginTop: '0.75rem' }}>
+      <summary className="meta">{d.company.profileTitle}</summary>
+      <ProfileFields
+        d={d}
+        idPrefix={`profile-${row.userId}`}
+        value={value}
+        onChange={(next) => {
+          setValue(next);
+          setState('idle');
+        }}
+      />
+      <p style={{ marginTop: '0.5rem' }}>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() =>
+            onSave(row.userId, value).then(
+              () => setState('saved'),
+              () => setState('error'),
+            )
+          }
+        >
+          {d.company.saveProfile}
+        </button>{' '}
+        {state === 'saved' && <span role="status">{d.company.profileSaved}</span>}
+        {state === 'error' && <span role="alert">{d.app.saveError}</span>}
+      </p>
+    </details>
+  );
+}
 
 /** Presentational: the real dashboard and /demo feed it their own data and links. */
 export default function DashboardView(props: {
@@ -23,8 +69,9 @@ export default function DashboardView(props: {
   /** e.g. /en/join or /en/demo/join */
   joinBase: string;
   onRefresh: () => void;
+  onSaveProfile: (userId: string, profile: ProfileValues) => Promise<void>;
 }) {
-  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, onRefresh } = props;
+  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, onRefresh, onSaveProfile } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
@@ -129,6 +176,7 @@ export default function DashboardView(props: {
               </div>
               <h3 className="meta">{d.company.countersHeading}</h3>
               <CounterTable d={d} counters={row.counters} />
+              <EmployeeProfileForm d={d} row={row} onSave={onSaveProfile} />
               <Link className="btn btn-ghost" to={`${companyBase}/employee/${row.userId}`} style={{ marginTop: '0.75rem' }}>
                 {d.company.viewHistory}
               </Link>

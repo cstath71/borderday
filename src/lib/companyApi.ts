@@ -34,6 +34,32 @@ async function allPages<T>(
   }
 }
 
+/**
+ * Phase 2 columns and RPCs are additive, and the site can deploy before the migration has run.
+ * "Column or function does not exist" then falls back to the old shape instead of breaking /app.
+ */
+const SCHEMA_LAG_CODES = new Set(['42703', '42883', 'PGRST202', 'PGRST204']);
+
+export function isSchemaLag(error: unknown): boolean {
+  return SCHEMA_LAG_CODES.has((error as { code?: string } | null)?.code ?? '');
+}
+
+const MEMBER_PROFILE_COLUMNS = 'employment_percent, a1_in_place, a1_valid_until';
+
+export interface MemberProfile {
+  employmentPercent: number | null;
+  a1InPlace: boolean;
+  a1ValidUntil: string | null;
+}
+
+function mapProfile(m: any): MemberProfile {
+  return {
+    employmentPercent: m.employment_percent ?? null,
+    a1InPlace: m.a1_in_place ?? false,
+    a1ValidUntil: m.a1_valid_until ?? null,
+  };
+}
+
 export function isHrRole(role: CompanyRole | null | undefined): boolean {
   return role === 'owner' || role === 'hr_viewer';
 }
@@ -49,6 +75,7 @@ export interface MyCompany {
   seat_count: number;
   borderPackId: BorderId | null;
   annualWorkingDays: number | null;
+  profile: MemberProfile;
 }
 
 export async function createCompany(name: string): Promise<{ companyId: string }> {
@@ -61,14 +88,13 @@ export async function listMyCompanies(): Promise<MyCompany[]> {
   if (!supabase) return [];
   const userId = await currentUserId();
   if (!userId) return [];
+  const base =
+    'role, border_pack_id, annual_working_days, bd_companies(id, name, subscription_status, trial_ends_at, seat_count)';
   // HR can read every member row of their company, so filter to the caller's own.
-  const { data, error } = await supabase
-    .from('bd_company_members')
-    .select(
-      'role, border_pack_id, annual_working_days, bd_companies(id, name, subscription_status, trial_ends_at, seat_count)',
-    )
-    .eq('user_id', userId)
-    .eq('active', true);
+  const query = (columns: string) =>
+    supabase!.from('bd_company_members').select(columns).eq('user_id', userId).eq('active', true);
+  let { data, error }: { data: any; error: unknown } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(base));
   if (error) throw error;
   return (data || []).map((m: any) => ({
     id: m.bd_companies.id,
@@ -79,6 +105,7 @@ export async function listMyCompanies(): Promise<MyCompany[]> {
     seat_count: m.bd_companies.seat_count,
     borderPackId: m.border_pack_id,
     annualWorkingDays: m.annual_working_days,
+    profile: mapProfile(m),
   }));
 }
 
@@ -104,13 +131,16 @@ export interface CompanyMemberRow {
   joinedAt: string;
   email: string;
   displayName: string;
+  employmentPercent: number | null;
+  a1InPlace: boolean;
+  a1ValidUntil: string | null;
 }
 
 export async function listMembers(companyId: string): Promise<CompanyMemberRow[]> {
-  const { data, error } = await client()
-    .from('bd_company_members')
-    .select('id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)')
-    .eq('company_id', companyId);
+  const base = 'id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)';
+  const query = (columns: string) => client().from('bd_company_members').select(columns).eq('company_id', companyId);
+  let { data, error }: { data: any; error: unknown } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(base));
   if (error) throw error;
   return (data || []).map((m: any) => ({
     id: m.id,
@@ -122,6 +152,7 @@ export async function listMembers(companyId: string): Promise<CompanyMemberRow[]
     joinedAt: m.joined_at,
     email: m.bd_profiles?.email ?? '',
     displayName: m.bd_profiles?.display_name || m.bd_profiles?.email || '',
+    ...mapProfile(m),
   }));
 }
 
@@ -157,6 +188,38 @@ export async function updateMemberSelf(
     p_annual_working_days: patch.annualWorkingDays,
   });
   if (error) throw error;
+}
+
+/** The caller's own employment % and A1 record. Same reason for an RPC as updateMemberSelf. */
+export async function updateMyProfile(companyId: string, profile: MemberProfile): Promise<void> {
+  const { error } = await client().rpc('bd_update_member_profile', {
+    p_company_id: companyId,
+    p_employment_percent: profile.employmentPercent,
+    p_a1_in_place: profile.a1InPlace,
+    p_a1_valid_until: profile.a1ValidUntil,
+  });
+  if (error) throw error;
+}
+
+/** HR recording an employee's employment % and A1. RLS and column grants decide who may. */
+export async function updateEmployeeProfile(
+  companyId: string,
+  employeeUserId: string,
+  profile: MemberProfile,
+): Promise<void> {
+  const { data, error } = await client()
+    .from('bd_company_members')
+    .update({
+      employment_percent: profile.employmentPercent,
+      a1_in_place: profile.a1InPlace,
+      a1_valid_until: profile.a1ValidUntil,
+    })
+    .eq('company_id', companyId)
+    .eq('user_id', employeeUserId)
+    .select('id');
+  if (error) throw error;
+  // RLS hides a forbidden row instead of raising, so "nothing updated" is the refusal.
+  if (!data?.length) throw new Error('profile update denied');
 }
 
 export async function updateMyDisplayName(displayName: string): Promise<void> {
@@ -282,34 +345,66 @@ export interface DayLogView {
   employeeUserId: string;
   workDate: string;
   dayType: DayType;
+  overnightAway: boolean;
 }
 
-export async function upsertDayLog(opts: { companyId: string; workDate: string; dayType: DayType }): Promise<void> {
-  const userId = await currentUserId();
-  if (!userId) throw new Error('not authenticated');
-  const { error } = await client()
-    .from('bd_day_logs')
-    .upsert(
-      {
-        company_id: opts.companyId,
-        employee_user_id: userId,
-        work_date: opts.workDate,
-        day_type: opts.dayType,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'employee_user_id,work_date' },
-    );
+/**
+ * Before the Phase 2 migration the flag has no column. Clearing it is harmless to drop;
+ * setting it must fail visibly, or a counted day would silently vanish.
+ */
+async function upsertWithOvernight(
+  overnightAway: boolean | undefined,
+  run: (extra: { overnight_away_for_work?: boolean }) => PromiseLike<{ error: unknown }>,
+): Promise<void> {
+  let { error } = await run({ overnight_away_for_work: !!overnightAway });
+  if (isSchemaLag(error) && !overnightAway) ({ error } = await run({}));
   if (error) throw error;
 }
 
-/** HR and self both read through bd_list_day_types: employee, date and day type, never `note`. */
-export async function listDayLogs(companyId: string, employeeUserId?: string): Promise<DayLogView[]> {
-  const rows = await allPages<{ employee_user_id: string; work_date: string; day_type: DayType }>((from, to) =>
+export async function upsertDayLog(opts: {
+  companyId: string;
+  workDate: string;
+  dayType: DayType;
+  overnightAway?: boolean;
+}): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  await upsertWithOvernight(opts.overnightAway, (extra) =>
     client()
-      .rpc('bd_list_day_types', { cid: companyId, employee: employeeUserId ?? null })
-      .range(from, to),
+      .from('bd_day_logs')
+      .upsert(
+        {
+          company_id: opts.companyId,
+          employee_user_id: userId,
+          work_date: opts.workDate,
+          day_type: opts.dayType,
+          updated_at: new Date().toISOString(),
+          ...extra,
+        },
+        { onConflict: 'employee_user_id,work_date' },
+      ),
   );
-  return rows.map((r) => ({ employeeUserId: r.employee_user_id, workDate: r.work_date, dayType: r.day_type }));
+}
+
+/** HR and self both read through the RPCs: employee, date, day type and overnight flag, never `note`. */
+export async function listDayLogs(companyId: string, employeeUserId?: string): Promise<DayLogView[]> {
+  type Row = { employee_user_id: string; work_date: string; day_type: DayType; overnight_away_for_work?: boolean };
+  const read = (rpc: 'bd_list_day_records' | 'bd_list_day_types') =>
+    allPages<Row>((from, to) =>
+      client()
+        .rpc(rpc, { cid: companyId, employee: employeeUserId ?? null })
+        .range(from, to),
+    );
+  const rows = await read('bd_list_day_records').catch((e) => {
+    if (isSchemaLag(e)) return read('bd_list_day_types');
+    throw e;
+  });
+  return rows.map((r) => ({
+    employeeUserId: r.employee_user_id,
+    workDate: r.work_date,
+    dayType: r.day_type,
+    overnightAway: !!r.overnight_away_for_work,
+  }));
 }
 
 export async function deleteMyDayLogs(companyId: string): Promise<void> {
@@ -340,37 +435,52 @@ export async function hasIndividualAccess(): Promise<boolean> {
 export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPackId: BorderId | null }>> {
   const userId = await currentUserId();
   if (!userId) return [];
-  const rows = await allPages<{ work_date: string; day_type: DayType; border_pack_id: BorderId | null }>((from, to) =>
-    client()
-      .from('bd_personal_day_logs')
-      .select('work_date, day_type, border_pack_id')
-      .eq('user_id', userId)
-      .order('work_date', { ascending: true })
-      .range(from, to),
-  );
-  return rows.map((r) => ({ date: r.work_date, type: r.day_type, borderPackId: r.border_pack_id }));
+  type Row = { work_date: string; day_type: DayType; border_pack_id: BorderId | null; overnight_away_for_work?: boolean };
+  const read = (columns: string) =>
+    allPages<Row>((from, to) =>
+      client()
+        .from('bd_personal_day_logs')
+        .select(columns)
+        .eq('user_id', userId)
+        .order('work_date', { ascending: true })
+        .range(from, to),
+    );
+  const base = 'work_date, day_type, border_pack_id';
+  const rows = await read(`${base}, overnight_away_for_work`).catch((e) => {
+    if (isSchemaLag(e)) return read(base);
+    throw e;
+  });
+  return rows.map((r) => ({
+    date: r.work_date,
+    type: r.day_type,
+    borderPackId: r.border_pack_id,
+    overnightAway: !!r.overnight_away_for_work,
+  }));
 }
 
 export async function upsertPersonalDayLog(opts: {
   workDate: string;
   dayType: DayType;
   borderPackId: BorderId | null;
+  overnightAway?: boolean;
 }): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
-  const { error } = await client()
-    .from('bd_personal_day_logs')
-    .upsert(
-      {
-        user_id: userId,
-        work_date: opts.workDate,
-        day_type: opts.dayType,
-        border_pack_id: opts.borderPackId,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'user_id,work_date' },
-    );
-  if (error) throw error;
+  await upsertWithOvernight(opts.overnightAway, (extra) =>
+    client()
+      .from('bd_personal_day_logs')
+      .upsert(
+        {
+          user_id: userId,
+          work_date: opts.workDate,
+          day_type: opts.dayType,
+          border_pack_id: opts.borderPackId,
+          updated_at: new Date().toISOString(),
+          ...extra,
+        },
+        { onConflict: 'user_id,work_date' },
+      ),
+  );
 }
 
 export async function deleteMyPersonalDayLogs(): Promise<void> {

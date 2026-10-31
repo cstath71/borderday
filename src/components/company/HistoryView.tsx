@@ -4,11 +4,11 @@ import type { EmployeeDashboardRow } from '../../company/dashboardMath';
 import type { Dict } from '../../i18n';
 import CounterTable from './CounterTable';
 
-/** Dates and day types only, by construction: the props carry nothing else. */
+/** Dates, day types and the overnight yes/no only, by construction: the props carry nothing else. */
 export default function HistoryView(props: {
   d: Dict;
   row: EmployeeDashboardRow;
-  logs: Array<{ workDate: string; dayType: DayType }>;
+  logs: Array<{ workDate: string; dayType: DayType; overnightAway?: boolean }>;
   backHref: string;
   backLabel: string;
   isDemo?: boolean;
@@ -39,6 +39,7 @@ export default function HistoryView(props: {
           <tr>
             <th>{d.company.colDate}</th>
             <th>{d.company.colDayType}</th>
+            <th>{d.dayTypes.overnightAwayShort}</th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@ export default function HistoryView(props: {
             <tr key={l.workDate}>
               <td>{l.workDate}</td>
               <td>{(d.dayTypes as Record<string, string>)[l.dayType] ?? l.dayType}</td>
+              <td>{l.overnightAway ? '✓' : ''}</td>
             </tr>
           ))}
         </tbody>

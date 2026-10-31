@@ -111,7 +111,9 @@ describe('no backend-mode text for customers (L3)', () => {
 describe('no HR path selects the note column', () => {
   it('companyApi reads company day logs only through the RPC', () => {
     const api = readFileSync(API, 'utf8');
-    expect(api).toContain("rpc('bd_list_day_types'");
+    expect(api).toContain("'bd_list_day_records'");
+    expect(api).toContain("'bd_list_day_types'");
+    expect(api).toContain('.rpc(rpc,');
     expect(api).not.toMatch(/from\('bd_day_logs'\)\s*\.select/);
     const code = api.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
     expect(code).not.toMatch(/\bnote\b/);

@@ -3,6 +3,9 @@ import en from '../src/i18n/en';
 import fr from '../src/i18n/fr';
 import de from '../src/i18n/de';
 import itDict from '../src/i18n/it';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { BORDER_PACKS } from '../src/borders/packs';
 
 function flatKeys(obj: unknown, prefix = ''): string[] {
   if (obj === null || typeof obj !== 'object') return [prefix];
@@ -40,5 +43,133 @@ describe('i18n key parity', () => {
     ].join(' ');
     expect(brandy.toLowerCase()).not.toMatch(/\bfrontalier/);
     expect(brandy.toLowerCase()).not.toMatch(/\bgrenzgänger/);
+  });
+});
+
+describe('Phase 2 rule copy, all four languages', () => {
+  const dicts = { en, fr, de, it: itDict };
+  const all = Object.entries(dicts) as Array<[string, typeof en]>;
+  const text = (d: typeof en) => d.counters as Record<string, string>;
+
+  it('every key a pack points to exists', () => {
+    for (const [lang, d] of all) {
+      for (const pack of BORDER_PACKS) {
+        if (pack.regionNoteKey) expect((d.borders as Record<string, string>)[pack.regionNoteKey], lang).toBeTruthy();
+        if (pack.logHintKey) expect((d.dayTypes as Record<string, string>)[pack.logHintKey], lang).toBeTruthy();
+        for (const k of Object.values(pack.dayHintKeys ?? {})) {
+          expect((d.dayTypes as Record<string, string>)[k as string], lang).toBeTruthy();
+        }
+        for (const c of pack.counters) {
+          for (const k of [c.labelKey, c.notesKey, c.pendingReasonKey, c.pendingValueKey, c.overKey, c.kind]) {
+            if (k) expect(text(d)[k], `${lang} ${k}`).toBeTruthy();
+          }
+        }
+      }
+    }
+  });
+
+  it('every message and badge the engine can emit exists', () => {
+    const src = readFileSync(join(__dirname, '../src/lib/counting.ts'), 'utf8');
+    const keys = new Set(
+      [...src.matchAll(/(?:key|statusLabelKey): '(\w+)'/g), ...src.matchAll(/'(status_\w+)'/g)].map((m) => m[1]),
+    );
+    expect(keys.size).toBeGreaterThan(15);
+    for (const [lang, d] of all) {
+      for (const k of keys) expect(text(d)[k], `${lang} ${k}`).toBeTruthy();
+    }
+  });
+
+  it('template variables match English in every language', () => {
+    const vars = (s: string) => [...s.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort();
+    for (const k of Object.keys(en.counters)) {
+      for (const [lang, d] of all) expect(vars(text(d)[k]), `${lang} ${k}`).toEqual(vars(text(en)[k]));
+    }
+  });
+
+  it('risk1Body and the framework notes name both 25% and 50%', () => {
+    for (const [lang, d] of all) {
+      for (const s of [d.home.risk1Body, d.counters.ss_framework_note, d.counters.ss_framework_lu_note]) {
+        expect(s, lang).toMatch(/25\s?%/);
+        expect(s, lang).toMatch(/50\s?%/);
+        expect(s, lang).toMatch(/A1/);
+      }
+    }
+  });
+
+  it('the framework note lists the exclusions', () => {
+    expect(en.counters.ss_framework_note).toMatch(/self-employed/);
+    expect(fr.counters.ss_framework_note).toMatch(/indépendantes/);
+    expect(de.counters.ss_framework_note).toMatch(/selbständig/);
+    expect(itDict.counters.ss_framework_note).toMatch(/indipendente/);
+  });
+
+  it('1983 copy says taxed in France and never the Geneva sentence', () => {
+    expect(en.counters.ch_fr_1983_note).toMatch(/taxed in France/);
+    expect(fr.counters.ch_fr_1983_note).toMatch(/imposés en France/);
+    expect(de.counters.ch_fr_1983_note).toMatch(/in Frankreich besteuert/);
+    expect(itDict.counters.ch_fr_1983_note).toMatch(/tassati in Francia/);
+    for (const [, d] of all) {
+      expect(d.counters.ch_fr_1983_note).toMatch(/45/);
+      expect(d.counters.ch_fr_1983_value).toBeTruthy();
+    }
+    expect(en.counters.ch_fr_1983_note).not.toMatch(/taxable in Switzerland/);
+  });
+
+  it('no pack label folds 1983 cantons into Geneva', () => {
+    for (const [lang, d] of all) {
+      const blob = JSON.stringify(d);
+      expect(blob, lang).not.toMatch(/Romandi[ea]/);
+      expect(d.borders.geneva_fr, lang).toMatch(/1983/);
+      expect(d.borders.basel_fr, lang).toMatch(/1983/);
+      expect(d.borders.ch_fr_1983_region, lang).toMatch(/Vaud|Waadt/);
+      expect(d.borders.ch_fr_1983_region, lang).toMatch(/Neuch|Neuenburg/);
+      expect(d.borders.ch_fr_1983_region, lang).toMatch(/Jura|Giura/);
+    }
+  });
+
+  it('marketing no longer promises tax limits on every corridor', () => {
+    expect(JSON.stringify(en)).not.toMatch(/five borders|official tax and social-security/);
+    for (const [lang, d] of all) {
+      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(four|quatre|vier|quattro)\b/i);
+    }
+  });
+
+  it('rule jargon, unsourced wording and retired messages are gone', () => {
+    for (const [lang, d] of all) {
+      const blob = JSON.stringify(d);
+      expect(blob, lang).not.toMatch(/Sit inside|that expression|Ausdrucksweise|cette expression|tale espressione/i);
+      expect(blob, lang).not.toMatch(/30-minute|30 minutes|30-Minuten|30 minuti/);
+      expect(blob, lang).not.toMatch(/INAMI/);
+      expect(blob, lang).not.toMatch(/UE\/EWR/);
+      expect(blob, lang).not.toMatch(/\((?:DFI|EDI)|DFI \(|EDI \(/);
+      expect(text(d).ruleBeingConfirmed, lang).toBeUndefined();
+    }
+  });
+
+  it('Luxembourg and Belgium pending notes say the honest thing', () => {
+    expect(en.counters.pending_lu_de_tax).toMatch(/34/);
+    expect(en.counters.pending_lu_be_tax).toMatch(/34/);
+    expect(en.counters.pending_be_fr_tax).toMatch(/No day tolerance found/);
+    expect(en.counters.pending_be_fr_tax).toMatch(/first day/);
+    expect(en.counters.pending_be_nl_tax).toMatch(/check with/);
+    expect(en.counters.lu_fr_tax_note).toMatch(/rounded down/);
+    expect(en.dayTypes.logHint_luxembourg_fr).toMatch(/whole day/);
+    expect(en.dayTypes.teleworkHint_ticino).toMatch(/your home/);
+  });
+
+  it('privacy, consent and HR copy disclose the new fields, and still no location', () => {
+    expect(en.company.consentBody).toMatch(/night away/);
+    expect(en.company.consentBody).toMatch(/A1/);
+    expect(en.company.consentBody).toMatch(/cannot see GPS/);
+    expect(en.privacy.s1Body).toMatch(/night away/);
+    expect(en.privacy.s2Body).toMatch(/No GPS/);
+    expect(en.privacy.s2Body).toMatch(/A1/);
+  });
+
+  it('an out-of-scope section exists', () => {
+    for (const [lang, d] of all) {
+      expect(d.faq.q8, lang).toBeTruthy();
+      expect(d.faq.a8.length, lang).toBeGreaterThan(100);
+    }
   });
 });

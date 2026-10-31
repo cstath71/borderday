@@ -30,6 +30,8 @@ vi.mock('../src/lib/companyApi', async (original) => {
     getInviteByToken: vi.fn(),
     acceptInvite: vi.fn(),
     updateMemberSelf: vi.fn(),
+    updateMyProfile: vi.fn(),
+    updateEmployeeProfile: vi.fn(async () => undefined),
     updateMyDisplayName: vi.fn(),
     listDayLogs: vi.fn(async () => []),
     upsertDayLog: vi.fn(),
@@ -114,6 +116,49 @@ describe('Dashboard', () => {
     const text = container.textContent ?? '';
     expect(text).not.toMatch(/DEMO|Backend|local-mock/);
     expect(text).not.toContain(en.company.billingInactive);
+  });
+
+  it('HR sees A1-required with its caveat, and the rule conditions, not just a status', async () => {
+    asHr();
+    mocked.listDayLogs.mockResolvedValue(
+      Array.from({ length: 72 }, (_, i) => ({
+        employeeUserId: 'emp1',
+        workDate: new Date(Date.UTC(new Date().getFullYear(), 0, 1 + i)).toISOString().slice(0, 10),
+        dayType: 'telework' as const,
+        overnightAway: false,
+      })),
+    );
+    const { container } = open('/en/company/c1/dashboard');
+    await screen.findByText('Real Employee');
+    expect(screen.getAllByText(en.counters.status_a1_required).length).toBeGreaterThan(0);
+    expect(screen.getByText(en.counters.ss_band_a1_required)).toBeTruthy();
+    expect(screen.getAllByText(en.counters.ruleAndConditions).length).toBeGreaterThan(0);
+    expect(container.textContent).toContain(en.counters.multi_employer_note);
+  });
+
+  it('HR records an employee A1 through companyApi and reloads the counters', async () => {
+    asHr();
+    open('/en/company/c1/dashboard');
+    await screen.findByText('Real Employee');
+    fireEvent.click(screen.getByLabelText(new RegExp(en.app.a1InPlace.replace(/[()]/g, '\\$&'))));
+    const calls = mocked.listMembers.mock.calls.length;
+    fireEvent.click(screen.getByRole('button', { name: en.company.saveProfile }));
+    await screen.findByText(en.company.profileSaved);
+    expect(mocked.updateEmployeeProfile).toHaveBeenCalledWith('c1', 'emp1', {
+      employmentPercent: null,
+      a1InPlace: true,
+      a1ValidUntil: null,
+    });
+    await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
+  });
+
+  it('says so when saving the profile is refused', async () => {
+    asHr();
+    mocked.updateEmployeeProfile.mockRejectedValueOnce(new Error('profile update denied'));
+    open('/en/company/c1/dashboard');
+    await screen.findByText('Real Employee');
+    fireEvent.click(screen.getByRole('button', { name: en.company.saveProfile }));
+    expect((await screen.findByRole('alert')).textContent).toBe(en.app.saveError);
   });
 
   it('points an unpaid company at pricing', async () => {
@@ -405,5 +450,32 @@ describe('/app gate', () => {
     open('/en/app');
     fireEvent.click((await screen.findByText(en.dayTypes.onsite)).closest('button')!);
     await screen.findByText(en.app.saveError);
+  });
+});
+
+describe('Home coverage chips', () => {
+  it('says plainly which corridors have tax counters', async () => {
+    const { container } = open('/en');
+    await screen.findByRole('heading', { name: en.home.bordersTitle });
+    const chips = [...container.querySelectorAll('.border-chip')].map((c) => c.textContent ?? '');
+    expect(chips).toHaveLength(9);
+    const withTax = chips.filter((c) => c.includes(en.home.chipTaxYes));
+    expect(withTax).toHaveLength(4);
+    expect(chips.filter((c) => c.includes(en.home.chipTaxNo))).toHaveLength(5);
+    expect(chips.every((c) => c.includes(en.home.chipSsYes))).toBe(true);
+    expect(chips.find((c) => c.includes(en.borders.basel_fr))).toContain(en.home.chipTaxNo);
+    expect(chips.find((c) => c.includes(en.borders.luxembourg_fr))).toContain(en.home.chipTaxYes);
+  });
+});
+
+describe('FAQ and disclaimer', () => {
+  it('FAQ states what is out of scope', async () => {
+    open('/en/faq');
+    await screen.findByRole('heading', { name: en.faq.q8 });
+    expect(screen.getByText(en.faq.a8)).toBeTruthy();
+  });
+  it('disclaimer states it too', async () => {
+    open('/en/disclaimer');
+    await screen.findByRole('heading', { name: en.faq.q8 });
   });
 });

@@ -5,7 +5,7 @@ const de: Dict = {
     siteName: 'BorderDay',
     tagline: 'Grenzüberschreitende Tagesschwellen für HR und Mitarbeitende — bevor es teuer wird.',
     description:
-      'BorderDay hilft HR und Mitarbeitenden, Telearbeit, Vor-Ort- und Reisetage an offiziellen Steuer- und Sozialversicherungsschwellen für Genf, Basel, Tessin, Luxemburg und Belgien zu messen. Ein Tracking-Tool — keine Steuer- oder Rechtsberatung.',
+      'BorderDay hilft HR und Mitarbeitenden, Telearbeit, Vor-Ort- und Reisetage zu erfassen. Sozialversicherungszähler auf allen neun Korridoren; Steuerzähler auf vier: Genf und weitere Kantone ausserhalb des Abkommens von 1983, Deutschland→Schweiz, Frankreich→Luxemburg und Italien→Schweiz. Tracking-Tool — keine Steuer- oder Rechtsberatung.',
   },
   nav: {
     home: 'Start',
@@ -32,28 +32,30 @@ const de: Dict = {
   home: {
     heroTitle: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
     heroBody:
-      'Für HR- und Finance-Verantwortliche in Genf, Basel, Tessin, Luxemburg und Belgien: Steuer- und Sozialversicherungs-Zähler pro Mitarbeitendem sehen — bevor sich die sozialversicherungsrechtliche Zuständigkeit verschiebt oder eine Steuerschwelle überschritten wird. Mehrere Grenzen, vier Sprachen, Steuer und Sozialversicherung getrennt.',
+      'Für HR und Finanzverantwortliche in Genf, Basel, im Tessin, in Luxemburg und Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Korridoren, Steuerzähler auf vier, und jeder Korridor zeigt, was er abdeckt. Vier Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
     ctaPrimary: 'Firmenkonto erstellen',
     ctaSecondary: 'Unternehmenspreise ansehen',
     ctaIndividuals: 'Ich bin einzelne Mitarbeiterin / einzelner Mitarbeiter',
     riskTitle: 'Warum Tagesschwellen für Arbeitgeber zählen',
     risk1Title: 'Sozialversicherungsrechtliche Zuständigkeit',
     risk1Body:
-      'Nach der Rahmenvereinbarung UE/EWR/CH zur grenzüberschreitenden Telearbeit kann gewöhnliche Telearbeit im Wohnstaat ab 50 % der Arbeitszeit die Zuständigkeit ändern. BorderDay führt den Unter-50%-Zähler getrennt von der Steuer.',
+      'Nach dem EU/EWR/CH-Rahmenübereinkommen verlagert Telearbeit im Wohnsitzstaat ab 25 % der Arbeitszeit die Sozialversicherung normalerweise dorthin, sofern keine A1-Bescheinigung beantragt wird. Ab 50 % steht das Übereinkommen nicht mehr zur Verfügung. BorderDay zeigt die drei Bereiche getrennt von der Steuer: unter 25 %, 25 % bis unter 50 % (A1 erforderlich) und 50 % oder mehr.',
     risk2Title: 'Steuerliche Tagesschwellen',
     risk2Body:
-      'Korridore wie FR–CH-Telearbeit (40 % / 10 Missionstage), Luxemburg–Frankreich (34 Tage) und Italien–Schweiz (25 % / 45 Tage ohne Heimkehr) beruhen auf öffentlichen amtlichen Schwellen. Wir zeigen genutzte vs. erlaubte Tage — unbestätigte Regeln bleiben deaktiviert.',
+      'Steuerzähler laufen heute auf vier Korridoren: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Missionstage), Deutschland→Schweiz (60 Nichtrückkehrtage), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Die übrigen fünf sagen klar, dass kein Steuerzähler läuft. Wir erfinden nie eine Zahl.',
     risk3Title: 'Teams über mehrere Grenzen',
     risk3Body:
       'Ein Unternehmens-Dashboard für Mitarbeitende mit unterschiedlichen Grenzen. Filter nach Grenze oder Status. CSV-Export für Audits. Mitarbeitende sehen genau dieselben Zähler wie HR.',
     feature1Title: 'Steuer und Sozialversicherung, getrennt',
-    feature1Body: 'Unabhängige Zähler mit verlinkten amtlichen Quellen. Warnungen bei 75 %, 90 % und 100 % der realen Quote.',
+    feature1Body:
+      'Unabhängige Zähler mit verlinkten amtlichen Quellen. Warnungen bei 75 % und 90 % des tatsächlichen Kontingents, danach die Zustände «an der Grenze» und «überschritten» mit der jeweiligen Folge.',
     feature2Title: 'Einladung per E-Mail-Link',
     feature2Body: 'Mitarbeitende treten bei, wählen ihr Grenzpaket und erfassen nur den Tagestyp — niemals GPS-Standort.',
     feature3Title: 'Datenschutz durch Technikgestaltung',
     feature3Body: 'An DSGVO und das schweizerische Bundesgesetz über den Datenschutz (DSG / nDSG) ausgerichtet: Mandantentrennung, Export und Löschung, klare Einwilligung, Aufbewahrungshinweis. HR sieht Tagestypen und Anzahlen, keinen Standort.',
-    bordersTitle: 'Abgedeckte Grenzen in Version 1',
-    bordersIntro: 'Regeln aus öffentlichen amtlichen Quellen. Noch nicht bestätigte Zähler bleiben deaktiviert — keine erfundenen Zahlen.',
+    bordersTitle: 'In Version 1 abgedeckte Korridore',
+    bordersIntro:
+      'Jeder Korridor zeigt, was er heute zählt. Wenn noch keine Steuerregel gezählt werden kann, steht das dort, und es erscheint keine Zahl.',
     howTitle: 'So nutzen Unternehmen BorderDay',
     how1: 'Unternehmenkonto anlegen und Mitarbeitende per E-Mail-Link einladen.',
     how2: 'Jede Person wählt ihr Grenzpaket und erfasst Telearbeit / vor Ort / Reise / nicht gearbeitet.',
@@ -68,22 +70,30 @@ const de: Dict = {
       'BorderDay ist ein Tracking- und Erinnerungstool für Tagesklassifikationen. Keine Steuer- oder Rechtsberatung. Immer bei der zuständigen Behörde oder einer Fachperson prüfen.',
     demoBanner: 'Screenshots und das vorgeladene Unternehmen nutzen klar gekennzeichnete DEMO-Daten — keine echten Mitarbeitenden.',
     inShort:
-      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden an offiziellen Steuer- und Sozialversicherungsschwellen auf fünf Grenzen zu messen. Unternehmensplan: 5 € je aktive Mitarbeitende und Monat (Minimum 39 €); Einzelpersonen 4,99 €/Monat oder 49 €/Jahr. 7-Tage-Test mit Karte. Tracking-Tool — keine Steuer- oder Rechtsberatung.',
+      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf vier davon. Unternehmensplan: 5 € je aktive Mitarbeitende und Monat (Minimum 39 €); Einzelpersonen 4,99 €/Monat oder 49 €/Jahr. 7-Tage-Test mit Karte. Tracking-Tool — keine Steuer- oder Rechtsberatung.',
     inShortLabel: 'Kurz gesagt',
+    chipTaxYes: 'Steuer: ja',
+    chipTaxNo: 'Steuer: noch nicht',
+    chipSsYes: 'Sozialversicherung: ja',
   },
   borders: {
-    geneva_fr: 'Genf / Romandie ← Frankreich',
-    basel_fr: 'Basel ← Frankreich',
-    basel_de: 'Basel ← Deutschland',
+    geneva_fr:
+      'Genf und weitere Kantone ausserhalb des Abkommens von 1983 ← Frankreich',
+    basel_fr: 'Basel und weitere Kantone des Abkommens von 1983 ← Frankreich',
+    basel_de: 'Basel / Schweiz ← Deutschland',
     luxembourg_fr: 'Luxemburg ← Frankreich',
     luxembourg_be: 'Luxemburg ← Belgien',
     luxembourg_de: 'Luxemburg ← Deutschland',
     belgium_fr: 'Belgien ← Frankreich',
     belgium_nl: 'Belgien ← Niederlande',
     ticino_it: 'Tessin ← Italien',
-    geneva_region: 'Kantone, die unter den französisch-schweizerischen Steueravenant zur Telearbeit fallen (ab 1. Jan. 2026).',
-    basel_region: 'Nordwestschweiz / Region Basel.',
+    geneva_region:
+      'Abkommensregime: Genf und alle Kantone ausserhalb des Abkommens von 1983, Telearbeitsregel ab 1. Jan. 2026. Liegt Ihr Arbeitgeber in Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Waadt, Wallis, Neuenburg oder Jura, wählen Sie das Paket des Abkommens von 1983.',
+    basel_region:
+      'Die 60-Tage-Regel gilt für die ganze Schweiz. Das Minimum von 5 Tagen ist die Regel, die Basel-Stadt für das eigene Personal anwendet.',
     ticino_region: 'Abkommen Italien–Schweiz zu Grenzgängern, geändert für Telearbeit.',
+    ch_fr_1983_region:
+      'Abkommen von 1983: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Waadt, Wallis, Neuenburg und Jura. Genf und andere Kantone folgen einem anderen Regime: Wählen Sie das andere Paket Frankreich–Schweiz.',
   },
   dayTypes: {
     telework: 'Telearbeit zu Hause',
@@ -94,6 +104,16 @@ const de: Dict = {
     onsiteHint: 'Arbeitstag in den Räumen des Arbeitgebers im Staat des Arbeitsorts.',
     third_countryHint: 'Dienstreise, Schulung, Kundenbesuch oder vorübergehende Mission außerhalb des Staats des Arbeitsorts.',
     non_workingHint: 'Urlaub, nicht gearbeiteter Feiertag, Krankheit oder Ruhetag.',
+    teleworkHint_ticino:
+      'Arbeitstag zu Hause in Italien. Das Protokoll spricht vom «eigenen Wohnsitz»: Ob ein Coworking-Tag zählt, ist nicht bestätigt, fragen Sie Ihre Behörde.',
+    third_countryHint_basel_de:
+      'Arbeit ausserhalb von Deutschland und der Schweiz: immer ein Nichtrückkehrtag, auch bei Rückkehr am selben Abend. Nicht für eintägige Reisen innerhalb von Deutschland oder der Schweiz verwenden.',
+    logHint_luxembourg_fr:
+      'Jeder Teil eines Arbeitstags ausserhalb Luxemburgs zählt als ganzer Tag: Erfassen Sie den ganzen Tag als Telearbeit oder Reise.',
+    overnightAway: 'Beruflich auswärts übernachtet (nicht nach Hause zurückgekehrt)',
+    overnightAwayHint:
+      'Ein Ja oder Nein, nie ein Ort. Manche Grenzen zählen diese Tage. In einem Unternehmenskonto sieht HR dies zusammen mit der Tagesart.',
+    overnightAwayShort: 'Auswärts übernachtet',
   },
   counters: {
     tax: 'Steuer',
@@ -101,49 +121,110 @@ const de: Dict = {
     ch_fr_tax_telework_40: 'Telearbeitsanteil (max. 40 % der jährlichen Arbeitszeit)',
     ch_fr_tax_missions_10: 'Vorübergehende Missionen außerhalb der Schweiz (max. 10 Tage/Jahr)',
     ch_fr_tax_note:
-      'Nach der französisch-schweizerischen Verständigungsvereinbarung kann Telearbeit aus Frankreich bis zu 40 % der jährlichen Arbeitszeit in der Schweiz steuerpflichtig bleiben. Vorübergehende Missionen (bis 10 Tage/Jahr, anteilig) liegen innerhalb dieser Ausdrucksweise. Quelle: ge.ch / ESTV.',
+      'Abkommensregime: Telearbeit aus Frankreich bis 40 % der Jahresarbeitszeit bleibt in der Schweiz steuerbar. Bis zu 10 Missionstage pro Jahr zählen als Telearbeit, aber nur soweit sie nach der gewöhnlichen Telearbeit unter 40 % passen. Weitere Missionstage werden anders besteuert. Über 40 % ist Telearbeit ab dem ersten Tag in Frankreich steuerbar. Bereitschaftsdienst zählt nur bei tatsächlichem Einsatz. Quellen: ESTV-Vereinbarung vom 29. Apr. 2026; ge.ch.',
     ch_fr_missions_note:
-      'Bis zu 10 Tage pro Jahr vorübergehende Missionen in Frankreich oder einem Drittstaat können innerhalb der Telearbeits-Ausdrucksweise behandelt werden, vorbehaltlich der 40-%-Grenze. Teiljahr / Teilzeit: Grenze anteilig, aufgerundet. Quelle: ESTV-Verständigungsvereinbarung.',
-    lu_tax_tolerance_34: 'Tage außerhalb Luxemburgs (Toleranzschwelle: 34 Tage)',
+      'Temporäre Missionen in Frankreich oder einem Drittstaat: Bis zu 10 Tage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit Platz haben. Bei Teilzeit oder unterjähriger Tätigkeit werden die 10 Tage anteilig gekürzt und aufgerundet. Tage ausserhalb dieser Grenzen sind in Frankreich steuerbar, vorbehaltlich eines Abkommens mit dem Drittstaat. Quellen: ESTV-Vereinbarung vom 29. Apr. 2026; Merkblatt impots.gouv.fr.',
+    lu_tax_tolerance_34: 'Tage ausserhalb Luxemburgs (bis 34 Tage, Vollzeit ganzjährig)',
     lu_tax_tolerance_pending: 'Tage außerhalb Luxemburgs (steuerliche Toleranz)',
     lu_fr_tax_note:
-      'Für in Frankreich ansässige Beschäftigte in Luxemburg: 34 Tage je Besteuerungszeitraum physisch in Frankreich und/oder einem Drittstaat zur Ausübung der Beschäftigung, ohne die luxemburgische Besteuerung für den gesamten Zeitraum zu verlieren. Jeder Bruchteil eines Tages zählt als voller Tag. Urlaub, Wochenruhe, Feiertage (ohne Arbeitspflicht), Krankheit und höhere Gewalt sind ausgenommen. Quelle: Verständigungsvereinbarung impots.gouv.fr.',
-    ss_framework_under_50: 'Grenzüberschreitende Telearbeit (Rahmenvereinbarung: unter 50 %)',
+      'Personen mit Wohnsitz in Frankreich und Beschäftigung in Luxemburg: bis zu 34 Tage pro Steuerzeitraum körperlich in Frankreich und/oder einem Drittstaat zur Arbeit, ohne die Besteuerung in Luxemburg für den Zeitraum zu verlieren. Teilzeit oder unterjährig: Die 34 werden anteilig gekürzt und abgerundet. Darüber hinaus kann Frankreich die tatsächlich in Frankreich oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Jeder Teil eines Tages zählt als ganzer Tag, Weiterbildung zählt ebenfalls. Urlaub, wöchentliche Ruhetage, nicht gearbeitete Feiertage, Krankheit und höhere Gewalt zählen nicht. Die Grenze gilt für alle Ihre Verträge im Jahr, und Sie müssen Ihre Tage belegen: Dieses Protokoll allein reicht womöglich nicht. Quelle: Vereinbarung auf impots.gouv.fr (das PDF nennt 29 Tage, durch den Zusatz vom 7. Nov. 2022 auf 34 erhöht).',
+    ss_framework_under_50:
+      'Grenzüberschreitende Telearbeit (Rahmenübereinkommen: A1 ab 25 %, unter 50 %)',
     ss_framework_note:
-      'Nach der Rahmenvereinbarung EU/EWR/CH zur grenzüberschreitenden Telearbeit kann gewöhnliche Telearbeit im Wohnsitzstaat unter 50 % der gesamten Arbeitszeit die sozialversicherungsrechtliche Zuständigkeit des Arbeitgeberstaats beibehalten, wenn beide Staaten unterzeichnet haben und eine A1-Bescheinigung (portables Dokument A1) beantragt wird. Quelle: FÖD Soziale Sicherheit Belgien (Verwahrer); CLEISS.',
+      'Nach dem EU/EWR/CH-Rahmenübereinkommen: Unter 25 % der Arbeitszeit als Telearbeit im Wohnsitzstaat ist wegen der Telearbeit keine A1-Bescheinigung nötig. Von 25 % bis unter 50 % wird normalerweise der Wohnsitzstaat zuständig, sofern Arbeitgeber und Mitarbeitende nicht eine A1 beantragen, die den Arbeitgeberstaat beibehält. Die A1 gilt höchstens 3 Jahre und wirkt höchstens 3 Monate zurück, wenn dort bereits Beiträge gezahlt wurden. Ab 50 % steht das Übereinkommen nicht zur Verfügung. Es gilt nicht für Personen, die im Wohnsitzstaat gewöhnlich etwas anderes als Telearbeit ausüben, gewöhnlich in einem anderen Staat arbeiten, selbständig sind oder Arbeitgeber in mehreren Staaten haben. Telearbeit setzt hier eine IT-Anbindung voraus. Quellen: Belgischer FÖD (Depositar); CLEISS.',
     ss_framework_lu_note:
-      'CCSS Luxemburg: Telearbeit ausschließlich im Wohnsitzstaat, zwischen 25 % und unter 50 % der gesamten Arbeitszeit, beide Staaten unterzeichnet → Arbeitgeber kann A1 beantragen, damit luxemburgischer Schutz fortbesteht. Eine gewöhnliche Tätigkeit, die keine Telearbeit ist, im Wohnsitzstaat oder Arbeit in einem anderen Mitgliedstaat kann die Anwendung der Rahmenvereinbarung entfallen lassen. Quelle: CCSS.',
+      'CCSS Luxemburg: Telearbeit nur im Wohnsitzstaat. Unter 25 %: keine A1 wegen Telearbeit. Von 25 % bis unter 50 %, beide Staaten Unterzeichner: Der Arbeitgeber kann eine A1 beantragen, damit die luxemburgische Deckung fortbesteht; ohne sie wird normalerweise der Wohnsitzstaat zuständig. Ab 50 % steht das Übereinkommen nicht zur Verfügung. Eine gewöhnliche andere Tätigkeit als Telearbeit im Wohnsitzstaat oder Arbeit in einem anderen Mitgliedstaat kann den Fall aus dem Übereinkommen herausfallen lassen. Quellen: CCSS; Belgischer FÖD.',
     ch_it_tax_telework_25: 'Telearbeit am Wohnsitz (max. 25 % der unselbständigen Tätigkeit)',
-    ch_it_tax_nonreturn_45: 'Tage ohne tägliche Rückkehr nach Hause (max. 45 Tage/Jahr)',
+    ch_it_tax_nonreturn_45: 'Tage ohne Rückkehr nach Hause aus beruflichen Gründen (max. 45/Jahr)',
     ch_it_tax_note:
-      'Nach dem Änderungsprotokoll zum Abkommen Italien–Schweiz darf ein Grenzgänger höchstens 25 % der unselbständigen Tätigkeit in einem Kalenderjahr als Telearbeit am Wohnsitz im Wohnsitzstaat ausüben, ohne Status oder steuerliche Behandlung dieser Telearbeit zu ändern. Quelle: Fedlex RU 2026 104; EDI (SIF).',
+      'Nach dem Änderungsprotokoll zum Abkommen Italien–Schweiz (in Kraft seit 9. Feb. 2026, anwendbar ab 1. Jan. 2024, auch für das Übergangsregime): höchstens 25 % der unselbständigen Tätigkeit als Telearbeit zu Hause im Wohnsitzstaat pro Kalenderjahr, ohne Änderung des Status oder der steuerlichen Behandlung dieser Telearbeit. Das Protokoll sagt nicht, was über 25 % gilt. Quellen: Fedlex AS 2026 104; SIF.',
     ch_it_nonreturn_note:
-      'Grundsätzlich bis zu 45 Tage in einem Kalenderjahr ohne tägliche Rückkehr nach Hause aus beruflichen Gründen (Urlaubs- und Krankheitstage zählen nicht zu diesen 45). Quelle: Fedlex-Änderungsprotokoll.',
-    basel_de_tax_pending: 'Steuerliche Tagesregeln Deutschland–Schweiz',
-    basel_de_employer_commute: 'Arbeitgeberpraxis (Basel-Stadt): Vor-Ort-Tage diesen Monat (Untergrenze ≈ 5)',
+      'Grundsätzlich und sofern die Behörden nichts anderes entscheiden, bis zu 45 Tage pro Kalenderjahr ohne tägliche Rückkehr nach Hause aus beruflichen Gründen. Urlaub und Krankheit zählen nicht. BorderDay zählt nur Tage, die Sie als «beruflich auswärts übernachtet» markieren; eine Tagesreise zählt nicht. Quelle: Änderungsprotokoll, Fedlex.',
+    basel_de_employer_commute:
+      'Personalregel Basel-Stadt: Vor-Ort-Tage diesen Monat (mindestens 5 oder 1 pro Woche)',
     basel_de_employer_note:
-      'HR-Vorgaben Basel-Stadt (Stand 1. Jan. 2026): Homeoffice nur, wenn die Beschäftigten mindestens 1 Tag pro Woche oder mindestens 5 Tage pro Monat an den Schweizer Arbeitsplatz pendeln. Arbeitgeberpraxis, kein veröffentlichter bundessteuerlicher Tageszähler. Quelle: Finanzdepartement Kanton Basel-Stadt.',
-    be_tax_pending: 'Steuerliche Tagesregeln für belgische Korridore',
-    ruleBeingConfirmed: 'Regel wird bestätigt',
-    pending_bmf:
-      'Die genauen steuerlichen Tages-/Nicht-Rückkehr-Regeln Deutschland–Schweiz für diesen Korridor werden anhand der BMF-Konsultationstexte bestätigt. Dieser Zähler bleibt bis dahin deaktiviert.',
+      'Dies ist die Regel, die der Kanton Basel-Stadt für das eigene Personal anwendet (Stand 1. Jan. 2026): Homeoffice nur, wenn die Person mindestens 1 Tag pro Woche oder mindestens 5 Tage pro Monat an den Arbeitsort pendelt. Andere Arbeitgeber können anderes vorsehen, und es ist keine allgemeine Steuergrenze. Quelle: Finanzdepartement Basel-Stadt.',
     pending_lu_be_tax:
-      'Die luxemburgische Steuertoleranz für in Belgien Ansässige wird oft als 34 Tage beschrieben, aber die primären ACD-/SPF-Finances-Seiten wurden für diese Version nicht bestätigt. Zähler deaktiviert.',
+      'Die luxemburgische Regierung hat ab 2022 34 Tage für Personen mit Wohnsitz in Belgien angekündigt. Der belgische Text zu Teilzeitkürzung und Zählweise wurde nicht gefunden, daher läuft kein Zähler. Fragen Sie Ihre Behörde.',
     pending_lu_de_tax:
-      'Die luxemburgische Steuertoleranz für in Deutschland Ansässige (einschließlich einer möglichen 30-Minuten-Regel) wird anhand der ACD-/BMF-Primärseiten bestätigt. Zähler deaktiviert.',
-    pending_be_tax:
-      'Keine einfache öffentliche Tagestoleranz für FR→BE oder NL→BE wurde auf SPF Finances für diese Version verifiziert. Steuerzähler deaktiviert; der Rahmenvereinbarungs-Zähler der Sozialversicherung bleibt verfügbar.',
+      'Laut der luxemburgischen Regierung stieg die Toleranz ab 2024 für Personen mit Wohnsitz in Deutschland von 19 auf 34 Tage. Der deutsche Text zu Zählweise und Teilzeit konnte nicht bestätigt werden, daher läuft kein Zähler und die Kürzung Frankreich–Luxemburg wird nicht angewendet. Fragen Sie Ihre Behörde.',
     usedOf: '{used} von {limit}',
     percentUsed: '{used} % von {limit} %',
     usedOfDays: '{used} von {allowed} Tagen',
     percentOfAnnual: '{pct} % von {annual} Tagen/Jahr (Grenze {limit} %)',
     status_ok: 'Innerhalb der Grenze',
-    status_warn: 'Grenze nähert sich',
+    status_warn: 'Achtung',
     status_critical: 'Nahe der Grenze',
     status_over: 'Über der Grenze',
-    status_disabled: 'Noch nicht verfügbar',
-    sourceLink: 'Amtliche Quelle',
+    status_disabled: 'Noch kein Zähler',
+    sourceLink: 'Amtliche Quellen',
     checkedOn: 'Geprüft am {date}',
+    employer_practice: 'Arbeitgeberpraxis',
+    ch_fr_over_40:
+      'Über 40 %: Telearbeitstage sind ab dem ersten Tag in Frankreich steuerbar, nicht nur die Überschreitung, und Missionstage zählen nicht mehr als Telearbeit. Fragen Sie Ihre Steuerbehörde.',
+    ch_fr_mission_excess:
+      'Von Ihren Missionstagen zählen {counted} innerhalb der 40 % und {excess} nicht: Diese sind in Frankreich steuerbar, vorbehaltlich eines Abkommens mit einem Drittstaat.',
+    ch_fr_1983_label: 'Steuer Frankreich–Schweiz (Abkommen von 1983): Regime in Prüfung',
+    ch_fr_1983_value: 'Regime in Prüfung: Fragen Sie Ihre Behörde',
+    ch_fr_1983_note:
+      'Diese Kantone folgen nicht der Genfer Regel. Nach dem Abkommen von 1983 werden Personen mit Wohnsitz in Frankreich in der Regel in Frankreich besteuert, und Frankreich überweist 4,5 % des Bruttolohns an die Schweiz. Zu den veröffentlichten Bedingungen gehören Telearbeit bis 40 % der Arbeitszeit, bis zu 10 Missionstage innerhalb dieser 40 % und höchstens 45 Nächte pro Jahr in der Schweiz oder einem Drittstaat. Ein einziger Missionstag in Frankreich über diese Grenzen hinaus beendet das Regime. BorderDay kann Missionen in Frankreich noch nicht von anderen trennen und zeigt deshalb hier keinen Steuerzähler statt einer falschen Entwarnung. Für Schweizer Staatsangehörige im öffentlichen Dienst und Wochenaufenthalter gilt anderes. Fragen Sie Ihre kantonale Steuerbehörde.',
+    lu_over_34:
+      'Grenze überschritten: Frankreich kann die tatsächlich in Frankreich oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Fragen Sie Ihre Steuerbehörde.',
+    prorate_missing:
+      '{limit} Tage gelten nur für Vollzeit über das ganze Jahr — geben Sie Ihren Beschäftigungsgrad an.',
+    prorate_applied:
+      'Grenze an Ihren Beschäftigungsgrad von {pct} % angepasst: {limit} Tage.',
+    at_limit_note: 'An der Grenze: noch zulässig, aber der nächste Tag überschreitet sie.',
+    ss_band_under: 'Unter {from} %: wegen Telearbeit keine A1 nötig.',
+    ss_band_approaching:
+      'Annäherung an {from} %: Ab dann ist eine A1 nötig, um im Arbeitgeberstaat zu bleiben.',
+    ss_band_a1_required:
+      '25 % bis unter 50 %: A1 erforderlich. Ohne sie wird normalerweise der Wohnsitzstaat zuständig. Tragen Sie sie hier ein, sobald Ihr Arbeitgeber sie hat.',
+    ss_band_a1_recorded:
+      'A1 erfasst, gültig bis {until}. BorderDay prüft die Bescheinigung nicht.',
+    ss_band_a1_recorded_nodate:
+      'A1 erfasst, ohne Enddatum. Eine A1 nach dem Rahmenübereinkommen gilt höchstens 3 Jahre: Tragen Sie das Enddatum nach. BorderDay prüft die Bescheinigung nicht.',
+    ss_band_a1_expired: 'Die erfasste A1 endete am {until}. Ab 25 % ist eine neue erforderlich.',
+    ss_band_residence:
+      '50 % oder mehr: Das Rahmenübereinkommen steht nicht zur Verfügung, normalerweise gilt der Wohnsitzstaat. Eine Einzelvereinbarung kann möglich sein: Fragen Sie Ihre Sozialversicherungsstelle.',
+    ss_third_country:
+      'Dieses Jahr erfasste Reisetage: {days}. Wiederkehrende Arbeit ausserhalb des Arbeitgeberstaats kann aus dem Rahmenübereinkommen fallen: Fragen Sie Ihre Sozialversicherungsstelle.',
+    ch_it_over:
+      'Grenze überschritten. Das Protokoll nennt die Folge nicht: Fragen Sie die zuständige Behörde.',
+    basel_de_nonreturn_60: 'Nichtrückkehrtage aus beruflichen Gründen (bis 60 pro Jahr)',
+    basel_de_nonreturn_note:
+      'Deutschland–Schweiz: Die Grenzgängereigenschaft entfällt bei mehr als 60 beruflich bedingten Nichtrückkehrtagen pro Jahr. Gezählt werden hier Tage, die Sie als «beruflich auswärts übernachtet» markieren, sowie jeder Arbeitstag ausserhalb von Deutschland und der Schweiz, auch bei Rückkehr am selben Tag. Eintägige Reisen innerhalb von Deutschland oder der Schweiz, Krankheit und Unfall zählen nicht. Bei mehrtägigen, vom Arbeitgeber bezahlten Geschäftsreisen zählen auch Wochenenden und Feiertage: Erfassen Sie diese als Reisetage. Für Teilzeitbeschäftigte, die nur tageweise arbeiten, gilt eine anteilig tiefere Grenze; mehrere Arbeitgeber werden zusammen beurteilt. Ob ein Homeoffice-Tag ein Nichtrückkehrtag sein kann, ist hier nicht bestätigt: Fragen Sie Ihre Behörde. Der Arbeitgeber reicht das Formular Gre-3 ein (31. März im Aargau; prüfen Sie Ihren Kanton). Quellen: KonsVerCHEV §§ 8–9; Merkblatt Kanton Aargau, Stand 1. Jan. 2026.',
+    basel_de_over_60:
+      'Über 60 Tage entfällt die Grenzgängereigenschaft: Die Schweizer Quellensteuer wechselt für das Jahr von 4,5 % zum ordentlichen Tarif. Fragen Sie Ihre Steuerbehörde.',
+    floor_week_met: 'Erfüllt durch mindestens einen Vor-Ort-Tag in jeder Woche des Monats.',
+    floor_below_note:
+      'Dieser Monat endete mit weniger als {limit} Vor-Ort-Tagen und ohne jede Woche abzudecken. Falls diese Regel für Sie gilt, fragen Sie Ihren Arbeitgeber.',
+    be_fr_tax_label: 'Steuer Frankreich→Belgien',
+    be_fr_value: 'Keine Tagestoleranz gefunden',
+    be_nl_tax_label: 'Steuer Niederlande→Belgien',
+    be_nl_value: 'Keine Regel bestätigt: Fragen Sie Ihre Behörde',
+    lu_announced_value: '34 Tage angekündigt: noch kein Zähler',
+    pending_be_fr_tax:
+      'Keine Tagestoleranz gefunden. Von Frankreich aus gearbeitete Tage werden in der Regel anteilig ab dem ersten Tag in Frankreich besteuert (Antwort des französischen Ministers vom 28. Mai 2024). Wer vor dem 1. Jan. 2012 Grenzgänger wurde, behält bis 2033 ein eigenes Regime mit einer Grenze von 30 Tagen ausserhalb der belgischen Grenzzone. Ein 2021 unterzeichnetes Abkommen war zu diesem Zeitpunkt noch nicht ratifiziert. Hier läuft kein Zähler: Fragen Sie Ihre Behörde.',
+    pending_be_nl_tax:
+      'Auf der Abkommensseite der niederländischen Steuerbehörde wurde keine Homeoffice-Toleranz gefunden, sie behandelt diese Tage nicht, und es wurde kein belgischer Primärtext gefunden. Hier läuft kein Zähler: Fragen Sie eine Beratung oder Ihre Behörde.',
+    pace_line:
+      'Aktuelles Tempo: {pct} % der bisher erfassten Arbeitstage ({days}).',
+    pace_above:
+      'Aktuelles Tempo: {pct} % der bisher erfassten Arbeitstage ({days}), über {limit} %. Bleibt es so, wird diese Schwelle überschritten.',
+    multi_employer_note:
+      'Diese Zähler erfassen nur die hier eingetragenen Tage. Andere Stellen im selben Jahr können ebenfalls zählen.',
+    ruleAndConditions: 'Regel und Bedingungen',
+    status_approaching: 'Grenze naht',
+    status_at_limit: 'An der Grenze',
+    status_ss_under: 'Unter 25 %',
+    status_a1_required: 'A1 erforderlich',
+    status_a1_recorded: 'A1 erfasst',
+    status_ss_residence: 'Ab 50 %: Wohnsitzstaat',
+    status_floor_met: 'Minimum erfüllt',
+    status_floor_below: 'Unter dem Minimum',
+    status_floor_progress: 'Monat läuft',
+    status_floor_no_data: 'Keine Tage erfasst',
   },
   app: {
     title: 'Ihr Tagesprotokoll',
@@ -162,7 +243,7 @@ const de: Dict = {
     deleted: 'Alle Tage gelöscht.',
     annualWorkingDays: 'Vertragliche Arbeitstage / Jahr',
     annualWorkingDaysHint:
-      'Wird verwendet, um Tageszahlen in Prozente umzurechnen. Der Standard hängt von Ihrem Grenzpaket ab.',
+      'Dient zur Umrechnung der Tage in einen Prozentsatz. Der Standardwert ist eine Annahme, ausser 240 bei Frankreich–Schweiz, der amtlichen vereinfachten Vollzeitbasis: Tragen Sie Ihren eigenen Wert ein, bei Teilzeit tiefer.',
     installHint: 'Fügen Sie BorderDay zum Startbildschirm hinzu für eine App mit einem Tippen.',
     emptyMonth: 'Diesen Monat noch keine Tage erfasst.',
     weekdays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
@@ -173,12 +254,20 @@ const de: Dict = {
     previewCta: 'Tarife ansehen',
     previewMonthOnly: 'In der Vorschau kann nur der aktuelle Monat erfasst werden.',
     savedToAccount: 'In Ihrem Konto gespeichert.',
-    savedToCompany: 'In Ihrem {company}-Konto gespeichert. Ihr HR-Team sieht Art und Datum jedes Tages sowie Ihre Zähler.',
+    savedToCompany:
+      'In Ihrem {company}-Konto gespeichert. Ihr HR-Team sieht Art und Datum jedes Tages, ob er als berufliche Übernachtung markiert ist, und Ihre Zähler.',
     saveError: 'Speichern fehlgeschlagen. Bitte versuchen Sie es erneut.',
     deleteAllAccountConfirm: 'Alle in Ihrem Konto gespeicherten Tage löschen? Das kann nicht rückgängig gemacht werden.',
     importLocal: '{count} Tage von diesem Gerät in Ihr Konto kopieren',
     disclaimerBanner:
       'Nur Dokumentationstool — keine Steuer- oder Rechtsberatung. Schwellen bei der zuständigen Behörde prüfen.',
+    employmentPercent: 'Beschäftigungsgrad dieses Jahr',
+    employmentPercentHint:
+      'Teilzeit und unterjährig zusammen: 80 für 80 % das ganze Jahr, 50 für Vollzeit über sechs Monate. Manche Tagesgrenzen werden damit gekürzt. In einem Unternehmenskonto sieht HR diesen Wert.',
+    a1InPlace: 'A1-Bescheinigung vorhanden (Rahmenübereinkommen)',
+    a1ValidUntil: 'A1 gültig bis',
+    a1Hint:
+      'Von Ihnen oder Ihrem Arbeitgeber eingetragen. BorderDay prüft die Bescheinigung nicht. In einem Unternehmenskonto sieht HR sie.',
   },
   pricing: {
     title: 'Preise',
@@ -197,7 +286,8 @@ const de: Dict = {
     individualTax: 'inkl. MwSt.',
     includes: 'Enthalten',
     include1: 'Alle Grenzpakete Ihres Plans',
-    include2: 'Getrennte Steuer- und Sozialversicherungs-Zähler',
+    include2:
+      'Steuerzähler, wo verfügbar, Sozialversicherungszähler auf jedem Korridor',
     include3: 'Warnungen bei Annäherung an die Schwellen',
     include4: 'Daten jederzeit exportieren und löschen',
     include5: 'Englisch, Französisch, Deutsch, Italienisch',
@@ -225,15 +315,20 @@ const de: Dict = {
     q2: 'Wo wird mein Tagesprotokoll gespeichert?',
     a2: 'Ohne Abo nur auf Ihrem Gerät (IndexedDB im Browser). Mit aktivem Abo oder Unternehmenskonto in Ihrem BorderDay-Konto. In beiden Fällen können Sie JSON oder CSV exportieren oder alles löschen.',
     q3: 'Warum sind manche Zähler deaktiviert?',
-    a3: 'Wir zeigen eine Zahl nur, wenn sie auf einer amtlichen Seite bestätigt ist. Sonst zeigt der Zähler „Regel wird bestätigt“ und erfindet keinen Wert.',
+    a3:
+      'Wir zeigen eine Zahl nur, wenn die Zählweise in einer amtlichen Quelle bestätigt ist. Sonst erklärt die Karte, warum kein Zähler läuft, und verweist auf Ihre Behörde. Sie erfindet nie eine Zahl.',
     q4: 'Erfassen Sie meinen Standort?',
     a4: 'Nein. Version 1 hat kein GPS und keine Hintergrund-Standortbestimmung. Sie erfassen Tage selbst.',
     q5: 'Welche Grenzen decken Sie ab?',
-    a5: 'Genf/Romandie–Frankreich, Basel–Frankreich/Deutschland, Luxemburg mit Frankreich/Belgien/Deutschland, Belgien beginnend mit Pendlern aus Frankreich und den Niederlanden, und Tessin–Italien.',
+    a5:
+      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf vier: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Deutschland→Schweiz, Frankreich→Luxemburg und Italien→Schweiz. Noch kein Steuerzähler: Kantone des Abkommens von 1983←Frankreich (Basel und andere), Belgien→Luxemburg, Deutschland→Luxemburg, Frankreich→Belgien und Niederlande→Belgien.',
     q6: 'Und der App Store?',
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
     a7: 'Checkout nutzt Stripe Managed Payments: Link ist der Merchant of Record und übernimmt MwSt./GST im Checkout. Firmen- und Einzelpläne beinhalten eine 7-Tage-Testphase; eine Karte ist bei der Anmeldung nötig. Aktionscodes werden akzeptiert. Siehe AGB zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
+    q8: 'Was deckt BorderDay nicht ab?',
+    a8:
+      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die von manchen Kantonen verlangte jährliche Telearbeitsquote. Im Zweifel fragen Sie Ihre Behörde.',
   },
   privacy: {
     title: 'Datenschutz',
@@ -243,10 +338,10 @@ const de: Dict = {
       'Verantwortlicher im Sinne der DSGVO und Verantwortlicher im Sinne des schweizerischen Bundesgesetzes über den Datenschutz (DSG / nDSG) für BorderDay-Unternehmenskonten und die damit verbundenen Verarbeitungen ist die PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (IDE/UID CHE-312.418.158). Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com.',
     s1Title: 'Was wir erheben',
     s1Body:
-      'Einzel-Logger (Gerät): Grenzpaket, Tagestyp (Telearbeit, vor Ort, Drittstaat, nicht gearbeitet), optionale Notizen, vertragliche Arbeitstage/Jahr. Unternehmenskonten: Firmenname, E-Mails/Namen, Rollen, Grenzpaket, Tagestypen und Daten, Einwilligungen. Ausgerichtet auf DSGVO und das schweizerische Bundesgesetz über den Datenschutz (DSG / nDSG).',
+      'Individuelles Protokoll (Gerät): Grenzpaket, Art jedes Tages (Telearbeit, vor Ort, Drittstaat, arbeitsfrei), Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad und A1, falls eingetragen. Unternehmenskonten (falls genutzt): Firmenname, E-Mails/Namen der Mitglieder, Rollen, Grenzpaket, Tagesarten und Daten, Markierungen auswärtiger Übernachtung, Beschäftigungsgrad und A1, falls eingetragen, Einwilligungsnachweise. Ausgelegt auf die DSGVO und das Schweizer Datenschutzgesetz (DSG / nDSG).',
     s2Title: 'Was wir nicht erheben',
     s2Body:
-      'Kein GPS, keine Dauerstandortbestimmung, keine IP-Geolokalisierung als Arbeitsort. HR sieht Tagestypen und Anzahlen — dieselben Zähler wie die Mitarbeitenden. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
+      'Kein GPS, keine Dauerstandortbestimmung, keine IP-Geolokalisierung als Arbeitsort. HR sieht Tagestypen, Markierungen auswärtiger Übernachtung, Beschäftigungsgrad und A1, falls eingetragen, und Anzahlen — dieselben Zähler wie die Mitarbeitenden. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
     s3Title: 'Konto-E-Mail',
     s3Body:
       'Konto-E-Mails (Registrierung, Magic Link, Einladungen) nur für Auth und Firmeneinladungen. Löschung: privacy@borderday.com.',
@@ -268,7 +363,7 @@ const de: Dict = {
     title: 'BorderDay für Privatpersonen',
     heroTitle: 'Eigene Grenztage auf dem Gerät erfassen',
     heroBody:
-      'Mitarbeitende und Selbsttracker: Telearbeit, vor Ort, Reise und nicht gearbeitet an offiziellen Steuer- und Sozialversicherungsschwellen messen. Nutzt Ihr Arbeitgeber BorderDay, treten Sie über den Einladungslink bei und teilen dieselben Zähler mit HR.',
+      'Mitarbeitende und Selbsterfassende können Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage erfassen: Sozialversicherungszähler auf jedem Korridor, Steuerzähler dort, wo die Regel heute zählbar ist. Nutzt Ihr Arbeitgeber BorderDay, treten Sie über den Einladungslink bei und teilen dieselben Zähler mit HR.',
     ctaApp: 'Mitarbeiter-App öffnen',
     ctaPricing: 'Einzelpreis',
     ctaCompanies: 'Mein Arbeitgeber braucht den Unternehmensplan',
@@ -297,7 +392,8 @@ const de: Dict = {
     inviteCreated: 'Einladung erstellt. Link an die Person weitergeben.',
     pendingInvites: 'Offene Einladungen',
     dashboardTitle: 'HR-Dashboard',
-    dashboardSubtitle: 'Steuer- und Sozialversicherungs-Zähler pro Person. Nur Tagestypen und Anzahlen — niemals Standort.',
+    dashboardSubtitle:
+      'Steuer- und Sozialversicherungszähler je Mitarbeitenden. Tagesarten, Markierungen auswärtiger Übernachtung und Anzahlen — nie der Standort.',
     filterBorder: 'Nach Grenze filtern',
     filterStatus: 'Nach Status filtern',
     filterAll: 'Alle',
@@ -306,7 +402,8 @@ const de: Dict = {
     noEmployees: 'Noch keine Mitarbeitenden. Einladungslink erstellen.',
     viewHistory: 'Tageshistorie',
     historyTitle: 'Tageshistorie der Person',
-    historySubtitle: 'Nur Tagestyp und Datum. Keine Standortdaten.',
+    historySubtitle:
+      'Nur Tagesart, Datum und Markierung auswärtiger Übernachtung. Es werden keine Standortdaten gespeichert.',
     backDashboard: 'Zurück zum Dashboard',
     joinTitle: 'Unternehmen beitreten',
     joinSubtitle: 'Einladung annehmen, Einwilligung erteilen und Grenzpaket wählen.',
@@ -315,7 +412,7 @@ const de: Dict = {
     pickBorder: 'Ihr Grenzpaket',
     consentTitle: 'Einwilligung — was HR sehen kann',
     consentBody:
-      'Mit dem Beitritt stimmen Sie zu, dass Owner und HR-Ansicht Ihres Arbeitgebers sehen: Name, E-Mail, Grenzpaket, vertragliche Arbeitstage, Tagestyp und Datum jedes erfassten Tages sowie dieselben Steuer-/Sozialversicherungs-Zähler wie Sie. Kein GPS und keine Standortspur — BorderDay erhebt keinen Standort. Export und Löschung Ihres Protokolls sind möglich. Aufbewahrung standardmäßig 24 Monate. Tracking-Tool, keine Steuer- oder Rechtsberatung.',
+      'Mit dem Beitritt stimmen Sie zu, dass Inhaber und HR-Leser Ihres Arbeitgebers sehen können: Ihren Namen, Ihre E-Mail, das gewählte Grenzpaket, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob er als auswärtige berufliche Übernachtung markiert ist, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad und Ihre A1 eintragen. Sie sehen weder GPS noch Standortverläufe — BorderDay erhebt keinen Standort. Sie können Ihr Protokoll exportieren oder löschen. Aufbewahrung standardmässig 24 Monate (Firmeneinstellung). Tracking-Tool, keine Steuer- oder Rechtsberatung.',
     consentAccept: 'Ich habe den Hinweis gelesen und akzeptiere ihn',
     consentRequired: 'Einwilligung erforderlich, um fortzufahren.',
     demoDataBadge: 'DEMO-DATEN',
@@ -341,6 +438,9 @@ const de: Dict = {
     colDate: 'Datum',
     colDayType: 'Tagesart',
     emptyCounters: 'Noch kein Grenzpaket gewählt.',
+    profileTitle: 'Beschäftigungsgrad und A1',
+    saveProfile: 'Speichern',
+    profileSaved: 'Gespeichert.',
   },
 
   terms: {

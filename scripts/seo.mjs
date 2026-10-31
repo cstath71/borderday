@@ -90,37 +90,37 @@ export const PAGES = {
     en: {
       title: 'BorderDay — Cross-border day limits for HR and employees',
       description:
-        'Employer-first day counting for tax and social-security thresholds across Geneva, Basel, Ticino, Luxembourg and Belgium. Company from €5/employee/mo (min €39). 7-day trial.',
+        'Employer-first day counting for cross-border staff. Social-security counters on nine corridors, tax counters on four. Company from €5/employee/mo (min €39). 7-day trial.',
       h1: 'One place for every border your people work across',
       summary:
-        'BorderDay helps HR track telework, on-site and travel days per employee against official tax and social-security day limits on five borders. Company plan: €5 per active employee per month (€39 minimum); individuals €4.99/month or €49/year. 7-day trial with card required. A tracking tool — not tax or legal advice.',
+        'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on four of them. Company plan: €5 per active employee per month (€39 minimum); individuals €4.99/month or €49/year. 7-day trial with card required. A tracking tool — not tax or legal advice.',
       crumbs: [['Home', '']],
     },
     fr: {
       title: 'BorderDay — Limites de jours transfrontaliers pour les RH',
       description:
-        'Comptage des jours pour les seuils fiscaux et de sécurité sociale (Genève, Bâle, Tessin, Luxembourg, Belgique). Entreprise dès 5 €/collaborateur/mois (min. 39 €). Essai 7 jours.',
+        'Comptage des jours pour équipes transfrontalières. Compteurs de sécurité sociale sur neuf corridors, compteurs fiscaux sur quatre. Entreprise dès 5 €/collaborateur/mois (min. 39 €). Essai 7 jours.',
       h1: 'Un seul endroit pour chaque frontière de vos équipes',
       summary:
-        'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur au regard des seuils officiels fiscaux et de sécurité sociale sur cinq frontières. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €) ; particuliers 4,99 €/mois ou 49 €/an. Essai de 7 jours avec carte requise. Outil de suivi — pas un conseil fiscal ou juridique.',
+        'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur quatre d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €) ; particuliers 4,99 €/mois ou 49 €/an. Essai de 7 jours avec carte requise. Outil de suivi — pas un conseil fiscal ou juridique.',
       crumbs: [['Accueil', '']],
     },
     de: {
       title: 'BorderDay — Grenzüberschreitende Tagesschwellen für HR',
       description:
-        'Tageszählung für Steuer- und Sozialversicherungsschwellen (Genf, Basel, Tessin, Luxemburg, Belgien). Unternehmen ab 5 €/Mitarbeitende/Monat (min. 39 €). 7-Tage-Test.',
+        'Tageszählung für grenzüberschreitende Teams. Sozialversicherungszähler auf neun Korridoren, Steuerzähler auf vier. Unternehmen ab 5 €/Mitarbeitende/Monat (min. 39 €). 7-Tage-Test.',
       h1: 'Ein Ort für jede Grenze Ihrer Mitarbeitenden',
       summary:
-        'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden an offiziellen Steuer- und Sozialversicherungsschwellen auf fünf Grenzen zu messen. Unternehmensplan: 5 € je aktive Mitarbeitende und Monat (Minimum 39 €); Einzelpersonen 4,99 €/Monat oder 49 €/Jahr. 7-Tage-Test mit Karte. Tracking-Tool — keine Steuer- oder Rechtsberatung.',
+        'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf vier davon. Unternehmensplan: 5 € je aktive Mitarbeitende und Monat (Minimum 39 €); Einzelpersonen 4,99 €/Monat oder 49 €/Jahr. 7-Tage-Test mit Karte. Tracking-Tool — keine Steuer- oder Rechtsberatung.',
       crumbs: [['Start', '']],
     },
     it: {
       title: 'BorderDay — Soglie di giorni transfrontalieri per HR',
       description:
-        'Conteggio giorni per soglie fiscali e di sicurezza sociale (Ginevra, Basilea, Ticino, Lussemburgo, Belgio). Azienda da 5 €/collaboratore/mese (min. 39 €). Prova 7 giorni.',
+        'Conteggio giorni per team transfrontalieri. Contatori di sicurezza sociale su nove corridoi, contatori fiscali su quattro. Azienda da 5 €/collaboratore/mese (min. 39 €). Prova 7 giorni.',
       h1: 'Un solo posto per ogni frontiera dei vostri team',
       summary:
-        'BorderDay aiuta HR a registrare telelavoro, giorni in sede e missioni per collaboratore rispetto alle soglie ufficiali fiscali e di sicurezza sociale su cinque frontiere. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €); individuali 4,99 €/mese o 49 €/anno. Prova di 7 giorni con carta richiesta. Strumento di tracciamento — non consulenza fiscale o legale.',
+        'BorderDay aiuta HR a registrare telelavoro, giorni in sede e missioni per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su quattro di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €); individuali 4,99 €/mese o 49 €/anno. Prova di 7 giorni con carta richiesta. Strumento di tracciamento — non consulenza fiscale o legale.',
       crumbs: [['Home', '']],
     },
   },
@@ -181,7 +181,7 @@ export const PAGES = {
         'Is BorderDay tax advice? Where is the day log stored? Which borders are covered? How do payments and the 7-day trial work?',
       h1: 'FAQ',
       summary:
-        'BorderDay is a record-keeping and reminder tool, not tax or legal advice. Day logs stay on the device in version 1; HR sees day types and counts only, never location. Borders in v1: Geneva/Romandie–France, Basel–France/Germany, Luxembourg–FR/BE/DE, Belgium←FR/NL, Ticino–Italy. Checkout uses Stripe Managed Payments with a 7-day trial (card required).',
+        'BorderDay is a record-keeping and reminder tool, not tax or legal advice. Paid day logs are saved to your account, the free preview stays on the device; HR never sees location. Nine corridors: social-security counters on all, tax counters on four (Geneva and other non-1983 cantons, Germany→Switzerland, France→Luxembourg, Italy→Switzerland). Checkout uses Stripe Managed Payments with a 7-day trial (card required).',
       crumbs: [
         ['Home', ''],
         ['FAQ', 'faq'],
@@ -193,7 +193,7 @@ export const PAGES = {
         'BorderDay est-il un conseil fiscal ? Où est le journal ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?',
       h1: 'FAQ',
       summary:
-        'BorderDay est un outil de suivi et de rappel, pas un conseil fiscal ou juridique. Le journal reste sur l’appareil en v1 ; les RH voient types de jours et compteurs uniquement, jamais la localisation. Frontières v1 : Genève/Romandie–France, Bâle–France/Allemagne, Luxembourg–FR/BE/DE, Belgique←FR/NL, Tessin–Italie. Paiement via Stripe Managed Payments avec essai de 7 jours (carte requise).',
+        'BorderDay est un outil de suivi et de rappel, pas un conseil fiscal ou juridique. Avec un abonnement, le journal est enregistré dans votre compte ; l’aperçu gratuit reste sur l’appareil ; les RH ne voient jamais la localisation. Neuf corridors : compteurs de sécurité sociale sur tous, compteurs fiscaux sur quatre (Genève et autres cantons hors accord de 1983, Allemagne→Suisse, France→Luxembourg, Italie→Suisse). Paiement via Stripe Managed Payments avec essai de 7 jours (carte requise).',
       crumbs: [
         ['Accueil', ''],
         ['FAQ', 'faq'],
@@ -205,7 +205,7 @@ export const PAGES = {
         'Ist BorderDay Steuerberatung? Wo liegt das Tagebuch? Welche Grenzen? Wie funktionieren Zahlung und 7-Tage-Test?',
       h1: 'FAQ',
       summary:
-        'BorderDay ist ein Erfassungs- und Erinnerungstool, keine Steuer- oder Rechtsberatung. Das Tagebuch bleibt in v1 auf dem Gerät; HR sieht nur Tagesarten und Zähler, nie den Standort. Grenzen v1: Genf/Romandie–Frankreich, Basel–FR/DE, Luxemburg–FR/BE/DE, Belgien←FR/NL, Tessin–Italien. Checkout über Stripe Managed Payments mit 7-Tage-Test (Karte nötig).',
+        'BorderDay ist ein Erfassungs- und Erinnerungstool, keine Steuer- oder Rechtsberatung. Mit Abo wird das Protokoll im Konto gespeichert, die Gratisvorschau bleibt auf dem Gerät; HR sieht nie den Standort. Neun Korridore: Sozialversicherungszähler auf allen, Steuerzähler auf vier (Genf und weitere Kantone ausserhalb des Abkommens von 1983, Deutschland→Schweiz, Frankreich→Luxemburg, Italien→Schweiz). Checkout über Stripe Managed Payments mit 7-Tage-Test (Karte nötig).',
       crumbs: [
         ['Start', ''],
         ['FAQ', 'faq'],
@@ -217,7 +217,7 @@ export const PAGES = {
         'BorderDay è consulenza fiscale? Dove è il diario? Quali frontiere? Come funzionano pagamenti e prova di 7 giorni?',
       h1: 'FAQ',
       summary:
-        'BorderDay è uno strumento di registrazione e promemoria, non consulenza fiscale o legale. Il diario resta sul dispositivo in v1; HR vede solo tipi di giorno e contatori, mai la posizione. Frontiere v1: Ginevra/Romandia–Francia, Basilea–FR/DE, Lussemburgo–FR/BE/DE, Belgio←FR/NL, Ticino–Italia. Checkout con Stripe Managed Payments e prova di 7 giorni (carta richiesta).',
+        'BorderDay è uno strumento di registrazione e promemoria, non consulenza fiscale o legale. Con un piano il registro è salvato nell’account, l’anteprima gratuita resta sul dispositivo; HR non vede mai la posizione. Nove corridoi: contatori di sicurezza sociale su tutti, contatori fiscali su quattro (Ginevra e altri cantoni fuori dall’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo, Italia→Svizzera). Checkout con Stripe Managed Payments e prova di 7 giorni (carta richiesta).',
       crumbs: [
         ['Home', ''],
         ['FAQ', 'faq'],
@@ -228,10 +228,10 @@ export const PAGES = {
     en: {
       title: 'For individuals — BorderDay',
       description:
-        'Log your own telework and border days on your device against official tax and social-security limits. €4.99/month or €49/year. Join via employer invite when they use BorderDay.',
+        'Log your own telework and border days: social-security counters on every corridor, tax counters where the rule can be counted today. €4.99/month or €49/year. Join via employer invite when they use BorderDay.',
       h1: 'BorderDay for individuals',
       summary:
-        'Employees and self-trackers can log telework, on-site, trip and non-working days against official limits. Individual plan: €4.99/month or €49/year (incl. VAT), 7-day trial with card required. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
+        'Employees and self-trackers can log telework, on-site, trip and non-working days. Social-security counters run on every corridor; tax counters run on four. Individual plan: €4.99/month or €49/year (incl. VAT), 7-day trial with card required. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
       crumbs: [
         ['Home', ''],
         ['For individuals', 'for-individuals'],
@@ -278,7 +278,7 @@ export const PAGES = {
     en: {
       title: 'Privacy — BorderDay',
       description:
-        'How BorderDay handles company and employee day data: no GPS, HR sees day types and counts only, GDPR and Swiss FADP oriented, processors named.',
+        'How BorderDay handles company and employee day data: no GPS, HR sees day types, night-away marks and counts, GDPR and Swiss FADP oriented, processors named.',
       h1: 'Privacy',
       summary:
         'BorderDay collects day types and counts for company accounts — not GPS or continuous location. HR sees the same counters employees see. Production uses Supabase (EU), Resend, and Stripe/Link. Contact privacy@borderday.com.',
@@ -290,7 +290,7 @@ export const PAGES = {
     fr: {
       title: 'Confidentialité — BorderDay',
       description:
-        'Traitement des données BorderDay : pas de GPS, les RH voient types de jours et compteurs uniquement, orientation RGPD et LPD suisse.',
+        'Traitement des données BorderDay : pas de GPS, les RH voient types de jours, marques de nuit hors du domicile et compteurs, orientation RGPD et LPD suisse.',
       h1: 'Confidentialité',
       summary:
         'BorderDay collecte types de jours et compteurs pour les comptes entreprise — pas de GPS ni de localisation continue. Les RH voient les mêmes compteurs que les collaborateurs. Production : Supabase (UE), Resend, Stripe/Link. Contact privacy@borderday.com.',
@@ -302,7 +302,7 @@ export const PAGES = {
     de: {
       title: 'Datenschutz — BorderDay',
       description:
-        'Umgang mit Unternehmens- und Mitarbeitendendaten: kein GPS, HR sieht nur Tagesarten und Zähler, DSGVO- und CH-DSG-orientiert.',
+        'Umgang mit Unternehmens- und Mitarbeitendendaten: kein GPS, HR sieht Tagesarten, Markierungen auswärtiger Übernachtung und Zähler, DSGVO- und CH-DSG-orientiert.',
       h1: 'Datenschutz',
       summary:
         'BorderDay erfasst Tagesarten und Zähler für Unternehmenskonten — kein GPS, keine Dauerortung. HR sieht dieselben Zähler wie Mitarbeitende. Produktion: Supabase (EU), Resend, Stripe/Link. Kontakt privacy@borderday.com.',
@@ -314,7 +314,7 @@ export const PAGES = {
     it: {
       title: 'Privacy — BorderDay',
       description:
-        'Trattamento dati BorderDay: niente GPS, HR vede solo tipi di giorno e contatori, orientato a GDPR e LPD svizzera.',
+        'Trattamento dati BorderDay: niente GPS, HR vede tipi di giorno, segni di notte fuori e contatori, orientato a GDPR e LPD svizzera.',
       h1: 'Privacy',
       summary:
         'BorderDay raccoglie tipi di giorno e contatori per account aziendali — niente GPS né localizzazione continua. HR vede gli stessi contatori dei collaboratori. Produzione: Supabase (UE), Resend, Stripe/Link. Contatto privacy@borderday.com.',
@@ -428,7 +428,7 @@ export const PAGES = {
     en: {
       title: 'Company sign-up — BorderDay',
       description:
-        'Create a BorderDay company account for HR day counting across five borders. Then subscribe on Pricing (€5/employee/mo, min €39).',
+        'Create a BorderDay company account for HR day counting across nine corridors. Then subscribe on Pricing (€5/employee/mo, min €39).',
       h1: 'Company sign-up',
       summary:
         'Create a company account with email or Google, invite employees, and subscribe on the Pricing page. Company plan: €5 per active employee per month, €39 minimum, 7-day trial with card required.',
@@ -440,7 +440,7 @@ export const PAGES = {
     fr: {
       title: 'Inscription entreprise — BorderDay',
       description:
-        'Créez un compte entreprise BorderDay pour le suivi RH sur cinq frontières. Puis abonnez-vous (5 €/collaborateur/mois, min. 39 €).',
+        'Créez un compte entreprise BorderDay pour le suivi RH sur neuf corridors. Puis abonnez-vous (5 €/collaborateur/mois, min. 39 €).',
       h1: 'Inscription entreprise',
       summary:
         'Créez un compte entreprise avec e-mail ou Google, invitez vos collaborateurs, puis abonnez-vous sur Tarifs. Offre entreprise : 5 € par collaborateur actif et par mois, minimum 39 €, essai 7 jours avec carte.',
@@ -452,7 +452,7 @@ export const PAGES = {
     de: {
       title: 'Unternehmensregistrierung — BorderDay',
       description:
-        'BorderDay-Unternehmenskonto für HR-Tageszählung auf fünf Grenzen. Danach Abo unter Preise (5 €/Mitarbeitende/Monat, min. 39 €).',
+        'BorderDay-Unternehmenskonto für HR-Tageszählung auf neun Korridoren. Danach Abo unter Preise (5 €/Mitarbeitende/Monat, min. 39 €).',
       h1: 'Unternehmensregistrierung',
       summary:
         'Unternehmenskonto mit E-Mail oder Google anlegen, Mitarbeitende einladen, unter Preise abonnieren. Plan: 5 € je aktive Mitarbeitende und Monat, Minimum 39 €, 7-Tage-Test mit Karte.',
@@ -464,7 +464,7 @@ export const PAGES = {
     it: {
       title: 'Registrazione azienda — BorderDay',
       description:
-        'Crea un account aziendale BorderDay per il conteggio HR su cinque frontiere. Poi abbonati (5 €/collaboratore/mese, min. 39 €).',
+        'Crea un account aziendale BorderDay per il conteggio HR su nove corridoi. Poi abbonati (5 €/collaboratore/mese, min. 39 €).',
       h1: 'Registrazione azienda',
       summary:
         'Crea un account aziendale con e-mail o Google, invita i collaboratori e abbonati in Prezzi. Piano: 5 € per collaboratore attivo al mese, minimo 39 €, prova 7 giorni con carta.',
@@ -475,6 +475,9 @@ export const PAGES = {
     },
   },
 };
+
+/** Corridors with a running tax counter. tests/seo.test.ts holds this equal to the packs. */
+export const TAX_COUNTER_CORRIDORS = ['geneva_fr', 'basel_de', 'luxembourg_fr', 'ticino_it'];
 
 /** FAQ pairs used on home + FAQ JSON-LD (EN source of truth; localized below). Matches site FAQ copy. */
 export const FAQ = {
@@ -489,11 +492,11 @@ export const FAQ = {
     ],
     [
       'Do you track my location?',
-      'No. Version 1 has no GPS and no background location. You log days yourself. HR sees day types and counts only — never location.',
+      'No. Version 1 has no GPS and no background location. You log days yourself. HR sees day types, night-away marks and counts — never location.',
     ],
     [
       'Which borders do you cover?',
-      'Geneva/Romandie–France, Basel–France/Germany, Luxembourg with France/Belgium/Germany, Belgium starting with commuters from France and the Netherlands, and Ticino–Italy.',
+      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on four: Geneva and other non-1983 cantons←France, Germany→Switzerland, France→Luxembourg and Italy→Switzerland. No tax counter yet: the 1983-agreement cantons←France (Basel and others), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium and Netherlands→Belgium.',
     ],
     [
       'How much does BorderDay cost?',
@@ -502,6 +505,10 @@ export const FAQ = {
     [
       'How do payments work?',
       'Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
+    ],
+    [
+      'What does BorderDay not cover?',
+      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate report some cantons require. When in doubt, check with your authority.',
     ],
   ],
   fr: [
@@ -519,7 +526,7 @@ export const FAQ = {
     ],
     [
       'Quelles frontières couvrez-vous ?',
-      'Genève/Romandie–France, Bâle–France/Allemagne, Luxembourg avec France/Belgique/Allemagne, Belgique en commençant par les navetteurs depuis la France et les Pays-Bas, et Tessin–Italie.',
+      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur quatre : Genève et autres cantons hors accord de 1983←France, Allemagne→Suisse, France→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal : cantons de l’accord de 1983←France (Bâle et autres), Belgique→Luxembourg, Allemagne→Luxembourg, France→Belgique et Pays-Bas→Belgique.',
     ],
     [
       'Combien coûte BorderDay ?',
@@ -528,6 +535,10 @@ export const FAQ = {
     [
       'Comment fonctionnent les paiements ?',
       'Le paiement utilise Stripe Managed Payments : Link est le vendeur enregistré et gère TVA/GST. Codes promo supportés. Voir les Conditions pour la résiliation et le droit de rétractation UE de 14 jours.',
+    ],
+    [
+      'Que ne couvre pas BorderDay ?',
+      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme le taux de télétravail annuel exigé par certains cantons. En cas de doute, vérifiez auprès de votre autorité.',
     ],
   ],
   de: [
@@ -541,11 +552,11 @@ export const FAQ = {
     ],
     [
       'Erfasst ihr meinen Standort?',
-      'Nein. Version 1 hat kein GPS und keine Hintergrundortung. Sie erfassen Tage selbst. HR sieht nur Tagesarten und Zähler — nie den Standort.',
+      'Nein. Version 1 hat kein GPS und keine Hintergrundortung. Sie erfassen Tage selbst. HR sieht Tagesarten, Markierungen auswärtiger Übernachtung und Zähler — nie den Standort.',
     ],
     [
       'Welche Grenzen deckt ihr ab?',
-      'Genf/Romandie–Frankreich, Basel–Frankreich/Deutschland, Luxemburg mit Frankreich/Belgien/Deutschland, Belgien beginnend mit Pendlerinnen und Pendlern aus Frankreich und den Niederlanden, sowie Tessin–Italien.',
+      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf vier: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Deutschland→Schweiz, Frankreich→Luxemburg und Italien→Schweiz. Noch kein Steuerzähler: Kantone des Abkommens von 1983←Frankreich (Basel und andere), Belgien→Luxemburg, Deutschland→Luxemburg, Frankreich→Belgien und Niederlande→Belgien.',
     ],
     [
       'Was kostet BorderDay?',
@@ -554,6 +565,10 @@ export const FAQ = {
     [
       'Wie funktionieren Zahlungen?',
       'Checkout über Stripe Managed Payments: Link ist Merchant of Record und handhabt MwSt./GST. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
+    ],
+    [
+      'Was deckt BorderDay nicht ab?',
+      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die von manchen Kantonen verlangte jährliche Telearbeitsquote. Im Zweifel fragen Sie Ihre Behörde.',
     ],
   ],
   it: [
@@ -567,11 +582,11 @@ export const FAQ = {
     ],
     [
       'Tracciate la mia posizione?',
-      'No. La versione 1 non ha GPS né localizzazione in background. Registrate i giorni voi. HR vede solo tipi di giorno e contatori — mai la posizione.',
+      'No. La versione 1 non ha GPS né localizzazione in background. Registrate i giorni voi. HR vede tipi di giorno, segni di notte fuori e contatori — mai la posizione.',
     ],
     [
       'Quali frontiere coprite?',
-      'Ginevra/Romandia–Francia, Basilea–Francia/Germania, Lussemburgo con Francia/Belgio/Germania, Belgio a partire dai pendolari da Francia e Paesi Bassi, e Ticino–Italia.',
+      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su quattro: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, Germania→Svizzera, Francia→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale per ora: cantoni dell’accordo del 1983←Francia (Basilea e altri), Belgio→Lussemburgo, Germania→Lussemburgo, Francia→Belgio e Paesi Bassi→Belgio.',
     ],
     [
       'Quanto costa BorderDay?',
@@ -580,6 +595,10 @@ export const FAQ = {
     [
       'Come funzionano i pagamenti?',
       'Il checkout usa Stripe Managed Payments: Link è il merchant of record e gestisce IVA/GST. Codici promo supportati. Vedi i Termini per disdetta e recesso UE di 14 giorni.',
+    ],
+    [
+      'Cosa non copre BorderDay?',
+      'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. I corridoi non elencati, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni corridoio. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come il tasso annuo di telelavoro richiesto da alcuni cantoni. In caso di dubbio, verificate con la vostra autorità.',
     ],
   ],
 };
@@ -751,15 +770,18 @@ export function ldScript(graph) {
 export function llmsTxt() {
   return `# BorderDay
 
-> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days against official tax and social-security day limits on five borders. HR sees day types and counts only — never location.
+> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on four. HR sees day types, night-away marks and counts — never location.
 
 - Site: ${BASE}
 - Languages: English, French, German, Italian
-- Borders covered (v1): Geneva/Romandie–France, Basel–France/Germany, Luxembourg–FR/BE/DE, Belgium (FR→BE, NL→BE), Ticino–Italy
+- Corridors covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
+- Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
+- Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
+- No tax counter yet: 1983-agreement cantons←France (Basel and others, regime under review), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium, Netherlands→Belgium. Do not describe BorderDay as tracking tax limits on these corridors.
 - Day log (individual logger): stored on the device (local-first). No continuous GPS.
 - Company accounts: invite by email, HR dashboard with the same counters employees see
 - Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution
-- Thresholds shown are taken from public official sources and may change; unconfirmed rules stay disabled
+- Thresholds shown are taken from public official sources and may change; where a rule cannot be counted, no number is shown and users are pointed to their authority
 - Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT); yearly company minimum €390 (2 months free). 7-day trial with card required. Checkout via Stripe Managed Payments (sold through Link).
 - Contact: ${CFG.contact_email}
 
@@ -791,7 +813,7 @@ export function llmsFullTxt() {
     `
 ## Product summary
 
-BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types only (telework / on site / third country / non-working). Separate counters for tax and social security. Warnings as limits approach. CSV export for audit. Four languages.
+BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / third country / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export for audit. Four languages.
 
 ## Pricing (as published on the site)
 

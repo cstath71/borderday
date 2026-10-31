@@ -10,6 +10,9 @@ export interface UserMeta {
   annualWorkingDays: number | null;
   warnAt: number[]; // 0-1
   language: string;
+  employmentPercent?: number | null;
+  a1InPlace?: boolean;
+  a1ValidUntil?: string | null;
 }
 
 const DEFAULT_META: UserMeta = {
@@ -112,10 +115,10 @@ export async function exportJson(source?: DayEntry[]): Promise<string> {
 
 export async function exportCsv(source?: DayEntry[]): Promise<string> {
   const days = source ?? (await listDays());
-  const lines = ['date,type,note'];
+  const lines = ['date,type,overnight_away_for_work,note'];
   for (const d of days) {
     const note = (d.note ?? '').replaceAll('"', '""');
-    lines.push(`${d.date},${d.type},"${note}"`);
+    lines.push(`${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},"${note}"`);
   }
   return lines.join('\n');
 }

@@ -23,8 +23,8 @@ Deno.serve(async (req) => {
     if (!inv) throw new Error("Invite not found");
     const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
     const joinUrl = `${siteUrl}/en/join/${inv.token}`;
-    const from = Deno.env.get("RESEND_FROM") || "BorderDay <invites@borderday.com>";
-    const apiKey = Deno.env.get("RESEND_API_KEY");
+    const from = Deno.env.get("RESEND_FROM") || "BorderDay <hello@borderday.com>";
+    const apiKey = Deno.env.get("RESEND_API_KEY_BORDERDAY") || Deno.env.get("RESEND_API_KEY");
     const live = Deno.env.get("RESEND_LIVE") === "1";
     const allowReal = live && !!apiKey;
     const isTestAddr = /@(example\.com|example\.org|borderday\.test)$/i.test(inv.email);

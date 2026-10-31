@@ -76,6 +76,8 @@ Deno.serve(async (req) => {
       metadata,
       subscription_data: { metadata, trial_period_days: 14 },
       allow_promotion_codes: true,
+      // €0 due (trial / 100% promo) → no card required
+      payment_method_collection: "if_required",
       customer_email: user.email,
       // Stripe Tax: account default exclusive; individual prices inclusive, company exclusive.
       billing_address_collection: "required",

@@ -62,6 +62,7 @@ export const NOINDEX_PATHS = [
   'auth/sign-up',
   'auth/callback',
   'company/dashboard',
+  'demo',
 ];
 
 export function esc(s) {
@@ -484,7 +485,7 @@ export const FAQ = {
     ],
     [
       'Where is my day log stored?',
-      'On your device (IndexedDB in the browser). You can export JSON or CSV, or delete everything. Optional cloud sync is not in this version.',
+      'Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.',
     ],
     [
       'Do you track my location?',
@@ -510,7 +511,7 @@ export const FAQ = {
     ],
     [
       'Où est stocké mon journal de jours ?',
-      'Sur votre appareil (IndexedDB dans le navigateur). Vous pouvez exporter JSON ou CSV, ou tout supprimer. La synchro cloud optionnelle n’est pas dans cette version.',
+      'Sans abonnement, uniquement sur votre appareil (IndexedDB dans le navigateur). Avec un abonnement actif ou un compte entreprise, dans votre compte BorderDay. Dans tous les cas, vous pouvez exporter en JSON ou CSV, ou tout supprimer.',
     ],
     [
       'Suivez-vous ma localisation ?',
@@ -536,7 +537,7 @@ export const FAQ = {
     ],
     [
       'Wo wird mein Tagebuch gespeichert?',
-      'Auf Ihrem Gerät (IndexedDB im Browser). Export als JSON oder CSV oder vollständiges Löschen möglich. Optionale Cloud-Sync ist in dieser Version nicht enthalten.',
+      'Ohne Abo nur auf Ihrem Gerät (IndexedDB im Browser). Mit aktivem Abo oder Unternehmenskonto in Ihrem BorderDay-Konto. In beiden Fällen können Sie JSON oder CSV exportieren oder alles löschen.',
     ],
     [
       'Erfasst ihr meinen Standort?',
@@ -562,7 +563,7 @@ export const FAQ = {
     ],
     [
       'Dove è memorizzato il diario dei giorni?',
-      'Sul vostro dispositivo (IndexedDB nel browser). Potete esportare JSON o CSV, o cancellare tutto. La sync cloud opzionale non è in questa versione.',
+      'Senza abbonamento, solo sul vostro dispositivo (IndexedDB nel browser). Con un abbonamento attivo o un account aziendale, nel vostro account BorderDay. In ogni caso potete esportare JSON o CSV, o eliminare tutto.',
     ],
     [
       'Tracciate la mia posizione?',
@@ -593,6 +594,7 @@ export function robotsTxt() {
     '/*/company/*/employee/',
     '/*/join/',
     '/*/company/dashboard',
+    '/*/demo',
   ];
   let out = 'User-agent: *\nAllow: /\n';
   for (const d of disallow) out += `Disallow: ${d}\n`;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isLang } from '../../i18n';
+import { safeNext, takeRememberedNext } from '../../lib/authNext';
 import { supabase } from '../../lib/supabase';
 
 export default function AuthCallback() {
@@ -24,7 +25,7 @@ export default function AuthCallback() {
       }
       const { data } = await supabase.auth.getSession();
       if (cancelled) return;
-      if (data.session) nav(`/${lang}/company/signup`, { replace: true });
+      if (data.session) nav(safeNext(takeRememberedNext(), `/${lang}/company/signup`), { replace: true });
       else setMsg('Could not complete sign-in. Try again.');
     })();
     return () => { cancelled = true; };

@@ -1,31 +1,47 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
 import { useAuth } from '../../lib/auth';
+import { rememberNext, safeNext } from '../../lib/authNext';
 
 export default function SignUp() {
   const lang = useLang();
   const d = getDict(lang);
   const nav = useNavigate();
   const auth = useAuth();
+  const [params] = useSearchParams();
+  const nextParam = params.get('next');
+  const next = safeNext(nextParam, `/${lang}/company/signup`);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // With an invite waiting, stay on the "check your email" message until a session exists.
+  useEffect(() => {
+    if (submitted && nextParam && auth.user) nav(next);
+  }, [submitted, nextParam, auth.user, next, nav]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setMsg(null);
+    rememberNext(next);
     const { error } = await auth.signUpEmail(email, password, displayName);
     setBusy(false);
     if (error) setMsg(error);
-    else { setMsg(d.auth.checkEmail); setTimeout(() => nav(`/${lang}/company/signup`), 800); }
+    else {
+      setMsg(d.auth.checkEmail);
+      setSubmitted(true);
+      if (!nextParam) setTimeout(() => nav(next), 800);
+    }
   }
   async function onGoogle() {
     setBusy(true);
+    rememberNext(next);
     const { error } = await auth.signInGoogle();
     if (error) { setBusy(false); setMsg(error.includes('provider') ? d.auth.googleNotReady : error); }
   }
@@ -45,7 +61,7 @@ export default function SignUp() {
             <button className="btn btn-primary" type="submit" disabled={busy || !auth.configured}>{d.auth.createAccount}</button>
           </form>
           {msg && <p className="meta" role="status">{msg}</p>}
-          <p style={{ marginTop: '1rem' }}>{d.auth.hasAccount} <Link to={`/${lang}/auth/sign-in`}>{d.auth.signIn}</Link></p>
+          <p style={{ marginTop: '1rem' }}>{d.auth.hasAccount} <Link to={`/${lang}/auth/sign-in${nextParam ? `?next=${encodeURIComponent(next)}` : ''}`}>{d.auth.signIn}</Link></p>
         </div>
       </section>
     </>

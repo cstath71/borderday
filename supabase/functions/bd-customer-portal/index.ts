@@ -24,13 +24,24 @@ Deno.serve(async (req) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("Unauthorized");
     const body = await req.json().catch(() => ({})) as { companyId?: string };
+    if (body.companyId) {
+      // Checked with the caller's JWT, before the service-role client reads billing data.
+      const { data: mem } = await supabase.from("bd_company_members").select("role")
+        .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
+      if (!mem || !["owner", "hr_viewer"].includes(mem.role)) {
+        return new Response(JSON.stringify({ available: false, message: "Forbidden" }), {
+          status: 403, headers: { ...cors, "Content-Type": "application/json" },
+        });
+      }
+    }
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     let customerId: string | null = null;
     if (body.companyId) {
       const { data } = await admin.from("bd_companies").select("stripe_customer_id").eq("id", body.companyId).single();
       customerId = data?.stripe_customer_id ?? null;
     } else {
-      const { data } = await admin.from("bd_subscriptions").select("stripe_customer_id").eq("user_id", user.id).maybeSingle();
+      const { data } = await admin.from("bd_subscriptions").select("stripe_customer_id")
+        .eq("user_id", user.id).order("updated_at", { ascending: false }).limit(1).maybeSingle();
       customerId = data?.stripe_customer_id ?? null;
     }
     if (!customerId) {

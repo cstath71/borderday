@@ -42,6 +42,7 @@ describe('SEO generators', () => {
     expect(t).toContain('Disallow: /*/auth/');
     expect(t).toContain('Disallow: /auth/');
     expect(t).toContain('Disallow: /*/company/dashboard');
+    expect(t).toContain('Disallow: /*/demo');
     expect(t).not.toMatch(OWNER);
   });
 
@@ -143,7 +144,7 @@ describe('SEO generators', () => {
 
   it('NOINDEX_PATHS cover app and auth shells', () => {
     expect(NOINDEX_PATHS).toEqual(
-      expect.arrayContaining(['app', 'auth/sign-in', 'auth/sign-up', 'auth/callback', 'company/dashboard']),
+      expect.arrayContaining(['app', 'auth/sign-in', 'auth/sign-up', 'auth/callback', 'company/dashboard', 'demo']),
     );
   });
 });

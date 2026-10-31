@@ -1,6 +1,6 @@
 /**
- * Local tenant mock that mirrors supabase/migrations/20261031120000_employer_first.sql RLS.
- * Backend mode: LOCAL MOCK (Docker / supabase start unavailable on this box).
+ * Local tenant mock behind the labelled /demo routes only (see src/pages/demo/DemoRoutes.tsx).
+ * Production pages use companyApi.ts. Mirrors the bd_* RLS rules for the demo.
  * Never talks to a cloud Supabase project.
  */
 import type { BorderId, DayType } from '../borders/types';

@@ -8,6 +8,7 @@ Disallow: /*/company/*/invite
 Disallow: /*/company/*/employee/
 Disallow: /*/join/
 Disallow: /*/company/dashboard
+Disallow: /*/demo
 
 # Search engines and AI assistants are welcome to crawl and cite public pages.
 User-agent: Googlebot
@@ -38,5 +39,6 @@ Disallow: /*/company/*/invite
 Disallow: /*/company/*/employee/
 Disallow: /*/join/
 Disallow: /*/company/dashboard
+Disallow: /*/demo
 
 Sitemap: https://borderday.com/sitemap.xml

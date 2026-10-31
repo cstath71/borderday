@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import AppPage from './pages/AppPage';
@@ -16,6 +17,9 @@ import EmployeeHistory from './pages/company/History';
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
 import AuthCallback from './pages/auth/Callback';
+
+// The browser-local mock stays out of the main bundle: it is only reachable under /demo.
+const DemoRoutes = lazy(() => import('./pages/demo/DemoRoutes'));
 
 export default function App() {
   return (
@@ -40,6 +44,14 @@ export default function App() {
         <Route path="company/:companyId/employee/:employeeId" element={<EmployeeHistory />} />
         <Route path="company/dashboard" element={<CompanyDashboard />} />
         <Route path="join/:token" element={<JoinCompany />} />
+        <Route
+          path="demo/*"
+          element={
+            <Suspense fallback={null}>
+              <DemoRoutes />
+            </Suspense>
+          }
+        />
       </Route>
       <Route path="*" element={<Navigate to="/en/" replace />} />
     </Routes>

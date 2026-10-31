@@ -1,81 +1,253 @@
 /**
- * Real Supabase API for BorderDay company tenants (bd_* tables).
- * DEMO / offline preview still uses supabaseMock.ts.
+ * Real Supabase API for BorderDay tenants (bd_* tables).
+ * The labelled /demo routes use supabaseMock.ts; nothing else may.
  */
-import { supabase, supabaseConfigured } from './supabase';
-import type { CompanyRole } from '../company/types';
-import type { DayType } from '../borders/types';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import { companyHasPaidAccess } from './billing';
+import { supabase } from './supabase';
+import type { Invitation, CompanyRole, InviteStatus } from '../company/types';
+import type { BorderId, DayEntry, DayType } from '../borders/types';
 
-export function getBackendMode(): 'supabase' | 'unconfigured' {
-  return supabaseConfigured ? 'supabase' : 'unconfigured';
+/** PostgREST caps responses (default max-rows 1000); longer lists must be paged or counters undercount. */
+const PAGE_SIZE = 1000;
+
+function client(): SupabaseClient {
+  if (!supabase) throw new Error('Supabase not configured');
+  return supabase;
+}
+
+async function currentUserId(): Promise<string | null> {
+  const { data } = await client().auth.getUser();
+  return data.user?.id ?? null;
+}
+
+async function allPages<T>(
+  fetchPage: (from: number, to: number) => PromiseLike<{ data: unknown; error: unknown }>,
+): Promise<T[]> {
+  const rows: T[] = [];
+  for (let from = 0; ; from += PAGE_SIZE) {
+    const { data, error } = await fetchPage(from, from + PAGE_SIZE - 1);
+    if (error) throw error;
+    const page = (data ?? []) as T[];
+    rows.push(...page);
+    if (page.length < PAGE_SIZE) return rows;
+  }
+}
+
+export function isHrRole(role: CompanyRole | null | undefined): boolean {
+  return role === 'owner' || role === 'hr_viewer';
+}
+
+// ---- Companies -------------------------------------------------------------
+
+export interface MyCompany {
+  id: string;
+  name: string;
+  role: CompanyRole;
+  subscription_status: string;
+  trial_ends_at: string | null;
+  seat_count: number;
+  borderPackId: BorderId | null;
+  annualWorkingDays: number | null;
 }
 
 export async function createCompany(name: string): Promise<{ companyId: string }> {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data, error } = await supabase.rpc('bd_create_company', { company_name: name });
+  const { data, error } = await client().rpc('bd_create_company', { company_name: name });
   if (error) throw error;
   return { companyId: data as string };
 }
 
-export async function listMyCompanies(): Promise<Array<{ id: string; name: string; role: CompanyRole; subscription_status: string; seat_count: number }>> {
+export async function listMyCompanies(): Promise<MyCompany[]> {
   if (!supabase) return [];
-  const { data: mems, error } = await supabase
+  const userId = await currentUserId();
+  if (!userId) return [];
+  // HR can read every member row of their company, so filter to the caller's own.
+  const { data, error } = await supabase
     .from('bd_company_members')
-    .select('role, company_id, bd_companies(id, name, subscription_status, seat_count)')
+    .select(
+      'role, border_pack_id, annual_working_days, bd_companies(id, name, subscription_status, trial_ends_at, seat_count)',
+    )
+    .eq('user_id', userId)
     .eq('active', true);
   if (error) throw error;
-  return (mems || []).map((m: any) => ({
+  return (data || []).map((m: any) => ({
     id: m.bd_companies.id,
     name: m.bd_companies.name,
     role: m.role as CompanyRole,
     subscription_status: m.bd_companies.subscription_status,
+    trial_ends_at: m.bd_companies.trial_ends_at,
     seat_count: m.bd_companies.seat_count,
+    borderPackId: m.border_pack_id,
+    annualWorkingDays: m.annual_working_days,
   }));
 }
 
 export async function getCompany(companyId: string) {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data, error } = await supabase.from('bd_companies').select('*').eq('id', companyId).single();
+  const { data, error } = await client()
+    .from('bd_companies')
+    .select('id, name, subscription_status, trial_ends_at, seat_count, current_period_end, data_retention_months')
+    .eq('id', companyId)
+    .maybeSingle();
   if (error) throw error;
   return data;
 }
 
-export async function listMembers(companyId: string) {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data, error } = await supabase
+// ---- Members ---------------------------------------------------------------
+
+export interface CompanyMemberRow {
+  id: string;
+  userId: string;
+  role: CompanyRole;
+  borderPackId: BorderId | null;
+  annualWorkingDays: number | null;
+  active: boolean;
+  joinedAt: string;
+  email: string;
+  displayName: string;
+}
+
+export async function listMembers(companyId: string): Promise<CompanyMemberRow[]> {
+  const { data, error } = await client()
     .from('bd_company_members')
     .select('id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)')
     .eq('company_id', companyId);
   if (error) throw error;
-  return data || [];
+  return (data || []).map((m: any) => ({
+    id: m.id,
+    userId: m.user_id,
+    role: m.role,
+    borderPackId: m.border_pack_id,
+    annualWorkingDays: m.annual_working_days,
+    active: m.active,
+    joinedAt: m.joined_at,
+    email: m.bd_profiles?.email ?? '',
+    displayName: m.bd_profiles?.display_name || m.bd_profiles?.email || '',
+  }));
 }
 
-export async function createInvite(companyId: string, email: string, role: CompanyRole = 'employee') {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data: user } = await supabase.auth.getUser();
-  const { data, error } = await supabase
+export async function myMembership(
+  companyId: string,
+): Promise<{ role: CompanyRole; borderPackId: BorderId | null; annualWorkingDays: number | null } | null> {
+  const userId = await currentUserId();
+  if (!userId) return null;
+  const { data, error } = await client()
+    .from('bd_company_members')
+    .select('role, border_pack_id, annual_working_days')
+    .eq('company_id', companyId)
+    .eq('user_id', userId)
+    .eq('active', true)
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return null;
+  return {
+    role: data.role as CompanyRole,
+    borderPackId: data.border_pack_id as BorderId | null,
+    annualWorkingDays: data.annual_working_days,
+  };
+}
+
+/** Sets both values. Goes through an RPC because employees have no direct update on member rows. */
+export async function updateMemberSelf(
+  companyId: string,
+  patch: { borderPackId: BorderId | null; annualWorkingDays: number | null },
+): Promise<void> {
+  const { error } = await client().rpc('bd_update_member_self', {
+    p_company_id: companyId,
+    p_border_pack_id: patch.borderPackId,
+    p_annual_working_days: patch.annualWorkingDays,
+  });
+  if (error) throw error;
+}
+
+export async function updateMyDisplayName(displayName: string): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client().from('bd_profiles').update({ display_name: displayName }).eq('id', userId);
+  if (error) throw error;
+}
+
+// ---- Invitations -----------------------------------------------------------
+
+function mapInvite(row: any): Invitation {
+  return {
+    id: row.id,
+    companyId: row.company_id,
+    email: row.email,
+    role: row.role,
+    token: row.token,
+    status: row.status,
+    invitedBy: row.invited_by,
+    createdAt: row.created_at,
+    expiresAt: row.expires_at,
+  };
+}
+
+export async function createInvite(
+  companyId: string,
+  email: string,
+  role: CompanyRole = 'employee',
+): Promise<{ invite: Invitation; emailed: boolean }> {
+  const c = client();
+  const { data, error } = await c
     .from('bd_invitations')
-    .insert({ company_id: companyId, email, role, invited_by: user.user?.id ?? null })
+    .insert({ company_id: companyId, email: email.trim().toLowerCase(), role, invited_by: await currentUserId() })
     .select('*')
     .single();
   if (error) throw error;
-  // Fire-and-forget invite email (edge fn dry-runs until Resend domain ready)
-  void supabase.functions.invoke('bd-send-invite', {
-    body: { invitationId: data.id, companyId },
-  });
-  return data;
+  // The invite exists either way; HR can always share the link if the email is dry-run or fails.
+  const sent = await c.functions.invoke('bd-send-invite', { body: { invitationId: data.id, companyId } });
+  return { invite: mapInvite(data), emailed: !sent.error && sent.data?.sent === true };
 }
 
-export async function getInviteByToken(token: string) {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data, error } = await supabase.rpc('bd_get_invite_by_token', { invite_token: token });
+export async function listInvites(companyId: string, status?: InviteStatus): Promise<Invitation[]> {
+  let q = client()
+    .from('bd_invitations')
+    .select('*')
+    .eq('company_id', companyId)
+    .order('created_at', { ascending: false });
+  if (status) q = q.eq('status', status);
+  const { data, error } = await q;
   if (error) throw error;
-  return Array.isArray(data) ? data[0] : data;
+  return (data || []).map(mapInvite);
 }
 
-export async function acceptInvite(token: string, consentVersion: string, textLang: string) {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data, error } = await supabase.rpc('bd_accept_invite', {
+export interface InvitePeek {
+  id: string;
+  companyId: string;
+  companyName: string;
+  email: string;
+  role: CompanyRole;
+  status: InviteStatus;
+  expiresAt: string;
+}
+
+export async function getInviteByToken(token: string): Promise<InvitePeek | null> {
+  const { data, error } = await client().rpc('bd_get_invite_by_token', { invite_token: token });
+  if (error) throw error;
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row) return null;
+  return {
+    id: row.id,
+    companyId: row.company_id,
+    companyName: row.company_name,
+    email: row.email,
+    role: row.role,
+    status: row.status,
+    expiresAt: row.expires_at,
+  };
+}
+
+export function isInviteOpen(invite: Pick<InvitePeek, 'status' | 'expiresAt'>, now = Date.now()): boolean {
+  return invite.status === 'pending' && new Date(invite.expiresAt).getTime() > now;
+}
+
+export function sameEmail(a: string | null | undefined, b: string | null | undefined): boolean {
+  return !!a && !!b && a.trim().toLowerCase() === b.trim().toLowerCase();
+}
+
+export async function acceptInvite(token: string, consentVersion: string, textLang: string): Promise<string> {
+  const c = client();
+  const { data, error } = await c.rpc('bd_accept_invite', {
     invite_token: token,
     consent_version: consentVersion,
     text_lang: textLang,
@@ -83,14 +255,13 @@ export async function acceptInvite(token: string, consentVersion: string, textLa
   if (error) throw error;
   const companyId = data as string;
   // Seat count trigger already ran; align Stripe flat↔per-seat if subscribed.
-  void supabase.functions.invoke('bd-sync-company-billing', { body: { companyId } });
+  void c.functions.invoke('bd-sync-company-billing', { body: { companyId } });
   return companyId;
 }
 
 /** Explicitly re-sync company Stripe item to current seat_count (flat ≤7 / per-seat ≥8). */
 export async function syncCompanyBilling(companyId: string) {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data, error } = await supabase.functions.invoke('bd-sync-company-billing', {
+  const { data, error } = await client().functions.invoke('bd-sync-company-billing', {
     body: { companyId },
   });
   if (error) throw error;
@@ -105,39 +276,132 @@ export async function syncCompanyBilling(companyId: string) {
   };
 }
 
-export async function upsertDayLog(opts: {
-  companyId: string;
+// ---- Company day logs ------------------------------------------------------
+
+export interface DayLogView {
+  employeeUserId: string;
   workDate: string;
   dayType: DayType;
-  note?: string;
-}) {
-  if (!supabase) throw new Error('Supabase not configured');
-  const { data: user } = await supabase.auth.getUser();
-  if (!user.user) throw new Error('not authenticated');
-  const { data, error } = await supabase
+}
+
+export async function upsertDayLog(opts: { companyId: string; workDate: string; dayType: DayType }): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client()
     .from('bd_day_logs')
     .upsert(
       {
         company_id: opts.companyId,
-        employee_user_id: user.user.id,
+        employee_user_id: userId,
         work_date: opts.workDate,
         day_type: opts.dayType,
-        note: opts.note ?? null,
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'employee_user_id,work_date' },
-    )
-    .select('*')
-    .single();
+    );
   if (error) throw error;
-  return data;
 }
 
-export async function listDayLogs(companyId: string, employeeUserId?: string) {
-  if (!supabase) throw new Error('Supabase not configured');
-  let q = supabase.from('bd_day_logs').select('*').eq('company_id', companyId).order('work_date', { ascending: false });
-  if (employeeUserId) q = q.eq('employee_user_id', employeeUserId);
-  const { data, error } = await q;
+/** HR and self both read through bd_list_day_types: employee, date and day type, never `note`. */
+export async function listDayLogs(companyId: string, employeeUserId?: string): Promise<DayLogView[]> {
+  const rows = await allPages<{ employee_user_id: string; work_date: string; day_type: DayType }>((from, to) =>
+    client()
+      .rpc('bd_list_day_types', { cid: companyId, employee: employeeUserId ?? null })
+      .range(from, to),
+  );
+  return rows.map((r) => ({ employeeUserId: r.employee_user_id, workDate: r.work_date, dayType: r.day_type }));
+}
+
+export async function deleteMyDayLogs(companyId: string): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client()
+    .from('bd_day_logs')
+    .delete()
+    .eq('company_id', companyId)
+    .eq('employee_user_id', userId);
   if (error) throw error;
-  return data || [];
+}
+
+// ---- Individual plan -------------------------------------------------------
+
+export async function hasIndividualAccess(): Promise<boolean> {
+  const userId = await currentUserId();
+  if (!userId) return false;
+  const { data, error } = await client()
+    .from('bd_subscriptions')
+    .select('status, trial_ends_at')
+    .eq('plan_kind', 'individual')
+    .eq('user_id', userId);
+  if (error) throw error;
+  return (data || []).some((s) => companyHasPaidAccess(s.status, s.trial_ends_at));
+}
+
+export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPackId: BorderId | null }>> {
+  const userId = await currentUserId();
+  if (!userId) return [];
+  const rows = await allPages<{ work_date: string; day_type: DayType; border_pack_id: BorderId | null }>((from, to) =>
+    client()
+      .from('bd_personal_day_logs')
+      .select('work_date, day_type, border_pack_id')
+      .eq('user_id', userId)
+      .order('work_date', { ascending: true })
+      .range(from, to),
+  );
+  return rows.map((r) => ({ date: r.work_date, type: r.day_type, borderPackId: r.border_pack_id }));
+}
+
+export async function upsertPersonalDayLog(opts: {
+  workDate: string;
+  dayType: DayType;
+  borderPackId: BorderId | null;
+}): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client()
+    .from('bd_personal_day_logs')
+    .upsert(
+      {
+        user_id: userId,
+        work_date: opts.workDate,
+        day_type: opts.dayType,
+        border_pack_id: opts.borderPackId,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: 'user_id,work_date' },
+    );
+  if (error) throw error;
+}
+
+export async function deleteMyPersonalDayLogs(): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client().from('bd_personal_day_logs').delete().eq('user_id', userId);
+  if (error) throw error;
+}
+
+// ---- /app access -----------------------------------------------------------
+
+export type AppAccess =
+  | { mode: 'company'; company: MyCompany }
+  | { mode: 'individual' }
+  /** unpaidCompany: the caller belongs to this company, but it has no active subscription. */
+  | { mode: 'preview'; unpaidCompany: string | null };
+
+/**
+ * Membership only unlocks /app when that company is paid. Otherwise anyone could create a
+ * free company and get the paid product. Employee memberships win over HR ones.
+ */
+export function pickAppAccess(companies: MyCompany[], individualPaid: boolean): AppAccess {
+  const paid = companies
+    .filter((c) => companyHasPaidAccess(c.subscription_status, c.trial_ends_at))
+    .sort((a, b) => Number(b.role === 'employee') - Number(a.role === 'employee'));
+  if (paid[0]) return { mode: 'company', company: paid[0] };
+  if (individualPaid) return { mode: 'individual' };
+  return { mode: 'preview', unpaidCompany: companies[0]?.name ?? null };
+}
+
+export async function resolveAppAccess(): Promise<AppAccess> {
+  const [companies, individualPaid] = await Promise.all([listMyCompanies(), hasIndividualAccess()]);
+  return pickAppAccess(companies, individualPaid);
 }

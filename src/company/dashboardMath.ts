@@ -43,7 +43,9 @@ function worse(a: AggregateStatus, b: CounterResult['status']): AggregateStatus 
   return (rank[b] ?? 0) > (rank[a] ?? 0) ? (b as AggregateStatus) : a;
 }
 
-export function dayLogsToEntries(logs: DayLog[]): DayEntry[] {
+type CountedLog = Pick<DayLog, 'workDate' | 'dayType' | 'note'>;
+
+export function dayLogsToEntries(logs: CountedLog[]): DayEntry[] {
   return logs.map((l) => ({ date: l.workDate, type: l.dayType, note: l.note }));
 }
 
@@ -53,7 +55,7 @@ export function summarizeEmployee(opts: {
   email: string;
   borderPackId: BorderId | null;
   annualWorkingDays: number | null;
-  logs: DayLog[];
+  logs: CountedLog[];
   year: number;
   isDemo?: boolean;
 }): EmployeeDashboardRow {

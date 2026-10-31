@@ -12,9 +12,8 @@ async function shot(page, name) {
 const browser = await chromium.launch({ headless: true });
 
 async function seedDemo(page) {
-  await page.goto(`${BASE}/en/company/signup`, { waitUntil: 'networkidle' });
-  await page.getByRole('button', { name: /Load DEMO company/i }).click();
-  await page.waitForURL(/\/company\/.+\/dashboard/);
+  await page.goto(`${BASE}/en/demo`, { waitUntil: 'networkidle' });
+  await page.waitForURL(/\/demo\/company\/.+\/dashboard/);
   const url = page.url();
   const m = url.match(/\/company\/([^/]+)\/dashboard/);
   return m ? m[1] : null;
@@ -92,7 +91,7 @@ let companyId = null;
   const page = await ctx.newPage();
   // re-seed session in this context (localStorage is per-context)
   const id = await seedDemo(page);
-  await page.goto(`${BASE}/en/company/${id}/invite`, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE}/en/demo/company/${id}/invite`, { waitUntil: 'networkidle' });
   await page.waitForSelector('form.stack-form, form.card');
   await shot(page, 'en-invite-flow.png');
   await page.locator('form input[type="email"]').fill('screenshot.invite@borderday.example');
@@ -105,7 +104,7 @@ let companyId = null;
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 1000 } });
   const page = await ctx.newPage();
-  await page.goto(`${BASE}/en/join/demo-invite-token-borderday`, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE}/en/demo/join/demo-invite-token-borderday`, { waitUntil: 'networkidle' });
   await shot(page, 'en-join-consent.png');
   await ctx.close();
 }

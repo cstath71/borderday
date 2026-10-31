@@ -49,7 +49,7 @@ BorderDay is built employer-first: company accounts and an HR dashboard come fir
 No. It is a personal record-keeping and reminder tool. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.
 
 ### Where is my day log stored?
-On your device (IndexedDB in the browser). You can export JSON or CSV, or delete everything. Optional cloud sync is not in this version.
+Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.
 
 ### Do you track my location?
 No. Version 1 has no GPS and no background location. You log days yourself. HR sees day types and counts only — never location.

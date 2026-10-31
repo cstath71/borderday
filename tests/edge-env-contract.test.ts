@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { escapeHtml, isInviteTestAddress } from '../supabase/functions/_shared/invite';
 
 const root = resolve(__dirname, '..');
 
@@ -17,6 +18,87 @@ describe('bd-send-invite Resend env', () => {
   it('keeps RESEND_LIVE gate (no real invites until approved)', () => {
     expect(src).toContain('RESEND_LIVE');
     expect(src).toMatch(/RESEND_LIVE"\)\s*===\s*"1"/);
+  });
+});
+
+describe('bd-send-invite authorisation and logging (H2)', () => {
+  const src = readFileSync(resolve(root, 'supabase/functions/bd-send-invite/index.ts'), 'utf8');
+
+  it('checks owner/hr_viewer with the JWT client before the service-role client exists', () => {
+    const check = src.indexOf('supabase.from("bd_company_members")');
+    const admin = src.indexOf('SUPABASE_SERVICE_ROLE_KEY');
+    expect(check).toBeGreaterThan(-1);
+    expect(check).toBeLessThan(admin);
+    expect(src).toContain('["owner", "hr_viewer"].includes(mem.role)');
+    expect(src).toContain('status: 403');
+    expect(src.slice(check, src.indexOf('status: 403'))).not.toContain('joinUrl');
+  });
+
+  it('logs only the invitation id and dryRun flag', () => {
+    const logs = src.match(/console\.\w+\([^\n]*\)/g) ?? [];
+    expect(logs.length).toBeGreaterThan(0);
+    for (const line of logs) {
+      expect(line).toMatch(/invitationId: inv\.id, dryRun: (true|false)/);
+      expect(line).not.toMatch(/email|token|joinUrl|\bto:/i);
+    }
+  });
+
+  it('sends for real only with RESEND_LIVE, a key, and a test address', () => {
+    expect(src).toContain('const allowReal = live && !!apiKey;');
+    expect(src).toContain('if (!allowReal || !isInviteTestAddress(inv.email))');
+  });
+
+  it('allows @borderday.com and the existing test domains', () => {
+    for (const email of [
+      'hello+bdtest@borderday.com',
+      'HELLO@BORDERDAY.COM',
+      'a@example.com',
+      'a@example.org',
+      'a@borderday.test',
+    ]) {
+      expect(isInviteTestAddress(email)).toBe(true);
+    }
+  });
+
+  it('refuses every other address, including lookalikes and second recipients', () => {
+    for (const email of [
+      'person@gmail.com',
+      'a@borderday.com.evil.com',
+      'a@notborderday.com',
+      'a@sub.borderday.com',
+      'victim@gmail.com,a@borderday.com',
+      'victim@gmail.com; a@borderday.com',
+      'Victim <victim@gmail.com> a@borderday.com',
+      '@borderday.com',
+      '',
+    ]) {
+      expect(isInviteTestAddress(email)).toBe(false);
+    }
+  });
+
+  it('escapes the company name in the email body', () => {
+    expect(escapeHtml('<a href="x">A&B</a>')).toBe('&lt;a href=&quot;x&quot;&gt;A&amp;B&lt;/a&gt;');
+    expect(src).toContain('escapeHtml(companyName');
+  });
+});
+
+describe('bd-customer-portal authorisation (H2)', () => {
+  const src = readFileSync(resolve(root, 'supabase/functions/bd-customer-portal/index.ts'), 'utf8');
+  it('checks owner/hr_viewer with the JWT client before the service-role client exists', () => {
+    const check = src.indexOf('supabase.from("bd_company_members")');
+    const admin = src.indexOf('SUPABASE_SERVICE_ROLE_KEY');
+    expect(check).toBeGreaterThan(-1);
+    expect(check).toBeLessThan(admin);
+    expect(src).toContain('["owner", "hr_viewer"].includes(mem.role)');
+    expect(src).toContain('status: 403');
+  });
+});
+
+describe('bd-sync-company-billing authorisation', () => {
+  const src = readFileSync(resolve(root, 'supabase/functions/bd-sync-company-billing/index.ts'), 'utf8');
+  it('lets any active member trigger the input-free seat sync (acceptInvite runs as the employee)', () => {
+    expect(src).toContain('.eq("user_id", user.id).eq("active", true)');
+    expect(src).toContain('if (!mem) throw new Error("Forbidden");');
   });
 });
 

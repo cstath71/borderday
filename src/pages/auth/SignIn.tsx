@@ -1,22 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
 import { useAuth } from '../../lib/auth';
+import { rememberNext, safeNext } from '../../lib/authNext';
 
 export default function SignIn() {
   const lang = useLang();
   const d = getDict(lang);
   const nav = useNavigate();
   const [params] = useSearchParams();
-  const next = params.get('next') || `/${lang}/company/signup`;
+  const nextParam = params.get('next');
+  const next = safeNext(nextParam, `/${lang}/company/signup`);
   const auth = useAuth();
   const [mode, setMode] = useState<'password' | 'magic'>('password');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  // A protected page sent us here: once a session exists, go back rather than asking again.
+  useEffect(() => {
+    if (nextParam && auth.user) nav(next, { replace: true });
+  }, [nextParam, auth.user, next, nav]);
 
   async function onPassword(e: React.FormEvent) {
     e.preventDefault();
@@ -28,12 +35,14 @@ export default function SignIn() {
   async function onMagic(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setMsg(null);
+    rememberNext(next);
     const { error } = await auth.signInMagicLink(email);
     setBusy(false);
     if (error) setMsg(error); else setMsg(d.auth.magicSent);
   }
   async function onGoogle() {
     setBusy(true); setMsg(null);
+    rememberNext(next);
     const { error } = await auth.signInGoogle();
     if (error) { setBusy(false); setMsg(error.includes('provider') ? d.auth.googleNotReady : error); }
   }
@@ -65,7 +74,7 @@ export default function SignIn() {
             </form>
           )}
           {msg && <p className="meta" role="status">{msg}</p>}
-          <p style={{ marginTop: '1rem' }}>{d.auth.noAccount} <Link to={`/${lang}/auth/sign-up`}>{d.auth.signUp}</Link></p>
+          <p style={{ marginTop: '1rem' }}>{d.auth.noAccount} <Link to={`/${lang}/auth/sign-up${nextParam ? `?next=${encodeURIComponent(next)}` : ''}`}>{d.auth.signUp}</Link></p>
         </div>
       </section>
     </>

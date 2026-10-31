@@ -39,7 +39,9 @@ Deno.serve(async (req) => {
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const { data: mem } = await admin.from("bd_company_members").select("role")
       .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
-    if (!mem || !["owner", "hr_viewer"].includes(mem.role)) throw new Error("Forbidden");
+    // Any active member: acceptInvite calls this as the new employee. The sync takes no input,
+    // it only aligns Stripe with the server-side seat_count.
+    if (!mem) throw new Error("Forbidden");
 
     const { data: company } = await admin.from("bd_companies")
       .select("seat_count, subscription_status")

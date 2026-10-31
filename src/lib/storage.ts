@@ -105,13 +105,13 @@ export async function deleteAllDays(): Promise<void> {
   });
 }
 
-export async function exportJson(): Promise<string> {
-  const [days, meta] = await Promise.all([listDays(), getMeta()]);
+export async function exportJson(source?: DayEntry[]): Promise<string> {
+  const [days, meta] = await Promise.all([source ?? listDays(), getMeta()]);
   return JSON.stringify({ version: 1, exportedAt: new Date().toISOString(), meta, days }, null, 2);
 }
 
-export async function exportCsv(): Promise<string> {
-  const days = await listDays();
+export async function exportCsv(source?: DayEntry[]): Promise<string> {
+  const days = source ?? (await listDays());
   const lines = ['date,type,note'];
   for (const d of days) {
     const note = (d.note ?? '').replaceAll('"', '""');

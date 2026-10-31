@@ -1,126 +1,163 @@
-import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
+import DashboardView from '../../components/company/DashboardView';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
-import { getDict, t } from '../../i18n';
-import { listBorderPacks } from '../../borders/packs';
-import type { AggregateStatus } from '../../company/dashboardMath';
-import { filterRows, rowsToCsv } from '../../company/dashboardMath';
 import { buildDashboardRows } from '../../company/buildRows';
-import {
-  getBackendMode,
-  getCompany,
-  listInvitations,
-  myMembership,
-  seedDemoCompany,
-} from '../../lib/supabaseMock';
+import type { EmployeeDashboardRow } from '../../company/dashboardMath';
+import type { Invitation } from '../../company/types';
+import { getDict } from '../../i18n';
+import { useAuth } from '../../lib/auth';
+import { companyHasPaidAccess } from '../../lib/billing';
+import * as api from '../../lib/companyApi';
 
-const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'over', 'disabled'];
+type Loaded = {
+  name: string;
+  paid: boolean;
+  rows: EmployeeDashboardRow[];
+  invites: Invitation[];
+};
+
+type State =
+  | { status: 'loading' }
+  | { status: 'denied' }
+  | { status: 'error' }
+  | { status: 'ready'; data: Loaded };
 
 export default function CompanyDashboard() {
   const lang = useLang();
   const d = getDict(lang);
-  const { companyId: paramId } = useParams();
+  const auth = useAuth();
+  const location = useLocation();
+  const { companyId } = useParams();
   const year = new Date().getFullYear();
-  const [borderFilter, setBorderFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const userId = auth.user?.id;
+  const [state, setState] = useState<State>({ status: 'loading' });
+  const [companies, setCompanies] = useState<api.MyCompany[] | null>(null);
   const [tick, setTick] = useState(0);
 
-  let companyId = paramId ?? '';
-  if (!companyId) {
-    try {
-      const seeded = seedDemoCompany();
-      companyId = seeded.companyId;
-    } catch {
-      /* ignore */
-    }
+  useEffect(() => {
+    if (!userId || companyId) return;
+    let cancelled = false;
+    api
+      .listMyCompanies()
+      .then((list) => {
+        if (!cancelled) setCompanies(list.filter((c) => api.isHrRole(c.role)));
+      })
+      .catch(() => {
+        if (!cancelled) setState({ status: 'error' });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, companyId]);
+
+  useEffect(() => {
+    if (!userId || !companyId) return;
+    let cancelled = false;
+    (async () => {
+      const membership = await api.myMembership(companyId);
+      if (!api.isHrRole(membership?.role)) {
+        if (!cancelled) setState({ status: 'denied' });
+        return;
+      }
+      const [company, members, logs, invites] = await Promise.all([
+        api.getCompany(companyId),
+        api.listMembers(companyId),
+        api.listDayLogs(companyId),
+        api.listInvites(companyId, 'pending'),
+      ]);
+      if (cancelled) return;
+      if (!company) {
+        setState({ status: 'denied' });
+        return;
+      }
+      setState({
+        status: 'ready',
+        data: {
+          name: company.name,
+          paid: companyHasPaidAccess(company.subscription_status, company.trial_ends_at),
+          rows: buildDashboardRows({ members, logs, year }),
+          invites,
+        },
+      });
+    })().catch(() => {
+      if (!cancelled) setState({ status: 'error' });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, companyId, year, tick]);
+
+  if (auth.ready && !auth.user) {
+    return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(location.pathname)}`} replace />;
   }
 
-  const company = (() => {
-    try {
-      return companyId ? getCompany(companyId) : null;
-    } catch {
-      return null;
-    }
-  })();
-
-  const membership = (() => {
-    try {
-      return companyId ? myMembership(companyId) : null;
-    } catch {
-      return null;
-    }
-  })();
-
-  const { rows, isDemo } = useMemo(() => {
-    void tick;
-    if (!companyId || !membership || (membership.role !== 'owner' && membership.role !== 'hr_viewer')) {
-      return { rows: [], isDemo: false };
-    }
-    try {
-      return buildDashboardRows(companyId, year);
-    } catch {
-      return { rows: [], isDemo: false };
-    }
-  }, [companyId, membership, year, tick]);
-
-  const filtered = filterRows(rows, {
-    borderPackId: (borderFilter || null) as import('../../borders/types').BorderId | null,
-    status: (statusFilter as AggregateStatus) || null,
-  });
-
-  const packs = listBorderPacks();
-  const invites = (() => {
-    try {
-      return companyId && membership && (membership.role === 'owner' || membership.role === 'hr_viewer')
-        ? listInvitations(companyId).filter((i) => i.status === 'pending')
-        : [];
-    } catch {
-      return [];
-    }
-  })();
-
-  function exportCsv() {
-    const csv = rowsToCsv(filtered, year);
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `borderday-audit-${year}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+  if (!companyId && companies?.length === 1) {
+    return <Navigate to={`/${lang}/company/${companies[0].id}/dashboard`} replace />;
   }
 
-  function ensureDemo() {
-    const { companyId: id } = seedDemoCompany();
-    window.location.assign(`/${lang}/company/${id}/dashboard`);
-  }
-
-  if (!company || !membership || (membership.role !== 'owner' && membership.role !== 'hr_viewer')) {
-    return (
-      <section className="section">
-        <div className="container">
-          <h1>{d.company.dashboardTitle}</h1>
-          <p>{d.company.backendMode}</p>
-          <button type="button" className="btn btn-primary" onClick={ensureDemo}>
-            {d.company.loadDemo}
-          </button>
-          <Link className="btn btn-ghost" to={`/${lang}/company/signup`} style={{ marginLeft: '0.5rem' }}>
-            {d.nav.companySignup}
-          </Link>
-        </div>
-      </section>
+  let body: React.ReactNode;
+  if (!companyId && companies) {
+    body = (
+      <>
+        <h1>{d.company.dashboardTitle}</h1>
+        {companies.length === 0 ? (
+          <>
+            <p>{d.company.noCompany}</p>
+            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+              {d.nav.companySignup}
+            </Link>
+          </>
+        ) : (
+          <>
+            <p>{d.company.chooseCompany}</p>
+            <ul>
+              {companies.map((c) => (
+                <li key={c.id}>
+                  <Link to={`/${lang}/company/${c.id}/dashboard`}>{c.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </>
     );
-  }
-
-  function statusLabel(s: string): string {
-    const key = `status_${s}`;
-    return (d.counters as Record<string, string>)[key] ?? s;
-  }
-
-  function borderLabel(id: string | null): string {
-    if (!id) return '—';
-    return (d.borders as Record<string, string>)[id] ?? id;
+  } else if (state.status === 'loading') {
+    body = <p role="status">{d.company.loading}</p>;
+  } else if (state.status === 'error') {
+    body = <p role="alert">{d.company.loadError}</p>;
+  } else if (state.status === 'denied') {
+    body = (
+      <>
+        <h1>{d.company.dashboardTitle}</h1>
+        <p>{d.company.accessDenied}</p>
+        <Link className="btn btn-primary" to={`/${lang}/app`}>
+          {d.nav.openApp}
+        </Link>
+      </>
+    );
+  } else {
+    const { data } = state;
+    body = (
+      <>
+        {!data.paid && (
+          <div className="demo-banner" role="status">
+            {d.company.billingInactive} <Link to={`/${lang}/pricing`}>{d.company.billingCta}</Link>
+          </div>
+        )}
+        <DashboardView
+          d={d}
+          companyName={data.name}
+          rows={data.rows}
+          invites={data.invites}
+          year={year}
+          companyBase={`/${lang}/company/${companyId}`}
+          joinBase={`/${lang}/join`}
+          onRefresh={() => setTick((x) => x + 1)}
+        />
+      </>
+    );
   }
 
   return (
@@ -129,153 +166,11 @@ export default function CompanyDashboard() {
         lang={lang}
         title={`${d.company.dashboardTitle} — BorderDay`}
         description={d.company.dashboardSubtitle}
-        path={`company/${companyId}/dashboard`}
+        path={companyId ? `company/${companyId}/dashboard` : 'company/dashboard'}
+        noindex
       />
       <section className="section">
-        <div className="container">
-          {(isDemo || company.isDemo) && (
-            <div className="demo-banner" role="status">
-              <strong>{d.company.demoDataBadge}</strong> — {d.company.demoBanner}
-            </div>
-          )}
-          <div className="dash-head">
-            <div>
-              <h1>
-                {d.company.dashboardTitle}
-                {(isDemo || company.isDemo) && (
-                  <span className="badge warn" style={{ marginLeft: '0.5rem' }}>
-                    {d.company.demoDataBadge}
-                  </span>
-                )}
-              </h1>
-              <p>{company.name}</p>
-              <p className="meta">{d.company.dashboardSubtitle}</p>
-              <p className="meta backend-mode">
-                {d.company.backendMode} ({getBackendMode()})
-              </p>
-            </div>
-            <div className="dash-actions">
-              <Link className="btn btn-secondary" to={`/${lang}/company/${companyId}/invite`}>
-                {d.company.inviteTitle}
-              </Link>
-              <button type="button" className="btn btn-primary" onClick={exportCsv}>
-                {d.company.exportCsv}
-              </button>
-            </div>
-          </div>
-
-          <div className="filters">
-            <label>
-              {d.company.filterBorder}
-              <select value={borderFilter} onChange={(e) => setBorderFilter(e.target.value)}>
-                <option value="">{d.company.filterAll}</option>
-                {packs.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {(d.borders as Record<string, string>)[p.nameKey]}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              {d.company.filterStatus}
-              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-                <option value="">{d.company.filterAll}</option>
-                {STATUSES.map((s) => (
-                  <option key={s} value={s}>
-                    {statusLabel(s)}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button type="button" className="btn btn-ghost" onClick={() => setTick((x) => x + 1)}>
-              ↻
-            </button>
-          </div>
-
-          <h2>
-            {d.company.employees} ({filtered.length})
-          </h2>
-          {filtered.length === 0 ? (
-            <p>{d.company.noEmployees}</p>
-          ) : (
-            <div className="employee-list">
-              {filtered.map((row) => (
-                <article className="card employee-card" key={row.userId}>
-                  <div className="employee-head">
-                    <div>
-                      <strong>
-                        {row.isDemo && (
-                          <span className="badge warn" style={{ marginRight: '0.35rem' }}>
-                            {d.company.demoDataBadge}
-                          </span>
-                        )}
-                        {row.displayName}
-                      </strong>
-                      <div className="meta">{row.email}</div>
-                      <div className="meta">{borderLabel(row.borderPackId)}</div>
-                    </div>
-                    <span className={`badge ${row.worstStatus}`}>{statusLabel(row.worstStatus)}</span>
-                  </div>
-                  <h3 className="meta">{d.company.countersHeading}</h3>
-                  {row.counters.length === 0 ? (
-                    <p className="meta">{d.company.emptyCounters}</p>
-                  ) : (
-                    <table className="counter-table">
-                      <thead>
-                        <tr>
-                          <th>{d.company.countersHeading}</th>
-                          <th>{d.company.kindTax}/{d.company.kindSs}</th>
-                          <th>{d.company.usedAllowed}</th>
-                          <th>{d.company.status}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {row.counters.map((c) => (
-                          <tr key={c.counterId}>
-                            <td>{(d.counters as Record<string, string>)[c.labelKey] ?? c.labelKey}</td>
-                            <td>{c.kind === 'tax' ? d.company.kindTax : d.company.kindSs}</td>
-                            <td>
-                              {c.enabled
-                                ? t(d.counters.usedOfDays, {
-                                    used: c.usedDays ?? 0,
-                                    allowed: c.allowedDays ?? 0,
-                                  })
-                                : '—'}
-                            </td>
-                            <td>
-                              <span className={`badge ${c.status}`}>{statusLabel(c.status)}</span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  )}
-                  <Link
-                    className="btn btn-ghost"
-                    to={`/${lang}/company/${companyId}/employee/${row.userId}`}
-                    style={{ marginTop: '0.75rem' }}
-                  >
-                    {d.company.viewHistory}
-                  </Link>
-                </article>
-              ))}
-            </div>
-          )}
-
-          {invites.length > 0 && (
-            <div className="card" style={{ marginTop: '1.5rem' }}>
-              <h2>{d.company.pendingInvites}</h2>
-              <ul>
-                {invites.map((i) => (
-                  <li key={i.id}>
-                    {i.email} · {i.role} ·{' '}
-                    <Link to={`/${lang}/join/${i.token}`}>{d.company.inviteLinkLabel}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+        <div className="container">{body}</div>
       </section>
     </>
   );

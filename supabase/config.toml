@@ -1,8 +1,5 @@
-# BorderDay — local-only Supabase config skeleton.
-# DO NOT link a cloud project without Gus approval.
-# Target production region when approved: eu-central-1 (Frankfurt) or eu-west-1.
-# Backend mode for this workspace: LOCAL MOCK (Docker unavailable).
-# Migrations under supabase/migrations/ are the source of truth for a future `supabase db push`.
+# BorderDay: local Supabase CLI skeleton (`supabase start`). Production is the EU `fig-mail`
+# project; migrations under supabase/migrations/ are the source of truth for it.
 
 [project]
 id = "borderday-local"

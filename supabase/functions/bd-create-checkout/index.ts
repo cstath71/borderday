@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
     }
 
     const Stripe = (await import("https://esm.sh/stripe@17.3.1?target=deno")).default;
-    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity }],

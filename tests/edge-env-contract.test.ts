@@ -34,3 +34,13 @@ describe('bd-create-checkout promo / €0 card', () => {
     expect(src).toContain('billing_address_collection: "required"');
   });
 });
+
+describe('Stripe API version (Managed Payments)', () => {
+  for (const fn of ['bd-create-checkout', 'bd-customer-portal', 'bd-stripe-webhook', 'bd-sync-company-billing'] as const) {
+    it(`${fn} uses 2025-03-31.basil`, () => {
+      const src = readFileSync(resolve(root, `supabase/functions/${fn}/index.ts`), 'utf8');
+      expect(src).toContain('apiVersion: "2025-03-31.basil"');
+      expect(src).not.toContain('2024-11-20.acacia');
+    });
+  }
+});

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import LegalLinks from '../../components/LegalLinks';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
@@ -43,6 +44,7 @@ export default function CompanySignup() {
         <div className="container" style={{ maxWidth: 560 }}>
           <h1>{d.company.signupTitle}</h1>
           <p>{d.company.signupSubtitle}</p>
+          <LegalLinks d={d} lang={lang} intro={d.auth.signUpTerms} />
           {auth.user && <p className="meta">{auth.user.email}</p>}
           {!auth.user && (
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>

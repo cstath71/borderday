@@ -14,13 +14,14 @@ const it: Dict = {
     faq: 'FAQ',
     privacy: 'Privacy',
     disclaimer: 'Avvertenza',
-    terms: 'Condizioni',
+    terms: 'Condizioni e note legali',
     openApp: 'Apri l’app',
     joinWaitlist: 'Accedi',
     forIndividuals: 'Per i privati',
     forCompanies: 'Per le aziende',
     hrDashboard: 'Dashboard HR',
     companySignup: 'Crea azienda',
+    withdraw: 'Recedere dal contratto',
   },
   lang: {
     en: 'English',
@@ -45,7 +46,7 @@ const it: Dict = {
       'Oggi i contatori fiscali funzionano su quattro corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Gli altri cinque dichiarano chiaramente che nessun contatore fiscale è attivo. Non inventiamo mai un numero.',
     risk3Title: 'Team multi-confine',
     risk3Body:
-      'Una dashboard aziendale per collaboratori su confini diversi. Filtri per confine o situazione. Export CSV per audit. I collaboratori vedono esattamente gli stessi contatori dell’HR.',
+      'Una dashboard aziendale per collaboratori su confini diversi. Filtri per confine o situazione. Export CSV. I collaboratori vedono esattamente gli stessi contatori dell’HR.',
     feature1Title: 'Fisco e sicurezza sociale, separati',
     feature1Body:
       'Contatori indipendenti con fonti ufficiali collegate. Avvisi al 75% e al 90% del limite applicabile, poi stati «al limite» e «oltre il limite» con la conseguenza spiegata.',
@@ -66,12 +67,13 @@ const it: Dict = {
     waitlistBody:
       'Create un account azienda con e-mail o Google, invitate il team e abbonatevi dalla pagina Prezzi. Un’azienda DEMO etichettata resta disponibile.',
     waitlistButton: 'Crea account',
-    waitlistNote: 'Niente lista d\'attesa — account e checkout sono attivi. Piani azienda: 5 €/dipendente/mese (min. 39 €), prova di 7 giorni.',
+    waitlistNote:
+      'Nessuna lista d’attesa: account e checkout sono attivi. Piano azienda: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
     disclaimerShort:
       'BorderDay è uno strumento di registrazione e promemoria delle classificazioni dei giorni. Non è consulenza fiscale o legale. Verificate sempre con l’autorità competente o un consulente qualificato.',
     demoBanner: 'Gli screenshot e l’azienda precaricata usano dati DEMO chiaramente etichettati — non collaboratori reali.',
     inShort:
-      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e missioni per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su quattro di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €); individuali 4,99 €/mese o 49 €/anno. Prova di 7 giorni con carta richiesta. Strumento di registrazione — non consulenza fiscale o legale.',
+      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su quattro di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
     inShortLabel: 'In breve',
     chipTaxYes: 'Fisco: sì',
     chipTaxNo: 'Fisco: non ancora',
@@ -297,22 +299,30 @@ const it: Dict = {
     companyInclude1: 'Dashboard HR con contatori per collaboratore e filtri',
     companyInclude2: 'Inviti e-mail, ruoli (amministratore dell’account / HR in lettura), export CSV',
     companyInclude3: 'I collaboratori vedono gli stessi contatori dell’HR',
-    companyInclude4: 'Protezione dei dati fin dalla progettazione (solo tipi di giorno — nessuna posizione)',
+    companyInclude4:
+      'Protezione dei dati fin dalla progettazione (tipi di giorno per data — niente GPS né posizione del dispositivo)',
     subscribeMonthly: 'Inizia mensile',
     subscribeYearly: 'Inizia annuale',
-    trialNote: 'Prova gratuita di 7 giorni — carta richiesta all\'iscrizione.',
     checkoutSuccess: 'Pagamento impostato — la prova è attiva. Aprite l’account per continuare.',
     checkoutCancel: 'Checkout annullato — nessun addebito. Potete riprovare in qualsiasi momento.',
     goToAccount: 'Vai all’account',
     needCompany: 'Create o aprite prima un account azienda, poi abbonatevi.',
     waitlistCta: 'Inizia account',
-    compareNote: 'Prezzi allineati a strumenti comparabili al 31 ott 2026 (Europe/Zurich). Non consulenza fiscale.',
     recommended: 'Consigliato per i datori di lavoro',
+    trialCompany:
+      'Prova gratuita di 7 giorni, poi 5 € per collaboratore attivo al mese (minimo 39 €/mese) o, con fatturazione annuale, minimo 390 €/anno, IVA esclusa, addebitati automaticamente l’8° giorno e rinnovati fino alla disdetta. Carta richiesta all’iscrizione. Con la disdetta prima dell’8° giorno non viene addebitato nulla.',
+    trialIndividual:
+      'Prova gratuita di 7 giorni, poi 4,99 €/mese o 49 €/anno IVA inclusa (secondo il piano scelto), addebitati automaticamente l’8° giorno e rinnovati fino alla disdetta. Carta richiesta all’iscrizione. Con la disdetta prima dell’8° giorno non viene addebitato nulla.',
+    readBefore: 'Prima di abbonarvi, leggete:',
+    companyBusinessOnly: 'Per le aziende. I consumatori scelgono il piano individuale.',
+    yearlyRenewal:
+      'I piani annuali si rinnovano per un altro anno fino alla disdetta. Dopo il primo anno potete disdire in qualsiasi momento un piano rinnovato, come indicato nelle Condizioni.',
   },
   faq: {
     title: 'FAQ',
     q1: 'BorderDay è consulenza fiscale o legale?',
-    a1: 'No. È uno strumento personale di registrazione e promemoria. Le soglie provengono da fonti ufficiali pubbliche e possono cambiare. Verifica sempre con il datore di lavoro, un consulente qualificato o l’autorità competente.',
+    a1:
+      'No. È uno strumento di registrazione e promemoria per datori di lavoro e dipendenti. Le soglie provengono da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con il datore di lavoro, un consulente qualificato o l’autorità competente.',
     q2: 'Dove è memorizzato il vostro diario dei giorni?',
     a2:
       'Senza abbonamento, solo sul vostro dispositivo (IndexedDB nel browser). Con un abbonamento attivo o un account aziendale, nel vostro account BorderDay. In ogni caso potete esportare JSON o CSV, o eliminare tutto.',
@@ -320,45 +330,152 @@ const it: Dict = {
     a3:
       'Mostriamo un numero solo se il metodo di conteggio è confermato da una fonte ufficiale. Altrimenti la scheda spiega perché nessun contatore è attivo e vi rimanda alla vostra autorità. Non inventa mai una cifra.',
     q4: 'Tracciate la mia posizione?',
-    a4: 'No. La versione 1 non ha GPS né localizzazione in background. Registri i giorni tu.',
+    a4:
+      'No. Registrate voi i giorni. Niente GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
     q5: 'Quali confini coprite?',
     a5:
       'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su quattro: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, Germania→Svizzera, Francia→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale per ora: cantoni dell’accordo del 1983←Francia (Basilea e altri), Belgio→Lussemburgo, Germania→Lussemburgo, Francia→Belgio e Paesi Bassi→Belgio.',
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',
-    a7: 'Il checkout usa Stripe Managed Payments: Link è il merchant of record e gestisce IVA/GST nel checkout. I piani azienda e individuale includono una prova gratuita di 7 giorni; è richiesta una carta all\'iscrizione. I codici promo sono accettati. Vedi le Condizioni per la disdetta e il diritto di recesso di 14 giorni (consumatori UE).',
+    a7:
+      'Il checkout usa Stripe Managed Payments: Link è il merchant of record e gestisce IVA/GST nel checkout. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato (individuale 4,99 €/mese o 49 €/anno IVA inclusa; azienda 5 € per collaboratore attivo al mese, minimo 39 €/mese, o minimo 390 €/anno, IVA esclusa), addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta. I codici promo sono accettati. Vedete le Condizioni per la disdetta e il diritto di recesso di 14 giorni (consumatori UE).',
     q8: 'Cosa non copre BorderDay?',
     a8:
       'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. I corridoi non elencati, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni corridoio. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come il tasso annuo di telelavoro richiesto da alcuni cantoni. In caso di dubbio, verificate con la vostra autorità.',
   },
   privacy: {
     title: 'Privacy',
-    updated: 'Ultimo aggiornamento: 31 ott 2026 (Europe/Zurich)',
+    updated: 'Ultimo aggiornamento: 31 ott. 2026 (Europe/Zurich)',
+    intro:
+      'Questa informativa spiega quali dati personali tratta BorderDay, perché, chi li riceve, dove vanno e per quanto tempo sono conservati, e quali sono i vostri diritti secondo il GDPR e la legge federale svizzera sulla protezione dei dati (LPD).',
     controllerTitle: 'Titolare del trattamento',
     controllerBody:
-      'Il titolare del trattamento (GDPR) e il titolare del trattamento ai sensi della Legge federale svizzera sulla protezione dei dati (LPD / nLPD) per gli account azienda BorderDay e i relativi trattamenti è PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDE/UID CHE-312.418.158). Contatto: hello@borderday.com · Privacy: privacy@borderday.com.',
+      'PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDI CHE-312.418.158) è il titolare del trattamento ai sensi del GDPR e della legge federale svizzera sulla protezione dei dati (LPD) per questo sito, i piani individuali, gli account utente, l’amministrazione degli account aziendali, la fatturazione, il supporto e la sicurezza. Contatto: hello@borderday.com · Privacy: privacy@borderday.com. Le persone nell’UE/SEE possono usare gli stessi indirizzi.',
+    rolesTitle: 'Chi è responsabile dei registri dei giorni dei dipendenti',
+    rolesBody:
+      'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. Su questo sito non è ancora pubblicato un accordo sul trattamento dei dati: i datori di lavoro che ne hanno bisogno possono chiederlo allo stesso indirizzo.',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Registro individuale (dispositivo): pacchetto confine, tipo di ogni giorno (telelavoro, in sede, paese terzo, non lavorativo), segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego e A1 se inseriti. Account aziendali (se usati): nome azienda, e-mail/nomi dei membri, ruoli, pacchetto confine, tipi e date dei giorni, segni di notte fuori, percentuale d’impiego e A1 se inseriti, registrazioni del consenso. Progettato per il GDPR e la legge federale svizzera sulla protezione dei dati (LPD / nLPD).',
+      'Anteprima gratuita, sul vostro dispositivo: pacchetto confine, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego e A1 se inseriti. Piano individuale: gli stessi dati, salvati nel vostro account. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, pacchetto confine, tipi e date dei giorni, segni di notte fuori, percentuale d’impiego e A1 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
-      'Niente GPS, niente localizzazione continua, niente geolocalizzazione IP come luogo di lavoro. L’HR vede tipi di giorno, segni di notte fuori, percentuale d’impiego e A1 se inseriti, e conteggi — gli stessi contatori del collaboratore. Niente tracker pubblicitari. Niente vendita di dati personali.',
-    s3Title: 'Email account',
-    s3Body:
-      'Le email account (iscrizione, magic link, inviti) servono solo ad auth e inviti aziendali. Cancellazione: privacy@borderday.com.',
-    s4Title: 'I vostri diritti (collaboratori e HR)',
-    s4Body:
-      'I collaboratori possono esportare e cancellare il diario e vedono esattamente ciò che vede l’HR. Revoca del consenso e cancellazione: privacy@borderday.com.',
-    s5Title: 'Responsabili del trattamento e residenza',
-    s5Body:
-      'Produzione su Supabase (UE, eu-central-1). Responsabili del trattamento: Resend (e-mail transazionali, inclusi inviti e auth), Stripe / Link (pagamenti Managed Payments). Auth: email e Google.',
+      'Niente GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche percentuale d’impiego e A1 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Niente tracker pubblicitari. Niente vendita di dati personali.',
+    tableTitle: 'Finalità, basi giuridiche, destinatari, trasferimenti e conservazione',
+    tableIntro:
+      'I numeri di articolo si riferiscono al GDPR. La LPD svizzera non elenca le basi giuridiche allo stesso modo; valgono le stesse finalità, gli stessi destinatari e paesi.',
+    tableCols: {
+      purpose: 'Finalità',
+      data: 'Dati',
+      basis: 'Base giuridica',
+      recipients: 'Destinatari',
+      transfer: 'Paese e garanzia',
+      retention: 'Conservazione',
+    },
+    tableRows: [
+      {
+        purpose: 'Visualizzazione di questo sito',
+        data: 'Indirizzo IP e dettagli delle richieste nei log dell’host. Nessun cookie di analisi o pubblicitario.',
+        basis: 'Legittimi interessi a gestire e proteggere il sito (art. 6, par. 1, lett. f)',
+        recipients: 'GitHub Pages (hosting)',
+        transfer: 'Stati Uniti; garanzie qui sotto',
+        retention: 'Stabilita da GitHub. BorderDay non tiene log separati dei visitatori.',
+      },
+      {
+        purpose: 'Account, accesso e sicurezza',
+        data: 'E-mail, nome, hash della password o accesso Google, log di sessione e di sicurezza',
+        basis: 'Contratto (art. 6, par. 1, lett. b); legittimi interessi alla sicurezza (art. 6, par. 1, lett. f)',
+        recipients: 'Supabase (database, autenticazione); Resend (e-mail di accesso); Google, solo se scegliete l’accesso con Google',
+        transfer: 'Database ospitato nell’UE (eu-central-1). Supabase, Resend e Google sono fornitori con sede negli Stati Uniti; garanzie qui sotto',
+        retention: 'Fino alla chiusura dell’account. Cancellazione su richiesta: nessuna eliminazione automatica per ora.',
+      },
+      {
+        purpose: 'Piano individuale: il vostro registro e i vostri contatori',
+        data: 'Pacchetto confine, tipi e date dei giorni, segni di notte fuori, note, giorni lavorativi, percentuale d’impiego, A1',
+        basis: 'Contratto (art. 6, par. 1, lett. b)',
+        recipients: 'Supabase',
+        transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
+        retention: 'Finché non cancellate i giorni o chiudete l’account',
+      },
+      {
+        purpose: 'Amministrazione dell’account aziendale',
+        data: 'Nome dell’azienda, nomi ed e-mail degli amministratori dell’account e dei lettori HR, ruoli, organico attivo per la fatturazione',
+        basis: 'Contratto con il datore di lavoro; legittimi interessi ai contatti con i suoi referenti (art. 6, par. 1, lett. b, f)',
+        recipients: 'Supabase',
+        transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
+        retention: 'Finché esiste l’account aziendale. Cancellazione su richiesta: nessuna eliminazione automatica per ora.',
+      },
+      {
+        purpose: 'Account aziendale: registri dei dipendenti e contatori HR (il datore di lavoro è titolare, BorderDay il suo responsabile del trattamento)',
+        data: 'Nome, e-mail, pacchetto confine, giorni lavorativi, percentuale d’impiego, A1, tipo e data del giorno, segno di notte fuori, contatori. Le note restano private per il dipendente.',
+        basis: 'Stabilita dal datore di lavoro come titolare, per esempio un obbligo di legge o legittimi interessi. BorderDay non si basa qui sul consenso del dipendente.',
+        recipients: 'Gli amministratori dell’account e i lettori HR del datore di lavoro; Supabase',
+        transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
+        retention: 'Obiettivo: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi). Nessuna cancellazione automatica per ora: rivolgetevi al datore di lavoro o a privacy@borderday.com.',
+      },
+      {
+        purpose: 'Inviti e prova dell’avviso',
+        data: 'Indirizzo e-mail fornito dal datore di lavoro, ruolo, link di invito; data, lingua e versione dell’avviso di cui avete preso atto',
+        basis: 'Inviti: il datore di lavoro come titolare, come sopra. Prova dell’avviso: legittimi interessi a dimostrare che l’avviso è stato dato (art. 6, par. 1, lett. f)',
+        recipients: 'Resend (e-mail di invito); Supabase',
+        transfer: 'Stati Uniti (Resend) e hosting nell’UE (Supabase); garanzie qui sotto',
+        retention: 'I link di invito scadono dopo 14 giorni. I dati restano finché esiste l’adesione: nessuna eliminazione automatica per ora.',
+      },
+      {
+        purpose: 'Abbonamenti e pagamenti',
+        data: 'Presso Stripe e Link: e-mail, indirizzo di fatturazione, metodo di pagamento, dati di ordine e IVA. Presso BorderDay: stato dell’abbonamento e riferimento cliente.',
+        basis: 'Contratto; obblighi di legge contabili e fiscali (art. 6, par. 1, lett. b, c)',
+        recipients: 'Stripe e Link, come titolari autonomi secondo le proprie informative',
+        transfer: 'UE e Stati Uniti; vedete le informative di Stripe e Link',
+        retention: 'Stripe e Link: vedete le loro informative. BorderDay: finché esiste l’account e per quanto richiesto dal diritto contabile.',
+      },
+      {
+        purpose: 'Supporto, richieste sui vostri diritti, messaggi di recesso e di disdetta',
+        data: 'Il vostro indirizzo e-mail e il contenuto del messaggio',
+        basis: 'Contratto; obblighi di legge; legittimi interessi a rispondervi (art. 6, par. 1, lett. b, c, f)',
+        recipients: 'Zoho (caselle di posta)',
+        transfer: 'Centro dati nell’UE (Zoho EU)',
+        retention: 'Il tempo necessario a gestire la richiesta, ed eventuali periodi legali di conservazione',
+      },
+    ],
+    s5Title: 'Destinatari',
+    recipients: [
+      'Supabase: database e autenticazione, come responsabile del trattamento. Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti.',
+      'Resend: e-mail di accesso e di invito, come responsabile del trattamento. Fornitore con sede negli Stati Uniti.',
+      'Stripe e Link: checkout, pagamento, imposte e rimborsi a livello di ordine, come titolari autonomi secondo le proprie informative. Il vostro indirizzo e-mail viene loro trasmesso all’avvio del checkout.',
+      'GitHub Pages: hosting del sito; riceve gli indirizzi IP dei visitatori. Stati Uniti.',
+      'Zoho: caselle hello@borderday.com e privacy@borderday.com. Centro dati nell’UE.',
+      'Google: accesso, solo se lo scegliete. Stati Uniti.',
+      'Il vostro datore di lavoro: in un account aziendale, i suoi amministratori dell’account e lettori HR.',
+    ],
+    transfersTitle: 'Trasferimenti internazionali',
+    transfersBody:
+      'Il titolare ha sede in Svizzera, di cui la Commissione europea riconosce l’adeguatezza della protezione; la Svizzera riconosce a sua volta come adeguati gli Stati dell’UE e del SEE. Per i destinatari negli Stati Uniti o altrove ci basiamo sui Data Privacy Framework UE–USA e Svizzera–USA se il fornitore è certificato, altrimenti sulle clausole contrattuali tipo (con adattamenti svizzeri) delle sue condizioni pubblicate sul trattamento dei dati. Potete chiedere una copia di queste garanzie a privacy@borderday.com.',
     s6Title: 'Conservazione dei dati',
     s6Body:
-      'Conservazione predefinita dei diari azienda: 24 mesi, salvo diversa impostazione (1–120) o obbligo di legge più lungo. Poi cancellazione o anonimizzazione. I dati DEMO sono etichettati e resettabili.',
-    s7Title: 'Trasparenza collaboratore / HR',
+      'I periodi indicati sopra sono obiettivi. Registri aziendali: obiettivo di 24 mesi per impostazione predefinita, o secondo l’impostazione dell’azienda (1–120 mesi), salvo che il diritto applicabile richieda di più. La cancellazione automatica non è ancora attiva: i dati non vengono quindi eliminati da soli alla fine di un periodo. Per far cancellare i dati subito, usate l’app o scrivete a privacy@borderday.com. I dati dimostrativi sono etichettati DEMO e possono essere reimpostati in qualsiasi momento.',
+    s4Title: 'I vostri diritti',
+    rightsIntro: 'Nei limiti previsti dalla legge, avete questi diritti:',
+    rights: [
+      'Accesso: una copia dei vostri dati e informazioni sul loro trattamento.',
+      'Rettifica: correzione dei dati inesatti.',
+      'Cancellazione: eliminazione dei vostri dati.',
+      'Limitazione: limitare il trattamento in determinati casi.',
+      'Opposizione: opporvi ai trattamenti basati su legittimi interessi.',
+      'Portabilità: i vostri dati in un formato strutturato e leggibile da dispositivo automatico.',
+    ],
+    rightsHow:
+      'Usate la pagina Account per esportare i registri o chiedere la cancellazione, oppure scrivete a privacy@borderday.com. Il GDPR ci dà un mese per rispondere e la LPD 30 giorni. Per i registri di un account aziendale il titolare è il datore di lavoro, che può dover conservare alcuni documenti.',
+    complaintBody:
+      'Potete presentare reclamo all’Incaricato federale della protezione dei dati e della trasparenza (IFPDT, www.edoeb.admin.ch). Se vivete o lavorate nell’UE/SEE, potete rivolgervi anche alla vostra autorità locale di protezione dei dati.',
+    requiredBody:
+      'Per un account serve un indirizzo e-mail, per i contatori servono i dati dei giorni: senza di essi il servizio non può essere fornito. Percentuale d’impiego, A1 e note sono facoltativi, ma alcune soglie sono meno precise senza di essi. BorderDay non prende decisioni automatizzate con effetti giuridici: i contatori calcolano solo a partire dai giorni registrati.',
+    storageTitle: 'Memorizzazione sul vostro dispositivo',
+    storageBody:
+      'BorderDay non imposta cookie e non usa tracker pubblicitari o di analisi. Sul dispositivo memorizza solo ciò che serve all’app: IndexedDB per il registro e le impostazioni dell’anteprima gratuita, localStorage per la sessione di accesso e l’azienda dimostrativa, e una cache del service worker per il caricamento offline. Sono elementi strettamente necessari, quindi non viene mostrato alcun banner di consenso. Potete cancellarli nelle impostazioni del browser.',
+    s7Title: 'Trasparenza dipendente / HR',
     s7Body:
-      'Nessun punteggio nascosto per l’HR. La logica dei contatori (giorni usati, ammessi, stato) è identica per collaboratore e dashboard HR.',
+      'Nessun punteggio nascosto per l’HR. La logica dei contatori (giorni usati, ammessi, stato) è identica per il dipendente e la dashboard HR.',
     contact: 'Contatto privacy: privacy@borderday.com · hello@borderday.com',
   },
   individuals: {
@@ -398,7 +515,7 @@ const it: Dict = {
     pendingInvites: 'Inviti in sospeso',
     dashboardTitle: 'Dashboard HR',
     dashboardSubtitle:
-      'Contatori fiscali e di sicurezza sociale per collaboratore. Tipi di giorno, segni di notte fuori e conteggi — mai la posizione.',
+      'Contatori fiscali e di sicurezza sociale per collaboratore. Tipi di giorno, segni di notte fuori e conteggi — mai GPS né posizione del dispositivo.',
     filterBorder: 'Filtra per confine',
     filterStatus: 'Filtra per situazione',
     filterAll: 'Tutti',
@@ -408,18 +525,14 @@ const it: Dict = {
     viewHistory: 'Cronologia giorni',
     historyTitle: 'Cronologia giorni del collaboratore',
     historySubtitle:
-      'Solo tipo di giorno, data e segno di notte fuori. Nessun dato di posizione viene memorizzato.',
+      'Solo tipo di giorno, data e segno di notte fuori. Non vengono memorizzati GPS né posizione del dispositivo, e le note non sono mostrate.',
     backDashboard: 'Torna alla dashboard',
     joinTitle: 'Unitevi alla vostra azienda',
-    joinSubtitle: 'Accetta l’invito, il consenso di visibilità e scegli il pacchetto confine.',
+    joinSubtitle:
+      'Accettate l’invito, leggete l’avviso su ciò che può vedere l’HR e scegliete il pacchetto confine.',
     joinButton: 'Unisciti all’azienda',
     joinSuccess: 'Fatto: ora fate parte dell’azienda. Aprite l’app collaboratore per registrare i giorni.',
     pickBorder: 'Il vostro pacchetto confine',
-    consentTitle: 'Consenso — cosa può vedere l’HR',
-    consentBody:
-      'Entrando, accettate che il titolare e i lettori HR del datore di lavoro possano vedere: nome, e-mail, pacchetto confine scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se è segnato come notte fuori per lavoro, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego e il vostro A1. Non vedono GPS né tracce di posizione — BorderDay non raccoglie la posizione. Potete esportare o cancellare il registro. Conservazione predefinita: 24 mesi (impostazione aziendale). Strumento di registrazione, non consulenza fiscale o legale.',
-    consentAccept: 'Ho letto e accetto questo avviso',
-    consentRequired: 'Accetta l’avviso di consenso per continuare.',
     demoDataBadge: 'DATI DEMO',
     demoBanner: 'Questa azienda è etichettata DEMO. Cifre di esempio per l’anteprima — non collaboratori reali.',
     loadDemo: 'Carica azienda DEMO',
@@ -447,32 +560,48 @@ const it: Dict = {
     profileTitle: 'Percentuale d’impiego e A1',
     saveProfile: 'Salva',
     profileSaved: 'Salvato.',
+    noticeTitle: 'Avviso — cosa può vedere l’HR',
+    noticeBody:
+      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, pacchetto confine scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se è segnato come notte fuori per lavoro, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego e il vostro A1. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare o cancellare il registro e chiedere al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione prevista: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi); la cancellazione non è ancora automatizzata. Strumento di registrazione, non consulenza fiscale o legale.',
+    noticeAck: 'Ho letto questo avviso',
+    noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
+    noticePrivacyLink: 'Informativa privacy completa',
   },
 
   terms: {
-    title: 'Condizioni di servizio',
+    title: 'Condizioni di servizio e note legali',
     updated: 'Ultimo aggiornamento: 31 ott. 2026 (Europe/Zurich)',
-    providerTitle: 'Fornitore e parte contraente',
+    providerTitle: 'Note legali: fornitore e parte contraente',
     providerBody:
-      'Il servizio BorderDay è fornito da PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDE/UID CHE-312.418.158), che è la parte contraente per il servizio. Contatto: hello@borderday.com. Il checkout usa Stripe Managed Payments: gli acquisti risultano venduti tramite Link, e Link è il merchant of record (seller of record) per il pagamento, la riscossione delle imposte e i rimborsi a livello di ordine ove Managed Payments si applica.',
+      'Il servizio BorderDay e questo sito sono forniti da PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDI CHE-312.418.158), che è la parte contraente per il servizio. Contatto: hello@borderday.com. Il checkout usa Stripe Managed Payments: gli acquisti risultano venduti tramite Link, e Link è il merchant of record (seller of record) per il pagamento, la riscossione, la dichiarazione e il versamento delle imposte e i rimborsi a livello di ordine ove Managed Payments si applica.',
+    legalNoticeNote: 'Ulteriori dettagli sono disponibili su richiesta a hello@borderday.com.',
     s1Title: 'Servizio',
     s1Body:
-      'BorderDay è uno strumento di registrazione e promemoria delle classificazioni giornaliere per datori di lavoro e collaboratori su determinati corridoi transfrontalieri. Non è consulenza fiscale o legale, né un sostituto del datore di lavoro, di un consulente qualificato o di un’autorità competente. Vedi l’Avvertenza.',
+      'BorderDay è uno strumento di registrazione e promemoria delle classificazioni giornaliere per datori di lavoro e dipendenti su determinati corridoi transfrontalieri. Non è consulenza fiscale o legale, né sostituisce il datore di lavoro, un consulente qualificato o un’autorità competente. Vedete l’Avvertenza.',
     s2Title: 'Account e uso aziendale',
     s2Body:
-      'Devi fornire dati di account corretti. I titolari aziendali invitano i collaboratori; questi scelgono un pacchetto confine e registrano solo il tipo di giorno (nessuna posizione). L’HR vede gli stessi contatori del collaboratore. Sei responsabile dell’accuratezza dei giorni registrati e del trattamento lecito dei dati dei dipendenti ai sensi del GDPR e, se applicabile, della LPD svizzera.',
-    s3Title: 'Abbonamenti, prova e disdetta',
+      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un pacchetto confine e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. Su questo sito non è ancora pubblicato un accordo sul trattamento dei dati: i datori di lavoro che ne hanno bisogno possono chiederlo a privacy@borderday.com. Siete responsabili dell’accuratezza dei giorni registrati.',
+    s3Title: 'Abbonamenti, prova, rinnovo e disdetta',
     s3Body:
-      'I piani a pagamento sono abbonamenti. Azienda e individuale includono una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Puoi disdire tramite gli strumenti ordine Link o il portale clienti Stripe. La disdetta interrompe i rinnovi futuri; gli importi già riscosati per un periodo avviato non sono proratati, salvo obblighi di legge o politica di rimborso di Link.',
+      'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo avviato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link, e il diritto di recesso qui sotto non è pregiudicato.',
+    s3YearlyBody:
+      'I piani individuali annuali si rinnovano per un altro anno fino alla disdetta. La disdetta durante il primo anno interrompe il rinnovo successivo. Dopo il primo anno potete disdire in qualsiasi momento un piano annuale rinnovato; il piano termina allora, e ogni rimborso della parte non utilizzata si applica, come richiesto dal diritto imperativo dei consumatori del vostro paese.',
     s4Title: 'Prezzi, IVA e merchant of record',
     s4Body:
-      'Azienda: 5 € per collaboratore attivo al mese, minimo 39 € / mese (o equivalente annuale con 2 mesi gratis), IVA esclusa. Individuale: 4,99 € / mese o 49 € / anno, IVA inclusa. Il checkout usa Stripe Managed Payments: gli acquisti risultano venduti tramite Link, e Link è il merchant of record per la riscossione e il versamento dell’IVA ove Managed Payments si applica. I prezzi visualizzati possono essere convertiti in valuta locale al checkout.',
-    s5Title: 'Diritto di recesso dei consumatori UE (14 giorni)',
+      'Azienda: 5 € per collaboratore attivo al mese, minimo 39 € al mese, o fatturazione annuale con 2 mesi gratis (minimo 390 € all’anno), tutto IVA esclusa. Individuale: 4,99 € al mese o 49 € all’anno, IVA inclusa. Il checkout usa Stripe Managed Payments: gli acquisti risultano venduti tramite Link, e Link è il merchant of record per la riscossione, la dichiarazione e il versamento dell’IVA ove Managed Payments si applica. I prezzi visualizzati possono essere convertiti in valuta locale al checkout.',
+    s5Title: 'Diritto di recesso dei consumatori UE/SEE (14 giorni)',
     s5Body:
-      'Se acquisti un piano individuale come consumatore nell’UE/SEE, la direttiva 2011/83/UE ti riconosce un diritto di recesso di 14 giorni dalla conclusione del contratto, senza motivazione. Per esercitarlo, contatta il supporto Link per l’ordine (venduto tramite Link) e/o privacy@borderday.com con l’e-mail dell’account e il riferimento. Per i servizi digitali, l’inizio dell’esecuzione durante il periodo di recesso dopo consenso espresso preventivo e riconoscimento della perdita del diritto una volta iniziata l’esecuzione può limitare o estinguere tale diritto (art. 16) — il checkout e le condizioni Sold through Link di Link descrivono la gestione per il tuo ordine. Gli acquisti aziendali non sono contratti a distanza con i consumatori.',
+      'Se acquistate un piano individuale come consumatori nell’UE/SEE, potete recedere dal contratto entro 14 giorni senza indicare il motivo. Il periodo decorre dalla conclusione del contratto, cioè dal giorno in cui ricevete l’accesso dopo il checkout. Per recedere, informateci chiaramente: usate la pagina «Recedere dal contratto», il modulo tipo qui sotto o una semplice e-mail a privacy@borderday.com, oppure contattate il supporto Link per il vostro ordine. Basta inviare il messaggio prima della fine dei 14 giorni.',
+    s5EffectsBody:
+      'BorderDay è un servizio digitale: il diritto di recesso cessa quindi solo a seguito della completa esecuzione del contratto, non al suo inizio. Il recesso durante la prova gratuita non costa nulla. Se recedete dopo l’inizio di un periodo a pagamento, dovete solo un importo proporzionale al servizio fornito fino al recesso, e solo se avete chiesto espressamente che il servizio iniziasse durante il periodo e avete ricevuto questa informazione. Tutto il resto che avete pagato viene rimborsato senza indebito ritardo ed entro 14 giorni al più tardi, con lo stesso mezzo di pagamento; Link gestisce il rimborso del vostro ordine.',
+    s5BusinessBody:
+      'I piani azienda sono venduti per uso professionale. I diritti imperativi dei consumatori non sono pregiudicati.',
+    s5FormTitle: 'Modulo tipo di recesso (compilare e restituire solo se si desidera recedere)',
+    s5Form:
+      'Destinatario: BorderDay, privacy@borderday.com (dati del fornitore nelle note legali qui sopra)\nCon la presente notifico il recesso dal mio contratto per il seguente servizio: abbonamento BorderDay\nOrdinato il / ricevuto il:\nNome del consumatore:\nIndirizzo del consumatore:\nFirma del consumatore (solo se il presente modulo è notificato in versione cartacea):\nData:',
     s6Title: 'Rimborsi e supporto pagamenti',
     s6Body:
-      'Pagamento, ricevuta, fattura fiscale e richieste di rimborso a livello di ordine Managed Payments sono gestiti da Link secondo le condizioni Sold through Link / Purchase di Stripe. Domande sul prodotto (funzionamento, accesso, export): hello@borderday.com o privacy@borderday.com.',
+      'Pagamento, ricevuta, fattura e richieste di rimborso a livello di ordine con Managed Payments sono gestiti da Link secondo le condizioni pubblicate da Stripe come «Sold through Link» (venduto tramite Link) e «Purchase» (acquisto). Domande sul prodotto (funzionamento, accesso all’account, export): hello@borderday.com o privacy@borderday.com.',
     s7Title: 'Modifiche',
     s7Body:
       'Possiamo aggiornare queste Condizioni. La data «Ultimo aggiornamento» cambia di conseguenza. L’uso continuato dopo un aggiornamento vale come accettazione, salvo processo diverso imposto dal diritto dei consumatori.',
@@ -481,7 +610,37 @@ const it: Dict = {
   disclaimer: {
     title: 'Avvertenza',
     body:
-      'BorderDay è uno strumento personale di registrazione e promemoria. Non è consulenza fiscale, non è consulenza legale e non sostituisce il datore di lavoro, un consulente fiscale qualificato o l’istituzione di sicurezza sociale competente. Le soglie mostrate provengono da fonti ufficiali pubbliche e possono cambiare; verificate sempre presso l’autorità competente. Siete responsabili dell’accuratezza dei giorni che registrate.',
+      'BorderDay è uno strumento di registrazione e promemoria per datori di lavoro e dipendenti. Non è consulenza fiscale, non è consulenza legale e non sostituisce il datore di lavoro, un consulente fiscale qualificato o l’istituzione di sicurezza sociale competente. Le soglie mostrate provengono da fonti ufficiali pubbliche e possono cambiare; verificate sempre presso l’autorità competente. Siete responsabili dell’accuratezza dei giorni che registrate. I datori di lavoro restano responsabili delle richieste di A1, delle paghe e delle dichiarazioni fiscali.',
+  },
+  withdrawal: {
+    title: 'Recedere dal contratto',
+    intro:
+      'Se avete acquistato un piano individuale come consumatori nell’UE/SEE, potete recedere entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo. Compilate i campi, confermate e inviate il messaggio preparato dalla vostra e-mail.',
+    howTitle: 'Come funziona',
+    how:
+      'Questa pagina prepara il vostro messaggio di recesso a privacy@borderday.com. Il recesso è esercitato quando lo inviate. Conservate una copia dell’e-mail inviata come prova. Confermiamo la ricezione via e-mail e Link gestisce il rimborso del vostro ordine.',
+    linkNote:
+      'Potete anche contattare il supporto Link per il vostro ordine, o usare un’eventuale opzione di recesso nella pagina d’ordine Link. Non abbiamo potuto verificare una funzione di recesso con un clic su quella pagina: questa pagina e l’indirizzo e-mail qui sopra restano quindi disponibili.',
+    scopeNote:
+      'Tutti i dettagli e il modulo tipo si trovano nelle Condizioni e note legali. I piani azienda sono venduti per uso professionale.',
+    orderedOn: 'Data dell’ordine o dell’accesso',
+    submit: 'Continua alla conferma',
+    confirm: 'Conferma il recesso',
+    mailSubject: 'Recesso dal contratto BorderDay',
+    mailBody:
+      'Con la presente notifico il recesso dal mio contratto per il seguente servizio: abbonamento BorderDay.\n\nNome: {name}\nE-mail dell’account: {email}\nRiferimento dell’ordine: {reference}\nOrdinato il / ricevuto il: {date}\nData della presente comunicazione: {today}',
+  },
+  mailForm: {
+    name: 'Il vostro nome',
+    email: 'E-mail dell’account',
+    reference: 'Riferimento dell’ordine',
+    referenceHint: 'Dalla ricevuta Link, se disponibile.',
+    reviewTitle: 'Controllate il messaggio',
+    to: 'A:',
+    subject: 'Oggetto:',
+    send: 'Apri nella mia e-mail',
+    manual: 'Se non si apre alcuna app di posta, copiate questo testo e inviatelo a {to}.',
+    back: 'Modifica i dati',
   },
   footer: {
     tagline: 'Registrazione dei giorni per team e collaboratori che lavorano oltre confine.',
@@ -512,6 +671,8 @@ const it: Dict = {
     callbackFailed: 'Impossibile completare l’accesso. Riprovate.',
     paymentsUnavailable: 'Impossibile avviare il checkout — riprovate o contattate il supporto.',
     signOut: 'Esci',
+    signUpTerms:
+      'La creazione di un account è gratuita. Un piano a pagamento inizia solo con il checkout: prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta. Leggete:',
   },
 };
 

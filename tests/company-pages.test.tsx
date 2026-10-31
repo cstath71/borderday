@@ -285,7 +285,7 @@ describe('Join', () => {
     open('/en/join/tok');
     await fill();
     fireEvent.click(screen.getByRole('button', { name: en.company.joinButton }));
-    await screen.findByText(en.company.consentRequired);
+    await screen.findByText(en.company.noticeRequired);
     expect(mocked.acceptInvite).not.toHaveBeenCalled();
   });
 

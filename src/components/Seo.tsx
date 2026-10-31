@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { LANGS, type Lang } from '../i18n';
+import { getDict, LANGS, type Lang } from '../i18n';
 
 const BASE = 'https://borderday.com';
 
@@ -63,6 +63,7 @@ function softwareGraph() {
         name: 'Company monthly (per active employee)',
         price: '5.00',
         priceCurrency: 'EUR',
+        description: 'Minimum €39 / month. Prices exclude VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
         availability: 'https://schema.org/InStock',
         url: `${BASE}/en/pricing/`,
       },
@@ -71,6 +72,7 @@ function softwareGraph() {
         name: 'Company yearly minimum',
         price: '390.00',
         priceCurrency: 'EUR',
+        description: 'Yearly company billing: 2 months free (€390 / year minimum). Prices exclude VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
         availability: 'https://schema.org/InStock',
         url: `${BASE}/en/pricing/`,
       },
@@ -79,6 +81,7 @@ function softwareGraph() {
         name: 'Individual monthly',
         price: '4.99',
         priceCurrency: 'EUR',
+        description: 'Includes VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
         availability: 'https://schema.org/InStock',
         url: `${BASE}/en/pricing/`,
       },
@@ -87,6 +90,7 @@ function softwareGraph() {
         name: 'Individual yearly',
         price: '49.00',
         priceCurrency: 'EUR',
+        description: 'Includes VAT. About two months free vs monthly. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
         availability: 'https://schema.org/InStock',
         url: `${BASE}/en/pricing/`,
       },
@@ -157,7 +161,7 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
       graph.push({
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE}/${lang}/` },
+          { '@type': 'ListItem', position: 1, name: getDict(lang).nav.home, item: `${BASE}/${lang}/` },
           { '@type': 'ListItem', position: 2, name, item: canonical },
         ],
       });

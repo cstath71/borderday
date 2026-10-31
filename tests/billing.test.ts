@@ -113,7 +113,7 @@ describe('trial length', () => {
   const locales = { en, fr, de, it: itDict } as const;
   for (const [lang, dict] of Object.entries(locales)) {
     it(`${lang}: pricing/home trial copy says 7, never 14`, () => {
-      const blob = [dict.pricing.trialNote, dict.home.waitlistNote].join(' | ');
+      const blob = [dict.pricing.trialCompany, dict.pricing.trialIndividual, dict.home.waitlistNote].join(' | ');
       expect(blob).toMatch(/\b7\b/);
       expect(blob).not.toMatch(/\b14\b/);
     });

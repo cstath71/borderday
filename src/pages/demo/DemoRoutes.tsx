@@ -198,6 +198,7 @@ function DemoJoin() {
         </div>
       ) : (
         <JoinForm
+          privacyHref={`/${lang}/privacy`}
           d={d}
           companyName={peek.companyName}
           email={peek.email}

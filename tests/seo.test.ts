@@ -215,7 +215,7 @@ describe('SEO artifacts on disk', () => {
         const html = readFileSync(join(dist, rel), 'utf8');
         const title = html.match(/<title>([^<]*)<\/title>/)?.[1];
         expect(title).toBeTruthy();
-        expect(title).toBe(PAGES[path][lang].title);
+        expect(title!.replaceAll('&amp;', '&')).toBe(PAGES[path][lang].title);
         seenTitles.add(`${lang}:${title}`);
         expect(html).toContain(`rel="canonical" href="${absUrl(lang, path)}"`);
         expect(html).toContain('hreflang="x-default"');

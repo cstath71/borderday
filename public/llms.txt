@@ -1,6 +1,6 @@
 # BorderDay
 
-> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on four. HR sees day types, night-away marks and counts — never location.
+> BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on four. HR sees day types per date, night-away marks and counts, never GPS or device location.
 
 - Site: https://borderday.com
 - Languages: English, French, German, Italian
@@ -8,11 +8,11 @@
 - Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
 - Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
 - No tax counter yet: 1983-agreement cantons←France (Basel and others, regime under review), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium, Netherlands→Belgium. Do not describe BorderDay as tracking tax limits on these corridors.
-- Day log (individual logger): stored on the device (local-first). No continuous GPS.
+- Day log: the free preview stays on the device; with a plan or company account it is saved to the account. No GPS or device location.
 - Company accounts: invite by email, HR dashboard with the same counters employees see
 - Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution
 - Thresholds shown are taken from public official sources and may change; where a rule cannot be counted, no number is shown and users are pointed to their authority
-- Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT); yearly company minimum €390 (2 months free). 7-day trial with card required. Checkout via Stripe Managed Payments (sold through Link).
+- Subscriptions: individuals €4.99/month or €49/year (incl. VAT); companies €5/active employee/month (min €39/month, excl. VAT); yearly company minimum €390, excl. VAT (2 months free). 7-day free trial, then the plan chosen at the stated price, charged automatically on day 8 and renewing until cancelled; card required at signup. Checkout via Stripe Managed Payments (sold through Link).
 - Contact: hello@borderday.com
 
 ## Important pages
@@ -27,7 +27,8 @@
 - https://borderday.com/en/company/signup/ — Company sign-up
 - https://borderday.com/en/privacy/ — Privacy
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
-- https://borderday.com/en/terms/ — Terms of service
+- https://borderday.com/en/terms/ — Terms and legal notice
+- https://borderday.com/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

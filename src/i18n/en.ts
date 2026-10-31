@@ -12,13 +12,14 @@ const en = {
     faq: 'FAQ',
     privacy: 'Privacy',
     disclaimer: 'Disclaimer',
-    terms: 'Terms',
+    terms: 'Terms & legal notice',
     openApp: 'Open the app',
     joinWaitlist: 'Sign in',
     forIndividuals: 'For individuals',
     forCompanies: 'For companies',
     hrDashboard: 'HR dashboard',
     companySignup: 'Company sign-up',
+    withdraw: 'Withdraw from contract',
   },
   lang: {
     en: 'English',
@@ -43,7 +44,7 @@ const en = {
       'Tax counters run today on four corridors: Geneva and other non-1983 cantons (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). The other five say plainly that no tax counter runs. We never invent a number.',
     risk3Title: 'Multi-border teams',
     risk3Body:
-      'One company dashboard for employees on different borders. Filter by border or status. Export CSV for audit. Employees see exactly the same counters HR sees.',
+      'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see exactly the same counters HR sees.',
     feature1Title: 'Tax and social security, separately',
     feature1Body:
       'Independent counters with official sources linked. Warnings at 75% and 90% of the applicable limit, then at-limit and over-limit states with the consequence spelled out.',
@@ -63,12 +64,13 @@ const en = {
     waitlistBody:
       'Create a company account with email or Google, invite your team, then subscribe on the Pricing page. A labeled DEMO company remains available for preview.',
     waitlistButton: 'Create account',
-    waitlistNote: 'No waitlist — accounts and checkout are live. Company plans: €5/employee/mo (min €39), 7-day trial.',
+    waitlistNote:
+      'No waitlist: accounts and checkout are live. Company plan: €5 per active employee per month (minimum €39), excl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
     disclaimerShort:
       'BorderDay is a tracking and reminder tool for day classifications. It is not tax advice or legal advice. Always verify with the competent authority or a qualified adviser.',
     demoBanner: 'Screenshots and the seeded company use clearly labeled DEMO data — not real employees.',
     inShort:
-      'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on four of them. Company plan: €5 per active employee per month (€39 minimum); individuals €4.99/month or €49/year. 7-day trial with card required. A tracking tool — not tax or legal advice.',
+      'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on four of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
     inShortLabel: 'In short',
     chipTaxYes: 'Tax: yes',
     chipTaxNo: 'Tax: not yet',
@@ -291,36 +293,45 @@ const en = {
     companyInclude1: 'HR dashboard with per-employee counters and filters',
     companyInclude2: 'Email invites, roles (owner / HR viewer), CSV export',
     companyInclude3: 'Employees see the same counters HR sees',
-    companyInclude4: 'Data protection by design (day types only — no location)',
+    companyInclude4: 'Data protection by design (day types per date — no GPS or device location)',
     subscribeMonthly: 'Start monthly',
     subscribeYearly: 'Start yearly',
-    trialNote: '7-day free trial — card required at signup.',
     checkoutSuccess: 'Payment set up — your trial is active. Open your account to continue.',
     checkoutCancel: 'Checkout canceled — no charge. You can try again anytime.',
     goToAccount: 'Go to account',
     needCompany: 'Create or open a company account first, then subscribe.',
     waitlistCta: 'Start free account',
-    compareNote: 'Prices aligned with comparable tools checked on 31 Oct 2026 (Europe/Zurich). Not tax advice.',
     recommended: 'Recommended for employers',
+    trialCompany:
+      '7-day free trial, then €5 per active employee per month (minimum €39/month) or, on yearly billing, minimum €390/year, excl. VAT, charged automatically on day 8 and renewing until you cancel. Card required at signup. Cancel before day 8 and nothing is charged.',
+    trialIndividual:
+      '7-day free trial, then €4.99/month or €49/year incl. VAT (the plan you pick), charged automatically on day 8 and renewing until you cancel. Card required at signup. Cancel before day 8 and nothing is charged.',
+    readBefore: 'Before you subscribe, read:',
+    companyBusinessOnly: 'For businesses. Consumers should choose the individual plan.',
+    yearlyRenewal:
+      'Yearly plans renew for a further year until you cancel. After the first year you can cancel a renewed plan at any time, as set out in the Terms.',
   },
   faq: {
     title: 'FAQ',
     q1: 'Is BorderDay tax or legal advice?',
-    a1: 'No. It is a personal record-keeping and reminder tool. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.',
+    a1:
+      'No. It is a record-keeping and reminder tool for employers and employees. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.',
     q2: 'Where is my day log stored?',
     a2: 'Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.',
     q3: 'Why are some counters disabled?',
     a3:
       'We only show a number when we have confirmed how to count it on an official source. Otherwise the card says why no counter runs and points you to your authority. It never invents a figure.',
     q4: 'Do you track my location?',
-    a4: 'No. Version 1 has no GPS and no background location. You log days yourself.',
+    a4:
+      'No. You log days yourself. No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     q5: 'Which borders do you cover?',
     a5:
       'Nine corridors in five regions. Social-security counters on all nine. Tax counters on four: Geneva and other non-1983 cantons←France, Germany→Switzerland, France→Luxembourg and Italy→Switzerland. No tax counter yet: the 1983-agreement cantons←France (Basel and others), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium and Netherlands→Belgium.',
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',
-    a7: 'Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Company and individual plans include a 7-day free trial; a card is required at signup. Promo codes are supported at checkout. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
+    a7:
+      'Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Company and individual plans start with a 7-day free trial, and a card is required at signup. After 7 days the plan becomes paid at the stated price (individual €4.99/month or €49/year incl. VAT; company €5 per active employee per month, minimum €39/month, or minimum €390/year, excl. VAT), charged automatically on day 8 and renewing until you cancel. Promo codes are supported at checkout. See the Terms for cancellation and the 14-day EU withdrawal right for consumers.',
     q8: 'What does BorderDay not cover?',
     a8:
       'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate report some cantons require. When in doubt, check with your authority.',
@@ -328,27 +339,132 @@ const en = {
   privacy: {
     title: 'Privacy',
     updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    intro:
+      'This notice explains what personal data BorderDay processes, why, who receives it, where it goes and how long it is kept, and your rights under the GDPR and the Swiss Federal Act on Data Protection (FADP).',
     controllerTitle: 'Data controller',
     controllerBody:
-      'The data controller (GDPR) and the controller under the Swiss Federal Act on Data Protection (FADP / nLPD) for BorderDay company accounts and related processing is PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (IDE/UID CHE-312.418.158). Contact: hello@borderday.com · Privacy: privacy@borderday.com.',
+      'PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (UID CHE-312.418.158) is the data controller under the GDPR and the controller under the Swiss Federal Act on Data Protection (FADP) for this website, individual plans, user accounts, company account administration, billing, support and security. Contact: hello@borderday.com · Privacy: privacy@borderday.com. People in the EU/EEA can use the same addresses.',
+    rolesTitle: 'Who is responsible for employee day logs',
+    rolesBody:
+      'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. No data-processing agreement is published on this site yet: employers who need one can ask at the same address.',
     s1Title: 'What we collect',
     s1Body:
-      'Individual logger (device): border pack, each day’s type (telework, on site, third country, non-working), whether you marked a night away for work, optional notes, contractual working days per year, employment percentage and A1 record if you enter them. Company accounts (when used): company name, member emails/names, roles, border pack, day types and dates, night-away marks, employment percentage and A1 record if entered, consent records. Designed for GDPR and the Swiss Federal Act on Data Protection (FADP / nLPD).',
+      'Free preview, on your device: border pack, each day’s type (telework, on site, work trip / third State, non-working), whether you marked a night away for work, optional notes, contractual working days per year, employment percentage and A1 record if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border pack, day types and dates, night-away marks, employment percentage and A1 record if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
     s2Title: 'What we do not collect',
     s2Body:
-      'No GPS, no continuous location, no IP geolocation stored as a work location. HR sees day types, night-away marks, employment percentage and A1 records if entered, and counts — the same counters the employee sees. No advertising trackers. No sale of personal data.',
-    s3Title: 'Account email',
-    s3Body:
-      'Account emails (sign-up, magic link, invites) are used for authentication and company invites only. You can request erasure via privacy@borderday.com.',
-    s4Title: 'Your rights (employees and HR)',
-    s4Body:
-      'Employees can export and delete their day log. Employees see exactly what HR sees for their counters. You may withdraw consent for company processing where applicable and request erasure via privacy@borderday.com.',
-    s5Title: 'Processors and residency',
-    s5Body:
-      'Production uses Supabase (EU, eu-central-1). Processors: Resend (transactional email, including invites and auth mail), Stripe / Link (payments under Managed Payments). Auth: email and Google.',
+      'No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee. HR also sees employment percentage and A1 record if entered, and counts: the same counters the employee sees. No IP address is stored as a work location. No advertising trackers. No sale of personal data.',
+    tableTitle: 'Purposes, legal bases, recipients, transfers and retention',
+    tableIntro:
+      'Article numbers refer to the GDPR. The Swiss FADP does not list legal bases in the same way; the same purposes, recipients and countries apply.',
+    tableCols: {
+      purpose: 'Purpose',
+      data: 'Data',
+      basis: 'Legal basis',
+      recipients: 'Recipients',
+      transfer: 'Country and safeguard',
+      retention: 'Retention',
+    },
+    tableRows: [
+      {
+        purpose: 'Showing this website',
+        data: 'IP address and request details in the host’s logs. No analytics or advertising cookies.',
+        basis: 'Legitimate interests in running and securing the site (Art. 6(1)(f))',
+        recipients: 'GitHub Pages (hosting)',
+        transfer: 'United States; safeguards below',
+        retention: 'Set by GitHub. BorderDay keeps no separate visitor logs.',
+      },
+      {
+        purpose: 'Accounts, sign-in and security',
+        data: 'Email, name, password hash or Google sign-in, session and security logs',
+        basis: 'Contract (Art. 6(1)(b)); legitimate interests in security (Art. 6(1)(f))',
+        recipients: 'Supabase (database, authentication); Resend (sign-in email); Google, only if you choose Google sign-in',
+        transfer: 'Database hosted in the EU (eu-central-1). Supabase, Resend and Google are US-based providers; safeguards below',
+        retention: 'Until the account is closed. Deletion on request: no automatic purge yet.',
+      },
+      {
+        purpose: 'Individual plan: your day log and counters',
+        data: 'Border pack, day types and dates, night-away marks, notes, working days, employment percentage, A1 record',
+        basis: 'Contract (Art. 6(1)(b))',
+        recipients: 'Supabase',
+        transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
+        retention: 'Until you delete the days or close the account',
+      },
+      {
+        purpose: 'Company account administration',
+        data: 'Company name, names and emails of account owners and HR viewers, roles, active headcount for billing',
+        basis: 'Contract with the employer; legitimate interests in dealing with its contacts (Art. 6(1)(b), (f))',
+        recipients: 'Supabase',
+        transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
+        retention: 'As long as the company account exists. Deletion on request: no automatic purge yet.',
+      },
+      {
+        purpose: 'Company account: employee day logs and HR counters (the employer is controller, BorderDay its processor)',
+        data: 'Name, email, border pack, working days, employment percentage, A1 record, day type and date, night-away mark, counters. Notes are private to the employee.',
+        basis: 'Decided by the employer as controller, for example a legal obligation or legitimate interests. BorderDay does not rely on employee consent here.',
+        recipients: 'The employer’s account owners and HR viewers; Supabase',
+        transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
+        retention: 'Target: 24 months by default (company setting, 1–120 months). No automatic deletion yet: ask your employer or privacy@borderday.com.',
+      },
+      {
+        purpose: 'Invitations and the record of the notice',
+        data: 'Email address supplied by the employer, role, invite link; date, language and version of the notice you acknowledged',
+        basis: 'Invitations: the employer as controller, as above. Notice record: legitimate interests in proving the notice was given (Art. 6(1)(f))',
+        recipients: 'Resend (invitation email); Supabase',
+        transfer: 'United States (Resend) and EU hosting (Supabase); safeguards below',
+        retention: 'Invite links expire after 14 days. Records stay while the membership exists: no automatic purge yet.',
+      },
+      {
+        purpose: 'Subscriptions and payments',
+        data: 'At Stripe and Link: email, billing address, payment method, order and tax details. At BorderDay: subscription status and customer reference.',
+        basis: 'Contract; legal obligations in accounting and tax (Art. 6(1)(b), (c))',
+        recipients: 'Stripe and Link, as independent controllers under their own privacy notices',
+        transfer: 'EU and United States; see the Stripe and Link notices',
+        retention: 'Stripe and Link: see their notices. BorderDay: while the account exists and as long as accounting law requires.',
+      },
+      {
+        purpose: 'Support, rights requests, withdrawal and cancellation messages',
+        data: 'Your email address and what you write',
+        basis: 'Contract; legal obligations; legitimate interests in answering you (Art. 6(1)(b), (c), (f))',
+        recipients: 'Zoho (mailboxes)',
+        transfer: 'EU data centre (Zoho EU)',
+        retention: 'As long as needed to deal with the request, and any legal retention period',
+      },
+    ],
+    s5Title: 'Recipients',
+    recipients: [
+      'Supabase: database and authentication, as processor. EU hosting (eu-central-1); US-based provider.',
+      'Resend: sign-in and invitation email, as processor. US-based provider.',
+      'Stripe and Link: checkout, payment, tax and Order-level refunds, as independent controllers under their own privacy notices. Your email address goes to them when you start checkout.',
+      'GitHub Pages: website hosting; receives visitors’ IP addresses. United States.',
+      'Zoho: mailboxes for hello@borderday.com and privacy@borderday.com. EU data centre.',
+      'Google: sign-in, only if you choose it. United States.',
+      'Your employer: in a company account, its account owners and HR viewers.',
+    ],
+    transfersTitle: 'International transfers',
+    transfersBody:
+      'The controller is in Switzerland, which the European Commission recognises as providing adequate protection; Switzerland in turn recognises the EU and EEA states as adequate. For recipients in the United States or elsewhere, we rely on the EU–US and Swiss–US Data Privacy Frameworks where the provider is certified, and otherwise on the standard contractual clauses (with Swiss adaptations) in the provider’s published data-processing terms. Ask privacy@borderday.com for a copy of these safeguards.',
     s6Title: 'Data retention',
     s6Body:
-      'Default retention for company day logs is 24 months unless your company sets a different window (1–120 months) or applicable law requires longer. After retention, day logs are deleted or anonymised. Demo data is labeled DEMO and may be reset anytime.',
+      'The periods above are targets. Company day logs: target 24 months by default, or the company’s setting (1–120 months), unless applicable law requires longer. Automatic deletion is not in place yet, so data is not purged by itself when a period ends. To have data deleted now, use the app or write to privacy@borderday.com. Demo data is labelled DEMO and may be reset at any time.',
+    s4Title: 'Your rights',
+    rightsIntro: 'Within the limits set by law, you have these rights:',
+    rights: [
+      'Access: a copy of your data and information on how it is processed.',
+      'Rectification: correction of inaccurate data.',
+      'Erasure: deletion of your data.',
+      'Restriction: limiting processing in certain cases.',
+      'Objection: objecting to processing based on legitimate interests.',
+      'Portability: your data in a structured, machine-readable format.',
+    ],
+    rightsHow:
+      'Use the Account page to export your day logs or request deletion, or write to privacy@borderday.com. The GDPR gives us one month to answer and the FADP 30 days. For day logs in a company account the employer is the controller, and it may need to keep some records.',
+    complaintBody:
+      'You can complain to the Swiss Federal Data Protection and Information Commissioner (FDPIC, www.edoeb.admin.ch). If you live or work in the EU/EEA, you can also complain to your local data protection authority.',
+    requiredBody:
+      'An email address is needed for an account, and day data is needed for the counters: without them the service cannot be provided. Employment percentage, A1 record and notes are optional, though some limits are less precise without them. BorderDay takes no automated decisions with legal effect: counters only calculate from the days logged.',
+    storageTitle: 'Storage on your device',
+    storageBody:
+      'BorderDay sets no cookies and uses no advertising or analytics trackers. It stores only what the app needs on your device: IndexedDB for the free preview’s day log and settings, localStorage for your sign-in session and the demo company, and a service-worker cache so the app loads offline. These are strictly necessary, so no consent banner is shown. You can clear them in your browser settings.',
     s7Title: 'Transparency between employee and HR',
     s7Body:
       'There is no hidden HR-only score. Counter math (used days, allowed days, status) is identical for the employee view and the HR dashboard.',
@@ -390,7 +506,7 @@ const en = {
     pendingInvites: 'Pending invites',
     dashboardTitle: 'HR dashboard',
     dashboardSubtitle:
-      'Tax and social-security counters per employee. Day types, night-away marks and counts — never location.',
+      'Tax and social-security counters per employee. Day types, night-away marks and counts — never GPS or device location.',
     filterBorder: 'Filter by border',
     filterStatus: 'Filter by status',
     filterAll: 'All',
@@ -399,18 +515,14 @@ const en = {
     noEmployees: 'No employees yet. Create an invite link.',
     viewHistory: 'Day history',
     historyTitle: 'Employee day history',
-    historySubtitle: 'Day type, date and night-away mark only. No location data is stored.',
+    historySubtitle:
+      'Day type, date and night-away mark only. No GPS or device location is stored, and notes are not shown.',
     backDashboard: 'Back to dashboard',
     joinTitle: 'Join your company',
-    joinSubtitle: 'Accept the invite, consent to company visibility, and pick your border pack.',
+    joinSubtitle: 'Accept the invite, read the notice on what HR can see, and pick your border pack.',
     joinButton: 'Join company',
     joinSuccess: 'You joined the company. Open the employee app to log days.',
     pickBorder: 'Your border pack',
-    consentTitle: 'Consent — what HR can see',
-    consentBody:
-      'By joining, you agree that your employer’s owner and HR viewers can see: your name, email, chosen border pack, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether you marked it as a night away for work, and the same tax/social-security counters you see. They can also record your employment percentage and A1. They cannot see GPS or any location trail — BorderDay does not collect location. You can export or delete your day log. Retention defaults to 24 months (company setting). This is a tracking tool, not tax or legal advice.',
-    consentAccept: 'I have read and accept this notice',
-    consentRequired: 'Accept the consent notice to continue.',
     demoDataBadge: 'DEMO DATA',
     demoBanner: 'This company is labeled DEMO. Figures are sample data for product preview — not real employees.',
     loadDemo: 'Load DEMO company',
@@ -437,32 +549,47 @@ const en = {
     profileTitle: 'Employment percentage and A1',
     saveProfile: 'Save',
     profileSaved: 'Saved.',
+    noticeTitle: 'Notice — what HR can see',
+    noticeBody:
+      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border pack, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether you marked it as a night away for work, and the same tax and social-security counters you see. They can also record your employment percentage and A1. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export or delete your day log, and ask your employer or privacy@borderday.com about your rights. Target retention: 24 months by default (company setting, 1–120 months); deletion is not automated yet. This is a tracking tool, not tax or legal advice.',
+    noticeAck: 'I have read this notice',
+    noticeRequired: 'Confirm that you have read the notice to continue.',
+    noticePrivacyLink: 'Full privacy notice',
   },
 
   terms: {
-    title: 'Terms of service',
+    title: 'Terms & legal notice',
     updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
-    providerTitle: 'Provider and contracting party',
+    providerTitle: 'Legal notice: provider and contracting party',
     providerBody:
-      'The BorderDay service is provided by PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (IDE/UID CHE-312.418.158), which is the contracting party for the service. Contact: hello@borderday.com. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record (seller of record) for payment, tax collection and Order-level refunds where Managed Payments applies.',
+      'The BorderDay service and this website are provided by PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (UID CHE-312.418.158), which is the contracting party for the service. Contact: hello@borderday.com. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record (seller of record) for payment, tax collection and filing, and Order-level refunds where Managed Payments applies.',
+    legalNoticeNote: 'Further particulars are available on request at hello@borderday.com.',
     s1Title: 'Service',
     s1Body:
       'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border corridors. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',
     s2Title: 'Accounts and company use',
     s2Body:
-      'You must provide accurate account details. Company owners invite employees; employees choose a border pack and log day types only (no location). HR sees the same counters the employee sees. You are responsible for the accuracy of days you log and for lawful use of employee data under GDPR and, where applicable, Swiss FADP.',
-    s3Title: 'Subscriptions, trial and cancellation',
+      'You must provide accurate account details. Company account owners invite employees; employees choose a border pack and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. The provider is the controller of accounts, billing and security. No data-processing agreement is published on this site yet: employers who need one can ask at privacy@borderday.com. You are responsible for the accuracy of the days you log.',
+    s3Title: 'Subscriptions, trial, renewal and cancellation',
     s3Body:
-      'Paid plans are subscriptions. Company and individual plans include a 7-day free trial; a payment card is required at signup. If no valid payment method is on file when the trial ends, the subscription cancels. You can cancel via the Link order tools or the Stripe customer portal linked from your account. Cancellation stops future renewals; charges already collected for a started billing period are not pro-rated unless required by law or by Link’s refund policy.',
+      'Paid plans are subscriptions. Company and individual plans start with a 7-day free trial, and a payment card is required at signup. After 7 days the plan becomes paid at the stated price: your card is charged automatically on day 8 and the subscription then renews each month or year until you cancel. If you cancel before day 8, nothing is charged. If no valid payment method is on file when the trial ends, the subscription is cancelled. You can cancel at any time through the Cancel subscription link in the footer of every page, which leads to the customer portal, your Link order tools or an email request. Cancellation stops future renewals. Amounts already collected for a started billing period are not pro-rated unless the law or Link’s refund terms require it, and your right of withdrawal below is not affected.',
+    s3YearlyBody:
+      'Yearly individual plans renew for a further year until you cancel. Cancelling during the first year stops the next renewal. After the first year you can cancel a renewed yearly plan at any time; it then ends, and any refund of the unused part applies, as mandatory consumer law in your country requires.',
     s4Title: 'Prices, VAT and merchant of record',
     s4Body:
-      'Company: €5 per active employee per month, minimum €39 per month (or yearly equivalent with 2 months free), excluding VAT. Individual: €4.99 per month or €49 per year, including VAT. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record for tax collection and filing where Managed Payments applies. Displayed prices may be converted to local currency at checkout.',
-    s5Title: 'EU consumer right of withdrawal (14 days)',
+      'Company: €5 per active employee per month, minimum €39 per month, or yearly billing with 2 months free (minimum €390 per year), all excluding VAT. Individual: €4.99 per month or €49 per year, including VAT. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record for tax collection and filing where Managed Payments applies. Displayed prices may be converted to local currency at checkout.',
+    s5Title: 'Right of withdrawal for EU/EEA consumers (14 days)',
     s5Body:
-      'If you buy an individual plan as a consumer in the EU/EEA, Directive 2011/83/EU gives you a 14-day right of withdrawal from the day the contract is concluded, without giving a reason. To exercise it, contact Link support for the Order (sold through Link) and/or privacy@borderday.com with your account email and order reference. For digital services, starting the service during the withdrawal period after you gave prior express consent and acknowledged that you lose the right once performance has begun may limit or end that right under Article 16 of the Directive — checkout and Link’s Sold through Link terms describe how this is handled for your Order. Business (company) purchases are not consumer distance contracts.',
+      'If you buy an individual plan as a consumer in the EU/EEA, you can withdraw from the contract within 14 days without giving a reason. The period runs from the day the contract is concluded, which is the day you receive access after checkout. To withdraw, tell us clearly: use the Withdraw from contract page, the model form below or a plain email to privacy@borderday.com, or contact Link support for your Order. It is enough to send your message before the 14 days end.',
+    s5EffectsBody:
+      'BorderDay is a digital service, so the right of withdrawal ends only once the contract has been fully performed, not when performance starts. Withdrawing during the free trial costs nothing. If you withdraw after a paid period has started, you owe only an amount in proportion to the service provided up to your withdrawal, and only if you expressly asked for the service to start during the period and received this information. Anything else you paid is refunded without undue delay and within 14 days at the latest, by the same means of payment; Link handles the refund for your Order.',
+    s5BusinessBody: 'Company plans are sold for business use. Mandatory consumer rights are not affected.',
+    s5FormTitle: 'Model withdrawal form (complete and return it only if you wish to withdraw)',
+    s5Form:
+      'To: BorderDay, privacy@borderday.com (provider details in the Legal notice above)\nI hereby give notice that I withdraw from my contract for the provision of the following service: BorderDay subscription\nOrdered on / received on:\nName of consumer:\nAddress of consumer:\nSignature of consumer (only if this form is notified on paper):\nDate:',
     s6Title: 'Refunds and payment support',
     s6Body:
-      'Payment, receipt, tax invoice and Order-level refund requests for Managed Payments are handled by Link under Stripe’s Sold through Link / Purchase terms. Product questions (how BorderDay works, account access, data export) go to hello@borderday.com or privacy@borderday.com.',
+      'Payment, receipt, invoice and Order-level refund requests under Managed Payments are handled by Link under the terms Stripe publishes as “Sold through Link” and “Purchase”. Product questions (how BorderDay works, account access, data export) go to hello@borderday.com or privacy@borderday.com.',
     s7Title: 'Changes',
     s7Body:
       'We may update these Terms. The “Last updated” date above changes when we do. Continued use after an update means you accept the revised Terms, except where mandatory consumer law requires a different process.',
@@ -471,7 +598,37 @@ const en = {
   disclaimer: {
     title: 'Disclaimer',
     body:
-      'BorderDay is a personal record-keeping and reminder tool. It is not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution. Thresholds shown are taken from public official sources and may change; always verify with the authority that applies to you. You are responsible for the accuracy of the days you log.',
+      'BorderDay is a record-keeping and reminder tool for employers and employees. It is not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution. Thresholds shown are taken from public official sources and may change; always verify with the authority that applies to you. You are responsible for the accuracy of the days you log. Employers remain responsible for A1 applications, payroll and tax filings.',
+  },
+  withdrawal: {
+    title: 'Withdraw from contract',
+    intro:
+      'If you bought an individual plan as a consumer in the EU/EEA, you can withdraw within 14 days of receiving access, without giving a reason. Fill in the fields, confirm, and send the prepared message from your email.',
+    howTitle: 'How it works',
+    how:
+      'This page prepares your withdrawal message to privacy@borderday.com. Your withdrawal is made when you send it. Keep a copy of the sent email as proof. We confirm receipt by email and Link handles the refund for your Order.',
+    linkNote:
+      'You can also contact Link support for your Order, or use any withdrawal option on your Link order page. We have not been able to verify a one-click withdrawal function there, so this page and the email address above remain available.',
+    scopeNote:
+      'Full details and the model form are in the Terms & legal notice. Company plans are sold for business use.',
+    orderedOn: 'Order or access date',
+    submit: 'Continue to confirmation',
+    confirm: 'Confirm withdrawal',
+    mailSubject: 'Withdrawal from BorderDay contract',
+    mailBody:
+      'I hereby give notice that I withdraw from my contract for the provision of the following service: BorderDay subscription.\n\nName: {name}\nAccount email: {email}\nOrder reference: {reference}\nOrdered on / received on: {date}\nDate of this notice: {today}',
+  },
+  mailForm: {
+    name: 'Your name',
+    email: 'Account email',
+    reference: 'Order reference',
+    referenceHint: 'From your Link receipt, if you have it.',
+    reviewTitle: 'Check your message',
+    to: 'To:',
+    subject: 'Subject:',
+    send: 'Open in my email app',
+    manual: 'If no email app opens, copy this text and send it to {to}.',
+    back: 'Change details',
   },
   footer: {
     tagline: 'Day tracking for cross-border teams and employees.',
@@ -502,6 +659,8 @@ const en = {
     callbackFailed: 'Could not complete sign-in. Try again.',
     paymentsUnavailable: 'Could not start checkout — try again or contact support.',
     signOut: 'Sign out',
+    signUpTerms:
+      'Creating an account is free. A paid plan starts only through checkout: 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel. Read:',
   },
 };
 

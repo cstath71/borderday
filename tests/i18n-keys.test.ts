@@ -220,10 +220,10 @@ describe('Phase 2 rule copy, all four languages', () => {
     expect(en.dayTypes.teleworkHint_ticino).toMatch(/your home/);
   });
 
-  it('privacy, consent and HR copy disclose the new fields, and still no location', () => {
-    expect(en.company.consentBody).toMatch(/night away/);
-    expect(en.company.consentBody).toMatch(/A1/);
-    expect(en.company.consentBody).toMatch(/cannot see GPS/);
+  it('privacy, notice and HR copy disclose the new fields, and still no location', () => {
+    expect(en.company.noticeBody).toMatch(/night away/);
+    expect(en.company.noticeBody).toMatch(/A1/);
+    expect(en.company.noticeBody).toMatch(/cannot see GPS/);
     expect(en.privacy.s1Body).toMatch(/night away/);
     expect(en.privacy.s2Body).toMatch(/No GPS/);
     expect(en.privacy.s2Body).toMatch(/A1/);

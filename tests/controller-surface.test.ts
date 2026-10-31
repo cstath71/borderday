@@ -42,9 +42,32 @@ describe('controller identity surface', () => {
     expect(itDict.privacy.controllerTitle).toBe('Titolare del trattamento');
     expect(en.terms.providerBody).toMatch(/contracting party/);
     expect(en.terms.providerBody).toMatch(/merchant of record|seller of record/i);
-    expect(fr.privacy.controllerBody).toMatch(/LPD \/ nLPD/);
-    expect(de.privacy.controllerBody).toMatch(/DSG \/ nDSG/);
-    expect(itDict.privacy.controllerBody).toMatch(/LPD \/ nLPD/);
+    // Fedlex uses LPD / DSG only (02-translations finding 29); the colloquial nLPD / nDSG are gone.
+    expect(fr.privacy.controllerBody).toMatch(/\(LPD\)/);
+    expect(de.privacy.controllerBody).toMatch(/\(DSG\)/);
+    expect(itDict.privacy.controllerBody).toMatch(/\(LPD\)/);
+    for (const d of [en, fr, de, itDict]) {
+      expect(d.privacy.controllerBody).not.toMatch(/nLPD|nDSG/);
+    }
+  });
+
+  it('the controller section covers the whole service, and the business ID uses the local term (M9, finding 30)', () => {
+    expect(en.privacy.controllerBody).toMatch(/website, individual plans, user accounts, company account administration, billing/);
+    expect(fr.privacy.controllerBody).toMatch(/ce site, les offres individuelles, les comptes utilisateurs/);
+    expect(de.privacy.controllerBody).toMatch(/diese Website, Einzelpläne, Benutzerkonten/);
+    expect(itDict.privacy.controllerBody).toMatch(/questo sito, i piani individuali, gli account utente/);
+    expect(en.privacy.controllerBody).toMatch(/UID CHE-312\.418\.158/);
+    expect(fr.privacy.controllerBody).toMatch(/IDE CHE-312\.418\.158/);
+    expect(de.privacy.controllerBody).toMatch(/UID CHE-312\.418\.158/);
+    expect(itDict.privacy.controllerBody).toMatch(/IDI CHE-312\.418\.158/);
+  });
+
+  it('the legal notice names no representative, phone or register number that was not approved (M1)', () => {
+    for (const d of [en, fr, de, itDict]) {
+      const blob = d.terms.providerBody + d.terms.legalNoticeNote;
+      expect(blob).toMatch(/hello@borderday\.com/);
+      expect(blob).not.toMatch(/\+\d{2}|CHE-\d{3}\.\d{3}\.\d{3}\.\d|Stathopoulos|Handelsregister|registre du commerce|registro di commercio/i);
+    }
   });
 
   it('SEO generators never mention controller identity', () => {

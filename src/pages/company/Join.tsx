@@ -98,6 +98,7 @@ export default function JoinCompany() {
         role={peek.invite.role}
         error={error}
         busy={busy}
+        privacyHref={`/${lang}/privacy`}
         onSubmit={(values) => void onJoin(values)}
       />
     );

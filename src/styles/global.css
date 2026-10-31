@@ -177,6 +177,12 @@ img { max-width: 100%; height: auto; }
 
 .prose h2 { margin-top: 1.75rem; }
 .prose p, .prose li { color: var(--ink-muted); }
+.pre-line { white-space: pre-line; }
+.table-scroll { overflow-x: auto; margin: 1rem 0; }
+.legal-table { border-collapse: collapse; min-width: 56rem; font-size: 0.85rem; }
+.legal-table th, .legal-table td { border: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
+.legal-table thead th { background: var(--surface); }
+.legal-table tbody th { font-weight: 600; }
 
 select.border-select, input.num {
   width: 100%; padding: 0.65rem 0.75rem; border-radius: 10px;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { listBorderPacks } from '../../borders/packs';
 import type { BorderId } from '../../borders/types';
 import type { Dict } from '../../i18n';
@@ -11,19 +12,20 @@ export default function JoinForm(props: {
   role: string;
   error: string | null;
   busy?: boolean;
+  privacyHref: string;
   onSubmit: (values: { displayName: string; borderPackId: BorderId }) => void;
 }) {
-  const { d, companyName, email, role, error, busy, onSubmit } = props;
+  const { d, companyName, email, role, error, busy, privacyHref, onSubmit } = props;
   const packs = listBorderPacks();
   const [displayName, setDisplayName] = useState('');
   const [border, setBorder] = useState<BorderId | ''>('');
-  const [consent, setConsent] = useState(false);
+  const [noticeRead, setNoticeRead] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!consent) {
-      setLocalError(d.company.consentRequired);
+    if (!noticeRead) {
+      setLocalError(d.company.noticeRequired);
       return;
     }
     setLocalError(null);
@@ -52,11 +54,14 @@ export default function JoinForm(props: {
         </select>
       </label>
       <fieldset className="consent-box">
-        <legend>{d.company.consentTitle}</legend>
-        <p>{d.company.consentBody}</p>
+        <legend>{d.company.noticeTitle}</legend>
+        <p>{d.company.noticeBody}</p>
+        <p>
+          <Link to={privacyHref}>{d.company.noticePrivacyLink}</Link>
+        </p>
         <label className="consent-check">
-          <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-          {d.company.consentAccept}
+          <input type="checkbox" checked={noticeRead} onChange={(e) => setNoticeRead(e.target.checked)} />
+          {d.company.noticeAck}
         </label>
       </fieldset>
       <button className="btn btn-primary" type="submit" disabled={busy}>

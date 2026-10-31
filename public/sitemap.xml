@@ -254,6 +254,42 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms/"/>
   </url>
   <url>
+    <loc>https://borderday.com/en/withdrawal/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/withdrawal/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/withdrawal/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/withdrawal/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
+  </url>
+  <url>
     <loc>https://borderday.com/en/company/signup/</loc>
     <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/company/signup/"/>

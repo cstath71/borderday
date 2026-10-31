@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import LegalLinks from '../../components/LegalLinks';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
@@ -53,6 +54,7 @@ export default function SignUp() {
         <div className="container" style={{ maxWidth: 420 }}>
           <h1>{d.auth.signUpTitle}</h1>
           <p>{d.auth.signUpSubtitle}</p>
+          <LegalLinks d={d} lang={lang} intro={d.auth.signUpTerms} />
           <button type="button" className="btn btn-secondary" style={{ width: '100%', marginBottom: '1rem' }} onClick={onGoogle} disabled={busy || !auth.configured}>{d.auth.continueGoogle}</button>
           <form className="card stack-form" onSubmit={onSubmit}>
             <label>{d.auth.displayName}<input value={displayName} onChange={(e) => setDisplayName(e.target.value)} required /></label>
@@ -60,7 +62,7 @@ export default function SignUp() {
             <label>{d.auth.password}<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="new-password" minLength={8} /></label>
             <button className="btn btn-primary" type="submit" disabled={busy || !auth.configured}>{d.auth.createAccount}</button>
           </form>
-          {msg && <p className="meta" role="status">{msg}</p>}
+          {msg && <p className="meta" role={submitted ? 'status' : 'alert'}>{msg}</p>}
           <p style={{ marginTop: '1rem' }}>{d.auth.hasAccount} <Link to={`/${lang}/auth/sign-in${nextParam ? `?next=${encodeURIComponent(next)}` : ''}`}>{d.auth.signIn}</Link></p>
         </div>
       </section>

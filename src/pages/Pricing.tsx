@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import LegalLinks from '../components/LegalLinks';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
@@ -113,7 +114,7 @@ export default function Pricing() {
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.companyYearly}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyTax}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.activeEmployeeDef}</p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.trialNote}</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyBusinessOnly}</p>
               <h3>{d.pricing.includes}</h3>
               <ul>
                 <li>{d.pricing.companyInclude1}</li>
@@ -123,6 +124,8 @@ export default function Pricing() {
                 <li>{d.pricing.include2}</li>
                 <li>{d.pricing.include5}</li>
               </ul>
+              <p style={{ fontSize: '0.9rem' }}><strong>{d.pricing.trialCompany}</strong></p>
+              <LegalLinks d={d} lang={lang} intro={d.pricing.readBefore} />
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <Link className="btn btn-secondary" to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
                 <button
@@ -149,7 +152,6 @@ export default function Pricing() {
               <div>{d.pricing.yearly}</div>
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.yearlyNote}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.individualTax}</p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.trialNote}</p>
               <h3>{d.pricing.includes}</h3>
               <ul>
                 <li>{d.pricing.include1}</li>
@@ -159,6 +161,9 @@ export default function Pricing() {
                 <li>{d.pricing.include5}</li>
                 <li>{d.pricing.include6}</li>
               </ul>
+              <p style={{ fontSize: '0.9rem' }}><strong>{d.pricing.trialIndividual}</strong></p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.yearlyRenewal}</p>
+              <LegalLinks d={d} lang={lang} intro={d.pricing.readBefore} />
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <Link className="btn btn-secondary" to={`/${lang}/auth/sign-up`}>{d.pricing.waitlistCta}</Link>
                 <button
@@ -181,7 +186,6 @@ export default function Pricing() {
             </article>
           </div>
           {note && <p className="meta" role="status" style={{ marginTop: '1rem' }}>{note}</p>}
-          <p style={{ marginTop: '1.5rem', color: 'var(--ink-muted)', fontSize: '0.9rem' }}>{d.pricing.compareNote}</p>
         </div>
       </section>
     </>

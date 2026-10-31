@@ -75,6 +75,8 @@ export default function Layout() {
             {' · '}
             <Link to={`/${lang}/terms`}>{d.nav.terms}</Link>
             {' · '}
+            <Link to={`/${lang}/withdrawal`}>{d.nav.withdraw}</Link>
+            {' · '}
             <Link to={`/${lang}/disclaimer`}>{d.nav.disclaimer}</Link>
             {' · '}
             <Link to={`/${lang}/pricing`}>{d.nav.pricing}</Link>

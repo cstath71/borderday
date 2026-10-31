@@ -45,24 +45,41 @@ revoke all on function public.bd_purge_expired_data() from anon, authenticated;
 grant execute on function public.bd_purge_expired_data() to service_role;
 
 comment on function public.bd_purge_expired_data() is
-  'Deletes company day logs older than each company data_retention_months and expires pending invites past expires_at. Scheduled daily via pg_cron.';
+  'Deletes company day logs older than each company data_retention_months and expires pending invites past expires_at. Scheduled daily via pg_cron when the extension is available.';
 
--- Enable scheduler when available (Supabase hosted).
-create extension if not exists pg_cron with schema pg_catalog;
-
--- Idempotent schedule: unschedule prior job name if present, then schedule daily 03:17 UTC.
+-- Enable scheduler when available (Supabase hosted). Embedded/CI Postgres has no pg_cron
+-- binary, so CREATE EXTENSION would abort the whole migration and skip RLS tests — guard it.
 do $$
 begin
-  perform cron.unschedule(jobid)
-  from cron.job
-  where jobname = 'bd_purge_expired_data_daily';
+  if exists (select 1 from pg_available_extensions where name = 'pg_cron') then
+    execute 'create extension if not exists pg_cron with schema pg_catalog';
+  else
+    raise notice 'pg_cron not available — bd_purge_expired_data() is defined but not scheduled';
+  end if;
 exception
-  when undefined_table then null;
-  when undefined_function then null;
+  when others then
+    raise notice 'pg_cron could not be enabled (%); purge function remains callable by service_role', sqlerrm;
 end $$;
 
-select cron.schedule(
-  'bd_purge_expired_data_daily',
-  '17 3 * * *',
-  $cron$select public.bd_purge_expired_data();$cron$
-);
+-- Idempotent daily schedule at 03:17 UTC, only when pg_cron is installed.
+do $$
+begin
+  if not exists (select 1 from pg_extension where extname = 'pg_cron') then
+    return;
+  end if;
+
+  begin
+    perform cron.unschedule(jobid)
+    from cron.job
+    where jobname = 'bd_purge_expired_data_daily';
+  exception
+    when undefined_table then null;
+    when undefined_function then null;
+  end;
+
+  perform cron.schedule(
+    'bd_purge_expired_data_daily',
+    '17 3 * * *',
+    $cron$select public.bd_purge_expired_data();$cron$
+  );
+end $$;

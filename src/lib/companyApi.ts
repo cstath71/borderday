@@ -96,7 +96,9 @@ export async function listMyCompanies(): Promise<MyCompany[]> {
   // HR can read every member row of their company, so filter to the caller's own.
   const query = (columns: string) =>
     supabase!.from('bd_company_members').select(columns).eq('user_id', userId).eq('active', true);
+  const PROFILE_WITHOUT_FRONTIER = 'employment_percent, a1_in_place, a1_valid_until';
   let { data, error }: { data: any; error: unknown } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
   if (isSchemaLag(error)) ({ data, error } = await query(base));
   if (error) throw error;
   return (data || []).map((m: any) => ({
@@ -153,7 +155,9 @@ export async function updateCompanyRetention(companyId: string, months: number) 
 export async function listMembers(companyId: string): Promise<CompanyMemberRow[]> {
   const base = 'id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)';
   const query = (columns: string) => client().from('bd_company_members').select(columns).eq('company_id', companyId);
+  const PROFILE_WITHOUT_FRONTIER = 'employment_percent, a1_in_place, a1_valid_until';
   let { data, error }: { data: any; error: unknown } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
   if (isSchemaLag(error)) ({ data, error } = await query(base));
   if (error) throw error;
   return (data || []).map((m: any) => ({

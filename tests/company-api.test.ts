@@ -152,7 +152,7 @@ describe('companyApi', () => {
       const [member] = await api.listMembers('c1');
       expect(member).toMatchObject({ userId: 'e1', employmentPercent: null, a1InPlace: false, a1ValidUntil: null });
       const [mine] = await api.listMyCompanies();
-      expect(mine.profile).toEqual({ employmentPercent: null, a1InPlace: false, a1ValidUntil: null });
+      expect(mine.profile).toEqual({ employmentPercent: null, a1InPlace: false, a1ValidUntil: null, frontierBefore2012: false });
     });
 
     it('logging a plain day still works: the unset flag is dropped', async () => {
@@ -203,6 +203,7 @@ describe('companyApi', () => {
       p_employment_percent: 80,
       p_a1_in_place: true,
       p_a1_valid_until: '2027-06-30',
+      p_frontier_before_2012: false,
     });
   });
 
@@ -218,6 +219,7 @@ describe('companyApi', () => {
       'a1_in_place',
       'a1_valid_until',
       'employment_percent',
+      'frontier_before_2012',
     ]);
     state.respond = () => ({ data: [], error: null });
     await expect(api.updateEmployeeProfile('c1', 'e1', profile)).rejects.toThrow(/denied/);

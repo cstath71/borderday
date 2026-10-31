@@ -14,6 +14,8 @@ export default function Terms() {
         <div className="container prose">
           <h1>{t.title}</h1>
           <p>{t.updated}</p>
+          <h2>{t.providerTitle}</h2>
+          <p>{t.providerBody}</p>
           <h2>{t.s1Title}</h2>
           <p>{t.s1Body}</p>
           <h2>{t.s2Title}</h2>

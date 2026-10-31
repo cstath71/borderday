@@ -224,6 +224,9 @@ const de: Dict = {
   privacy: {
     title: 'Datenschutz',
     updated: 'Zuletzt aktualisiert: 31.10.2026 (Europe/Zurich)',
+    controllerTitle: 'Verantwortlicher',
+    controllerBody:
+      'Verantwortlicher im Sinne der DSGVO und Verantwortlicher im Sinne des schweizerischen Bundesgesetzes über den Datenschutz (DSG / nDSG) für BorderDay-Unternehmenskonten und die damit verbundenen Verarbeitungen ist die PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (IDE/UID CHE-312.418.158). Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com.',
     s1Title: 'Was wir erheben',
     s1Body:
       'Einzel-Logger (Gerät): Grenzpaket, Tagestyp (Telearbeit, vor Ort, Drittstaat, nicht gearbeitet), optionale Notizen, vertragliche Arbeitstage/Jahr. Unternehmenskonten: Firmenname, E-Mails/Namen, Rollen, Grenzpaket, Tagestypen und Daten, Einwilligungen. Ausgerichtet auf DSGVO und das schweizerische Bundesgesetz über den Datenschutz (DSG / nDSG).',
@@ -245,7 +248,7 @@ const de: Dict = {
     s7Title: 'Transparenz Mitarbeitende / HR',
     s7Body:
       'Kein versteckter HR-Score. Die Zählerlogik (genutzte Tage, erlaubte Tage, Status) ist für Mitarbeitende und HR-Dashboard identisch.',
-    contact: 'Datenschutz: privacy@borderday.com',
+    contact: 'Datenschutz: privacy@borderday.com · hello@borderday.com',
   },
   individuals: {
     title: 'BorderDay für Privatpersonen',
@@ -318,6 +321,9 @@ const de: Dict = {
   terms: {
     title: 'Nutzungsbedingungen',
     updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
+    providerTitle: 'Anbieter und Vertragspartner',
+    providerBody:
+      'Der BorderDay-Dienst wird von der PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (IDE/UID CHE-312.418.158), erbracht; sie ist Vertragspartnerin für den Dienst. Kontakt: hello@borderday.com. Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record (Seller of Record) für Zahlung, Steuererhebung und Erstattungen auf Bestellebene, soweit Managed Payments gilt.',
     s1Title: 'Dienst',
     s1Body:
       'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzkorridoren. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, einen qualifizierten Berater oder eine zuständige Behörde. Siehe Haftungsausschluss.',

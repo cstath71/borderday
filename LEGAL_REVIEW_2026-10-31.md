@@ -104,7 +104,7 @@ Same stale-copy / MoR / processors / Terms / active-employee fixes so EN remains
 1. **Governing law & jurisdiction** in Terms — deliberately omitted; needs lawyer (Link MoR + EU consumer mandatory rules + possible Swiss company seat).
 2. **GDPR legal basis for employee day logs** — consent is used in `company.consentBody`; employment / legitimate interest may be more appropriate in some Member States. Lawyer / DPO.
 3. **Art. 16 waiver UX at Checkout** — confirm Stripe Managed Payments actually collects express consent + acknowledgment for digital services; if not, add BorderDay-side step.
-4. **Controller identity** on privacy/terms — public copy must not invent a public “owner” name; when a legal entity is ready for public display, add it (without Swiss/PrimeLogic branding constraints Gus set for marketing).
+4. **Controller identity** — **Resolved (31 Oct 2026, Gus):** named only on Privacy and Terms (all 4 languages) as PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland, IDE/UID CHE-312.418.158, contact hello@borderday.com. Correct role wording (controller / responsable du traitement / Verantwortlicher / titolare del trattamento; Swiss LPD/DSG/nLPD/nDSG). Terms name the same entity as service contracting party; Link/Stripe remains seller of record for payments. **Not** shown in header, footer branding, home, pricing, meta tags, llms.txt, emails or Stripe product text. Stathopoulos not mentioned. Governing law still unspecified.
 5. **FR `home.heroTitle` “seuils”** (TRANSLATION_REVIEW #1) — marketing tone; optional “limites / plafonds”.
 6. **FR `ch_fr_tax_note` “expression”** (#2) — ESTV calque; native tax reader preference.
 7. **DE `home.heroTitle` “Grenztag-Schwellen”** (#4) — coined compound; native prefer longer official phrasing?
@@ -122,7 +122,7 @@ Same stale-copy / MoR / processors / Terms / active-employee fixes so EN remains
 - FR/DE/IT legal pages are careful adaptations, **not** sworn translations.
 - Consumer withdrawal notice is now present, but **effectiveness** depends on Checkout UX (Link) and on whether individual buyers are correctly classified as consumers.
 - Tax/SS counter notes cite public sources and can drift when authorities update thresholds — keep source URLs and re-check on schedule.
-- No public legal-entity controller name yet → transparency risk under GDPR Arts. 13–14 until addressed.
+- Controller/provider identity is now on Privacy and Terms only (PrimeLogic Advisory Sàrl). Transparency risk under GDPR Arts. 13–14 for those pages is reduced; keep it off marketing surfaces per Gus.
 
 ---
 
@@ -154,3 +154,7 @@ Corpus for a paid review (FR+DE+IT disclaimer+privacy+terms+consent): **~2,500 w
 **Avoid as sole path:** cheapest Fiverr “legal translation” gigs (listed from ~$5 / 500 words on marketplace search) — fine for a second proofread, not for MoR/CRD/Swiss LPD wording.
 
 **Do not book or pay** until Gus approves a specific vendor and budget.
+
+### Update — human review (31 Oct 2026)
+
+Gus skipped booking a paid native/lawyer review for now. Controller identity on Privacy/Terms was added instead. Revisit reviewer options above when he wants a paid pass.

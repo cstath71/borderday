@@ -224,6 +224,9 @@ const fr: Dict = {
   privacy: {
     title: 'Confidentialité',
     updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
+    controllerTitle: 'Responsable du traitement',
+    controllerBody:
+      'Le responsable du traitement (RGPD) et le responsable du traitement au sens de la Loi fédérale suisse sur la protection des données (LPD / nLPD) pour les comptes entreprise BorderDay et les traitements associés est PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse (IDE/UID CHE-312.418.158). Contact : hello@borderday.com · Confidentialité : privacy@borderday.com.',
     s1Title: 'Ce que nous collectons',
     s1Body:
       'Journal individuel (appareil) : pack frontière, type de chaque jour (télétravail, sur site, pays tiers, non travaillé), notes optionnelles, jours travaillés contractuels / an. Comptes entreprise : nom, e-mails/noms des membres, rôles, pack frontière, types et dates de jours, consentements. Conçu pour le RGPD et la Loi fédérale suisse sur la protection des données (LPD / nLPD).',
@@ -245,7 +248,7 @@ const fr: Dict = {
     s7Title: 'Transparence collaborateur / RH',
     s7Body:
       'Aucun score caché réservé aux RH. Le calcul des compteurs (jours utilisés, autorisés, statut) est identique pour le collaborateur et le tableau RH.',
-    contact: 'Contact confidentialité : privacy@borderday.com',
+    contact: 'Contact confidentialité : privacy@borderday.com · hello@borderday.com',
   },
   individuals: {
     title: 'BorderDay pour les particuliers',
@@ -318,6 +321,9 @@ const fr: Dict = {
   terms: {
     title: 'Conditions d’utilisation',
     updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
+    providerTitle: 'Prestataire et partie contractante',
+    providerBody:
+      'Le service BorderDay est fourni par PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse (IDE/UID CHE-312.418.158), qui est la partie contractante pour le service. Contact : hello@borderday.com. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le commerçant enregistré (merchant of record / vendeur enregistré) pour le paiement, la collecte de la fiscalité et les remboursements au niveau de la commande lorsque Managed Payments s’applique.',
     s1Title: 'Service',
     s1Body:
       'BorderDay est un outil de suivi et de rappel des classifications de jours pour employeurs et collaborateurs sur certains corridors transfrontaliers. Ce n’est pas un conseil fiscal ou juridique, ni un substitut à votre employeur, à un conseiller qualifié ou à une autorité compétente. Voir l’Avertissement.',

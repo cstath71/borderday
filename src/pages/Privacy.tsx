@@ -13,6 +13,8 @@ export default function Privacy() {
         <div className="container prose">
           <h1>{d.privacy.title}</h1>
           <p>{d.privacy.updated}</p>
+          <h2>{d.privacy.controllerTitle}</h2>
+          <p>{d.privacy.controllerBody}</p>
           <h2>{d.privacy.s1Title}</h2>
           <p>{d.privacy.s1Body}</p>
           <h2>{d.privacy.s2Title}</h2>

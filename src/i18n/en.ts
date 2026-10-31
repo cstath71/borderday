@@ -221,6 +221,9 @@ const en = {
   privacy: {
     title: 'Privacy',
     updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    controllerTitle: 'Data controller',
+    controllerBody:
+      'The data controller (GDPR) and the controller under the Swiss Federal Act on Data Protection (FADP / nLPD) for BorderDay company accounts and related processing is PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (IDE/UID CHE-312.418.158). Contact: hello@borderday.com · Privacy: privacy@borderday.com.',
     s1Title: 'What we collect',
     s1Body:
       'Individual logger (device): border pack, each day’s type (telework, on site, third country, non-working), optional notes, contractual working days per year. Company accounts (when used): company name, member emails/names, roles, border pack, day types and dates, consent records. Designed for GDPR and the Swiss Federal Act on Data Protection (FADP / nLPD).',
@@ -242,7 +245,7 @@ const en = {
     s7Title: 'Transparency between employee and HR',
     s7Body:
       'There is no hidden HR-only score. Counter math (used days, allowed days, status) is identical for the employee view and the HR dashboard.',
-    contact: 'Privacy contact: privacy@borderday.com',
+    contact: 'Privacy contact: privacy@borderday.com · hello@borderday.com',
   },
 
   individuals: {
@@ -316,6 +319,9 @@ const en = {
   terms: {
     title: 'Terms of service',
     updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    providerTitle: 'Provider and contracting party',
+    providerBody:
+      'The BorderDay service is provided by PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Switzerland (IDE/UID CHE-312.418.158), which is the contracting party for the service. Contact: hello@borderday.com. Checkout uses Stripe Managed Payments: purchases appear as sold through Link, and Link is the merchant of record (seller of record) for payment, tax collection and Order-level refunds where Managed Payments applies.',
     s1Title: 'Service',
     s1Body:
       'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border corridors. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',

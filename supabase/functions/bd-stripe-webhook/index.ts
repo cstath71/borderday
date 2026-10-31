@@ -138,7 +138,8 @@ Deno.serve(async (req) => {
   }) {
     const from = Deno.env.get("RESEND_FROM") || "BorderDay <hello@borderday.com>";
     const apiKey = Deno.env.get("RESEND_API_KEY_BORDERDAY") || Deno.env.get("RESEND_API_KEY");
-    const live = Deno.env.get("RESEND_LIVE") === "1";
+    // Live email approved 2026-10-31 (Gus t415u). Default on; set RESEND_LIVE=0 to pause.
+    const live = (Deno.env.get("RESEND_LIVE") ?? "1") === "1";
     const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
     const cancelUrl = `${siteUrl}/en/cancel`;
     const renewOn = opts.renewOnIso

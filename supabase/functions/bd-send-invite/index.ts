@@ -38,7 +38,8 @@ Deno.serve(async (req) => {
     const joinUrl = joinUrlFor(siteUrl, lang, inv.token);
     const from = Deno.env.get("RESEND_FROM") || "BorderDay <hello@borderday.com>";
     const apiKey = Deno.env.get("RESEND_API_KEY_BORDERDAY") || Deno.env.get("RESEND_API_KEY");
-    const live = Deno.env.get("RESEND_LIVE") === "1";
+    // Live email approved 2026-10-31 (Gus t415u). Default on; set RESEND_LIVE=0 to pause.
+    const live = (Deno.env.get("RESEND_LIVE") ?? "1") === "1";
     const allowReal = live && !!apiKey;
 
     if (!allowReal || !isInviteTestAddress(inv.email)) {

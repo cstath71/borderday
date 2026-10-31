@@ -15,9 +15,9 @@ describe('bd-send-invite Resend env', () => {
     expect(src).toContain('BorderDay <hello@borderday.com>');
     expect(src).not.toContain('invites@borderday.com');
   });
-  it('keeps RESEND_LIVE gate (no real invites until approved)', () => {
+  it('keeps RESEND_LIVE gate (default on; set 0 to pause)', () => {
     expect(src).toContain('RESEND_LIVE');
-    expect(src).toMatch(/RESEND_LIVE"\)\s*===\s*"1"/);
+    expect(src).toMatch(/\(Deno\.env\.get\("RESEND_LIVE"\) \?\? "1"\) === "1"/);
   });
 });
 

@@ -3,7 +3,8 @@ import type { Dict } from './en';
 const fr: Dict = {
   meta: {
     siteName: 'BorderDay',
-    tagline: 'Limites de jours transfrontaliers pour les RH et les collaborateurs — avant les mauvaises surprises.',
+    tagline:
+      'Seuils de jours fiscaux et sociaux pour les RH et les collaborateurs — avant les mauvaises surprises.',
     description:
       'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf corridors ; compteurs fiscaux sur quatre : Genève et autres cantons hors accord de 1983, Allemagne→Suisse, France→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
   },
@@ -19,7 +20,7 @@ const fr: Dict = {
     joinWaitlist: 'Connexion',
     forIndividuals: 'Pour les particuliers',
     forCompanies: 'Pour les entreprises',
-    hrDashboard: 'Tableau RH',
+    hrDashboard: 'Tableau de bord RH',
     companySignup: 'Créer une entreprise',
   },
   lang: {
@@ -48,22 +49,23 @@ const fr: Dict = {
       'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV pour audit. Les collaborateurs voient exactement les mêmes compteurs que les RH.',
     feature1Title: 'Fiscalité et sécurité sociale, séparément',
     feature1Body:
-      'Compteurs indépendants avec sources officielles. Alertes à 75 % et 90 % de la marge réelle, puis états « à la limite » et « au-delà » avec la conséquence expliquée.',
+      'Compteurs indépendants avec sources officielles. Alertes à 75 % et 90 % du plafond applicable, puis états « à la limite » et « au-delà » avec la conséquence expliquée.',
     feature2Title: 'Invitation par lien e-mail',
-    feature2Body: 'Les collaborateurs rejoignent votre entreprise, choisissent leur pack frontière et journalisent uniquement le type de jour — jamais la localisation GPS.',
+    feature2Body:
+      'Les collaborateurs rejoignent votre entreprise, choisissent leur pack frontière et enregistrent uniquement le type de jour — jamais la localisation GPS.',
     feature3Title: 'Protection des données dès la conception',
-    feature3Body: 'Orienté RGPD et LPD suisse (nLPD) : isolation par entreprise, export et suppression, consentement clair, note de conservation. Les RH voient types de jours et totaux, pas la localisation.',
+    feature3Body:
+      'Orienté RGPD et LPD suisse : isolation par entreprise, export et suppression, avis clair sur ce que voient les RH, note de conservation. Ni GPS ni localisation de l’appareil.',
     bordersTitle: 'Corridors couverts en version 1',
     bordersIntro:
       'Chaque corridor indique ce qu’il compte aujourd’hui. Si aucune règle fiscale ne peut encore être comptée, il le dit et n’affiche aucun chiffre.',
     howTitle: 'Comment les entreprises utilisent BorderDay',
     how1: 'Créez un compte entreprise et invitez les collaborateurs par lien e-mail.',
-    how2: 'Chaque collaborateur choisit son pack frontière et journalise télétravail / sur site / déplacement / non travaillé.',
+    how2: 'Chaque collaborateur choisit son pack frontière et enregistre télétravail / sur site / déplacement / non travaillé.',
     how3: 'Les RH suivent les compteurs fiscaux et de sécurité sociale, filtrent par statut et exportent en CSV.',
     waitlistTitle: 'Commencez avec un compte entreprise',
     waitlistBody:
       'Créez un compte entreprise par e-mail ou Google, invitez votre équipe, puis abonnez-vous sur la page Tarifs. Une entreprise DÉMO étiquetée reste disponible.',
-    waitlistPlaceholder: 'vous@entreprise.com',
     waitlistButton: 'Créer un compte',
     waitlistNote: 'Pas de liste d\'attente — comptes et paiement sont actifs. Offres entreprise : 5 €/employé/mois (min. 39 €), essai de 7 jours.',
     disclaimerShort:
@@ -96,8 +98,8 @@ const fr: Dict = {
   },
   dayTypes: {
     telework: 'Télétravail à domicile',
-    onsite: 'Sur site sur le lieu de travail',
-    third_country: 'Pays tiers / déplacement professionnel',
+    onsite: 'Sur le lieu de travail',
+    third_country: 'Déplacement professionnel / État tiers',
     non_working: 'Jour non travaillé',
     teleworkHint: 'Jour de travail effectué dans le pays de résidence (domicile ou espace de coworking local).',
     onsiteHint: 'Jour de travail dans les locaux de l’employeur dans le pays du lieu de travail.',
@@ -120,29 +122,29 @@ const fr: Dict = {
     ch_fr_tax_telework_40: 'Part de télétravail (max. 40 % du temps de travail annuel)',
     ch_fr_tax_missions_10: 'Missions temporaires hors de Suisse (max. 10 jours/an)',
     ch_fr_tax_note:
-      'Régime de la convention : le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste imposable en Suisse. Jusqu’à 10 jours de mission par an comptent comme télétravail, seulement dans la mesure où ils tiennent sous les 40 % après le télétravail ordinaire. Les autres jours de mission sont imposés différemment. Au-delà de 40 %, le télétravail est imposable en France dès le premier jour. L’astreinte ne compte qu’en cas d’intervention effective. Sources : accord AFC du 29 avr. 2026 ; ge.ch.',
+      'Régime de la convention : le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste imposable en Suisse. Jusqu’à 10 jours de mission par an comptent comme télétravail, seulement dans la mesure où ils tiennent sous les 40 % après le télétravail ordinaire. Les autres jours de mission sont imposés différemment. Au-delà de 40 %, le télétravail est imposable en France dès le premier jour. L’astreinte ne compte qu’en cas d’intervention effective. Sources : avenant du 27 juin 2023 (protocole additionnel) pour la règle des 40 % ; accord amiable AFC du 29 avr. 2026 pour les jours de mission ; ge.ch.',
     ch_fr_missions_note:
-      'Missions temporaires en France ou dans un État tiers : jusqu’à 10 jours par an comptent dans les 40 %, seulement dans la mesure où ils tiennent après le télétravail ordinaire. Temps partiel ou année incomplète : les 10 jours sont réduits proportionnellement et arrondis à l’unité supérieure. Les jours hors de ces limites sont imposables en France, sous réserve de la convention avec l’État tiers. Sources : accord AFC du 29 avr. 2026 ; fiche impots.gouv.fr.',
+      'Missions temporaires en France ou dans un État tiers : jusqu’à 10 jours par an comptent dans les 40 %, seulement dans la mesure où ils tiennent après le télétravail ordinaire. Temps partiel ou année incomplète : les 10 jours sont réduits proportionnellement et arrondis à l’unité supérieure. Les jours hors de ces limites sont imposables en France, sous réserve de la convention avec l’État tiers. Sources : accord amiable AFC du 29 avr. 2026 ; fiche impots.gouv.fr.',
     lu_tax_tolerance_34: 'Jours hors du Luxembourg (jusqu’à 34 jours, temps plein sur l’année)',
     lu_tax_tolerance_pending: 'Jours hors du Luxembourg (seuil de tolérance fiscale)',
     lu_fr_tax_note:
-      'Résidents de France employés au Luxembourg : jusqu’à 34 jours par période d’imposition physiquement présents en France et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur la période. Temps partiel ou année incomplète : les 34 jours sont réduits proportionnellement et arrondis à l’unité inférieure. Au-delà, la France peut imposer le temps réellement travaillé en France ou dans un État tiers, dès le premier jour. Toute fraction de journée compte comme une journée entière, et la formation compte. Les congés, le repos hebdomadaire, les jours fériés non travaillés, la maladie et la force majeure ne comptent pas. Le seuil couvre tous vos contrats de l’année et il vous appartient de prouver vos jours : ce journal seul peut ne pas suffire. Source : accord impots.gouv.fr (le PDF indique 29 jours, portés à 34 par l’avenant du 7 nov. 2022).',
+      'Résidents de France employés au Luxembourg : jusqu’à 34 jours par période imposable physiquement présents en France et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur la période. Temps partiel ou année incomplète : les 34 jours sont réduits proportionnellement et arrondis à l’unité inférieure. Au-delà, la France peut imposer le temps réellement travaillé en France ou dans un État tiers, dès le premier jour. Toute fraction de journée compte comme une journée entière, et la formation compte. Les congés, le repos hebdomadaire, les jours fériés non travaillés, la maladie et la force majeure ne comptent pas. Le seuil couvre tous vos contrats de l’année et il vous appartient de prouver vos jours : ce journal seul peut ne pas suffire. Source : accord impots.gouv.fr (le PDF indique 29 jours, portés à 34 par l’avenant du 7 nov. 2022).',
     ss_framework_under_50:
       'Télétravail transfrontalier (accord-cadre : A1 dès 25 %, moins de 50 %)',
     ss_framework_note:
-      'Selon l’accord-cadre UE/EEE/CH : sous 25 % du temps de travail télétravaillé dans l’État de résidence, aucune attestation A1 n’est nécessaire au titre du télétravail. De 25 % à moins de 50 %, l’État de résidence devient normalement compétent, sauf si employeur et salarié demandent une A1 maintenant l’État de l’employeur. L’A1 vaut 3 ans au plus et ne peut rétroagir que de 3 mois, si les cotisations y ont déjà été payées. À partir de 50 %, l’accord-cadre n’est pas disponible. Il ne couvre pas les personnes qui exercent habituellement une autre activité que le télétravail dans l’État de résidence, travaillent habituellement dans un autre État, sont indépendantes ou ont des employeurs dans plusieurs États. Le télétravail suppose ici un lien informatique. Sources : SPF belge (dépositaire) ; CLEISS.',
+      'Selon l’accord-cadre UE/EEE/CH : sous 25 % du temps de travail télétravaillé dans l’État de résidence, aucune attestation A1 n’est nécessaire au titre du télétravail. De 25 % à moins de 50 %, l’État de résidence devient normalement compétent, sauf si employeur et salarié demandent une A1 maintenant l’État de l’employeur. L’A1 vaut 3 ans au plus et ne peut rétroagir que de 3 mois, si les cotisations y ont déjà été payées. À partir de 50 %, l’accord-cadre n’est pas disponible. Il ne couvre pas les personnes qui exercent habituellement une autre activité que le télétravail dans l’État de résidence, travaillent habituellement dans un État autre que l’État de résidence et celui du siège de l’employeur, sont indépendantes ou ont des employeurs dans plusieurs États. Le télétravail suppose ici un lien informatique. Sources : SPF belge (dépositaire) ; CLEISS.',
     ss_framework_lu_note:
-      'CCSS Luxembourg : télétravail uniquement dans l’État de résidence. Sous 25 % : pas d’A1 au titre du télétravail. De 25 % à moins de 50 %, les deux États signataires : l’employeur peut demander une A1 pour maintenir la couverture luxembourgeoise ; sans elle, l’État de résidence devient normalement compétent. À partir de 50 %, l’accord-cadre n’est pas disponible. Une activité habituelle autre que le télétravail dans l’État de résidence ou un travail dans un autre État membre peut faire sortir le cas de l’accord-cadre. Sources : CCSS ; SPF belge.',
-    ch_it_tax_telework_25: 'Télétravail au domicile (max. 25 % de l’activité salariée)',
+      'CCSS Luxembourg : télétravail uniquement dans l’État de résidence. Sous 25 % : pas d’A1 au titre du télétravail. De 25 % à moins de 50 %, les deux États signataires : l’employeur peut demander une A1 pour maintenir la couverture luxembourgeoise ; sans elle, l’État de résidence devient normalement compétent. À partir de 50 %, l’accord-cadre n’est pas disponible. Une activité habituelle autre que le télétravail dans l’État de résidence ou un travail dans un État autre que l’État de résidence et celui du siège de l’employeur peut faire sortir le cas de l’accord-cadre. Sources : CCSS ; SPF belge.',
+    ch_it_tax_telework_25: 'Télétravail au domicile (max. 25 % de l’activité lucrative dépendante)',
     ch_it_tax_nonreturn_45: 'Jours sans retour à domicile pour le travail (max. 45/an)',
     ch_it_tax_note:
-      'Selon le protocole modifiant l’accord Italie–Suisse (en vigueur le 9 févr. 2026, applicable dès le 1er janv. 2024, y compris au régime transitoire) : au plus 25 % de l’activité salariée en télétravail à domicile dans l’État de résidence par année civile, sans changer le statut ni le traitement fiscal de ce télétravail. Le protocole ne dit pas ce qui se passe au-delà de 25 %. Sources : Fedlex RO 2026 104 ; SFI.',
+      'Selon le protocole modifiant l’accord Italie–Suisse (en vigueur le 9 févr. 2026, applicable dès le 1er janv. 2024, y compris au régime transitoire) : au plus 25 % de l’activité lucrative dépendante en télétravail à domicile dans l’État de résidence par année civile, sans changer le statut ni le traitement fiscal de ce télétravail. Le protocole ne dit pas ce qui se passe au-delà de 25 %. Sources : Fedlex RO 2026 104 ; SFI.',
     ch_it_nonreturn_note:
       'En principe, et sauf décision contraire des autorités, jusqu’à 45 jours par année civile sans retour quotidien à domicile pour le travail. Les congés et la maladie ne comptent pas. BorderDay ne compte que les jours que vous marquez « nuit hors du domicile pour le travail » ; un déplacement d’une journée ne compte pas. Source : protocole de modification, Fedlex.',
     basel_de_employer_commute:
       'Règle du personnel de Bâle-Ville : jours sur site ce mois-ci (minimum 5, ou 1 par semaine)',
     basel_de_employer_note:
-      'C’est la règle que le canton de Bâle-Ville applique à son propre personnel (état au 1er janv. 2026) : home office seulement si la personne se rend sur son lieu de travail au moins 1 jour par semaine ou au moins 5 jours par mois. D’autres employeurs peuvent appliquer d’autres règles, et ce n’est pas un seuil fiscal général. Source : Département des finances de Bâle-Ville.',
+      'C’est la règle que le canton de Bâle-Ville applique à son propre personnel (état au 1er janv. 2026) : télétravail seulement si la personne se rend sur son lieu de travail au moins 1 jour par semaine ou au moins 5 jours par mois. D’autres employeurs peuvent appliquer d’autres règles, et ce n’est pas un seuil fiscal général. Source : Département des finances de Bâle-Ville.',
     pending_lu_be_tax:
       'Le gouvernement luxembourgeois a annoncé 34 jours dès 2022 pour les résidents de Belgique. Le texte belge précisant la réduction à temps partiel et ce qui compte n’a pas été trouvé : aucun compteur ne fonctionne. Vérifiez auprès de votre autorité.',
     pending_lu_de_tax:
@@ -192,7 +194,7 @@ const fr: Dict = {
       'Seuil dépassé. Le protocole n’en précise pas la conséquence : interrogez l’autorité compétente.',
     basel_de_nonreturn_60: 'Jours de non-retour pour le travail (jusqu’à 60 par an)',
     basel_de_nonreturn_note:
-      'Allemagne–Suisse : le statut frontalier est perdu au-delà de 60 jours de non-retour professionnels par an. Sont comptés ici les jours marqués « nuit hors du domicile pour le travail », plus chaque jour de travail hors d’Allemagne et de Suisse, même avec retour le soir. Les déplacements d’une journée en Allemagne ou en Suisse, la maladie et l’accident ne comptent pas. Lors de voyages de plusieurs jours payés par l’employeur, week-ends et jours fériés comptent aussi : consignez-les en déplacement. Les temps partiels travaillant certains jours seulement ont un seuil réduit proportionnellement, et plusieurs employeurs sont appréciés ensemble. La prise en compte d’un jour de home office n’est pas confirmée ici : vérifiez auprès de votre autorité. L’employeur dépose le formulaire Gre-3 (31 mars en Argovie ; vérifiez dans votre canton). Sources : KonsVerCHEV §§ 8–9 ; notice du canton d’Argovie, état au 1er janv. 2026.',
+      'Allemagne–Suisse : le statut frontalier est perdu au-delà de 60 jours de non-retour professionnels par an. Sont comptés ici les jours marqués « nuit hors du domicile pour le travail », plus chaque jour de travail hors d’Allemagne et de Suisse, même avec retour le soir. Les déplacements d’une journée en Allemagne ou en Suisse, la maladie et l’accident ne comptent pas. Lors de voyages de plusieurs jours payés par l’employeur, week-ends et jours fériés comptent aussi : consignez-les en déplacement. Les temps partiels travaillant certains jours seulement ont un seuil réduit proportionnellement, et plusieurs employeurs sont appréciés ensemble. La prise en compte d’un jour de télétravail n’est pas confirmée ici : vérifiez auprès de votre autorité. L’employeur dépose le formulaire Gre-3 (31 mars en Argovie ; vérifiez dans votre canton). Sources : KonsVerCHEV §§ 8–9 ; notice du canton d’Argovie, état au 1er janv. 2026.',
     basel_de_over_60:
       'Au-delà de 60 jours, le statut frontalier est perdu : l’impôt à la source suisse passe de 4,5 % au barème normal pour l’année. Vérifiez auprès de votre autorité fiscale.',
     floor_week_met: 'Atteint grâce à au moins un jour sur site chaque semaine du mois.',
@@ -277,7 +279,7 @@ const fr: Dict = {
     yearly: '49 € / an',
     yearlyNote: 'Environ deux mois offerts vs mensuel.',
     companyPrice: '5 € / collaborateur actif / mois',
-    companyMin: 'Minimum 39 € / mois (jusqu\'à 7 collaborateurs actifs)',
+    companyMin: 'Minimum 39 € / mois (couvre jusqu’à 7 collaborateurs actifs)',
     companyYearly: 'Facturation annuelle : 2 mois offerts (minimum 390 € / an)',
     activeEmployeeDef:
       'Collaborateur actif : membre de l\'entreprise ayant accepté l\'invitation et non désactivé. La facturation utilise l\'effectif actif courant chaque période (minimum 39 € / mois).',
@@ -291,11 +293,10 @@ const fr: Dict = {
     include4: 'Export et suppression de vos données à tout moment',
     include5: 'Anglais, français, allemand, italien',
     include6: 'PWA installable',
-    companyInclude1: 'Tableau RH avec compteurs par collaborateur et filtres',
-    companyInclude2: 'Invitations e-mail, rôles (owner / RH lecture), export CSV d’audit',
+    companyInclude1: 'Tableau de bord RH avec compteurs par collaborateur et filtres',
+    companyInclude2: 'Invitations e-mail, rôles (administrateur du compte / RH en lecture), export CSV',
     companyInclude3: 'Les collaborateurs voient les mêmes compteurs que les RH',
     companyInclude4: 'Protection des données dès la conception (types de jours seulement — pas de localisation)',
-    comingSoon: 'Paiement en ligne',
     subscribeMonthly: 'Commencer au mois',
     subscribeYearly: 'Commencer à l\'année',
     trialNote: 'Essai gratuit de 7 jours — carte requise à l\'inscription.',
@@ -324,7 +325,7 @@ const fr: Dict = {
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',
-    a7: 'Le paiement utilise Stripe Managed Payments : Link est le commerçant enregistré (merchant of record) et gère la TVA/GST au checkout. Les offres entreprise et individuel incluent un essai gratuit de 7 jours ; une carte est requise à l\'inscription. Les codes promo sont acceptés. Voir les Conditions pour la résiliation et le droit de rétractation de 14 jours (consommateurs UE).',
+    a7: 'Le paiement utilise Stripe Managed Payments : Link est le marchand officiel (merchant of record) et gère la TVA/GST au checkout. Les offres entreprise et individuel incluent un essai gratuit de 7 jours ; une carte est requise à l\'inscription. Les codes promo sont acceptés. Voir les Conditions pour la résiliation et le droit de rétractation de 14 jours (consommateurs UE).',
     q8: 'Que ne couvre pas BorderDay ?',
     a8:
       'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme le taux de télétravail annuel exigé par certains cantons. En cas de doute, vérifiez auprès de votre autorité.',
@@ -360,30 +361,32 @@ const fr: Dict = {
   },
   individuals: {
     title: 'BorderDay pour les particuliers',
-    heroTitle: 'Journalisez vos jours frontière sur votre appareil',
+    heroTitle: 'Enregistrez vos propres jours de travail',
     heroBody:
       'Salariés et particuliers peuvent consigner télétravail, jours sur site, déplacements et jours non travaillés : compteurs de sécurité sociale sur chaque corridor, compteurs fiscaux là où la règle peut être comptée aujourd’hui. Si votre employeur utilise BorderDay, rejoignez-le via son lien d’invitation pour partager les mêmes compteurs avec les RH.',
     ctaApp: 'Ouvrir l’app collaborateur',
     ctaPricing: 'Tarif individuel',
     ctaCompanies: 'Mon employeur a besoin de l’offre entreprise',
-    point1: 'Journal local-first avec export et suppression',
+    point1:
+      'L’aperçu gratuit reste sur votre appareil ; un abonnement enregistre le journal dans votre compte. Export et suppression dans les deux cas.',
     point2: 'Mêmes packs frontière et compteurs sourcés avec prudence',
     point3: 'Adhésion entreprise optionnelle — vous voyez ce que voient les RH',
   },
   company: {
     signupTitle: 'Créer un compte entreprise',
-    signupSubtitle: 'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Abonnez-vous sur la page Tarifs quand vous êtes prêt.',
+    signupSubtitle:
+      'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Abonnez-vous ensuite sur la page Tarifs.',
     companyName: 'Nom de l’entreprise',
     yourName: 'Votre nom',
     workEmail: 'E-mail professionnel',
     createButton: 'Créer l\'entreprise',
-    created: 'Entreprise créée. Vous êtes owner.',
-    openDashboard: 'Ouvrir le tableau RH',
+    created: 'Entreprise créée. Vous en êtes l’administrateur du compte.',
+    openDashboard: 'Ouvrir le tableau de bord RH',
     inviteTitle: 'Inviter des collaborateurs',
     inviteSubtitle: 'Générez un lien d\'invitation. Nous envoyons l\'e-mail d\'invitation lorsque c\'est possible ; vous pouvez toujours copier et partager le lien.',
     inviteEmail: 'E-mail du collaborateur',
     inviteRole: 'Rôle',
-    roleOwner: 'Owner',
+    roleOwner: 'Administrateur du compte',
     roleHr: 'RH (lecture)',
     roleEmployee: 'Collaborateur',
     sendInvite: 'Créer le lien d’invitation',
@@ -403,11 +406,12 @@ const fr: Dict = {
     historyTitle: 'Historique des jours du collaborateur',
     historySubtitle:
       'Type de jour, date et marque de nuit hors du domicile uniquement. Aucune donnée de localisation n’est stockée.',
-    backDashboard: 'Retour au tableau',
+    backDashboard: 'Retour au tableau de bord',
     joinTitle: 'Rejoindre votre entreprise',
     joinSubtitle: 'Acceptez l’invitation, le consentement de visibilité, et choisissez votre pack frontière.',
     joinButton: 'Rejoindre l’entreprise',
-    joinSuccess: 'Vous avez rejoint l’entreprise. Ouvrez l’app collaborateur pour journaliser.',
+    joinSuccess:
+      'C’est fait : vous faites partie de l’entreprise. Ouvrez l’app collaborateur pour enregistrer vos jours.',
     pickBorder: 'Votre pack frontière',
     consentTitle: 'Consentement — ce que les RH peuvent voir',
     consentBody:
@@ -419,14 +423,15 @@ const fr: Dict = {
     loadDemo: 'Charger l’entreprise DEMO',
     loading: 'Chargement…',
     loadError: 'Impossible de charger cette page. Réessayez.',
-    accessDenied: 'Vous devez avoir un accès RH ou Owner à cette entreprise.',
-    noCompany: 'Vous n’êtes rattaché à aucune entreprise pour le moment.',
+    accessDenied: 'Il vous faut un accès RH ou administrateur du compte à cette entreprise.',
+    noCompany: 'Vous ne faites encore partie d’aucune entreprise.',
     chooseCompany: 'Choisissez une entreprise.',
     billingInactive: 'Cette entreprise n’a pas d’abonnement actif. Les collaborateurs peuvent la rejoindre, mais ne pourront saisir leurs jours qu’après votre souscription.',
     billingCta: 'Voir les offres',
     inviteEmailed: 'Invitation créée et envoyée par e-mail. Vous pouvez aussi partager le lien.',
     inviteInvalid: 'Invitation introuvable ou expirée.',
-    joinEmailMismatch: 'Cette invitation a été envoyée à {invited}, mais vous êtes connecté avec {current}. Déconnectez-vous, puis connectez-vous avec l’adresse invitée.',
+    joinEmailMismatch:
+      'Cette invitation a été envoyée à {invited}, mais la session ouverte est celle de {current}. Déconnectez-vous, puis connectez-vous avec l’adresse invitée.',
     joinEmailUnconfirmed: 'Confirmez votre adresse e-mail, puis rouvrez cette invitation.',
     viewMyHistory: 'Voir ce que voient les RH',
     countersHeading: 'Compteurs',
@@ -447,19 +452,19 @@ const fr: Dict = {
     updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
     providerTitle: 'Prestataire et partie contractante',
     providerBody:
-      'Le service BorderDay est fourni par PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse (IDE/UID CHE-312.418.158), qui est la partie contractante pour le service. Contact : hello@borderday.com. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le commerçant enregistré (merchant of record / vendeur enregistré) pour le paiement, la collecte de la fiscalité et les remboursements au niveau de la commande lorsque Managed Payments s’applique.',
+      'Le service BorderDay est fourni par PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Suisse (IDE/UID CHE-312.418.158), qui est la partie contractante pour le service. Contact : hello@borderday.com. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le marchand officiel (merchant of record / vendeur enregistré) pour le paiement, la collecte de la fiscalité et les remboursements au niveau de la commande lorsque Managed Payments s’applique.',
     s1Title: 'Service',
     s1Body:
       'BorderDay est un outil de suivi et de rappel des classifications de jours pour employeurs et collaborateurs sur certains corridors transfrontaliers. Ce n’est pas un conseil fiscal ou juridique, ni un substitut à votre employeur, à un conseiller qualifié ou à une autorité compétente. Voir l’Avertissement.',
     s2Title: 'Comptes et usage entreprise',
     s2Body:
-      'Vous devez fournir des informations de compte exactes. Les owners d’entreprise invitent les collaborateurs ; ceux-ci choisissent un pack frontière et journalisent uniquement le type de jour (pas de localisation). Les RH voient les mêmes compteurs que le collaborateur. Vous êtes responsable de l’exactitude des jours journalisés et du traitement licite des données sous le RGPD et, le cas échéant, la LPD suisse.',
+      'Vous devez fournir des informations de compte exactes. Les administrateurs du compte invitent les collaborateurs ; ceux-ci choisissent un pack frontière et enregistrent uniquement le type de jour (pas de localisation). Les RH voient les mêmes compteurs que le collaborateur. Vous êtes responsable de l’exactitude des jours enregistrés et du traitement licite des données sous le RGPD et, le cas échéant, la LPD suisse.',
     s3Title: 'Abonnements, essai et résiliation',
     s3Body:
       'Les offres payantes sont des abonnements. Entreprise et individuel incluent un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier via les outils de commande Link ou le portail client Stripe. La résiliation arrête les renouvellements futurs ; les montants déjà encaissés pour une période commencée ne sont pas proratisés, sauf obligation légale ou politique de remboursement Link.',
-    s4Title: 'Tarifs, TVA et commerçant enregistré',
+    s4Title: 'Tarifs, TVA et marchand officiel',
     s4Body:
-      'Entreprise : 5 € par collaborateur actif et par mois, minimum 39 € / mois (ou équivalent annuel avec 2 mois offerts), hors TVA. Individuel : 4,99 € / mois ou 49 € / an, TVA incluse. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le commerçant enregistré pour la collecte et le dépôt de la TVA là où Managed Payments s’applique. Les prix peuvent être convertis en devise locale au checkout.',
+      'Entreprise : 5 € par collaborateur actif et par mois, minimum 39 € / mois (ou équivalent annuel avec 2 mois offerts), hors TVA. Individuel : 4,99 € / mois ou 49 € / an, TVA incluse. Le checkout utilise Stripe Managed Payments : les achats apparaissent comme vendus via Link, et Link est le marchand officiel pour la collecte et le dépôt de la TVA là où Managed Payments s’applique. Les prix peuvent être convertis en devise locale au checkout.',
     s5Title: 'Droit de rétractation des consommateurs UE (14 jours)',
     s5Body:
       'Si vous achetez une offre individuelle en tant que consommateur dans l’UE/EEE, la directive 2011/83/UE vous confère un droit de rétractation de 14 jours à compter de la conclusion du contrat, sans motif. Pour l’exercer, contactez le support Link pour la commande (vendue via Link) et/ou privacy@borderday.com avec l’e-mail du compte et la référence. Pour les services numériques, le début d’exécution pendant le délai après consentement exprès préalable et reconnaissance de la perte du droit une fois l’exécution commencée peut limiter ou éteindre ce droit (art. 16) — le checkout et les conditions Sold through Link de Link décrivent le traitement pour votre commande. Les achats entreprise ne sont pas des contrats à distance de consommation.',
@@ -474,10 +479,11 @@ const fr: Dict = {
   disclaimer: {
     title: 'Avertissement',
     body:
-      'BorderDay est un outil personnel de suivi et de rappel. Ce n’est ni un conseil fiscal, ni un conseil juridique, ni un substitut à votre employeur, à un conseiller fiscal qualifié ou à l’institution de sécurité sociale compétente. Les seuils affichés proviennent de sources officielles publiques et peuvent évoluer ; vérifiez toujours auprès de l’autorité qui s’applique à votre situation. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
+      'BorderDay est un outil personnel de suivi et de rappel. Ce n’est ni un conseil fiscal, ni un conseil juridique, ni un substitut à votre employeur, à un conseiller fiscal qualifié ou à l’institution de sécurité sociale compétente. Les seuils affichés proviennent de sources officielles publiques et peuvent évoluer ; vérifiez toujours auprès de l’autorité compétente. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
   },
   footer: {
-    tagline: 'Suivi des jours pour les équipes et collaborateurs transfrontaliers.',
+    tagline:
+      'Suivi des jours pour les équipes et les collaborateurs qui travaillent par-delà les frontières.',
     rights: '© {year} BorderDay',
   },
   auth: {
@@ -505,12 +511,6 @@ const fr: Dict = {
     callbackFailed: 'Impossible de terminer la connexion. Réessayez.',
     paymentsUnavailable: 'Impossible de démarrer le paiement — réessayez ou contactez le support.',
     signOut: 'Se déconnecter',
-  },
-  waitlist: {
-    thanks: 'Compte créé — continuez vers l\'inscription entreprise.',
-    invalid: 'Veuillez saisir une adresse e-mail valide.',
-    localOnly:
-      'Utilisez Créer un compte / Connexion. Le paiement est disponible sur la page Tarifs.',
   },
 };
 

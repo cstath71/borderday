@@ -46,11 +46,12 @@ const en = {
       'One company dashboard for employees on different borders. Filter by border or status. Export CSV for audit. Employees see exactly the same counters HR sees.',
     feature1Title: 'Tax and social security, separately',
     feature1Body:
-      'Independent counters with official sources linked. Warnings at 75% and 90% of the real allowance, then at-limit and over-limit states with the consequence spelled out.',
+      'Independent counters with official sources linked. Warnings at 75% and 90% of the applicable limit, then at-limit and over-limit states with the consequence spelled out.',
     feature2Title: 'Invite by email link',
     feature2Body: 'Employees join your company, pick their border pack, and log day types only — never GPS location.',
     feature3Title: 'Data protection by design',
-    feature3Body: 'GDPR and Swiss FADP (nLPD) oriented: company isolation, export and delete, clear consent, retention note. HR sees day types and counts, not location.',
+    feature3Body:
+      'GDPR and Swiss FADP oriented: company isolation, export and delete, a clear notice of what HR can see, and a retention note. No GPS or device location.',
     bordersTitle: 'Corridors covered in version 1',
     bordersIntro:
       'Each corridor shows what it counts today. Where no tax rule can be counted yet, it says so and shows no number.',
@@ -61,7 +62,6 @@ const en = {
     waitlistTitle: 'Start with a company account',
     waitlistBody:
       'Create a company account with email or Google, invite your team, then subscribe on the Pricing page. A labeled DEMO company remains available for preview.',
-    waitlistPlaceholder: 'you@company.com',
     waitlistButton: 'Create account',
     waitlistNote: 'No waitlist — accounts and checkout are live. Company plans: €5/employee/mo (min €39), 7-day trial.',
     disclaimerShort:
@@ -95,7 +95,7 @@ const en = {
   dayTypes: {
     telework: 'Telework at home',
     onsite: 'On site at workplace',
-    third_country: 'Third country / work trip',
+    third_country: 'Work trip / third State',
     non_working: 'Non-working day',
     teleworkHint: 'Workday performed in your residence country (home or local co-working).',
     onsiteHint: 'Workday at the employer’s premises in the work country.',
@@ -118,22 +118,22 @@ const en = {
     ch_fr_tax_telework_40: 'Telework share (max 40% of annual working time)',
     ch_fr_tax_missions_10: 'Temporary missions outside Switzerland (max 10 days/year)',
     ch_fr_tax_note:
-      'Convention regime: telework from France up to 40% of annual working time stays taxable in Switzerland. Up to 10 mission days a year count as telework, only as far as they fit under 40% after ordinary telework. Extra mission days are taxed differently. Above 40%, telework is taxable in France from the first day. On-call time counts only if you actually intervened. Sources: ESTV agreement of 29 Apr 2026; ge.ch.',
+      'Convention regime: telework from France up to 40% of annual working time stays taxable in Switzerland. Up to 10 mission days a year count as telework, only as far as they fit under 40% after ordinary telework. Extra mission days are taxed differently. Above 40%, telework is taxable in France from the first day. On-call time counts only if you actually intervened. Sources: amendment of 27 Jun 2023 (additional protocol) for the 40% rule; FTA amicable agreement of 29 Apr 2026 for mission days; ge.ch.',
     ch_fr_missions_note:
-      'Temporary missions in France or a third country: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Days outside those limits are taxable in France, subject to any treaty with the third state. Sources: ESTV agreement of 29 Apr 2026; impots.gouv.fr fact sheet.',
+      'Temporary missions in France or a third country: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Days outside those limits are taxable in France, subject to any treaty with the third state. Sources: FTA amicable agreement of 29 Apr 2026; impots.gouv.fr fact sheet.',
     lu_tax_tolerance_34: 'Days outside Luxembourg (up to 34 days, full-year full-time)',
     lu_tax_tolerance_pending: 'Days outside Luxembourg (tax tolerance)',
     lu_fr_tax_note:
       'Residents of France employed in Luxembourg: up to 34 days per taxable period physically present in France and/or a third state for work, without losing Luxembourg taxation for the period. Part-time or part-year: the 34 is reduced in proportion and rounded down. Beyond the limit, France may tax the time actually worked in France or a third state, from the first day. Any fraction of a day counts as a whole day, and training counts. Leave, weekly rest, public holidays not worked, sickness and force majeure do not. The limit covers all your contracts in the year, and it is up to you to prove your days: this log alone may not be enough. Source: impots.gouv.fr agreement (the PDF says 29 days, raised to 34 by the avenant of 7 Nov 2022).',
     ss_framework_under_50: 'Cross-border telework (framework agreement: A1 from 25%, under 50%)',
     ss_framework_note:
-      'Under the EU/EEA/CH framework agreement: under 25% of working time teleworked in the residence state, no A1 is needed on telework grounds. From 25% to under 50%, the residence state normally becomes competent unless employer and employee request an A1 keeping the employer’s state. The A1 lasts up to 3 years and can reach back at most 3 months, if contributions were already paid there. At 50% or more the framework is not available. It does not cover people who habitually work other than by telework in the residence state, habitually work in another state, are self-employed, or have employers in more than one state. Telework here means work done through an IT link. Sources: Belgian FPS (depositary); CLEISS.',
+      'Under the EU/EEA/CH framework agreement: under 25% of working time teleworked in the residence state, no A1 is needed on telework grounds. From 25% to under 50%, the residence state normally becomes competent unless employer and employee request an A1 keeping the employer’s state. The A1 lasts up to 3 years and can reach back at most 3 months, if contributions were already paid there. At 50% or more the framework is not available. It does not cover people who habitually work other than by telework in the residence state, habitually work in a state other than the residence state and the employer’s state, are self-employed, or have employers in more than one state. Telework here means work done through an IT link. Sources: Belgian FPS (depositary); CLEISS.',
     ss_framework_lu_note:
-      'Luxembourg CCSS: telework only in the residence state. Under 25%: no A1 on telework grounds. From 25% to under 50%, both states signed: the employer may request an A1 so Luxembourg cover continues; without it the residence state normally becomes competent. At 50% or more the framework is not available. Habitual non-telework activity in the residence state or work in another member state can push the case out of the framework. Sources: CCSS; Belgian FPS.',
+      'Luxembourg CCSS: telework only in the residence state. Under 25%: no A1 on telework grounds. From 25% to under 50%, both states signed: the employer may request an A1 so Luxembourg cover continues; without it the residence state normally becomes competent. At 50% or more the framework is not available. Habitual non-telework activity in the residence state or work in a state other than the residence state and the employer’s state can push the case out of the framework. Sources: CCSS; Belgian FPS.',
     ch_it_tax_telework_25: 'Telework at domicile (max 25% of employed activity)',
     ch_it_tax_nonreturn_45: 'Days without returning home for work (max 45/year)',
     ch_it_tax_note:
-      'Under the protocol amending the Italy–Switzerland agreement (in force 9 Feb 2026, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. The protocol does not state what happens above 25%. Sources: Fedlex RU 2026 104; SIF.',
+      'Under the protocol amending the Italy–Switzerland agreement (in force 9 Feb 2026, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. The protocol does not state what happens above 25%. Sources: Fedlex AS 2026 104; SIF.',
     ch_it_nonreturn_note:
       'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work. Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. Source: Fedlex amending protocol.',
     basel_de_employer_commute:
@@ -289,10 +289,9 @@ const en = {
     include5: 'English, French, German, Italian',
     include6: 'Installable PWA',
     companyInclude1: 'HR dashboard with per-employee counters and filters',
-    companyInclude2: 'Email invites, roles (owner / HR viewer), CSV audit export',
+    companyInclude2: 'Email invites, roles (owner / HR viewer), CSV export',
     companyInclude3: 'Employees see the same counters HR sees',
     companyInclude4: 'Data protection by design (day types only — no location)',
-    comingSoon: 'Live checkout',
     subscribeMonthly: 'Start monthly',
     subscribeYearly: 'Start yearly',
     trialNote: '7-day free trial — card required at signup.',
@@ -358,13 +357,14 @@ const en = {
 
   individuals: {
     title: 'BorderDay for individuals',
-    heroTitle: 'Log your own border days on your device',
+    heroTitle: 'Log your own border days',
     heroBody:
       'Employees and self-trackers can log telework, on-site, trip and non-working days: social-security counters on every corridor, tax counters where the rule can be counted today. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
     ctaApp: 'Open employee app',
     ctaPricing: 'Individual pricing',
     ctaCompanies: 'My employer needs the company plan',
-    point1: 'Local-first logger with export and delete',
+    point1:
+      'Free preview stays on your device; a plan saves your log to your account. Export and delete either way.',
     point2: 'Same border packs and careful, sourced counters',
     point3: 'Optional company join — you see what HR sees',
   },
@@ -502,12 +502,6 @@ const en = {
     callbackFailed: 'Could not complete sign-in. Try again.',
     paymentsUnavailable: 'Could not start checkout — try again or contact support.',
     signOut: 'Sign out',
-  },
-  waitlist: {
-    thanks: 'Account created — continue to company sign-up.',
-    invalid: 'Please enter a valid email.',
-    localOnly:
-      'Use Sign up / Sign in for a real account. Checkout is live on the Pricing page.',
   },
 };
 

@@ -3,9 +3,10 @@ import en from '../src/i18n/en';
 import fr from '../src/i18n/fr';
 import de from '../src/i18n/de';
 import itDict from '../src/i18n/it';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { BORDER_PACKS } from '../src/borders/packs';
+import { LANGS, PAGES, PUBLIC_PATHS } from '../scripts/seo.mjs';
 
 function flatKeys(obj: unknown, prefix = ''): string[] {
   if (obj === null || typeof obj !== 'object') return [prefix];
@@ -29,20 +30,82 @@ describe('i18n key parity', () => {
   it('IT has identical keys to EN', () => {
     expect(flatKeys(itDict)).toEqual(enKeys);
   });
-  it('branding strings avoid frontalier slogan', () => {
-    const brandy = [
-      en.meta.tagline,
-      en.home.heroTitle,
-      fr.meta.tagline,
-      de.meta.tagline,
-      itDict.meta.tagline,
-      en.home.heroBody,
-      fr.home.heroBody,
-      de.home.heroBody,
-      itDict.home.heroBody,
-    ].join(' ');
-    expect(brandy.toLowerCase()).not.toMatch(/\bfrontalier/);
-    expect(brandy.toLowerCase()).not.toMatch(/\bgrenzgänger/);
+  it('brand surfaces avoid the frontier-worker words, including transfrontalier*', () => {
+    const banned = /frontalier|frontaliere|grenzgänger|grenzgaenger/i;
+    for (const [lang, d] of Object.entries({ en, fr, de, it: itDict })) {
+      const surfaces = [
+        d.meta.tagline,
+        d.meta.description,
+        d.footer.tagline,
+        d.home.heroTitle,
+        d.home.heroBody,
+        d.home.inShort,
+        d.home.waitlistTitle,
+        d.pricing.title,
+        d.pricing.subtitle,
+      ];
+      for (const s of surfaces) expect(s, lang).not.toMatch(banned);
+    }
+    for (const lang of LANGS) {
+      for (const path of PUBLIC_PATHS) {
+        const page = PAGES[path][lang];
+        for (const s of [page.title, page.description, page.h1]) expect(s, `${lang} ${path}`).not.toMatch(banned);
+      }
+    }
+  });
+});
+
+describe('terminology decisions (02-translations)', () => {
+  const dicts = { en, fr, de, it: itDict };
+  const blob = (d: unknown) => JSON.stringify(d);
+
+  it('no colloquial nLPD / nDSG, and no calqued role names', () => {
+    for (const [lang, d] of Object.entries(dicts)) {
+      expect(blob(d.home), lang).not.toMatch(/nLPD|nDSG/);
+    }
+    for (const d of [fr, de, itDict]) expect(blob(d.company)).not.toMatch(/\bowners?\b/i);
+    expect(blob(de)).not.toMatch(/Firmeneigentümer|Ausdrucksweise|Rahmenvereinbarung|Unternehmenkonto/);
+    expect(blob(fr)).not.toMatch(/journalis|commerçant enregistré/);
+  });
+
+  it('German uses one word per concept', () => {
+    const b = blob(de);
+    expect(b).not.toMatch(/Tagestyp|Tracking-Tool|Dokumentationstool|Missionstag|Wohnsitzstaat|außerhalb/);
+    expect(b).not.toMatch(/Firmenkonto|Firmenplan|Haftungsausschluss/);
+    expect(de.counters.ch_fr_tax_missions_10).toMatch(/Temporäre Einsätze/);
+  });
+
+  it('Italian uses one word per concept and the formal voi on shared surfaces', () => {
+    const b = blob(itDict);
+    expect(b).not.toMatch(/tracciamento|pacchetto frontiera|pacchetto di confine|giorni di missione/);
+    for (const s of [itDict.app.title, itDict.app.counters, itDict.auth.signUpTitle, itDict.faq.a2]) {
+      expect(s).not.toMatch(/\b(tuo|tua|tuoi|tue)\b/);
+    }
+  });
+
+  it('the 40% rule cites the additional protocol, not only the amicable agreement', () => {
+    expect(en.counters.ch_fr_tax_note).toMatch(/additional protocol/);
+    expect(fr.counters.ch_fr_tax_note).toMatch(/protocole additionnel/);
+    expect(de.counters.ch_fr_tax_note).toMatch(/Zusatzprotokoll/);
+    expect(itDict.counters.ch_fr_tax_note).toMatch(/Protocollo addizionale/);
+  });
+
+  it('the official collection is cited per language', () => {
+    expect(en.counters.ch_it_tax_note).toMatch(/AS 2026 104/);
+    expect(fr.counters.ch_it_tax_note).toMatch(/RO 2026 104/);
+    expect(de.counters.ch_it_tax_note).toMatch(/AS 2026 104/);
+    expect(itDict.counters.ch_it_tax_note).toMatch(/RU 2026 104/);
+  });
+
+  it('the third-State exclusion names both States', () => {
+    expect(fr.counters.ss_framework_lu_note).toMatch(/autre que l’État de résidence/);
+    expect(de.counters.ss_framework_lu_note).toMatch(/Staat des Arbeitgebersitzes/);
+    expect(itDict.counters.ss_framework_lu_note).toMatch(/diverso dallo Stato di residenza/);
+  });
+
+  it('the waitlist strings and component are gone', () => {
+    expect(blob(en)).not.toMatch(/"waitlist":/);
+    expect(existsSync(join(__dirname, '../src/components/WaitlistForm.tsx'))).toBe(false);
   });
 });
 

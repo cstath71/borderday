@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { escapeHtml, isInviteTestAddress } from '../supabase/functions/_shared/invite';
+import { escapeHtml, isInviteTestAddress, isSendableInviteAddress } from '../supabase/functions/_shared/invite';
 
 const root = resolve(__dirname, '..');
 
@@ -43,9 +43,13 @@ describe('bd-send-invite authorisation and logging (H2)', () => {
     }
   });
 
-  it('sends for real only with RESEND_LIVE, a key, and a test address', () => {
-    expect(src).toContain('const allowReal = live && !!apiKey;');
-    expect(src).toContain('if (!allowReal || !isInviteTestAddress(inv.email))');
+  it('sends for real when live + key + sendable address; test allowlist only when paused', () => {
+    expect(src).toContain('isSendableInviteAddress');
+    expect(src).toContain('isInviteTestAddress');
+    expect(src).toMatch(/live \? isSendableInviteAddress\(inv\.email\) : isInviteTestAddress\(inv\.email\)/);
+    expect(src).not.toContain('if (!allowReal || !isInviteTestAddress(inv.email))');
+    expect(src).toContain('MAX_INVITE_EMAILS_PER_HOUR');
+    expect(src).toContain('Rate limited');
   });
 
   it('allows @borderday.com and the existing test domains', () => {
@@ -73,6 +77,24 @@ describe('bd-send-invite authorisation and logging (H2)', () => {
       '',
     ]) {
       expect(isInviteTestAddress(email)).toBe(false);
+    }
+  });
+
+  it('accepts ordinary customer addresses when live (sendable check)', () => {
+    for (const email of ['hr@acme.com', 'a.b+c@company.co.uk', 'hello+live@borderday.com']) {
+      expect(isSendableInviteAddress(email)).toBe(true);
+    }
+  });
+
+  it('sendable check still blocks multi-recipient and empty', () => {
+    for (const email of [
+      'victim@gmail.com,a@borderday.com',
+      'victim@gmail.com; a@borderday.com',
+      'Victim <victim@gmail.com>',
+      '',
+      '@x.com',
+    ]) {
+      expect(isSendableInviteAddress(email)).toBe(false);
     }
   });
 

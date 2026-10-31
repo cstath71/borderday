@@ -8,7 +8,7 @@ Multilingual PWA for HR and employees to track telework / on-site / third-countr
 - Supabase (EU `fig-mail` project): Auth, `bd_*` tables + RLS, Edge Functions
 - GitHub Pages hosting
 - Stripe Checkout live (Managed Payments, sold through Link)
-- Resend configured for invite email. Real sends are dry-run gated: `RESEND_LIVE` default on (set `0` to pause) and test addresses only (`@borderday.com`, `@example.com`, `@example.org`, `@borderday.test`)
+- Resend configured for invite email. Live by default (`RESEND_LIVE` unset or `1`; set `0` to pause). When live, any single-recipient address may be emailed (owner/hr only, rate-limited). When paused, real sends stay limited to test addresses (`@borderday.com`, `@example.com`, `@example.org`, `@borderday.test`).
 
 ## Auth
 
@@ -44,7 +44,7 @@ Company pricing (approved): **€5 per active employee / month**, **minimum €3
 - Seats **≥ 8** → `company-seat-month` (€5) / `company-seat-year` (€50) × seats
 - Edge: `bd-create-checkout`, `bd-stripe-webhook` (seat sync on update), `bd-sync-company-billing`
 - Env: `STRIPE_PRICE_COMPANY_MIN_MONTH`, `STRIPE_PRICE_COMPANY_MIN_YEAR`, plus existing seat/individual price envs
-- Invites: `bd-send-invite` uses `RESEND_API_KEY_BORDERDAY` (fallback `RESEND_API_KEY`); default From `BorderDay <hello@borderday.com>` when `RESEND_FROM` unset. Real sends stay gated by `RESEND_LIVE` (default on after 2026-10-31; set `0` to pause) and the test-address allowlist in `supabase/functions/_shared/invite.ts`; every other address is a dry run.
+- Invites: `bd-send-invite` uses `RESEND_API_KEY_BORDERDAY` (fallback `RESEND_API_KEY`); default From `BorderDay <hello@borderday.com>` when `RESEND_FROM` unset. `RESEND_LIVE` defaults on (set `0` to pause). Live sends go to any single-recipient address after owner/hr auth and a 30/hour per-company and per-user cap; when paused, the test-address allowlist in `supabase/functions/_shared/invite.ts` still applies.
 - Stripe SDK API version: `2025-03-31.basil` (required for Managed Payments on this account).
 - Tax: account default **exclusive**; company prices exclusive; individual prices **inclusive**. Managed Payments handles tax, so Checkout must not send `automatic_tax` or `tax_id_collection`; a billing address is required.
 

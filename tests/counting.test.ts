@@ -1,16 +1,62 @@
 import { describe, expect, it } from 'vitest';
-import { getBorderPack } from '../src/borders/packs';
+import { BORDER_PACKS, getBorderPack } from '../src/borders/packs';
 import type { DayEntry } from '../src/borders/types';
-import { countType, evaluateCounter, evaluatePack } from '../src/lib/counting';
+import {
+  allowedDaysForPercent,
+  countType,
+  evaluateCounter,
+  evaluatePack,
+} from '../src/lib/counting';
 
 function days(specs: Array<[string, DayEntry['type']]>): DayEntry[] {
   return specs.map(([date, type]) => ({ date, type }));
 }
 
+describe('allowedDaysForPercent (ge.ch-style annual base)', () => {
+  it('40% of 240 → 96 days', () => {
+    expect(allowedDaysForPercent(40, 240)).toBe(96);
+  });
+  it('50% of 240 → 120 days', () => {
+    expect(allowedDaysForPercent(50, 240)).toBe(120);
+  });
+  it('25% of 240 → 60 days', () => {
+    expect(allowedDaysForPercent(25, 240)).toBe(60);
+  });
+  it('50% of 220 → 110 days', () => {
+    expect(allowedDaysForPercent(50, 220)).toBe(110);
+  });
+});
+
+describe('one telework day is never over-limit for any % counter', () => {
+  const oneDay = days([['2026-01-05', 'telework']]);
+
+  for (const pack of BORDER_PACKS) {
+    const percentCounters = pack.counters.filter(
+      (c) => c.enabled && c.unit === 'percent_of_working_time',
+    );
+    for (const counter of percentCounters) {
+      it(`${pack.id} / ${counter.id}: 1 telework day stays within limit`, () => {
+        const annual = pack.defaultAnnualWorkingDays;
+        const r = evaluateCounter(pack, counter, oneDay, {
+          year: 2026,
+          annualWorkingDays: annual,
+        });
+        expect(r.enabled).toBe(true);
+        expect(r.usedDays).toBe(1);
+        expect(r.allowedDays).toBe(allowedDaysForPercent(counter.limit!, annual));
+        expect(r.percentOfAnnual).toBeCloseTo((1 / annual) * 100, 2);
+        expect(r.ratio).toBeLessThan(0.75);
+        expect(r.status).toBe('ok');
+        expect(r.status).not.toBe('over');
+      });
+    }
+  }
+});
+
 describe('Geneva / Romandie–FR', () => {
   const pack = getBorderPack('geneva_fr')!;
 
-  it('counts telework toward 40% tax share', () => {
+  it('measures telework share against annual contractual days, not logged days', () => {
     const entries = days([
       ['2026-01-05', 'telework'],
       ['2026-01-06', 'telework'],
@@ -19,15 +65,43 @@ describe('Geneva / Romandie–FR', () => {
       ['2026-01-09', 'non_working'],
     ]);
     const tax = pack.counters.find((c) => c.id === 'geneva_tax_telework_40')!;
-    const r = evaluateCounter(pack, tax, entries, { year: 2026 });
-    // 2 telework of 4 working days = 50%
+    const r = evaluateCounter(pack, tax, entries, { year: 2026, annualWorkingDays: 240 });
     expect(r.enabled).toBe(true);
-    expect(r.used).toBe(50);
+    expect(r.usedDays).toBe(2);
+    expect(r.allowedDays).toBe(96);
+    expect(r.percentOfAnnual).toBeCloseTo((2 / 240) * 100, 2);
     expect(r.limit).toBe(40);
+    expect(r.status).toBe('ok'); // 2/96 ≪ 0.75
+  });
+
+  it('warns at 75% of annual allowance (72 of 96 days)', () => {
+    const entries: DayEntry[] = [];
+    for (let i = 0; i < 72; i++) {
+      const month = String(Math.floor(i / 28) + 1).padStart(2, '0');
+      const day = String((i % 28) + 1).padStart(2, '0');
+      entries.push({ date: `2026-${month}-${day}`, type: 'telework' });
+    }
+    const tax = pack.counters.find((c) => c.id === 'geneva_tax_telework_40')!;
+    const r = evaluateCounter(pack, tax, entries, { year: 2026, annualWorkingDays: 240 });
+    expect(r.usedDays).toBe(72);
+    expect(r.ratio).toBeCloseTo(0.75, 5);
+    expect(r.status).toBe('warn');
+  });
+
+  it('over limit only when usedDays >= allowedDays', () => {
+    const entries: DayEntry[] = [];
+    for (let i = 0; i < 96; i++) {
+      const month = String(Math.floor(i / 28) + 1).padStart(2, '0');
+      const day = String((i % 28) + 1).padStart(2, '0');
+      entries.push({ date: `2026-${month}-${day}`, type: 'telework' });
+    }
+    const tax = pack.counters.find((c) => c.id === 'geneva_tax_telework_40')!;
+    const r = evaluateCounter(pack, tax, entries, { year: 2026, annualWorkingDays: 240 });
+    expect(r.usedDays).toBe(96);
     expect(r.status).toBe('over');
   });
 
-  it('counts third_country toward mission 10-day cap and toward 40%', () => {
+  it('counts third_country toward mission 10-day cap and toward 40% annual share', () => {
     const entries = days([
       ['2026-02-02', 'third_country'],
       ['2026-02-03', 'third_country'],
@@ -36,10 +110,11 @@ describe('Geneva / Romandie–FR', () => {
     const missions = pack.counters.find((c) => c.id === 'geneva_tax_missions_10')!;
     const tax40 = pack.counters.find((c) => c.id === 'geneva_tax_telework_40')!;
     const m = evaluateCounter(pack, missions, entries, { year: 2026 });
-    const t = evaluateCounter(pack, tax40, entries, { year: 2026 });
+    const t = evaluateCounter(pack, tax40, entries, { year: 2026, annualWorkingDays: 240 });
     expect(m.used).toBe(2);
-    // Both third_country days count toward the 40% telework expression
-    expect(t.used).toBeCloseTo((2 / 3) * 100, 1);
+    expect(t.usedDays).toBe(2);
+    expect(t.percentOfAnnual).toBeCloseTo((2 / 240) * 100, 2);
+    expect(t.status).toBe('ok');
   });
 
   it('excludes non_working from telework % and missions', () => {
@@ -49,12 +124,14 @@ describe('Geneva / Romandie–FR', () => {
       ['2026-03-04', 'telework'],
     ]);
     const tax = pack.counters.find((c) => c.id === 'geneva_tax_telework_40')!;
-    const r = evaluateCounter(pack, tax, entries, { year: 2026 });
-    expect(r.used).toBe(100); // 1 of 1 working day
+    const r = evaluateCounter(pack, tax, entries, { year: 2026, annualWorkingDays: 240 });
+    expect(r.usedDays).toBe(1);
+    expect(r.percentOfAnnual).toBeCloseTo((1 / 240) * 100, 2);
+    expect(r.status).toBe('ok');
     expect(countType(entries, 'non_working', 2026)).toBe(2);
   });
 
-  it('social-security framework uses telework only toward %', () => {
+  it('social-security framework uses telework only toward annual %', () => {
     const entries = days([
       ['2026-04-01', 'telework'],
       ['2026-04-02', 'third_country'],
@@ -62,8 +139,11 @@ describe('Geneva / Romandie–FR', () => {
       ['2026-04-04', 'onsite'],
     ]);
     const ss = pack.counters.find((c) => c.id === 'geneva_ss_50')!;
-    const r = evaluateCounter(pack, ss, entries, { year: 2026 });
-    expect(r.used).toBe(25); // 1 telework of 4 working
+    const r = evaluateCounter(pack, ss, entries, { year: 2026, annualWorkingDays: 240 });
+    expect(r.usedDays).toBe(1); // third_country does not count toward SS %
+    expect(r.allowedDays).toBe(120);
+    expect(r.percentOfAnnual).toBeCloseTo((1 / 240) * 100, 2);
+    expect(r.status).toBe('ok');
   });
 });
 
@@ -84,12 +164,21 @@ describe('Luxembourg ← France', () => {
     expect(r.limit).toBe(34);
     expect(r.status).toBe('critical'); // 31/34 ≈ 0.91
   });
+
+  it('SS 50% uses annual contractual days (220 default)', () => {
+    const entries = days([['2026-01-05', 'telework']]);
+    const ss = pack.counters.find((c) => c.id === 'lu_fr_ss_50')!;
+    const r = evaluateCounter(pack, ss, entries, { year: 2026 });
+    expect(r.usedDays).toBe(1);
+    expect(r.allowedDays).toBe(110);
+    expect(r.status).toBe('ok');
+  });
 });
 
 describe('Ticino ← Italy', () => {
   const pack = getBorderPack('ticino_it')!;
 
-  it('25% telework cap and 45 non-return days', () => {
+  it('25% telework cap against annual days and 45 non-return days', () => {
     const entries = days([
       ['2026-07-01', 'telework'],
       ['2026-07-02', 'telework'],
@@ -102,11 +191,13 @@ describe('Ticino ← Italy', () => {
       ['2026-07-09', 'third_country'],
       ['2026-07-10', 'non_working'],
     ]);
-    const results = evaluatePack(pack, entries, { year: 2026 });
+    const results = evaluatePack(pack, entries, { year: 2026, annualWorkingDays: 240 });
     const tele = results.find((r) => r.counterId === 'ticino_tax_telework_25')!;
     const nonret = results.find((r) => r.counterId === 'ticino_tax_nonreturn_45')!;
-    // telework 2 of 9 working = 22.22%
-    expect(tele.used).toBeCloseTo((2 / 9) * 100, 1);
+    expect(tele.usedDays).toBe(2);
+    expect(tele.allowedDays).toBe(60);
+    expect(tele.percentOfAnnual).toBeCloseTo((2 / 240) * 100, 2);
+    expect(tele.status).toBe('ok');
     expect(nonret.used).toBe(1);
     expect(nonret.limit).toBe(45);
   });

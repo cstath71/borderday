@@ -62,9 +62,18 @@ export interface DayEntry {
 export interface CounterResult {
   counterId: string;
   enabled: boolean;
+  /** For percent counters: percent of annual contractual time. For day counters: days used. */
   used: number;
   limit: number | null;
   unit: LimitUnit | null;
-  ratio: number | null; // used/limit when both known
+  /** usedDays/allowedDays (percent) or used/limit (days). Warnings use this. */
+  ratio: number | null;
   status: 'ok' | 'warn' | 'critical' | 'over' | 'disabled';
+  /** Days that count toward the rule (null when disabled). */
+  usedDays: number | null;
+  /** Allowance in days (percent × annualWorkingDays, or absolute day limit). */
+  allowedDays: number | null;
+  /** Percent of annual contractual working days used (percent counters only). */
+  percentOfAnnual: number | null;
+  annualWorkingDays: number | null;
 }

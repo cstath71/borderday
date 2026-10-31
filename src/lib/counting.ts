@@ -41,7 +41,19 @@ function statusFor(ratio: number | null, warningAt: number[]): CounterResult['st
 }
 
 /**
+ * Allowed day budget for a percentage-of-working-time rule.
+ * e.g. 40% of 240 contractual days → 96 days (ge.ch method).
+ */
+export function allowedDaysForPercent(limitPercent: number, annualWorkingDays: number): number {
+  return Math.round((limitPercent / 100) * annualWorkingDays);
+}
+
+/**
  * Evaluate one counter for a calendar year (or current month for days_per_period employer practice).
+ *
+ * percent_of_working_time is measured against the user's annual contractual working days
+ * (or pack default), not against days logged so far. Ratio = usedDays / allowedDays so
+ * warnings fire at 75/90/100% of the real annual allowance.
  */
 export function evaluateCounter(
   pack: BorderPack,
@@ -60,6 +72,10 @@ export function evaluateCounter(
       unit: null,
       ratio: null,
       status: 'disabled',
+      usedDays: null,
+      allowedDays: null,
+      percentOfAnnual: null,
+      annualWorkingDays: null,
     };
   }
 
@@ -72,28 +88,40 @@ export function evaluateCounter(
     yearEntries = entries.filter((e) => monthOf(e.date) === month);
   }
 
-  let used = 0;
-
   if (counter.unit === 'percent_of_working_time') {
-    const worked = workingDays(yearEntries);
-    const toward = worked.filter((e) => {
+    const usedDays = yearEntries.filter((e) => {
       const c = contribution(counter, e.type);
       return c === 'toward_percent' || c === 'full';
     }).length;
-    const denom = Math.max(worked.length, 1);
-    // Prefer user-logged working days as denominator when the year has logs;
-    // also expose against the contractual annual base when useful.
-    const pctOfLogged = (toward / denom) * 100;
-    // For projections early in the year, also consider toward / annualWorkingDays.
-    // Spec: use logged working days when available (>= 1), else annual base.
-    used = worked.length >= 1 ? pctOfLogged : (toward / annualWorkingDays) * 100;
-  } else {
-    // day counts
-    for (const e of yearEntries) {
-      const c = contribution(counter, e.type);
-      if (c === 'full' || c === 'mission' || c === 'non_return') {
-        used += 1;
-      }
+    const limit = counter.limit;
+    const allowedDays = allowedDaysForPercent(limit, annualWorkingDays);
+    const percentOfAnnual =
+      annualWorkingDays > 0
+        ? Math.round((usedDays / annualWorkingDays) * 10000) / 100
+        : 0;
+    const ratio = allowedDays > 0 ? usedDays / allowedDays : null;
+    return {
+      counterId: counter.id,
+      enabled: true,
+      // `used` = percent of annual contractual time (display helper / legacy)
+      used: percentOfAnnual,
+      limit,
+      unit: counter.unit,
+      ratio,
+      status: statusFor(ratio, counter.warningAt),
+      usedDays,
+      allowedDays,
+      percentOfAnnual,
+      annualWorkingDays,
+    };
+  }
+
+  // Absolute day counts (per year or per reference period)
+  let used = 0;
+  for (const e of yearEntries) {
+    const c = contribution(counter, e.type);
+    if (c === 'full' || c === 'mission' || c === 'non_return') {
+      used += 1;
     }
   }
 
@@ -102,11 +130,15 @@ export function evaluateCounter(
   return {
     counterId: counter.id,
     enabled: true,
-    used: Math.round(used * 100) / 100,
+    used,
     limit,
     unit: counter.unit,
     ratio,
     status: statusFor(ratio, counter.warningAt),
+    usedDays: used,
+    allowedDays: limit,
+    percentOfAnnual: null,
+    annualWorkingDays,
   };
 }
 

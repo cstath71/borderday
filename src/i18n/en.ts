@@ -113,6 +113,8 @@ const en = {
       'No simple public day-tolerance for FR→BE or NL→BE was verified on SPF Finances for this release. Tax counter disabled; social-security framework counter remains available.',
     usedOf: '{used} of {limit}',
     percentUsed: '{used}% of {limit}%',
+    usedOfDays: '{used} of {allowed} days',
+    percentOfAnnual: '{pct}% of {annual} days/yr (limit {limit}%)',
     status_ok: 'Within limit',
     status_warn: 'Approaching limit',
     status_critical: 'Near limit',

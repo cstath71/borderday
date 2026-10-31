@@ -22,12 +22,25 @@ export default function CounterCards({
         const status = result.status;
         const pct =
           result.ratio != null ? Math.min(100, Math.round(result.ratio * 1000) / 10) : 0;
-        const valueText =
-          !result.enabled
-            ? d.counters.ruleBeingConfirmed
-            : result.unit === 'percent_of_working_time'
-              ? t(d.counters.percentUsed, { used: result.used, limit: result.limit ?? 0 })
-              : t(d.counters.usedOf, { used: result.used, limit: result.limit ?? 0 });
+
+        let valueText: string;
+        if (!result.enabled) {
+          valueText = d.counters.ruleBeingConfirmed;
+        } else if (result.unit === 'percent_of_working_time') {
+          valueText = [
+            t(d.counters.usedOfDays, {
+              used: result.usedDays ?? 0,
+              allowed: result.allowedDays ?? 0,
+            }),
+            t(d.counters.percentOfAnnual, {
+              pct: result.percentOfAnnual ?? 0,
+              annual: result.annualWorkingDays ?? pack.defaultAnnualWorkingDays,
+              limit: result.limit ?? 0,
+            }),
+          ].join(' · ');
+        } else {
+          valueText = t(d.counters.usedOf, { used: result.used, limit: result.limit ?? 0 });
+        }
 
         return (
           <div className="card counter-card" key={counter.id}>

@@ -16,7 +16,7 @@ export default function Layout() {
       <header className="site-header">
         <div className="container inner">
           <Link to={`/${lang}/`} className="brand" aria-label="BorderDay home">
-            <img src="/logo.png" alt="BorderDay" width={180} height={52} />
+            <img src="/logo-header.png" alt="BorderDay" width={160} height={47} />
           </Link>
           <nav className="nav" aria-label="Main">
             <NavLink to={`/${lang}/`} end>

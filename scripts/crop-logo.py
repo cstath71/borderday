@@ -9,8 +9,8 @@ from PIL import Image, ImageFilter
 ROOT = Path(__file__).resolve().parents[1]
 SRC = Path('/workspace/borderday-assets/logo-concepts-2.jpg')
 OUT = ROOT / 'public'
-FULL_BOX = (95, 115, 535, 275)
-ICON_BOX = (100, 115, 225, 275)
+FULL_BOX = (88, 108, 575, 282)
+ICON_BOX = (95, 112, 230, 278)
 
 def flood_white_to_alpha(rgb_im, white_thresh=235):
     a = np.asarray(rgb_im).astype(float)
@@ -47,7 +47,10 @@ def flood_white_to_alpha(rgb_im, white_thresh=235):
     bbox = img.getbbox()
     if bbox:
         img = img.crop(bbox)
-    return img
+    pad = 12
+    padded = Image.new("RGBA", (img.width + pad, img.height + 4), (0, 0, 0, 0))
+    padded.alpha_composite(img, (0, 2))
+    return padded
 
 def square_pad(img, size):
     bbox = img.getbbox() or (0, 0, img.width, img.height)

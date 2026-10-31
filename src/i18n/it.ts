@@ -119,6 +119,8 @@ const it: Dict = {
       'Nessuna soglia di tolleranza pubblica semplice per FR→BE o NL→BE è stata verificata su SPF Finances per questa versione. Contatore fiscale disattivato; resta disponibile il contatore dell’accordo quadro di sicurezza sociale.',
     usedOf: '{used} su {limit}',
     percentUsed: '{used}% su {limit}%',
+    usedOfDays: '{used} di {allowed} giorni',
+    percentOfAnnual: '{pct}% di {annual} gg/anno (limite {limit}%)',
     status_ok: 'Entro la soglia',
     status_warn: 'Soglia in avvicinamento',
     status_critical: 'Vicino alla soglia',

@@ -119,6 +119,8 @@ const fr: Dict = {
       'Aucun seuil de tolérance public simple pour FR→BE ou NL→BE n’a été vérifié sur SPF Finances pour cette version. Compteur fiscal désactivé ; le compteur accord-cadre de sécurité sociale reste disponible.',
     usedOf: '{used} sur {limit}',
     percentUsed: '{used} % sur {limit} %',
+    usedOfDays: '{used} sur {allowed} jours',
+    percentOfAnnual: '{pct} % de {annual} j/an (plafond {limit} %)',
     status_ok: 'Sous le seuil',
     status_warn: 'Seuil approché',
     status_critical: 'Proche du seuil',

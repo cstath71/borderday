@@ -36,13 +36,23 @@ img { max-width: 100%; height: auto; }
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
+  overflow: visible;
 }
 .site-header .inner {
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem; padding: 0.75rem 0;
 }
-.brand { display: flex; align-items: center; gap: 0.5rem; }
-.brand img { height: 36px; width: auto; display: block; }
+.brand {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-shrink: 0;
+}
+.brand img {
+  height: 40px;
+  width: auto;
+  max-width: none; /* override global img { max-width:100% } so wordmark is never cropped */
+  display: block;
+  flex-shrink: 0;
+}
 .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
 .nav a { color: var(--ink); font-weight: 500; font-size: 0.95rem; }
 .nav a.active { color: var(--primary); }

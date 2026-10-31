@@ -119,6 +119,8 @@ const de: Dict = {
       'Keine einfache öffentliche Tagestoleranz für FR→BE oder NL→BE wurde auf SPF Finances für diese Version verifiziert. Steuerzähler deaktiviert; der Rahmenvereinbarungs-Zähler der Sozialversicherung bleibt verfügbar.',
     usedOf: '{used} von {limit}',
     percentUsed: '{used} % von {limit} %',
+    usedOfDays: '{used} von {allowed} Tagen',
+    percentOfAnnual: '{pct} % von {annual} Tagen/Jahr (Grenze {limit} %)',
     status_ok: 'Innerhalb der Grenze',
     status_warn: 'Grenze nähert sich',
     status_critical: 'Nahe der Grenze',

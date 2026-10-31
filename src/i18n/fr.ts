@@ -326,7 +326,7 @@ const fr: Dict = {
     sendMagic: "M'envoyer un lien de connexion",
     magicSent: 'Vérifiez votre e-mail pour le lien de connexion.',
     continueGoogle: 'Continuer avec Google',
-    googleHint: 'La connexion Google nécessite un client OAuth du propriétaire du projet.',
+    googleHint: 'OAuth Google sécurisé — nous ne voyons jamais votre mot de passe Google.',
     googleNotReady: "Google n'est pas encore activé. Utilisez l'e-mail pour l'instant.",
     checkEmail: 'Vérifiez votre e-mail pour confirmer le compte (si demandé), puis continuez.',
     noAccount: 'Pas encore de compte ?',

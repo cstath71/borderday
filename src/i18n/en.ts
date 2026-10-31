@@ -324,7 +324,7 @@ const en = {
     sendMagic: 'Email me a sign-in link',
     magicSent: 'Check your email for the sign-in link.',
     continueGoogle: 'Continue with Google',
-    googleHint: 'Google sign-in needs an OAuth client from the project owner before it works.',
+    googleHint: 'Secure Google OAuth — we never see your Google password.',
     googleNotReady: 'Google sign-in is not enabled yet. Use email for now.',
     checkEmail: 'Check your email to confirm your account (if required), then continue.',
     noAccount: 'No account yet?',

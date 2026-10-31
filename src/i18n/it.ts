@@ -326,7 +326,7 @@ const it: Dict = {
     sendMagic: 'Inviami un link di accesso',
     magicSent: "Controlla l'email per il link di accesso.",
     continueGoogle: 'Continua con Google',
-    googleHint: "L'accesso Google richiede un client OAuth dal proprietario del progetto.",
+    googleHint: 'OAuth Google sicuro — non vediamo mai la password Google.',
     googleNotReady: "Google non è ancora attivo. Usa l'email per ora.",
     checkEmail: "Controlla l'email per confermare (se richiesto), poi continua.",
     noAccount: 'Non hai un account?',

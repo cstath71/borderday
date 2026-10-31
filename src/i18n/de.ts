@@ -326,7 +326,7 @@ const de: Dict = {
     sendMagic: 'Anmeldelink per E-Mail senden',
     magicSent: 'Prüfen Sie Ihre E-Mail für den Anmeldelink.',
     continueGoogle: 'Mit Google fortfahren',
-    googleHint: 'Google-Anmeldung braucht einen OAuth-Client vom Projektinhaber.',
+    googleHint: 'Sicheres Google-OAuth — wir sehen Ihr Google-Passwort nie.',
     googleNotReady: 'Google ist noch nicht aktiv. Bitte E-Mail nutzen.',
     checkEmail: 'E-Mail prüfen zur Bestätigung (falls nötig), dann weiter.',
     noAccount: 'Noch kein Konto?',

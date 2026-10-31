@@ -8,7 +8,10 @@
  *   - Flat minimum: €39/mo (lookup company-min-month) / €390/yr (company-min-year) for 1–7 active employees
  *   - Per seat: €5/seat/mo (company-seat-month) / €50/seat/yr (company-seat-year) when seats ≥ 8
  *   Yearly = 10 × monthly (2 months free).
- * Individual: €4.99/mo or €49/yr. Trial: 14 days on Checkout session.
+ * Individual: €4.99/mo or €49/yr (tax_behavior inclusive).
+ * Company prices: tax_behavior exclusive. Account default: exclusive.
+ * Checkout: automatic_tax + tax_id_collection + billing_address_collection required.
+ * Trial: 14 days on Checkout session.
  */
 import Stripe from 'stripe';
 const key = process.env.STRIPE_SECRET_KEY;
@@ -21,22 +24,22 @@ const company = await stripe.products.create({
 });
 const companyMinMonth = await stripe.prices.create({
   product: company.id, currency: 'eur', unit_amount: 3900, recurring: { interval: 'month' },
-  nickname: 'company-min-month', lookup_key: 'company-min-month',
+  nickname: 'company-min-month', lookup_key: 'company-min-month', tax_behavior: 'exclusive',
   metadata: { billing: 'flat_minimum', covers_seats: '1-7' },
 });
 const companyMinYear = await stripe.prices.create({
   product: company.id, currency: 'eur', unit_amount: 39000, recurring: { interval: 'year' },
-  nickname: 'company-min-year', lookup_key: 'company-min-year',
+  nickname: 'company-min-year', lookup_key: 'company-min-year', tax_behavior: 'exclusive',
   metadata: { billing: 'flat_minimum', covers_seats: '1-7' },
 });
 const companyMonth = await stripe.prices.create({
   product: company.id, currency: 'eur', unit_amount: 500, recurring: { interval: 'month' },
-  nickname: 'company-seat-month', lookup_key: 'company-seat-month',
+  nickname: 'company-seat-month', lookup_key: 'company-seat-month', tax_behavior: 'exclusive',
   metadata: { billing: 'per_seat' },
 });
 const companyYear = await stripe.prices.create({
   product: company.id, currency: 'eur', unit_amount: 5000, recurring: { interval: 'year' },
-  nickname: 'company-seat-year', lookup_key: 'company-seat-year',
+  nickname: 'company-seat-year', lookup_key: 'company-seat-year', tax_behavior: 'exclusive',
   metadata: { billing: 'per_seat' },
 });
 const individual = await stripe.products.create({
@@ -45,11 +48,11 @@ const individual = await stripe.products.create({
 });
 const indivMonth = await stripe.prices.create({
   product: individual.id, currency: 'eur', unit_amount: 499, recurring: { interval: 'month' },
-  nickname: 'individual-month', lookup_key: 'individual-month',
+  nickname: 'individual-month', lookup_key: 'individual-month', tax_behavior: 'inclusive',
 });
 const indivYear = await stripe.prices.create({
   product: individual.id, currency: 'eur', unit_amount: 4900, recurring: { interval: 'year' },
-  nickname: 'individual-year', lookup_key: 'individual-year',
+  nickname: 'individual-year', lookup_key: 'individual-year', tax_behavior: 'inclusive',
 });
 console.log(JSON.stringify({
   STRIPE_PRICE_COMPANY_MIN_MONTH: companyMinMonth.id,

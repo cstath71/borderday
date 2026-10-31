@@ -176,6 +176,8 @@ const it: Dict = {
     companyPrice: '€5 / collaboratore attivo / mese',
     companyMin: 'Minimo €39 / mese',
     companyYearly: 'Fatturazione annuale: 2 mesi gratis',
+    companyTax: 'IVA esclusa',
+    individualTax: 'IVA inclusa',
     includes: 'Include',
     include1: 'Tutti i pacchetti confine del piano',
     include2: 'Contatori fiscali e di sicurezza sociale separati',

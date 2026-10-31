@@ -176,6 +176,8 @@ const de: Dict = {
     companyPrice: '€5 / aktive Mitarbeitende / Monat',
     companyMin: 'Minimum €39 / Monat',
     companyYearly: 'Jahresabrechnung: 2 Monate gratis',
+    companyTax: 'zzgl. MwSt.',
+    individualTax: 'inkl. MwSt.',
     includes: 'Enthalten',
     include1: 'Alle Grenzpakete Ihres Plans',
     include2: 'Getrennte Steuer- und Sozialversicherungs-Zähler',

@@ -77,6 +77,10 @@ Deno.serve(async (req) => {
       subscription_data: { metadata, trial_period_days: 14 },
       allow_promotion_codes: true,
       customer_email: user.email,
+      // Stripe Tax: account default exclusive; individual prices inclusive, company exclusive.
+      billing_address_collection: "required",
+      automatic_tax: { enabled: true },
+      tax_id_collection: { enabled: true },
     } as any);
 
     return new Response(JSON.stringify({ available: true, url: session.url }), {

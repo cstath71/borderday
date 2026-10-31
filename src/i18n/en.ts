@@ -173,6 +173,8 @@ const en = {
     companyPrice: '€5 / active employee / month',
     companyMin: 'Minimum €39 / month',
     companyYearly: 'Yearly billing: 2 months free',
+    companyTax: 'excl. VAT',
+    individualTax: 'incl. VAT',
     includes: 'Includes',
     include1: 'All border packs available in your plan',
     include2: 'Separate tax and social-security counters',

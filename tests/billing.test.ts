@@ -85,3 +85,22 @@ describe('pricing page copy (no €40 floor)', () => {
     });
   }
 });
+
+describe('pricing VAT copy', () => {
+  it('en: incl. VAT / excl. VAT', () => {
+    expect(en.pricing.individualTax).toBe('incl. VAT');
+    expect(en.pricing.companyTax).toBe('excl. VAT');
+  });
+  it('fr: TVA incluse / hors TVA', () => {
+    expect(fr.pricing.individualTax).toBe('TVA incluse');
+    expect(fr.pricing.companyTax).toBe('hors TVA');
+  });
+  it('de: inkl. MwSt. / zzgl. MwSt.', () => {
+    expect(de.pricing.individualTax).toBe('inkl. MwSt.');
+    expect(de.pricing.companyTax).toBe('zzgl. MwSt.');
+  });
+  it('it: IVA inclusa / IVA esclusa', () => {
+    expect(itDict.pricing.individualTax).toBe('IVA inclusa');
+    expect(itDict.pricing.companyTax).toBe('IVA esclusa');
+  });
+});

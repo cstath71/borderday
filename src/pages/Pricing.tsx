@@ -35,6 +35,7 @@ export default function Pricing() {
               <div className="price">{d.pricing.companyPrice}</div>
               <div>{d.pricing.companyMin}</div>
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.companyYearly}</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyTax}</p>
               <h3>{d.pricing.includes}</h3>
               <ul>
                 <li>{d.pricing.companyInclude1}</li>
@@ -55,6 +56,7 @@ export default function Pricing() {
               <div className="price">{d.pricing.monthly}</div>
               <div>{d.pricing.yearly}</div>
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.yearlyNote}</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.individualTax}</p>
               <h3>{d.pricing.includes}</h3>
               <ul>
                 <li>{d.pricing.include1}</li>

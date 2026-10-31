@@ -176,6 +176,8 @@ const fr: Dict = {
     companyPrice: '5 € / collaborateur actif / mois',
     companyMin: 'Minimum 39 € / mois',
     companyYearly: 'Facturation annuelle : 2 mois offerts',
+    companyTax: 'hors TVA',
+    individualTax: 'TVA incluse',
     includes: 'Inclus',
     include1: 'Tous les packs frontière de votre offre',
     include2: 'Compteurs fiscaux et de sécurité sociale séparés',

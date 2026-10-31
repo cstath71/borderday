@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -11,6 +12,8 @@ Deno.serve(async (req) => {
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
   const priceCompanyMonth = Deno.env.get("STRIPE_PRICE_COMPANY_MONTH");
   const priceCompanyYear = Deno.env.get("STRIPE_PRICE_COMPANY_YEAR");
+  const priceCompanyMinMonth = Deno.env.get("STRIPE_PRICE_COMPANY_MIN_MONTH");
+  const priceCompanyMinYear = Deno.env.get("STRIPE_PRICE_COMPANY_MIN_YEAR");
   const priceIndivMonth = Deno.env.get("STRIPE_PRICE_INDIVIDUAL_MONTH");
   const priceIndivYear = Deno.env.get("STRIPE_PRICE_INDIVIDUAL_YEAR");
   const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
@@ -42,9 +45,17 @@ Deno.serve(async (req) => {
         .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
       if (!mem || !["owner", "hr_viewer"].includes(mem.role)) throw new Error("Forbidden");
       const { data: company } = await admin.from("bd_companies").select("seat_count").eq("id", body.companyId).single();
-      quantity = Math.max(company?.seat_count ?? 0, 8);
-      priceId = body.interval === "year" ? (priceCompanyYear || "") : priceCompanyMonth;
+      const seats = company?.seat_count ?? 0;
+      const billing = resolveCompanyBilling(seats, body.interval === "year" ? "year" : "month");
+      quantity = billing.quantity;
+      if (billing.priceKind === "min") {
+        priceId = body.interval === "year" ? (priceCompanyMinYear || "") : (priceCompanyMinMonth || "");
+      } else {
+        priceId = body.interval === "year" ? (priceCompanyYear || "") : priceCompanyMonth;
+      }
       metadata.company_id = body.companyId;
+      metadata.active_seats = String(billing.seats);
+      metadata.billing_mode = billing.mode;
     } else {
       priceId = body.interval === "year" ? (priceIndivYear || "") : (priceIndivMonth || "");
     }

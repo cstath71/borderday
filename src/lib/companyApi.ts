@@ -81,7 +81,28 @@ export async function acceptInvite(token: string, consentVersion: string, textLa
     text_lang: textLang,
   });
   if (error) throw error;
-  return data as string;
+  const companyId = data as string;
+  // Seat count trigger already ran; align Stripe flat↔per-seat if subscribed.
+  void supabase.functions.invoke('bd-sync-company-billing', { body: { companyId } });
+  return companyId;
+}
+
+/** Explicitly re-sync company Stripe item to current seat_count (flat ≤7 / per-seat ≥8). */
+export async function syncCompanyBilling(companyId: string) {
+  if (!supabase) throw new Error('Supabase not configured');
+  const { data, error } = await supabase.functions.invoke('bd-sync-company-billing', {
+    body: { companyId },
+  });
+  if (error) throw error;
+  return data as {
+    available?: boolean;
+    synced?: boolean;
+    changed?: boolean;
+    mode?: string;
+    quantity?: number;
+    seats?: number;
+    message?: string;
+  };
 }
 
 export async function upsertDayLog(opts: {

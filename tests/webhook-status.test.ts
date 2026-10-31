@@ -14,9 +14,3 @@ describe('stripe status mapping', () => {
     expect(mapStripeStatus('unpaid')).toBe('past_due');
   });
 });
-
-describe('seat floor', () => {
-  it('min 8 seats for €39 floor at €5', () => {
-    expect(Math.max(3, 8) * 5).toBe(40);
-  });
-});

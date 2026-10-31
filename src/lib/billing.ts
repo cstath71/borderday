@@ -4,7 +4,7 @@ export type CheckoutResult =
   | { ok: true; url: string }
   | { ok: false; reason: 'not_available' | 'error'; message: string };
 
-/** Company: €5/active employee/mo, min €39; yearly = 10 months (2 free). Individual: €4.99/mo or €49/yr. */
+/** Company: €5/active employee/mo, flat €39 for 1–7 seats; yearly = 10 months (2 free). Individual: €4.99/mo or €49/yr. */
 export async function startCheckout(opts: {
   plan: 'company' | 'individual';
   interval: 'month' | 'year';

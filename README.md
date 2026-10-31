@@ -29,7 +29,14 @@ npm test
 STRIPE_SECRET_KEY=sk_test_... node scripts/stripe-create-products.mjs
 ```
 
-Never use a live key or an unrelated Stripe account.
+Company pricing (approved): **€5 per active employee / month**, **minimum €39 / month**, yearly **2 months free** (10× monthly).
+
+- Seats **1–7** → flat `company-min-month` (€39) / `company-min-year` (€390), quantity 1
+- Seats **≥ 8** → `company-seat-month` (€5) / `company-seat-year` (€50) × seats
+- Edge: `bd-create-checkout`, `bd-stripe-webhook` (seat sync on update), `bd-sync-company-billing`
+- Env: `STRIPE_PRICE_COMPANY_MIN_MONTH`, `STRIPE_PRICE_COMPANY_MIN_YEAR`, plus existing seat/individual price envs
+
+Never use a live key or an unrelated Stripe account (never WeddingVenues).
 
 ## License
 

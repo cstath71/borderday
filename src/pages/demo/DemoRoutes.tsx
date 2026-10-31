@@ -132,6 +132,7 @@ function DemoInvite() {
   return (
     <div style={{ maxWidth: 640 }}>
       <InviteView
+        lang={lang}
         d={d}
         invites={invites}
         canInviteOwner

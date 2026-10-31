@@ -1,5 +1,7 @@
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getDict, isLang, LANGS, type Lang } from '../i18n';
+import { useAuth } from '../lib/auth';
 
 export function useLang(): Lang {
   const { lang } = useParams();
@@ -10,15 +12,32 @@ export default function Layout() {
   const lang = useLang();
   const d = getDict(lang);
   const year = new Date().getFullYear();
+  const auth = useAuth();
+  const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        {d.nav.skipToContent}
+      </a>
       <header className="site-header">
         <div className="container inner">
-          <Link to={`/${lang}/`} className="brand" aria-label="BorderDay home">
+          <Link to={`/${lang}/`} className="brand" aria-label={d.nav.homeLabel}>
             <img src="/logo-header.png" alt="BorderDay" width={160} height={47} />
           </Link>
-          <nav className="nav" aria-label="Main">
+          <button
+            type="button"
+            className="btn btn-ghost nav-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="main-nav"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {d.nav.menu}
+          </button>
+          <nav id="main-nav" className={`nav ${menuOpen ? 'open' : ''}`} aria-label={d.nav.mainLabel}>
             <NavLink to={`/${lang}/`} end>
               {d.nav.home}
             </NavLink>
@@ -38,6 +57,11 @@ export default function Layout() {
             <NavLink to={`/${lang}/faq`} className="hide-sm">
               {d.nav.faq}
             </NavLink>
+            {auth.user && (
+              <NavLink to={`/${lang}/account`} className="hide-sm">
+                {d.nav.account}
+              </NavLink>
+            )}
             <label className="lang-switch">
               <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>
                 {d.lang.label}
@@ -61,7 +85,7 @@ export default function Layout() {
           </nav>
         </div>
       </header>
-      <main>
+      <main id="main" tabIndex={-1}>
         <Outlet />
       </main>
       <footer className="site-footer">
@@ -76,6 +100,10 @@ export default function Layout() {
             <Link to={`/${lang}/terms`}>{d.nav.terms}</Link>
             {' · '}
             <Link to={`/${lang}/withdrawal`}>{d.nav.withdraw}</Link>
+            {' · '}
+            <Link to={`/${lang}/cancel`}>{d.nav.cancel}</Link>
+            {' · '}
+            <Link to={`/${lang}/account`}>{d.nav.account}</Link>
             {' · '}
             <Link to={`/${lang}/disclaimer`}>{d.nav.disclaimer}</Link>
             {' · '}

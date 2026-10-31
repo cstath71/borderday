@@ -87,7 +87,7 @@ export default function DashboardView(props: {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `borderday-audit-${year}.csv`;
+    a.download = `borderday-export-${year}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -111,6 +111,7 @@ export default function DashboardView(props: {
           </h1>
           <p>{companyName}</p>
           <p className="meta">{d.company.dashboardSubtitle}</p>
+          <p className="meta" role="note">{d.company.hrDisclaimer}</p>
         </div>
         <div className="dash-actions">
           <Link className="btn btn-secondary" to={`${companyBase}/invite`}>

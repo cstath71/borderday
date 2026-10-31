@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
@@ -75,7 +76,9 @@ export default function Privacy() {
               <li key={r}>{r}</li>
             ))}
           </ul>
-          <p>{p.rightsHow}</p>
+          <p>
+            {p.rightsHow} <Link to={`/${lang}/account`}>{d.nav.account}</Link>
+          </p>
           <p>{p.complaintBody}</p>
           <p>{p.requiredBody}</p>
           <h2>{p.storageTitle}</h2>

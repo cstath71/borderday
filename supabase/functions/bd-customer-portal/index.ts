@@ -23,7 +23,8 @@ Deno.serve(async (req) => {
     });
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("Unauthorized");
-    const body = await req.json().catch(() => ({})) as { companyId?: string };
+    const body = await req.json().catch(() => ({})) as { companyId?: string; lang?: string };
+    const lang = body.lang === "fr" || body.lang === "de" || body.lang === "it" ? body.lang : "en";
     if (body.companyId) {
       // Checked with the caller's JWT, before the service-role client reads billing data.
       const { data: mem } = await supabase.from("bd_company_members").select("role")
@@ -51,7 +52,7 @@ Deno.serve(async (req) => {
     }
     const Stripe = (await import("https://esm.sh/stripe@18.5.0?target=deno")).default;
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
-    const portal = await stripe.billingPortal.sessions.create({ customer: customerId, return_url: `${siteUrl}/en/pricing` });
+    const portal = await stripe.billingPortal.sessions.create({ customer: customerId, return_url: `${siteUrl}/${lang}/account/` });
     return new Response(JSON.stringify({ available: true, url: portal.url }), {
       headers: { ...cors, "Content-Type": "application/json" },
     });

@@ -1,7 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
+import Account from './pages/Account';
 import AppPage from './pages/AppPage';
+import Cancel from './pages/Cancel';
 import Disclaimer from './pages/Disclaimer';
 import Faq from './pages/Faq';
 import ForIndividuals from './pages/ForIndividuals';
@@ -37,6 +39,8 @@ export default function App() {
         <Route path="disclaimer" element={<Disclaimer />} />
         <Route path="terms" element={<Terms />} />
         <Route path="withdrawal" element={<Withdrawal />} />
+        <Route path="cancel" element={<Cancel />} />
+        <Route path="account" element={<Account />} />
         <Route path="auth/sign-in" element={<SignIn />} />
         <Route path="auth/sign-up" element={<SignUp />} />
         <Route path="auth/callback" element={<AuthCallback />} />

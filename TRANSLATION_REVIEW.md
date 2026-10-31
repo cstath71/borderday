@@ -9,7 +9,7 @@ Checked: 31 Oct 2026 (Europe/Zurich). Process: EN written first; FR/DE/IT drafte
 | Concept | FR | DE | IT | Source |
 | --- | --- | --- | --- | --- |
 | Cross-border telework | télétravail transfrontalier | grenzüberschreitende Telearbeit | telelavoro transfrontaliero | CLEISS; CCSS; Framework Agreement |
-| Framework agreement | accord-cadre | Rahmenvereinbarung zur Telearbeit | accordo quadro sul telelavoro transfrontaliero | Belgian FPS; CLEISS |
+| Framework agreement | accord-cadre | Rahmenübereinkommen | accordo quadro sul telelavoro transfrontaliero | Belgian FPS; CLEISS; LGBl 2023/272 |
 | A1 certificate | document portable A1 | A1-Bescheinigung | documento portatile A1 | CLEISS; Reg. 987/2009 |
 | CH–FR tax share | 40 % du temps de travail / taux de télétravail | 40 % der Arbeitszeit / Telearbeitsquote | 40% del tempo di lavoro annuo | ge.ch; ESTV |
 | LU tax tolerance (FR) | seuil de tolérance / 34 jours | Toleranzschwelle: 34 Tage | soglia di tolleranza: 34 giorni | impots.gouv.fr |

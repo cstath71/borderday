@@ -249,6 +249,7 @@ export async function createInvite(
   companyId: string,
   email: string,
   role: CompanyRole = 'employee',
+  lang = 'en',
 ): Promise<{ invite: Invitation; emailed: boolean }> {
   const c = client();
   const { data, error } = await c
@@ -258,7 +259,7 @@ export async function createInvite(
     .single();
   if (error) throw error;
   // The invite exists either way; HR can always share the link if the email is dry-run or fails.
-  const sent = await c.functions.invoke('bd-send-invite', { body: { invitationId: data.id, companyId } });
+  const sent = await c.functions.invoke('bd-send-invite', { body: { invitationId: data.id, companyId, lang } });
   return { invite: mapInvite(data), emailed: !sent.error && sent.data?.sent === true };
 }
 

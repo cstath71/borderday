@@ -18,6 +18,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
+  const isNotice = msg === d.auth.magicSent;
   const [busy, setBusy] = useState(false);
 
   // A protected page sent us here: once a session exists, go back rather than asking again.
@@ -73,7 +74,7 @@ export default function SignIn() {
               <button className="btn btn-primary" type="submit" disabled={busy || !auth.configured}>{d.auth.sendMagic}</button>
             </form>
           )}
-          {msg && <p className="meta" role="status">{msg}</p>}
+          {msg && <p className="meta" role={isNotice ? 'status' : 'alert'}>{msg}</p>}
           <p style={{ marginTop: '1rem' }}>{d.auth.noAccount} <Link to={`/${lang}/auth/sign-up${nextParam ? `?next=${encodeURIComponent(next)}` : ''}`}>{d.auth.signUp}</Link></p>
         </div>
       </section>

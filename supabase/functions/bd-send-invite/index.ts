@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
-import { escapeHtml, isInviteTestAddress } from "../_shared/invite.ts";
+import { isInviteTestAddress } from "../_shared/invite.ts";
+import { buildInviteEmail, inviteLang, joinUrlFor } from "../_shared/inviteEmail.ts";
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -17,7 +18,7 @@ Deno.serve(async (req) => {
     });
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("Unauthorized");
-    const body = await req.json() as { invitationId: string; companyId: string };
+    const body = await req.json() as { invitationId: string; companyId: string; lang?: string };
 
     // Checked with the caller's JWT, before the service-role client can see the token.
     const { data: mem } = await supabase.from("bd_company_members").select("role")
@@ -33,7 +34,8 @@ Deno.serve(async (req) => {
       .eq("id", body.invitationId).eq("company_id", body.companyId).eq("status", "pending").single();
     if (!inv) throw new Error("Invite not found");
     const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
-    const joinUrl = `${siteUrl}/en/join/${inv.token}`;
+    const lang = inviteLang(body.lang);
+    const joinUrl = joinUrlFor(siteUrl, lang, inv.token);
     const from = Deno.env.get("RESEND_FROM") || "BorderDay <hello@borderday.com>";
     const apiKey = Deno.env.get("RESEND_API_KEY_BORDERDAY") || Deno.env.get("RESEND_API_KEY");
     const live = Deno.env.get("RESEND_LIVE") === "1";
@@ -45,14 +47,15 @@ Deno.serve(async (req) => {
         headers: { ...cors, "Content-Type": "application/json" },
       });
     }
-    const companyName = inv.bd_companies?.name;
+    const email = buildInviteEmail({ lang, companyName: inv.bd_companies?.name, joinUrl, siteUrl });
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from, to: [inv.email],
-        subject: `You're invited to ${companyName || "BorderDay"}`,
-        html: `<p>You have been invited to join <strong>${escapeHtml(companyName || "a company")}</strong> on BorderDay.</p><p><a href="${joinUrl}">Accept invitation</a></p>`,
+        subject: email.subject,
+        html: email.html,
+        text: email.text,
       }),
     });
     const result = await r.json();

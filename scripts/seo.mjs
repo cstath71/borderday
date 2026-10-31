@@ -53,12 +53,14 @@ export const PUBLIC_PATHS = [
   'disclaimer',
   'terms',
   'withdrawal',
+  'cancel',
   'company/signup',
 ];
 
 /** SPA shells that must exist for GitHub Pages but stay noindex. */
 export const NOINDEX_PATHS = [
   'app',
+  'account',
   'auth/sign-in',
   'auth/sign-up',
   'auth/callback',
@@ -467,6 +469,48 @@ export const PAGES = {
       ],
     },
   },
+  cancel: {
+    en: {
+      title: 'Cancel subscription — BorderDay',
+      description: 'Cancel a BorderDay subscription: from your account, through Link, or by email without signing in. Cancellation stops future renewals.',
+      h1: 'Cancel subscription',
+      summary: 'Cancel your BorderDay subscription here. Cancellation stops future renewals. If you cancel before day 8 of your trial, nothing is charged.',
+      crumbs: [
+        ['Home', ''],
+        ['Cancel subscription', 'cancel'],
+      ],
+    },
+    fr: {
+      title: 'Résilier votre contrat — BorderDay',
+      description: 'Résilier un abonnement BorderDay : depuis votre compte, via Link, ou par e-mail sans vous connecter. La résiliation arrête les renouvellements futurs.',
+      h1: 'Résilier votre contrat',
+      summary: 'Résiliez ici votre abonnement BorderDay. La résiliation arrête les renouvellements futurs. Si vous résiliez avant le 8e jour de l’essai, rien n’est débité.',
+      crumbs: [
+        ['Accueil', ''],
+        ['Résilier votre contrat', 'cancel'],
+      ],
+    },
+    de: {
+      title: 'Verträge hier kündigen — BorderDay',
+      description: 'BorderDay-Abo kündigen: aus Ihrem Konto, über Link oder per E-Mail ohne Anmeldung. Die Kündigung stoppt künftige Verlängerungen.',
+      h1: 'Verträge hier kündigen',
+      summary: 'Kündigen Sie hier Ihr BorderDay-Abo. Die Kündigung stoppt künftige Verlängerungen. Kündigen Sie vor dem 8. Tag der Testphase, wird nichts abgebucht.',
+      crumbs: [
+        ['Start', ''],
+        ['Verträge hier kündigen', 'cancel'],
+      ],
+    },
+    it: {
+      title: 'Disdire il contratto — BorderDay',
+      description: 'Disdire un abbonamento BorderDay: dall’account, tramite Link o via e-mail senza accedere. La disdetta interrompe i rinnovi futuri.',
+      h1: 'Disdire il contratto',
+      summary: 'Disdite qui il vostro abbonamento BorderDay. La disdetta interrompe i rinnovi futuri. Con la disdetta prima dell’8° giorno di prova non viene addebitato nulla.',
+      crumbs: [
+        ['Home', ''],
+        ['Disdire il contratto', 'cancel'],
+      ],
+    },
+  },
   'company/signup': {
     en: {
       title: 'Company sign-up — BorderDay',
@@ -649,6 +693,7 @@ export const FAQ = {
 export function robotsTxt() {
   const disallow = [
     '/*/app',
+    '/*/account',
     '/*/auth/',
     '/auth/',
     '/*/company/*/dashboard',
@@ -842,6 +887,7 @@ export function llmsTxt() {
 - ${BASE}/en/disclaimer/ — Legal disclaimer
 - ${BASE}/en/terms/ — Terms and legal notice
 - ${BASE}/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
+- ${BASE}/en/cancel/ — Cancel subscription
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

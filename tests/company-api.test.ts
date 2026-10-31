@@ -245,7 +245,7 @@ describe('companyApi', () => {
       role: 'employee',
       invited_by: 'me',
     });
-    expect(state.invoke).toHaveBeenCalledWith('bd-send-invite', { body: { invitationId: 'i1', companyId: 'c1' } });
+    expect(state.invoke).toHaveBeenCalledWith('bd-send-invite', { body: { invitationId: 'i1', companyId: 'c1', lang: 'en' } });
     expect(invite.token).toBe('t');
     expect(emailed).toBe(false);
   });

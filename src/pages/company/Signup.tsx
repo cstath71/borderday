@@ -33,7 +33,7 @@ export default function CompanySignup() {
       setMsg(d.company.created);
       setCompanies(await api.listMyCompanies());
     } catch (err) {
-      setMsg(err instanceof Error ? err.message : 'Error');
+      setMsg(d.company.loadError);
     } finally { setBusy(false); }
   }
 
@@ -59,7 +59,7 @@ export default function CompanySignup() {
           <form className="card stack-form" onSubmit={onCreate}>
             <label>{d.company.companyName}<input value={name} onChange={(e) => setName(e.target.value)} required disabled={!auth.user} /></label>
             <button className="btn btn-primary" type="submit" disabled={busy || !auth.user}>{d.company.createButton}</button>
-            {msg && <p className="meta" role="status">{msg}</p>}
+            {msg && <p className="meta" role={companyId ? 'status' : 'alert'}>{msg}</p>}
             {companyId && <Link className="btn btn-secondary" to={`/${lang}/company/${companyId}/dashboard`}>{d.company.openDashboard}</Link>}
           </form>
           {companies.length > 0 && (

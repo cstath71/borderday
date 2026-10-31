@@ -4,7 +4,7 @@ import InviteView from '../../components/company/InviteView';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import type { CompanyRole, Invitation } from '../../company/types';
-import { getDict } from '../../i18n';
+import { getDict, type Lang } from '../../i18n';
 import { useAuth } from '../../lib/auth';
 import * as api from '../../lib/companyApi';
 
@@ -51,10 +51,10 @@ export default function CompanyInvite() {
 
   const joinPath = (token: string) => `/${lang}/join/${token}`;
 
-  async function onCreate(email: string, role: CompanyRole) {
-    const { invite, emailed } = await api.createInvite(companyId, email, role);
+  async function onCreate(email: string, role: CompanyRole, inviteLang: Lang) {
+    const { invite, emailed } = await api.createInvite(companyId, email, role, inviteLang);
     setState(await load());
-    return { link: `${window.location.origin}${joinPath(invite.token)}`, emailed };
+    return { link: `${window.location.origin}/${inviteLang}/join/${invite.token}`, emailed };
   }
 
   let body: React.ReactNode;
@@ -77,6 +77,7 @@ export default function CompanyInvite() {
         canInviteOwner={state.role === 'owner'}
         dashboardHref={`/${lang}/company/${companyId}/dashboard`}
         joinPath={joinPath}
+        lang={lang}
         onCreate={onCreate}
       />
     );

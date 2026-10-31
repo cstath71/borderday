@@ -191,8 +191,20 @@ select.border-select, input.num {
 
 .toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
 
+.skip-link {
+  position: absolute; left: 0.5rem; top: -4rem; z-index: 100;
+  background: white; padding: 0.5rem 0.75rem; border-radius: 8px;
+}
+.skip-link:focus { top: 0.5rem; }
+main:focus { outline: none; }
+.nav-toggle { display: none; }
+
 @media (max-width: 640px) {
+  .site-header .inner { flex-wrap: wrap; }
+  .nav-toggle { display: inline-flex; }
   .nav .hide-sm { display: none; }
+  .nav.open { flex-direction: column; align-items: flex-start; width: 100%; }
+  .nav.open .hide-sm { display: inline; }
   .day-type-grid { grid-template-columns: 1fr; }
 }
 

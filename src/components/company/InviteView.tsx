@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { CompanyRole, Invitation } from '../../company/types';
-import type { Dict } from '../../i18n';
+import { LANGS, type Dict, type Lang } from '../../i18n';
 
 /** Presentational: the real invite page and /demo supply the data and the create action. */
 export default function InviteView(props: {
@@ -10,11 +10,14 @@ export default function InviteView(props: {
   canInviteOwner: boolean;
   dashboardHref: string;
   joinPath: (token: string) => string;
-  onCreate: (email: string, role: CompanyRole) => Promise<{ link: string; emailed: boolean }>;
+  /** Preselected language for the employee's email and link. */
+  lang: Lang;
+  onCreate: (email: string, role: CompanyRole, lang: Lang) => Promise<{ link: string; emailed: boolean }>;
 }) {
-  const { d, invites, canInviteOwner, dashboardHref, joinPath, onCreate } = props;
+  const { d, invites, canInviteOwner, dashboardHref, joinPath, lang, onCreate } = props;
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<CompanyRole>('employee');
+  const [inviteLang, setInviteLang] = useState<Lang>(lang);
   const [created, setCreated] = useState<{ link: string; emailed: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -24,10 +27,10 @@ export default function InviteView(props: {
     setError(null);
     setBusy(true);
     try {
-      setCreated(await onCreate(email, role));
+      setCreated(await onCreate(email, role, inviteLang));
       setEmail('');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : d.company.loadError);
+    } catch {
+      setError(d.company.inviteFailed);
     } finally {
       setBusy(false);
     }
@@ -51,6 +54,16 @@ export default function InviteView(props: {
             <option value="employee">{d.company.roleEmployee}</option>
             <option value="hr_viewer">{d.company.roleHr}</option>
             {canInviteOwner && <option value="owner">{d.company.roleOwner}</option>}
+          </select>
+        </label>
+        <label>
+          {d.company.inviteLanguage}
+          <select value={inviteLang} onChange={(e) => setInviteLang(e.target.value as Lang)}>
+            {LANGS.map((l) => (
+              <option key={l} value={l}>
+                {d.lang[l]}
+              </option>
+            ))}
           </select>
         </label>
         <button className="btn btn-primary" type="submit" disabled={busy}>

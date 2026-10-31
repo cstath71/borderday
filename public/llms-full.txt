@@ -29,6 +29,7 @@
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
 - https://borderday.com/en/terms/ — Terms and legal notice
 - https://borderday.com/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
+- https://borderday.com/en/cancel/ — Cancel subscription
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note
@@ -80,4 +81,5 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/en/disclaimer/
 - https://borderday.com/en/terms/
 - https://borderday.com/en/withdrawal/
+- https://borderday.com/en/cancel/
 - https://borderday.com/en/company/signup/

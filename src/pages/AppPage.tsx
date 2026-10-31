@@ -11,6 +11,7 @@ import { useAuth } from '../lib/auth';
 import { resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
 import { evaluatePack } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
+import { download } from '../lib/download';
 import {
   deleteAllDays,
   exportCsv,
@@ -23,6 +24,8 @@ import {
 } from '../lib/storage';
 
 const DAY_TYPES: DayType[] = ['telework', 'onsite', 'third_country', 'non_working'];
+/** Colour is not the only cue: each logged cell also shows a shape. The aria-label carries the words. */
+const DAY_MARKS: Record<DayType, string> = { telework: '⌂', onsite: '▣', third_country: '✈', non_working: '–' };
 
 /** Sleeping away for work only makes sense on a day worked away from home. */
 function canBeOvernight(type: DayType): boolean {
@@ -38,16 +41,6 @@ function monthMatrix(year: number, month0: number): (Date | null)[] {
   for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month0, d));
   while (cells.length % 7 !== 0) cells.push(null);
   return cells;
-}
-
-function download(filename: string, text: string, mime: string) {
-  const blob = new Blob([text], { type: mime });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 export default function AppPage() {
@@ -362,6 +355,7 @@ export default function AppPage() {
                 key={type}
                 type="button"
                 className={`day-type-btn ${selectedEntry?.type === type ? 'selected' : ''}`}
+                aria-pressed={selectedEntry?.type === type}
                 disabled={busy || !canLogSelected}
                 onClick={() => void logDay(type, canBeOvernight(type) && !!selectedEntry?.overnightAway)}
               >
@@ -391,6 +385,7 @@ export default function AppPage() {
               <button
                 className="btn btn-ghost"
                 type="button"
+                aria-label={d.app.prevMonth}
                 onClick={() => {
                   const m = viewMonth - 1;
                   if (m < 0) {
@@ -407,6 +402,7 @@ export default function AppPage() {
               <button
                 className="btn btn-ghost"
                 type="button"
+                aria-label={d.app.nextMonth}
                 onClick={() => {
                   const m = viewMonth + 1;
                   if (m > 11) {
@@ -429,14 +425,22 @@ export default function AppPage() {
               if (!dt) return <div key={`e-${i}`} className="cal-cell muted" />;
               const iso = todayIso(dt);
               const entry = byDate.get(iso);
+              const dayLabel = entry ? (d.dayTypes as Record<string, string>)[entry.type] : d.app.notLogged;
               return (
                 <button
                   type="button"
                   key={iso}
                   className={`cal-cell ${entry?.type ?? ''} ${iso === selectedDate ? 'selected' : ''}`}
+                  aria-label={t(d.app.calendarDay, {
+                    date: dt.toLocaleDateString(lang, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+                    type: dayLabel,
+                  })}
+                  aria-pressed={iso === selectedDate}
+                  aria-current={iso === todayIso() ? 'date' : undefined}
                   onClick={() => setSelectedDate(iso)}
                 >
                   <span>{dt.getDate()}</span>
+                  {entry && <span aria-hidden="true"> {DAY_MARKS[entry.type]}</span>}
                 </button>
               );
             })}
@@ -449,6 +453,10 @@ export default function AppPage() {
         {!pack && <p>{d.app.noBorder}</p>}
         {pack && <CounterCards d={d} pack={pack} results={results} />}
 
+        <p className="meta" style={{ marginTop: '1rem' }}>
+          {isPreview ? d.app.exportDeviceNote : d.app.exportAccountNote}{' '}
+          {!isPreview && <Link to={`/${lang}/account`}>{d.nav.account}</Link>}
+        </p>
         <div className="toolbar">
           <button
             className="btn btn-secondary"

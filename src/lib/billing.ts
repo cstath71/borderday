@@ -41,12 +41,12 @@ export async function startCheckout(opts: {
   return { ok: true, url: body.url };
 }
 
-export async function openCustomerPortal(companyId?: string): Promise<CheckoutResult> {
+export async function openCustomerPortal(companyId?: string, lang?: string): Promise<CheckoutResult> {
   if (!supabaseConfigured || !supabase) {
     return { ok: false, reason: 'not_available', message: 'Payments not yet available' };
   }
   const res = await supabase.functions.invoke('bd-customer-portal', {
-    body: { companyId },
+    body: { companyId, lang },
   });
   if (res.error) {
     return { ok: false, reason: 'not_available', message: 'Payments not yet available' };

@@ -22,6 +22,12 @@ const it: Dict = {
     hrDashboard: 'Dashboard HR',
     companySignup: 'Crea azienda',
     withdraw: 'Recedere dal contratto',
+    cancel: 'Disdire il contratto',
+    account: 'Account',
+    menu: 'Menu',
+    skipToContent: 'Vai al contenuto principale',
+    homeLabel: 'Home di BorderDay',
+    mainLabel: 'Navigazione principale',
   },
   lang: {
     en: 'English',
@@ -154,7 +160,7 @@ const it: Dict = {
     percentUsed: '{used}% su {limit}%',
     usedOfDays: '{used} di {allowed} giorni',
     percentOfAnnual: '{pct}% di {annual} gg/anno (limite {limit}%)',
-    status_ok: 'Entro la soglia',
+    status_ok: 'Sotto il limite monitorato',
     status_warn: 'Attenzione',
     status_critical: 'Vicino alla soglia',
     status_over: 'Oltre la soglia',
@@ -272,6 +278,13 @@ const it: Dict = {
     a1ValidUntil: 'A1 valido fino al',
     a1Hint:
       'Indicato da voi o dal datore di lavoro. BorderDay non verifica il certificato. In un account aziendale, HR lo vede.',
+    prevMonth: 'Mese precedente',
+    nextMonth: 'Mese successivo',
+    notLogged: 'non registrato',
+    calendarDay: '{date}: {type}',
+    exportDeviceNote: 'Questi pulsanti esportano solo i giorni presenti su questo dispositivo.',
+    exportAccountNote:
+      'Questi pulsanti esportano i giorni mostrati qui. L’export completo dell’account si trova nella pagina Account.',
   },
   pricing: {
     title: 'Prezzi',
@@ -519,7 +532,7 @@ const it: Dict = {
     filterBorder: 'Filtra per confine',
     filterStatus: 'Filtra per situazione',
     filterAll: 'Tutti',
-    exportCsv: 'Esporta CSV (audit)',
+    exportCsv: 'Esporta CSV',
     employees: 'Collaboratori',
     noEmployees: 'Nessun collaboratore. Create un link di invito.',
     viewHistory: 'Cronologia giorni',
@@ -566,6 +579,10 @@ const it: Dict = {
     noticeAck: 'Ho letto questo avviso',
     noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
     noticePrivacyLink: 'Informativa privacy completa',
+    hrDisclaimer:
+      'I contatori riflettono solo i giorni registrati qui e non costituiscono una valutazione giuridica o fiscale. Il datore di lavoro resta responsabile delle richieste di A1, delle paghe e delle dichiarazioni fiscali. Verificate con l’autorità competente.',
+    inviteLanguage: 'Lingua del dipendente',
+    inviteFailed: 'Impossibile creare l’invito. Controllate l’indirizzo e riprovate.',
   },
 
   terms: {
@@ -641,6 +658,49 @@ const it: Dict = {
     send: 'Apri nella mia e-mail',
     manual: 'Se non si apre alcuna app di posta, copiate questo testo e inviatelo a {to}.',
     back: 'Modifica i dati',
+  },
+  account: {
+    title: 'Il vostro account',
+    signedInAs: 'Accesso effettuato con {email}',
+    exportTitle: 'Esportate i registri salvati',
+    exportBody:
+      'Scarica ciò che è salvato sui nostri server per il vostro account: il registro del piano individuale, e il vostro registro e le vostre impostazioni in ogni azienda di cui fate parte.',
+    exportError: 'Impossibile preparare l’export. Riprovate.',
+    deviceTitle: 'Solo questo dispositivo',
+    deviceBody: 'Giorni dell’anteprima gratuita, memorizzati in questo browser e non sui nostri server.',
+    deleteTitle: 'Richiedere la cancellazione dell’account',
+    deleteBody:
+      'La cancellazione di un account è gestita da noi, non automaticamente. Inviate la richiesta qui sotto: cancelliamo l’account e il registro personale e rispondiamo entro un mese. Per i registri di un account aziendale il titolare è il datore di lavoro, che può dover conservare alcuni documenti: in tal caso ve lo comunichiamo. Disdite prima ogni piano a pagamento.',
+    deleteConfirm: 'Desidero richiedere la cancellazione del mio account',
+    deleteSend: 'Apri la richiesta di cancellazione nella mia e-mail',
+    deleteHint: 'La richiesta è fatta quando inviate l’e-mail a {to}.',
+    deleteMailSubject: 'Richiesta di cancellazione dell’account BorderDay',
+    deleteMailBody:
+      'Vi prego di cancellare il mio account BorderDay.\n\nE-mail dell’account: {email}\nID dell’account: {id}\nData: {today}',
+  },
+  cancel: {
+    title: 'Disdire il contratto',
+    intro:
+      'Disdite qui il vostro abbonamento BorderDay. La disdetta interrompe i rinnovi futuri. Con la disdetta prima dell’8° giorno di prova non viene addebitato nulla.',
+    accountTitle: 'Disdire dal vostro account',
+    accountBody: 'Apre il portale di fatturazione, dove confermate la disdetta.',
+    companyButton: 'Disdire l’abbonamento di {company}',
+    individualButton: 'Disdire il mio piano individuale',
+    noPlans:
+      'Per questo account non è stato trovato alcun abbonamento gestibile. Usate le opzioni qui sotto.',
+    signIn: 'Accedete per disdire dal vostro account',
+    portalError: 'Non è stato possibile aprire il portale di fatturazione. Usate le opzioni qui sotto.',
+    linkTitle: 'Piani acquistati tramite Link',
+    linkBody:
+      'Gli acquisti sono venduti tramite Link. Usate il link dell’ordine nella ricevuta Link per gestire o disdire l’abbonamento, oppure contattate il supporto Link per il vostro ordine.',
+    formTitle: 'Disdire via e-mail, senza accedere',
+    formBody:
+      'Compilate i campi, confermate e inviate il messaggio preparato dalla vostra e-mail. Confermiamo la disdetta via e-mail.',
+    submit: 'Continua alla conferma',
+    confirm: 'Conferma la disdetta',
+    mailSubject: 'Disdetta dell’abbonamento BorderDay',
+    mailBody:
+      'Disdico il mio abbonamento BorderDay.\n\nNome: {name}\nE-mail dell’account: {email}\nRiferimento dell’ordine: {reference}\nData: {today}',
   },
   footer: {
     tagline: 'Registrazione dei giorni per team e collaboratori che lavorano oltre confine.',

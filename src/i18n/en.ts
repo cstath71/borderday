@@ -20,6 +20,12 @@ const en = {
     hrDashboard: 'HR dashboard',
     companySignup: 'Company sign-up',
     withdraw: 'Withdraw from contract',
+    cancel: 'Cancel subscription',
+    account: 'Account',
+    menu: 'Menu',
+    skipToContent: 'Skip to main content',
+    homeLabel: 'BorderDay home',
+    mainLabel: 'Main',
   },
   lang: {
     en: 'English',
@@ -150,7 +156,7 @@ const en = {
     percentUsed: '{used}% of {limit}%',
     usedOfDays: '{used} of {allowed} days',
     percentOfAnnual: '{pct}% of {annual} days/yr (limit {limit}%)',
-    status_ok: 'Within limit',
+    status_ok: 'Below tracked limit',
     status_warn: 'Attention',
     status_critical: 'Near limit',
     status_over: 'Over limit',
@@ -266,6 +272,13 @@ const en = {
     a1ValidUntil: 'A1 valid until',
     a1Hint:
       'Recorded by you or your employer. BorderDay does not check the certificate. In a company account, HR sees it.',
+    prevMonth: 'Previous month',
+    nextMonth: 'Next month',
+    notLogged: 'not logged',
+    calendarDay: '{date}: {type}',
+    exportDeviceNote: 'These buttons export the days on this device only.',
+    exportAccountNote:
+      'These buttons export the days shown here. Your full account export is on the Account page.',
   },
   pricing: {
     title: 'Pricing',
@@ -510,7 +523,7 @@ const en = {
     filterBorder: 'Filter by border',
     filterStatus: 'Filter by status',
     filterAll: 'All',
-    exportCsv: 'Export CSV (audit)',
+    exportCsv: 'Export CSV',
     employees: 'Employees',
     noEmployees: 'No employees yet. Create an invite link.',
     viewHistory: 'Day history',
@@ -555,6 +568,10 @@ const en = {
     noticeAck: 'I have read this notice',
     noticeRequired: 'Confirm that you have read the notice to continue.',
     noticePrivacyLink: 'Full privacy notice',
+    hrDisclaimer:
+      'Counters only reflect the days logged here and are not a legal or tax determination. The employer remains responsible for A1 applications, payroll and tax filings. Verify with the competent authority.',
+    inviteLanguage: 'Employee’s language',
+    inviteFailed: 'Could not create the invite. Check the address and try again.',
   },
 
   terms: {
@@ -629,6 +646,48 @@ const en = {
     send: 'Open in my email app',
     manual: 'If no email app opens, copy this text and send it to {to}.',
     back: 'Change details',
+  },
+  account: {
+    title: 'Your account',
+    signedInAs: 'Signed in as {email}',
+    exportTitle: 'Export your saved day logs',
+    exportBody:
+      'Downloads what is saved on our servers for your account: your individual plan’s day log, and your own day log and settings in each company you belong to.',
+    exportError: 'Could not prepare the export. Try again.',
+    deviceTitle: 'This device only',
+    deviceBody: 'Days from the free preview, stored in this browser and not on our servers.',
+    deleteTitle: 'Request account deletion',
+    deleteBody:
+      'Deleting an account is handled by us, not automatically. Send the request below and we delete your account and personal day log and answer within one month. For day logs in a company account your employer is the controller and may need to keep some records: we tell you if so. Cancel any paid plan first.',
+    deleteConfirm: 'I want to request the deletion of my account',
+    deleteSend: 'Open deletion request in my email app',
+    deleteHint: 'The request is made when you send the email to {to}.',
+    deleteMailSubject: 'BorderDay account deletion request',
+    deleteMailBody:
+      'Please delete my BorderDay account.\n\nAccount email: {email}\nAccount ID: {id}\nDate: {today}',
+  },
+  cancel: {
+    title: 'Cancel subscription',
+    intro:
+      'Cancel your BorderDay subscription here. Cancellation stops future renewals. If you cancel before day 8 of your trial, nothing is charged.',
+    accountTitle: 'Cancel from your account',
+    accountBody: 'Opens the billing portal, where you confirm the cancellation.',
+    companyButton: 'Cancel the {company} subscription',
+    individualButton: 'Cancel my individual plan',
+    noPlans: 'No subscription you can manage was found for this account. Use the options below.',
+    signIn: 'Sign in to cancel from your account',
+    portalError: 'The billing portal could not be opened. Use the options below.',
+    linkTitle: 'Plans bought through Link',
+    linkBody:
+      'Purchases are sold through Link. Use the order link in your Link receipt email to manage or cancel the subscription, or contact Link support for your Order.',
+    formTitle: 'Cancel by email, without signing in',
+    formBody:
+      'Fill in the fields, confirm, and send the prepared message from your email. We confirm the cancellation by email.',
+    submit: 'Continue to confirmation',
+    confirm: 'Confirm cancellation',
+    mailSubject: 'BorderDay subscription cancellation',
+    mailBody:
+      'I cancel my BorderDay subscription.\n\nName: {name}\nAccount email: {email}\nOrder reference: {reference}\nDate: {today}',
   },
   footer: {
     tagline: 'Day tracking for cross-border teams and employees.',

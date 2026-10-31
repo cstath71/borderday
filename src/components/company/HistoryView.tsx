@@ -21,6 +21,7 @@ export default function HistoryView(props: {
       </Link>
       <h1>{d.company.historyTitle}</h1>
       <p>{d.company.historySubtitle}</p>
+      <p className="meta" role="note">{d.company.hrDisclaimer}</p>
       <p>
         <strong>
           {isDemo && (

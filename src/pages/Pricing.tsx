@@ -69,7 +69,7 @@ export default function Pricing() {
         window.location.assign(res.url);
         return;
       }
-      setNote(res.reason === 'not_available' ? d.auth.paymentsUnavailable : res.message);
+      setNote(d.auth.paymentsUnavailable);
     } finally {
       setBusy(false);
     }
@@ -105,6 +105,9 @@ export default function Pricing() {
               )}
             </p>
           )}
+          <p style={{ fontSize: '0.9rem' }}>
+            <Link to={`/${lang}/cancel`}>{d.nav.cancel}</Link>
+          </p>
           <div className="price-grid" style={{ marginTop: '1.5rem' }}>
             <article className="card price-card" style={{ borderColor: 'var(--primary)', borderWidth: 2 }}>
               <div className="meta" style={{ color: 'var(--primary)', fontWeight: 700 }}>{d.pricing.recommended}</div>
@@ -185,7 +188,7 @@ export default function Pricing() {
               </div>
             </article>
           </div>
-          {note && <p className="meta" role="status" style={{ marginTop: '1rem' }}>{note}</p>}
+          {note && <p className="meta" role="alert" style={{ marginTop: '1rem' }}>{note}</p>}
         </div>
       </section>
     </>

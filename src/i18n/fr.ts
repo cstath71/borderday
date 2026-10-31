@@ -23,6 +23,12 @@ const fr: Dict = {
     hrDashboard: 'Tableau de bord RH',
     companySignup: 'Créer une entreprise',
     withdraw: 'Se rétracter du contrat',
+    cancel: 'Résilier votre contrat',
+    account: 'Compte',
+    menu: 'Menu',
+    skipToContent: 'Aller au contenu principal',
+    homeLabel: 'Accueil BorderDay',
+    mainLabel: 'Navigation principale',
   },
   lang: {
     en: 'English',
@@ -155,7 +161,7 @@ const fr: Dict = {
     percentUsed: '{used} % sur {limit} %',
     usedOfDays: '{used} sur {allowed} jours',
     percentOfAnnual: '{pct} % de {annual} j/an (plafond {limit} %)',
-    status_ok: 'Sous le seuil',
+    status_ok: 'Sous la limite suivie',
     status_warn: 'Attention',
     status_critical: 'Proche du seuil',
     status_over: 'Au-delà du seuil',
@@ -271,6 +277,13 @@ const fr: Dict = {
     a1ValidUntil: 'A1 valable jusqu’au',
     a1Hint:
       'Indiquée par vous ou votre employeur. BorderDay ne vérifie pas l’attestation. Dans un compte entreprise, les RH la voient.',
+    prevMonth: 'Mois précédent',
+    nextMonth: 'Mois suivant',
+    notLogged: 'non enregistré',
+    calendarDay: '{date} : {type}',
+    exportDeviceNote: 'Ces boutons exportent uniquement les jours présents sur cet appareil.',
+    exportAccountNote:
+      'Ces boutons exportent les jours affichés ici. L’export complet de votre compte se trouve sur la page Compte.',
   },
   pricing: {
     title: 'Tarifs',
@@ -516,7 +529,7 @@ const fr: Dict = {
     filterBorder: 'Filtrer par frontière',
     filterStatus: 'Filtrer par statut',
     filterAll: 'Tous',
-    exportCsv: 'Exporter CSV (audit)',
+    exportCsv: 'Exporter CSV',
     employees: 'Collaborateurs',
     noEmployees: 'Aucun collaborateur. Créez un lien d’invitation.',
     viewHistory: 'Historique des jours',
@@ -564,6 +577,10 @@ const fr: Dict = {
     noticeAck: 'J’ai lu cet avis',
     noticeRequired: 'Confirmez que vous avez lu l’avis pour continuer.',
     noticePrivacyLink: 'Politique de confidentialité complète',
+    hrDisclaimer:
+      'Les compteurs ne reflètent que les jours enregistrés ici et ne constituent pas une appréciation juridique ou fiscale. L’employeur reste responsable des demandes d’A1, de la paie et des déclarations fiscales. Vérifiez auprès de l’autorité compétente.',
+    inviteLanguage: 'Langue du collaborateur',
+    inviteFailed: 'Impossible de créer l’invitation. Vérifiez l’adresse et réessayez.',
   },
 
   terms: {
@@ -640,6 +657,48 @@ const fr: Dict = {
     send: 'Ouvrir dans ma messagerie',
     manual: 'Si aucune messagerie ne s’ouvre, copiez ce texte et envoyez-le à {to}.',
     back: 'Modifier les informations',
+  },
+  account: {
+    title: 'Votre compte',
+    signedInAs: 'Connecté avec {email}',
+    exportTitle: 'Exporter vos journaux enregistrés',
+    exportBody:
+      'Télécharge ce qui est enregistré sur nos serveurs pour votre compte : le journal de votre offre individuelle, ainsi que votre propre journal et vos réglages dans chaque entreprise dont vous faites partie.',
+    exportError: 'Impossible de préparer l’export. Réessayez.',
+    deviceTitle: 'Cet appareil uniquement',
+    deviceBody: 'Jours de l’aperçu gratuit, stockés dans ce navigateur et non sur nos serveurs.',
+    deleteTitle: 'Demander la suppression du compte',
+    deleteBody:
+      'La suppression d’un compte est traitée par nos soins, pas automatiquement. Envoyez la demande ci-dessous : nous supprimons votre compte et votre journal personnel et répondons dans un délai d’un mois. Pour les journaux d’un compte entreprise, votre employeur est responsable du traitement et peut devoir conserver certains documents : nous vous le signalons le cas échéant. Résiliez d’abord toute offre payante.',
+    deleteConfirm: 'Je souhaite demander la suppression de mon compte',
+    deleteSend: 'Ouvrir la demande de suppression dans ma messagerie',
+    deleteHint: 'La demande est effectuée lorsque vous envoyez l’e-mail à {to}.',
+    deleteMailSubject: 'Demande de suppression du compte BorderDay',
+    deleteMailBody:
+      'Merci de supprimer mon compte BorderDay.\n\nE-mail du compte : {email}\nIdentifiant du compte : {id}\nDate : {today}',
+  },
+  cancel: {
+    title: 'Résilier votre contrat',
+    intro:
+      'Résiliez ici votre abonnement BorderDay. La résiliation arrête les renouvellements futurs. Si vous résiliez avant le 8e jour de l’essai, rien n’est débité.',
+    accountTitle: 'Résilier depuis votre compte',
+    accountBody: 'Ouvre le portail de facturation, où vous confirmez la résiliation.',
+    companyButton: 'Résilier l’abonnement de {company}',
+    individualButton: 'Résilier mon offre individuelle',
+    noPlans: 'Aucun abonnement à gérer n’a été trouvé pour ce compte. Utilisez les options ci-dessous.',
+    signIn: 'Se connecter pour résilier depuis votre compte',
+    portalError: 'Le portail de facturation n’a pas pu s’ouvrir. Utilisez les options ci-dessous.',
+    linkTitle: 'Offres achetées via Link',
+    linkBody:
+      'Les achats sont vendus via Link. Utilisez le lien de commande de votre reçu Link pour gérer ou résilier l’abonnement, ou contactez le support Link pour votre commande.',
+    formTitle: 'Résilier par e-mail, sans vous connecter',
+    formBody:
+      'Remplissez les champs, confirmez et envoyez le message préparé depuis votre messagerie. Nous confirmons la résiliation par e-mail.',
+    submit: 'Continuer vers la confirmation',
+    confirm: 'Confirmer la résiliation',
+    mailSubject: 'Résiliation de l’abonnement BorderDay',
+    mailBody:
+      'Je résilie mon abonnement BorderDay.\n\nNom : {name}\nE-mail du compte : {email}\nRéférence de commande : {reference}\nDate : {today}',
   },
   footer: {
     tagline:

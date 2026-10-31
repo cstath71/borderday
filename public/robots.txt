@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /*/app
+Disallow: /*/account
 Disallow: /*/auth/
 Disallow: /auth/
 Disallow: /*/company/*/dashboard
@@ -32,6 +33,7 @@ User-agent: MistralAI-User
 User-agent: YandexBot
 Allow: /
 Disallow: /*/app
+Disallow: /*/account
 Disallow: /*/auth/
 Disallow: /auth/
 Disallow: /*/company/*/dashboard

@@ -208,7 +208,7 @@ describe('Invite', () => {
     fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
     fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
     await screen.findByText(en.company.inviteCreated);
-    expect(mocked.createInvite).toHaveBeenCalledWith('c1', 'new@acme.test', 'employee');
+    expect(mocked.createInvite).toHaveBeenCalledWith('c1', 'new@acme.test', 'employee', 'en');
     expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/tok123');
   });
 
@@ -384,8 +384,8 @@ describe('/app gate', () => {
     open('/en/app');
     const telework = (await screen.findByText(en.dayTypes.telework)).closest('button')!;
     expect(telework.disabled).toBe(false);
-    fireEvent.click(screen.getByRole('button', { name: '‹' }));
-    fireEvent.click(screen.getByRole('button', { name: '15' }));
+    fireEvent.click(screen.getByRole('button', { name: en.app.prevMonth }));
+    fireEvent.click(screen.getByRole('button', { name: /\b15\b/ }));
     await screen.findByText(en.app.previewMonthOnly);
     expect((screen.getByText(en.dayTypes.telework).closest('button') as HTMLButtonElement).disabled).toBe(true);
   });

@@ -78,7 +78,10 @@ describe('bd-send-invite authorisation and logging (H2)', () => {
 
   it('escapes the company name in the email body', () => {
     expect(escapeHtml('<a href="x">A&B</a>')).toBe('&lt;a href=&quot;x&quot;&gt;A&amp;B&lt;/a&gt;');
-    expect(src).toContain('escapeHtml(companyName');
+    // The body is built in _shared/inviteEmail.ts; tests/account-cancel-a11y.test.tsx asserts the escaped output.
+    const shared = readFileSync(resolve(root, 'supabase/functions/_shared/inviteEmail.ts'), 'utf8');
+    expect(shared).toContain('const safe = escapeHtml(company);');
+    expect(src).toContain('buildInviteEmail(');
   });
 });
 

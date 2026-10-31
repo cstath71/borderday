@@ -23,6 +23,12 @@ const de: Dict = {
     hrDashboard: 'HR-Dashboard',
     companySignup: 'Unternehmen anlegen',
     withdraw: 'Vertrag widerrufen',
+    cancel: 'Verträge hier kündigen',
+    account: 'Konto',
+    menu: 'Menü',
+    skipToContent: 'Zum Hauptinhalt springen',
+    homeLabel: 'BorderDay Startseite',
+    mainLabel: 'Hauptnavigation',
   },
   lang: {
     en: 'English',
@@ -156,7 +162,7 @@ const de: Dict = {
     percentUsed: '{used} % von {limit} %',
     usedOfDays: '{used} von {allowed} Tagen',
     percentOfAnnual: '{pct} % von {annual} Tagen/Jahr (Grenze {limit} %)',
-    status_ok: 'Innerhalb der Grenze',
+    status_ok: 'Unter der erfassten Grenze',
     status_warn: 'Achtung',
     status_critical: 'Nahe der Grenze',
     status_over: 'Über der Grenze',
@@ -272,6 +278,13 @@ const de: Dict = {
     a1ValidUntil: 'A1 gültig bis',
     a1Hint:
       'Von Ihnen oder Ihrem Arbeitgeber eingetragen. BorderDay prüft die Bescheinigung nicht. In einem Unternehmenskonto sieht HR sie.',
+    prevMonth: 'Vorheriger Monat',
+    nextMonth: 'Nächster Monat',
+    notLogged: 'nicht erfasst',
+    calendarDay: '{date}: {type}',
+    exportDeviceNote: 'Diese Schaltflächen exportieren nur die Tage auf diesem Gerät.',
+    exportAccountNote:
+      'Diese Schaltflächen exportieren die hier angezeigten Tage. Den vollständigen Kontoexport finden Sie auf der Kontoseite.',
   },
   pricing: {
     title: 'Preise',
@@ -516,7 +529,7 @@ const de: Dict = {
     filterBorder: 'Nach Grenze filtern',
     filterStatus: 'Nach Status filtern',
     filterAll: 'Alle',
-    exportCsv: 'CSV exportieren (Audit)',
+    exportCsv: 'CSV exportieren',
     employees: 'Mitarbeitende',
     noEmployees: 'Noch keine Mitarbeitenden. Einladungslink erstellen.',
     viewHistory: 'Tageshistorie',
@@ -561,6 +574,11 @@ const de: Dict = {
     noticeAck: 'Ich habe diesen Hinweis gelesen',
     noticeRequired: 'Bestätigen Sie, dass Sie den Hinweis gelesen haben, um fortzufahren.',
     noticePrivacyLink: 'Vollständige Datenschutzerklärung',
+    hrDisclaimer:
+      'Die Zähler bilden nur die hier erfassten Tage ab und sind keine rechtliche oder steuerliche Beurteilung. Der Arbeitgeber bleibt für A1-Anträge, Lohnabrechnung und Steuermeldungen verantwortlich. Prüfen Sie bei der zuständigen Behörde.',
+    inviteLanguage: 'Sprache der Person',
+    inviteFailed:
+      'Die Einladung konnte nicht erstellt werden. Prüfen Sie die Adresse und versuchen Sie es erneut.',
   },
 
   terms: {
@@ -638,6 +656,50 @@ const de: Dict = {
     manual:
       'Wenn sich kein E-Mail-Programm öffnet, kopieren Sie diesen Text und senden Sie ihn an {to}.',
     back: 'Angaben ändern',
+  },
+  account: {
+    title: 'Ihr Konto',
+    signedInAs: 'Angemeldet als {email}',
+    exportTitle: 'Gespeicherte Tagesprotokolle exportieren',
+    exportBody:
+      'Lädt herunter, was auf unseren Servern zu Ihrem Konto gespeichert ist: das Tagesprotokoll Ihres Einzelplans sowie Ihr eigenes Protokoll und Ihre Einstellungen in jedem Unternehmen, dem Sie angehören.',
+    exportError: 'Der Export konnte nicht vorbereitet werden. Bitte versuchen Sie es erneut.',
+    deviceTitle: 'Nur dieses Gerät',
+    deviceBody:
+      'Tage aus der Gratisvorschau, in diesem Browser gespeichert und nicht auf unseren Servern.',
+    deleteTitle: 'Kontolöschung beantragen',
+    deleteBody:
+      'Die Löschung eines Kontos bearbeiten wir von Hand, nicht automatisch. Senden Sie den Antrag unten: Wir löschen Ihr Konto und Ihr persönliches Tagesprotokoll und antworten innerhalb eines Monats. Bei Tagesprotokollen in einem Unternehmenskonto ist Ihr Arbeitgeber Verantwortlicher und muss möglicherweise Unterlagen aufbewahren: Wir teilen Ihnen dies gegebenenfalls mit. Kündigen Sie zuerst jeden kostenpflichtigen Plan.',
+    deleteConfirm: 'Ich möchte die Löschung meines Kontos beantragen',
+    deleteSend: 'Löschantrag in meinem E-Mail-Programm öffnen',
+    deleteHint: 'Der Antrag ist gestellt, wenn Sie die E-Mail an {to} senden.',
+    deleteMailSubject: 'Antrag auf Löschung des BorderDay-Kontos',
+    deleteMailBody:
+      'Bitte löschen Sie mein BorderDay-Konto.\n\nKonto-E-Mail: {email}\nKonto-ID: {id}\nDatum: {today}',
+  },
+  cancel: {
+    title: 'Verträge hier kündigen',
+    intro:
+      'Kündigen Sie hier Ihr BorderDay-Abo. Die Kündigung stoppt künftige Verlängerungen. Kündigen Sie vor dem 8. Tag der Testphase, wird nichts abgebucht.',
+    accountTitle: 'Aus Ihrem Konto kündigen',
+    accountBody: 'Öffnet das Abrechnungsportal, in dem Sie die Kündigung bestätigen.',
+    companyButton: 'Abo von {company} kündigen',
+    individualButton: 'Meinen Einzelplan kündigen',
+    noPlans:
+      'Für dieses Konto wurde kein verwaltbares Abo gefunden. Nutzen Sie die Möglichkeiten unten.',
+    signIn: 'Anmelden, um aus Ihrem Konto zu kündigen',
+    portalError: 'Das Abrechnungsportal konnte nicht geöffnet werden. Nutzen Sie die Möglichkeiten unten.',
+    linkTitle: 'Über Link gekaufte Pläne',
+    linkBody:
+      'Käufe werden über Link verkauft. Nutzen Sie den Bestelllink in Ihrem Link-Beleg, um das Abo zu verwalten oder zu kündigen, oder kontaktieren Sie den Link-Support zu Ihrer Bestellung.',
+    formTitle: 'Per E-Mail kündigen, ohne Anmeldung',
+    formBody:
+      'Füllen Sie die Felder aus, bestätigen Sie und senden Sie die vorbereitete Nachricht aus Ihrem E-Mail-Programm. Wir bestätigen die Kündigung per E-Mail.',
+    submit: 'Weiter zur Bestätigung',
+    confirm: 'Jetzt kündigen',
+    mailSubject: 'Kündigung des BorderDay-Abos',
+    mailBody:
+      'Hiermit kündige ich mein BorderDay-Abo.\n\nName: {name}\nKonto-E-Mail: {email}\nBestellreferenz: {reference}\nDatum: {today}',
   },
   footer: {
     tagline: 'Tageserfassung für grenzüberschreitende Teams und Mitarbeitende.',

@@ -4,6 +4,7 @@ export interface ProfileValues {
   employmentPercent: number | null;
   a1InPlace: boolean;
   a1ValidUntil: string | null;
+  frontierBefore2012?: boolean;
 }
 
 /** Employment % and A1 record: the same fields for an employee on /app and for HR on the dashboard. */
@@ -13,6 +14,7 @@ export default function ProfileFields({
   value,
   onChange,
   onCommit,
+  showFrontierBefore2012 = false,
 }: {
   d: Dict;
   idPrefix: string;
@@ -20,6 +22,8 @@ export default function ProfileFields({
   onChange: (next: ProfileValues) => void;
   /** Called when a field is finished with. `next` is what to persist. */
   onCommit?: (next: ProfileValues) => void;
+  /** FR→BE only: tick opens the optional pre-2012 30-day counter. */
+  showFrontierBefore2012?: boolean;
 }) {
   return (
     <>
@@ -63,6 +67,21 @@ export default function ProfileFields({
             onChange={(e) => onChange({ ...value, a1ValidUntil: e.target.value || null })}
             onBlur={() => onCommit?.(value)}
           />
+        </label>
+      )}
+      {showFrontierBefore2012 && (
+        <label style={{ display: 'block', marginTop: '0.75rem' }}>
+          <input
+            type="checkbox"
+            checked={!!value.frontierBefore2012}
+            onChange={(e) => {
+              const next = { ...value, frontierBefore2012: e.target.checked };
+              onChange(next);
+              onCommit?.(next);
+            }}
+          />{' '}
+          <strong>{d.app.frontierBefore2012}</strong>
+          <div className="meta">{d.app.frontierBefore2012Hint}</div>
         </label>
       )}
     </>

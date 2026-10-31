@@ -12,6 +12,7 @@ export interface RowMember {
   annualWorkingDays: number | null;
   employmentPercent?: number | null;
   a1InPlace?: boolean;
+  frontierBefore2012?: boolean;
   a1ValidUntil?: string | null;
 }
 
@@ -37,6 +38,7 @@ export function buildEmployeeRow(
     profile: {
       employmentPercent: member.employmentPercent,
       a1InPlace: member.a1InPlace,
+      frontierBefore2012: member.frontierBefore2012,
       a1ValidUntil: member.a1ValidUntil,
     },
     logs,

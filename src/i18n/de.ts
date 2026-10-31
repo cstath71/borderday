@@ -246,7 +246,7 @@ const de: Dict = {
       'Keine Tagestoleranz gefunden. Homeoffice-Tage in Frankreich werden ab dem ersten Tag anteilig in Frankreich besteuert (Art. 11 des Abkommens Frankreich–Belgien; Antwort des französischen Ministers vom 28. Mai 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). Wer vor dem 1. Januar 2012 Grenzgänger wurde, behält bis 2033 ein eigenes Regime: aktivieren Sie diese Option unten, um den 30-Tage-Zähler zu öffnen. Hier läuft kein allgemeiner Steuerzähler.',
     be_fr_pre2012_30: 'Tage ausserhalb der belgischen Grenzzone (max. 30/Jahr, Grenzgänger vor 2012)',
     be_fr_pre2012_note:
-      'Nur für Personen, die vor dem 1. Januar 2012 Grenzgänger unter dem Regime Frankreich–Belgien waren. Bis 2033 behalten sie eine jährliche Grenze von 30 Tagen Arbeit ausserhalb der belgischen Grenzzone. Darüber gilt die normale Art.-11-Regel. Quellen: ministerielle Antwort vom 28. Mai 2024; BOFiP.',
+      'Nur für Personen, die vor dem 1. Januar 2012 Grenzgänger unter dem Regime Frankreich–Belgien waren. Bis 2033 behalten sie eine jährliche Grenze von 30 Tagen Arbeit ausserhalb der belgischen Grenzzone. BorderDay zählt Reisetage als Näherung und kann die Geografie der belgischen Grenzzone nicht prüfen. Darüber gilt die normale Art.-11-Regel. Quellen: ministerielle Antwort vom 28. Mai 2024; BOFiP.',
     be_fr_pre2012_over:
       'Über 30 Tage ausserhalb der Grenzzone: das Übergangsregime vor 2012 deckt diese Tage nicht mehr. Fragen Sie Ihre Steuerbehörde.',
     be_fr_pre2012_pending:
@@ -311,6 +311,9 @@ const de: Dict = {
       'Teilzeit und unterjährig zusammen: 80 für 80 % das ganze Jahr, 50 für Vollzeit über sechs Monate. Manche Tagesgrenzen werden damit gekürzt. In einem Unternehmenskonto sieht HR diesen Wert.',
     a1InPlace: 'A1-Bescheinigung vorhanden (Rahmenübereinkommen)',
     a1ValidUntil: 'A1 gültig bis',
+    frontierBefore2012: 'Grenzgänger vor 2012 (Frankreich–Belgien)',
+    frontierBefore2012Hint:
+      'Nur für Personen, die vor dem 1. Januar 2012 Grenzgänger unter dem Regime Frankreich–Belgien waren. Öffnet den optionalen 30-Tage-Zähler für Arbeit ausserhalb der belgischen Grenzzone (gültig bis 2033).',
     a1Hint:
       'Von Ihnen oder Ihrem Arbeitgeber eingetragen. BorderDay prüft die Bescheinigung nicht. In einem Unternehmenskonto sieht HR sie.',
     prevMonth: 'Vorheriger Monat',

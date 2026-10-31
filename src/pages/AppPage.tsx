@@ -118,8 +118,9 @@ export default function AppPage() {
     employmentPercent: meta?.employmentPercent ?? null,
     a1InPlace: !!meta?.a1InPlace,
     a1ValidUntil: meta?.a1ValidUntil ?? null,
+    frontierBefore2012: !!meta?.frontierBefore2012,
   };
-  const { employmentPercent, a1InPlace, a1ValidUntil } = profile;
+  const { employmentPercent, a1InPlace, a1ValidUntil, frontierBefore2012 } = profile;
 
   const results = useMemo(() => {
     if (!pack) return [];
@@ -127,9 +128,9 @@ export default function AppPage() {
       year: viewYear,
       annualWorkingDays: annual,
       referenceMonth: `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}`,
-      profile: { employmentPercent, a1InPlace, a1ValidUntil },
+      profile: { employmentPercent, a1InPlace, a1ValidUntil, frontierBefore2012 },
     });
-  }, [pack, days, viewYear, viewMonth, annual, employmentPercent, a1InPlace, a1ValidUntil]);
+  }, [pack, days, viewYear, viewMonth, annual, employmentPercent, a1InPlace, a1ValidUntil, frontierBefore2012]);
 
   const selectedEntry = days.find((e) => e.date === selectedDate);
   const byDate = useMemo(() => {
@@ -332,6 +333,7 @@ export default function AppPage() {
               value={profile}
               onChange={(next) => setMetaState({ ...meta, ...next })}
               onCommit={(next) => void saveProfile(next)}
+              showFrontierBefore2012={borderId === 'belgium_fr'}
             />
           )}
         </div>

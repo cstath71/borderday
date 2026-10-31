@@ -148,6 +148,7 @@ describe('Dashboard', () => {
       employmentPercent: null,
       a1InPlace: true,
       a1ValidUntil: null,
+      frontierBefore2012: false,
     });
     await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
   });

@@ -457,6 +457,10 @@ export const BORDER_PACKS: BorderPack[] = [
     ],
   },
   {
+    // No general day tolerance (Art. 11 pro rata). Optional 30-day counter only for people who
+    // were frontier workers before 1 Jan 2012 (until 2033). Gated by profile flag so hasTaxCounter
+    // stays false. BorderDay counts trip days as the proxy for days outside the Belgian border
+    // zone; it cannot verify zone geography.
     id: 'belgium_fr',
     nameKey: 'belgium_fr',
     residenceCountries: ['FR'],
@@ -470,9 +474,30 @@ export const BORDER_PACKS: BorderPack[] = [
         enabled: false,
         countsAs: {},
         warningAt: WARN,
-        sources: [SRC.frBeAnswer, SRC.impotsCantons, SRC.frBeBofip],
+        sources: [SRC.frBeAnswer, SRC.frBeBofip],
         pendingReasonKey: 'pending_be_fr_tax',
         pendingValueKey: 'be_fr_value',
+      },
+      {
+        id: 'be_fr_pre2012_30',
+        kind: 'tax',
+        labelKey: 'be_fr_pre2012_30',
+        enabled: true,
+        limit: 30,
+        inclusive: true,
+        requiresProfileFlag: 'frontierBefore2012',
+        unit: 'days_per_year',
+        countsAs: {
+          telework: 'none',
+          onsite: 'none',
+          third_country: 'full',
+          non_working: 'none',
+        },
+        warningAt: WARN,
+        sources: [SRC.frBeAnswer, SRC.frBeBofip],
+        notesKey: 'be_fr_pre2012_note',
+        overKey: 'be_fr_pre2012_over',
+        pendingReasonKey: 'be_fr_pre2012_pending',
       },
       ssFramework('be_fr_ss_50'),
     ],

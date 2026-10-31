@@ -13,6 +13,7 @@ export interface UserMeta {
   employmentPercent?: number | null;
   a1InPlace?: boolean;
   a1ValidUntil?: string | null;
+  frontierBefore2012?: boolean;
 }
 
 const DEFAULT_META: UserMeta = {

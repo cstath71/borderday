@@ -269,7 +269,7 @@ export function recordConsent(companyId: string, textLang: string): Consent {
 export function updateEmployeeProfile(
   companyId: string,
   employeeUserId: string,
-  patch: { employmentPercent: number | null; a1InPlace: boolean; a1ValidUntil: string | null },
+  patch: { employmentPercent: number | null; a1InPlace: boolean; a1ValidUntil: string | null; frontierBefore2012?: boolean },
 ): CompanyMember {
   const db = load();
   const session = requireSession(db);

@@ -245,7 +245,7 @@ const fr: Dict = {
       'Aucune tolérance en jours trouvée. Les jours de travail à domicile en France sont imposés en France, au prorata, dès le premier jour (art. 11 de la convention France–Belgique ; réponse ministérielle du 28 mai 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm ; BOFiP). Les personnes devenues frontalières avant le 1er janvier 2012 gardent un régime distinct jusqu’en 2033 : cochez cette option ci-dessous pour ouvrir le compteur de 30 jours. Aucun compteur fiscal général ne fonctionne ici.',
     be_fr_pre2012_30: 'Jours hors de la zone frontalière belge (max 30/an, frontaliers avant 2012)',
     be_fr_pre2012_note:
-      'Uniquement pour les personnes frontalières au sens du régime France–Belgique avant le 1er janvier 2012. Jusqu’en 2033 elles gardent une limite annuelle de 30 jours de travail hors de la zone frontalière belge. Au-delà, la règle normale de l’art. 11 s’applique. Sources : réponse ministérielle du 28 mai 2024 ; BOFiP.',
+      'Uniquement pour les personnes frontalières au sens du régime France–Belgique avant le 1er janvier 2012. Jusqu’en 2033 elles gardent une limite annuelle de 30 jours de travail hors de la zone frontalière belge. BorderDay compte les jours de déplacement comme approximation et ne peut pas vérifier la géographie de la zone frontalière belge. Au-delà, la règle normale de l’art. 11 s’applique. Sources : réponse ministérielle du 28 mai 2024 ; BOFiP.',
     be_fr_pre2012_over:
       'Au-delà de 30 jours hors de la zone frontalière : le régime transitoire antérieur à 2012 ne couvre plus ces jours. Vérifiez auprès de votre autorité fiscale.',
     be_fr_pre2012_pending:
@@ -310,6 +310,9 @@ const fr: Dict = {
       'Temps partiel et année incomplète ensemble : 80 pour 80 % toute l’année, 50 pour un temps plein sur six mois. Certains seuils en jours sont réduits selon ce chiffre. Dans un compte entreprise, les RH le voient.',
     a1InPlace: 'Attestation A1 en place (accord-cadre)',
     a1ValidUntil: 'A1 valable jusqu’au',
+    frontierBefore2012: 'Frontalier avant 2012 (France–Belgique)',
+    frontierBefore2012Hint:
+      'Uniquement pour les personnes frontalières au sens du régime France–Belgique avant le 1er janvier 2012. Ouvre le compteur optionnel de 30 jours hors de la zone frontalière belge (valable jusqu’en 2033).',
     a1Hint:
       'Indiquée par vous ou votre employeur. BorderDay ne vérifie pas l’attestation. Dans un compte entreprise, les RH la voient.',
     prevMonth: 'Mois précédent',

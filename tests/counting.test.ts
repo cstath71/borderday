@@ -239,6 +239,54 @@ const counterOf = (pack: BorderPack, id: string) => pack.counters.find((c) => c.
 const keysOf = (r: { messages: Array<{ key: string }> }) => r.messages.map((m) => m.key);
 const TODAY = '2026-10-31';
 
+describe('belgium_fr: Art. 11 pending + optional pre-2012 30-day counter', () => {
+  const pack = getBorderPack('belgium_fr')!;
+
+  it('keeps the general tax counter disabled and hasTaxCounter false', () => {
+    expect(counterOf(pack, 'be_fr_tax').enabled).toBe(false);
+    expect(hasTaxCounter(pack)).toBe(false);
+  });
+
+  it('hides the pre-2012 counter until the profile flag is set', () => {
+    const c = counterOf(pack, 'be_fr_pre2012_30');
+    expect(c.enabled).toBe(true);
+    expect(c.requiresProfileFlag).toBe('frontierBefore2012');
+    expect(c.limit).toBe(30);
+    expect(c.inclusive).toBe(true);
+    const off = evaluateCounter(pack, c, run(5, 'third_country'), { year: 2026 });
+    expect(off.enabled).toBe(false);
+    const on = evaluateCounter(pack, c, run(5, 'third_country'), {
+      year: 2026,
+      profile: { frontierBefore2012: true },
+    });
+    expect(on.enabled).toBe(true);
+    expect(on.used).toBe(5);
+    expect(on.limit).toBe(30);
+    expect(on.status).toBe('ok');
+  });
+
+  it('counts only trip days toward the 30-day outside-zone proxy', () => {
+    const c = counterOf(pack, 'be_fr_pre2012_30');
+    const entries = [...run(3, 'telework'), ...run(4, 'third_country', '2026-02-01'), ...run(2, 'onsite', '2026-03-01')];
+    const r = evaluateCounter(pack, c, entries, { year: 2026, profile: { frontierBefore2012: true } });
+    expect(r.used).toBe(4);
+  });
+
+  it('goes over at 31 trip days and cites AN + BOFiP, not INAMI', () => {
+    const c = counterOf(pack, 'be_fr_pre2012_30');
+    const r = evaluateCounter(pack, c, run(31, 'third_country'), {
+      year: 2026,
+      profile: { frontierBefore2012: true },
+    });
+    expect(r.status).toBe('over');
+    expect(keysOf(r)).toContain('be_fr_pre2012_over');
+    const urls = pack.counters.flatMap((x) => x.sources.map((s) => s.url));
+    expect(urls.some((u) => u.includes('assemblee-nationale'))).toBe(true);
+    expect(urls.some((u) => u.toLowerCase().includes('bofip'))).toBe(true);
+    expect(urls.every((u) => !u.toLowerCase().includes('inami'))).toBe(true);
+  });
+});
+
 describe('C: A1 social-security bands (under 25%, 25% to under 50%, 50% or more)', () => {
   for (const pack of BORDER_PACKS) {
     const ss = pack.counters.find((c) => c.kind === 'social_security')!;

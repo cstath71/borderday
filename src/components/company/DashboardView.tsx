@@ -22,6 +22,7 @@ function EmployeeProfileForm(props: {
     employmentPercent: row.profile.employmentPercent ?? null,
     a1InPlace: !!row.profile.a1InPlace,
     a1ValidUntil: row.profile.a1ValidUntil ?? null,
+    frontierBefore2012: !!row.profile.frontierBefore2012,
   });
   const [state, setState] = useState<'idle' | 'saved' | 'error'>('idle');
   return (
@@ -35,6 +36,7 @@ function EmployeeProfileForm(props: {
           setValue(next);
           setState('idle');
         }}
+        showFrontierBefore2012={row.borderPackId === 'belgium_fr'}
       />
       <p style={{ marginTop: '0.5rem' }}>
         <button

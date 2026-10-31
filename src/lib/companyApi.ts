@@ -44,12 +44,14 @@ export function isSchemaLag(error: unknown): boolean {
   return SCHEMA_LAG_CODES.has((error as { code?: string } | null)?.code ?? '');
 }
 
-const MEMBER_PROFILE_COLUMNS = 'employment_percent, a1_in_place, a1_valid_until';
+const MEMBER_PROFILE_COLUMNS =
+  'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012';
 
 export interface MemberProfile {
   employmentPercent: number | null;
   a1InPlace: boolean;
   a1ValidUntil: string | null;
+  frontierBefore2012?: boolean;
 }
 
 function mapProfile(m: any): MemberProfile {
@@ -57,6 +59,7 @@ function mapProfile(m: any): MemberProfile {
     employmentPercent: m.employment_percent ?? null,
     a1InPlace: m.a1_in_place ?? false,
     a1ValidUntil: m.a1_valid_until ?? null,
+    frontierBefore2012: m.frontier_before_2012 ?? false,
   };
 }
 
@@ -134,6 +137,7 @@ export interface CompanyMemberRow {
   employmentPercent: number | null;
   a1InPlace: boolean;
   a1ValidUntil: string | null;
+  frontierBefore2012: boolean;
 }
 
 export async function updateCompanyRetention(companyId: string, months: number) {
@@ -207,6 +211,7 @@ export async function updateMyProfile(companyId: string, profile: MemberProfile)
     p_employment_percent: profile.employmentPercent,
     p_a1_in_place: profile.a1InPlace,
     p_a1_valid_until: profile.a1ValidUntil,
+    p_frontier_before_2012: !!profile.frontierBefore2012,
   });
   if (error) throw error;
 }
@@ -223,6 +228,7 @@ export async function updateEmployeeProfile(
       employment_percent: profile.employmentPercent,
       a1_in_place: profile.a1InPlace,
       a1_valid_until: profile.a1ValidUntil,
+      frontier_before_2012: !!profile.frontierBefore2012,
     })
     .eq('company_id', companyId)
     .eq('user_id', employeeUserId)

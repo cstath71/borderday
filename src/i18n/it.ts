@@ -243,7 +243,7 @@ const it: Dict = {
       'Nessuna tolleranza in giorni trovata. I giorni di lavoro da casa in Francia sono tassati in Francia, in proporzione, dal primo giorno (art. 11 della convenzione Francia–Belgio; risposta del ministro francese del 28 maggio 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). Chi è diventato frontaliere prima del 1° gennaio 2012 mantiene un regime distinto fino al 2033: spuntate questa opzione qui sotto per aprire il contatore di 30 giorni. Qui non è attivo alcun contatore fiscale generale.',
     be_fr_pre2012_30: 'Giorni fuori dalla zona di frontiera belga (max 30/anno, frontalieri prima del 2012)',
     be_fr_pre2012_note:
-      'Solo per chi era frontaliere secondo il regime Francia–Belgio prima del 1° gennaio 2012. Fino al 2033 mantiene un limite annuale di 30 giorni di lavoro fuori dalla zona di frontiera belga. Oltre, vale la regola normale dell’art. 11. Fonti: risposta ministeriale del 28 maggio 2024; BOFiP.',
+      'Solo per chi era frontaliere secondo il regime Francia–Belgio prima del 1° gennaio 2012. Fino al 2033 mantiene un limite annuale di 30 giorni di lavoro fuori dalla zona di frontiera belga. BorderDay conta i giorni di trasferta come proxy e non può verificare la geografia della zona di frontiera belga. Oltre, vale la regola normale dell’art. 11. Fonti: risposta ministeriale del 28 maggio 2024; BOFiP.',
     be_fr_pre2012_over:
       'Oltre 30 giorni fuori dalla zona di frontiera: il regime transitorio anteriore al 2012 non copre più quei giorni. Verificate con la vostra autorità fiscale.',
     be_fr_pre2012_pending:
@@ -310,6 +310,9 @@ const it: Dict = {
       'Tempo parziale e anno incompleto insieme: 80 per l’80% tutto l’anno, 50 per il tempo pieno su sei mesi. Alcuni limiti in giorni si riducono con questo valore. In un account aziendale, HR lo vede.',
     a1InPlace: 'Certificato A1 disponibile (accordo quadro)',
     a1ValidUntil: 'A1 valido fino al',
+    frontierBefore2012: 'Frontaliere prima del 2012 (Francia–Belgio)',
+    frontierBefore2012Hint:
+      'Solo per chi era frontaliere secondo il regime Francia–Belgio prima del 1° gennaio 2012. Apre il contatore opzionale di 30 giorni fuori dalla zona di frontiera belga (valido fino al 2033).',
     a1Hint:
       'Indicato da voi o dal datore di lavoro. BorderDay non verifica il certificato. In un account aziendale, HR lo vede.',
     prevMonth: 'Mese precedente',

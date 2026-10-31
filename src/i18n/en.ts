@@ -240,7 +240,7 @@ const en = {
       'No day tolerance found. Home-working days in France are taxed in France, pro rata, from the first day (Art. 11 of the France–Belgium convention; French minister’s answer of 28 May 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). People who became frontier workers before 1 January 2012 keep a separate regime until 2033: tick that option below to open the 30-day counter. No general tax counter runs here.',
     be_fr_pre2012_30: 'Days outside the Belgian border zone (max 30/year, pre-2012 frontier workers)',
     be_fr_pre2012_note:
-      'Only for people who were frontier workers under the France–Belgium regime before 1 January 2012. Until 2033 they keep a 30-day annual limit for work outside the Belgian border zone. Beyond that, the normal Art. 11 rule applies. Sources: French minister’s answer of 28 May 2024; BOFiP.',
+      'Only for people who were frontier workers under the France–Belgium regime before 1 January 2012. Until 2033 they keep a 30-day annual limit for work outside the Belgian border zone. BorderDay counts trip days as a proxy and cannot verify Belgian border-zone geography. Beyond that, the normal Art. 11 rule applies. Sources: French minister’s answer of 28 May 2024; BOFiP.',
     be_fr_pre2012_over:
       'Above 30 days outside the border zone: the pre-2012 transitional regime no longer covers those days. Check with your tax authority.',
     be_fr_pre2012_pending:
@@ -305,6 +305,9 @@ const en = {
       'Part-time and part-year together: 80 for 80% all year, 50 for full-time for six months. Some day limits are reduced with this figure. In a company account, HR sees it.',
     a1InPlace: 'A1 certificate in place (framework agreement)',
     a1ValidUntil: 'A1 valid until',
+    frontierBefore2012: 'Frontier worker before 2012 (France–Belgium)',
+    frontierBefore2012Hint:
+      'Only for people who were frontier workers under the France–Belgium regime before 1 January 2012. Opens the optional 30-day counter for work outside the Belgian border zone (valid until 2033).',
     a1Hint:
       'Recorded by you or your employer. BorderDay does not check the certificate. In a company account, HR sees it.',
     prevMonth: 'Previous month',

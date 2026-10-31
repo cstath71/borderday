@@ -108,7 +108,7 @@ describe('SEO generators', () => {
       ['Home', ''],
       ['Pricing', 'pricing'],
     ]);
-    expect(crumbs.itemListElement[1].item).toBe(`${BASE}/en/pricing`);
+    expect(crumbs.itemListElement[1].item).toBe(`${BASE}/en/pricing/`);
 
     const site = websiteLd();
     expect(site.publisher['@id']).toBe(org['@id']);

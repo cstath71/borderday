@@ -73,8 +73,9 @@ export function esc(s) {
 }
 
 export function absUrl(lang, path) {
-  const suffix = path ? `/${path}` : '/';
-  return `${BASE}/${lang}${suffix === '/' ? '/' : suffix}`;
+  // Trailing slash: GitHub Pages serves path/index.html as path/ (301 from path).
+  if (!path) return `${BASE}/${lang}/`;
+  return `${BASE}/${lang}/${path}/`;
 }
 
 export function pageFile(lang, path) {
@@ -678,7 +679,7 @@ export function softwareApplicationLd() {
         },
         description: 'Minimum €39 / month. Prices exclude VAT. 7-day trial, card required.',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
       {
         '@type': 'Offer',
@@ -687,7 +688,7 @@ export function softwareApplicationLd() {
         priceCurrency: 'EUR',
         description: 'Yearly company billing: 2 months free (€390 / year minimum). Prices exclude VAT.',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
       {
         '@type': 'Offer',
@@ -696,7 +697,7 @@ export function softwareApplicationLd() {
         priceCurrency: 'EUR',
         description: 'Includes VAT. 7-day trial, card required.',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
       {
         '@type': 'Offer',
@@ -705,7 +706,7 @@ export function softwareApplicationLd() {
         priceCurrency: 'EUR',
         description: 'Includes VAT. About two months free vs monthly.',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
     ],
     publisher: { '@id': `${BASE}/#org` },
@@ -766,13 +767,13 @@ export function llmsTxt() {
 - ${BASE}/fr/ — French landing
 - ${BASE}/de/ — German landing
 - ${BASE}/it/ — Italian landing
-- ${BASE}/en/pricing — Pricing
-- ${BASE}/en/faq — FAQ
-- ${BASE}/en/for-individuals — Individual plan
-- ${BASE}/en/company/signup — Company sign-up
-- ${BASE}/en/privacy — Privacy
-- ${BASE}/en/disclaimer — Legal disclaimer
-- ${BASE}/en/terms — Terms of service
+- ${BASE}/en/pricing/ — Pricing
+- ${BASE}/en/faq/ — FAQ
+- ${BASE}/en/for-individuals/ — Individual plan
+- ${BASE}/en/company/signup/ — Company sign-up
+- ${BASE}/en/privacy/ — Privacy
+- ${BASE}/en/disclaimer/ — Legal disclaimer
+- ${BASE}/en/terms/ — Terms of service
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

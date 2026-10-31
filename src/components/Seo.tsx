@@ -64,7 +64,7 @@ function softwareGraph() {
         price: '5.00',
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
       {
         '@type': 'Offer',
@@ -72,7 +72,7 @@ function softwareGraph() {
         price: '390.00',
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
       {
         '@type': 'Offer',
@@ -80,7 +80,7 @@ function softwareGraph() {
         price: '4.99',
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
       {
         '@type': 'Offer',
@@ -88,7 +88,7 @@ function softwareGraph() {
         price: '49.00',
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing`,
+        url: `${BASE}/en/pricing/`,
       },
     ],
     publisher: { '@id': `${BASE}/#org` },
@@ -110,8 +110,7 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
     setMeta('twitter:description', description);
     setMeta('twitter:image', `${BASE}/og.png`);
 
-    const suffix = path ? `/${path}` : '/';
-    const canonical = `${BASE}/${lang}${suffix === '/' ? '/' : suffix}`;
+    const canonical = path ? `${BASE}/${lang}/${path}/` : `${BASE}/${lang}/`;
     setLink('canonical', canonical);
     setMeta('og:url', canonical, true);
 
@@ -120,14 +119,14 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
       const link = document.createElement('link');
       link.rel = 'alternate';
       link.hreflang = l;
-      link.href = `${BASE}/${l}${suffix === '/' ? '/' : suffix}`;
+      link.href = path ? `${BASE}/${l}/${path}/` : `${BASE}/${l}/`;
       link.setAttribute('data-hreflang', l);
       document.head.appendChild(link);
     }
     const xd = document.createElement('link');
     xd.rel = 'alternate';
     xd.hreflang = 'x-default';
-    xd.href = `${BASE}/en${suffix === '/' ? '/' : suffix}`;
+    xd.href = path ? `${BASE}/en/${path}/` : `${BASE}/en/`;
     xd.setAttribute('data-hreflang', 'x-default');
     document.head.appendChild(xd);
 

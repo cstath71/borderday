@@ -18,13 +18,13 @@
 - https://borderday.com/fr/ — French landing
 - https://borderday.com/de/ — German landing
 - https://borderday.com/it/ — Italian landing
-- https://borderday.com/en/pricing — Pricing
-- https://borderday.com/en/faq — FAQ
-- https://borderday.com/en/for-individuals — Individual plan
-- https://borderday.com/en/company/signup — Company sign-up
-- https://borderday.com/en/privacy — Privacy
-- https://borderday.com/en/disclaimer — Legal disclaimer
-- https://borderday.com/en/terms — Terms of service
+- https://borderday.com/en/pricing/ — Pricing
+- https://borderday.com/en/faq/ — FAQ
+- https://borderday.com/en/for-individuals/ — Individual plan
+- https://borderday.com/en/company/signup/ — Company sign-up
+- https://borderday.com/en/privacy/ — Privacy
+- https://borderday.com/en/disclaimer/ — Legal disclaimer
+- https://borderday.com/en/terms/ — Terms of service
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

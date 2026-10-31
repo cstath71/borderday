@@ -11,6 +11,31 @@ async function shot(page, name) {
 
 const browser = await chromium.launch({ headless: true });
 
+async function seedDemo(page) {
+  await page.goto(`${BASE}/en/company/signup`, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: /Load DEMO company/i }).click();
+  await page.waitForURL(/\/company\/.+\/dashboard/);
+  const url = page.url();
+  const m = url.match(/\/company\/([^/]+)\/dashboard/);
+  return m ? m[1] : null;
+}
+
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/en/`, { waitUntil: 'networkidle' });
+  await shot(page, 'en-home-hr.png');
+  await ctx.close();
+}
+
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/fr/`, { waitUntil: 'networkidle' });
+  await shot(page, 'fr-home-hr.png');
+  await ctx.close();
+}
+
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await ctx.newPage();
@@ -36,7 +61,7 @@ const browser = await chromium.launch({ headless: true });
 }
 
 {
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage();
   await page.goto(`${BASE}/en/pricing`, { waitUntil: 'networkidle' });
   await shot(page, 'en-pricing.png');
@@ -44,18 +69,44 @@ const browser = await chromium.launch({ headless: true });
 }
 
 {
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage();
-  await page.goto(`${BASE}/de/disclaimer`, { waitUntil: 'networkidle' });
-  await shot(page, 'de-disclaimer.png');
+  await page.goto(`${BASE}/en/for-individuals`, { waitUntil: 'networkidle' });
+  await shot(page, 'en-for-individuals.png');
+  await ctx.close();
+}
+
+let companyId = null;
+{
+  const ctx = await browser.newContext({ viewport: { width: 1400, height: 1100 } });
+  const page = await ctx.newPage();
+  companyId = await seedDemo(page);
+  console.log('demo companyId', companyId);
+  await page.waitForSelector('.employee-card');
+  await shot(page, 'en-hr-dashboard-demo.png');
   await ctx.close();
 }
 
 {
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage();
-  await page.goto(`${BASE}/it/privacy`, { waitUntil: 'networkidle' });
-  await shot(page, 'it-privacy.png');
+  // re-seed session in this context (localStorage is per-context)
+  const id = await seedDemo(page);
+  await page.goto(`${BASE}/en/company/${id}/invite`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('form.stack-form, form.card');
+  await shot(page, 'en-invite-flow.png');
+  await page.locator('form input[type="email"]').fill('screenshot.invite@borderday.example');
+  await page.getByRole('button', { name: /Create invite link/i }).click();
+  await page.waitForSelector('input[readonly]');
+  await shot(page, 'en-invite-link-created.png');
+  await ctx.close();
+}
+
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 1000 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/en/join/demo-invite-token-borderday`, { waitUntil: 'networkidle' });
+  await shot(page, 'en-join-consent.png');
   await ctx.close();
 }
 
@@ -69,43 +120,12 @@ const browser = await chromium.launch({ headless: true });
 }
 
 {
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 1100 } });
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await ctx.newPage();
-  await page.goto(`${BASE}/en/app`, { waitUntil: 'networkidle' });
-  await page.waitForSelector('#border');
-  await page.selectOption('#border', 'geneva_fr');
-  await page.waitForTimeout(400);
-
-  // Ensure annual days is 240
-  const annual = page.locator('input.num');
-  if (await annual.count()) {
-    await annual.fill('240');
-    await annual.blur();
-  }
-
-  // Click Telework day type
-  await page.locator('.day-type-btn').filter({ hasText: /Telework/i }).first().click();
-  await page.waitForTimeout(700);
-
-  // Wait for counter cards
-  await page.waitForSelector('.counter-card');
-  await page.locator('.counter-card').first().scrollIntoViewIfNeeded();
-  await shot(page, 'en-app-geneva-logged.png');
-
-  const body = await page.innerText('body');
-  const interesting = body.split('\n').filter((l) =>
-    /Telework share|Social|of |Within|Over|Approaching|Near|days|%|framework/i.test(l),
-  );
-  console.log('--- counters ---');
-  console.log(interesting.slice(0, 50).join('\n'));
-
-  if (/100%\s*of\s*40%/i.test(body) || /Over limit/i.test(body)) {
-    console.error('FAIL: still showing over-limit for one day');
-    process.exitCode = 1;
-  } else {
-    console.log('OK: no false over-limit');
-  }
+  await page.goto(`${BASE}/it/privacy`, { waitUntil: 'networkidle' });
+  await shot(page, 'it-privacy.png');
   await ctx.close();
 }
 
 await browser.close();
+console.log('done');

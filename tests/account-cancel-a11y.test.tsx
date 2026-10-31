@@ -195,7 +195,7 @@ describe('M8 accessibility', () => {
     screen.getByRole('button', { name: en.app.nextMonth });
     expect(screen.queryByRole('button', { name: '‹' })).toBeNull();
     const now = new Date();
-    const expected = new Date(now.getFullYear(), now.getMonth(), 1).toLocaleDateString('en', {
+    const expected = new Date(now.getFullYear(), now.getMonth(), 1).toLocaleDateString('en-CH', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -297,7 +297,9 @@ describe('M10 / H10 invitation email', () => {
     const src = readFileSync(resolve(__dirname, '../supabase/functions/bd-send-invite/index.ts'), 'utf8');
     expect(src).toContain('inviteLang(body.lang)');
     expect(src).not.toContain('/en/join/');
-    expect(src).toContain('if (!allowReal || !isInviteTestAddress(inv.email))');
+    expect(src).toContain('if (!allowReal)');
+    expect(src).toContain('RESEND_LIVE');
+    expect(src).toContain('isInviteTestAddress');
   });
 
   it('the portal returns to the account page in the caller’s language', () => {

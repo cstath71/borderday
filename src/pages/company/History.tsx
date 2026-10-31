@@ -76,6 +76,7 @@ export default function EmployeeHistory() {
         logs={state.logs}
         backHref={isSelf ? `/${lang}/app` : `/${lang}/company/${companyId}/dashboard`}
         backLabel={isSelf ? d.nav.openApp : d.company.backDashboard}
+        locale={({en:'en-CH',fr:'fr-CH',de:'de-CH',it:'it-CH',nl:'nl-BE'} as const)[lang] ?? 'en-CH'}
       />
     );
   }

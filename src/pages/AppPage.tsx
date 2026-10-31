@@ -468,7 +468,7 @@ export default function AppPage() {
                   key={iso}
                   className={`cal-cell ${entry?.type ?? ''} ${iso === selectedDate ? 'selected' : ''}`}
                   aria-label={t(d.app.calendarDay, {
-                    date: dt.toLocaleDateString(lang, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+                    date: dt.toLocaleDateString(({en:'en-CH',fr:'fr-CH',de:'de-CH',it:'it-CH',nl:'nl-BE'} as const)[lang] ?? 'en-CH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
                     type: dayLabel,
                   })}
                   aria-pressed={iso === selectedDate}

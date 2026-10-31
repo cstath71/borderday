@@ -36,6 +36,7 @@ const it: Dict = {
     fr: 'Français',
     de: 'Deutsch',
     it: 'Italiano',
+    nl: 'Nederlands',
     label: 'Lingua',
     apply: 'Applica',
   },
@@ -53,7 +54,7 @@ const it: Dict = {
     risk2Title: 'Soglie fiscali di giorni',
     risk2Body:
       'Oggi i contatori fiscali funzionano su sette corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), cantoni dell’accordo del 1983←Francia (40% / 10 impieghi temporanei / 45 notti, tassati in Francia), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale), Belgio→Lussemburgo (34 giorni, non ridotti per il tempo parziale), Germania→Lussemburgo (34 giorni, non ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Francia→Belgio e Paesi Bassi→Belgio dichiarano chiaramente che nessun contatore fiscale generale è attivo. Non inventiamo mai un numero.',
-    risk3Title: 'Team multi-confine',
+    risk3Title: 'Team multi-corridoio',
     risk3Body:
       'Una dashboard aziendale per dipendenti su confini diversi. Filtri per confine o situazione. Export CSV. I dipendenti vedono, per i propri giorni, gli stessi contatori che l’HR vede per loro.',
     feature1Title: 'Fisco e sicurezza sociale, separati',
@@ -61,7 +62,7 @@ const it: Dict = {
       'Contatori indipendenti con fonti ufficiali collegate. Avvisi al 75% e al 90% del limite applicabile, poi stati «al limite» e «oltre il limite» con la conseguenza spiegata.',
     feature2Title: 'Invito tramite link e-mail',
     feature2Body:
-      'I dipendenti entrano in azienda, scelgono il pacchetto confine e registrano solo il tipo di giorno — mai la posizione GPS.',
+      'I dipendenti entrano in azienda, scelgono il corridoio e registrano solo il tipo di giorno — mai la posizione GPS.',
     feature3Title: 'Protezione dei dati fin dalla progettazione',
     feature3Body:
       'Orientato a GDPR e LPD svizzera: isolamento per azienda, export e cancellazione, avviso chiaro su ciò che vede l’HR, nota di conservazione. Nessun GPS né posizione del dispositivo.',
@@ -70,7 +71,7 @@ const it: Dict = {
       'Ogni corridoio indica cosa conta oggi. Se nessuna regola fiscale può ancora essere conteggiata, lo dice e non mostra alcun numero.',
     howTitle: 'Come le aziende usano BorderDay',
     how1: 'Create un account azienda e invitate i dipendenti con un link e-mail.',
-    how2: 'Ogni dipendente sceglie il pacchetto confine e registra telelavoro / in sede / trasferta / non lavorato.',
+    how2: 'Ogni dipendente sceglie il corridoio e registra telelavoro / in sede / trasferta / non lavorato.',
     how3: 'L’HR osserva i contatori fiscali e di sicurezza sociale, filtra per situazione ed esporta CSV.',
     waitlistTitle: 'Iniziate con un account azienda',
     waitlistBody:
@@ -99,12 +100,12 @@ const it: Dict = {
     belgium_nl: 'Belgio ← Paesi Bassi',
     ticino_it: 'Ticino ← Italia',
     geneva_region:
-      'Regime della convenzione: Ginevra e tutti i cantoni fuori dall’accordo del 1983, regola sul telelavoro applicabile dal 1° gen. 2026. Se il datore di lavoro è a Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel o Giura, scegliete invece il pacchetto dell’accordo del 1983.',
+      'Regime della convenzione: Ginevra e tutti i cantoni fuori dall’accordo del 1983, regola sul telelavoro applicabile dal 1° gen. 2026. Se il datore di lavoro è a Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel o Giura, scegliete invece il corridoio dell’accordo del 1983.',
     basel_region:
       'La regola dei 60 giorni vale per tutta la Svizzera. Il minimo di 5 giorni è la regola che Basilea Città applica al proprio personale.',
     ticino_region: 'Accordo Italia–Svizzera sui lavoratori frontalieri, come modificato per il telelavoro.',
     ch_fr_1983_region:
-      'Accordo del 1983: Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel e Giura. Ginevra e gli altri cantoni seguono un altro regime: scegliete l’altro pacchetto Francia–Svizzera.',
+      'Accordo del 1983: Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel e Giura. Ginevra e gli altri cantoni seguono un altro regime: scegliete l’altro corridoio Francia–Svizzera.',
   },
   dayTypes: {
     telework: 'Telelavoro a casa',
@@ -142,7 +143,6 @@ const it: Dict = {
     ch_fr_missions_note:
       'Impieghi temporanei in Francia o in uno Stato terzo: fino a 10 giorni all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. Tempo parziale o anno incompleto: i 10 giorni sono ridotti proporzionalmente e arrotondati per eccesso. I giorni oltre questi limiti sono imponibili in Francia, fatta salva la convenzione con lo Stato terzo. Fonti: accordo amichevole AFC del 29 apr. 2026; scheda impots.gouv.fr.',
     lu_tax_tolerance_34: 'Giorni fuori dal Lussemburgo (fino a 34 giorni/anno)',
-    lu_tax_tolerance_pending: 'Giorni fuori dal Lussemburgo (tolleranza fiscale)',
     lu_fr_tax_note:
       'Residenti in Francia impiegati in Lussemburgo: fino a 34 giorni per periodo d’imposta fisicamente presenti in Francia e/o in uno Stato terzo per lavoro, senza perdere la tassazione in Lussemburgo per il periodo. Tempo parziale o anno incompleto: i 34 giorni sono ridotti proporzionalmente e arrotondati per difetto. Oltre il limite, la Francia può tassare il tempo effettivamente lavorato in Francia o in uno Stato terzo, dal primo giorno. Ogni frazione di giornata conta come giornata intera, e la formazione conta. Ferie, riposo settimanale, festivi non lavorati, malattia e forza maggiore non contano. Il limite copre tutti i vostri contratti dell’anno e spetta a voi provare i giorni: questo registro da solo può non bastare. Fonte: accordo su impots.gouv.fr (il PDF indica 29 giorni, portati a 34 dall’avenant del 7 nov. 2022).',
     ss_framework_under_50: 'Telelavoro transfrontaliero (accordo quadro: A1 dal 25%, meno del 50%)',
@@ -165,7 +165,6 @@ const it: Dict = {
     pending_lu_de_tax:
       'Il governo lussemburghese indica che la tolleranza è passata da 19 a 34 giorni dal 2024 per i residenti in Germania. Il testo tedesco su conteggio e tempo parziale non ha potuto essere confermato, quindi nessun contatore è attivo e la riduzione Francia–Lussemburgo non è applicata. Verificate con la vostra autorità.',
     usedOf: '{used} su {limit}',
-    percentUsed: '{used}% su {limit}%',
     usedOfDays: '{used} di {allowed} giorni',
     percentOfAnnual: '{pct}% di {annual} gg/anno (limite {limit}%)',
     status_ok: 'Sotto il limite monitorato',
@@ -173,7 +172,6 @@ const it: Dict = {
     status_critical: 'Vicino alla soglia',
     status_over: 'Oltre la soglia',
     status_disabled: 'Nessun contatore per ora',
-    sourceLink: 'Fonti ufficiali',
     checkedOn: 'Verificato il {date}',
     employer_practice: 'Prassi del datore di lavoro',
     ch_fr_over_40:
@@ -197,7 +195,6 @@ const it: Dict = {
       'Oltre 45 notti di lavoro fuori casa: il regime frontaliero del 1983 viene meno. Verificate con la vostra autorità fiscale.',
     ch_fr_1983_mission_excess:
       'Dei vostri giorni di impiego temporaneo, {counted} contano nel 40% e {excess} no. Qualsiasi giorno in eccesso in Francia fa cessare il regime del 1983; BorderDay non distingue la Francia da uno Stato terzo.',
-    ch_fr_1983_label: 'Fisco Francia–Svizzera (accordo del 1983)',
     ch_fr_1983_value: 'Vedere i contatori 40% / 10 impieghi temporanei / 45 notti',
     ch_fr_1983_note:
       'Questi cantoni seguono l’accordo del 1983: tassati in Francia (la Francia versa il 4,5% alla Svizzera). I contatori seguono il telelavoro fino al 40%, fino a 10 giorni di impiego temporaneo e al massimo 45 notti di lavoro fuori casa.',
@@ -244,7 +241,6 @@ const it: Dict = {
     be_fr_value: 'Nessuna tolleranza in giorni trovata',
     be_nl_tax_label: 'Fisco Paesi Bassi→Belgio',
     be_nl_value: 'Nessuna regola confermata: verificate con la vostra autorità',
-    lu_announced_value: '34 giorni annunciati: nessun contatore per ora',
     pending_be_fr_tax:
       'Nessuna tolleranza in giorni trovata. I giorni di lavoro da casa in Francia sono tassati in Francia, in proporzione, dal primo giorno (art. 11 della convenzione Francia–Belgio; risposta del ministro francese del 28 maggio 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). Chi è diventato frontaliere prima del 1° gennaio 2012 mantiene un regime distinto fino al 2033: spuntate questa opzione qui sotto per aprire il contatore di 30 giorni. Qui non è attivo alcun contatore fiscale generale.',
     be_fr_pre2012_30: 'Giorni fuori dalla zona di frontiera belga (max 30/anno, frontalieri prima del 2012)',
@@ -276,14 +272,13 @@ const it: Dict = {
   },
   app: {
     title: 'Il vostro diario dei giorni',
-    pickBorder: 'Il vostro confine',
+    pickBorder: 'Il vostro corridoio',
     pickBorderHint: 'Residenza → luogo di lavoro',
     today: 'Oggi',
     logDay: 'Registra questo giorno',
-    changeDay: 'Modifica',
     calendar: 'Calendario',
     counters: 'I vostri contatori',
-    noBorder: 'Scegliete un pacchetto confine per vedere i contatori.',
+    noBorder: 'Scegliete un corridoio per vedere i contatori.',
     exportJson: 'Esporta JSON',
     exportCsv: 'Esporta CSV',
     deleteAll: 'Elimina tutti i giorni',
@@ -350,7 +345,7 @@ const it: Dict = {
       'Contatori fiscali dove disponibili, contatori di sicurezza sociale su ogni corridoio',
     include3: 'Avvisi all’avvicinarsi delle soglie',
     include4: 'Export e cancellazione dei dati in qualsiasi momento',
-    include5: 'Inglese, francese, tedesco, italiano',
+    include5: 'Inglese, francese, tedesco, italiano, olandese',
     include6: 'PWA installabile',
     companyInclude1: 'Dashboard HR con contatori per dipendente e filtri',
     companyInclude2: 'Inviti e-mail, ruoli (amministratore dell’account / HR in lettura), export CSV',
@@ -373,6 +368,9 @@ const it: Dict = {
     companyBusinessOnly: 'Per le aziende. I consumatori scelgono il piano individuale.',
     yearlyRenewal:
       'I piani individuali annuali (49 €) si rinnovano per un altro anno al prezzo allora vigente fino alla disdetta. BorderDay invia un promemoria via e-mail prima di ogni addebito annuale. Disdite in qualsiasi momento tramite Disdici abbonamento nel piè di pagina (portale clienti). Dopo il primo anno potete disdire in qualsiasi momento un piano rinnovato; i rimborsi della parte non utilizzata si applicano ove il diritto imperativo dei consumatori lo richieda.',
+    approxChf: '≈ {chf}',
+    chfBillingNote:
+      'La fatturazione è in EUR. Gli importi in CHF sono indicativi, secondo il tasso di riferimento euro della BCE del {date} (1 EUR = {rate} CHF). Fonte: Banca centrale europea.',
   },
   faq: {
     title: 'FAQ',
@@ -413,7 +411,7 @@ const it: Dict = {
       'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni).',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Anteprima gratuita, sul vostro dispositivo: pacchetto confine, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego e A1 se inseriti. Piano individuale: gli stessi dati, salvati nel vostro account. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, pacchetto confine, tipi e date dei giorni, segni di notte fuori, percentuale d’impiego e A1 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
+      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego e A1 se inseriti. Piano individuale: gli stessi dati, salvati nel vostro account. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di notte fuori, percentuale d’impiego e A1 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
       'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche percentuale d’impiego e A1 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
@@ -447,7 +445,7 @@ const it: Dict = {
       },
       {
         purpose: 'Piano individuale: il vostro registro e i vostri contatori',
-        data: 'Pacchetto confine, tipi e date dei giorni, segni di notte fuori, note, giorni lavorativi, percentuale d’impiego, A1',
+        data: 'Corridoio, tipi e date dei giorni, segni di notte fuori, note, giorni lavorativi, percentuale d’impiego, A1',
         basis: 'Contratto (art. 6, par. 1, lett. b)',
         recipients: 'Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
@@ -463,7 +461,7 @@ const it: Dict = {
       },
       {
         purpose: 'Account aziendale: registri dei dipendenti e contatori HR (il datore di lavoro è titolare, BorderDay il suo responsabile del trattamento)',
-        data: 'Nome, e-mail, pacchetto confine, giorni lavorativi, percentuale d’impiego, A1, tipo e data del giorno, segno di notte fuori, contatori. Le note restano private per il dipendente.',
+        data: 'Nome, e-mail, corridoio, giorni lavorativi, percentuale d’impiego, A1, tipo e data del giorno, segno di notte fuori, contatori. Le note restano private per il dipendente.',
         basis: 'Stabilita dal datore di lavoro come titolare, per esempio un obbligo di legge o legittimi interessi. BorderDay non si basa qui sul consenso del dipendente.',
         recipients: 'Gli amministratori dell’account e i lettori HR del datore di lavoro; Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
@@ -537,7 +535,7 @@ const it: Dict = {
   },
   individuals: {
     title: 'BorderDay per i privati',
-    heroTitle: 'Registrate i vostri giorni di confine',
+    heroTitle: 'Registrate i vostri giorni sul corridoio',
     heroBody:
       'Dipendenti e utenti individuali possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati: contatori di sicurezza sociale su ogni corridoio, contatori fiscali dove la regola è oggi conteggiabile. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
     ctaApp: 'Apri l’app dipendente',
@@ -554,7 +552,6 @@ const it: Dict = {
       'Accedete con e-mail o Google, poi create l’azienda. Abbonatevi in seguito dalla pagina Prezzi.',
     companyName: 'Nome azienda',
     yourName: 'Il vostro nome',
-    workEmail: 'E-mail di lavoro',
     createButton: 'Crea azienda',
     created: 'Azienda creata. Siete l’amministratore dell’account.',
     openDashboard: 'Apri dashboard HR',
@@ -573,7 +570,7 @@ const it: Dict = {
     dashboardTitle: 'Dashboard HR',
     dashboardSubtitle:
       'Contatori fiscali e di sicurezza sociale per dipendente. Tipi di giorno, segni di notte fuori e conteggi — mai GPS né posizione del dispositivo.',
-    filterBorder: 'Filtra per confine',
+    filterBorder: 'Filtra per corridoio',
     filterStatus: 'Filtra per situazione',
     filterAll: 'Tutti',
     exportCsv: 'Esporta CSV',
@@ -588,10 +585,10 @@ const it: Dict = {
     backDashboard: 'Torna alla dashboard',
     joinTitle: 'Unitevi alla vostra azienda',
     joinSubtitle:
-      'Accettate l’invito, leggete l’avviso su ciò che può vedere l’HR e scegliete il pacchetto confine.',
+      'Accettate l’invito, leggete l’avviso su ciò che può vedere l’HR e scegliete il corridoio.',
     joinButton: 'Unisciti all’azienda',
     joinSuccess: 'Fatto: ora fate parte dell’azienda. Aprite l’app dipendente per registrare i giorni.',
-    pickBorder: 'Il vostro pacchetto confine',
+    pickBorder: 'Il vostro corridoio',
     demoDataBadge: 'DATI DEMO',
     demoBanner: 'Questa azienda è etichettata DEMO. Cifre di esempio per l’anteprima — non dipendenti reali.',
     loadDemo: 'Carica azienda DEMO',
@@ -615,13 +612,13 @@ const it: Dict = {
     kindSs: 'Sicurezza sociale',
     colDate: 'Data',
     colDayType: 'Tipo di giorno',
-    emptyCounters: 'Il dipendente non ha ancora scelto un pacchetto confine.',
+    emptyCounters: 'Il dipendente non ha ancora scelto un corridoio.',
     profileTitle: 'Percentuale d’impiego e A1',
     saveProfile: 'Salva',
     profileSaved: 'Salvato.',
     noticeTitle: 'Avviso — cosa può vedere l’HR',
     noticeBody:
-      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, pacchetto confine scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se è segnato come notte fuori per lavoro, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego e il vostro A1. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare o cancellare il registro e chiedere al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale.',
+      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, corridoio scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se è segnato come notte fuori per lavoro, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego e il vostro A1. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare o cancellare il registro e chiedere al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale.',
     noticeAck: 'Ho letto questo avviso',
     noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
     noticePrivacyLink: 'Informativa privacy completa',
@@ -648,7 +645,7 @@ const it: Dict = {
       'BorderDay è uno strumento di registrazione e promemoria delle classificazioni giornaliere per datori di lavoro e dipendenti su determinati corridoi transfrontalieri. Non è consulenza fiscale o legale, né sostituisce il datore di lavoro, un consulente qualificato o un’autorità competente. Vedete l’Avvertenza.',
     s2Title: 'Account e uso aziendale',
     s2Body:
-      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un pacchetto confine e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Gli obblighi del datore di lavoro possono impedire un uso lecito finché non sono adempiuti: ad esempio la codecisione del consiglio di fabbrica sui sistemi tecnici di controllo (Germania BetrVG § 87 abs. 1 n. 6), le regole di consultazione dei rappresentanti del personale o dei CCT in Francia, Belgio, Lussemburgo e Svizzera, e ogni norma locale sul monitoraggio dei dipendenti o sulla privacy sul luogo di lavoro. BorderDay non conduce tali consultazioni al posto vostro. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati.',
+      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un corridoio e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Gli obblighi del datore di lavoro possono impedire un uso lecito finché non sono adempiuti: ad esempio la codecisione del consiglio di fabbrica sui sistemi tecnici di controllo (Germania BetrVG § 87 abs. 1 n. 6), le regole di consultazione dei rappresentanti del personale o dei CCT in Francia, Belgio, Lussemburgo e Svizzera, e ogni norma locale sul monitoraggio dei dipendenti o sulla privacy sul luogo di lavoro. BorderDay non conduce tali consultazioni al posto vostro. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati.',
     s3Title: 'Abbonamenti, prova, rinnovo e disdetta',
     s3Body:
       'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo avviato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link, e il diritto di recesso qui sotto non è pregiudicato.',
@@ -790,7 +787,7 @@ const it: Dict = {
       'Per i registri dei giorni dei dipendenti, gli inviti e i contatori HR da essi derivati, il datore di lavoro è titolare e PrimeLogic Advisory Sàrl è responsabile del trattamento. Per il sito BorderDay, i piani individuali, gli account utente, l’amministrazione dell’account aziendale, la fatturazione, il supporto e la sicurezza, PrimeLogic Advisory Sàrl resta titolare ai sensi dell’informativa sulla privacy. Stripe e Link agiscono come titolari indipendenti per il pagamento secondo le proprie informative; non sono responsabili del trattamento dei registri dei giorni ai sensi del presente ATD.',
     subjectTitle: 'Oggetto e natura del trattamento',
     subjectBody:
-      'Oggetto: hosting, archiviazione, recupero, trasmissione e visualizzazione dei dati di appartenenza e dei registri dei giorni affinché il datore di lavoro possa gestire i contatori di telelavoro e fiscali. Natura: trattamento automatizzato in un’applicazione ospitata (creazione, lettura, aggiornamento, cancellazione; aggregazione in contatori; e-mail di invito). Finalità: solo le finalità istruite dal datore di lavoro tramite le funzioni aziendali BorderDay, e come descritte nell’informativa sulla privacy. Categorie di interessati: dipendenti e altre persone fisiche che il datore di lavoro invita all’account aziendale. Categorie di dati: nome, e-mail, ruolo, pacchetto frontaliero, giorni contrattuali, percentuale di attività e scheda A1 se inserita, tipo e data del giorno, contrassegno pernottamento fuori casa, contatori, e la registrazione che è stato mostrato l’avviso «cosa vedono le HR». Le note restano private del dipendente. Non viene raccolta alcuna localizzazione GPS o del dispositivo.',
+      'Oggetto: hosting, archiviazione, recupero, trasmissione e visualizzazione dei dati di appartenenza e dei registri dei giorni affinché il datore di lavoro possa gestire i contatori di telelavoro e fiscali. Natura: trattamento automatizzato in un’applicazione ospitata (creazione, lettura, aggiornamento, cancellazione; aggregazione in contatori; e-mail di invito). Finalità: solo le finalità istruite dal datore di lavoro tramite le funzioni aziendali BorderDay, e come descritte nell’informativa sulla privacy. Categorie di interessati: dipendenti e altre persone fisiche che il datore di lavoro invita all’account aziendale. Categorie di dati: nome, e-mail, ruolo, corridoio, giorni contrattuali, percentuale di attività e scheda A1 se inserita, tipo e data del giorno, contrassegno pernottamento fuori casa, contatori, e la registrazione che è stato mostrato l’avviso «cosa vedono le HR». Le note restano private del dipendente. Non viene raccolta alcuna localizzazione GPS o del dispositivo.',
     durationTitle: 'Durata',
     durationBody:
       'Il trattamento dura per la vita dell’account aziendale e dell’appartenenza e, successivamente, solo quanto necessario per cancellare o restituire i dati ai sensi del presente ATD e dei periodi di conservazione dell’informativa sulla privacy (incluso eventuali impostazioni di conservazione aziendali).',

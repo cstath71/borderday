@@ -312,7 +312,7 @@ describe('History', () => {
       { employeeUserId: 'emp1', workDate: '2026-03-02', dayType: 'telework', note: 'dentist' } as any,
     ]);
     const { container } = open('/en/company/c1/employee/emp1');
-    await screen.findByText('2026-03-02');
+    await screen.findByText(new Date('2026-03-02T12:00:00').toLocaleDateString('en-CH', { year: 'numeric', month: 'short', day: 'numeric' }));
     expect(screen.getByRole('cell', { name: en.dayTypes.telework })).toBeTruthy();
     expect(screen.getByText(en.company.countersHeading, { selector: 'h2' })).toBeTruthy();
     expect(container.textContent).not.toContain('dentist');
@@ -325,7 +325,7 @@ describe('History', () => {
     mocked.listMembers.mockResolvedValue([empRow]);
     mocked.listDayLogs.mockResolvedValue([{ employeeUserId: 'emp1', workDate: '2026-03-02', dayType: 'onsite' }]);
     open('/en/company/c1/employee/emp1');
-    await screen.findByText('2026-03-02');
+    await screen.findByText(new Date('2026-03-02T12:00:00').toLocaleDateString('en-CH', { year: 'numeric', month: 'short', day: 'numeric' }));
     expect(screen.getByText(en.company.countersHeading, { selector: 'h2' })).toBeTruthy();
     expect(screen.getByRole('link', { name: `← ${en.nav.openApp}` })).toBeTruthy();
   });

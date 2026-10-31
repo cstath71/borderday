@@ -169,6 +169,7 @@ function DemoHistory() {
         backHref={back}
         backLabel={d.company.backDashboard}
         isDemo
+        locale={({en:'en-CH',fr:'fr-CH',de:'de-CH',it:'it-CH',nl:'nl-BE'} as const)[lang] ?? 'en-CH'}
       />
     </div>
   );

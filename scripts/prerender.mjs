@@ -71,7 +71,7 @@ function headBlock({ lang, path, title, description, noindex }) {
     <meta property="og:type" content="website">
     <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:image" content="${esc(BASE + CFG.og_image)}">
-    <meta property="og:locale" content="${lang === 'en' ? 'en_US' : lang === 'fr' ? 'fr_FR' : lang === 'de' ? 'de_DE' : 'it_IT'}">
+    <meta property="og:locale" content="${lang === 'en' ? 'en_US' : lang === 'fr' ? 'fr_FR' : lang === 'de' ? 'de_DE' : lang === 'nl' ? 'nl_BE' : 'it_IT'}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${esc(title)}">
     <meta name="twitter:description" content="${esc(description)}">

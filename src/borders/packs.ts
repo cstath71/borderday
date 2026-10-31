@@ -68,7 +68,7 @@ const SRC = {
   },
   ccssParent: {
     title: 'CCSS Luxembourg — telework agreement',
-    url: 'https://ccss.public.lu/en/employeurs/secteur-prive/activite-etranger/accord-teletravail.html',
+    url: 'https://ccss.public.lu/en/employeurs/secteur-prive/activite-etranger/accord-teletravail/notice-teletravail.html',
     checked: CHECKED,
   },
   ge40: {

@@ -12,8 +12,9 @@ export default function HistoryView(props: {
   backHref: string;
   backLabel: string;
   isDemo?: boolean;
+  locale?: string;
 }) {
-  const { d, row, logs, backHref, backLabel, isDemo } = props;
+  const { d, row, logs, backHref, backLabel, isDemo, locale = 'en-CH' } = props;
   return (
     <>
       <Link className="meta" to={backHref}>
@@ -47,7 +48,7 @@ export default function HistoryView(props: {
         <tbody>
           {logs.map((l) => (
             <tr key={l.workDate}>
-              <td>{l.workDate}</td>
+              <td>{new Date(l.workDate + 'T12:00:00').toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' })}</td>
               <td>{(d.dayTypes as Record<string, string>)[l.dayType] ?? l.dayType}</td>
               <td>{l.dayShare === 0.5 ? '½' : ''}</td>
               <td>{l.overnightAway ? '✓' : ''}</td>

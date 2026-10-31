@@ -11,7 +11,7 @@ export const CFG = JSON.parse(readFileSync(join(ROOT, 'config/site.json'), 'utf8
 export const BASE = CFG.base_url.replace(/\/$/, '');
 export const BRAND = CFG.brand;
 export const INDEXNOW_KEY = CFG.indexnow_key;
-export const LANGS = ['en', 'fr', 'de', 'it'];
+export const LANGS = ['en', 'fr', 'de', 'it', 'nl'];
 export const LASTMOD = CFG.lastmod;
 
 export const IN_SHORT_LABEL = {
@@ -19,6 +19,7 @@ export const IN_SHORT_LABEL = {
   fr: 'En bref',
   de: 'Kurz gesagt',
   it: 'In breve',
+  nl: 'In het kort',
 };
 
 export const AI_BOTS = [
@@ -269,8 +270,8 @@ export const PAGES = {
     it: {
       title: 'Per i privati — BorderDay',
       description:
-        'Registrate telelavoro e giorni di confine. 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
-      h1: 'Registrate i vostri giorni di confine',
+        'Registrate telelavoro e giorni sul corridoio. 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+      h1: 'Registrate i vostri giorni sul corridoio',
       summary:
         'Dipendenti e utenti individuali possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati. Contatori di sicurezza sociale su ogni corridoio, contatori fiscali su sette. Piano individuale: 4,99 €/mese o 49 €/anno (IVA inclusa). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
       crumbs: [
@@ -667,6 +668,69 @@ export const PAGES = {
   },
 };
 
+// Dutch legal locale: clone EN SEO for every path, then override legal pages.
+for (const path of Object.keys(PAGES)) {
+  if (!PAGES[path].nl) PAGES[path].nl = { ...PAGES[path].en };
+}
+PAGES.privacy.nl = {
+  title: 'BorderDay — Privacyverklaring',
+  description:
+    'Wat BorderDay verwerkt, waarom, wie ontvangt, waar gegevens naartoe gaan en hoe lang ze worden bewaard. AVG en Zwitserse DSG. Geen GPS of apparaatlocatie.',
+  h1: 'Privacyverklaring',
+  summary: 'Geen GPS of apparaatlocatie: HR ziet per datum de dagsoort en overnachting weg ja/nee, een landcategorie, nooit coördinaten. De werkgever is verwerkingsverantwoordelijke voor medewerkersdagboeken. Contact privacy@borderday.com.',
+  crumbs: [
+    ['Home', ''],
+    ['Privacyverklaring', 'privacy'],
+  ],
+};
+PAGES.terms.nl = {
+  title: 'BorderDay — Voorwaarden & impressum',
+  description:
+    'Voorwaarden, impressum en herroepingsrecht. Abonnementen via Stripe Managed Payments (Link). 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
+  h1: 'Voorwaarden & impressum',
+  summary: PAGES.terms.en.summary,
+  crumbs: [
+    ['Home', ''],
+    ['Voorwaarden', 'terms'],
+  ],
+};
+PAGES.dpa.nl = {
+  title: 'BorderDay — Verwerkersovereenkomst',
+  description:
+    'Verwerkersovereenkomst (art. 28 AVG / Zwitserse DSG) voor BorderDay-bedrijfsaccounts. Rollen werkgever/verwerker voor medewerker-dagregistraties.',
+  h1: 'Verwerkersovereenkomst (bedrijfsaccounts)',
+  summary: 'DPA voor medewerker-dagregistraties wanneer de werkgever een bedrijfsaccount gebruikt.',
+  crumbs: [
+    ['Home', ''],
+    ['Verwerkersovereenkomst', 'dpa'],
+  ],
+};
+PAGES.disclaimer.nl = {
+  title: 'BorderDay — Disclaimer',
+  description: 'BorderDay is een registratie- en herinneringstool — geen belasting- of juridisch advies.',
+  h1: 'Disclaimer',
+  summary: 'Geen belasting- of juridisch advies; drempels uit openbare bronnen.',
+};
+PAGES.withdrawal.nl = {
+  title: 'BorderDay — Herroeping',
+  description: 'Herroepingsrecht van 14 dagen voor consumenten in de EU/EER op individuele abonnementen.',
+  h1: 'Herroeping van de overeenkomst',
+  summary: 'EU/EER-consumentenherroeping voor individuele BorderDay-abonnementen.',
+};
+PAGES.accessibility.nl = {
+  title: 'BorderDay — Toegankelijkheid',
+  description: 'Toegankelijkheidsverklaring voor borderday.com (richting WCAG 2.2 AA).',
+  h1: 'Toegankelijkheid',
+  summary: 'Korte openbare toegankelijkheidsverklaring voor BorderDay.',
+};
+PAGES[''].nl = { ...PAGES[''].en, title: 'BorderDay — Grensoverschrijdende daglimieten voor HR en medewerkers', h1: 'Eén plek voor elke grens waar uw mensen overheen werken' };
+PAGES.pricing.nl = { ...PAGES.pricing.en, title: 'BorderDay — Prijzen', h1: 'Prijzen' };
+PAGES.faq.nl = { ...PAGES.faq.en, title: 'BorderDay — FAQ', h1: 'FAQ' };
+PAGES['for-individuals'].nl = { ...PAGES['for-individuals'].en, title: 'BorderDay — Voor particulieren', h1: 'Log your own border days' };
+PAGES.cancel.nl = { ...PAGES.cancel.en, title: 'BorderDay — Abonnement opzeggen', h1: 'Abonnement opzeggen' };
+PAGES['company/signup'].nl = { ...PAGES['company/signup'].en, title: 'BorderDay — Bedrijf aanmelden', h1: 'Bedrijf aanmelden' };
+
+
 /** Corridors with a running tax counter. tests/seo.test.ts holds this equal to the packs. */
 export const TAX_COUNTER_CORRIDORS = ['geneva_fr', 'basel_fr', 'basel_de', 'luxembourg_fr', 'luxembourg_be', 'luxembourg_de', 'ticino_it'];
 
@@ -793,6 +857,8 @@ export const FAQ = {
     ],
   ],
 };
+FAQ.nl = FAQ.en;
+
 
 export function robotsTxt() {
   const disallow = [

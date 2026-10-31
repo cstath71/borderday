@@ -3,6 +3,7 @@ import en from '../src/i18n/en';
 import fr from '../src/i18n/fr';
 import de from '../src/i18n/de';
 import itDict from '../src/i18n/it';
+import nl from '../src/i18n/nl';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { BORDER_PACKS } from '../src/borders/packs';
@@ -30,9 +31,14 @@ describe('i18n key parity', () => {
   it('IT has identical keys to EN', () => {
     expect(flatKeys(itDict)).toEqual(enKeys);
   });
+  it('NL has identical keys to EN', () => {
+    expect(flatKeys(nl)).toEqual(enKeys);
+  });
   it('brand surfaces avoid the frontier-worker words, including transfrontalier*', () => {
-    const banned = /frontalier|frontaliere|grenzgänger|grenzgaenger/i;
-    for (const [lang, d] of Object.entries({ en, fr, de, it: itDict })) {
+    // Match as substring so "transfrontalier" is caught; brand-only (not counter/legal quotes).
+    const banned = /frontalier|frontaliere|grenzgänger|grenzgaenger|grensarbeider/i;
+    const dicts = { en, fr, de, it: itDict, nl };
+    for (const [lang, d] of Object.entries(dicts)) {
       const surfaces = [
         d.meta.tagline,
         d.meta.description,
@@ -41,17 +47,57 @@ describe('i18n key parity', () => {
         d.home.heroBody,
         d.home.inShort,
         d.home.waitlistTitle,
+        d.home.waitlistBody,
         d.pricing.title,
         d.pricing.subtitle,
-      ];
+        d.pricing.company,
+        d.pricing.individual,
+        d.nav.home,
+        d.nav.app,
+        d.nav.forIndividuals,
+        d.nav.forCompanies,
+        d.individuals?.title,
+        d.faq.title,
+      ].filter(Boolean);
       for (const s of surfaces) expect(s, lang).not.toMatch(banned);
     }
     for (const lang of LANGS) {
       for (const path of PUBLIC_PATHS) {
         const page = PAGES[path][lang];
-        for (const s of [page.title, page.description, page.h1]) expect(s, `${lang} ${path}`).not.toMatch(banned);
+        for (const s of [page.title, page.description, page.h1, page.summary].filter(Boolean)) {
+          expect(s, `${lang} ${path}`).not.toMatch(banned);
+        }
       }
     }
+    // seo.mjs slogans / footer-adjacent copy already covered via PAGES; also forbid product coinages
+    for (const [lang, d] of Object.entries(dicts)) {
+      const blob = JSON.stringify({
+        meta: d.meta,
+        home: d.home,
+        pricing: d.pricing,
+        footer: d.footer,
+        nav: d.nav,
+      });
+      expect(blob, lang).not.toMatch(/Grenzpaket|pack frontière|pacchetto confine|border pack/i);
+    }
+  });
+});
+
+
+describe('border-route naming (T56/T59)', () => {
+  const dicts = { en, fr, de, it: itDict, nl };
+  it('drops Grenzpaket / pack frontière / pacchetto confine product coinages', () => {
+    for (const [lang, d] of Object.entries(dicts)) {
+      const blob = JSON.stringify(d);
+      expect(blob, lang).not.toMatch(/Grenzpaket|Grenztage|Tagesschwellen/);
+      expect(blob, lang).not.toMatch(/pack frontière|jours frontière/);
+      expect(blob, lang).not.toMatch(/pacchetto confine|pacchetto di confine|pacchetto frontiera/);
+      expect(blob, lang).not.toMatch(/border pack/i);
+    }
+    expect(en.company.pickBorder).toMatch(/route/i);
+    expect(fr.company.pickBorder).toMatch(/itinéraire/i);
+    expect(de.company.pickBorder).toMatch(/Grenzroute/);
+    expect(itDict.company.pickBorder).toMatch(/corridoio/i);
   });
 });
 

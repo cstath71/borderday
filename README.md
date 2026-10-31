@@ -8,7 +8,7 @@ Multilingual PWA for HR and employees to track telework / on-site / third-countr
 - Supabase (EU `fig-mail` project): Auth, `bd_*` tables + RLS, Edge Functions
 - GitHub Pages hosting
 - Stripe Checkout live (Managed Payments, sold through Link)
-- Resend configured for invite email. Live by default (`RESEND_LIVE` unset or `1`; set `0` to pause). When live, any single-recipient address may be emailed (owner/hr only, rate-limited). When paused, real sends stay limited to test addresses (`@borderday.com`, `@example.com`, `@example.org`, `@borderday.test`).
+- Resend configured for invite email. Live by default (`RESEND_LIVE=1` or unset; set `RESEND_LIVE=0` to pause). When live, any single-recipient address may be emailed (owner/hr only, rate-limited). When paused, real sends stay limited to test addresses (`@borderday.com`, `@example.com`, `@example.org`, `@borderday.test`).
 
 ## Auth
 

@@ -37,6 +37,7 @@ const de: Dict = {
     fr: 'Français',
     de: 'Deutsch',
     it: 'Italiano',
+    nl: 'Nederlands',
     label: 'Sprache',
     apply: 'Übernehmen',
   },
@@ -51,7 +52,7 @@ const de: Dict = {
     risk1Title: 'Sozialversicherungsrechtliche Zuständigkeit',
     risk1Body:
       'Nach dem EU/EWR/CH-Rahmenübereinkommen verlagert Telearbeit im Wohnstaat ab 25 % der Arbeitszeit die Sozialversicherung normalerweise dorthin, sofern keine A1-Bescheinigung beantragt wird. Ab 50 % steht das Übereinkommen nicht mehr zur Verfügung. BorderDay zeigt die drei Bereiche getrennt von der Steuer: unter 25 %, 25 % bis unter 50 % (A1 erforderlich) und 50 % oder mehr.',
-    risk2Title: 'Steuerliche Tagesschwellen',
+    risk2Title: 'Steuerliche Tagesgrenzen',
     risk2Body:
       'Steuerzähler laufen heute auf sieben Korridoren: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Nächte, in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
     risk3Title: 'Teams über mehrere Grenzen',
@@ -62,7 +63,7 @@ const de: Dict = {
       'Unabhängige Zähler mit verlinkten amtlichen Quellen. Warnungen bei 75 % und 90 % der geltenden Grenze, danach die Zustände «an der Grenze» und «überschritten» mit der jeweiligen Folge.',
     feature2Title: 'Einladung per E-Mail-Link',
     feature2Body:
-      'Mitarbeitende treten bei, wählen ihr Grenzpaket und erfassen nur die Tagesart — niemals einen GPS-Standort.',
+      'Mitarbeitende treten bei, wählen ihre Grenzroute und erfassen nur die Tagesart — niemals einen GPS-Standort.',
     feature3Title: 'Datenschutz durch Technikgestaltung',
     feature3Body:
       'An DSGVO und schweizerischem DSG ausgerichtet: Mandantentrennung, Export und Löschung, klarer Hinweis darauf, was HR sieht, Aufbewahrungshinweis. Kein GPS und kein Gerätestandort.',
@@ -71,7 +72,7 @@ const de: Dict = {
       'Jeder Korridor zeigt, was er heute zählt. Wenn noch keine Steuerregel gezählt werden kann, steht das dort, und es erscheint keine Zahl.',
     howTitle: 'So nutzen Unternehmen BorderDay',
     how1: 'Unternehmenskonto anlegen und Mitarbeitende per E-Mail-Link einladen.',
-    how2: 'Jede Person wählt ihr Grenzpaket und erfasst Telearbeit / vor Ort / Reise / nicht gearbeitet.',
+    how2: 'Jede Person wählt ihre Grenzroute und erfasst Telearbeit / vor Ort / Reise / nicht gearbeitet.',
     how3: 'HR beobachtet Steuer- und Sozialversicherungs-Zähler, filtert nach Status und exportiert CSV.',
     waitlistTitle: 'Mit Unternehmenskonto starten',
     waitlistBody:
@@ -144,7 +145,6 @@ const de: Dict = {
     ch_fr_missions_note:
       'Temporäre Einsätze in Frankreich oder einem Drittstaat: Bis zu 10 Tage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit Platz haben. Bei Teilzeit oder unterjähriger Tätigkeit werden die 10 Tage anteilig gekürzt und aufgerundet. Tage ausserhalb dieser Grenzen sind in Frankreich steuerbar, vorbehaltlich eines Abkommens mit dem Drittstaat. Quellen: Verständigungsvereinbarung der ESTV vom 29. Apr. 2026; Merkblatt impots.gouv.fr.',
     lu_tax_tolerance_34: 'Tage ausserhalb Luxemburgs (bis 34 Tage/Jahr)',
-    lu_tax_tolerance_pending: 'Tage ausserhalb Luxemburgs (steuerliche Toleranz)',
     lu_fr_tax_note:
       'Personen mit Wohnsitz in Frankreich und Beschäftigung in Luxemburg: bis zu 34 Tage pro Steuerzeitraum körperlich in Frankreich und/oder einem Drittstaat zur Arbeit, ohne die Besteuerung in Luxemburg für den Zeitraum zu verlieren. Teilzeit oder unterjährig: Die 34 werden anteilig gekürzt und abgerundet. Darüber hinaus kann Frankreich die tatsächlich in Frankreich oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Jeder Teil eines Tages zählt als ganzer Tag, Weiterbildung zählt ebenfalls. Ferien, wöchentliche Ruhetage, nicht gearbeitete Feiertage, Krankheit und höhere Gewalt zählen nicht. Die Grenze gilt für alle Ihre Verträge im Jahr, und Sie müssen Ihre Tage belegen: Dieses Protokoll allein reicht womöglich nicht. Quelle: Vereinbarung auf impots.gouv.fr (das PDF nennt 29 Tage, durch den Zusatz vom 7. Nov. 2022 auf 34 erhöht).',
     ss_framework_under_50:
@@ -168,7 +168,6 @@ const de: Dict = {
     pending_lu_de_tax:
       'Laut der luxemburgischen Regierung stieg die Toleranz ab 2024 für Personen mit Wohnsitz in Deutschland von 19 auf 34 Tage. Der deutsche Text zu Zählweise und Teilzeit konnte nicht bestätigt werden, daher läuft kein Zähler und die Kürzung Frankreich–Luxemburg wird nicht angewendet. Fragen Sie Ihre Behörde.',
     usedOf: '{used} von {limit}',
-    percentUsed: '{used} % von {limit} %',
     usedOfDays: '{used} von {allowed} Tagen',
     percentOfAnnual: '{pct} % von {annual} Tagen/Jahr (Grenze {limit} %)',
     status_ok: 'Unter der erfassten Grenze',
@@ -176,7 +175,6 @@ const de: Dict = {
     status_critical: 'Nahe der Grenze',
     status_over: 'Über der Grenze',
     status_disabled: 'Noch kein Zähler',
-    sourceLink: 'Amtliche Quellen',
     checkedOn: 'Geprüft am {date}',
     employer_practice: 'Arbeitgeberpraxis',
     ch_fr_over_40:
@@ -200,7 +198,6 @@ const de: Dict = {
       'Über 45 Arbeitsnächte auswärts: das Grenzgängerregime von 1983 entfällt. Fragen Sie Ihre Steuerbehörde.',
     ch_fr_1983_mission_excess:
       'Von Ihren Einsatztagen zählen {counted} innerhalb der 40 % und {excess} nicht. Jeder überschüssige Tag in Frankreich beendet das Regime von 1983; BorderDay unterscheidet Frankreich nicht von einem Drittstaat.',
-    ch_fr_1983_label: 'Steuer Frankreich–Schweiz (Abkommen von 1983)',
     ch_fr_1983_value: 'Siehe Zähler 40 % / 10 Einsätze / 45 Nächte',
     ch_fr_1983_note:
       'Diese Kantone folgen dem Abkommen von 1983: in Frankreich besteuert (Frankreich überweist 4,5 % an die Schweiz). Die Zähler erfassen Telearbeit bis 40 %, bis zu 10 Einsatztage und höchstens 45 Arbeitsnächte auswärts.',
@@ -247,7 +244,6 @@ const de: Dict = {
     be_fr_value: 'Keine Tagestoleranz gefunden',
     be_nl_tax_label: 'Steuer Niederlande→Belgien',
     be_nl_value: 'Keine Regel bestätigt: Fragen Sie Ihre Behörde',
-    lu_announced_value: '34 Tage angekündigt: noch kein Zähler',
     pending_be_fr_tax:
       'Keine Tagestoleranz gefunden. Homeoffice-Tage in Frankreich werden ab dem ersten Tag anteilig in Frankreich besteuert (Art. 11 des Abkommens Frankreich–Belgien; Antwort des französischen Ministers vom 28. Mai 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). Wer vor dem 1. Januar 2012 Grenzgänger wurde, behält bis 2033 ein eigenes Regime: aktivieren Sie diese Option unten, um den 30-Tage-Zähler zu öffnen. Hier läuft kein allgemeiner Steuerzähler.',
     be_fr_pre2012_30: 'Tage ausserhalb der belgischen Grenzzone (max. 30/Jahr, Grenzgänger vor 2012)',
@@ -279,14 +275,13 @@ const de: Dict = {
   },
   app: {
     title: 'Ihr Tagesprotokoll',
-    pickBorder: 'Ihre Grenze',
+    pickBorder: 'Ihre Grenzroute',
     pickBorderHint: 'Wohnsitz → Arbeitsort',
     today: 'Heute',
     logDay: 'Diesen Tag erfassen',
-    changeDay: 'Ändern',
     calendar: 'Kalender',
     counters: 'Ihre Zähler',
-    noBorder: 'Wählen Sie ein Grenzpaket, um Zähler zu sehen.',
+    noBorder: 'Wählen Sie eine Grenzroute, um Zähler zu sehen.',
     exportJson: 'JSON exportieren',
     exportCsv: 'CSV exportieren',
     deleteAll: 'Alle Tage löschen',
@@ -338,7 +333,7 @@ const de: Dict = {
     monthly: '4,99 € / Monat',
     yearly: '49 € / Jahr',
     yearlyNote: 'Etwa zwei Monate gratis gegenüber monatlich.',
-    companyPrice: '5 € / aktive Mitarbeitende / Monat',
+    companyPrice: '5 € / aktive mitarbeitende Person / Monat',
     companyMin: 'Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab; darüber hinaus Abrechnung je Sitz)',
     companyYearly: 'Jahresabrechnung: 2 Monate gratis (Mindestbetrag 390 € / Jahr)',
     activeEmployeeDef:
@@ -346,12 +341,12 @@ const de: Dict = {
     companyTax: 'zzgl. MWST',
     individualTax: 'inkl. MWST',
     includes: 'Enthalten',
-    include1: 'Alle Grenzpakete Ihres Plans',
+    include1: 'Alle Grenzrouten Ihres Plans',
     include2:
       'Steuerzähler, wo verfügbar, Sozialversicherungszähler auf jedem Korridor',
     include3: 'Warnungen bei Annäherung an die Schwellen',
     include4: 'Daten jederzeit exportieren und löschen',
-    include5: 'Englisch, Französisch, Deutsch, Italienisch',
+    include5: 'Englisch, Französisch, Deutsch, Italienisch, Niederländisch',
     include6: 'Installierbare PWA',
     companyInclude1: 'HR-Dashboard mit Zählern pro Person und Filtern',
     companyInclude2: 'E-Mail-Einladungen, Rollen (Kontoinhaber / HR-Ansicht), CSV-Export',
@@ -374,6 +369,9 @@ const de: Dict = {
     companyBusinessOnly: 'Für Unternehmen. Verbraucher wählen den Einzelplan.',
     yearlyRenewal:
       'Jährliche Einzelpläne (49 €) verlängern sich um ein weiteres Jahr zum dann geltenden Preis, bis Sie kündigen. BorderDay sendet vor jeder Jahresabbuchung eine Erinnerung per E-Mail. Jederzeit kündigen über Abo kündigen in der Fusszeile (Kundenportal). Nach dem ersten Jahr können Sie ein verlängertes Jahresabo jederzeit beenden; anteilige Erstattung ungenutzter Zeit gilt, soweit zwingendes Verbraucherrecht es verlangt.',
+    approxChf: '≈ {chf}',
+    chfBillingNote:
+      'Abrechnung in EUR. CHF-Beträge sind Näherungswerte nach dem EZB-Euro-Referenzkurs vom {date} (1 EUR = {rate} CHF). Quelle: Europäische Zentralbank.',
   },
   faq: {
     title: 'FAQ',
@@ -413,7 +411,7 @@ const de: Dict = {
       'In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage seiner Mitarbeitenden erfasst werden. Der Arbeitgeber ist daher Verantwortlicher für diese Tagesprotokolle und deren Nutzung durch HR, einschliesslich der Rechtsgrundlage, und BorderDay bearbeitet sie für ihn als Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Fragen dazu, warum Ihr Arbeitgeber diese Tage erfasst oder welche Unterlagen er aufbewahren muss, richten Sie zuerst an ihn; an privacy@borderday.com gesendete Anfragen leiten wir weiter. Der öffentliche Auftragsverarbeitungsvertrag für Unternehmenskonten steht unter /dpa/ (verlinkt von Preisen, Unternehmensanmeldung und den Nutzungsbedingungen).',
     s1Title: 'Was wir erheben',
     s1Body:
-      'Kostenlose Vorschau, auf Ihrem Gerät: Grenzpaket, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad und A1, falls eingetragen. Einzelplan: dieselben Daten, in Ihrem Konto gespeichert. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzpaket, Tagesarten und Daten, Markierungen auswärtiger Übernachtung, Beschäftigungsgrad und A1, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
+      'Kostenlose Vorschau, auf Ihrem Gerät: Grenzroute, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad und A1, falls eingetragen. Einzelplan: dieselben Daten, in Ihrem Konto gespeichert. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzroute, Tagesarten und Daten, Markierungen auswärtiger Übernachtung, Beschäftigungsgrad und A1, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
     s2Title: 'Was wir nicht erheben',
     s2Body:
       'Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat. HR sieht zudem Beschäftigungsgrad und A1, falls eingetragen, und Anzahlen: dieselben Zähler wie die Mitarbeitenden. Keine IP-Adresse wird als Arbeitsort gespeichert. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
@@ -447,7 +445,7 @@ const de: Dict = {
       },
       {
         purpose: 'Einzelplan: Ihr Tagesprotokoll und Ihre Zähler',
-        data: 'Grenzpaket, Tagesarten und Daten, Markierungen auswärtiger Übernachtung, Notizen, Arbeitstage, Beschäftigungsgrad, A1',
+        data: 'Grenzroute, Tagesarten und Daten, Markierungen auswärtiger Übernachtung, Notizen, Arbeitstage, Beschäftigungsgrad, A1',
         basis: 'Vertrag (Art. 6 Abs. 1 lit. b)',
         recipients: 'Supabase',
         transfer: 'Hosting in der EU (eu-central-1); Anbieter mit Sitz in den USA; Garantien siehe unten',
@@ -463,7 +461,7 @@ const de: Dict = {
       },
       {
         purpose: 'Unternehmenskonto: Tagesprotokolle der Mitarbeitenden und HR-Zähler (der Arbeitgeber ist Verantwortlicher, BorderDay sein Auftragsverarbeiter / Auftragsbearbeiter)',
-        data: 'Name, E-Mail, Grenzpaket, Arbeitstage, Beschäftigungsgrad, A1, Tagesart und Datum, Markierung auswärtiger Übernachtung, Zähler. Notizen bleiben für die mitarbeitende Person privat.',
+        data: 'Name, E-Mail, Grenzroute, Arbeitstage, Beschäftigungsgrad, A1, Tagesart und Datum, Markierung auswärtiger Übernachtung, Zähler. Notizen bleiben für die mitarbeitende Person privat.',
         basis: 'Vom Arbeitgeber als Verantwortlichem festgelegt, zum Beispiel eine rechtliche Verpflichtung oder berechtigte Interessen. BorderDay stützt sich hier nicht auf eine Einwilligung der Mitarbeitenden.',
         recipients: 'Die Kontoinhaber und HR-Leser des Arbeitgebers; Supabase',
         transfer: 'Hosting in der EU (eu-central-1); Anbieter mit Sitz in den USA; Garantien siehe unten',
@@ -545,7 +543,7 @@ const de: Dict = {
     ctaCompanies: 'Mein Arbeitgeber braucht den Unternehmensplan',
     point1:
       'Die Gratisvorschau bleibt auf Ihrem Gerät, ein Abo speichert das Protokoll in Ihrem Konto. Export und Löschung in beiden Fällen.',
-    point2: 'Dieselben Grenzpakete und sorgfältig belegten Zähler',
+    point2: 'Dieselben Grenzrouten und sorgfältig belegten Zähler',
     point3: 'Optionaler Unternehmensbeitritt — Sie sehen, was HR sieht',
   },
   company: {
@@ -553,7 +551,6 @@ const de: Dict = {
     signupSubtitle: 'Mit E-Mail oder Google anmelden, dann Unternehmen anlegen. Abonnieren Sie auf der Preisseite, wenn Sie bereit sind.',
     companyName: 'Name des Unternehmens',
     yourName: 'Ihr Name',
-    workEmail: 'Geschäfts-E-Mail',
     createButton: 'Unternehmen erstellen',
     created: 'Unternehmen angelegt. Sie sind Kontoinhaber.',
     openDashboard: 'HR-Dashboard öffnen',
@@ -571,7 +568,7 @@ const de: Dict = {
     dashboardTitle: 'HR-Dashboard',
     dashboardSubtitle:
       'Steuer- und Sozialversicherungszähler je Mitarbeitenden. Tagesarten, Markierungen auswärtiger Übernachtung und Anzahlen — nie GPS oder Gerätestandort.',
-    filterBorder: 'Nach Grenze filtern',
+    filterBorder: 'Nach Grenzroute filtern',
     filterStatus: 'Nach Status filtern',
     filterAll: 'Alle',
     exportCsv: 'CSV exportieren',
@@ -585,10 +582,10 @@ const de: Dict = {
       'Nur Tagesart, Datum und Markierung auswärtiger Übernachtung. Es werden weder GPS noch Gerätestandort gespeichert, und Notizen werden nicht angezeigt.',
     backDashboard: 'Zurück zum Dashboard',
     joinTitle: 'Unternehmen beitreten',
-    joinSubtitle: 'Einladung annehmen, Hinweis lesen, was HR sehen kann, und Grenzpaket wählen.',
+    joinSubtitle: 'Einladung annehmen, Hinweis lesen, was HR sehen kann, und Grenzroute wählen.',
     joinButton: 'Beitreten',
     joinSuccess: 'Beigetreten. Öffnen Sie die Mitarbeiter-App zum Erfassen.',
-    pickBorder: 'Ihr Grenzpaket',
+    pickBorder: 'Ihre Grenzroute',
     demoDataBadge: 'DEMO-DATEN',
     demoBanner: 'Dieses Unternehmen ist als DEMO gekennzeichnet. Beispielzahlen zur Produktvorschau — keine echten Mitarbeitenden.',
     loadDemo: 'DEMO-Unternehmen laden',
@@ -611,13 +608,13 @@ const de: Dict = {
     kindSs: 'Sozialversicherung',
     colDate: 'Datum',
     colDayType: 'Tagesart',
-    emptyCounters: 'Noch kein Grenzpaket gewählt.',
+    emptyCounters: 'Noch keine Grenzroute gewählt.',
     profileTitle: 'Beschäftigungsgrad und A1',
     saveProfile: 'Speichern',
     profileSaved: 'Gespeichert.',
     noticeTitle: 'Hinweis — was HR sehen kann',
     noticeBody:
-      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR-Leser Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, das gewählte Grenzpaket, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob er als auswärtige berufliche Übernachtung markiert ist, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad und Ihre A1 eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll exportieren oder löschen und Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten fragen. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 1–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Erfassungstool, keine Steuer- oder Rechtsberatung.',
+      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR-Leser Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob er als auswärtige berufliche Übernachtung markiert ist, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad und Ihre A1 eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll exportieren oder löschen und Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten fragen. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 1–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Erfassungstool, keine Steuer- oder Rechtsberatung.',
     noticeAck: 'Ich habe diesen Hinweis gelesen',
     noticeRequired: 'Bestätigen Sie, dass Sie den Hinweis gelesen haben, um fortzufahren.',
     noticePrivacyLink: 'Vollständige Datenschutzerklärung',
@@ -645,7 +642,7 @@ const de: Dict = {
       'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzkorridoren. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, eine qualifizierte Beratung oder eine zuständige Behörde. Siehe Rechtlicher Hinweis.',
     s2Title: 'Konten und Unternehmensnutzung',
     s2Body:
-      'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen ein Grenzpaket und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Arbeitgeberseitige Pflichten können die rechtmässige Nutzung blockieren, solange sie nicht erfüllt sind: beispielsweise die Mitbestimmung des Betriebsrats bei technischen Einrichtungen zur Überwachung (Deutschland BetrVG § 87 Abs. 1 Nr. 6), Anhörungs- oder Gesamtarbeitsvertragsregeln in Frankreich, Belgien, Luxemburg und der Schweiz sowie örtliche Regeln zur Mitarbeiterüberwachung oder zum Persönlichkeitsschutz am Arbeitsplatz. BorderDay führt diese Konsultationen nicht für Sie durch. Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich.',
+      'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen eine Grenzroute und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Arbeitgeberseitige Pflichten können die rechtmässige Nutzung blockieren, solange sie nicht erfüllt sind: beispielsweise die Mitbestimmung des Betriebsrats bei technischen Einrichtungen zur Überwachung (Deutschland BetrVG § 87 Abs. 1 Nr. 6), Anhörungs- oder Gesamtarbeitsvertragsregeln in Frankreich, Belgien, Luxemburg und der Schweiz sowie örtliche Regeln zur Mitarbeiterüberwachung oder zum Persönlichkeitsschutz am Arbeitsplatz. BorderDay führt diese Konsultationen nicht für Sie durch. Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich.',
     s3Title: 'Abonnements, Testphase, Verlängerung und Kündigung',
     s3Body:
       'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung stoppt künftige Verlängerungen. Bereits eingezogene Beträge für eine begonnene Periode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsrichtlinien von Link es verlangen; Ihr Widerrufsrecht unten bleibt unberührt.',

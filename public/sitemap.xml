@@ -8,6 +8,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
   </url>
   <url>
@@ -17,6 +18,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
   </url>
   <url>
@@ -26,6 +28,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
   </url>
   <url>
@@ -35,6 +38,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
   </url>
   <url>
@@ -44,6 +58,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/pricing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing/"/>
   </url>
   <url>
@@ -53,6 +68,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/pricing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing/"/>
   </url>
   <url>
@@ -62,6 +78,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/pricing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing/"/>
   </url>
   <url>
@@ -71,6 +88,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/pricing/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/pricing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing/"/>
   </url>
   <url>
@@ -80,6 +108,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/faq/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq/"/>
   </url>
   <url>
@@ -89,6 +118,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/faq/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq/"/>
   </url>
   <url>
@@ -98,6 +128,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/faq/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq/"/>
   </url>
   <url>
@@ -107,6 +138,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/faq/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/faq/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq/"/>
   </url>
   <url>
@@ -116,6 +158,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/for-individuals/"/>
   </url>
   <url>
@@ -125,6 +168,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/for-individuals/"/>
   </url>
   <url>
@@ -134,6 +178,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/for-individuals/"/>
   </url>
   <url>
@@ -143,6 +188,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/for-individuals/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/for-individuals/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/for-individuals/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/for-individuals/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/for-individuals/"/>
   </url>
   <url>
@@ -152,6 +208,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/privacy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy/"/>
   </url>
   <url>
@@ -161,6 +218,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/privacy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy/"/>
   </url>
   <url>
@@ -170,6 +228,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/privacy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy/"/>
   </url>
   <url>
@@ -179,6 +238,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/privacy/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/privacy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy/"/>
   </url>
   <url>
@@ -188,6 +258,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/dpa/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/dpa/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/dpa/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/dpa/"/>
   </url>
   <url>
@@ -197,6 +268,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/dpa/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/dpa/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/dpa/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/dpa/"/>
   </url>
   <url>
@@ -206,6 +278,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/dpa/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/dpa/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/dpa/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/dpa/"/>
   </url>
   <url>
@@ -215,6 +288,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/dpa/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/dpa/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/dpa/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/dpa/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/dpa/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/dpa/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/dpa/"/>
   </url>
   <url>
@@ -224,6 +308,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer/"/>
   </url>
   <url>
@@ -233,6 +318,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer/"/>
   </url>
   <url>
@@ -242,6 +328,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer/"/>
   </url>
   <url>
@@ -251,6 +338,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/disclaimer/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/disclaimer/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer/"/>
   </url>
   <url>
@@ -260,6 +358,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
   </url>
   <url>
@@ -269,6 +368,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
   </url>
   <url>
@@ -278,6 +378,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
   </url>
   <url>
@@ -287,6 +388,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/accessibility/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/accessibility/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
   </url>
   <url>
@@ -296,6 +408,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/terms/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms/"/>
   </url>
   <url>
@@ -305,6 +418,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/terms/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms/"/>
   </url>
   <url>
@@ -314,6 +428,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/terms/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms/"/>
   </url>
   <url>
@@ -323,6 +438,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/terms/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/terms/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/terms/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/terms/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/terms/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/terms/"/>
   </url>
   <url>
@@ -332,6 +458,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
   </url>
   <url>
@@ -341,6 +468,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
   </url>
   <url>
@@ -350,6 +478,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
   </url>
   <url>
@@ -359,6 +488,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/withdrawal/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/withdrawal/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/withdrawal/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/withdrawal/"/>
   </url>
   <url>
@@ -368,6 +508,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/cancel/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/cancel/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/cancel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/cancel/"/>
   </url>
   <url>
@@ -377,6 +518,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/cancel/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/cancel/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/cancel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/cancel/"/>
   </url>
   <url>
@@ -386,6 +528,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/cancel/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/cancel/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/cancel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/cancel/"/>
   </url>
   <url>
@@ -395,6 +538,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/cancel/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/cancel/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/cancel/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/cancel/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/cancel/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/cancel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/cancel/"/>
   </url>
   <url>
@@ -404,6 +558,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/company/signup/"/>
   </url>
   <url>
@@ -413,6 +568,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/company/signup/"/>
   </url>
   <url>
@@ -422,6 +578,7 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/company/signup/"/>
   </url>
   <url>
@@ -431,6 +588,17 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/company/signup/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/company/signup/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/company/signup/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/company/signup/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/company/signup/"/>
   </url>
 </urlset>

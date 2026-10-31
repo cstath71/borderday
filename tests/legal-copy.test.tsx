@@ -27,6 +27,7 @@ const DISCLOSURE: Record<Lang, RegExp[]> = {
   fr: [/8e jour/, /automatiquement|automatique/, /jusqu’à (votre )?résiliation/],
   de: [/8\. Tag/, /automatisch/, /bis zu(r| Ihrer) Kündigung/],
   it: [/8° giorno/, /automaticamente|automatico/, /fino alla disdetta/],
+  nl: [/day 8/, /automatically/, /renewing until you cancel/],
 };
 
 function expectDisclosure(lang: Lang, text: string, where: string) {
@@ -61,10 +62,11 @@ describe('C1 Privacy content', () => {
     expect(getDict('fr').privacy.rights.join(' ')).toMatch(/Accès.*Rectification.*Effacement.*Limitation.*Opposition.*Portabilité/s);
     expect(getDict('de').privacy.rights.join(' ')).toMatch(/Auskunft.*Berichtigung.*Löschung.*Einschränkung.*Widerspruch.*Datenübertragbarkeit/s);
     expect(getDict('it').privacy.rights.join(' ')).toMatch(/Accesso.*Rettifica.*Cancellazione.*Limitazione.*Opposizione.*Portabilità/s);
+    expect(getDict('nl').privacy.rights.join(' ')).toMatch(/Inzage.*Rectificatie.*Wissing.*Beperking.*Bezwaar.*Overdraagbaarheid/s);
   });
 
   it('names the Swiss authority and the local EU authority', () => {
-    const names: Record<Lang, RegExp> = { en: /FDPIC/, fr: /PFPDT/, de: /EDÖB/, it: /IFPDT/ };
+    const names: Record<Lang, RegExp> = { en: /FDPIC/, fr: /PFPDT/, de: /EDÖB/, it: /IFPDT/, nl: /EDÖB/ };
     for (const [lang, d] of dicts) {
       expect(d.privacy.complaintBody).toMatch(names[lang]);
       expect(d.privacy.complaintBody).toMatch(/edoeb\.admin\.ch/);

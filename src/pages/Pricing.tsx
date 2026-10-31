@@ -7,6 +7,8 @@ import { getDict } from '../i18n';
 import { startCheckout } from '../lib/billing';
 import { useAuth } from '../lib/auth';
 import { listMyCompanies } from '../lib/companyApi';
+import { ECB_EUR_CHF, formatApproxChf } from '../lib/fx';
+import { t } from '../i18n';
 
 export default function Pricing() {
   const lang = useLang();
@@ -46,6 +48,14 @@ export default function Pricing() {
     if (banner === 'cancel') return d.pricing.checkoutCancel;
     return null;
   }, [banner, d.pricing.checkoutSuccess, d.pricing.checkoutCancel]);
+
+  const locale = lang === 'en' ? 'en-CH' : lang === 'de' ? 'de-CH' : lang === 'fr' ? 'fr-CH' : lang === 'it' ? 'it-CH' : lang === 'nl' ? 'nl-BE' : 'en-CH';
+  const chfLine = (eur: number) =>
+    t(d.pricing.approxChf, { chf: formatApproxChf(eur, locale) });
+  const chfNote = t(d.pricing.chfBillingNote, {
+    date: ECB_EUR_CHF.date,
+    rate: String(ECB_EUR_CHF.rate),
+  });
 
   async function buy(plan: 'company' | 'individual', interval: 'month' | 'year') {
     setNote(null);
@@ -113,8 +123,9 @@ export default function Pricing() {
               <div className="meta" style={{ color: 'var(--primary)', fontWeight: 700 }}>{d.pricing.recommended}</div>
               <h2>{d.pricing.company}</h2>
               <div className="price">{d.pricing.companyPrice}</div>
+              <div className="meta">{chfLine(5)} <span aria-hidden="true">·</span> {chfLine(39)} min</div>
               <div>{d.pricing.companyMin}</div>
-              <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.companyYearly}</p>
+              <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.companyYearly} ({chfLine(390)})</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyTax}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.activeEmployeeDef}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyBusinessOnly}</p>
@@ -152,7 +163,8 @@ export default function Pricing() {
             <article className="card price-card">
               <h2>{d.pricing.individual}</h2>
               <div className="price">{d.pricing.monthly}</div>
-              <div>{d.pricing.yearly}</div>
+              <div className="meta">{chfLine(4.99)}</div>
+              <div>{d.pricing.yearly} ({chfLine(49)})</div>
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.yearlyNote}</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.individualTax}</p>
               <h3>{d.pricing.includes}</h3>
@@ -188,6 +200,7 @@ export default function Pricing() {
               </div>
             </article>
           </div>
+          <p className="meta" style={{ marginTop: '1rem', fontSize: '0.85rem' }}>{chfNote}</p>
           {note && <p className="meta" role="alert" style={{ marginTop: '1rem' }}>{note}</p>}
         </div>
       </section>

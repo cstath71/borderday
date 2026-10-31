@@ -34,6 +34,7 @@ const en = {
     fr: 'Français',
     de: 'Deutsch',
     it: 'Italiano',
+    nl: 'Nederlands',
     label: 'Language',
     apply: 'Apply',
   },
@@ -58,7 +59,7 @@ const en = {
     feature1Body:
       'Independent counters with official sources linked. Warnings at 75% and 90% of the applicable limit, then at-limit and over-limit states with the consequence spelled out.',
     feature2Title: 'Invite by email link',
-    feature2Body: 'Employees join your company, pick their border pack, and log day types only — never GPS location.',
+    feature2Body: 'Employees join your company, pick their border route, and log day types only — never GPS location.',
     feature3Title: 'Data protection by design',
     feature3Body:
       'GDPR and Swiss FADP oriented: company isolation, export and delete, a clear notice of what HR can see, and a retention note. No GPS or device location.',
@@ -67,7 +68,7 @@ const en = {
       'Each corridor shows what it counts today. Where no tax rule can be counted yet, it says so and shows no number.',
     howTitle: 'How companies use BorderDay',
     how1: 'Create a company account and invite employees by email link.',
-    how2: 'Each employee picks their border pack and logs telework / on-site / trip / non-working days.',
+    how2: 'Each employee picks their border route and logs telework / on-site / trip / non-working days.',
     how3: 'HR watches per-employee tax and social-security counters, filters by status, and exports CSV.',
     waitlistTitle: 'Start with a company account',
     waitlistBody:
@@ -96,12 +97,12 @@ const en = {
     belgium_nl: 'Belgium ← Netherlands',
     ticino_it: 'Ticino ← Italy',
     geneva_region:
-      'Convention regime: Geneva and every canton outside the 1983 agreement, with the telework rule applying from 1 Jan 2026. If your employer is in Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel or Jura, choose the 1983-agreement pack instead.',
+      'Convention regime: Geneva and every canton outside the 1983 agreement, with the telework rule applying from 1 Jan 2026. If your employer is in Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel or Jura, choose the 1983-agreement border route instead.',
     basel_region:
       'The 60-day rule applies across Switzerland. The 5-day minimum is the rule Basel-Stadt applies to its own staff.',
     ticino_region: 'Italy–Switzerland frontier-worker agreement, as amended for telework.',
     ch_fr_1983_region:
-      '1983 agreement: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel and Jura. Geneva and other cantons follow a different regime: choose the other France–Switzerland pack.',
+      '1983 agreement: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel and Jura. Geneva and other cantons follow a different regime: choose the other France–Switzerland border route.',
   },
   dayTypes: {
     telework: 'Telework at home',
@@ -139,7 +140,6 @@ const en = {
     ch_fr_missions_note:
       'Temporary missions in France or a third State: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Days outside those limits are taxable in France, subject to any treaty with the third state. Sources: FTA amicable agreement of 29 Apr 2026; impots.gouv.fr fact sheet.',
     lu_tax_tolerance_34: 'Days outside Luxembourg (up to 34 days/year)',
-    lu_tax_tolerance_pending: 'Days outside Luxembourg (tax tolerance)',
     lu_fr_tax_note:
       'Residents of France employed in Luxembourg: up to 34 days per taxable period physically present in France and/or a third state for work, without losing Luxembourg taxation for the period. Part-time or part-year: the 34 is reduced in proportion and rounded down. Beyond the limit, France may tax the time actually worked in France or a third state, from the first day. Any fraction of a day counts as a whole day, and training counts. Leave, weekly rest, public holidays not worked, sickness and force majeure do not. The limit covers all your contracts in the year, and it is up to you to prove your days: this log alone may not be enough. Source: impots.gouv.fr agreement (the PDF says 29 days, raised to 34 by the avenant of 7 Nov 2022).',
     ss_framework_under_50: 'Cross-border telework (framework agreement: A1 from 25%, under 50%)',
@@ -162,7 +162,6 @@ const en = {
     pending_lu_de_tax:
       'The Luxembourg government states the tolerance rose from 19 to 34 days from 2024 for residents of Germany. The German text on what counts and on part-time could not be confirmed, so no counter runs and the France–Luxembourg reduction is not applied. Check with your authority.',
     usedOf: '{used} of {limit}',
-    percentUsed: '{used}% of {limit}%',
     usedOfDays: '{used} of {allowed} days',
     percentOfAnnual: '{pct}% of {annual} days/yr (limit {limit}%)',
     status_ok: 'Below tracked limit',
@@ -170,7 +169,6 @@ const en = {
     status_critical: 'Near limit',
     status_over: 'Over limit',
     status_disabled: 'No counter yet',
-    sourceLink: 'Official sources',
     checkedOn: 'Checked {date}',
     employer_practice: 'Employer practice',
     ch_fr_over_40:
@@ -194,7 +192,6 @@ const en = {
       'Above 45 work nights away: the 1983 frontier regime is lost. Check with your tax authority.',
     ch_fr_1983_mission_excess:
       'Of your mission days, {counted} count inside the 40% and {excess} do not. Any excess day in France ends the 1983 regime; BorderDay cannot tell France from a third state.',
-    ch_fr_1983_label: 'France–Switzerland tax (1983 agreement)',
     ch_fr_1983_value: 'See 40% / 10 mission / 45 night counters',
     ch_fr_1983_note:
       'These cantons follow the 1983 agreement: taxed in France (France remits 4.5% to Switzerland). Counters track telework up to 40%, up to 10 mission days, and at most 45 work nights away.',
@@ -241,7 +238,6 @@ const en = {
     be_fr_value: 'No day tolerance found',
     be_nl_tax_label: 'Netherlands→Belgium tax',
     be_nl_value: 'No rule confirmed: check with your authority',
-    lu_announced_value: '34 days announced: no counter yet',
     pending_be_fr_tax:
       'No day tolerance found. Home-working days in France are taxed in France, pro rata, from the first day (Art. 11 of the France–Belgium convention; French minister’s answer of 28 May 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). People who became frontier workers before 1 January 2012 keep a separate regime until 2033: tick that option below to open the 30-day counter. No general tax counter runs here.',
     be_fr_pre2012_30: 'Days outside the Belgian border zone (max 30/year, pre-2012 frontier workers)',
@@ -273,14 +269,13 @@ const en = {
   },
   app: {
     title: 'Your day log',
-    pickBorder: 'Your border',
+    pickBorder: 'Your border route',
     pickBorderHint: 'Residence → workplace',
     today: 'Today',
     logDay: 'Log this day',
-    changeDay: 'Change',
     calendar: 'Calendar',
     counters: 'Your counters',
-    noBorder: 'Choose a border pack to see counters.',
+    noBorder: 'Choose a border route to see counters.',
     exportJson: 'Export JSON',
     exportCsv: 'Export CSV',
     deleteAll: 'Delete all days',
@@ -340,12 +335,12 @@ const en = {
     companyTax: 'excl. VAT',
     individualTax: 'incl. VAT',
     includes: 'Includes',
-    include1: 'All border packs available in your plan',
+    include1: 'All border routes available in your plan',
     include2:
       'Tax counters where available, social-security counters on every corridor',
     include3: 'Warnings as limits approach',
     include4: 'Export and delete your data anytime',
-    include5: 'English, French, German, Italian',
+    include5: 'English, French, German, Italian, Dutch',
     include6: 'Installable PWA',
     companyInclude1: 'HR dashboard with per-employee counters and filters',
     companyInclude2: 'Email invites, roles (owner / HR viewer), CSV export',
@@ -367,6 +362,9 @@ const en = {
     companyBusinessOnly: 'For businesses. Consumers should choose the individual plan.',
     yearlyRenewal:
       'Yearly individual plans (€49) renew for a further year at the then-current price until you cancel. BorderDay emails a renewal reminder before each yearly charge. Cancel anytime via Cancel subscription in the footer (customer portal). After the first year you can cancel a renewed plan at any time; unused-period refunds apply where mandatory consumer law requires them.',
+    approxChf: '≈ {chf}',
+    chfBillingNote:
+      'Billing is in EUR. CHF amounts are approximate, using the ECB euro reference rate of {date} (1 EUR = {rate} CHF). Source: European Central Bank.',
   },
   faq: {
     title: 'FAQ',
@@ -406,7 +404,7 @@ const en = {
       'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. The public data processing agreement for company accounts is at /dpa/ (linked from Pricing, company sign-up and the Terms).',
     s1Title: 'What we collect',
     s1Body:
-      'Free preview, on your device: border pack, each day’s type (telework, on site, work trip / third State, non-working), whether you marked a night away for work, optional notes, contractual working days per year, employment percentage and A1 record if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border pack, day types and dates, night-away marks, employment percentage and A1 record if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
+      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether you marked a night away for work, optional notes, contractual working days per year, employment percentage and A1 record if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border route, day types and dates, night-away marks, employment percentage and A1 record if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
     s2Title: 'What we do not collect',
     s2Body:
       'No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee. HR also sees employment percentage and A1 record if entered, and counts: the same counters the employee sees. No IP address is stored as a work location. No advertising trackers. No sale of personal data.',
@@ -440,7 +438,7 @@ const en = {
       },
       {
         purpose: 'Individual plan: your day log and counters',
-        data: 'Border pack, day types and dates, night-away marks, notes, working days, employment percentage, A1 record',
+        data: 'Border route, day types and dates, night-away marks, notes, working days, employment percentage, A1 record',
         basis: 'Contract (Art. 6(1)(b))',
         recipients: 'Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
@@ -456,7 +454,7 @@ const en = {
       },
       {
         purpose: 'Company account: employee day logs and HR counters (the employer is controller, BorderDay its processor)',
-        data: 'Name, email, border pack, working days, employment percentage, A1 record, day type and date, night-away mark, counters. Notes are private to the employee.',
+        data: 'Name, email, border route, working days, employment percentage, A1 record, day type and date, night-away mark, counters. Notes are private to the employee.',
         basis: 'Decided by the employer as controller, for example a legal obligation or legitimate interests. BorderDay does not rely on employee consent here.',
         recipients: 'The employer’s account owners and HR viewers; Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
@@ -539,7 +537,7 @@ const en = {
     ctaCompanies: 'My employer needs the company plan',
     point1:
       'Free preview stays on your device; a plan saves your log to your account. Export and delete either way.',
-    point2: 'Same border packs and careful, sourced counters',
+    point2: 'Same border routes and careful, sourced counters',
     point3: 'Optional company join — you see what HR sees',
   },
   company: {
@@ -547,7 +545,6 @@ const en = {
     signupSubtitle: 'Sign in with email or Google, then create your company. Subscribe on the Pricing page when ready.',
     companyName: 'Company name',
     yourName: 'Your name',
-    workEmail: 'Work email',
     createButton: 'Create company',
     created: 'Company created. You are the owner.',
     openDashboard: 'Open HR dashboard',
@@ -565,7 +562,7 @@ const en = {
     dashboardTitle: 'HR dashboard',
     dashboardSubtitle:
       'Tax and social-security counters per employee. Day types, night-away marks and counts — never GPS or device location.',
-    filterBorder: 'Filter by border',
+    filterBorder: 'Filter by border route',
     filterStatus: 'Filter by status',
     filterAll: 'All',
     exportCsv: 'Export CSV',
@@ -579,10 +576,10 @@ const en = {
       'Day type, date and night-away mark only. No GPS or device location is stored, and notes are not shown.',
     backDashboard: 'Back to dashboard',
     joinTitle: 'Join your company',
-    joinSubtitle: 'Accept the invite, read the notice on what HR can see, and pick your border pack.',
+    joinSubtitle: 'Accept the invite, read the notice on what HR can see, and pick your border route.',
     joinButton: 'Join company',
     joinSuccess: 'You joined the company. Open the employee app to log days.',
-    pickBorder: 'Your border pack',
+    pickBorder: 'Your border route',
     demoDataBadge: 'DEMO DATA',
     demoBanner: 'This company is labeled DEMO. Figures are sample data for product preview — not real employees.',
     loadDemo: 'Load DEMO company',
@@ -605,13 +602,13 @@ const en = {
     kindSs: 'Social security',
     colDate: 'Date',
     colDayType: 'Day type',
-    emptyCounters: 'Employee has not chosen a border pack yet.',
+    emptyCounters: 'Employee has not chosen a border route yet.',
     profileTitle: 'Employment percentage and A1',
     saveProfile: 'Save',
     profileSaved: 'Saved.',
     noticeTitle: 'Notice — what HR can see',
     noticeBody:
-      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border pack, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether you marked it as a night away for work, and the same tax and social-security counters you see. They can also record your employment percentage and A1. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export or delete your day log, and ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. This is a tracking tool, not tax or legal advice.',
+      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether you marked it as a night away for work, and the same tax and social-security counters you see. They can also record your employment percentage and A1. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export or delete your day log, and ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. This is a tracking tool, not tax or legal advice.',
     noticeAck: 'I have read this notice',
     noticeRequired: 'Confirm that you have read the notice to continue.',
     noticePrivacyLink: 'Full privacy notice',
@@ -638,7 +635,7 @@ const en = {
       'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border corridors. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',
     s2Title: 'Accounts and company use',
     s2Body:
-      'You must provide accurate account details. Company account owners invite employees; employees choose a border pack and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. Employer-side duties can block lawful use until completed: for example works-council co-determination on technical monitoring systems (Germany BetrVG § 87(1) No. 6), staff-representative or CCT consultation rules in France, Belgium, Luxembourg and Switzerland, and any local employee-monitoring or workplace-privacy rules. BorderDay does not run those consultations for you. The provider is the controller of accounts, billing and security. The data processing agreement for employee day logs is published at /dpa/. You are responsible for the accuracy of the days you log.',
+      'You must provide accurate account details. Company account owners invite employees; employees choose a border route and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. Employer-side duties can block lawful use until completed: for example works-council co-determination on technical monitoring systems (Germany BetrVG § 87(1) No. 6), staff-representative or CCT consultation rules in France, Belgium, Luxembourg and Switzerland, and any local employee-monitoring or workplace-privacy rules. BorderDay does not run those consultations for you. The provider is the controller of accounts, billing and security. The data processing agreement for employee day logs is published at /dpa/. You are responsible for the accuracy of the days you log.',
     s3Title: 'Subscriptions, trial, renewal and cancellation',
     s3Body:
       'Paid plans are subscriptions. Company and individual plans start with a 7-day free trial, and a payment card is required at signup. After 7 days the plan becomes paid at the stated price: your card is charged automatically on day 8 and the subscription then renews each month or year until you cancel. If you cancel before day 8, nothing is charged. If no valid payment method is on file when the trial ends, the subscription is cancelled. You can cancel at any time through the Cancel subscription link in the footer of every page, which leads to the customer portal, your Link order tools or an email request. Cancellation stops future renewals. Amounts already collected for a started billing period are not pro-rated unless the law or Link’s refund terms require it, and your right of withdrawal below is not affected.',
@@ -779,7 +776,7 @@ const en = {
       'For employee day logs, invitations and the HR counters derived from them, the employer is the controller and PrimeLogic Advisory Sàrl is the processor. For the BorderDay website, individual plans, user accounts, company account administration, billing, support and security, PrimeLogic Advisory Sàrl remains controller under the Privacy notice. Stripe and Link act as independent controllers for checkout and payment under their own notices; they are not processors of employee day logs under this DPA.',
     subjectTitle: 'Subject-matter and nature of the processing',
     subjectBody:
-      'Subject-matter: hosting, storage, retrieval, transmission and display of employee membership and day-log data so the employer can run telework and tax day counters. Nature: automated processing in a hosted application (create, read, update, delete; aggregation into counters; invitation email). Purpose: only the purposes instructed by the employer through the BorderDay company features, and as described in the Privacy notice. Categories of data subjects: employees and other natural persons the employer invites to the company account. Categories of personal data: name, email, role, border pack, contractual working days, employment percentage and A1 record if entered, day type and date, overnight-away mark, counters, and the record that the “what HR can see” notice was shown. Notes stay private to the employee and are not shown to HR. No GPS or device location is collected.',
+      'Subject-matter: hosting, storage, retrieval, transmission and display of employee membership and day-log data so the employer can run telework and tax day counters. Nature: automated processing in a hosted application (create, read, update, delete; aggregation into counters; invitation email). Purpose: only the purposes instructed by the employer through the BorderDay company features, and as described in the Privacy notice. Categories of data subjects: employees and other natural persons the employer invites to the company account. Categories of personal data: name, email, role, border route, contractual working days, employment percentage and A1 record if entered, day type and date, overnight-away mark, counters, and the record that the “what HR can see” notice was shown. Notes stay private to the employee and are not shown to HR. No GPS or device location is collected.',
     durationTitle: 'Duration',
     durationBody:
       'Processing lasts for the life of the company account and membership, and thereafter only as needed to delete or return data under this DPA and the retention periods stated in the Privacy notice (including any company retention setting).',

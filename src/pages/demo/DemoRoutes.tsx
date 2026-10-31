@@ -138,10 +138,10 @@ function DemoInvite() {
         canInviteOwner
         dashboardHref={`/${lang}/demo/company/${companyId}/dashboard`}
         joinPath={joinPath}
-        onCreate={async (email, role) => {
+        onCreate={async (email, role, inviteLang) => {
           const inv = createInvitation(companyId, email, role);
           setTick((x) => x + 1);
-          return { link: `${window.location.origin}${joinPath(inv.token)}`, emailed: false };
+          return { link: `${window.location.origin}/${inviteLang}/demo/join/${inv.token}`, emailed: false };
         }}
       />
     </div>

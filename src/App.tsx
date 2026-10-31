@@ -12,11 +12,15 @@ import CompanyDashboard from './pages/company/Dashboard';
 import CompanyInvite from './pages/company/Invite';
 import JoinCompany from './pages/company/Join';
 import EmployeeHistory from './pages/company/History';
+import SignIn from './pages/auth/SignIn';
+import SignUp from './pages/auth/SignUp';
+import AuthCallback from './pages/auth/Callback';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/en/" replace />} />
+      <Route path="/auth/callback" element={<AuthCallback />} />
       <Route path="/:lang" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="app" element={<AppPage />} />
@@ -25,6 +29,9 @@ export default function App() {
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="disclaimer" element={<Disclaimer />} />
+        <Route path="auth/sign-in" element={<SignIn />} />
+        <Route path="auth/sign-up" element={<SignUp />} />
+        <Route path="auth/callback" element={<AuthCallback />} />
         <Route path="company/signup" element={<CompanySignup />} />
         <Route path="company/:companyId/dashboard" element={<CompanyDashboard />} />
         <Route path="company/:companyId/invite" element={<CompanyInvite />} />

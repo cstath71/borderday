@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { listBorderPacks } from '../borders/packs';
 import Seo from '../components/Seo';
-import WaitlistForm from '../components/WaitlistForm';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
 
@@ -21,8 +20,7 @@ export default function Home() {
           <h1>{d.home.heroTitle}</h1>
           <p className="lead">{d.home.heroBody}</p>
           <div className="hero-cta">
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
-              {d.home.ctaPrimary}
+            <Link className="btn btn-primary" to={`/${lang}/auth/sign-up`}>{d.home.ctaPrimary}
             </Link>
             <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
               {d.home.ctaSecondary}
@@ -103,10 +101,14 @@ export default function Home() {
       </section>
 
       <section className="section">
-        <div className="container card" id="waitlist">
+        <div className="container card" id="get-started">
           <h2>{d.home.waitlistTitle}</h2>
           <p>{d.home.waitlistBody}</p>
-          <WaitlistForm d={d} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.75rem' }}>
+            <Link className="btn btn-primary" to={`/${lang}/auth/sign-up`}>{d.home.waitlistButton}</Link>
+            <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in`}>{d.nav.joinWaitlist}</Link>
+            <Link className="btn btn-secondary" to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
+          </div>
           <p className="meta" style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
             {d.home.waitlistNote}
           </p>

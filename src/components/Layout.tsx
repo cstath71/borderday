@@ -32,6 +32,9 @@ export default function Layout() {
             <NavLink to={`/${lang}/pricing`} className="hide-sm">
               {d.nav.pricing}
             </NavLink>
+            <NavLink to={`/${lang}/auth/sign-in`} className="hide-sm">
+              {d.nav.joinWaitlist}
+            </NavLink>
             <NavLink to={`/${lang}/faq`} className="hide-sm">
               {d.nav.faq}
             </NavLink>

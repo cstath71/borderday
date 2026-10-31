@@ -568,6 +568,8 @@ const en = {
     filterStatus: 'Filter by status',
     filterAll: 'All',
     exportCsv: 'Export CSV',
+    exportCsvNote:
+      'Working record only. Not the annual telework-rate filing some cantons (for example the AFC) require — compute and submit that rate with your authority.',
     employees: 'Employees',
     noEmployees: 'No employees yet. Create an invite link.',
     viewHistory: 'Day history',

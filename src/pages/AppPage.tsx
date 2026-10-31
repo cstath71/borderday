@@ -9,7 +9,7 @@ import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
 import { resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
-import { evaluatePack } from '../lib/counting';
+import { evaluatePack, zurichToday } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import { download } from '../lib/download';
 import {
@@ -60,8 +60,8 @@ export default function AppPage() {
   const [meta, setMetaState] = useState<UserMeta | null>(null);
   const [days, setDays] = useState<DayEntry[]>([]);
   const [selectedDate, setSelectedDate] = useState(todayIso());
-  const [viewYear, setViewYear] = useState(() => new Date().getFullYear());
-  const [viewMonth, setViewMonth] = useState(() => new Date().getMonth());
+  const [viewYear, setViewYear] = useState(() => Number(zurichToday().slice(0, 4)));
+  const [viewMonth, setViewMonth] = useState(() => Number(zurichToday().slice(5, 7)) - 1);
   const [busy, setBusy] = useState(false);
 
   // Fail closed: if access cannot be resolved, the visitor stays on the on-device preview.

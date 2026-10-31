@@ -174,6 +174,9 @@ export default function DashboardView(props: {
           <button type="button" className="btn btn-primary" onClick={exportCsv}>
             {d.company.exportCsv}
           </button>
+          <p className="meta" role="note" style={{ maxWidth: '16rem', margin: 0 }}>
+            {d.company.exportCsvNote}
+          </p>
         </div>
       </div>
 

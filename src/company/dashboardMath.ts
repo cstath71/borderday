@@ -8,7 +8,7 @@ import type {
   EmploymentProfile,
   OfficialSource,
 } from '../borders/types';
-import { evaluatePack } from '../lib/counting';
+import { evaluatePack, zurichToday } from '../lib/counting';
 import type { DayLog } from './types';
 
 export type AggregateStatus = 'ok' | 'warn' | 'critical' | 'at_limit' | 'over' | 'disabled' | 'mixed';
@@ -106,10 +106,14 @@ export function summarizeEmployee(opts: {
     };
   }
   const annual = opts.annualWorkingDays ?? pack.defaultAnnualWorkingDays;
+  const today = zurichToday();
   const results = evaluatePack(pack, dayLogsToEntries(opts.logs), {
     year: opts.year,
     annualWorkingDays: annual,
     profile,
+    // Same calendar month as the employee view (Europe/Zurich), not UTC.
+    referenceMonth: today.slice(0, 7),
+    today,
   });
   const counters: EmployeeCounterSummary[] = pack.counters.map((c) => {
     const r = results.find((x) => x.counterId === c.id)!;
@@ -163,7 +167,7 @@ export function filterRows(
   });
 }
 
-/** CSV for audit — day types and counts only, never location. */
+/** CSV for audit — day types and counts only, never location. Not an AFC filing. */
 export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
   const header = [
     'demo',
@@ -181,10 +185,18 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     'used_days',
     'allowed_days',
     'percent_of_annual',
+    'telework_rate_pct_working_calc_not_afc',
     'year',
   ];
-  const lines = [header.join(',')];
+  const disclaimer =
+    '# BorderDay working export — day types and counts only, never location. Not the annual telework-rate filing some cantons (e.g. AFC) require. Compute and submit that rate with your authority.';
+  const lines = [disclaimer, header.join(',')];
   for (const r of rows) {
+    // Working calc of telework % for this employee (not an AFC filing figure).
+    const teleworkRate =
+      r.counters.find((c) => c.percentOfAnnual != null && c.kind === 'tax')?.percentOfAnnual ??
+      r.counters.find((c) => c.percentOfAnnual != null)?.percentOfAnnual ??
+      '';
     for (const c of r.counters) {
       lines.push(
         [
@@ -203,6 +215,7 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
           c.usedDays ?? '',
           c.allowedDays ?? '',
           c.percentOfAnnual ?? '',
+          teleworkRate,
           year,
         ].join(','),
       );

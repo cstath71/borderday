@@ -574,6 +574,8 @@ const fr: Dict = {
     filterStatus: 'Filtrer par statut',
     filterAll: 'Tous',
     exportCsv: 'Exporter CSV',
+    exportCsvNote:
+      'Document de travail uniquement. Ce n’est pas le taux de télétravail annuel exigé par certains cantons (par ex. AFC) : calculez et déclarez ce taux auprès de votre autorité.',
     employees: 'Collaborateurs',
     noEmployees: 'Aucun collaborateur. Créez un lien d’invitation.',
     viewHistory: 'Historique des jours',

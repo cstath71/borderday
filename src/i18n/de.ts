@@ -574,6 +574,8 @@ const de: Dict = {
     filterStatus: 'Nach Status filtern',
     filterAll: 'Alle',
     exportCsv: 'CSV exportieren',
+    exportCsvNote:
+      'Nur Arbeitsunterlage. Nicht die jährliche Telearbeitsquote, die manche Kantone (z. B. AFC) verlangen — diese Quote bei Ihrer Behörde berechnen und einreichen.',
     employees: 'Mitarbeitende',
     noEmployees: 'Noch keine Mitarbeitenden. Einladungslink erstellen.',
     viewHistory: 'Tageshistorie',

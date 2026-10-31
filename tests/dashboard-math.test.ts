@@ -173,10 +173,14 @@ describe('HR dashboard status math', () => {
       isDemo: true,
     });
     const csv = rowsToCsv([row], 2026);
-    expect(csv.split('\n')[0]).not.toMatch(/location|gps|lat|lon/i);
+    const lines = csv.split('\n');
+    expect(lines[0].startsWith('#')).toBe(true);
+    expect(lines[0]).toMatch(/not the annual telework-rate filing/i);
+    expect(lines[1]).not.toMatch(/location|gps|lat|lon/i);
     expect(csv).toContain('DEMO');
     expect(csv).toContain('geneva_tax_telework_40');
-    expect(csv.split('\n')[0]).toContain('employment_percent');
-    expect(csv.split('\n')[0]).toContain('a1_valid_until');
+    expect(lines[1]).toContain('employment_percent');
+    expect(lines[1]).toContain('a1_valid_until');
+    expect(lines[1]).toContain('telework_rate_pct_working_calc_not_afc');
   });
 });

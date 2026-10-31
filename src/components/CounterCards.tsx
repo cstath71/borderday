@@ -31,7 +31,7 @@ export function CounterSources({ d, counter }: { d: Dict; counter: Pick<LimitCou
   if (counter.sources.length === 0) return null;
   return (
     <details style={{ marginTop: '0.5rem' }}>
-      <summary className="meta">{d.counters.sourceLink}</summary>
+      <summary className="meta">{d.counters.ruleAndConditions}</summary>
       <ul className="meta">
         {counter.sources.map((s) => (
           <li key={s.url}>

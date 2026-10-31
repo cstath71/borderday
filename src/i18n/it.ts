@@ -576,6 +576,8 @@ const it: Dict = {
     filterStatus: 'Filtra per situazione',
     filterAll: 'Tutti',
     exportCsv: 'Esporta CSV',
+    exportCsvNote:
+      'Solo documento di lavoro. Non è il tasso annuale di telelavoro richiesto da alcuni Cantoni (p. es. AFC): calcolate e presentate quel tasso all’autorità competente.',
     employees: 'Collaboratori',
     noEmployees: 'Nessun collaboratore. Create un link di invito.',
     viewHistory: 'Cronologia giorni',

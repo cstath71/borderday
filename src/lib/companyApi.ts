@@ -136,6 +136,16 @@ export interface CompanyMemberRow {
   a1ValidUntil: string | null;
 }
 
+export async function updateCompanyRetention(companyId: string, months: number) {
+  const n = Math.min(120, Math.max(1, Math.round(months)));
+  const { error } = await client()
+    .from('bd_companies')
+    .update({ data_retention_months: n })
+    .eq('id', companyId);
+  if (error) throw error;
+  return n;
+}
+
 export async function listMembers(companyId: string): Promise<CompanyMemberRow[]> {
   const base = 'id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)';
   const query = (columns: string) => client().from('bd_company_members').select(columns).eq('company_id', companyId);

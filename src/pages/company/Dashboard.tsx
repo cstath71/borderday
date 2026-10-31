@@ -16,6 +16,8 @@ type Loaded = {
   paid: boolean;
   rows: EmployeeDashboardRow[];
   invites: Invitation[];
+  retentionMonths: number;
+  isOwner: boolean;
 };
 
 type State =
@@ -79,6 +81,8 @@ export default function CompanyDashboard() {
           paid: companyHasPaidAccess(company.subscription_status, company.trial_ends_at),
           rows: buildDashboardRows({ members, logs, year }),
           invites,
+          retentionMonths: company.data_retention_months ?? 24,
+          isOwner: membership?.role === 'owner',
         },
       });
     })().catch(() => {
@@ -154,11 +158,21 @@ export default function CompanyDashboard() {
           year={year}
           companyBase={`/${lang}/company/${companyId}`}
           joinBase={`/${lang}/join`}
+          retentionMonths={data.retentionMonths}
+          canEditRetention={data.isOwner}
           onRefresh={() => setTick((x) => x + 1)}
           onSaveProfile={async (employeeId, profile) => {
             await api.updateEmployeeProfile(companyId!, employeeId, profile);
             setTick((x) => x + 1);
           }}
+          onSaveRetention={
+            data.isOwner
+              ? async (months) => {
+                  await api.updateCompanyRetention(companyId!, months);
+                  setTick((x) => x + 1);
+                }
+              : undefined
+          }
         />
       </>
     );

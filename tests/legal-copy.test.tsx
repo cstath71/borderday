@@ -103,17 +103,18 @@ describe('C1 Privacy content', () => {
     expect(flat(getDict('en').privacy)).not.toMatch(/authentication and company invites only/);
   });
 
-  it('H3: claims no deletion that does not happen, and says so', () => {
-    const noPurge: Record<Lang, RegExp> = {
-      en: /Automatic deletion is not in place yet/,
-      fr: /suppression automatique n’est pas encore en place/,
-      de: /automatische Löschung ist noch nicht eingerichtet/,
-      it: /cancellazione automatica non è ancora attiva/,
+  it('H3: states the scheduled purge and the 1–120 month company window', () => {
+    const purge: Record<Lang, RegExp> = {
+      en: /daily scheduled job deletes company day logs/,
+      fr: /job quotidien planifié supprime les journaux entreprise/,
+      de: /täglich geplanter Job löscht Unternehmens-Tagesprotokolle/,
+      it: /job giornaliero programmato cancella i registri aziendali/,
     };
     for (const [lang, d] of dicts) {
-      expect(d.privacy.s6Body).toMatch(noPurge[lang]);
+      expect(d.privacy.s6Body).toMatch(purge[lang]);
       expect(flat(d)).not.toMatch(/deleted or anonymised|suppression ou anonymisation|Löschung oder Anonymisierung|cancellazione o anonimizzazione/);
       expect(d.privacy.s6Body).toMatch(/1–120/);
+      expect(d.privacy.s6Body).not.toMatch(/not in place yet|pas encore en place|noch nicht eingerichtet|non è ancora attiva/);
     }
   });
 
@@ -164,9 +165,9 @@ describe('C4 notice, not consent', () => {
     expect(getDict('it').company.noticeBody).toMatch(/non una richiesta di consenso/);
   });
 
-  it('says retention is a target and not automated', () => {
+  it('says company day-log retention is automated within 1–120 months', () => {
     for (const [, d] of dicts) expect(d.company.noticeBody).toMatch(/1–120/);
-    expect(getDict('en').company.noticeBody).toMatch(/deletion is not automated yet/);
+    expect(getDict('en').company.noticeBody).toMatch(/deleted automatically each day/);
   });
 });
 

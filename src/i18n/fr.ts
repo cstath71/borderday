@@ -400,7 +400,7 @@ const fr: Dict = {
         basis: 'Contrat (art. 6, par. 1, let. b) ; intérêts légitimes en matière de sécurité (art. 6, par. 1, let. f)',
         recipients: 'Supabase (base de données, authentification) ; Resend (e-mails de connexion) ; Google, seulement si vous choisissez la connexion Google',
         transfer: 'Base de données hébergée dans l’UE (eu-central-1). Supabase, Resend et Google sont des prestataires basés aux États-Unis ; garanties ci-dessous',
-        retention: 'Jusqu’à la clôture du compte. Suppression sur demande : pas encore de purge automatique.',
+        retention: 'Jusqu’à la clôture du compte. Suppression sur demande via l’application ou privacy@borderday.com (pas de suppression automatique temporisée du compte entier).',
       },
       {
         purpose: 'Offre individuelle : votre journal et vos compteurs',
@@ -416,7 +416,7 @@ const fr: Dict = {
         basis: 'Contrat avec l’employeur ; intérêts légitimes à échanger avec ses contacts (art. 6, par. 1, let. b et f)',
         recipients: 'Supabase',
         transfer: 'Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis ; garanties ci-dessous',
-        retention: 'Tant que le compte entreprise existe. Suppression sur demande : pas encore de purge automatique.',
+        retention: 'Tant que le compte entreprise existe. Suppression sur demande via privacy@borderday.com.',
       },
       {
         purpose: 'Compte entreprise : journaux des collaborateurs et compteurs RH (l’employeur est responsable du traitement, BorderDay son sous-traitant)',
@@ -424,7 +424,7 @@ const fr: Dict = {
         basis: 'Décidée par l’employeur en tant que responsable du traitement, par exemple une obligation légale ou des intérêts légitimes. BorderDay ne se fonde pas ici sur le consentement du collaborateur.',
         recipients: 'Les administrateurs du compte et lecteurs RH de l’employeur ; Supabase',
         transfer: 'Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis ; garanties ci-dessous',
-        retention: 'Objectif : 24 mois par défaut (réglage de l’entreprise, 1–120 mois). Pas encore de suppression automatique : adressez-vous à votre employeur ou à privacy@borderday.com.',
+        retention: '24 mois par défaut (réglage de l’entreprise, 1–120 mois). Un job quotidien supprime les journaux dont la date de travail est plus ancienne que cette fenêtre.',
       },
       {
         purpose: 'Invitations et preuve de l’avis',
@@ -432,7 +432,7 @@ const fr: Dict = {
         basis: 'Invitations : l’employeur en tant que responsable du traitement, comme ci-dessus. Preuve de l’avis : intérêts légitimes à prouver que l’avis a été donné (art. 6, par. 1, let. f)',
         recipients: 'Resend (e-mail d’invitation) ; Supabase',
         transfer: 'États-Unis (Resend) et hébergement UE (Supabase) ; garanties ci-dessous',
-        retention: 'Les liens d’invitation expirent après 14 jours. Les enregistrements restent tant que l’adhésion existe : pas encore de purge automatique.',
+        retention: 'Les liens d’invitation expirent après 14 jours ; un job quotidien marque expirées les invitations en attente dépassées. Les enregistrements d’adhésion et d’invitation restent tant que l’adhésion ou le compte entreprise existe.',
       },
       {
         purpose: 'Abonnements et paiements',
@@ -466,7 +466,7 @@ const fr: Dict = {
       'Le responsable du traitement est en Suisse, pays dont la Commission européenne reconnaît le niveau de protection adéquat ; la Suisse reconnaît à son tour les États de l’UE et de l’EEE comme adéquats. Pour les destinataires aux États-Unis ou ailleurs, nous nous fondons sur les Data Privacy Frameworks UE–États-Unis et Suisse–États-Unis lorsque le prestataire est certifié, et sinon sur les clauses contractuelles types (avec adaptations suisses) de ses conditions publiées de traitement des données. Demandez une copie de ces garanties à privacy@borderday.com.',
     s6Title: 'Conservation des données',
     s6Body:
-      'Les durées ci-dessus sont des objectifs. Journaux entreprise : objectif de 24 mois par défaut, ou selon le réglage de l’entreprise (1–120 mois), sauf si le droit applicable exige plus longtemps. La suppression automatique n’est pas encore en place : les données ne sont donc pas purgées d’elles-mêmes à la fin d’une période. Pour faire supprimer des données maintenant, utilisez l’app ou écrivez à privacy@borderday.com. Les données de démonstration sont étiquetées DEMO et peuvent être réinitialisées à tout moment.',
+      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (1–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, et marque expirées les invitations en attente au-delà de 14 jours. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DEMO et peuvent être réinitialisées à tout moment.',
     s4Title: 'Vos droits',
     rightsIntro: 'Dans les limites fixées par la loi, vous disposez des droits suivants :',
     rights: [
@@ -575,10 +575,15 @@ const fr: Dict = {
     profileSaved: 'Enregistré.',
     noticeTitle: 'Avis — ce que les RH peuvent voir',
     noticeBody:
-      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, le pack frontière choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, sa marque éventuelle de nuit hors du domicile pour le travail, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi et votre A1. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter ou supprimer votre journal et interroger votre employeur ou privacy@borderday.com sur vos droits. Conservation visée : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; la suppression n’est pas encore automatisée. Outil de suivi, pas un conseil fiscal ou juridique.',
+      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, le pack frontière choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, sa marque éventuelle de nuit hors du domicile pour le travail, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi et votre A1. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter ou supprimer votre journal et interroger votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. Outil de suivi, pas un conseil fiscal ou juridique.',
     noticeAck: 'J’ai lu cet avis',
     noticeRequired: 'Confirmez que vous avez lu l’avis pour continuer.',
     noticePrivacyLink: 'Politique de confidentialité complète',
+    retentionTitle: 'Conservation des journaux de jours',
+    retentionHelp: 'Les journaux entreprise plus anciens que ce nombre de mois sont supprimés automatiquement chaque jour (1–120). Défaut 24. L’appartenance, la facturation et les comptes entiers ne sont pas supprimés automatiquement.',
+    retentionMonths: 'Mois',
+    retentionSave: 'Enregistrer la conservation',
+    retentionSaved: 'Conservation mise à jour.',
     hrDisclaimer:
       'Les compteurs ne reflètent que les jours enregistrés ici et ne constituent pas une appréciation juridique ou fiscale. L’employeur reste responsable des demandes d’A1, de la paie et des déclarations fiscales. Vérifiez auprès de l’autorité compétente.',
     inviteLanguage: 'Langue du collaborateur',

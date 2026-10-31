@@ -56,6 +56,55 @@ function EmployeeProfileForm(props: {
   );
 }
 
+
+function RetentionForm(props: {
+  d: Dict;
+  months: number;
+  onSave: (months: number) => Promise<void>;
+}) {
+  const { d, months, onSave } = props;
+  const [value, setValue] = useState(String(months));
+  const [state, setState] = useState<'idle' | 'saved' | 'error'>('idle');
+  return (
+    <div className="card" style={{ marginTop: '1.5rem' }}>
+      <h2>{d.company.retentionTitle}</h2>
+      <p className="meta">{d.company.retentionHelp}</p>
+      <label>
+        {d.company.retentionMonths}
+        <input
+          type="number"
+          min={1}
+          max={120}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setState('idle');
+          }}
+        />
+      </label>{' '}
+      <button
+        type="button"
+        className="btn btn-secondary"
+        onClick={() => {
+          const n = Number(value);
+          if (!Number.isFinite(n)) {
+            setState('error');
+            return;
+          }
+          onSave(n).then(
+            () => setState('saved'),
+            () => setState('error'),
+          );
+        }}
+      >
+        {d.company.retentionSave}
+      </button>{' '}
+      {state === 'saved' && <span role="status">{d.company.retentionSaved}</span>}
+      {state === 'error' && <span role="alert">{d.app.saveError}</span>}
+    </div>
+  );
+}
+
 /** Presentational: the real dashboard and /demo feed it their own data and links. */
 export default function DashboardView(props: {
   d: Dict;
@@ -68,10 +117,13 @@ export default function DashboardView(props: {
   companyBase: string;
   /** e.g. /en/join or /en/demo/join */
   joinBase: string;
+  retentionMonths?: number;
+  canEditRetention?: boolean;
   onRefresh: () => void;
   onSaveProfile: (userId: string, profile: ProfileValues) => Promise<void>;
+  onSaveRetention?: (months: number) => Promise<void>;
 }) {
-  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, onRefresh, onSaveProfile } = props;
+  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, onRefresh, onSaveProfile, onSaveRetention } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
@@ -184,6 +236,10 @@ export default function DashboardView(props: {
             </article>
           ))}
         </div>
+      )}
+
+      {canEditRetention && onSaveRetention && retentionMonths != null && (
+        <RetentionForm d={d} months={retentionMonths} onSave={onSaveRetention} />
       )}
 
       {invites.length > 0 && (

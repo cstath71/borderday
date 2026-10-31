@@ -18,4 +18,8 @@ The Account page exports the person's own server data. Requests beyond it (auth 
 
 ## Retention
 
-No purge job exists yet (`data_retention_months` is stored but not enforced). Privacy says so. Update Privacy `s6Body` and the table when a job ships.
+Daily `pg_cron` job `bd_purge_expired_data_daily` (03:17 UTC) runs `public.bd_purge_expired_data()`:
+- deletes `bd_day_logs` whose `work_date` is older than the company `data_retention_months` (default 24, owner-editable 1–120 on the HR dashboard);
+- marks pending `bd_invitations` with `expires_at` in the past as `expired`.
+
+Personal day logs, whole accounts, membership and billing rows are not timed-deleted — handle those via the steps above or privacy@borderday.com.

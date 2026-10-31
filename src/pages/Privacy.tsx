@@ -12,7 +12,7 @@ export default function Privacy() {
 
   // OPEN C2: no EU representative (GDPR Art. 27) is named here because none has been appointed yet.
   // Add the name to controllerBody once the owner appoints one; never invent it.
-  // TODO H3: s6Body and the retention column say "no automatic purge yet". Change them when a purge job exists.
+  // H3: daily pg_cron job bd_purge_expired_data deletes company day logs past data_retention_months.
   return (
     <>
       <Seo lang={lang} title={`${p.title} — BorderDay`} description={p.intro} path="privacy" />

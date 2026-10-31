@@ -22,6 +22,12 @@ export default function Layout() {
             <NavLink to={`/${lang}/`} end>
               {d.nav.home}
             </NavLink>
+            <NavLink to={`/${lang}/company/signup`} className="hide-sm">
+              {d.nav.forCompanies}
+            </NavLink>
+            <NavLink to={`/${lang}/for-individuals`} className="hide-sm">
+              {d.nav.forIndividuals}
+            </NavLink>
             <NavLink to={`/${lang}/app`}>{d.nav.app}</NavLink>
             <NavLink to={`/${lang}/pricing`} className="hide-sm">
               {d.nav.pricing}
@@ -67,6 +73,8 @@ export default function Layout() {
             <Link to={`/${lang}/disclaimer`}>{d.nav.disclaimer}</Link>
             {' · '}
             <Link to={`/${lang}/pricing`}>{d.nav.pricing}</Link>
+            {' · '}
+            <Link to={`/${lang}/for-individuals`}>{d.nav.forIndividuals}</Link>
             <p>{d.footer.rights.replace('{year}', String(year))}</p>
           </div>
         </div>

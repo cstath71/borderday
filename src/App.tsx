@@ -3,9 +3,15 @@ import Layout from './components/Layout';
 import AppPage from './pages/AppPage';
 import Disclaimer from './pages/Disclaimer';
 import Faq from './pages/Faq';
+import ForIndividuals from './pages/ForIndividuals';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
+import CompanySignup from './pages/company/Signup';
+import CompanyDashboard from './pages/company/Dashboard';
+import CompanyInvite from './pages/company/Invite';
+import JoinCompany from './pages/company/Join';
+import EmployeeHistory from './pages/company/History';
 
 export default function App() {
   return (
@@ -14,10 +20,17 @@ export default function App() {
       <Route path="/:lang" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="app" element={<AppPage />} />
+        <Route path="for-individuals" element={<ForIndividuals />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="disclaimer" element={<Disclaimer />} />
+        <Route path="company/signup" element={<CompanySignup />} />
+        <Route path="company/:companyId/dashboard" element={<CompanyDashboard />} />
+        <Route path="company/:companyId/invite" element={<CompanyInvite />} />
+        <Route path="company/:companyId/employee/:employeeId" element={<EmployeeHistory />} />
+        <Route path="company/dashboard" element={<CompanyDashboard />} />
+        <Route path="join/:token" element={<JoinCompany />} />
       </Route>
       <Route path="*" element={<Navigate to="/en/" replace />} />
     </Routes>

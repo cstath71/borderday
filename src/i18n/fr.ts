@@ -24,6 +24,7 @@ const fr: Dict = {
     companySignup: 'Créer une entreprise',
     withdraw: 'Se rétracter du contrat',
     cancel: 'Résilier votre contrat',
+    accessibility: 'Accessibilité',
     account: 'Compte',
     menu: 'Menu',
     skipToContent: 'Aller au contenu principal',
@@ -53,7 +54,7 @@ const fr: Dict = {
       'Des compteurs fiscaux fonctionnent aujourd’hui sur quatre corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), Allemagne→Suisse (60 jours de non-retour), France→Luxembourg (34 jours, réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). Les cinq autres indiquent clairement qu’aucun compteur fiscal ne fonctionne. Nous n’inventons jamais de chiffre.',
     risk3Title: 'Équipes multi-frontières',
     risk3Body:
-      'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient exactement les mêmes compteurs que les RH.',
+      'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient, pour leurs propres jours, les mêmes compteurs que les RH voient pour eux.',
     feature1Title: 'Fiscalité et sécurité sociale, séparément',
     feature1Body:
       'Compteurs indépendants avec sources officielles. Alertes à 75 % et 90 % du plafond applicable, puis états « à la limite » et « au-delà » avec la conséquence expliquée.',
@@ -146,7 +147,7 @@ const fr: Dict = {
     ch_it_tax_telework_25: 'Télétravail au domicile (max. 25 % de l’activité lucrative dépendante)',
     ch_it_tax_nonreturn_45: 'Jours sans retour à domicile pour le travail (max. 45/an)',
     ch_it_tax_note:
-      'Selon le protocole modifiant l’accord Italie–Suisse (en vigueur le 9 févr. 2026, applicable dès le 1er janv. 2024, y compris au régime transitoire) : au plus 25 % de l’activité lucrative dépendante en télétravail à domicile dans l’État de résidence par année civile, sans changer le statut ni le traitement fiscal de ce télétravail. Le protocole ne dit pas ce qui se passe au-delà de 25 %. Sources : Fedlex RO 2026 104 ; SFI.',
+      'Selon le protocole modifiant l’accord Italie–Suisse (en vigueur le 9 févr. 2026, applicable dès le 1er janv. 2024, y compris au régime transitoire) : au plus 25 % de l’activité lucrative dépendante en télétravail à domicile dans l’État de résidence par année civile, sans changer le statut ni le traitement fiscal de ce télétravail. Le protocole ne dit pas ce qui se passe au-delà de 25 %. Sources : Fedlex RO 2026 104 ; SFI (DFF).',
     ch_it_nonreturn_note:
       'En principe, et sauf décision contraire des autorités, jusqu’à 45 jours par année civile sans retour quotidien à domicile pour le travail. Les congés et la maladie ne comptent pas. BorderDay ne compte que les jours que vous marquez « nuit hors du domicile pour le travail » ; un déplacement d’une journée ne compte pas. Source : protocole de modification, Fedlex.',
     basel_de_employer_commute:
@@ -699,6 +700,21 @@ const fr: Dict = {
     mailSubject: 'Résiliation de l’abonnement BorderDay',
     mailBody:
       'Je résilie mon abonnement BorderDay.\n\nNom : {name}\nE-mail du compte : {email}\nRéférence de commande : {reference}\nDate : {today}',
+  },
+  accessibility: {
+    title: 'Accessibilité',
+    updated: 'Dernière mise à jour : 31 octobre 2026',
+    intro:
+      'BorderDay vise une utilisation au clavier, avec lecteurs d’écran et technologies d’assistance courantes. Nous travaillons vers le niveau AA des WCAG 2.2. Cette page est une déclaration publique courte ; ce n’est pas une déclaration de conformité formelle au sens de l’acte européen sur l’accessibilité.',
+    scopeTitle: 'Périmètre',
+    scopeBody:
+      'Cette déclaration porte sur le site public et le produit connecté sur borderday.com (anglais, français, allemand et italien). Le checkout tiers (Stripe / Link) et les clients de messagerie suivent leurs propres pratiques d’accessibilité.',
+    statusTitle: 'État actuel',
+    statusBody:
+      'Des contrôles automatiques axe sur les écrans principaux n’ont signalé aucune violation lors du dernier scan interne (31 octobre 2026). Une revue manuelle relève encore des écarts en cours de correction : les cellules du calendrier ont besoin de noms accessibles plus complets (date et type de jour, pas seulement la couleur) ; les commandes de mois ont besoin d’intitulés plus clairs ; certaines erreurs de formulaire doivent être mieux annoncées ; la navigation sur petit écran doit faciliter l’accès à toutes les pages. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
+    feedbackTitle: 'Retour',
+    feedbackBody:
+      'Si vous rencontrez un obstacle, écrivez à hello@borderday.com avec l’URL de la page, votre navigateur ou technologie d’assistance, et ce que vous essayiez de faire. Nous visons une réponse sous cinq jours ouvrables.',
   },
   footer: {
     tagline:

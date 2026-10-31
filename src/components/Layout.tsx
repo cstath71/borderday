@@ -106,6 +106,8 @@ export default function Layout() {
             <Link to={`/${lang}/account`}>{d.nav.account}</Link>
             {' · '}
             <Link to={`/${lang}/disclaimer`}>{d.nav.disclaimer}</Link>
+            <span aria-hidden="true">·</span>
+            <Link to={`/${lang}/accessibility`}>{d.nav.accessibility}</Link>
             {' · '}
             <Link to={`/${lang}/pricing`}>{d.nav.pricing}</Link>
             {' · '}

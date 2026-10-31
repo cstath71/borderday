@@ -23,6 +23,7 @@ const it: Dict = {
     companySignup: 'Crea azienda',
     withdraw: 'Recedere dal contratto',
     cancel: 'Disdire il contratto',
+    accessibility: 'Accessibilità',
     account: 'Account',
     menu: 'Menu',
     skipToContent: 'Vai al contenuto principale',
@@ -52,7 +53,7 @@ const it: Dict = {
       'Oggi i contatori fiscali funzionano su quattro corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Gli altri cinque dichiarano chiaramente che nessun contatore fiscale è attivo. Non inventiamo mai un numero.',
     risk3Title: 'Team multi-confine',
     risk3Body:
-      'Una dashboard aziendale per collaboratori su confini diversi. Filtri per confine o situazione. Export CSV. I collaboratori vedono esattamente gli stessi contatori dell’HR.',
+      'Una dashboard aziendale per collaboratori su confini diversi. Filtri per confine o situazione. Export CSV. I collaboratori vedono, per i propri giorni, gli stessi contatori che l’HR vede per loro.',
     feature1Title: 'Fisco e sicurezza sociale, separati',
     feature1Body:
       'Contatori indipendenti con fonti ufficiali collegate. Avvisi al 75% e al 90% del limite applicabile, poi stati «al limite» e «oltre il limite» con la conseguenza spiegata.',
@@ -145,7 +146,7 @@ const it: Dict = {
     ch_it_tax_telework_25: 'Telelavoro al domicilio (max 25% dell’attività di lavoro dipendente)',
     ch_it_tax_nonreturn_45: 'Giorni senza rientro a domicilio per lavoro (max 45/anno)',
     ch_it_tax_note:
-      'Secondo il protocollo di modifica dell’accordo Italia–Svizzera (in vigore dal 9 feb. 2026, applicabile dal 1° gen. 2024, anche al regime transitorio): al massimo il 25 per cento dell’attività di lavoro dipendente in modalità di telelavoro presso il proprio domicilio nello Stato di residenza per anno civile, senza modificare lo status né il trattamento fiscale di tale telelavoro. Il protocollo non indica cosa accade oltre il 25%. Fonti: Fedlex RU 2026 104; SFI.',
+      'Secondo il protocollo di modifica dell’accordo Italia–Svizzera (in vigore dal 9 feb. 2026, applicabile dal 1° gen. 2024, anche al regime transitorio): al massimo il 25 per cento dell’attività di lavoro dipendente in modalità di telelavoro presso il proprio domicilio nello Stato di residenza per anno civile, senza modificare lo status né il trattamento fiscale di tale telelavoro. Il protocollo non indica cosa accade oltre il 25%. Fonti: Fedlex RU 2026 104; SFI (DFF).',
     ch_it_nonreturn_note:
       'In linea di principio, e salvo diversa decisione delle autorità, fino a 45 giorni per anno civile senza rientro quotidiano al domicilio per lavoro. Ferie e malattia non contano. BorderDay conta solo i giorni che segnate come «notte fuori per lavoro»; una trasferta di un giorno non conta. Fonte: protocollo di modifica, Fedlex.',
     basel_de_employer_commute:
@@ -701,6 +702,21 @@ const it: Dict = {
     mailSubject: 'Disdetta dell’abbonamento BorderDay',
     mailBody:
       'Disdico il mio abbonamento BorderDay.\n\nNome: {name}\nE-mail dell’account: {email}\nRiferimento dell’ordine: {reference}\nData: {today}',
+  },
+  accessibility: {
+    title: 'Accessibilità',
+    updated: 'Ultimo aggiornamento: 31 ottobre 2026',
+    intro:
+      'BorderDay mira a essere utilizzabile con tastiera, screen reader e tecnologie assistive comuni. Lavoriamo verso il livello AA delle WCAG 2.2. Questa pagina è una breve dichiarazione pubblica; non è una dichiarazione formale di conformità ai sensi dell’European Accessibility Act.',
+    scopeTitle: 'Ambito',
+    scopeBody:
+      'Questa dichiarazione riguarda il sito pubblico e il prodotto autenticato su borderday.com (inglese, francese, tedesco e italiano). Il checkout di terzi (Stripe / Link) e i client di posta seguono le proprie pratiche di accessibilità.',
+    statusTitle: 'Stato attuale',
+    statusBody:
+      'Controlli automatici axe sulle schermate principali non hanno segnalato violazioni nell’ultimo scan interno (31 ottobre 2026). La revisione manuale evidenzia ancora lacune in corso di correzione: le celle del calendario necessitano di nomi accessibili più completi (data e tipo di giorno, non solo il colore); i controlli del mese richiedono etichette più chiare; alcuni errori di form devono essere annunciati meglio; la navigazione su schermi piccoli deve facilitare l’accesso a tutte le pagine. Non è ancora stato completato un passaggio completo con screen reader.',
+    feedbackTitle: 'Feedback',
+    feedbackBody:
+      'Se trovate una barriera, scrivete a hello@borderday.com indicando l’URL della pagina, il browser o la tecnologia assistiva e ciò che stavate cercando di fare. Miriamo a rispondere entro cinque giorni lavorativi.',
   },
   footer: {
     tagline: 'Registrazione dei giorni per team e collaboratori che lavorano oltre confine.',

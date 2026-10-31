@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Account from './pages/Account';
 import AppPage from './pages/AppPage';
 import Cancel from './pages/Cancel';
+import Accessibility from './pages/Accessibility';
 import Disclaimer from './pages/Disclaimer';
 import Faq from './pages/Faq';
 import ForIndividuals from './pages/ForIndividuals';
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="disclaimer" element={<Disclaimer />} />
+        <Route path="accessibility" element={<Accessibility />} />
         <Route path="terms" element={<Terms />} />
         <Route path="withdrawal" element={<Withdrawal />} />
         <Route path="cancel" element={<Cancel />} />

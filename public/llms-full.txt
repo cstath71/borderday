@@ -27,6 +27,7 @@
 - https://borderday.com/en/company/signup/ — Company sign-up
 - https://borderday.com/en/privacy/ — Privacy
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
+- https://borderday.com/en/accessibility/ — Accessibility
 - https://borderday.com/en/terms/ — Terms and legal notice
 - https://borderday.com/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - https://borderday.com/en/cancel/ — Cancel subscription
@@ -79,6 +80,7 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/en/for-individuals/
 - https://borderday.com/en/privacy/
 - https://borderday.com/en/disclaimer/
+- https://borderday.com/en/accessibility/
 - https://borderday.com/en/terms/
 - https://borderday.com/en/withdrawal/
 - https://borderday.com/en/cancel/

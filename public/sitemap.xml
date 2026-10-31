@@ -218,6 +218,42 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer/"/>
   </url>
   <url>
+    <loc>https://borderday.com/en/accessibility/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/accessibility/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/accessibility/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/accessibility/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/accessibility/"/>
+  </url>
+  <url>
     <loc>https://borderday.com/en/terms/</loc>
     <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/terms/"/>

@@ -24,6 +24,7 @@ const de: Dict = {
     companySignup: 'Unternehmen anlegen',
     withdraw: 'Vertrag widerrufen',
     cancel: 'Verträge hier kündigen',
+    accessibility: 'Barrierefreiheit',
     account: 'Konto',
     menu: 'Menü',
     skipToContent: 'Zum Hauptinhalt springen',
@@ -53,7 +54,7 @@ const de: Dict = {
       'Steuerzähler laufen heute auf vier Korridoren: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Deutschland→Schweiz (60 Nichtrückkehrtage), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Die übrigen fünf sagen klar, dass kein Steuerzähler läuft. Wir erfinden nie eine Zahl.',
     risk3Title: 'Teams über mehrere Grenzen',
     risk3Body:
-      'Ein Unternehmens-Dashboard für Mitarbeitende mit unterschiedlichen Grenzen. Filter nach Grenze oder Status. CSV-Export. Mitarbeitende sehen genau dieselben Zähler wie HR.',
+      'Ein Unternehmens-Dashboard für Mitarbeitende mit unterschiedlichen Grenzen. Filter nach Grenze oder Status. CSV-Export. Mitarbeitende sehen bei ihren eigenen Tagen dieselben Zähler, die HR für sie sieht.',
     feature1Title: 'Steuer und Sozialversicherung, getrennt',
     feature1Body:
       'Unabhängige Zähler mit verlinkten amtlichen Quellen. Warnungen bei 75 % und 90 % der geltenden Grenze, danach die Zustände «an der Grenze» und «überschritten» mit der jeweiligen Folge.',
@@ -147,7 +148,7 @@ const de: Dict = {
     ch_it_tax_telework_25: 'Telearbeit zu Hause (max. 25 % der unselbstständigen Erwerbstätigkeit)',
     ch_it_tax_nonreturn_45: 'Tage ohne Rückkehr nach Hause aus beruflichen Gründen (max. 45/Jahr)',
     ch_it_tax_note:
-      'Nach dem Änderungsprotokoll zum Abkommen Italien–Schweiz (in Kraft seit 9. Feb. 2026, anwendbar ab 1. Jan. 2024, auch für das Übergangsregime): höchstens 25 % der unselbstständigen Erwerbstätigkeit als Telearbeit zu Hause im Ansässigkeitsstaat pro Kalenderjahr, ohne Änderung des Status oder der steuerlichen Behandlung dieser Telearbeit. Das Protokoll sagt nicht, was über 25 % gilt. Quellen: Fedlex AS 2026 104; SIF.',
+      'Nach dem Änderungsprotokoll zum Abkommen Italien–Schweiz (in Kraft seit 9. Feb. 2026, anwendbar ab 1. Jan. 2024, auch für das Übergangsregime): höchstens 25 % der unselbstständigen Erwerbstätigkeit als Telearbeit zu Hause im Ansässigkeitsstaat pro Kalenderjahr, ohne Änderung des Status oder der steuerlichen Behandlung dieser Telearbeit. Das Protokoll sagt nicht, was über 25 % gilt. Quellen: Fedlex AS 2026 104; SIF (EFD).',
     ch_it_nonreturn_note:
       'Grundsätzlich und sofern die Behörden nichts anderes entscheiden, bis zu 45 Tage pro Kalenderjahr ohne tägliche Rückkehr nach Hause aus beruflichen Gründen. Ferien und Krankheit zählen nicht. BorderDay zählt nur Tage, die Sie als «beruflich auswärts übernachtet» markieren; eine Tagesreise zählt nicht. Quelle: Änderungsprotokoll, Fedlex.',
     basel_de_employer_commute:
@@ -700,6 +701,21 @@ const de: Dict = {
     mailSubject: 'Kündigung des BorderDay-Abos',
     mailBody:
       'Hiermit kündige ich mein BorderDay-Abo.\n\nName: {name}\nKonto-E-Mail: {email}\nBestellreferenz: {reference}\nDatum: {today}',
+  },
+  accessibility: {
+    title: 'Barrierefreiheit',
+    updated: 'Zuletzt aktualisiert: 31. Oktober 2026',
+    intro:
+      'BorderDay soll mit Tastatur, Screenreadern und gängigen Hilfsmitteln nutzbar sein. Wir orientieren uns an WCAG 2.2 Stufe AA. Diese Seite ist eine kurze öffentliche Erklärung; sie ist keine formelle Konformitätserklärung im Sinne des European Accessibility Act.',
+    scopeTitle: 'Geltungsbereich',
+    scopeBody:
+      'Diese Erklärung betrifft die öffentliche Website und das angemeldete Produkt auf borderday.com (Englisch, Französisch, Deutsch und Italienisch). Der Checkout Dritter (Stripe / Link) und E-Mail-Programme folgen eigenen Barrierefreiheitspraktiken.',
+    statusTitle: 'Aktueller Stand',
+    statusBody:
+      'Automatisierte axe-Prüfungen der wichtigsten Bildschirme meldeten beim letzten internen Scan (31. Oktober 2026) keine Verstösse. Die manuelle Prüfung zeigt noch Lücken, die wir schliessen: Kalenderzellen brauchen vollständigere zugängliche Namen (Datum und Tagesart, nicht nur Farbe); Monatsschaltflächen brauchen klarere Bezeichnungen; einige Formularfehler müssen besser angekündigt werden; die Navigation auf kleinen Bildschirmen soll alle Seiten leichter erreichen. Ein vollständiger Screenreader-Abnahmetest steht noch aus.',
+    feedbackTitle: 'Rückmeldung',
+    feedbackBody:
+      'Wenn Sie auf eine Barriere stossen, schreiben Sie an hello@borderday.com mit Seiten-URL, Browser oder Hilfsmittel und dem Ziel Ihrer Aktion. Wir streben eine Antwort innerhalb von fünf Werktagen an.',
   },
   footer: {
     tagline: 'Tageserfassung für grenzüberschreitende Teams und Mitarbeitende.',

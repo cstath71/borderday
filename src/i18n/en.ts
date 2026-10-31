@@ -21,6 +21,7 @@ const en = {
     companySignup: 'Company sign-up',
     withdraw: 'Withdraw from contract',
     cancel: 'Cancel subscription',
+    accessibility: 'Accessibility',
     account: 'Account',
     menu: 'Menu',
     skipToContent: 'Skip to main content',
@@ -50,7 +51,7 @@ const en = {
       'Tax counters run today on four corridors: Geneva and other non-1983 cantons (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). The other five say plainly that no tax counter runs. We never invent a number.',
     risk3Title: 'Multi-border teams',
     risk3Body:
-      'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see exactly the same counters HR sees.',
+      'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see the same counters for their own days that HR sees for them.',
     feature1Title: 'Tax and social security, separately',
     feature1Body:
       'Independent counters with official sources linked. Warnings at 75% and 90% of the applicable limit, then at-limit and over-limit states with the consequence spelled out.',
@@ -141,7 +142,7 @@ const en = {
     ch_it_tax_telework_25: 'Telework at domicile (max 25% of employed activity)',
     ch_it_tax_nonreturn_45: 'Days without returning home for work (max 45/year)',
     ch_it_tax_note:
-      'Under the protocol amending the Italy–Switzerland agreement (in force 9 Feb 2026, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. The protocol does not state what happens above 25%. Sources: Fedlex AS 2026 104; SIF.',
+      'Under the protocol amending the Italy–Switzerland agreement (in force 9 Feb 2026, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. The protocol does not state what happens above 25%. Sources: Fedlex AS 2026 104; SIF (EFD).',
     ch_it_nonreturn_note:
       'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work. Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. Source: Fedlex amending protocol.',
     basel_de_employer_commute:
@@ -688,6 +689,21 @@ const en = {
     mailSubject: 'BorderDay subscription cancellation',
     mailBody:
       'I cancel my BorderDay subscription.\n\nName: {name}\nAccount email: {email}\nOrder reference: {reference}\nDate: {today}',
+  },
+  accessibility: {
+    title: 'Accessibility',
+    updated: 'Last updated: 31 October 2026',
+    intro:
+      'BorderDay aims to be usable with keyboard, screen readers and common assistive technologies. We work toward WCAG 2.2 Level AA. This page is a short public statement; it is not a formal conformity claim under the European Accessibility Act.',
+    scopeTitle: 'Scope',
+    scopeBody:
+      'This statement covers the public website and the signed-in product on borderday.com (English, French, German and Italian). Third-party checkout (Stripe / Link) and email clients follow their own accessibility practices.',
+    statusTitle: 'Current status',
+    statusBody:
+      'Automated checks with axe on the main screens reported no violations on the last internal scan (31 October 2026). Manual review still finds gaps we are fixing: calendar day cells need fuller accessible names (date and day type, not colour alone); month controls need clearer labels; some form errors need clearer announcements; the small-screen navigation needs an easier path to every page. We have not yet completed a full screen-reader acceptance pass.',
+    feedbackTitle: 'Feedback',
+    feedbackBody:
+      'If you find a barrier, email hello@borderday.com with the page URL, your browser or assistive technology, and what you were trying to do. We aim to reply within five working days.',
   },
   footer: {
     tagline: 'Day tracking for cross-border teams and employees.',

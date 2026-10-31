@@ -43,6 +43,12 @@ export default function Terms() {
           <p>{t.s6Body}</p>
           <h2>{t.s7Title}</h2>
           <p>{t.s7Body}</p>
+          <h2>{t.s8Title}</h2>
+          <p>{t.s8Body}</p>
+          <h2>{t.s9Title}</h2>
+          <p>{t.s9Body}</p>
+          <h2>{t.s10Title}</h2>
+          <p>{t.s10Body}</p>
           <p>{t.contact}</p>
         </div>
       </section>

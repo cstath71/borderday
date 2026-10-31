@@ -220,9 +220,9 @@ describe('Disabled counters stay disabled', () => {
     expect(r.limit).toBeNull();
   });
 
-  it('Luxembourg BE/DE tax counters disabled', () => {
-    expect(getBorderPack('luxembourg_be')!.counters.find((c) => c.id === 'lu_be_tax_34')!.enabled).toBe(false);
-    expect(getBorderPack('luxembourg_de')!.counters.find((c) => c.id === 'lu_de_tax_34')!.enabled).toBe(false);
+  it('Luxembourg BE/DE tax counters enabled (34 days, no prorate)', () => {
+    expect(getBorderPack('luxembourg_be')!.counters.find((c) => c.id === 'lu_be_tax_34')!.enabled).toBe(true);
+    expect(getBorderPack('luxembourg_de')!.counters.find((c) => c.id === 'lu_de_tax_34')!.enabled).toBe(true);
   });
 });
 
@@ -495,6 +495,40 @@ describe('C: luxembourg_fr 34 days part-time reduction', () => {
   });
 });
 
+describe('C: luxembourg_be / luxembourg_de 34 days — no part-time reduction', () => {
+  for (const [packId, counterId, overKey] of [
+    ['luxembourg_be', 'lu_be_tax_34', 'lu_be_over_34'],
+    ['luxembourg_de', 'lu_de_tax_34', 'lu_de_over_34'],
+  ] as const) {
+    describe(packId, () => {
+      const pack = getBorderPack(packId)!;
+      const tax = counterOf(pack, counterId);
+      const at = (days: number, employmentPercent?: number) =>
+        evaluateCounter(pack, tax, run(days, 'telework'), { year: 2026, profile: { employmentPercent } });
+
+      it('keeps 34 even at 50% part-time (no FR-style prorate)', () => {
+        expect(at(1, 100).limit).toBe(34);
+        expect(at(1, 50).limit).toBe(34);
+        expect(keysOf(at(5, 50))).not.toContain('prorate_applied');
+        expect(keysOf(at(5))).not.toContain('prorate_missing');
+      });
+
+      it('"n\'excédant pas": 34 at limit, 35 over', () => {
+        expect(at(34).status).toBe('at_limit');
+        expect(at(35).status).toBe('over');
+        expect(keysOf(at(35))).toContain(overKey);
+      });
+
+      it('counts telework and third_country, not onsite or non_working', () => {
+        expect(tax.countsAs.telework).toBe('full');
+        expect(tax.countsAs.third_country).toBe('full');
+        expect(tax.countsAs.onsite).toBe('none');
+        expect(tax.countsAs.non_working).toBe('none');
+      });
+    });
+  }
+});
+
 describe('H: CH–FR mission formula against the impots.gouv.fr fiche (240-day base)', () => {
   const split = (telework: number, missions: number) =>
     chFrMissionSplit({ telework, missions, annualWorkingDays: 240, quotaPercent: 40, capDays: 10 });
@@ -655,8 +689,8 @@ describe('M: inclusive and strict limits', () => {
 describe('Honest coverage per corridor', () => {
   const taxOn = BORDER_PACKS.filter((p) => p.counters.some((c) => c.kind === 'tax' && c.enabled)).map((p) => p.id);
 
-  it('tax counters run on exactly these four', () => {
-    expect(taxOn).toEqual(['geneva_fr', 'basel_de', 'luxembourg_fr', 'ticino_it']);
+  it('tax counters run on exactly these six', () => {
+    expect(taxOn).toEqual(['geneva_fr', 'basel_de', 'luxembourg_fr', 'luxembourg_be', 'luxembourg_de', 'ticino_it']);
   });
 
   it('every corridor has a social-security counter', () => {

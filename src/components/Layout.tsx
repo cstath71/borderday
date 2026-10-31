@@ -62,26 +62,32 @@ export default function Layout() {
                 {d.nav.account}
               </NavLink>
             )}
-            <label className="lang-switch">
-              <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>
-                {d.lang.label}
-              </span>
-              <select
-                aria-label={d.lang.label}
-                value={lang}
-                onChange={(e) => {
-                  const next = e.target.value as Lang;
-                  const path = window.location.pathname.replace(/^\/(en|fr|de|it)/, `/${next}`);
-                  window.location.assign(path || `/${next}/`);
-                }}
-              >
-                {LANGS.map((l) => (
-                  <option key={l} value={l}>
-                    {d.lang[l]}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <form
+              className="lang-switch"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const next = new FormData(e.currentTarget).get('lang') as Lang;
+                if (!isLang(next) || next === lang) return;
+                const path = window.location.pathname.replace(/^\/(en|fr|de|it)/, `/${next}`);
+                window.location.assign(path || `/${next}/`);
+              }}
+            >
+              <label>
+                <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>
+                  {d.lang.label}
+                </span>
+                <select name="lang" aria-label={d.lang.label} defaultValue={lang}>
+                  {LANGS.map((l) => (
+                    <option key={l} value={l}>
+                      {d.lang[l]}
+                    </option>
+                  ))}
+                </select>
+              </label>{' '}
+              <button type="submit" className="btn btn-ghost">
+                {d.lang.apply}
+              </button>
+            </form>
           </nav>
         </div>
       </header>

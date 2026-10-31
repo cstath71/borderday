@@ -3,7 +3,7 @@ const en = {
     siteName: 'BorderDay',
     tagline: 'Cross-border day limits for HR and employees — before affiliation or tax surprises.',
     description:
-      'BorderDay helps HR and employees log telework, on-site and travel days. Social-security telework counters on all nine corridors; tax counters on four: Geneva and other non-1983 cantons, Germany→Switzerland, France→Luxembourg and Italy→Switzerland. A tracking tool — not tax or legal advice.',
+      'BorderDay helps HR and employees log telework, on-site and travel days. Social-security telework counters on all nine corridors; tax counters on six: Geneva and other non-1983 cantons, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. A tracking tool — not tax or legal advice.',
   },
   nav: {
     home: 'Home',
@@ -35,11 +35,12 @@ const en = {
     de: 'Deutsch',
     it: 'Italiano',
     label: 'Language',
+    apply: 'Apply',
   },
   home: {
     heroTitle: 'One place for every border your people work across',
     heroBody:
-      'For HR and finance managers in Geneva, Basel, Ticino, Luxembourg and Belgium: see day counters per employee before a social-security switch or a tax limit is crossed. Social-security counters on all nine corridors, tax counters on four, and every corridor says which it has. Four languages, tax and social security tracked separately.',
+      'For HR and finance managers in Geneva, Basel, Ticino, Luxembourg and Belgium: see day counters per employee before a social-security switch or a tax limit is crossed. Social-security counters on all nine corridors, tax counters on six, and every corridor says which it has. Four languages, tax and social security tracked separately.',
     ctaPrimary: 'Create company account',
     ctaSecondary: 'See company pricing',
     ctaIndividuals: 'I am an individual employee',
@@ -49,7 +50,7 @@ const en = {
       'Under the EU/EEA/CH framework agreement, telework in the residence state of 25% or more of working time normally moves social security there unless an A1 is requested. At 50% or more the framework is no longer available. BorderDay shows the three bands: under 25%, 25% to under 50% (A1 required) and 50% or more, separately from tax.',
     risk2Title: 'Tax day thresholds',
     risk2Body:
-      'Tax counters run today on four corridors: Geneva and other non-1983 cantons (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). The other five say plainly that no tax counter runs. We never invent a number.',
+      'Tax counters run today on six corridors: Geneva and other non-1983 cantons (40% / 10 mission days), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). The other three say plainly that no tax counter runs. We never invent a number.',
     risk3Title: 'Multi-border teams',
     risk3Body:
       'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see the same counters for their own days that HR sees for them.',
@@ -78,7 +79,7 @@ const en = {
       'BorderDay is a tracking and reminder tool for day classifications. It is not tax advice or legal advice. Always verify with the competent authority or a qualified adviser.',
     demoBanner: 'Screenshots and the seeded company use clearly labeled DEMO data — not real employees.',
     inShort:
-      'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on four of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
+      'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on six of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
     inShortLabel: 'In short',
     chipTaxYes: 'Tax: yes',
     chipTaxNo: 'Tax: not yet',
@@ -131,7 +132,7 @@ const en = {
       'Convention regime: telework from France up to 40% of annual working time stays taxable in Switzerland. Up to 10 mission days a year count as telework, only as far as they fit under 40% after ordinary telework. Extra mission days are taxed differently. Above 40%, telework is taxable in France from the first day. On-call time counts only if you actually intervened. Sources: amendment of 27 Jun 2023 (additional protocol) for the 40% rule; FTA amicable agreement of 29 Apr 2026 for mission days; ge.ch.',
     ch_fr_missions_note:
       'Temporary missions in France or a third country: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Days outside those limits are taxable in France, subject to any treaty with the third state. Sources: FTA amicable agreement of 29 Apr 2026; impots.gouv.fr fact sheet.',
-    lu_tax_tolerance_34: 'Days outside Luxembourg (up to 34 days, full-year full-time)',
+    lu_tax_tolerance_34: 'Days outside Luxembourg (up to 34 days/year)',
     lu_tax_tolerance_pending: 'Days outside Luxembourg (tax tolerance)',
     lu_fr_tax_note:
       'Residents of France employed in Luxembourg: up to 34 days per taxable period physically present in France and/or a third state for work, without losing Luxembourg taxation for the period. Part-time or part-year: the 34 is reduced in proportion and rounded down. Beyond the limit, France may tax the time actually worked in France or a third state, from the first day. Any fraction of a day counts as a whole day, and training counts. Leave, weekly rest, public holidays not worked, sickness and force majeure do not. The limit covers all your contracts in the year, and it is up to you to prove your days: this log alone may not be enough. Source: impots.gouv.fr agreement (the PDF says 29 days, raised to 34 by the avenant of 7 Nov 2022).',
@@ -176,6 +177,14 @@ const en = {
       'These cantons do not follow the Geneva rule. Under the 1983 agreement, residents of France are generally taxed in France, and France pays 4.5% of gross salary to Switzerland. Published conditions include telework up to 40% of working time, up to 10 mission days within that 40%, and no more than 45 nights a year in Switzerland or a third state. A single mission day in France beyond those limits ends the regime. BorderDay cannot yet separate missions in France from missions elsewhere, so it shows no tax counter here rather than a false green light. Swiss nationals in the public sector and weekly residents are treated differently. Check with your cantonal tax authority.',
     lu_over_34:
       'Limit exceeded: France may tax the time actually worked in France or a third state, from the first day. Check with your tax authority.',
+    lu_be_tax_note:
+      'Residents of Belgium employed in Luxembourg: up to 34 days per calendar year physically present in Belgium and/or a third state for work, without losing Luxembourg taxation for those days. Unlike France–Luxembourg, the 34-day limit is not reduced for part-time or part-year work. Any fraction of a day counts as a whole day. On-site in Luxembourg and non-working days do not count. Source: Luxembourg Administration des contributions directes (seuil de tolérance BE–LU PDF).',
+    lu_be_over_34:
+      'Limit exceeded: Belgium may tax the time actually worked in Belgium or a third state, from the first day. Check with your tax authority.',
+    lu_de_tax_note:
+      'Residents of Germany employed in Luxembourg: up to 34 days per calendar year (from 2024) physically present in Germany and/or a third state for work, without losing Luxembourg taxation for those days. The 34-day limit is not reduced for part-time or part-year work. Activity lasting under half an hour does not count under the BMF agreement; BorderDay has no minute entry, so log a day only when the activity is material. On-site in Luxembourg and non-working days do not count. Source: German BMF Konsultationsvereinbarung of 11 January 2024.',
+    lu_de_over_34:
+      'Limit exceeded: Germany may tax the time actually worked in Germany or a third state, from the first day. Check with your tax authority.',
     prorate_missing:
       '{limit} days applies to full-year, full-time only — set your employment percentage.',
     prorate_applied: 'Limit adjusted to your {pct}% employment: {limit} days.',
@@ -341,7 +350,7 @@ const en = {
       'No. You log days yourself. No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     q5: 'Which borders do you cover?',
     a5:
-      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on four: Geneva and other non-1983 cantons←France, Germany→Switzerland, France→Luxembourg and Italy→Switzerland. No tax counter yet: the 1983-agreement cantons←France (Basel and others), Belgium→Luxembourg, Germany→Luxembourg, France→Belgium and Netherlands→Belgium.',
+      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on six: Geneva and other non-1983 cantons←France, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No tax counter yet: the 1983-agreement cantons←France (Basel and others), France→Belgium and Netherlands→Belgium.',
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',

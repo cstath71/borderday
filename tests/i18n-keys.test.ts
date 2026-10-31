@@ -193,7 +193,7 @@ describe('Phase 2 rule copy, all four languages', () => {
   it('marketing no longer promises tax limits on every corridor', () => {
     expect(JSON.stringify(en)).not.toMatch(/five borders|official tax and social-security/);
     for (const [lang, d] of all) {
-      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(four|quatre|vier|quattro)\b/i);
+      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(six|sei|sechs)\b/i);
     }
   });
 

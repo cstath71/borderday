@@ -460,8 +460,8 @@ describe('Home coverage chips', () => {
     const chips = [...container.querySelectorAll('.border-chip')].map((c) => c.textContent ?? '');
     expect(chips).toHaveLength(9);
     const withTax = chips.filter((c) => c.includes(en.home.chipTaxYes));
-    expect(withTax).toHaveLength(4);
-    expect(chips.filter((c) => c.includes(en.home.chipTaxNo))).toHaveLength(5);
+    expect(withTax).toHaveLength(6);
+    expect(chips.filter((c) => c.includes(en.home.chipTaxNo))).toHaveLength(3);
     expect(chips.every((c) => c.includes(en.home.chipSsYes))).toBe(true);
     expect(chips.find((c) => c.includes(en.borders.basel_fr))).toContain(en.home.chipTaxNo);
     expect(chips.find((c) => c.includes(en.borders.luxembourg_fr))).toContain(en.home.chipTaxYes);

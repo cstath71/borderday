@@ -5,7 +5,7 @@ const it: Dict = {
     siteName: 'BorderDay',
     tagline: 'Soglie di giorni fiscali e previdenziali per HR e collaboratori — prima delle sorprese.',
     description:
-      'BorderDay aiuta HR e collaboratori a registrare telelavoro, giorni in sede e trasferte. Contatori di sicurezza sociale su tutti i nove corridoi; contatori fiscali su quattro: Ginevra e altri cantoni fuori dall’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo e Italia→Svizzera. Strumento di registrazione — non consulenza fiscale o legale.',
+      'BorderDay aiuta HR e collaboratori a registrare telelavoro, giorni in sede e trasferte. Contatori di sicurezza sociale su tutti i nove corridoi; contatori fiscali su sei: Ginevra e altri cantoni fuori dall’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Strumento di registrazione — non consulenza fiscale o legale.',
   },
   nav: {
     home: 'Home',
@@ -37,11 +37,12 @@ const it: Dict = {
     de: 'Deutsch',
     it: 'Italiano',
     label: 'Lingua',
+    apply: 'Applica',
   },
   home: {
     heroTitle: 'Un solo strumento per tutti i confini dei vostri team',
     heroBody:
-      'Per HR e responsabili finanziari a Ginevra, Basilea, in Ticino, Lussemburgo e Belgio: contatori di giorni per collaboratore, prima di un cambio di affiliazione o del superamento di una soglia fiscale. Contatori di sicurezza sociale su tutti i nove corridoi, contatori fiscali su quattro, e ogni corridoio indica cosa copre. Quattro lingue, fisco e sicurezza sociale seguiti separatamente.',
+      'Per HR e responsabili finanziari a Ginevra, Basilea, in Ticino, Lussemburgo e Belgio: contatori di giorni per collaboratore, prima di un cambio di affiliazione o del superamento di una soglia fiscale. Contatori di sicurezza sociale su tutti i nove corridoi, contatori fiscali su sei, e ogni corridoio indica cosa copre. Quattro lingue, fisco e sicurezza sociale seguiti separatamente.',
     ctaPrimary: 'Crea account azienda',
     ctaSecondary: 'Vedi prezzi azienda',
     ctaIndividuals: 'Sono un collaboratore individuale',
@@ -51,7 +52,7 @@ const it: Dict = {
       'Secondo l’accordo quadro UE/SEE/CH, il telelavoro nello Stato di residenza pari o superiore al 25% del tempo di lavoro vi trasferisce di norma la sicurezza sociale, salvo richiesta di un certificato A1. Dal 50% l’accordo quadro non è più disponibile. BorderDay mostra le tre fasce, separate dal fisco: sotto il 25%, dal 25% a meno del 50% (A1 richiesto) e 50% o più.',
     risk2Title: 'Soglie fiscali di giorni',
     risk2Body:
-      'Oggi i contatori fiscali funzionano su quattro corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Gli altri cinque dichiarano chiaramente che nessun contatore fiscale è attivo. Non inventiamo mai un numero.',
+      'Oggi i contatori fiscali funzionano su sei corridoi: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), Germania→Svizzera (60 giorni di mancato rientro), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale), Belgio→Lussemburgo (34 giorni, non ridotti per il tempo parziale), Germania→Lussemburgo (34 giorni, non ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Gli altri tre dichiarano chiaramente che nessun contatore fiscale è attivo. Non inventiamo mai un numero.',
     risk3Title: 'Team multi-confine',
     risk3Body:
       'Una dashboard aziendale per collaboratori su confini diversi. Filtri per confine o situazione. Export CSV. I collaboratori vedono, per i propri giorni, gli stessi contatori che l’HR vede per loro.',
@@ -63,7 +64,7 @@ const it: Dict = {
       'I collaboratori entrano in azienda, scelgono il pacchetto confine e registrano solo il tipo di giorno — mai la posizione GPS.',
     feature3Title: 'Protezione dei dati fin dalla progettazione',
     feature3Body:
-      'Orientato a GDPR e LPD svizzera: isolamento per azienda, export e cancellazione, avviso chiaro su ciò che vede l’HR, nota di conservazione. Niente GPS né posizione del dispositivo.',
+      'Orientato a GDPR e LPD svizzera: isolamento per azienda, export e cancellazione, avviso chiaro su ciò che vede l’HR, nota di conservazione. Nessun GPS né posizione del dispositivo.',
     bordersTitle: 'Corridoi coperti nella versione 1',
     bordersIntro:
       'Ogni corridoio indica cosa conta oggi. Se nessuna regola fiscale può ancora essere conteggiata, lo dice e non mostra alcun numero.',
@@ -81,7 +82,7 @@ const it: Dict = {
       'BorderDay è uno strumento di registrazione e promemoria delle classificazioni dei giorni. Non è consulenza fiscale o legale. Verificate sempre con l’autorità competente o un consulente qualificato.',
     demoBanner: 'Gli screenshot e l’azienda precaricata usano dati DEMO chiaramente etichettati — non collaboratori reali.',
     inShort:
-      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su quattro di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
+      'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per collaboratore: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sei di essi. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
     inShortLabel: 'In breve',
     chipTaxYes: 'Fisco: sì',
     chipTaxNo: 'Fisco: non ancora',
@@ -134,8 +135,7 @@ const it: Dict = {
       'Regime della convenzione: il telelavoro dalla Francia fino al 40% del tempo di lavoro annuo resta imponibile in Svizzera. Fino a 10 giorni di impiego temporaneo all’anno contano come telelavoro, solo nella misura in cui rientrano nel 40% dopo il telelavoro ordinario. Gli altri giorni di impiego temporaneo sono tassati diversamente. Oltre il 40%, il telelavoro è imponibile in Francia dal primo giorno. Il picchetto conta solo in caso di intervento effettivo. Fonti: Accordo aggiuntivo del 27 giugno 2023 (Protocollo addizionale) per la regola del 40%; accordo amichevole AFC del 29 apr. 2026 per gli impieghi temporanei; ge.ch.',
     ch_fr_missions_note:
       'Impieghi temporanei in Francia o in uno Stato terzo: fino a 10 giorni all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. Tempo parziale o anno incompleto: i 10 giorni sono ridotti proporzionalmente e arrotondati per eccesso. I giorni oltre questi limiti sono imponibili in Francia, fatta salva la convenzione con lo Stato terzo. Fonti: accordo amichevole AFC del 29 apr. 2026; scheda impots.gouv.fr.',
-    lu_tax_tolerance_34:
-      'Giorni fuori dal Lussemburgo (fino a 34 giorni, tempo pieno su tutto l’anno)',
+    lu_tax_tolerance_34: 'Giorni fuori dal Lussemburgo (fino a 34 giorni/anno)',
     lu_tax_tolerance_pending: 'Giorni fuori dal Lussemburgo (tolleranza fiscale)',
     lu_fr_tax_note:
       'Residenti in Francia impiegati in Lussemburgo: fino a 34 giorni per periodo d’imposta fisicamente presenti in Francia e/o in uno Stato terzo per lavoro, senza perdere la tassazione in Lussemburgo per il periodo. Tempo parziale o anno incompleto: i 34 giorni sono ridotti proporzionalmente e arrotondati per difetto. Oltre il limite, la Francia può tassare il tempo effettivamente lavorato in Francia o in uno Stato terzo, dal primo giorno. Ogni frazione di giornata conta come giornata intera, e la formazione conta. Ferie, riposo settimanale, festivi non lavorati, malattia e forza maggiore non contano. Il limite copre tutti i vostri contratti dell’anno e spetta a voi provare i giorni: questo registro da solo può non bastare. Fonte: accordo su impots.gouv.fr (il PDF indica 29 giorni, portati a 34 dall’avenant del 7 nov. 2022).',
@@ -180,6 +180,14 @@ const it: Dict = {
       'Questi cantoni non seguono la regola di Ginevra. Secondo l’accordo del 1983, i residenti in Francia sono in genere tassati in Francia, che versa alla Svizzera il 4,5% del salario lordo. Le condizioni pubblicate comprendono telelavoro fino al 40% del tempo di lavoro, fino a 10 giorni di impiego temporaneo in quel 40% e al massimo 45 notti all’anno in Svizzera o in uno Stato terzo. Un solo giorno di missione in Francia oltre questi limiti mette fine al regime. BorderDay non sa ancora distinguere gli impieghi in Francia dagli altri, quindi qui non mostra un contatore fiscale piuttosto che un falso via libera. I cittadini svizzeri del settore pubblico e i residenti settimanali sono trattati diversamente. Verificate con la vostra autorità fiscale cantonale.',
     lu_over_34:
       'Limite superato: la Francia può tassare il tempo effettivamente lavorato in Francia o in uno Stato terzo, dal primo giorno. Verificate con la vostra autorità fiscale.',
+    lu_be_tax_note:
+      'Residenti in Belgio impiegati in Lussemburgo: fino a 34 giorni per anno civile fisicamente presenti in Belgio e/o in uno Stato terzo per lavoro, senza perdere la tassazione in Lussemburgo per quei giorni. A differenza di Francia–Lussemburgo, il limite di 34 giorni non è ridotto per il tempo parziale o l’anno incompleto. Ogni frazione di giornata conta come giornata intera. Il lavoro in sede in Lussemburgo e i giorni non lavorati non contano. Fonte: Administration des contributions directes del Lussemburgo (PDF seuil de tolérance BE–LU).',
+    lu_be_over_34:
+      'Limite superato: il Belgio può tassare il tempo effettivamente lavorato in Belgio o in uno Stato terzo, dal primo giorno. Verificate con la vostra autorità fiscale.',
+    lu_de_tax_note:
+      'Residenti in Germania impiegati in Lussemburgo: fino a 34 giorni per anno civile (dal 2024) fisicamente presenti in Germania e/o in uno Stato terzo per lavoro, senza perdere la tassazione in Lussemburgo per quei giorni. Il limite di 34 giorni non è ridotto per il tempo parziale o l’anno incompleto. Un’attività di meno di mezz’ora non conta secondo l’accordo BMF; BorderDay non registra i minuti — inserite un giorno solo se l’attività è sostanziale. Il lavoro in sede in Lussemburgo e i giorni non lavorati non contano. Fonte: Konsultationsvereinbarung BMF dell’11 gennaio 2024.',
+    lu_de_over_34:
+      'Limite superato: la Germania può tassare il tempo effettivamente lavorato in Germania o in uno Stato terzo, dal primo giorno. Verificate con la vostra autorità fiscale.',
     prorate_missing:
       '{limit} giorni valgono solo per il tempo pieno su tutto l’anno — indicate la vostra percentuale d’impiego.',
     prorate_applied:
@@ -346,10 +354,10 @@ const it: Dict = {
       'Mostriamo un numero solo se il metodo di conteggio è confermato da una fonte ufficiale. Altrimenti la scheda spiega perché nessun contatore è attivo e vi rimanda alla vostra autorità. Non inventa mai una cifra.',
     q4: 'Tracciate la mia posizione?',
     a4:
-      'No. Registrate voi i giorni. Niente GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
+      'No. Registrate voi i giorni. Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
     q5: 'Quali confini coprite?',
     a5:
-      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su quattro: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, Germania→Svizzera, Francia→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale per ora: cantoni dell’accordo del 1983←Francia (Basilea e altri), Belgio→Lussemburgo, Germania→Lussemburgo, Francia→Belgio e Paesi Bassi→Belgio.',
+      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sei: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale per ora: cantoni dell’accordo del 1983←Francia (Basilea e altri), Francia→Belgio e Paesi Bassi→Belgio.',
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',
@@ -375,7 +383,7 @@ const it: Dict = {
       'Anteprima gratuita, sul vostro dispositivo: pacchetto confine, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego e A1 se inseriti. Piano individuale: gli stessi dati, salvati nel vostro account. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, pacchetto confine, tipi e date dei giorni, segni di notte fuori, percentuale d’impiego e A1 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
-      'Niente GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche percentuale d’impiego e A1 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Niente tracker pubblicitari. Niente vendita di dati personali.',
+      'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche percentuale d’impiego e A1 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
     tableTitle: 'Finalità, basi giuridiche, destinatari, trasferimenti e conservazione',
     tableIntro:
       'I numeri di articolo si riferiscono al GDPR. La LPD svizzera non elenca le basi giuridiche allo stesso modo; valgono le stesse finalità, gli stessi destinatari e paesi.',

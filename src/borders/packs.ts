@@ -104,11 +104,21 @@ const SRC = {
     checked: CHECKED,
   },
   luDe34: {
+    title: 'BMF — Konsultationsvereinbarung DE–LU 11 Jan 2024 (34 Tage)',
+    url: 'https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/Internationales_Steuerrecht/Staatenbezogene_Informationen/Laender_A_Z/Luxemburg/2024-01-15-Luxemburg-Abkommen-DBA-Verstaendigungsvereinbarung-Anwendung-Auslegung-DBA.html',
+    checked: CHECKED,
+  },
+  luDe34Gov: {
     title: 'gouvernement.lu — nouveautés 2024: DE–LU, 19 à 34 jours',
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2023/12-decembre/29-nouveautes-2024.html',
     checked: CHECKED,
   },
   luBe34: {
+    title: 'impotsdirects.public.lu — seuil de tolérance BE–LU 34 jours',
+    url: 'https://impotsdirects.public.lu/dam-assets/fr/conventions/conv/seuil-de-tolerance-b-03-2023.pdf',
+    checked: CHECKED,
+  },
+  luBe34Gov: {
     title: 'gouvernement.lu — Gaichel 2021: BE–LU, 34 jours dès 2022',
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2021/08-aout/31-gaichel-accords-domaine-fiscal.html',
     checked: CHECKED,
@@ -341,15 +351,24 @@ export const BORDER_PACKS: BorderPack[] = [
     defaultAnnualWorkingDays: 220,
     counters: [
       {
+        // Official LU PDF: 34 days; part-time and part-year are NOT reduced; fraction of a day = full day.
         id: 'lu_be_tax_34',
         kind: 'tax',
-        labelKey: 'lu_tax_tolerance_pending',
-        enabled: false,
-        countsAs: {},
+        labelKey: 'lu_tax_tolerance_34',
+        enabled: true,
+        limit: 34,
+        inclusive: true,
+        unit: 'days_per_year',
+        countsAs: {
+          telework: 'full',
+          onsite: 'none',
+          third_country: 'full',
+          non_working: 'none',
+        },
         warningAt: WARN,
-        sources: [SRC.luBe34],
-        pendingReasonKey: 'pending_lu_be_tax',
-        pendingValueKey: 'lu_announced_value',
+        sources: [SRC.luBe34, SRC.luBe34Gov],
+        notesKey: 'lu_be_tax_note',
+        overKey: 'lu_be_over_34',
       },
       ssFramework('lu_be_ss_50', LU_SS_SOURCES, 'ss_framework_lu_note'),
     ],
@@ -362,16 +381,25 @@ export const BORDER_PACKS: BorderPack[] = [
     defaultAnnualWorkingDays: 220,
     counters: [
       {
-        // Not enabled, and FR–LU proration is not reused: the BMF agreement could not be read.
+        // BMF Konsultationsvereinbarung 11 Jan 2024: 34 days; part-time/part-year NOT reduced.
+        // Activity under 30 minutes does not count — BorderDay has no minute entry, so note that.
         id: 'lu_de_tax_34',
         kind: 'tax',
-        labelKey: 'lu_tax_tolerance_pending',
-        enabled: false,
-        countsAs: {},
+        labelKey: 'lu_tax_tolerance_34',
+        enabled: true,
+        limit: 34,
+        inclusive: true,
+        unit: 'days_per_year',
+        countsAs: {
+          telework: 'full',
+          onsite: 'none',
+          third_country: 'full',
+          non_working: 'none',
+        },
         warningAt: WARN,
-        sources: [SRC.luDe34],
-        pendingReasonKey: 'pending_lu_de_tax',
-        pendingValueKey: 'lu_announced_value',
+        sources: [SRC.luDe34, SRC.luDe34Gov],
+        notesKey: 'lu_de_tax_note',
+        overKey: 'lu_de_over_34',
       },
       ssFramework('lu_de_ss_50', LU_SS_SOURCES, 'ss_framework_lu_note'),
     ],

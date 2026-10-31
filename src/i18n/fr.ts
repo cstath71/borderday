@@ -6,7 +6,7 @@ const fr: Dict = {
     tagline:
       'Seuils de jours fiscaux et sociaux pour les RH et les collaborateurs — avant les mauvaises surprises.',
     description:
-      'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf corridors ; compteurs fiscaux sur quatre : Genève et autres cantons hors accord de 1983, Allemagne→Suisse, France→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
+      'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf corridors ; compteurs fiscaux sur six : Genève et autres cantons hors accord de 1983, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
   },
   nav: {
     home: 'Accueil',
@@ -38,11 +38,12 @@ const fr: Dict = {
     de: 'Deutsch',
     it: 'Italiano',
     label: 'Langue',
+    apply: 'Appliquer',
   },
   home: {
     heroTitle: 'Un seul outil pour toutes les frontières de vos équipes',
     heroBody:
-      'Pour les RH et responsables finance à Genève, Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur quatre, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
+      'Pour les RH et responsables finance à Genève, Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur six, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
     ctaPrimary: 'Créer un compte entreprise',
     ctaSecondary: 'Voir les tarifs entreprise',
     ctaIndividuals: 'Je suis un collaborateur individuel',
@@ -52,7 +53,7 @@ const fr: Dict = {
       'Selon l’accord-cadre UE/EEE/CH, un télétravail dans l’État de résidence de 25 % ou plus du temps de travail y transfère normalement la sécurité sociale, sauf demande d’attestation A1. À partir de 50 %, l’accord-cadre n’est plus disponible. BorderDay affiche les trois tranches, séparément de la fiscalité : moins de 25 %, de 25 % à moins de 50 % (A1 requise) et 50 % ou plus.',
     risk2Title: 'Seuils fiscaux de jours',
     risk2Body:
-      'Des compteurs fiscaux fonctionnent aujourd’hui sur quatre corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), Allemagne→Suisse (60 jours de non-retour), France→Luxembourg (34 jours, réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). Les cinq autres indiquent clairement qu’aucun compteur fiscal ne fonctionne. Nous n’inventons jamais de chiffre.',
+      'Des compteurs fiscaux fonctionnent aujourd’hui sur six corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), Allemagne→Suisse (60 jours de non-retour), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). Les trois autres indiquent clairement qu’aucun compteur fiscal ne fonctionne. Nous n’inventons jamais de chiffre.',
     risk3Title: 'Équipes multi-frontières',
     risk3Body:
       'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient, pour leurs propres jours, les mêmes compteurs que les RH voient pour eux.',
@@ -82,7 +83,7 @@ const fr: Dict = {
       'BorderDay est un outil de suivi et de rappel des classifications de jours. Ce n’est pas un conseil fiscal ou juridique. Vérifiez toujours auprès de l’autorité compétente ou d’un conseiller qualifié.',
     demoBanner: 'Les captures et l’entreprise préchargée utilisent des données DEMO clairement étiquetées — pas de vrais collaborateurs.',
     inShort:
-      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur quatre d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
+      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur six d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
     inShortLabel: 'En bref',
     chipTaxYes: 'Fiscalité : oui',
     chipTaxNo: 'Fiscalité : pas encore',
@@ -135,7 +136,7 @@ const fr: Dict = {
       'Régime de la convention : le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste imposable en Suisse. Jusqu’à 10 jours de mission par an comptent comme télétravail, seulement dans la mesure où ils tiennent sous les 40 % après le télétravail ordinaire. Les autres jours de mission sont imposés différemment. Au-delà de 40 %, le télétravail est imposable en France dès le premier jour. L’astreinte ne compte qu’en cas d’intervention effective. Sources : avenant du 27 juin 2023 (protocole additionnel) pour la règle des 40 % ; accord amiable AFC du 29 avr. 2026 pour les jours de mission ; ge.ch.',
     ch_fr_missions_note:
       'Missions temporaires en France ou dans un État tiers : jusqu’à 10 jours par an comptent dans les 40 %, seulement dans la mesure où ils tiennent après le télétravail ordinaire. Temps partiel ou année incomplète : les 10 jours sont réduits proportionnellement et arrondis à l’unité supérieure. Les jours hors de ces limites sont imposables en France, sous réserve de la convention avec l’État tiers. Sources : accord amiable AFC du 29 avr. 2026 ; fiche impots.gouv.fr.',
-    lu_tax_tolerance_34: 'Jours hors du Luxembourg (jusqu’à 34 jours, temps plein sur l’année)',
+    lu_tax_tolerance_34: 'Jours hors du Luxembourg (jusqu’à 34 jours/an)',
     lu_tax_tolerance_pending: 'Jours hors du Luxembourg (seuil de tolérance fiscale)',
     lu_fr_tax_note:
       'Résidents de France employés au Luxembourg : jusqu’à 34 jours par période imposable physiquement présents en France et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur la période. Temps partiel ou année incomplète : les 34 jours sont réduits proportionnellement et arrondis à l’unité inférieure. Au-delà, la France peut imposer le temps réellement travaillé en France ou dans un État tiers, dès le premier jour. Toute fraction de journée compte comme une journée entière, et la formation compte. Les congés, le repos hebdomadaire, les jours fériés non travaillés, la maladie et la force majeure ne comptent pas. Le seuil couvre tous vos contrats de l’année et il vous appartient de prouver vos jours : ce journal seul peut ne pas suffire. Source : accord impots.gouv.fr (le PDF indique 29 jours, portés à 34 par l’avenant du 7 nov. 2022).',
@@ -181,6 +182,14 @@ const fr: Dict = {
       'Ces cantons ne suivent pas la règle genevoise. Selon l’accord de 1983, les résidents de France sont en général imposés en France, qui reverse à la Suisse 4,5 % du salaire brut. Les conditions publiées comprennent le télétravail jusqu’à 40 % du temps de travail, jusqu’à 10 jours de mission dans ces 40 % et au plus 45 nuits par an en Suisse ou dans un État tiers. Un seul jour de mission en France au-delà de ces limites met fin au régime. BorderDay ne sait pas encore distinguer les missions en France des autres : il n’affiche donc pas de compteur fiscal ici plutôt qu’un faux feu vert. Les Suisses du secteur public et les résidents à la semaine sont traités autrement. Vérifiez auprès de votre autorité fiscale cantonale.',
     lu_over_34:
       'Seuil dépassé : la France peut imposer le temps réellement travaillé en France ou dans un État tiers, dès le premier jour. Vérifiez auprès de votre autorité fiscale.',
+    lu_be_tax_note:
+      'Résidents de Belgique employés au Luxembourg : jusqu’à 34 jours par année civile physiquement présents en Belgique et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur ces jours. Contrairement à France–Luxembourg, la limite de 34 jours n’est pas réduite pour le temps partiel ou l’année incomplète. Toute fraction de journée compte comme une journée entière. Le présentiel au Luxembourg et les jours non travaillés ne comptent pas. Source : Administration des contributions directes du Luxembourg (PDF seuil de tolérance BE–LU).',
+    lu_be_over_34:
+      'Seuil dépassé : la Belgique peut imposer le temps réellement travaillé en Belgique ou dans un État tiers, dès le premier jour. Vérifiez auprès de votre autorité fiscale.',
+    lu_de_tax_note:
+      'Résidents d’Allemagne employés au Luxembourg : jusqu’à 34 jours par année civile (depuis 2024) physiquement présents en Allemagne et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur ces jours. La limite de 34 jours n’est pas réduite pour le temps partiel ou l’année incomplète. Une activité de moins d’une demi-heure ne compte pas selon l’accord BMF ; BorderDay n’enregistre pas les minutes — ne saisissez un jour que si l’activité est substantielle. Le présentiel au Luxembourg et les jours non travaillés ne comptent pas. Source : Konsultationsvereinbarung BMF du 11 janvier 2024.',
+    lu_de_over_34:
+      'Seuil dépassé : l’Allemagne peut imposer le temps réellement travaillé en Allemagne ou dans un État tiers, dès le premier jour. Vérifiez auprès de votre autorité fiscale.',
     prorate_missing:
       '{limit} jours valent uniquement pour un temps plein sur toute l’année — indiquez votre taux d’emploi.',
     prorate_applied: 'Seuil ajusté à votre taux d’emploi de {pct} % : {limit} jours.',
@@ -347,7 +356,7 @@ const fr: Dict = {
       'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
     q5: 'Quelles frontières couvrez-vous ?',
     a5:
-      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur quatre : Genève et autres cantons hors accord de 1983←France, Allemagne→Suisse, France→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal : cantons de l’accord de 1983←France (Bâle et autres), Belgique→Luxembourg, Allemagne→Luxembourg, France→Belgique et Pays-Bas→Belgique.',
+      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur six : Genève et autres cantons hors accord de 1983←France, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal : cantons de l’accord de 1983←France (Bâle et autres), France→Belgique et Pays-Bas→Belgique.',
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',

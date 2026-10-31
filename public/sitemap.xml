@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://borderday.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/app</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/app"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/app"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/app"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/app"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/app"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/app</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/app"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/app"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/app"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/app"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/app"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/app</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/app"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/app"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/app"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/app"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/app"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/app</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/app"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/app"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/app"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/app"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/app"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/pricing"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/pricing"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/faq"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/privacy"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/disclaimer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/disclaimer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/disclaimer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/disclaimer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/disclaimer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/disclaimer"/>
+  </url>
+</urlset>

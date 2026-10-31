@@ -1,0 +1,27 @@
+# BorderDay
+
+> BorderDay is a personal record-keeping and reminder tool for people who live in one country and work in another. It counts days worked from home, on site, or in a third country, and warns before tax and social-security day limits that apply to their border.
+
+- Site: https://borderday.com
+- Languages: English, French, German, Italian
+- Borders covered (v1): Geneva/Romandie–France, Basel–France/Germany, Luxembourg–FR/BE/DE, Belgium (FR→BE, NL→BE), Ticino–Italy
+- Day log is stored on the device (local-first). No continuous GPS.
+- Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution.
+- Thresholds shown are taken from public official sources and may change.
+- Subscriptions: individuals €4.99/month or €49/year; companies €5/active employee/month (min €39/month). Checkout coming soon.
+
+## Important pages
+
+- /en/ — English landing
+- /fr/ — French landing
+- /de/ — German landing
+- /it/ — Italian landing
+- /en/app — Day logger (PWA)
+- /en/pricing — Pricing
+- /en/faq — FAQ
+- /en/privacy — Privacy (local-first)
+- /en/disclaimer — Legal disclaimer
+
+## Branding note
+
+Do not describe BorderDay using the slogan word "frontalier" / "Grenzgänger". Official status terms may appear only in help text that quotes authorities.

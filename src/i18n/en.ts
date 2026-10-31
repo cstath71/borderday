@@ -1,0 +1,230 @@
+const en = {
+  meta: {
+    siteName: 'BorderDay',
+    tagline: 'Track workdays across borders — before the limits.',
+    description:
+      'BorderDay helps you log telework, on-site and travel days against official tax and social-security limits for European borders. A personal record-keeping tool — not tax advice.',
+  },
+  nav: {
+    home: 'Home',
+    app: 'App',
+    pricing: 'Pricing',
+    faq: 'FAQ',
+    privacy: 'Privacy',
+    disclaimer: 'Disclaimer',
+    openApp: 'Open the app',
+    joinWaitlist: 'Join the waitlist',
+  },
+  lang: {
+    en: 'English',
+    fr: 'Français',
+    de: 'Deutsch',
+    it: 'Italiano',
+    label: 'Language',
+  },
+  home: {
+    heroTitle: 'Know where you stand on your border day limits',
+    heroBody:
+      'Log each workday as telework at home, on site, a work trip, or a non-working day. BorderDay counts them against the official tax and social-security rules for your border — and warns you before you get close.',
+    ctaPrimary: 'Start logging (free on your device)',
+    ctaSecondary: 'See pricing',
+    feature1Title: 'Four day types',
+    feature1Body: 'Telework at home, on site at the workplace, third country / work trip, and non-working days — each counted the way your border’s rules require.',
+    feature2Title: 'Tax and social security, separately',
+    feature2Body: 'The limits are independent systems. BorderDay keeps a counter for each, with the official threshold and a link to the source.',
+    feature3Title: 'Local-first privacy',
+    feature3Body: 'Your day log stays on your device. Export or delete anytime. No continuous location tracking.',
+    bordersTitle: 'Borders covered in version 1',
+    bordersIntro: 'Rules are taken from public official sources. Counters that are still being confirmed are shown as “rule being confirmed” and stay disabled.',
+    howTitle: 'How it works',
+    how1: 'Pick your border (residence country → workplace country).',
+    how2: 'Log each day in a few taps.',
+    how3: 'Watch the tax and social-security counters. Get warned at 75%, 90% and 100%.',
+    waitlistTitle: 'Payments coming soon',
+    waitlistBody:
+      'Checkout is not live yet. Leave your email and we will tell you when individual and company subscriptions open. Until then, you can use the day logger on your device for free.',
+    waitlistPlaceholder: 'you@example.com',
+    waitlistButton: 'Notify me',
+    waitlistNote: 'Stored only when you submit. No spam.',
+    disclaimerShort:
+      'BorderDay is a personal record-keeping and reminder tool. It is not tax advice or legal advice.',
+  },
+  borders: {
+    geneva_fr: 'Geneva / Romandie ← France',
+    basel_fr: 'Basel ← France',
+    basel_de: 'Basel ← Germany',
+    luxembourg_fr: 'Luxembourg ← France',
+    luxembourg_be: 'Luxembourg ← Belgium',
+    luxembourg_de: 'Luxembourg ← Germany',
+    belgium_fr: 'Belgium ← France',
+    belgium_nl: 'Belgium ← Netherlands',
+    ticino_it: 'Ticino ← Italy',
+    geneva_region: 'Cantons covered by the Franco-Swiss tax avenant for telework (from 1 Jan 2026).',
+    basel_region: 'North-western Switzerland / Basel area.',
+    ticino_region: 'Italy–Switzerland frontier-worker agreement, as amended for telework.',
+  },
+  dayTypes: {
+    telework: 'Telework at home',
+    onsite: 'On site at workplace',
+    third_country: 'Third country / work trip',
+    non_working: 'Non-working day',
+    teleworkHint: 'Workday performed in your residence country (home or local co-working).',
+    onsiteHint: 'Workday at the employer’s premises in the work country.',
+    third_countryHint: 'Business trip, training, client visit or temporary mission outside the work country.',
+    non_workingHint: 'Leave, public holiday not worked, sickness, or rest day.',
+  },
+  counters: {
+    tax: 'Tax',
+    social_security: 'Social security',
+    ch_fr_tax_telework_40: 'Telework share (max 40% of annual working time)',
+    ch_fr_tax_missions_10: 'Temporary missions outside Switzerland (max 10 days/year)',
+    ch_fr_tax_note:
+      'Under the Franco-Swiss amicable agreement, telework from France up to 40% of annual working time can remain taxable in Switzerland. Temporary missions (up to 10 days/year, prorated) sit inside that expression. Source: ge.ch / ESTV.',
+    ch_fr_missions_note:
+      'Up to 10 days per year of temporary missions in France or a third country may be treated within the telework expression, subject to the 40% cap. Part-year / part-time: cap prorated, rounded up. Source: ESTV amicable agreement.',
+    lu_tax_tolerance_34: 'Days outside Luxembourg (tolerance threshold: 34 days)',
+    lu_tax_tolerance_pending: 'Days outside Luxembourg (tax tolerance)',
+    lu_fr_tax_note:
+      'For residents of France employed in Luxembourg: 34 days per taxable period physically present in France and/or a third state to exercise the employment, without losing Luxembourg taxation for the whole period. Any fraction of a day counts as a full day. Leave, weekly rest, public holidays (when not required to work), sickness and force majeure are excluded. Source: impots.gouv.fr amicable agreement.',
+    ss_framework_under_50: 'Cross-border telework (framework agreement: under 50%)',
+    ss_framework_note:
+      'Under the EU/EEA/CH framework agreement on cross-border telework, habitual telework in the residence state under 50% of total working time can keep the employer’s-state social security if both states signed and an A1 certificate is requested. Source: Belgian FPS Social Security (depositary); CLEISS.',
+    ss_framework_lu_note:
+      'Luxembourg CCSS: telework exclusively in the residence state, between 25% and under 50% of total working time, both states signed → employer may request A1 so Luxembourg cover continues. Habitual non-telework in the residence state or work in a third member state can push the case out of the framework. Source: CCSS.',
+    ch_it_tax_telework_25: 'Telework at domicile (max 25% of employed activity)',
+    ch_it_tax_nonreturn_45: 'Days without daily return home (max 45 days/year)',
+    ch_it_tax_note:
+      'Under the amending protocol to the Italy–Switzerland agreement, a frontier worker may perform at most 25% of employed activity as telework at the domicile in the residence state in a calendar year without changing status or the tax treatment of that telework. Source: Fedlex RU 2026 104; SIF.',
+    ch_it_nonreturn_note:
+      'In principle, up to 45 days in a calendar year without daily return home for professional reasons (leave and sickness days not counted in that 45). Source: Fedlex amending protocol.',
+    basel_de_tax_pending: 'Germany–Switzerland tax day rules',
+    basel_de_employer_commute: 'Employer practice (Basel-Stadt): on-site days this month (floor ≈ 5)',
+    basel_de_employer_note:
+      'Basel-Stadt HR guidance (as of 1 Jan 2026): home office only if the employee commutes to the Swiss workplace at least 1 day per week or at least 5 days per month. This is employer practice, not a published federal tax day counter. Source: Kanton Basel-Stadt Finanzdepartement.',
+    be_tax_pending: 'Belgium corridor tax day rules',
+    ruleBeingConfirmed: 'Rule being confirmed',
+    pending_bmf:
+      'The exact Germany–Switzerland tax day / non-return rules for this corridor are being confirmed against BMF consultation texts. This counter stays disabled until then.',
+    pending_lu_be_tax:
+      'The Luxembourg tax tolerance for Belgian residents is widely described as 34 days, but the primary ACD / SPF Finances pages were not confirmed for this release. Counter disabled.',
+    pending_lu_de_tax:
+      'The Luxembourg tax tolerance for German residents (including any 30-minute rule) is being confirmed against ACD / BMF primary pages. Counter disabled.',
+    pending_be_tax:
+      'No simple public day-tolerance for FR→BE or NL→BE was verified on SPF Finances for this release. Tax counter disabled; social-security framework counter remains available.',
+    usedOf: '{used} of {limit}',
+    percentUsed: '{used}% of {limit}%',
+    status_ok: 'Within limit',
+    status_warn: 'Approaching limit',
+    status_critical: 'Near limit',
+    status_over: 'Over limit',
+    status_disabled: 'Not available yet',
+    sourceLink: 'Official source',
+    checkedOn: 'Checked {date}',
+  },
+  app: {
+    title: 'Your day log',
+    pickBorder: 'Your border',
+    pickBorderHint: 'Residence → workplace',
+    today: 'Today',
+    logDay: 'Log this day',
+    changeDay: 'Change',
+    calendar: 'Calendar',
+    counters: 'Your counters',
+    noBorder: 'Choose a border pack to see counters.',
+    exportJson: 'Export JSON',
+    exportCsv: 'Export CSV',
+    deleteAll: 'Delete all days',
+    deleteAllConfirm: 'Delete every day on this device? This cannot be undone.',
+    deleted: 'All days deleted.',
+    annualWorkingDays: 'Contractual working days / year',
+    annualWorkingDaysHint: 'Used when converting day counts to a percentage. Default depends on your border pack.',
+    installHint: 'Add BorderDay to your home screen for a one-tap app.',
+    emptyMonth: 'No days logged this month yet.',
+    weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    disclaimerBanner:
+      'Tracking tool only — not tax or legal advice. Verify thresholds with the authority that applies to you.',
+  },
+  pricing: {
+    title: 'Pricing',
+    subtitle: 'Subscriptions only. Checkout is not live yet — join the waitlist.',
+    individual: 'Individual',
+    company: 'Company / HR',
+    monthly: '€4.99 / month',
+    yearly: '€49 / year',
+    yearlyNote: 'About two months free vs monthly.',
+    companyPrice: '€5 / active employee / month',
+    companyMin: 'Minimum €39 / month',
+    companyYearly: 'Yearly billing: 2 months free',
+    includes: 'Includes',
+    include1: 'All border packs available in your plan',
+    include2: 'Separate tax and social-security counters',
+    include3: 'Warnings as limits approach',
+    include4: 'Export and delete your data anytime',
+    include5: 'English, French, German, Italian',
+    include6: 'Installable PWA',
+    companyInclude1: 'Multi-employee dashboard (coming with checkout)',
+    companyInclude2: 'Shared border packs and export',
+    comingSoon: 'Coming soon',
+    waitlistCta: 'Join the waitlist',
+    compareNote: 'Prices aligned with comparable tools checked on 31 Oct 2026 (Europe/Zurich).',
+  },
+  faq: {
+    title: 'FAQ',
+    q1: 'Is BorderDay tax or legal advice?',
+    a1: 'No. It is a personal record-keeping and reminder tool. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.',
+    q2: 'Where is my day log stored?',
+    a2: 'On your device (IndexedDB in the browser). You can export JSON or CSV, or delete everything. Optional cloud sync is not in this version.',
+    q3: 'Why are some counters disabled?',
+    a3: 'We only show a number when we have confirmed it on an official page. Until then the counter shows “rule being confirmed” and does not invent a figure.',
+    q4: 'Do you track my location?',
+    a4: 'No. Version 1 has no GPS and no background location. You log days yourself.',
+    q5: 'Which borders do you cover?',
+    a5: 'Geneva/Romandie–France, Basel–France/Germany, Luxembourg with France/Belgium/Germany, Belgium starting with commuters from France and the Netherlands, and Ticino–Italy.',
+    q6: 'What about the App Store?',
+    a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
+    q7: 'How do payments work?',
+    a7: 'Checkout is not live yet. Planned: Stripe Managed Payments (merchant of record, handles VAT). Join the waitlist for a notice when it opens.',
+  },
+  privacy: {
+    title: 'Privacy',
+    updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    s1Title: 'What we collect in this version',
+    s1Body:
+      'The day logger stores on your device: the border pack you chose, each day’s type (telework, on site, third country, non-working), optional notes, and optional settings such as contractual working days per year. This data does not leave your device unless you export it.',
+    s2Title: 'What we do not do',
+    s2Body:
+      'No continuous GPS. No advertising trackers. No sale of personal data. No account is required for the local logger.',
+    s3Title: 'Waitlist email',
+    s3Body:
+      'If you submit an email on the waitlist form, it is used only to tell you when subscriptions open. You can ask to be removed at any time.',
+    s4Title: 'Your rights',
+    s4Body:
+      'Export or delete your local day log anytime from the app. For waitlist emails, contact us to erase your address.',
+    s5Title: 'Processors (future)',
+    s5Body:
+      'When accounts and checkout launch, processors (for example hosting, email, payments) will be listed here with their roles. Prefer EU data residency where available.',
+    contact: 'Privacy contact: privacy@borderday.com',
+  },
+  disclaimer: {
+    title: 'Disclaimer',
+    body:
+      'BorderDay is a personal record-keeping and reminder tool. It is not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution. Thresholds shown are taken from public official sources and may change; always verify with the authority that applies to you. You are responsible for the accuracy of the days you log.',
+  },
+  footer: {
+    tagline: 'Personal day tracking for cross-border work.',
+    rights: '© {year} BorderDay',
+  },
+  waitlist: {
+    thanks: 'Thanks — we will email you when checkout opens.',
+    invalid: 'Please enter a valid email.',
+    localOnly:
+      'In this preview, the address is kept only on your device so you can see the confirmation. Live waitlist storage will be wired when email sending is approved.',
+  },
+};
+
+type DeepString<T> = {
+  [K in keyof T]: T[K] extends string ? string : DeepString<T[K]>;
+};
+
+export type Dict = DeepString<typeof en>;
+export default en;

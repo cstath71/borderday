@@ -287,6 +287,26 @@ describe('belgium_fr: Art. 11 pending + optional pre-2012 30-day counter', () =>
   });
 });
 
+describe('belgium_nl: tax counter stays disabled; Belastingdienst only', () => {
+  const pack = getBorderPack('belgium_nl')!;
+  const tax = counterOf(pack, 'be_nl_tax');
+
+  it('keeps the tax counter disabled with the adviser pending message', () => {
+    expect(tax.enabled).toBe(false);
+    expect(tax.pendingReasonKey).toBe('pending_be_nl_tax');
+    const r = evaluateCounter(pack, tax, run(10, 'telework'), { year: 2026 });
+    expect(r.enabled).toBe(false);
+  });
+
+  it('cites only the Belastingdienst treaty page and never INAMI', () => {
+    expect(tax.sources).toHaveLength(1);
+    expect(tax.sources[0].url).toMatch(/belastingdienst\.nl/);
+    expect(tax.sources[0].title).toMatch(/Belastingdienst/);
+    const urls = pack.counters.flatMap((x) => x.sources.map((s) => s.url));
+    expect(urls.every((u) => !u.toLowerCase().includes('inami'))).toBe(true);
+  });
+});
+
 describe('C: A1 social-security bands (under 25%, 25% to under 50%, 50% or more)', () => {
   for (const pack of BORDER_PACKS) {
     const ss = pack.counters.find((c) => c.kind === 'social_security')!;

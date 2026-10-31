@@ -47,7 +47,7 @@ const SRC = {
     checked: CHECKED,
   },
   fedlex: {
-    title: 'Fedlex RU 2026 104 — protocollo CH–IT',
+    title: 'Fedlex RU 2026 104 — protocollo CH–IT (pre-print verified; published RU prevails)',
     url: 'https://www.fedlex.admin.ch/eli/oc/2026/104/it',
     checked: CHECKED,
   },
@@ -97,7 +97,7 @@ const SRC = {
     checked: CHECKED,
   },
   konsVerCHEV: {
-    title: 'KonsVerCHEV §§ 7–10 — Nichtrückkehrtage (gesetze-im-internet.de)',
+    title: 'KonsVerCHEV §§ 8–9 — Nichtrückkehrtage (§ 7 is geringfügig only; gesetze-im-internet.de)',
     url: 'https://www.gesetze-im-internet.de/konsverchev/BJNR218700010.html',
     checked: CHECKED,
   },
@@ -139,6 +139,32 @@ const SRC = {
   frBeBofip: {
     title: 'BOFiP — régime frontalier France–Belgique',
     url: 'https://bofip.impots.gouv.fr/bofip/5518-PGP.html/identifiant=BOI-INT-CVB-BEL-10-60-20170306',
+    checked: CHECKED,
+  },
+
+  estvDeCh2022: {
+    title: 'ESTV — Konsultationsvereinbarung DE–CH 26 Jul 2022 (home office ≠ Nichtrückkehr)',
+    url: 'https://www.estv.admin.ch/dam/de/sd-web/otwXkqgI2YRg/int-laender-de-dba-kv-20220718-de.pdf',
+    checked: CHECKED,
+  },
+  art15a: {
+    title: 'Fedlex — DBA DE–CH Art. 15a (60 Arbeitstage)',
+    url: 'https://www.fedlex.admin.ch/eli/cc/1972/3075_3128_2910/de',
+    checked: CHECKED,
+  },
+  luCirc71: {
+    title: 'ACD Luxembourg — Circulaire L.G. - Conv. D.I. n° 71 (34 jours, 30 min, dès 2024)',
+    url: 'https://impotsdirects.public.lu/dam-assets/fr/legislation/legi24/circulaires/circulaire-lg-conv-di-71-du-18-mars-2024.pdf',
+    checked: CHECKED,
+  },
+  bofip45: {
+    title: 'BOFiP archives — 14 A-5-05 (45 nuitées, échange de lettres 2005)',
+    url: 'https://bofip-archives.impots.gouv.fr/bofip/23629-AIDA.html/identifiant=14A-5-05-20050518',
+    checked: CHECKED,
+  },
+  accordo2020: {
+    title: 'Fedlex — Accordo CH–IT 23 Dec 2020 Art. 2 (SR 0.642.045.43)',
+    url: 'https://www.fedlex.admin.ch/eli/cc/0.642.045.43/it',
     checked: CHECKED,
   },
   nlBe: {
@@ -187,6 +213,7 @@ const LU_SS_SOURCES = [SRC.ccssParent, SRC.fwMemo, SRC.fwText, SRC.fps];
 export const BORDER_PACKS: BorderPack[] = [
   {
     // Convention regime: Geneva and every canton outside the 1983 agreement.
+    // 240 = ge.ch official simplified full-time base for France–Switzerland.
     id: 'geneva_fr',
     nameKey: 'geneva_fr',
     residenceCountries: ['FR'],
@@ -310,7 +337,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.ai1983, SRC.ex1983, SRC.jura, SRC.impotsCantons],
+        sources: [SRC.ai1983, SRC.ex1983, SRC.jura, SRC.bofip45, SRC.impotsCantons],
         notesKey: 'ch_fr_1983_nights_note',
         overKey: 'ch_fr_1983_over_45',
       },
@@ -343,7 +370,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.konsVerCHEV, SRC.aargau],
+        sources: [SRC.konsVerCHEV, SRC.estvDeCh2022, SRC.art15a, SRC.aargau],
         notesKey: 'basel_de_nonreturn_note',
         overKey: 'basel_de_over_60',
       },
@@ -363,7 +390,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: [],
-        sources: [SRC.baselStadt, SRC.konsVerCHEV],
+        sources: [SRC.baselStadt],
         notesKey: 'basel_de_employer_note',
       },
       ssFramework('basel_de_ss_50'),
@@ -374,6 +401,7 @@ export const BORDER_PACKS: BorderPack[] = [
     nameKey: 'luxembourg_fr',
     residenceCountries: ['FR'],
     workCountries: ['LU'],
+    // 220 is an assumption (no official LU/BE full-time day base found); user should set their own.
     defaultAnnualWorkingDays: 220,
     logHintKey: 'logHint_luxembourg_fr',
     counters: [
@@ -459,7 +487,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.luDe34, SRC.luDe34Gov],
+        sources: [SRC.luCirc71, SRC.luDe34, SRC.luDe34Gov],
         notesKey: 'lu_de_tax_note',
         overKey: 'lu_de_over_34',
       },
@@ -539,6 +567,7 @@ export const BORDER_PACKS: BorderPack[] = [
     residenceCountries: ['IT'],
     workCountries: ['CH'],
     regionNoteKey: 'ticino_region',
+    // 240 is official for CH–FR (ge.ch) only; for CH–IT it is an assumption — user should set their own.
     defaultAnnualWorkingDays: 240,
     dayHintKeys: { telework: 'teleworkHint_ticino' },
     counters: [
@@ -557,7 +586,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.fedlex, SRC.sifIt],
+        sources: [SRC.fedlex, SRC.accordo2020, SRC.sifIt],
         notesKey: 'ch_it_tax_note',
         overKey: 'ch_it_over',
       },
@@ -579,7 +608,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.fedlex, SRC.sifIt],
+        sources: [SRC.fedlex, SRC.accordo2020, SRC.sifIt],
         notesKey: 'ch_it_nonreturn_note',
         overKey: 'ch_it_over',
       },

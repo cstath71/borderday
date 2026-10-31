@@ -100,7 +100,7 @@ const en = {
       'Convention regime: Geneva and every canton outside the 1983 agreement, with the telework rule applying from 1 Jan 2026. If your employer is in Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel or Jura, choose the 1983-agreement border route instead.',
     basel_region:
       'The 60-day rule applies across Switzerland. The 5-day minimum is the rule Basel-Stadt applies to its own staff.',
-    ticino_region: 'Italy–Switzerland frontier-worker agreement, as amended for telework.',
+    ticino_region: 'Italy–Switzerland frontier-worker agreement (Accordo Art. 2 zones: Grigioni, Ticino, Valais / Lombardia, Piemonte, Valle d’Aosta, Bolzano), as amended for telework.',
     ch_fr_1983_region:
       '1983 agreement: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel and Jura. Geneva and other cantons follow a different regime: choose the other France–Switzerland border route.',
   },
@@ -150,13 +150,13 @@ const en = {
     ch_it_tax_telework_25: 'Telework at domicile (max 25% of employed activity)',
     ch_it_tax_nonreturn_45: 'Days without returning home for work (max 45/year)',
     ch_it_tax_note:
-      'Under the protocol amending the Italy–Switzerland agreement (in force 9 Feb 2026, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. The protocol does not state what happens above 25%. Sources: Fedlex AS 2026 104; SIF (EFD).',
+      'Under the protocol amending the Italy–Switzerland frontier-worker agreement (Fedlex AS 2026 104 pre-print; published AS prevails; in force 9 Feb 2026, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. Accordo Art. 2 defines the frontier zones (CH: Grigioni, Ticino, Valais; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano). The protocol does not state what happens above 25%: ask the competent authority. Sources: Fedlex Accordo Art. 2; Fedlex AS 2026 104 (pre-print); SIF (EFD).',
     ch_it_nonreturn_note:
-      'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work. Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. Source: Fedlex amending protocol.',
+      'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work (protocol amending the Italy–Switzerland agreement). Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. The protocol does not state the consequence of exceeding 45 days: ask the competent authority. Sources: Fedlex Accordo / AS 2026 104 (pre-print; published AS prevails); SIF.',
     basel_de_employer_commute:
       'Basel-Stadt staff rule: on-site days this month (minimum 5, or 1 a week)',
     basel_de_employer_note:
-      'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): telework from home only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. Other employers may apply different rules, and it is not a general tax limit. Source: Basel-Stadt Finance Department.',
+      'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): telework from home only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. It is cantonal HR guidance for public staff, not a general federal tax or labour floor for all employers. KonsVerCHEV § 7 (1-day / 5-day test) applies only to geringfügige Arbeitsverhältnisse (marginal employment), not as a general home-office minimum. Other employers may apply different rules. Source: Basel-Stadt Finance Department (Homeoffice Vorgaben PDF).',
     pending_lu_be_tax:
       'The Luxembourg government announced 34 days from 2022 for residents of Belgium. The Belgian text settling part-time reduction and what counts was not found, so no counter runs. Check with your authority.',
     pending_lu_de_tax:
@@ -183,7 +183,7 @@ const en = {
     ch_fr_1983_missions_note:
       'Temporary missions in France or a third State: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Any excess mission day in France ends the 1983 regime. BorderDay cannot tell France from a third state, so treat every excess mission day as a risk. Sources: ESTV practical sheet; impots.gouv.fr 1983 interpretative agreement.',
     ch_fr_1983_nights_note:
-      'No more than 45 nights a year spent away from home for work in Switzerland or a third state (inclusive). BorderDay counts only days you mark “stayed away overnight for work” on an on-site or trip day. Excess nights end the 1983 regime. Source: Canton of Jura; ESTV practical sheet.',
+      'No more than 45 nights a year spent away from home for work in Switzerland or a third state (inclusive), under the 1983 frontier agreement and the 2005 competent-authority clarification. BorderDay counts only days you mark “stayed away overnight for work” on an on-site or trip day. Excess nights end the 1983 regime. Sources: 1983 agreement text; BOFiP 14 A-5-05 (45 nuitées); Canton of Jura; ESTV practical sheet.',
     ch_fr_1983_over_40:
       'Above 40%: the 1983 frontier regime is lost. Check with your tax authority.',
     ch_fr_1983_over_mission:
@@ -202,7 +202,7 @@ const en = {
     lu_be_over_34:
       'Limit exceeded: Belgium may tax the time actually worked in Belgium or a third state, from the first day. Check with your tax authority.',
     lu_de_tax_note:
-      'Residents of Germany employed in Luxembourg: up to 34 days per calendar year (from 2024) physically present in Germany and/or a third state for work, without losing Luxembourg taxation for those days. The 34-day limit is not reduced for part-time or part-year work. Activity lasting under half an hour does not count under the BMF agreement; BorderDay has no minute entry, so log a day only when the activity is material. On-site in Luxembourg and non-working days do not count. Source: German BMF Konsultationsvereinbarung of 11 January 2024.',
+      'Residents of Germany employed in Luxembourg: up to 34 days per calendar year (from 1 January 2024) physically present in Germany and/or a third state for work, without losing Luxembourg taxation for those days. The 34-day limit is not reduced for part-time or part-year work. Activity lasting under half an hour does not count; BorderDay has no minute entry, so log a day only when the activity is material. On-site in Luxembourg and non-working days do not count. Sources: Luxembourg ACD Circulaire L.G. - Conv. D.I. n° 71; German BMF Konsultationsvereinbarung of 11 January 2024.',
     lu_de_over_34:
       'Limit exceeded: Germany may tax the time actually worked in Germany or a third state, from the first day. Check with your tax authority.',
     prorate_missing:
@@ -228,7 +228,7 @@ const en = {
       'Limit exceeded. The protocol does not state the consequence: ask the competent authority.',
     basel_de_nonreturn_60: 'Non-return days for work (up to 60 a year)',
     basel_de_nonreturn_note:
-      'Germany–Switzerland: cross-border status is lost above 60 work-related non-return days a year. Counted here: days you mark “stayed away overnight for work”, plus every day of work outside Germany and Switzerland, even with same-day return. Same-day trips inside Germany or Switzerland, illness and accident do not count. On multi-day business trips paid by the employer, weekends and holidays count too, so log them as trip days. Part-time staff working only certain days have a proportionally lower limit, and several employers are assessed together. Whether a home-office day can be a non-return day is not confirmed here: check with your authority. The employer files form Gre-3 (31 March in Aargau; check your canton). Sources: KonsVerCHEV §§ 8–9; Canton Aargau leaflet, status 1 Jan 2026.',
+      'Germany–Switzerland: cross-border status is lost above 60 work-related non-return days a year (DBA DE–CH Art. 15a; Konsultationsvereinbarung). Counted here: days you mark “stayed away overnight for work”, plus every day of work outside Germany and Switzerland, even with same-day return. Same-day trips inside Germany or Switzerland, illness and accident do not count. On multi-day business trips paid by the employer, weekends and holidays count too, so log them as trip days. Part-time staff working only certain days have a proportionally lower limit, and several employers are assessed together. Full days worked at your home in Germany are not Nichtrückkehrtage under the ESTV/BMF Konsultationsvereinbarung of 26 July 2022. The employer files form Gre-3 (31 March in Aargau; check your canton). Sources: Fedlex Art. 15a; ESTV Konsultationsvereinbarung DE–CH (PDF); KonsVerCHEV §§ 8–9; Canton Aargau leaflet, status 1 Jan 2026.',
     basel_de_over_60:
       'Above 60 days, cross-border status is lost: Swiss withholding moves from 4.5% to the normal rate for the year. Check with your tax authority.',
     floor_week_met: 'Met through at least one on-site day in every week of the month.',
@@ -283,7 +283,7 @@ const en = {
     deleted: 'All days deleted.',
     annualWorkingDays: 'Contractual working days / year',
     annualWorkingDaysHint:
-      'Used when converting day counts to a percentage. The default is an assumption except for 240 on France–Switzerland, the official simplified full-time base: set your own figure, lower if you work part-time.',
+      'Used when converting day counts to a percentage. Defaults: 240 is the official simplified full-time base for France–Switzerland only (ge.ch). 220 for Luxembourg/Belgium corridors and 240 for Italy–Switzerland are assumptions with no official day-base found — set your own figure, lower if you work part-time.',
     installHint: 'Add BorderDay to your home screen for a one-tap app.',
     emptyMonth: 'No days logged this month yet.',
     weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -497,7 +497,7 @@ const en = {
     ],
     transfersTitle: 'International transfers',
     transfersBody:
-      'The controller is in Switzerland, which the European Commission recognises as providing adequate protection; Switzerland in turn recognises the EU and EEA states as adequate. For recipients in the United States or elsewhere, we rely on the EU–US and Swiss–US Data Privacy Frameworks where the provider is certified, and otherwise on the standard contractual clauses (with Swiss adaptations) in the provider’s published data-processing terms. Ask privacy@borderday.com for a copy of these safeguards.',
+      'The controller is in Switzerland, which the European Commission recognises as providing adequate protection; Switzerland in turn recognises the EU and EEA states as adequate. For Stripe, GitHub and Google in the United States we rely on the EU–US and Swiss–US Data Privacy Frameworks (Swiss-U.S. Active). For Resend and Supabase we do not claim Swiss–US DPF certification; we rely on the standard contractual clauses (with Swiss adaptations) in those providers’ published data-processing terms, and Supabase hosts the database in the EU (eu-central-1). Ask privacy@borderday.com for a copy of these safeguards.',
     s6Title: 'Data retention',
     s6Body:
       'Company day logs: 24 months by default, or the company’s setting (1–120 months), unless applicable law requires longer. A daily scheduled job deletes company day logs whose work date falls outside that window, and marks pending invites past their 14-day expiry as expired. Individual-plan day logs stay until you delete them or close the account. Whole accounts, company membership and billing records are not timed-deleted: close the account or write to privacy@borderday.com. Demo data is labelled DEMO and may be reset at any time.',
@@ -520,7 +520,7 @@ const en = {
       'An email address is needed for an account, and day data is needed for the counters: without them the service cannot be provided. Employment percentage, A1 record and notes are optional, though some limits are less precise without them. BorderDay takes no automated decisions with legal effect: counters only calculate from the days logged.',
     storageTitle: 'Storage on your device',
     storageBody:
-      'BorderDay sets no cookies and uses no advertising or analytics trackers. It stores only what the app needs on your device: IndexedDB for the free preview’s day log and settings, localStorage for your sign-in session and the demo company, and a service-worker cache so the app loads offline. These are strictly necessary, so no consent banner is shown. You can clear them in your browser settings.',
+      'BorderDay sets no cookies and uses no advertising or analytics trackers. It stores only what the app needs on your device: IndexedDB for the free preview’s day log and settings, localStorage for your sign-in session and the demo company, and a service-worker cache so the app loads offline. These are strictly necessary for the service. Under Swiss FMG Art. 45c (Loi sur les télécommunications / Fernmeldegesetz), we inform you that this processing on your terminal device is for providing the service; you can refuse it by clearing site data or not using the product. No consent banner is shown for these strictly necessary stores. You can clear them in your browser settings.',
     s7Title: 'Transparency between employee and HR',
     s7Body:
       'There is no hidden HR-only score. Counter math (used days, allowed days, status) is identical for the employee view and the HR dashboard.',
@@ -648,7 +648,7 @@ const en = {
     s5Body:
       'If you buy an individual plan as a consumer in the EU/EEA, you can withdraw from the contract within 14 days without giving a reason. The period runs from the day the contract is concluded, which is the day you receive access after checkout. To withdraw, tell us clearly: use the Withdraw from contract page, the model form below or a plain email to privacy@borderday.com, or contact Link support for your Order. It is enough to send your message before the 14 days end.',
     s5EffectsBody:
-      'BorderDay is a digital service, so the right of withdrawal ends only once the contract has been fully performed, not when performance starts. Withdrawing during the free trial costs nothing. If you withdraw after a paid period has started, you owe only an amount in proportion to the service provided up to your withdrawal, and only if you expressly asked for the service to start during the period and received this information. Anything else you paid is refunded without undue delay and within 14 days at the latest, by the same means of payment; Link handles the refund for your Order.',
+      'BorderDay is a digital service, so the right of withdrawal ends only once the contract has been fully performed, not when performance starts. Withdrawing during the free trial costs nothing. If you withdraw after a paid period has started, you owe only an amount in proportion to the service provided up to your withdrawal, and only if you expressly asked for the service to start during the period and received this information. Anything else you paid is refunded without undue delay and within 14 days at the latest, by the same means of payment; Link handles the refund for your Order. Whether a given SaaS subscription is classed as a digital service under Directive 2011/83/EU as interpreted in Case C-234/25 is a legal assessment; BorderDay treats individual consumer plans as a digital service on that basis — confirm with counsel for your situation.',
     s5BusinessBody: 'Company plans are sold for business use. Mandatory consumer rights are not affected.',
     s5FormTitle: 'Model withdrawal form (complete and return it only if you wish to withdraw)',
     s5Form:
@@ -800,7 +800,7 @@ const en = {
       'Material changes to this list will be reflected on this page. The employer may object on reasonable data-protection grounds by emailing privacy@borderday.com within 14 days of the update; if no workable alternative is agreed, the employer may stop using the company features that depend on the new sub-processor.',
     transfersTitle: 'International transfers',
     transfersBody:
-      'The controller is typically in the EU/EEA, Switzerland or another state. The processor is in Switzerland (adequacy). Database hosting for BorderDay is in the EU (eu-central-1). Where a sub-processor is in the United States or elsewhere, transfers rely on the EU–US and Swiss–US Data Privacy Frameworks where the provider is certified, otherwise on the standard contractual clauses (with Swiss adaptations) in that provider’s published terms. A copy of the safeguards can be requested at privacy@borderday.com.',
+      'The controller is typically in the EU/EEA, Switzerland or another state. The processor is in Switzerland (adequacy). Database hosting for BorderDay is in the EU (eu-central-1). For Stripe, GitHub and Google in the United States, transfers rely on the EU–US and Swiss–US Data Privacy Frameworks (Swiss-U.S. Active). For Resend and Supabase we do not claim Swiss–US DPF certification; transfers rely on the standard contractual clauses (with Swiss adaptations) in those providers’ published terms. A copy of the safeguards can be requested at privacy@borderday.com.',
     assistanceTitle: 'Assistance with data-subject rights and compliance (Art. 28(3)(e)–(f))',
     assistanceBody:
       'Taking into account the nature of the processing, the processor assists the employer by product features (export/delete where available) and by forwarding requests sent to privacy@borderday.com that clearly relate to that employer’s employees. The employer remains responsible for answering its employees. The processor also assists, on request and at reasonable cost where the law allows, with data-protection impact assessments and prior consultation where they relate to BorderDay company features.',

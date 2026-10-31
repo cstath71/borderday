@@ -10,7 +10,7 @@ export default function Privacy() {
   const d = getDict(lang);
   const p = d.privacy;
 
-  // OPEN C2: no EU representative (GDPR Art. 27) is named here because none has been appointed yet.
+  // C2: public copy stays silent on Art. 27 representative and DPO (GDPR Art. 13 where applicable); do not re-add absence claims.
   // Add the name to controllerBody once the owner appoints one; never invent it.
   // H3: daily pg_cron job bd_purge_expired_data deletes company day logs past data_retention_months.
   return (

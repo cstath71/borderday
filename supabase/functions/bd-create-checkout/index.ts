@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
+import { TRIAL_DAYS } from "../_shared/trial.ts";
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -33,10 +34,16 @@ Deno.serve(async (req) => {
     const { data: { user }, error: userErr } = await supabase.auth.getUser();
     if (userErr || !user) throw new Error("Unauthorized");
 
-    const body = await req.json() as { plan: "company" | "individual"; interval: "month" | "year"; companyId?: string };
+    const body = await req.json() as {
+      plan: "company" | "individual";
+      interval: "month" | "year";
+      companyId?: string;
+      lang?: string;
+    };
     let priceId = "";
     let quantity = 1;
     const metadata: Record<string, string> = { plan: body.plan, user_id: user.id };
+    const lang = (body.lang && /^[a-z]{2}$/.test(body.lang)) ? body.lang : "en";
 
     if (body.plan === "company") {
       if (!body.companyId) throw new Error("companyId required");
@@ -65,27 +72,38 @@ Deno.serve(async (req) => {
       });
     }
 
-    const Stripe = (await import("https://esm.sh/stripe@17.3.1?target=deno")).default;
+    // stripe@18+ understands managed_payments; API version must be 2025-03-31.basil+
+    const Stripe = (await import("https://esm.sh/stripe@18.5.0?target=deno")).default;
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
+
+    // Managed Payments (MoR): managed_payments[enabled]=true.
+    // Must NOT send automatic_tax, tax_id_collection, or payment_method_types
+    // (docs.stripe.com/payments/managed-payments/update-checkout).
+    // Allowed and kept: billing_address_collection, payment_method_collection,
+    // allow_promotion_codes, subscription_data (trial + trial_settings + metadata).
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity }],
-      success_url: `${siteUrl}/en/pricing?checkout=success`,
-      cancel_url: `${siteUrl}/en/pricing?checkout=cancel`,
+      success_url: `${siteUrl}/${lang}/pricing?checkout=success`,
+      cancel_url: `${siteUrl}/${lang}/pricing?checkout=cancel`,
       client_reference_id: body.companyId || user.id,
       metadata,
-      subscription_data: { metadata, trial_period_days: 14 },
+      managed_payments: { enabled: true },
+      subscription_data: {
+        metadata,
+        trial_period_days: TRIAL_DAYS,
+        trial_settings: {
+          end_behavior: { missing_payment_method: "cancel" },
+        },
+      },
       allow_promotion_codes: true,
-      // €0 due (trial / 100% promo) → no card required
-      payment_method_collection: "if_required",
+      // Card required up front so trial can convert (or cancel if missing).
+      payment_method_collection: "always",
       customer_email: user.email,
-      // Stripe Tax: account default exclusive; individual prices inclusive, company exclusive.
       billing_address_collection: "required",
-      automatic_tax: { enabled: true },
-      tax_id_collection: { enabled: true },
     } as any);
 
-    return new Response(JSON.stringify({ available: true, url: session.url }), {
+    return new Response(JSON.stringify({ available: true, url: session.url, id: session.id }), {
       headers: { ...cors, "Content-Type": "application/json" },
     });
   } catch (e) {

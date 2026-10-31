@@ -11,7 +11,7 @@
  * Individual: €4.99/mo or €49/yr (tax_behavior inclusive).
  * Company prices: tax_behavior exclusive. Account default: exclusive.
  * Checkout: automatic_tax + tax_id_collection + billing_address_collection required.
- * Trial: 14 days on Checkout session.
+ * Trial: 7 days on Checkout session (TRIAL_DAYS).
  */
 import Stripe from 'stripe';
 const key = process.env.STRIPE_SECRET_KEY;

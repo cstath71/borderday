@@ -12,13 +12,14 @@ Deno.serve(async (req) => {
   if (!stripeKey || !webhookSecret) {
     return new Response(JSON.stringify({ ok: false, message: "Stripe not configured" }), { status: 503 });
   }
-  const Stripe = (await import("https://esm.sh/stripe@17.3.1?target=deno")).default;
+  const Stripe = (await import("https://esm.sh/stripe@18.5.0?target=deno")).default;
   const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
   const sig = req.headers.get("stripe-signature");
   const raw = await req.text();
   let event: any;
   try {
-    event = stripe.webhooks.constructEvent(raw, sig!, webhookSecret);
+    // Deno SubtleCrypto requires the async verifier (sync constructEvent → 400).
+    event = await stripe.webhooks.constructEventAsync(raw, sig!, webhookSecret);
   } catch (e) {
     return new Response(`Webhook Error: ${e instanceof Error ? e.message : "bad sig"}`, { status: 400 });
   }
@@ -62,6 +63,13 @@ Deno.serve(async (req) => {
     return updated;
   }
 
+  function periodEndIso(sub: any): string | null {
+    // basil: current_period_* moved onto subscription items
+    const item = sub.items?.data?.[0];
+    const unix = item?.current_period_end ?? sub.current_period_end ?? sub.trial_end ?? null;
+    return unix ? new Date(unix * 1000).toISOString() : null;
+  }
+
   async function upsertFromSubscription(sub: any, opts?: { preferDbSeats?: boolean }) {
     const meta = sub.metadata || {};
     const statusMap: Record<string, string> = {
@@ -75,9 +83,8 @@ Deno.serve(async (req) => {
     const priceId = sub.items?.data?.[0]?.price?.id as string | undefined;
     const stripeQty = sub.items?.data?.[0]?.quantity ?? 1;
     const onFlat = isCompanyFlatMinimumPrice(priceId, priceCompanyMinMonth, priceCompanyMinYear);
-    // Billed quantity on flat is always 1; real seats live in metadata / bd_companies.seat_count.
     const metaSeats = meta.active_seats != null ? Number(meta.active_seats) : NaN;
-    const periodEnd = sub.current_period_end ? new Date(sub.current_period_end * 1000).toISOString() : null;
+    const periodEnd = periodEndIso(sub);
     const trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
 
     if (companyId) {
@@ -85,16 +92,13 @@ Deno.serve(async (req) => {
         .select("seat_count, stripe_customer_id")
         .eq("id", companyId).maybeSingle();
       const dbSeats = company?.seat_count ?? 0;
-      // Prefer DB active-employee count; never overwrite seat_count with flat qty=1.
       let seatCountToStore = dbSeats;
       if (!opts?.preferDbSeats && !onFlat && Number.isFinite(stripeQty) && stripeQty > 0) {
-        // Per-seat subscriptions: Stripe quantity tracks seats.
         seatCountToStore = stripeQty;
       } else if (Number.isFinite(metaSeats) && metaSeats >= 0 && dbSeats === 0) {
         seatCountToStore = metaSeats;
       }
 
-      // If we have an active/trialing company sub, align price/qty with current DB seats.
       if ((status === "active" || status === "trialing") && typeof dbSeats === "number") {
         sub = await syncCompanySubscriptionItem(sub, dbSeats);
       }
@@ -102,7 +106,6 @@ Deno.serve(async (req) => {
       await admin.from("bd_companies").update({
         stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
         subscription_status: status,
-        // Keep authoritative seat_count from members trigger when on flat or when preferDbSeats.
         ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
         current_period_end: periodEnd,
         trial_ends_at: trialEnd,

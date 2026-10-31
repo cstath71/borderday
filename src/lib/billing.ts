@@ -9,6 +9,7 @@ export async function startCheckout(opts: {
   plan: 'company' | 'individual';
   interval: 'month' | 'year';
   companyId?: string;
+  lang?: string;
 }): Promise<CheckoutResult> {
   if (!supabaseConfigured || !supabase) {
     return { ok: false, reason: 'not_available', message: 'Payments not yet available' };
@@ -31,7 +32,9 @@ export async function startCheckout(opts: {
   if (!body?.url) {
     return {
       ok: false,
-      reason: 'not_available',
+      reason: body?.available === false && body?.message && !/not yet available/i.test(body.message)
+        ? 'error'
+        : 'not_available',
       message: body?.message || 'Payments not yet available',
     };
   }

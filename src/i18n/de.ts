@@ -57,12 +57,12 @@ const de: Dict = {
     how1: 'Unternehmenkonto anlegen und Mitarbeitende per E-Mail-Link einladen.',
     how2: 'Jede Person wählt ihr Grenzpaket und erfasst Telearbeit / vor Ort / Reise / nicht gearbeitet.',
     how3: 'HR beobachtet Steuer- und Sozialversicherungs-Zähler, filtert nach Status und exportiert CSV.',
-    waitlistTitle: 'Zahlungen noch nicht verfügbar',
+    waitlistTitle: 'Mit Firmenkonto starten',
     waitlistBody:
-      'Checkout startet nach Stripe-Anbindung. Firmenkonto per E-Mail oder Google anlegen; bezahlte HR-Funktionen bleiben gesperrt. Ein gekennzeichnetes DEMO-Unternehmen bleibt verfügbar.',
+      'Erstellen Sie ein Firmenkonto per E-Mail oder Google, laden Sie Ihr Team ein und abonnieren Sie auf der Preisseite. Eine gekennzeichnete DEMO-Firma bleibt verfügbar.',
     waitlistPlaceholder: 'Sie@firma.com',
     waitlistButton: 'Konto erstellen',
-    waitlistNote: 'Keine Warteliste — Konten sind aktiv. Zahlungen bleiben gesperrt, bis Stripe verbunden ist.',
+    waitlistNote: 'Keine Warteliste — Konten und Checkout sind live. Firmenpläne: 5 €/Mitarbeiter/Monat (min. 39 €), 7-Tage-Test.',
     disclaimerShort:
       'BorderDay ist ein Tracking- und Erinnerungstool für Tagesklassifikationen. Keine Steuer- oder Rechtsberatung. Immer bei der zuständigen Behörde oder einer Fachperson prüfen.',
     demoBanner: 'Screenshots und das vorgeladene Unternehmen nutzen klar gekennzeichnete DEMO-Daten — keine echten Mitarbeitenden.',
@@ -189,7 +189,14 @@ const de: Dict = {
     companyInclude2: 'E-Mail-Einladungen, Rollen (Owner / HR-Ansicht), CSV-Audit-Export',
     companyInclude3: 'Mitarbeitende sehen dieselben Zähler wie HR',
     companyInclude4: 'Privacy by Design (nur Tagestypen — kein Standort)',
-    comingSoon: 'Zahlungen noch nicht verfügbar',
+    comingSoon: 'Checkout live',
+    subscribeMonthly: 'Monatlich starten',
+    subscribeYearly: 'Jährlich starten',
+    trialNote: '7 Tage kostenlos testen — Karte bei der Anmeldung erforderlich.',
+    checkoutSuccess: 'Zahlung eingerichtet — Ihre Testphase ist aktiv. Öffnen Sie Ihr Konto, um fortzufahren.',
+    checkoutCancel: 'Checkout abgebrochen — keine Belastung. Sie können es jederzeit erneut versuchen.',
+    goToAccount: 'Zum Konto',
+    needCompany: 'Legen Sie zuerst ein Firmenkonto an oder öffnen Sie eines, dann abonnieren.',
     waitlistCta: 'Konto starten',
     compareNote: 'Preise an vergleichbaren Tools vom 31.10.2026 (Europe/Zurich) ausgerichtet. Keine Steuerberatung.',
     recommended: 'Empfohlen für Arbeitgeber',
@@ -209,7 +216,7 @@ const de: Dict = {
     q6: 'Und der App Store?',
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
-    a7: 'Checkout ist vorbereitet, aber erst live nach Stripe. Geplant: Stripe Managed Payments (Verkäufer, MwSt.) mit 14-Tage-Test für Firmenpläne.',
+    a7: 'Stripe Managed Payments (Verkäufer) übernimmt die Steuer im Checkout. Firmen- und Einzelpläne beinhalten eine 7-Tage-Testphase; eine Karte ist bei der Anmeldung nötig. Aktionscodes werden akzeptiert.',
   },
   privacy: {
     title: 'Datenschutz',
@@ -336,14 +343,14 @@ const de: Dict = {
     notConfigured: 'Auth ist in diesem Build nicht konfiguriert.',
     completing: 'Anmeldung wird abgeschlossen…',
     callbackFailed: 'Anmeldung fehlgeschlagen. Erneut versuchen.',
-    paymentsUnavailable: 'Zahlungen noch nicht verfügbar',
+    paymentsUnavailable: 'Checkout konnte nicht gestartet werden — erneut versuchen oder Support kontaktieren.',
     signOut: 'Abmelden',
   },
   waitlist: {
     thanks: 'Konto erstellt — weiter zur Firmenregistrierung.',
     invalid: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     localOnly:
-      'Nutzen Sie Registrieren / Anmelden für ein echtes Konto. Zahlungen bleiben bis Stripe gesperrt.',
+      'Nutzen Sie Registrieren / Anmelden. Checkout ist auf der Preisseite verfügbar.',
   },
 };
 

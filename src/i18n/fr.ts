@@ -57,12 +57,12 @@ const fr: Dict = {
     how1: 'Créez un compte entreprise et invitez les collaborateurs par lien e-mail.',
     how2: 'Chaque collaborateur choisit son pack frontière et journalise télétravail / sur site / déplacement / non travaillé.',
     how3: 'Les RH suivent les compteurs fiscaux et de sécurité sociale, filtrent par statut et exportent en CSV.',
-    waitlistTitle: 'Paiements pas encore disponibles',
+    waitlistTitle: 'Commencez avec un compte entreprise',
     waitlistBody:
-      'Le paiement s\'ouvrira une fois Stripe connecté. Créez un compte entreprise par e-mail ou Google ; les fonctions payées restent verrouillées. Une entreprise DÉMO étiquetée reste disponible.',
+      'Créez un compte entreprise par e-mail ou Google, invitez votre équipe, puis abonnez-vous sur la page Tarifs. Une entreprise DÉMO étiquetée reste disponible.',
     waitlistPlaceholder: 'vous@entreprise.com',
     waitlistButton: 'Créer un compte',
-    waitlistNote: 'Pas de liste d\'attente — les comptes sont actifs. Les paiements restent indisponibles tant que Stripe n\'est pas connecté.',
+    waitlistNote: 'Pas de liste d\'attente — comptes et paiement sont actifs. Offres entreprise : 5 €/employé/mois (min. 39 €), essai de 7 jours.',
     disclaimerShort:
       'BorderDay est un outil de suivi et de rappel des classifications de jours. Ce n’est pas un conseil fiscal ou juridique. Vérifiez toujours auprès de l’autorité compétente ou d’un conseiller qualifié.',
     demoBanner: 'Les captures et l’entreprise préchargée utilisent des données DEMO clairement étiquetées — pas de vrais collaborateurs.',
@@ -189,7 +189,14 @@ const fr: Dict = {
     companyInclude2: 'Invitations e-mail, rôles (owner / RH lecture), export CSV d’audit',
     companyInclude3: 'Les collaborateurs voient les mêmes compteurs que les RH',
     companyInclude4: 'Confidentialité by design (types de jours seulement — pas de localisation)',
-    comingSoon: 'Paiements pas encore disponibles',
+    comingSoon: 'Paiement en ligne',
+    subscribeMonthly: 'Commencer au mois',
+    subscribeYearly: 'Commencer à l\'année',
+    trialNote: 'Essai gratuit de 7 jours — carte requise à l\'inscription.',
+    checkoutSuccess: 'Paiement configuré — votre essai est actif. Ouvrez votre compte pour continuer.',
+    checkoutCancel: 'Paiement annulé — aucun débit. Vous pouvez réessayer à tout moment.',
+    goToAccount: 'Aller au compte',
+    needCompany: 'Créez ou ouvrez d\'abord un compte entreprise, puis abonnez-vous.',
     waitlistCta: 'Créer un compte',
     compareNote: 'Tarifs alignés sur des outils comparables au 31 oct. 2026 (Europe/Zurich). Pas un conseil fiscal.',
     recommended: 'Recommandé pour les employeurs',
@@ -209,7 +216,7 @@ const fr: Dict = {
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',
-    a7: 'Le paiement est préparé mais pas en ligne tant que Stripe n\'est pas connecté. Prévu : Stripe Managed Payments (vendeur, TVA) avec essai de 14 jours sur les offres entreprise.',
+    a7: 'Stripe Managed Payments (vendeur) gère la fiscalité au paiement. Les offres entreprise et individuel incluent un essai gratuit de 7 jours ; une carte est requise à l\'inscription. Les codes promo sont acceptés.',
   },
   privacy: {
     title: 'Confidentialité',
@@ -336,14 +343,14 @@ const fr: Dict = {
     notConfigured: "L'authentification n'est pas configurée dans cette version.",
     completing: 'Finalisation de la connexion…',
     callbackFailed: 'Impossible de terminer la connexion. Réessayez.',
-    paymentsUnavailable: 'Paiements pas encore disponibles',
+    paymentsUnavailable: 'Impossible de démarrer le paiement — réessayez ou contactez le support.',
     signOut: 'Se déconnecter',
   },
   waitlist: {
     thanks: 'Compte créé — continuez vers l\'inscription entreprise.',
     invalid: 'Veuillez saisir une adresse e-mail valide.',
     localOnly:
-      'Utilisez Inscription / Connexion pour un vrai compte. Les paiements restent indisponibles tant que Stripe n\'est pas connecté.',
+      'Utilisez Créer un compte / Connexion. Le paiement est disponible sur la page Tarifs.',
   },
 };
 

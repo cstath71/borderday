@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { companyHasPaidAccess } from '../src/lib/billing';
+import { TRIAL_DAYS } from '../src/lib/trial';
 import {
   COMPANY_FLAT_MAX_SEATS,
   COMPANY_MIN_EUR_MONTH,
@@ -103,4 +104,18 @@ describe('pricing VAT copy', () => {
     expect(itDict.pricing.individualTax).toBe('IVA inclusa');
     expect(itDict.pricing.companyTax).toBe('IVA esclusa');
   });
+});
+
+describe('trial length', () => {
+  it('is 7 days (not 14)', () => {
+    expect(TRIAL_DAYS).toBe(7);
+  });
+  const locales = { en, fr, de, it: itDict } as const;
+  for (const [lang, dict] of Object.entries(locales)) {
+    it(`${lang}: trial copy says 7, never 14`, () => {
+      const blob = [dict.pricing.trialNote, dict.faq.a7, dict.home.waitlistNote].join(' | ');
+      expect(blob).toMatch(/\b7\b/);
+      expect(blob).not.toMatch(/\b14\b/);
+    });
+  }
 });

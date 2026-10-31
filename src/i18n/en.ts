@@ -55,12 +55,12 @@ const en = {
     how1: 'Create a company account and invite employees by email link.',
     how2: 'Each employee picks their border pack and logs telework / on-site / trip / non-working days.',
     how3: 'HR watches per-employee tax and social-security counters, filters by status, and exports CSV.',
-    waitlistTitle: 'Payments not yet available',
+    waitlistTitle: 'Start with a company account',
     waitlistBody:
-      'Checkout opens after Stripe is connected. Create a company account with email or Google now; paid HR features stay gated until billing is live. A labeled DEMO company remains available for preview.',
+      'Create a company account with email or Google, invite your team, then subscribe on the Pricing page. A labeled DEMO company remains available for preview.',
     waitlistPlaceholder: 'you@company.com',
     waitlistButton: 'Create account',
-    waitlistNote: 'No waitlist — accounts are live. Payments show as not yet available until Stripe is connected.',
+    waitlistNote: 'No waitlist — accounts and checkout are live. Company plans: €5/employee/mo (min €39), 7-day trial.',
     disclaimerShort:
       'BorderDay is a tracking and reminder tool for day classifications. It is not tax advice or legal advice. Always verify with the competent authority or a qualified adviser.',
     demoBanner: 'Screenshots and the seeded company use clearly labeled DEMO data — not real employees.',
@@ -186,7 +186,14 @@ const en = {
     companyInclude2: 'Email invites, roles (owner / HR viewer), CSV audit export',
     companyInclude3: 'Employees see the same counters HR sees',
     companyInclude4: 'Privacy by design (day types only — no location)',
-    comingSoon: 'Payments not yet available',
+    comingSoon: 'Live checkout',
+    subscribeMonthly: 'Start monthly',
+    subscribeYearly: 'Start yearly',
+    trialNote: '7-day free trial — card required at signup.',
+    checkoutSuccess: 'Payment set up — your trial is active. Open your account to continue.',
+    checkoutCancel: 'Checkout canceled — no charge. You can try again anytime.',
+    goToAccount: 'Go to account',
+    needCompany: 'Create or open a company account first, then subscribe.',
     waitlistCta: 'Start free account',
     compareNote: 'Prices aligned with comparable tools checked on 31 Oct 2026 (Europe/Zurich). Not tax advice.',
     recommended: 'Recommended for employers',
@@ -206,7 +213,7 @@ const en = {
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',
-    a7: 'Checkout is prepared but not live until Stripe is connected. Planned: Stripe Managed Payments (merchant of record, handles VAT) with a 14-day trial on company plans.',
+    a7: 'Stripe Managed Payments (merchant of record) handles tax in Checkout. Company and individual plans include a 7-day free trial; a card is required at signup. Promo codes are supported at checkout.',
   },
   privacy: {
     title: 'Privacy',
@@ -334,14 +341,14 @@ const en = {
     notConfigured: 'Auth backend is not configured in this build.',
     completing: 'Completing sign-in…',
     callbackFailed: 'Could not complete sign-in. Try again.',
-    paymentsUnavailable: 'Payments not yet available',
+    paymentsUnavailable: 'Could not start checkout — try again or contact support.',
     signOut: 'Sign out',
   },
   waitlist: {
     thanks: 'Account created — continue to company sign-up.',
     invalid: 'Please enter a valid email.',
     localOnly:
-      'Use Sign up / Sign in for a real account. Payments remain unavailable until Stripe is connected.',
+      'Use Sign up / Sign in for a real account. Checkout is live on the Pricing page.',
   },
 };
 

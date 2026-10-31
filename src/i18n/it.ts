@@ -57,12 +57,12 @@ const it: Dict = {
     how1: 'Create un account azienda e invitate i collaboratori con un link e-mail.',
     how2: 'Ogni collaboratore sceglie il pacchetto confine e registra telelavoro / in sede / missione / non lavorato.',
     how3: 'L’HR osserva i contatori fiscali e di sicurezza sociale, filtra per stato ed esporta CSV.',
-    waitlistTitle: 'Pagamenti non ancora disponibili',
+    waitlistTitle: 'Inizia con un account azienda',
     waitlistBody:
-      'Il checkout si apre dopo Stripe. Crea un account azienda con email o Google; le funzioni a pagamento restano bloccate. Resta disponibile un\'azienda DEMO etichettata.',
+      'Crea un account azienda con e-mail o Google, invita il team e abbonati dalla pagina Prezzi. Un\'azienda DEMO etichettata resta disponibile.',
     waitlistPlaceholder: 'voi@azienda.com',
     waitlistButton: 'Crea account',
-    waitlistNote: 'Niente lista d\'attesa — gli account sono attivi. I pagamenti restano bloccati finché Stripe non è collegato.',
+    waitlistNote: 'Niente lista d\'attesa — account e checkout sono attivi. Piani azienda: 5 €/dipendente/mese (min. 39 €), prova di 7 giorni.',
     disclaimerShort:
       'BorderDay è uno strumento di tracciamento e promemoria delle classificazioni dei giorni. Non è consulenza fiscale o legale. Verificate sempre con l’autorità competente o un consulente qualificato.',
     demoBanner: 'Gli screenshot e l’azienda precaricata usano dati DEMO chiaramente etichettati — non collaboratori reali.',
@@ -189,7 +189,14 @@ const it: Dict = {
     companyInclude2: 'Inviti e-mail, ruoli (owner / HR in lettura), export CSV di audit',
     companyInclude3: 'I collaboratori vedono gli stessi contatori dell’HR',
     companyInclude4: 'Privacy by design (solo tipi di giorno — nessuna posizione)',
-    comingSoon: 'Pagamenti non ancora disponibili',
+    comingSoon: 'Checkout attivo',
+    subscribeMonthly: 'Inizia mensile',
+    subscribeYearly: 'Inizia annuale',
+    trialNote: 'Prova gratuita di 7 giorni — carta richiesta all\'iscrizione.',
+    checkoutSuccess: 'Pagamento impostato — la prova è attiva. Apri l\'account per continuare.',
+    checkoutCancel: 'Checkout annullato — nessun addebito. Puoi riprovare in qualsiasi momento.',
+    goToAccount: 'Vai all\'account',
+    needCompany: 'Crea o apri prima un account azienda, poi abbonati.',
     waitlistCta: 'Inizia account',
     compareNote: 'Prezzi allineati a strumenti comparabili al 31 ott 2026 (Europe/Zurich). Non consulenza fiscale.',
     recommended: 'Consigliato per i datori di lavoro',
@@ -209,7 +216,7 @@ const it: Dict = {
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',
-    a7: 'Il checkout è pronto ma non live finché Stripe non è collegato. Previsto: Stripe Managed Payments (venditore, IVA) con prova di 14 giorni sui piani azienda.',
+    a7: 'Stripe Managed Payments (venditore) gestisce le imposte nel checkout. I piani azienda e individuale includono una prova gratuita di 7 giorni; è richiesta una carta all\'iscrizione. I codici promo sono accettati.',
   },
   privacy: {
     title: 'Privacy',
@@ -336,14 +343,14 @@ const it: Dict = {
     notConfigured: 'Auth non configurata in questa build.',
     completing: 'Completamento accesso…',
     callbackFailed: "Impossibile completare l'accesso. Riprova.",
-    paymentsUnavailable: 'Pagamenti non ancora disponibili',
+    paymentsUnavailable: 'Impossibile avviare il checkout — riprova o contatta il supporto.',
     signOut: 'Esci',
   },
   waitlist: {
     thanks: 'Account creato — continua alla registrazione azienda.',
     invalid: 'Inserisci un indirizzo e-mail valido.',
     localOnly:
-      'Usa Registrati / Accedi per un account reale. I pagamenti restano non disponibili finché Stripe non è collegato.',
+      'Usa Registrati / Accedi. Il checkout è disponibile nella pagina Prezzi.',
   },
 };
 

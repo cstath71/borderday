@@ -38,7 +38,7 @@ Deno.serve(async (req) => {
         status: 200, headers: { ...cors, "Content-Type": "application/json" },
       });
     }
-    const Stripe = (await import("https://esm.sh/stripe@17.3.1?target=deno")).default;
+    const Stripe = (await import("https://esm.sh/stripe@18.5.0?target=deno")).default;
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
     const portal = await stripe.billingPortal.sessions.create({ customer: customerId, return_url: `${siteUrl}/en/pricing` });
     return new Response(JSON.stringify({ available: true, url: portal.url }), {

@@ -20,18 +20,35 @@ describe('bd-send-invite Resend env', () => {
   });
 });
 
-describe('bd-create-checkout promo / €0 card', () => {
+describe('bd-create-checkout Managed Payments + trial', () => {
   const src = readFileSync(resolve(root, 'supabase/functions/bd-create-checkout/index.ts'), 'utf8');
-  it('allows promotion codes', () => {
+  const trialSrc = readFileSync(resolve(root, 'supabase/functions/_shared/trial.ts'), 'utf8');
+  it('enables Managed Payments and omits forbidden tax/PM params', () => {
+    expect(src).toContain('managed_payments: { enabled: true }');
+    expect(src).not.toMatch(/automatic_tax\s*:/);
+    expect(src).not.toMatch(/tax_id_collection\s*:/);
+    expect(src).not.toMatch(/payment_method_types\s*:/);
+  });
+  it('allows promotion codes and requires billing address', () => {
     expect(src).toContain('allow_promotion_codes: true');
-  });
-  it('uses payment_method_collection if_required for €0 due', () => {
-    expect(src).toContain('payment_method_collection: "if_required"');
-  });
-  it('keeps Stripe Tax collection fields', () => {
-    expect(src).toContain('automatic_tax: { enabled: true }');
-    expect(src).toContain('tax_id_collection: { enabled: true }');
     expect(src).toContain('billing_address_collection: "required"');
+  });
+  it('requires a payment method and cancels trial if missing', () => {
+    expect(src).toContain('payment_method_collection: "always"');
+    expect(src).toContain('missing_payment_method: "cancel"');
+  });
+  it('uses shared TRIAL_DAYS = 7', () => {
+    expect(trialSrc).toMatch(/export const TRIAL_DAYS = 7/);
+    expect(src).toContain('trial_period_days: TRIAL_DAYS');
+    expect(src).not.toMatch(/trial_period_days:\s*14/);
+  });
+});
+
+describe('bd-stripe-webhook Deno signature verify', () => {
+  const src = readFileSync(resolve(root, 'supabase/functions/bd-stripe-webhook/index.ts'), 'utf8');
+  it('uses constructEventAsync (SubtleCrypto)', () => {
+    expect(src).toContain('constructEventAsync');
+    expect(src).not.toMatch(/constructEvent\(/);
   });
 });
 

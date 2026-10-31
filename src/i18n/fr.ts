@@ -43,7 +43,7 @@ const fr: Dict = {
   home: {
     heroTitle: 'Un seul outil pour toutes les frontières de vos équipes',
     heroBody:
-      'Pour les RH et responsables finance à Genève, Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur sept, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
+      'Pour les RH et responsables finance à Genève, à Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur sept, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
     ctaPrimary: 'Créer un compte entreprise',
     ctaSecondary: 'Voir les tarifs entreprise',
     ctaIndividuals: 'Je suis un collaborateur individuel',
@@ -415,7 +415,7 @@ const fr: Dict = {
       'Aperçu gratuit, sur votre appareil : pack frontière, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi et A1 si vous les indiquez. Offre individuelle : les mêmes données, enregistrées dans votre compte. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, pack frontière, types et dates de jours, marques de nuit hors du domicile, taux d’emploi et A1 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
     s2Title: 'Ce que nous ne collectons pas',
     s2Body:
-      'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi le taux d’emploi et l’A1 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaireslicitaires. Pas de vente de données personnelles.',
+      'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi le taux d’emploi et l’A1 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaires. Pas de vente de données personnelles.',
     tableTitle: 'Finalités, bases légales, destinataires, transferts et conservation',
     tableIntro:
       'Les numéros d’articles renvoient au RGPD. La LPD suisse n’énumère pas les bases légales de la même façon ; les mêmes finalités, destinataires et pays s’appliquent.',

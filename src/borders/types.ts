@@ -29,7 +29,7 @@ export interface LimitCounter {
   direction?: 'cap' | 'floor';
   /** The limit itself is allowed ("up to", "n'excédant pas", "al massimo"): reaching it is "at limit", not "over". */
   inclusive?: boolean;
-  /** Evaluation window. Default calendar_year. */
+  /** Evaluation window. Default calendar_year. Prefer this over any id pattern (e.g. do not key month vs year off counter.id). */
   period?: 'calendar_year' | 'month';
   /** Day limit reduced for part-time and part-year; rounding differs by rule. */
   prorate?: 'floor' | 'ceil';

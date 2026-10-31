@@ -43,11 +43,11 @@ const de: Dict = {
   home: {
     heroTitle: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
     heroBody:
-      'Für HR und Finanzverantwortliche in Genf, Basel, im Tessin, in Luxemburg und Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Korridoren, Steuerzähler auf sieben, und jeder Korridor zeigt, was er abdeckt. Vier Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
+      'Für HR und Finanzverantwortliche in Genf, in Basel, im Tessin, in Luxemburg und in Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Korridoren, Steuerzähler auf sieben, und jeder Korridor zeigt, was er abdeckt. Vier Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
     ctaPrimary: 'Unternehmenskonto erstellen',
     ctaSecondary: 'Unternehmenspreise ansehen',
     ctaIndividuals: 'Ich bin einzelne Mitarbeiterin / einzelner Mitarbeiter',
-    riskTitle: 'Warum Tagesschwellen für Arbeitgeber zählen',
+    riskTitle: 'Warum Tagesgrenzen für Arbeitgeber zählen',
     risk1Title: 'Sozialversicherungsrechtliche Zuständigkeit',
     risk1Body:
       'Nach dem EU/EWR/CH-Rahmenübereinkommen verlagert Telearbeit im Wohnstaat ab 25 % der Arbeitszeit die Sozialversicherung normalerweise dorthin, sofern keine A1-Bescheinigung beantragt wird. Ab 50 % steht das Übereinkommen nicht mehr zur Verfügung. BorderDay zeigt die drei Bereiche getrennt von der Steuer: unter 25 %, 25 % bis unter 50 % (A1 erforderlich) und 50 % oder mehr.',
@@ -78,12 +78,12 @@ const de: Dict = {
       'Erstellen Sie ein Unternehmenskonto per E-Mail oder Google, laden Sie Ihr Team ein und abonnieren Sie auf der Preisseite. Ein gekennzeichnetes DEMO-Unternehmen bleibt verfügbar.',
     waitlistButton: 'Konto erstellen',
     waitlistNote:
-      'Keine Warteliste: Konten und Checkout sind live. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MwSt. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung.',
+      'Keine Warteliste: Konten und Checkout sind live. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung.',
     disclaimerShort:
       'BorderDay ist ein Erfassungs- und Erinnerungstool für Tagesklassifikationen. Keine Steuer- oder Rechtsberatung. Immer bei der zuständigen Behörde oder einer Fachperson prüfen.',
     demoBanner: 'Screenshots und das vorgeladene Unternehmen nutzen klar gekennzeichnete DEMO-Daten — keine echten Mitarbeitenden.',
     inShort:
-      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MwSt.; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MwSt. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
+      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
     inShortLabel: 'Kurz gesagt',
     chipTaxYes: 'Steuer: ja',
     chipTaxNo: 'Steuer: noch nicht',
@@ -116,7 +116,7 @@ const de: Dict = {
     teleworkHint: 'Arbeitstag im Wohnstaat, in der Regel zu Hause.',
     onsiteHint: 'Arbeitstag in den Räumen des Arbeitgebers im Staat des Arbeitsorts.',
     third_countryHint: 'Dienstreise, Schulung, Kundenbesuch oder temporärer Einsatz ausserhalb des Staats des Arbeitsorts.',
-    non_workingHint: 'Urlaub, nicht gearbeiteter Feiertag, Krankheit oder Ruhetag.',
+    non_workingHint: 'Ferien, nicht gearbeiteter Feiertag, Krankheit oder Ruhetag.',
     teleworkHint_ticino:
       'Arbeitstag zu Hause in Italien. Das Protokoll spricht vom «eigenen Wohnsitz»: Ob ein Coworking-Tag zählt, ist nicht bestätigt, fragen Sie Ihre Behörde.',
     teleworkHint_ch_fr:
@@ -146,7 +146,7 @@ const de: Dict = {
     lu_tax_tolerance_34: 'Tage ausserhalb Luxemburgs (bis 34 Tage/Jahr)',
     lu_tax_tolerance_pending: 'Tage ausserhalb Luxemburgs (steuerliche Toleranz)',
     lu_fr_tax_note:
-      'Personen mit Wohnsitz in Frankreich und Beschäftigung in Luxemburg: bis zu 34 Tage pro Steuerzeitraum körperlich in Frankreich und/oder einem Drittstaat zur Arbeit, ohne die Besteuerung in Luxemburg für den Zeitraum zu verlieren. Teilzeit oder unterjährig: Die 34 werden anteilig gekürzt und abgerundet. Darüber hinaus kann Frankreich die tatsächlich in Frankreich oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Jeder Teil eines Tages zählt als ganzer Tag, Weiterbildung zählt ebenfalls. Urlaub, wöchentliche Ruhetage, nicht gearbeitete Feiertage, Krankheit und höhere Gewalt zählen nicht. Die Grenze gilt für alle Ihre Verträge im Jahr, und Sie müssen Ihre Tage belegen: Dieses Protokoll allein reicht womöglich nicht. Quelle: Vereinbarung auf impots.gouv.fr (das PDF nennt 29 Tage, durch den Zusatz vom 7. Nov. 2022 auf 34 erhöht).',
+      'Personen mit Wohnsitz in Frankreich und Beschäftigung in Luxemburg: bis zu 34 Tage pro Steuerzeitraum körperlich in Frankreich und/oder einem Drittstaat zur Arbeit, ohne die Besteuerung in Luxemburg für den Zeitraum zu verlieren. Teilzeit oder unterjährig: Die 34 werden anteilig gekürzt und abgerundet. Darüber hinaus kann Frankreich die tatsächlich in Frankreich oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Jeder Teil eines Tages zählt als ganzer Tag, Weiterbildung zählt ebenfalls. Ferien, wöchentliche Ruhetage, nicht gearbeitete Feiertage, Krankheit und höhere Gewalt zählen nicht. Die Grenze gilt für alle Ihre Verträge im Jahr, und Sie müssen Ihre Tage belegen: Dieses Protokoll allein reicht womöglich nicht. Quelle: Vereinbarung auf impots.gouv.fr (das PDF nennt 29 Tage, durch den Zusatz vom 7. Nov. 2022 auf 34 erhöht).',
     ss_framework_under_50:
       'Grenzüberschreitende Telearbeit (Rahmenübereinkommen: A1 ab 25 %, unter 50 %)',
     ss_framework_note:
@@ -343,8 +343,8 @@ const de: Dict = {
     companyYearly: 'Jahresabrechnung: 2 Monate gratis (Mindestbetrag 390 € / Jahr)',
     activeEmployeeDef:
       'Aktive Mitarbeitende: Unternehmensmitglied mit angenommener Einladung, das nicht deaktiviert wurde. Die Abrechnung nutzt die aktuelle aktive Kopfzahl je Periode (Mindestbetrag 39 € / Monat).',
-    companyTax: 'zzgl. MwSt.',
-    individualTax: 'inkl. MwSt.',
+    companyTax: 'zzgl. MWST',
+    individualTax: 'inkl. MWST',
     includes: 'Enthalten',
     include1: 'Alle Grenzpakete Ihres Plans',
     include2:
@@ -367,9 +367,9 @@ const de: Dict = {
     waitlistCta: 'Konto starten',
     recommended: 'Empfohlen für Arbeitgeber',
     trialCompany:
-      '7 Tage kostenlos testen, danach 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €/Monat) oder bei Jahresabrechnung mindestens 390 €/Jahr, zzgl. MwSt., mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Karte bei der Anmeldung erforderlich. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht.',
+      '7 Tage kostenlos testen, danach 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €/Monat) oder bei Jahresabrechnung mindestens 390 €/Jahr, zzgl. MWST, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Karte bei der Anmeldung erforderlich. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht.',
     trialIndividual:
-      '7 Tage kostenlos testen, danach 4,99 €/Monat oder 49 €/Jahr inkl. MwSt. (je nach gewähltem Plan), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Karte bei der Anmeldung erforderlich. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht.',
+      '7 Tage kostenlos testen, danach 4,99 €/Monat oder 49 €/Jahr inkl. MWST (je nach gewähltem Plan), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Karte bei der Anmeldung erforderlich. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht.',
     readBefore: 'Bitte vor dem Abschluss lesen:',
     companyBusinessOnly: 'Für Unternehmen. Verbraucher wählen den Einzelplan.',
     yearlyRenewal:
@@ -395,7 +395,7 @@ const de: Dict = {
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
     a7:
-      'Checkout nutzt Stripe Managed Payments: Link ist der Merchant of Record und übernimmt MwSt./GST im Checkout. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; eine Karte ist bei der Anmeldung nötig. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig (Einzelperson 4,99 €/Monat oder 49 €/Jahr inkl. MwSt.; Unternehmen 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €/Monat, oder mindestens 390 €/Jahr, zzgl. MwSt.), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Aktionscodes werden akzeptiert. Siehe Nutzungsbedingungen zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
+      'Checkout nutzt Stripe Managed Payments: Link ist der Merchant of Record und übernimmt MWST/GST im Checkout. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; eine Karte ist bei der Anmeldung nötig. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig (Einzelperson 4,99 €/Monat oder 49 €/Jahr inkl. MWST; Unternehmen 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €/Monat, oder mindestens 390 €/Jahr, zzgl. MWST), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Aktionscodes werden akzeptiert. Siehe Nutzungsbedingungen zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
     q8: 'Was deckt BorderDay nicht ab?',
     a8:
       'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die von manchen Kantonen verlangte jährliche Telearbeitsquote. Im Zweifel fragen Sie Ihre Behörde.',
@@ -638,7 +638,7 @@ const de: Dict = {
     updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
     providerTitle: 'Impressum: Anbieter und Vertragspartner',
     providerBody:
-      'Der BorderDay-Dienst und diese Website werden von PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (UID CHE-312.418.158; schweizerische Unternehmens-Identifikationsnummer), bereitgestellt; sie ist Vertragspartnerin für den Dienst. Die Gesellschaft ist unter dieser UID im Handelsregister Genf eingetragen und wird durch ihre dort eingetragenen Geschäftsführer vertreten. Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com. Postanschrift wie oben. Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record für Zahlung, Erhebung und Abführung der MwSt. sowie Erstattungen auf Bestellebene, soweit Managed Payments gilt.',
+      'Der BorderDay-Dienst und diese Website werden von PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (UID CHE-312.418.158; schweizerische Unternehmens-Identifikationsnummer), bereitgestellt; sie ist Vertragspartnerin für den Dienst. Die Gesellschaft ist unter dieser UID im Handelsregister Genf eingetragen und wird durch ihre dort eingetragenen Geschäftsführer vertreten. Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com. Postanschrift wie oben. Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record für Zahlung, Erhebung und Abführung der MWST sowie Erstattungen auf Bestellebene, soweit Managed Payments gilt.',
     legalNoticeNote: 'Dieser Abschnitt ist das Impressum / die Anbieterkennzeichnung. Einen Handelsregisterauszug und weitere Angaben (einschliesslich eines späteren EU-Vertreters nach Art. 27, falls ernannt) erhalten Sie auf Anfrage unter hello@borderday.com.',
     s1Title: 'Dienst',
     s1Body:
@@ -651,9 +651,9 @@ const de: Dict = {
       'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung stoppt künftige Verlängerungen. Bereits eingezogene Beträge für eine begonnene Periode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsrichtlinien von Link es verlangen; Ihr Widerrufsrecht unten bleibt unberührt.',
     s3YearlyBody:
       'Jährliche Einzelpläne verlängern sich um ein weiteres Jahr, bis Sie kündigen. BorderDay sendet vor jeder jährlichen Verlängerung eine Erinnerung per E-Mail. Eine Kündigung im ersten Jahr stoppt die nächste Verlängerung. Nach dem ersten Jahr können Sie ein verlängertes Jahresabo jederzeit kündigen; es endet dann, und eine Erstattung des ungenutzten Teils gilt, soweit das zwingende Verbraucherrecht Ihres Landes es verlangt. Kündigung über den Link Abo kündigen in der Fusszeile (Kundenportal), Ihre Link-Bestelltools oder per E-Mail.',
-    s4Title: 'Preise, MwSt. und Merchant of Record',
+    s4Title: 'Preise, MWST und Merchant of Record',
     s4Body:
-      'Unternehmen: 5 € je aktive mitarbeitende Person und Monat, mindestens 39 € pro Monat, oder Jahresabrechnung mit 2 Monaten gratis (mindestens 390 € pro Jahr), jeweils zzgl. MwSt. Einzelperson: 4,99 € pro Monat oder 49 € pro Jahr, inkl. MwSt. Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record für Erhebung, Erklärung und Abführung der MwSt., soweit Managed Payments gilt. Angezeigte Preise können im Checkout in Landeswährung umgerechnet werden.',
+      'Unternehmen: 5 € je aktive mitarbeitende Person und Monat, mindestens 39 € pro Monat, oder Jahresabrechnung mit 2 Monaten gratis (mindestens 390 € pro Jahr), jeweils zzgl. MWST Einzelperson: 4,99 € pro Monat oder 49 € pro Jahr, inkl. MWST Checkout nutzt Stripe Managed Payments: Käufe erscheinen als über Link verkauft, und Link ist Merchant of Record für Erhebung, Erklärung und Abführung der MWST, soweit Managed Payments gilt. Angezeigte Preise können im Checkout in Landeswährung umgerechnet werden.',
     s5Title: 'Widerrufsrecht für Verbraucher in der EU/im EWR (14 Tage)',
     s5Body:
       'Wenn Sie einen Einzelplan als Verbraucher in der EU/im EWR kaufen, können Sie den Vertrag innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Die Frist beginnt mit dem Vertragsschluss, also an dem Tag, an dem Sie nach dem Checkout Zugang erhalten. Um zu widerrufen, teilen Sie uns dies eindeutig mit: über die Seite «Vertrag widerrufen», das Muster-Formular unten oder eine einfache E-Mail an privacy@borderday.com, oder über den Link-Support zu Ihrer Bestellung. Es genügt, die Nachricht vor Ablauf der 14 Tage abzusenden.',
@@ -667,7 +667,7 @@ const de: Dict = {
       'An: BorderDay, privacy@borderday.com (Angaben zum Anbieter im Impressum oben)\nHiermit widerrufe ich den von mir abgeschlossenen Vertrag über die Erbringung der folgenden Dienstleistung: BorderDay-Abonnement\nBestellt am / erhalten am:\nName des Verbrauchers:\nAnschrift des Verbrauchers:\nUnterschrift des Verbrauchers (nur bei Mitteilung auf Papier):\nDatum:',
     s6Title: 'Erstattungen und Zahlungs-Support',
     s6Body:
-      'Zahlung, Beleg, Rechnung mit ausgewiesener MwSt. und Erstattungsanfragen auf Bestellebene bei Managed Payments bearbeitet Link nach den von Stripe veröffentlichten Bedingungen «Sold through Link» (Verkauf über Link) und «Purchase» (Kauf). Produktfragen (Funktion, Kontozugang, Export): hello@borderday.com oder privacy@borderday.com.',
+      'Zahlung, Beleg, Rechnung mit ausgewiesener MWST und Erstattungsanfragen auf Bestellebene bei Managed Payments bearbeitet Link nach den von Stripe veröffentlichten Bedingungen «Sold through Link» (Verkauf über Link) und «Purchase» (Kauf). Produktfragen (Funktion, Kontozugang, Export): hello@borderday.com oder privacy@borderday.com.',
     s7Title: 'Änderungen',
     s7Body:
       'Wir können diese Bedingungen aktualisieren. Das Datum «Zuletzt aktualisiert» ändert sich dann. Bei wesentlichen Änderungen, die Ihre Rechte oder Pflichten betreffen, geben wir eine angemessene Vorankündigung (zum Beispiel per E-Mail an die Kontoadresse oder durch einen Hinweis im Produkt), bevor sie wirksam werden. Schreibt zwingendes Verbraucher- oder Arbeitsrecht Ihre ausdrückliche Zustimmung oder ein anderes Verfahren vor, gilt dieses Verfahren statt der blossen fortgesetzten Nutzung. Unwesentliche Klarstellungen können mit der Veröffentlichung wirksam werden.',

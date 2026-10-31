@@ -113,10 +113,10 @@ export const PAGES = {
     de: {
       title: 'BorderDay — Grenzüberschreitende Tagesgrenzen für HR',
       description:
-        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Korridoren, Steuer auf sechs. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MwSt. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Korridoren, Steuer auf sechs. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
       h1: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
       summary:
-        'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MwSt.; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MwSt. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
+        'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
       crumbs: [['Start', '']],
     },
     it: {
@@ -157,10 +157,10 @@ export const PAGES = {
     de: {
       title: 'Preise — BorderDay',
       description:
-        'Unternehmen: 5 € je aktive mitarbeitende Person / Monat, Minimum 39 €, jährlich mindestens 390 €, zzgl. MwSt. Einzelperson: 4,99 €/Monat oder 49 €/Jahr inkl. MwSt. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Unternehmen: 5 € je aktive mitarbeitende Person / Monat, Minimum 39 €, jährlich mindestens 390 €, zzgl. MWST Einzelperson: 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
       h1: 'Preise',
       summary:
-        'Unternehmen / HR: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab); jährlich mindestens 390 € (2 Monate gratis). Einzelperson: 4,99 € / Monat oder 49 € / Jahr. Unternehmenspreise zzgl. MwSt.; Einzelpreise inkl. MwSt. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Checkout über Stripe Managed Payments (verkauft über Link).',
+        'Unternehmen / HR: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab); jährlich mindestens 390 € (2 Monate gratis). Einzelperson: 4,99 € / Monat oder 49 € / Jahr. Unternehmenspreise zzgl. MWST; Einzelpreise inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Checkout über Stripe Managed Payments (verkauft über Link).',
       crumbs: [
         ['Start', ''],
         ['Preise', 'pricing'],
@@ -257,10 +257,10 @@ export const PAGES = {
     de: {
       title: 'Für Einzelpersonen — BorderDay',
       description:
-        'Eigene Telearbeits- und Reisetage erfassen. 4,99 €/Monat oder 49 €/Jahr inkl. MwSt. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Eigene Telearbeits- und Reisetage erfassen. 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
       h1: 'Eigene Arbeitstage über die Grenze erfassen',
       summary:
-        'Mitarbeitende erfassen Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage selbst. Sozialversicherungszähler auf jedem Korridor, Steuerzähler auf sieben. Einzelplan: 4,99 €/Monat oder 49 €/Jahr (inkl. MwSt.). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Nutzt der Arbeitgeber BorderDay, Beitritt über den Einladungslink: dieselben Zähler wie HR.',
+        'Mitarbeitende erfassen Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage selbst. Sozialversicherungszähler auf jedem Korridor, Steuerzähler auf sieben. Einzelplan: 4,99 €/Monat oder 49 €/Jahr (inkl. MWST). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Nutzt der Arbeitgeber BorderDay, Beitritt über den Einladungslink: dieselben Zähler wie HR.',
       crumbs: [
         ['Start', ''],
         ['Für Einzelpersonen', 'for-individuals'],
@@ -509,10 +509,10 @@ export const PAGES = {
     de: {
       title: 'Nutzungsbedingungen & Impressum — BorderDay',
       description:
-        'Nutzungsbedingungen und Impressum von BorderDay: Testphase und automatische Verlängerung, Kündigung, MwSt., 14-tägiges EU-Widerrufsrecht für Verbraucher.',
+        'Nutzungsbedingungen und Impressum von BorderDay: Testphase und automatische Verlängerung, Kündigung, MWST, 14-tägiges EU-Widerrufsrecht für Verbraucher.',
       h1: 'Nutzungsbedingungen & Impressum',
       summary:
-        'Abos beginnen mit einer 7-tägigen kostenlosen Testphase: Danach wird der Plan zum angegebenen Preis kostenpflichtig, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Unternehmenspreise zzgl. MwSt.; Einzelpreise inkl. MwSt. EU-Widerruf und Kündigung sind auf dieser Seite beschrieben.',
+        'Abos beginnen mit einer 7-tägigen kostenlosen Testphase: Danach wird der Plan zum angegebenen Preis kostenpflichtig, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Unternehmenspreise zzgl. MWST; Einzelpreise inkl. MWST EU-Widerruf und Kündigung sind auf dieser Seite beschrieben.',
       crumbs: [
         ['Start', ''],
         ['Nutzungsbedingungen', 'terms'],
@@ -643,10 +643,10 @@ export const PAGES = {
     de: {
       title: 'Unternehmensregistrierung — BorderDay',
       description:
-        'BorderDay-Unternehmenskonto für HR-Tageszählung auf neun Korridoren. Danach Abo unter Preise (5 € je aktive mitarbeitende Person/Monat, min. 39 €, zzgl. MwSt.).',
+        'BorderDay-Unternehmenskonto für HR-Tageszählung auf neun Korridoren. Danach Abo unter Preise (5 € je aktive mitarbeitende Person/Monat, min. 39 €, zzgl. MWST).',
       h1: 'Unternehmensregistrierung',
       summary:
-        'Unternehmenskonto mit E-Mail oder Google anlegen, Mitarbeitende einladen, unter Preise abonnieren. Plan: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €, zzgl. MwSt. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich.',
+        'Unternehmenskonto mit E-Mail oder Google anlegen, Mitarbeitende einladen, unter Preise abonnieren. Plan: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €, zzgl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich.',
       crumbs: [
         ['Start', ''],
         ['Unternehmensregistrierung', 'company/signup'],
@@ -751,11 +751,11 @@ export const FAQ = {
     ],
     [
       'Was kostet BorderDay?',
-      'Unternehmen: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €; jährlich mindestens 390 € (2 Monate gratis). Einzelperson: 4,99 €/Monat oder 49 €/Jahr. Unternehmenspreise zzgl. MwSt.; Einzelpreise inkl. MwSt. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich.',
+      'Unternehmen: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €; jährlich mindestens 390 € (2 Monate gratis). Einzelperson: 4,99 €/Monat oder 49 €/Jahr. Unternehmenspreise zzgl. MWST; Einzelpreise inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich.',
     ],
     [
       'Wie funktionieren Zahlungen?',
-      'Checkout über Stripe Managed Payments: Link ist Merchant of Record und handhabt MwSt./GST. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
+      'Checkout über Stripe Managed Payments: Link ist Merchant of Record und handhabt MWST/GST. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
     ],
     [
       'Was deckt BorderDay nicht ab?',

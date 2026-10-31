@@ -73,11 +73,17 @@ describe('controller identity surface', () => {
     expect(itDict.privacy.controllerBody).toMatch(/IDI CHE-312\.418\.158/);
   });
 
-  it('the legal notice names no representative, phone or register number that was not approved (M1)', () => {
+  it('the legal notice is an imprint with commercial-register particulars, without inventing a phone or named natural person (M1)', () => {
+    expect(en.terms.providerBody).toMatch(/Geneva commercial register/i);
+    expect(fr.terms.providerBody).toMatch(/registre du commerce de Genève/i);
+    expect(de.terms.providerBody).toMatch(/Handelsregister Genf/);
+    expect(itDict.terms.providerBody).toMatch(/registro di commercio di Ginevra/i);
     for (const d of [en, fr, de, itDict]) {
       const blob = d.terms.providerBody + d.terms.legalNoticeNote;
       expect(blob).toMatch(/hello@borderday\.com/);
-      expect(blob).not.toMatch(/\+\d{2}|CHE-\d{3}\.\d{3}\.\d{3}\.\d|Stathopoulos|Handelsregister|registre du commerce|registro di commercio/i);
+      // No phone; no 4-part IDE; no personal name until Gus supplies the registered directors.
+      expect(blob).not.toMatch(/\+\d{2}|CHE-\d{3}\.\d{3}\.\d{3}\.\d|Stathopoulos/i);
+      expect(blob).not.toMatch(/Constantinos|Kostas|Gus /i);
     }
   });
 

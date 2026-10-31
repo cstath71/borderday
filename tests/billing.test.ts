@@ -96,9 +96,9 @@ describe('pricing VAT copy', () => {
     expect(fr.pricing.individualTax).toBe('TVA incluse');
     expect(fr.pricing.companyTax).toBe('hors TVA');
   });
-  it('de: inkl. MwSt. / zzgl. MwSt.', () => {
-    expect(de.pricing.individualTax).toBe('inkl. MwSt.');
-    expect(de.pricing.companyTax).toBe('zzgl. MwSt.');
+  it('de: inkl. MWST / zzgl. MWST (Swiss spelling)', () => {
+    expect(de.pricing.individualTax).toBe('inkl. MWST');
+    expect(de.pricing.companyTax).toBe('zzgl. MWST');
   });
   it('it: IVA inclusa / IVA esclusa', () => {
     expect(itDict.pricing.individualTax).toBe('IVA inclusa');

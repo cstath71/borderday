@@ -333,7 +333,7 @@ const en = {
     yearly: '€49 / year',
     yearlyNote: 'About two months free vs monthly.',
     companyPrice: '€5 / active employee / month',
-    companyMin: 'Minimum €39 / month (covers up to 7 active employees)',
+    companyMin: 'Minimum €39 / month (the minimum covers up to 7 active employees; beyond that you pay per seat)',
     companyYearly: 'Yearly billing: 2 months free (€390 / year minimum)',
     activeEmployeeDef:
       'Active employee: a company member with an accepted invite who has not been deactivated. Billing uses the current active headcount each period (minimum €39 / month).',
@@ -658,7 +658,7 @@ const en = {
       'To: BorderDay, privacy@borderday.com (provider details in the Legal notice above)\nI hereby give notice that I withdraw from my contract for the provision of the following service: BorderDay subscription\nOrdered on / received on:\nName of consumer:\nAddress of consumer:\nSignature of consumer (only if this form is notified on paper):\nDate:',
     s6Title: 'Refunds and payment support',
     s6Body:
-      'Payment, receipt, invoice and Order-level refund requests under Managed Payments are handled by Link under the terms Stripe publishes as “Sold through Link” and “Purchase”. Product questions (how BorderDay works, account access, data export) go to hello@borderday.com or privacy@borderday.com.',
+      'Payment, receipt, invoice and Order-level refund requests under Managed Payments are handled by Link under the terms Stripe publishes as “Sold through Link” (checkout branding) and “Purchase” (the Link order page). Product questions (how BorderDay works, account access, data export) go to hello@borderday.com or privacy@borderday.com.',
     s7Title: 'Changes',
     s7Body:
       'We may update these Terms. The “Last updated” date above changes when we do. For material changes that affect your rights or obligations we will give reasonable advance notice (for example by email to the account address or a notice in the product) before they take effect. If mandatory consumer or employment law requires your express agreement or a different process, that process applies instead of mere continued use. Non-material clarifications may take effect when published.',

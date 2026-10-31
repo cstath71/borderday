@@ -264,7 +264,7 @@ describe('C7 / M5 trial and price disclosure on every surface', () => {
     const vat: Record<Lang, RegExp> = {
       en: /excl\. VAT.*incl\. VAT/s,
       fr: /hors TVA.*TVA incluse/s,
-      de: /zzgl\. MwSt\..*inkl\. MwSt\./s,
+      de: /zzgl\. MWST.*inkl\. MWST/s,
       it: /IVA esclusa.*IVA inclusa/s,
     };
     const yearly: Record<Lang, RegExp> = { en: /minimum €390/, fr: /minimum 390 €/, de: /mindestens 390 €/, it: /minimo 390 €/ };

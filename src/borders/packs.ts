@@ -1,5 +1,8 @@
 import type { BorderPack, LimitCounter, OfficialSource } from './types';
 
+/** Last content-support review date (Europe/Zurich) for citations that still use this stamp.
+ * Prefer a per-source `checked` when a URL was re-read on a different day. Do not stamp a
+ * source as checked for a claim its content does not support — remove or disable that citation. */
 const CHECKED = '2026-10-31';
 
 const SRC = {

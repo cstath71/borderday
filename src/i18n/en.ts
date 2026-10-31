@@ -150,9 +150,9 @@ const en = {
     ch_it_tax_telework_25: 'Telework at domicile (max 25% of employed activity)',
     ch_it_tax_nonreturn_45: 'Days without returning home for work (max 45/year)',
     ch_it_tax_note:
-      'Under the protocol amending the Italy–Switzerland frontier-worker agreement (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, published; in force 9 Feb 2026 by exchange of notes, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. Accordo Art. 2 defines the frontier zones (CH: Grigioni, Ticino, Valais; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano). The protocol does not state what happens above 25%: ask the competent authority. Sources: Fedlex Accordo Art. 2; Fedlex RU 2026 104; SIF (EFD).',
+      'Under the protocol amending the Italy–Switzerland frontier-worker agreement (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, published; in force 9 Feb 2026 by exchange of notes, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. Accordo Art. 2 defines the frontier zones (CH: Grigioni, Ticino, Valais; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano). Above that limit, the normal rules of the agreement apply. Sources: Fedlex Accordo Art. 2; Fedlex RU 2026 104; SIF (EFD).',
     ch_it_nonreturn_note:
-      'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work (protocol amending the Italy–Switzerland agreement, Fedlex RU 2026 104). Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. The protocol does not state the consequence of exceeding 45 days: ask the competent authority. Sources: Fedlex Accordo / RU 2026 104; SIF.',
+      'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work (protocol amending the Italy–Switzerland agreement, Fedlex RU 2026 104). Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. Above that limit, the normal rules of the agreement apply. Sources: Fedlex Accordo / RU 2026 104; SIF.',
     basel_de_employer_commute:
       'Basel-Stadt staff rule: on-site days this month (minimum 5, or 1 a week)',
     basel_de_employer_note:
@@ -225,7 +225,7 @@ const en = {
     ss_third_country:
       'Trip days logged this year: {days}. Recurring work outside the employer’s state may fall outside the framework: check with your social-security institution.',
     ch_it_over:
-      'Limit exceeded. The protocol does not state the consequence: ask the competent authority.',
+      'Limit exceeded. Above the limit, the normal rules of the agreement apply.',
     basel_de_nonreturn_60: 'Non-return days for work (up to 60 a year)',
     basel_de_nonreturn_note:
       'Germany–Switzerland: cross-border status is lost above 60 work-related non-return days a year (DBA DE–CH Art. 15a; Konsultationsvereinbarung). Counted here: days you mark “stayed away overnight for work”, plus every day of work outside Germany and Switzerland, even with same-day return. Same-day trips inside Germany or Switzerland, illness and accident do not count. On multi-day business trips paid by the employer, weekends and holidays count too, so log them as trip days. Part-time staff working only certain days have a proportionally lower limit, and several employers are assessed together. Full days worked at your home in Germany are not Nichtrückkehrtage under the ESTV/BMF Konsultationsvereinbarung of 26 July 2022. The employer files form Gre-3 (31 March in Aargau; check your canton). Sources: Fedlex Art. 15a; ESTV Konsultationsvereinbarung DE–CH (PDF); KonsVerCHEV §§ 8–9; Canton Aargau leaflet, status 1 Jan 2026.',

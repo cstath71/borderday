@@ -69,3 +69,24 @@ Avoid **frontalier / Grenzgänger / frontaliere** in slogans and hero copy. Offi
 
 - No invented headcounts in any language (INAMI / STATEC figures not used in marketing copy).
 - No “official” claim that agents can buy (N/A — not SBI).
+
+## Employer-first batch (31 Oct 2026, Europe/Zurich)
+
+New keys under `nav.*`, `home.*` (HR hero / risk / features), `pricing.company*` / `recommended` / `companyInclude*`, `privacy.s6`–`s7`, `individuals.*`, `company.*` (signup, invite, dashboard, join consent, DEMO labels, retention). Consent copy lives in `company.consentBody` in EN/FR/DE/IT — **legal review recommended** before production.
+
+### Needs Gus / native-speaker review
+
+| Key | Why |
+| --- | --- |
+| `home.heroTitle` / `home.heroBody` | Marketing tone for Geneva/Basel/Ticino/LU/BE HR |
+| `home.risk1Body` / `risk2Body` | Framework-agreement 50% and corridor numbers — keep aligned with official wording |
+| `company.consentBody` | GDPR / Swiss nLPD employee consent — lawyer or DPO review |
+| `privacy.s1Body`–`s7Body` | Retention (24 months default), transparency, processors |
+| `pricing.companyPrice` / `companyMin` / `companyYearly` | Display-only; checkout not live |
+| `nav.forCompanies` / `forIndividuals` / `hrDashboard` | Nav labels |
+| DE: `grenüberschreitende` / IT: `transfrontalier*` in taglines | Allowed in descriptive footer/tagline; confirm branding rule still OK |
+| FR `entreprise` vs `société` in company signup | Preference? |
+
+### Avoided in branding
+
+Hero and product name still avoid “frontalier”. Official status words remain only where quoting authority texts in help/counter notes (unchanged from v1 packs).

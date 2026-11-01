@@ -438,7 +438,7 @@ export const PAGES = {
         'BorderDay accessibility statement: scope, current status and how to report barriers. Feedback: hello@borderday.com.',
       h1: 'Accessibility',
       summary:
-        'We aim for WCAG 2.1 Level AA. Automated axe scans of the main screens reported no violations on 31 October 2026; manual gaps remain and are listed on this page.',
+        'We aim for WCAG 2.1 Level AA. Automated axe scans of the public pages and the demo reported no violations on 1 November 2026; manual gaps remain and are listed on this page.',
       crumbs: [
         ['Home', ''],
         ['Accessibility', 'accessibility'],
@@ -450,7 +450,7 @@ export const PAGES = {
         'Déclaration d’accessibilité BorderDay : périmètre, état actuel et comment signaler un obstacle. Contact : hello@borderday.com.',
       h1: 'Accessibilité',
       summary:
-        'Nous visons le niveau AA des WCAG 2.1. Les scans axe des écrans principaux n’ont signalé aucune violation le 31 octobre 2026 ; des écarts manuels restent listés sur cette page.',
+        'Nous visons le niveau AA des WCAG 2.1. Les scans axe des pages publiques et de la démo n’ont signalé aucune violation le 1er novembre 2026 ; des écarts manuels restent listés sur cette page.',
       crumbs: [
         ['Accueil', ''],
         ['Accessibilité', 'accessibility'],
@@ -462,7 +462,7 @@ export const PAGES = {
         'BorderDay-Erklärung zur Barrierefreiheit: Geltungsbereich, aktueller Stand und Rückmeldung. Kontakt: hello@borderday.com.',
       h1: 'Barrierefreiheit',
       summary:
-        'Wir orientieren uns an WCAG 2.1 Stufe AA. Automatisierte axe-Scans meldeten am 31. Oktober 2026 keine Verstösse; manuelle Lücken stehen auf dieser Seite.',
+        'Wir orientieren uns an WCAG 2.1 Stufe AA. Automatisierte axe-Scans der öffentlichen Seiten und der Demo meldeten am 1. November 2026 keine Verstösse; manuelle Lücken stehen auf dieser Seite.',
       crumbs: [
         ['Home', ''],
         ['Barrierefreiheit', 'accessibility'],
@@ -474,7 +474,7 @@ export const PAGES = {
         'Dichiarazione di accessibilità BorderDay: ambito, stato attuale e come segnalare una barriera. Contatto: hello@borderday.com.',
       h1: 'Accessibilità',
       summary:
-        'Miriamo al livello AA delle WCAG 2.1. Gli scan axe delle schermate principali non hanno segnalato violazioni il 31 ottobre 2026; le lacune manuali sono elencate in questa pagina.',
+        'Miriamo al livello AA delle WCAG 2.1. Gli scan axe delle pagine pubbliche e della demo non hanno segnalato violazioni il 1° novembre 2026; le lacune manuali sono elencate in questa pagina.',
       crumbs: [
         ['Home', ''],
         ['Accessibilità', 'accessibility'],

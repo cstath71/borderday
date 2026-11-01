@@ -101,6 +101,26 @@ describe('H11 permanent cancellation route', () => {
     expect(screen.queryByRole('button', { name: /Acme SA/ })).toBeNull();
   });
 
+  it('A3-17: no period-end note when there is nothing to cancel', async () => {
+    auth.value.user = { id: 'u1', email: 'hr@acme.test' };
+    mocked.listMyCompanies.mockResolvedValue([company({ id: 'c1', name: 'Gone SA', subscription_status: 'canceled' })]);
+    mocked.hasCancellableIndividualPlan.mockResolvedValue(false);
+    open('/en/cancel');
+    await screen.findByText(en.cancel.noPlans);
+    expect(screen.queryByText(en.cancel.portalPeriodEnd)).toBeNull();
+  });
+
+  it('A3-17: with a plan to cancel, says it ends at period end through the portal', async () => {
+    auth.value.user = { id: 'u1', email: 'hr@acme.test' };
+    mocked.listMyCompanies.mockResolvedValue([company({ id: 'c1', name: 'Acme SA', subscription_status: 'active' })]);
+    open('/en/cancel');
+    await screen.findByRole('button', { name: t(en.cancel.companyButton, { company: 'Acme SA' }) });
+    expect(screen.getByText(en.cancel.portalPeriodEnd)).toBeTruthy();
+    for (const lang of ['en', 'fr', 'de', 'it', 'nl'] as const) {
+      expect(getDict(lang).cancel.portalPeriodEnd).toContain('Stripe Customer Portal');
+    }
+  });
+
   it('A3-08: a past_due company keeps its cancel button; a cancelled or planless one has none', async () => {
     auth.value.user = { id: 'u1', email: 'hr@acme.test' };
     mocked.listMyCompanies.mockResolvedValue([

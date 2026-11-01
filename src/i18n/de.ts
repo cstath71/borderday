@@ -785,6 +785,8 @@ const de: Dict = {
     intro:
       'Kündigen Sie hier Ihr BorderDay-Abo. Die Kündigung stoppt künftige Verlängerungen. Kündigen Sie vor dem 8. Tag der Testphase, wird nichts abgebucht.',
     accountTitle: 'Aus Ihrem Konto kündigen',
+    portalPeriodEnd:
+      'Im Abrechnungsportal (Stripe Customer Portal) wird die Kündigung zum Ende des laufenden bezahlten Zeitraums oder der Gratis-Testphase wirksam: Der Plan bleibt bis dahin aktiv und verlängert sich nicht. Erstattungen werden nicht im Portal bearbeitet: siehe Nutzungsbedingungen oder schreiben Sie an hello@borderday.com.',
     accountBody: 'Öffnet das Abrechnungsportal, in dem Sie die Kündigung bestätigen.',
     companyButton: 'Abo von {company} kündigen',
     individualButton: 'Meinen Einzelplan kündigen',
@@ -806,7 +808,7 @@ const de: Dict = {
   },
   accessibility: {
     title: 'Barrierefreiheit',
-    updated: 'Zuletzt aktualisiert: 31. Oktober 2026',
+    updated: 'Zuletzt aktualisiert: 1. November 2026',
     intro:
       'BorderDay soll mit Tastatur, Screenreadern und gängigen Hilfsmitteln nutzbar sein. Wir orientieren uns an WCAG 2.1 Stufe AA. Diese Seite ist eine kurze öffentliche Erklärung zur Barrierefreiheit mit diesem Ziel und den Kontaktwegen.',
     scopeTitle: 'Geltungsbereich',
@@ -814,7 +816,7 @@ const de: Dict = {
       'Diese Erklärung betrifft die öffentliche Website und das angemeldete Produkt auf borderday.com (Englisch, Französisch, Deutsch, Italienisch und Niederländisch). Drittanbieter-Checkout (Stripe / Link) und E-Mail-Clients folgen eigenen Barrierefreiheitspraktiken.',
     statusTitle: 'Aktueller Stand',
     statusBody:
-      'Automatisierte axe-Prüfungen der wichtigsten Bildschirme meldeten beim letzten internen Scan (31. Oktober 2026) keine Verstösse. Die manuelle Prüfung zeigt noch Lücken, die wir schliessen: Kalenderzellen brauchen vollständigere zugängliche Namen (Datum und Tagesart, nicht nur Farbe); Monatsschaltflächen brauchen klarere Bezeichnungen; einige Formularfehler müssen besser angekündigt werden; die Navigation auf kleinen Bildschirmen soll alle Seiten leichter erreichen. Ein vollständiger Screenreader-Abnahmetest steht noch aus.',
+      'Automatisierte axe-Prüfungen der öffentlichen Seiten und der Demo meldeten beim letzten internen Scan (1. November 2026) keine Verstösse. Angemeldete Bildschirme waren nicht Teil dieses Scans. Die Sprachauswahl wechselt die Sprache jetzt erst, wenn Sie auf Übernehmen klicken. Einige Formularfehler müssen möglicherweise noch besser angekündigt werden. Ein vollständiger Screenreader-Abnahmetest steht noch aus.',
     feedbackTitle: 'Rückmeldung',
     feedbackBody:
       'Wenn Sie auf eine Barriere stossen, schreiben Sie an privacy@borderday.com oder hello@borderday.com mit Seiten-URL, Browser oder Hilfsmittel und dem, was Sie tun wollten. Wir antworten in der Regel innerhalb von fünf Werktagen.',

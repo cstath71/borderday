@@ -80,6 +80,7 @@ export default function CancelPanel({ lang }: { lang: Lang }) {
           </button>
         )}
       </div>
+      {!none && <p className="meta">{c.portalPeriodEnd}</p>}
       {error && (
         <p role="alert" style={{ color: 'var(--danger)' }}>
           {c.portalError}

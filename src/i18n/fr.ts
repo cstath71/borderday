@@ -785,6 +785,8 @@ const fr: Dict = {
     intro:
       'Résiliez ici votre abonnement BorderDay. La résiliation arrête les renouvellements futurs. Si vous résiliez avant le 8e jour de l’essai, rien n’est débité.',
     accountTitle: 'Résilier depuis votre compte',
+    portalPeriodEnd:
+      'Dans le portail de facturation (Stripe Customer Portal), la résiliation prend effet à la fin de la période payée en cours ou de l’essai gratuit : l’offre reste active jusque-là et n’est pas renouvelée. Les remboursements ne sont pas traités dans le portail : voir les Conditions, ou écrire à hello@borderday.com.',
     accountBody: 'Ouvre le portail de facturation, où vous confirmez la résiliation.',
     companyButton: 'Résilier l’abonnement de {company}',
     individualButton: 'Résilier mon offre individuelle',
@@ -805,7 +807,7 @@ const fr: Dict = {
   },
   accessibility: {
     title: 'Accessibilité',
-    updated: 'Dernière mise à jour : 31 octobre 2026',
+    updated: 'Dernière mise à jour : 1er novembre 2026',
     intro:
       'BorderDay vise à être utilisable au clavier, avec les lecteurs d’écran et les technologies d’assistance courantes. Nous visons le niveau AA des WCAG 2.1. Cette page est une courte déclaration publique d’accessibilité décrivant cet objectif et comment nous contacter.',
     scopeTitle: 'Périmètre',
@@ -813,7 +815,7 @@ const fr: Dict = {
       'Cette déclaration porte sur le site public et le produit connecté sur borderday.com (anglais, français, allemand, italien et néerlandais). Le checkout tiers (Stripe / Link) et les clients de messagerie suivent leurs propres pratiques d’accessibilité.',
     statusTitle: 'État actuel',
     statusBody:
-      'Des contrôles automatiques axe sur les écrans principaux n’ont signalé aucune violation lors du dernier scan interne (31 octobre 2026). Une revue manuelle relève encore des écarts en cours de correction : les cellules du calendrier ont besoin de noms accessibles plus complets (date et type de jour, pas seulement la couleur) ; les commandes de mois ont besoin d’intitulés plus clairs ; certaines erreurs de formulaire doivent être mieux annoncées ; la navigation sur petit écran doit faciliter l’accès à toutes les pages. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
+      'Des contrôles automatiques axe des pages publiques et de la démo n’ont signalé aucune violation lors du dernier scan interne (1er novembre 2026). Les écrans connectés n’en faisaient pas partie. Le sélecteur de langue ne change désormais la langue que lorsque vous appuyez sur Appliquer. Certaines erreurs de formulaire peuvent encore devoir être mieux annoncées. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
     feedbackTitle: 'Retour',
     feedbackBody:
       'Si vous rencontrez une barrière, écrivez à privacy@borderday.com ou hello@borderday.com en indiquant l’URL de la page, votre navigateur ou technologie d’assistance, et ce que vous essayiez de faire. Nous visons une réponse sous cinq jours ouvrés.',

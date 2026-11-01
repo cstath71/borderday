@@ -785,6 +785,8 @@ const it: Dict = {
     intro:
       'Disdite qui il vostro abbonamento BorderDay. La disdetta interrompe i rinnovi futuri. Con la disdetta prima dell’8° giorno di prova non viene addebitato nulla.',
     accountTitle: 'Disdire dal vostro account',
+    portalPeriodEnd:
+      'Nel portale di fatturazione (Stripe Customer Portal) la disdetta ha effetto alla fine del periodo pagato in corso o della prova gratuita: il piano resta attivo fino ad allora e non si rinnova. I rimborsi non sono gestiti nel portale: vedete le Condizioni o scrivete a hello@borderday.com.',
     accountBody: 'Apre il portale di fatturazione, dove confermate la disdetta.',
     companyButton: 'Disdire l’abbonamento di {company}',
     individualButton: 'Disdire il mio piano individuale',
@@ -806,7 +808,7 @@ const it: Dict = {
   },
   accessibility: {
     title: 'Accessibilità',
-    updated: 'Ultimo aggiornamento: 31 ottobre 2026',
+    updated: 'Ultimo aggiornamento: 1° novembre 2026',
     intro:
       'BorderDay mira a essere utilizzabile con tastiera, screen reader e tecnologie assistive comuni. Lavoriamo verso il livello AA delle WCAG 2.1. Questa pagina è una breve dichiarazione pubblica di accessibilità che descrive tale obiettivo e come contattarci.',
     scopeTitle: 'Ambito',
@@ -814,7 +816,7 @@ const it: Dict = {
       'Questa dichiarazione riguarda il sito pubblico e il prodotto autenticato su borderday.com (inglese, francese, tedesco, italiano e olandese). Il checkout di terzi (Stripe / Link) e i client di posta seguono le proprie pratiche di accessibilità.',
     statusTitle: 'Stato attuale',
     statusBody:
-      'Controlli automatici axe sulle schermate principali non hanno segnalato violazioni nell’ultimo scan interno (31 ottobre 2026). La revisione manuale evidenzia ancora lacune in corso di correzione: le celle del calendario necessitano di nomi accessibili più completi (data e tipo di giorno, non solo il colore); i controlli del mese richiedono etichette più chiare; alcuni errori di form devono essere annunciati meglio; la navigazione su schermi piccoli deve facilitare l’accesso a tutte le pagine. Non è ancora stato completato un passaggio completo con screen reader.',
+      'Controlli automatici axe delle pagine pubbliche e della demo non hanno segnalato violazioni nell’ultimo scan interno (1° novembre 2026). Le schermate con accesso non facevano parte dello scan. Il selettore di lingua ora cambia lingua solo quando premete Applica. Alcuni errori di form possono richiedere ancora annunci più chiari. Non è ancora stato completato un passaggio completo con screen reader.',
     feedbackTitle: 'Feedback',
     feedbackBody:
       'Se trovate una barriera, scrivete a privacy@borderday.com o hello@borderday.com indicando URL della pagina, browser o tecnologia assistiva e cosa stavate cercando di fare. Miriamo a rispondere entro cinque giorni lavorativi.',

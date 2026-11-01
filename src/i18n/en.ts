@@ -774,6 +774,8 @@ const en = {
     intro:
       'Cancel your BorderDay subscription here. Cancellation stops future renewals. If you cancel before day 8 of your trial, nothing is charged.',
     accountTitle: 'Cancel from your account',
+    portalPeriodEnd:
+      'In the billing portal (Stripe Customer Portal), cancellation takes effect at the end of the current paid period or free trial: the plan stays active until then and does not renew. Refunds are not handled in the portal: see the Terms, or write to hello@borderday.com.',
     accountBody: 'Opens the billing portal, where you confirm the cancellation.',
     companyButton: 'Cancel the {company} subscription',
     individualButton: 'Cancel my individual plan',
@@ -794,7 +796,7 @@ const en = {
   },
   accessibility: {
     title: 'Accessibility',
-    updated: 'Last updated: 31 October 2026',
+    updated: 'Last updated: 1 November 2026',
     intro:
       'BorderDay aims to be usable with keyboard, screen readers and common assistive technologies. We work toward WCAG 2.1 Level AA. This page is a short public accessibility statement describing that target and how to contact us.',
     scopeTitle: 'Scope',
@@ -802,7 +804,7 @@ const en = {
       'This statement covers the public website and the signed-in product on borderday.com (English, French, German, Italian and Dutch). Third-party checkout (Stripe / Link) and email clients follow their own accessibility practices.',
     statusTitle: 'Current status',
     statusBody:
-      'Automated checks with axe on the main screens reported no violations on the last internal scan (31 October 2026). Manual review still finds gaps we are fixing: calendar day cells need fuller accessible names (date and day type, not colour alone); month controls need clearer labels; some form errors need clearer announcements; the small-screen navigation needs an easier path to every page. We have not yet completed a full screen-reader acceptance pass.',
+      'Automated axe checks of the public pages and the demo reported no violations on the last internal scan (1 November 2026). Signed-in screens were not part of that scan. The language selector now changes language only when you press Apply. Some form errors may still need clearer announcements. We have not yet completed a full screen-reader acceptance pass.',
     feedbackTitle: 'Feedback',
     feedbackBody:
       'If you find a barrier, email privacy@borderday.com or hello@borderday.com with the page URL, your browser or assistive technology, and what you were trying to do. We aim to reply within five working days.',

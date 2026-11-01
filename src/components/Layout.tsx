@@ -83,10 +83,6 @@ export default function Layout() {
                 name="lang"
                 aria-label={d.lang.label}
                 defaultValue={lang}
-                onChange={(e) => {
-                  // Compact EN/FR/… control: apply immediately on change (no separate Apply button).
-                  e.currentTarget.form?.requestSubmit();
-                }}
               >
                 {LANGS.map((l) => (
                   <option key={l} value={l}>
@@ -95,6 +91,10 @@ export default function Layout() {
                 ))}
               </select>
             </label>
+            {/* WCAG 3.2.2: changing the control alone must not navigate. */}
+            <button type="submit" className="lang-apply" aria-label={`${d.lang.apply}: ${d.lang.label}`}>
+              {d.lang.apply}
+            </button>
           </form>
         </div>
       </header>

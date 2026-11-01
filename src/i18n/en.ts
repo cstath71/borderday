@@ -336,7 +336,7 @@ const en = {
     previewMonthOnly: 'The preview only logs the current month.',
     savedToAccount: 'Saved to your account.',
     savedToCompany:
-      'Saved to your {company} account. Your HR team sees each day’s type and date, whether you marked it as a night away for work, and your counters.',
+      'Saved to your {company} account. Your HR team sees each day’s type and date, whether it was a half day, whether you marked it as a night away for work, and your counters.',
     companyRetentionNote: 'Your employer keeps company day logs for {months} months (their retention setting; minimum 13). Older days are deleted automatically.',
     dayLogOtherCompany: 'This date is already in your record at another company, so it was not changed. BorderDay keeps one record per person and date.',
     saveError: 'Could not save. Try again.',
@@ -650,8 +650,9 @@ const en = {
     pendingInvites: 'Pending invites',
     dashboardTitle: 'HR dashboard',
     dashboardYear: 'Calendar year',
+    refreshAria: 'Refresh dashboard',
     dashboardSubtitle:
-      'Tax and social-security counters per employee. Day types, night-away marks and counts — never GPS or device location.',
+      'Tax and social-security counters per employee. Day types, half days, night-away marks and counts — never GPS or device location.',
     filterBorder: 'Filter by border route',
     filterStatus: 'Filter by status',
     filterAll: 'All',
@@ -662,7 +663,7 @@ const en = {
     viewHistory: 'Day history',
     historyTitle: 'Employee day history',
     historySubtitle:
-      'Day type, date and night-away mark only. No GPS or device location is stored, and notes are not shown.',
+      'Day type, date, half day and night-away mark only. No GPS or device location is stored, and notes are not shown.',
     backDashboard: 'Back to dashboard',
     joinTitle: 'Join your company',
     joinSubtitle: 'Accept the invite, read the notice on what HR can see, and pick your border route.',

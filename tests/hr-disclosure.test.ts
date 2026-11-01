@@ -64,6 +64,22 @@ describe('A3-12 HR-visible data is disclosed', () => {
     });
   }
 
+  // AR3-17 / A2-28: lesser employee and HR strings must also name half days
+  for (const [lang, d] of Object.entries(dicts) as Array<[keyof typeof dicts, typeof en]>) {
+    it(`${lang}: savedToCompany, dashboardSubtitle and historySubtitle name half days`, () => {
+      for (const [where, text] of [
+        ['savedToCompany', d.app.savedToCompany],
+        ['dashboardSubtitle', d.company.dashboardSubtitle],
+        ['historySubtitle', d.company.historySubtitle],
+      ] as const) {
+        expect(text, `${lang} ${where}`).toMatch(HALF_DAY[lang]);
+      }
+    });
+    it(`${lang}: refresh control has a translated accessible name`, () => {
+      expect(d.company.refreshAria.length).toBeGreaterThan(3);
+    });
+  }
+
   it('the notice version moved with the copy', () => {
     expect(CONSENT_VERSION).toBe('2026-11-01-v6');
   });

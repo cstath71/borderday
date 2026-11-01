@@ -338,6 +338,7 @@ const en = {
       'These buttons export the days shown here. Your full account export is on the Account page.',
   },
   pricing: {
+    trialOnce: "The free trial is offered once per person and once per company. If you or this company already had one, even a cancelled one, checkout starts the plan straight away and charges it then.",
     title: 'Pricing',
     subtitle: 'Company plan first. Subscriptions via Stripe Managed Payments (sold through Link).',
     individual: 'Individual (employee)',
@@ -366,7 +367,7 @@ const en = {
     companyInclude4: 'Data protection by design (day types per date — no GPS or device location)',
     subscribeMonthly: 'Start monthly',
     subscribeYearly: 'Start yearly',
-    checkoutSuccess: 'Payment set up — your trial is active. Open your account to continue.',
+    checkoutSuccess: "Payment set up — your plan is ready. Open your account to continue.",
     checkoutCancel: 'Checkout canceled — no charge. You can try again anytime.',
     goToAccount: 'Go to account',
     alreadySubscribed: "This plan already has a subscription that is active, in trial or awaiting payment, so no new checkout was started and nothing was charged. To change or fix it, use the “{cancel}” link on this page, which leads to the customer portal.",
@@ -564,6 +565,15 @@ const en = {
     point3: 'Optional company join — you see what HR sees',
   },
   company: {
+    checkoutDone: "Payment set up. The plan status here updates as soon as Stripe confirms it.",
+    planLabel: "Plan",
+    planTrialing: "free trial until {date}",
+    planActive: "active, current period ends on {date}",
+    planActiveNoDate: "active",
+    planPastDue: "payment overdue. Employees cannot log days until it is paid.",
+    planCanceled: "cancelled",
+    planNone: "no active plan",
+    planManage: "Update payment or cancel",
     signupTitle: 'Create a company account',
     signupSubtitle: 'Sign in with email or Google, then create your company. Subscribe on the Pricing page when ready.',
     companyName: 'Company name',
@@ -683,7 +693,7 @@ const en = {
       'You must provide accurate account details. Company account owners invite employees; employees choose a border route and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. Employer-side duties can block lawful use until completed: for example works-council co-determination on technical monitoring systems (Germany BetrVG § 87(1) No. 6), staff-representative or CCT consultation rules in France, Belgium, Luxembourg and Switzerland, and any local employee-monitoring or workplace-privacy rules. BorderDay does not run those consultations for you. The provider is the controller of accounts, billing and security. The data processing agreement for employee day logs is published at /dpa/. You are responsible for the accuracy of the days you log.',
     s3Title: 'Subscriptions, trial, renewal and cancellation',
     s3Body:
-      'Paid plans are subscriptions. Company and individual plans start with a 7-day free trial, and a payment card is required at signup. After 7 days the plan becomes paid at the stated price: your card is charged automatically on day 8 and the subscription then renews each month or year until you cancel. If you cancel before day 8, nothing is charged. If no valid payment method is on file when the trial ends, the subscription is cancelled. You can cancel at any time through the Cancel subscription link in the footer of every page, which leads to the customer portal, your Link order tools or an email request. Cancellation stops future renewals. Amounts already collected for a started billing period are not pro-rated unless the law or Link’s refund terms require it. Under Case C-565/22 (Sofatutor), where a free trial then auto-extends into a paid period and the paid price was clearly, comprehensibly and explicitly disclosed when you contracted, that is one contract with one statutory withdrawal right for the whole period — not a second right when charging starts.',
+      'Paid plans are subscriptions. Company and individual plans start with a 7-day free trial, and a payment card is required at signup. The free trial is offered once per person and once per company: if you or the company already had one, even a cancelled one, the plan starts and is charged at checkout. After 7 days the plan becomes paid at the stated price: your card is charged automatically on day 8 and the subscription then renews each month or year until you cancel. If you cancel before day 8, nothing is charged. If no valid payment method is on file when the trial ends, the subscription is cancelled. You can cancel at any time through the Cancel subscription link in the footer of every page, which leads to the customer portal, your Link order tools or an email request. Cancellation stops future renewals. Amounts already collected for a started billing period are not pro-rated unless the law or Link’s refund terms require it. Under Case C-565/22 (Sofatutor), where a free trial then auto-extends into a paid period and the paid price was clearly, comprehensibly and explicitly disclosed when you contracted, that is one contract with one statutory withdrawal right for the whole period — not a second right when charging starts.',
     s3YearlyBody:
       'Yearly individual plans renew for a further year until you cancel. BorderDay sends a renewal reminder by email before each yearly renewal. For consumers in France, Code de la consommation Art. L215-1 requires a written notice between one and three months before the deadline to refuse tacit renewal, with that deadline in a clear box; if that notice was not sent as required, you may end the contract free of charge at any time after renewal. Cancelling during the first year stops the next renewal. After the first year you can cancel a renewed yearly plan at any time; it then ends, and any refund of the unused part applies, as mandatory consumer law in your country requires. Cancel through the Cancel subscription link in the footer (customer portal), your Link order tools, or email.',
     s4Title: 'Prices, VAT and merchant of record',

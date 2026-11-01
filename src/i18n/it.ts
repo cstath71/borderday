@@ -343,6 +343,7 @@ const it: Dict = {
       'Questi pulsanti esportano i giorni mostrati qui. L’export completo dell’account si trova nella pagina Account.',
   },
   pricing: {
+    trialOnce: "La prova gratuita è offerta una sola volta per persona e per azienda. Se voi o questa azienda ne avete già avuta una, anche disdetta, il checkout avvia subito il piano e lo addebita in quel momento.",
     title: 'Prezzi',
     subtitle: 'Prima il piano azienda. Abbonamenti via Stripe Managed Payments (venduto tramite Link).',
     individual: 'Individuale (dipendente)',
@@ -372,7 +373,7 @@ const it: Dict = {
       'Protezione dei dati fin dalla progettazione (tipi di giorno per data — niente GPS né posizione del dispositivo)',
     subscribeMonthly: 'Inizia mensile',
     subscribeYearly: 'Inizia annuale',
-    checkoutSuccess: 'Pagamento impostato — la prova è attiva. Aprite l’account per continuare.',
+    checkoutSuccess: "Pagamento impostato — il piano è pronto. Aprite l’account per continuare.",
     checkoutCancel: 'Checkout annullato — nessun addebito. Potete riprovare in qualsiasi momento.',
     goToAccount: 'Vai all’account',
     alreadySubscribed: "Questo piano ha già un abbonamento attivo, in prova o in attesa di pagamento: non è stato avviato alcun nuovo checkout e non è stato addebitato nulla. Per modificarlo o regolarizzarlo, usate il link «{cancel}» di questa pagina, che porta al portale clienti.",
@@ -570,6 +571,15 @@ const it: Dict = {
     point3: 'Adesione azienda opzionale — vedete ciò che vede l’HR',
   },
   company: {
+    checkoutDone: "Pagamento impostato. Lo stato del piano si aggiorna qui appena Stripe lo conferma.",
+    planLabel: "Piano",
+    planTrialing: "prova gratuita fino al {date}",
+    planActive: "attivo, il periodo in corso termina il {date}",
+    planActiveNoDate: "attivo",
+    planPastDue: "pagamento scaduto. I dipendenti non possono registrare giorni finché non è saldato.",
+    planCanceled: "disdetto",
+    planNone: "nessun piano attivo",
+    planManage: "Aggiorna il pagamento o disdici",
     signupTitle: 'Create un account azienda',
     signupSubtitle:
       'Accedete con e-mail o Google, poi create l’azienda. Abbonatevi in seguito dalla pagina Prezzi.',
@@ -693,7 +703,7 @@ const it: Dict = {
       'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un corridoio e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Gli obblighi del datore di lavoro possono impedire un uso lecito finché non sono adempiuti: ad esempio la codecisione del consiglio di fabbrica sui sistemi tecnici di controllo (Germania BetrVG § 87 cpv. 1 n. 6), le regole di consultazione dei rappresentanti del personale o dei CCT in Francia, Belgio, Lussemburgo e Svizzera, e ogni norma locale sul monitoraggio dei dipendenti o sulla privacy sul luogo di lavoro. BorderDay non conduce tali consultazioni al posto vostro. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
     s3Title: 'Abbonamenti, prova, rinnovo e disdetta',
     s3Body:
-      'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo di fatturazione iniziato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link. Secondo la causa C-565/22 (Sofatutor), un contratto con periodo gratuito iniziale che si prolunga automaticamente in un periodo a pagamento — se il prezzo è stato comunicato in modo chiaro, comprensibile ed esplicito alla conclusione — è un solo contratto con un solo diritto legale di recesso per l’intero periodo, non un secondo diritto all’inizio dell’addebito.',
+      'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. La prova gratuita è offerta una sola volta per persona e per azienda: se voi o l’azienda ne avete già avuta una, anche disdetta, il piano inizia e viene addebitato al checkout. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo di fatturazione iniziato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link. Secondo la causa C-565/22 (Sofatutor), un contratto con periodo gratuito iniziale che si prolunga automaticamente in un periodo a pagamento — se il prezzo è stato comunicato in modo chiaro, comprensibile ed esplicito alla conclusione — è un solo contratto con un solo diritto legale di recesso per l’intero periodo, non un secondo diritto all’inizio dell’addebito.',
     s3YearlyBody:
       'I piani individuali annuali si rinnovano per un ulteriore anno finché non disdite. BorderDay invia un promemoria di rinnovo via e-mail prima di ogni rinnovo annuale. Per i consumatori in Francia, l’Art. L215-1 del Code de la consommation richiede un’informazione scritta tra uno e tre mesi prima del termine per rifiutare il rinnovo tacito, con tale termine in un riquadro evidente; in mancanza, potete risolvere il contratto gratuitamente in qualsiasi momento dopo il rinnovo. Disdire nel primo anno ferma il rinnovo successivo. Dopo il primo anno potete disdire un piano annuale rinnovato in qualsiasi momento; allora cessa, e ogni rimborso della parte non utilizzata si applica secondo il diritto dei consumatori obbligatorio del vostro Paese. Disdite tramite il link Disdire il contratto nel piè di pagina (portale clienti), gli strumenti ordine Link, o via e-mail.',
     s4Title: 'Prezzi, IVA e merchant of record',

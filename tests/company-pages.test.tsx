@@ -300,6 +300,43 @@ describe('Dashboard', () => {
     expect((await screen.findByRole('alert')).textContent).toBe(en.app.saveError);
   });
 
+  describe('E9: subscription status line', () => {
+    const company = (fields: object) =>
+      mocked.getCompany.mockResolvedValue({ id: 'c1', name: 'Acme Real SA', seat_count: 1, data_retention_months: 24, trial_ends_at: null, current_period_end: null, ...fields } as any);
+    it.each([
+      [{ subscription_status: 'trialing', trial_ends_at: '2999-03-04T12:00:00Z' }, 'Plan: free trial until 4 March 2999'],
+      [{ subscription_status: 'active', current_period_end: '2999-05-06T12:00:00Z' }, 'Plan: active, current period ends on 6 May 2999'],
+      [{ subscription_status: 'past_due' }, `Plan: ${en.company.planPastDue}`],
+      [{ subscription_status: 'canceled' }, 'Plan: cancelled'],
+      [{ subscription_status: 'none' }, 'Plan: no active plan'],
+    ])('%j', async (fields, text) => {
+      asHr();
+      company(fields);
+      open('/en/company/c1/dashboard');
+      await screen.findByText('Real Employee');
+      expect(screen.getByTestId('plan-status').textContent).toContain(text);
+    });
+  });
+
+  describe('E8: back from company checkout', () => {
+    it('confirms, and rechecks rather than claiming no subscription while the webhook is on its way', async () => {
+      asHr(false);
+      open('/en/company/c1/dashboard?checkout=success');
+      await screen.findByText(en.company.checkoutDone);
+      expect(screen.queryByText(en.company.billingInactive, { exact: false })).toBeNull();
+      mocked.getCompany.mockResolvedValue({ id: 'c1', name: 'Acme Real SA', subscription_status: 'trialing', trial_ends_at: '2999-01-01T00:00:00Z', seat_count: 1, data_retention_months: 24 } as any);
+      await waitFor(() => expect(screen.getByTestId('plan-status').textContent).toContain('free trial'), { timeout: 3500 });
+      expect(screen.queryByText(en.company.billingInactive, { exact: false })).toBeNull();
+    });
+
+    it('a normal visit to an unpaid company still says so', async () => {
+      asHr(false);
+      open('/en/company/c1/dashboard');
+      await screen.findByText(en.company.billingInactive, { exact: false });
+      expect(screen.queryByText(en.company.checkoutDone)).toBeNull();
+    });
+  });
+
   it('points an unpaid company at pricing', async () => {
     asHr(false);
     open('/en/company/c1/dashboard');

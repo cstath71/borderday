@@ -344,6 +344,7 @@ const de: Dict = {
       'Diese Schaltflächen exportieren die hier angezeigten Tage. Den vollständigen Kontoexport finden Sie auf der Kontoseite.',
   },
   pricing: {
+    trialOnce: "Die kostenlose Testphase gibt es einmal pro Person und einmal pro Unternehmen. Hatten Sie oder dieses Unternehmen bereits eine, auch eine gekündigte, startet der Checkout den Plan sofort und belastet ihn dann.",
     title: 'Preise',
     subtitle: 'Zuerst Unternehmensplan. Abos über Stripe Managed Payments (verkauft über Link).',
     individual: 'Einzelperson (Mitarbeitende)',
@@ -373,7 +374,7 @@ const de: Dict = {
       'Datenschutz durch Technikgestaltung (Tagesarten je Datum — kein GPS und kein Gerätestandort)',
     subscribeMonthly: 'Monatlich starten',
     subscribeYearly: 'Jährlich starten',
-    checkoutSuccess: 'Zahlung eingerichtet — Ihre Testphase ist aktiv. Öffnen Sie Ihr Konto, um fortzufahren.',
+    checkoutSuccess: "Zahlung eingerichtet — Ihr Plan ist bereit. Öffnen Sie Ihr Konto, um fortzufahren.",
     checkoutCancel: 'Checkout abgebrochen — keine Belastung. Sie können es jederzeit erneut versuchen.',
     goToAccount: 'Zum Konto',
     alreadySubscribed: "Dieser Plan hat bereits ein Abonnement, das aktiv, in der Testphase oder zahlungsfällig ist. Es wurde kein neuer Checkout gestartet und nichts belastet. Um es zu ändern oder in Ordnung zu bringen, nutzen Sie den Link «{cancel}» auf dieser Seite, der zum Kundenportal führt.",
@@ -570,6 +571,15 @@ const de: Dict = {
     point3: 'Optionaler Unternehmensbeitritt — Sie sehen, was HR sieht',
   },
   company: {
+    checkoutDone: "Zahlung eingerichtet. Der Planstatus wird hier aktualisiert, sobald Stripe ihn bestätigt.",
+    planLabel: "Plan",
+    planTrialing: "kostenlose Testphase bis {date}",
+    planActive: "aktiv, die laufende Periode endet am {date}",
+    planActiveNoDate: "aktiv",
+    planPastDue: "Zahlung überfällig. Mitarbeitende können keine Tage erfassen, bis sie beglichen ist.",
+    planCanceled: "gekündigt",
+    planNone: "kein aktiver Plan",
+    planManage: "Zahlung aktualisieren oder kündigen",
     signupTitle: 'Unternehmenskonto anlegen',
     signupSubtitle: 'Mit E-Mail oder Google anmelden, dann Unternehmen anlegen. Abonnieren Sie auf der Preisseite, wenn Sie bereit sind.',
     companyName: 'Name des Unternehmens',
@@ -690,7 +700,7 @@ const de: Dict = {
       'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen eine Grenzroute und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Arbeitgeberseitige Pflichten können die rechtmässige Nutzung blockieren, solange sie nicht erfüllt sind: beispielsweise die Mitbestimmung des Betriebsrats bei technischen Einrichtungen zur Überwachung (Deutschland BetrVG § 87 Abs. 1 Nr. 6), Anhörungs- oder Gesamtarbeitsvertragsregeln in Frankreich, Belgien, Luxemburg und der Schweiz sowie örtliche Regeln zur Mitarbeiterüberwachung oder zum Persönlichkeitsschutz am Arbeitsplatz. BorderDay führt diese Konsultationen nicht für Sie durch. Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist.',
     s3Title: 'Abonnements, Testphase, Verlängerung und Kündigung',
     s3Body:
-      'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung stoppt künftige Verlängerungen. Bereits eingezogene Beträge für eine begonnene Abrechnungsperiode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsbedingungen von Link es verlangen. Nach der Rechtssache C-565/22 (Sofatutor) ist ein Vertrag mit kostenloser Testphase, der sich automatisch in einen kostenpflichtigen Zeitraum verlängert, und bei dem der Preis bei Vertragsschluss klar, verständlich und ausdrücklich mitgeteilt wurde, ein Vertrag mit einem gesetzlichen Widerrufsrecht für die gesamte Periode — kein zweites Recht bei Beginn der Belastung.',
+      'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Die kostenlose Testphase gibt es einmal pro Person und einmal pro Unternehmen: Hatten Sie oder das Unternehmen bereits eine, auch eine gekündigte, beginnt der Plan beim Checkout und wird dann belastet. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung stoppt künftige Verlängerungen. Bereits eingezogene Beträge für eine begonnene Abrechnungsperiode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsbedingungen von Link es verlangen. Nach der Rechtssache C-565/22 (Sofatutor) ist ein Vertrag mit kostenloser Testphase, der sich automatisch in einen kostenpflichtigen Zeitraum verlängert, und bei dem der Preis bei Vertragsschluss klar, verständlich und ausdrücklich mitgeteilt wurde, ein Vertrag mit einem gesetzlichen Widerrufsrecht für die gesamte Periode — kein zweites Recht bei Beginn der Belastung.',
     s3YearlyBody:
       'Jährliche Einzelpläne verlängern sich um ein weiteres Jahr, bis Sie kündigen. BorderDay sendet vor jeder jährlichen Verlängerung eine Erinnerung per E-Mail. Für Verbraucher in Frankreich verlangt Art. L215-1 des Code de la consommation eine schriftliche Mitteilung zwischen einem und drei Monaten vor der Frist zur Ablehnung der stillschweigenden Verlängerung, mit dieser Frist in einem deutlichen Kasten; fehlt diese Mitteilung, können Sie den Vertrag jederzeit nach der Verlängerung kostenfrei beenden. Eine Kündigung im ersten Jahr stoppt die nächste Verlängerung. Nach dem ersten Jahr können Sie einen verlängerten Jahresplan jederzeit kündigen; er endet dann, und eine Erstattung des ungenutzten Teils gilt, soweit zwingendes Verbraucherschutzrecht Ihres Landes es verlangt. Kündigen Sie über den Link «Verträge hier kündigen» in der Fusszeile (Kundenportal), Ihre Link-Bestellwerkzeuge oder per E-Mail.',
     s4Title: 'Preise, MWST und Merchant of Record',

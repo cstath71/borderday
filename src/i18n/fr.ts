@@ -343,6 +343,7 @@ const fr: Dict = {
       'Ces boutons exportent les jours affichés ici. L’export complet de votre compte se trouve sur la page Compte.',
   },
   pricing: {
+    trialOnce: "L’essai gratuit est proposé une seule fois par personne et par entreprise. Si vous ou cette entreprise en avez déjà eu un, même résilié, le paiement démarre l’offre immédiatement et la débite alors.",
     title: 'Tarifs',
     subtitle: 'Offre entreprise en premier. Abonnements via Stripe Managed Payments (vendu via Link).',
     individual: 'Individuel (collaborateur)',
@@ -372,7 +373,7 @@ const fr: Dict = {
       'Protection des données dès la conception (types de jours par date — ni GPS ni localisation de l’appareil)',
     subscribeMonthly: 'Commencer au mois',
     subscribeYearly: 'Commencer à l\'année',
-    checkoutSuccess: 'Paiement configuré — votre essai est actif. Ouvrez votre compte pour continuer.',
+    checkoutSuccess: "Paiement configuré — votre offre est prête. Ouvrez votre compte pour continuer.",
     checkoutCancel: 'Paiement annulé — aucun débit. Vous pouvez réessayer à tout moment.',
     goToAccount: 'Aller au compte',
     alreadySubscribed: "Cette offre a déjà un abonnement actif, en essai ou en attente de paiement : aucun nouveau paiement n’a été lancé et rien n’a été débité. Pour le modifier ou le régulariser, utilisez le lien « {cancel} » de cette page, qui mène au portail client.",
@@ -569,6 +570,15 @@ const fr: Dict = {
     point3: 'Adhésion entreprise optionnelle — vous voyez ce que voient les RH',
   },
   company: {
+    checkoutDone: "Paiement configuré. Le statut de l’offre se met à jour ici dès que Stripe le confirme.",
+    planLabel: "Offre",
+    planTrialing: "essai gratuit jusqu’au {date}",
+    planActive: "active, la période en cours se termine le {date}",
+    planActiveNoDate: "active",
+    planPastDue: "paiement en retard. Les collaborateurs ne peuvent pas consigner de jours tant qu’il n’est pas réglé.",
+    planCanceled: "résiliée",
+    planNone: "aucune offre active",
+    planManage: "Mettre à jour le paiement ou résilier",
     signupTitle: 'Créer un compte entreprise',
     signupSubtitle:
       'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Abonnez-vous ensuite sur la page Tarifs.',
@@ -692,7 +702,7 @@ const fr: Dict = {
       'Vous devez fournir des informations de compte exactes. Les administrateurs du compte entreprise invitent les collaborateurs ; ceux-ci choisissent un itinéraire et enregistrent uniquement le type de jour (ni GPS ni localisation de l’appareil). Les RH voient les mêmes compteurs que le collaborateur. Dans un compte entreprise, l’employeur décide pourquoi et comment les jours sont enregistrés : il est responsable du traitement de ces journaux, de la base légale, de l’information des collaborateurs et de toute consultation exigée par son droit, et le prestataire agit comme son sous-traitant. L’Art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Les obligations côté employeur peuvent empêcher un usage licite tant qu’elles ne sont pas remplies : par exemple la co-détermination du comité d’entreprise sur les systèmes techniques de contrôle (Allemagne BetrVG § 87 al. 1 n° 6), les règles de consultation des représentants du personnel ou de conventions collectives de travail en France, en Belgique, au Luxembourg et en Suisse, et toute règle locale sur la surveillance des salariés ou la vie privée au travail. BorderDay ne conduit pas ces consultations à votre place. Le prestataire est responsable du traitement des comptes, de la facturation et de la sécurité. L’accord de traitement des données pour les journaux de jours des collaborateurs est publié à /dpa/. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
     s3Title: 'Abonnements, essai, renouvellement et résiliation',
     s3Body:
-      'Les offres payantes sont des abonnements. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. Après 7 jours, l’offre devient payante au prix indiqué : votre carte est débitée automatiquement le 8e jour et l’abonnement se renouvelle ensuite chaque mois ou chaque année jusqu’à votre résiliation. Si vous résiliez avant le 8e jour, rien n’est débité. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier à tout moment via le lien « Résilier votre contrat » en bas de chaque page, qui mène au portail client, aux outils de commande Link ou à une demande par e-mail. La résiliation arrête les renouvellements futurs. Les montants déjà encaissés pour une période de facturation commencée ne sont pas remboursés au prorata, sauf obligation légale ou conditions de remboursement de Link. Selon l’arrêt C-565/22 (Sofatutor), lorsqu’un essai gratuit se prolonge automatiquement en période payante et que le prix a été clairement, de façon compréhensible et explicite, communiqué lors de la conclusion, il s’agit d’un seul contrat avec un seul droit légal de rétractation pour toute la période — pas d’un second droit au début du prélèvement.',
+      'Les offres payantes sont des abonnements. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. L’essai gratuit est proposé une seule fois par personne et par entreprise : si vous ou l’entreprise en avez déjà eu un, même résilié, l’offre démarre et est débitée au moment du paiement. Après 7 jours, l’offre devient payante au prix indiqué : votre carte est débitée automatiquement le 8e jour et l’abonnement se renouvelle ensuite chaque mois ou chaque année jusqu’à votre résiliation. Si vous résiliez avant le 8e jour, rien n’est débité. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier à tout moment via le lien « Résilier votre contrat » en bas de chaque page, qui mène au portail client, aux outils de commande Link ou à une demande par e-mail. La résiliation arrête les renouvellements futurs. Les montants déjà encaissés pour une période de facturation commencée ne sont pas remboursés au prorata, sauf obligation légale ou conditions de remboursement de Link. Selon l’arrêt C-565/22 (Sofatutor), lorsqu’un essai gratuit se prolonge automatiquement en période payante et que le prix a été clairement, de façon compréhensible et explicite, communiqué lors de la conclusion, il s’agit d’un seul contrat avec un seul droit légal de rétractation pour toute la période — pas d’un second droit au début du prélèvement.',
     s3YearlyBody:
       'Les offres individuelles annuelles se renouvellent pour une année supplémentaire jusqu’à votre résiliation. BorderDay envoie un rappel de renouvellement par e-mail avant chaque reconduction annuelle. Pour les consommateurs en France, l’Art. L215-1 du Code de la consommation exige une information écrite entre un et trois mois avant la date limite de refus de reconduction tacite, avec cette date limite dans un encadré apparent ; à défaut, vous pouvez mettre fin au contrat gratuitement à tout moment après la reconduction. Résilier pendant la première année empêche la reconduction suivante. Après la première année, vous pouvez résilier une offre annuelle renouvelée à tout moment ; elle prend alors fin, et tout remboursement de la partie non utilisée s’applique selon le droit de la consommation obligatoire de votre pays. Résiliez via le lien Résilier votre contrat du pied de page (portail client), vos outils de commande Link, ou par e-mail.',
     s4Title: 'Tarifs, TVA et marchand officiel',

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
+import { Link, Navigate, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import DashboardView, { type TeamMember } from '../../components/company/DashboardView';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import Seo from '../../components/Seo';
@@ -7,14 +7,19 @@ import { useLang } from '../../components/Layout';
 import { buildDashboardRows } from '../../company/buildRows';
 import type { EmployeeDashboardRow } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
-import { getDict } from '../../i18n';
+import { getDict, t } from '../../i18n';
 import { useAuth } from '../../lib/auth';
-import { companyHasPaidAccess } from '../../lib/billing';
+import { companyHasPaidAccess, planStatus, type PlanStatus } from '../../lib/billing';
 import * as api from '../../lib/companyApi';
+
+/** Stripe's webhook usually lands within seconds of the return from checkout. */
+const CHECKOUT_RECHECK_MS = 2000;
+const CHECKOUT_RECHECKS = 5;
 
 type Loaded = {
   name: string;
   paid: boolean;
+  plan: PlanStatus;
   rows: EmployeeDashboardRow[];
   invites: Invitation[];
   retentionMonths: number;
@@ -39,6 +44,26 @@ export default function CompanyDashboard() {
   const [state, setState] = useState<State>({ status: 'loading' });
   const [companies, setCompanies] = useState<api.MyCompany[] | null>(null);
   const [tick, setTick] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [fromCheckout] = useState(() => searchParams.get('checkout') === 'success');
+  const [rechecks, setRechecks] = useState(0);
+
+  useEffect(() => {
+    if (!searchParams.has('checkout')) return;
+    const next = new URLSearchParams(searchParams);
+    next.delete('checkout');
+    setSearchParams(next, { replace: true });
+  }, [searchParams, setSearchParams]);
+
+  const awaitingWebhook = fromCheckout && state.status === 'ready' && !state.data.paid && rechecks < CHECKOUT_RECHECKS;
+  useEffect(() => {
+    if (!awaitingWebhook) return;
+    const timer = setTimeout(() => {
+      setRechecks((n) => n + 1);
+      setTick((x) => x + 1);
+    }, CHECKOUT_RECHECK_MS);
+    return () => clearTimeout(timer);
+  }, [awaitingWebhook, rechecks]);
 
   useEffect(() => {
     if (!userId || companyId) return;
@@ -81,6 +106,7 @@ export default function CompanyDashboard() {
         data: {
           name: company.name,
           paid: companyHasPaidAccess(company.subscription_status, company.trial_ends_at),
+          plan: planStatus(company),
           rows: buildDashboardRows({ members, logs, year }),
           invites,
           retentionMonths: company.data_retention_months ?? 24,
@@ -148,13 +174,38 @@ export default function CompanyDashboard() {
     );
   } else {
     const { data } = state;
+    const { plan } = data;
+    const planText = (d.company as unknown as Record<string, string>)[plan.key];
+    const planDate =
+      'date' in plan
+        ? new Date(plan.date).toLocaleDateString(({ en: 'en-CH', fr: 'fr-CH', de: 'de-CH', it: 'it-CH', nl: 'nl-BE' } as const)[lang] ?? 'en-CH', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            timeZone: 'Europe/Zurich',
+          })
+        : '';
     body = (
       <>
-        {!data.paid && (
+        {fromCheckout && (
+          <div className="demo-banner" role="status">
+            {d.company.checkoutDone}
+          </div>
+        )}
+        {!data.paid && !awaitingWebhook && (
           <div className="demo-banner" role="status">
             {d.company.billingInactive} <Link to={`/${lang}/pricing`}>{d.company.billingCta}</Link>
           </div>
         )}
+        <p className="meta" data-testid="plan-status">
+          {d.company.planLabel}: {t(planText, { date: planDate })}
+          {plan.key !== 'planNone' && plan.key !== 'planCanceled' && (
+            <>
+              {' · '}
+              <Link to={`/${lang}/cancel`}>{d.company.planManage}</Link>
+            </>
+          )}
+        </p>
         <DashboardView
           d={d}
           companyName={data.name}

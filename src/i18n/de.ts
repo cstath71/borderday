@@ -55,7 +55,7 @@ const de: Dict = {
       'Nach dem EU/EWR/CH-Rahmenübereinkommen verlagert Telearbeit im Wohnstaat ab 25 % der Arbeitszeit die Sozialversicherung normalerweise dorthin, sofern keine A1-Bescheinigung beantragt wird. Ab 50 % steht das Übereinkommen nicht mehr zur Verfügung. BorderDay zeigt die drei Bereiche getrennt von der Steuer: unter 25 %, 25 % bis unter 50 % (A1 erforderlich) und 50 % oder mehr.',
     risk2Title: 'Steuerliche Tagesgrenzen',
     risk2Body:
-      'Steuerzähler laufen heute auf sieben Korridoren: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Nächte, in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
+      'Steuerzähler laufen heute auf sieben Korridoren: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Nächte, in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage + 20 % regelmässige Rückkehr), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
     risk3Title: 'Teams über mehrere Grenzen',
     risk3Body:
       'Ein Unternehmens-Dashboard für Mitarbeitende mit unterschiedlichen Grenzen. Filter nach Grenze oder Status. CSV-Export. Mitarbeitende sehen bei ihren eigenen Tagen dieselben Zähler, die HR für sie sieht.',
@@ -174,7 +174,7 @@ const de: Dict = {
     basel_de_employer_commute:
       'Personalregel Basel-Stadt: Vor-Ort-Tage diesen Monat (mindestens 5 oder 1 pro Woche)',
     basel_de_employer_note:
-      'Dies ist die Regel, die der Kanton Basel-Stadt für das eigene Personal anwendet (Stand 1. Jan. 2026): Homeoffice nur, wenn die Person mindestens 1 Tag pro Woche oder mindestens 5 Tage pro Monat an den Arbeitsort pendelt. Es handelt sich um kantonale HR-Vorgaben für das öffentliche Personal, nicht um eine allgemeine bundesrechtliche Steuer- oder Arbeitsgrenze für alle Arbeitgeber. KonsVerCHEV § 7 (1-Tages-/5-Tages-Test) gilt nur für geringfügige Arbeitsverhältnisse, nicht als allgemeiner Homeoffice-Mindestumfang. Andere Arbeitgeber können andere Regeln anwenden. Quelle: Finanzdepartement Basel-Stadt (PDF Homeoffice Vorgaben).',
+      'Dies ist die Regel, die der Kanton Basel-Stadt für das eigene Personal anwendet (Stand 1. Jan. 2026): Homeoffice nur, wenn die Person mindestens 1 Tag pro Woche oder mindestens 5 Tage pro Monat an den Arbeitsort pendelt. Es handelt sich um kantonale HR-Vorgaben für das öffentliche Personal. KonsVerCHEV § 7 (1-Tag-/5-Tage-Test) gilt nur für geringfügige Arbeitsverhältnisse. Das nationale DE–CH-Protokoll (AS 2025 791, ab 1. Jan. 2026) definiert die regelmässige Rückkehr gesondert als Pendeln an mindestens 20 % der vereinbarten Arbeitstage — dafür gibt es einen eigenen Zähler. Andere Arbeitgeber können andere Personalregeln anwenden. Quelle: Finanzdepartement Basel-Stadt (Homeoffice Vorgaben PDF).',
     usedOf: '{used} von {limit}',
     usedOfDays: '{used} von {allowed} Tagen',
     percentOfAnnual: '{pct} % von {annual} Tagen/Jahr (Grenze {limit} %)',
@@ -243,9 +243,28 @@ const de: Dict = {
       'Dieses Jahr erfasste Reisetage: {days}. Wiederkehrende Arbeit ausserhalb des Arbeitgeberstaats kann aus dem Rahmenübereinkommen fallen: Fragen Sie Ihre Sozialversicherungsstelle.',
     ch_it_over:
       'Grenze überschritten. Oberhalb der Grenze gelten die normalen Regeln des Abkommens.',
+    basel_de_regular_return_20: 'Regelmässige Rückkehr an den Arbeitsort (mindestens 20 % der vereinbarten Tage)',
+    basel_de_regular_return_note:
+      'Deutschland–Schweiz-Protokoll (AS 2025 791, Ziff. 5(b), ab 1. Jan. 2026): Eine regelmässige Rückkehr liegt vor, wenn sich die Person an mindestens 20 Prozent der vereinbarten Arbeitstage im Kalenderjahr vom Wohnsitz an den Arbeitsort und zurück begibt. BorderDay zählt Vor-Ort-Tage für diese Untergrenze, bezogen auf Ihre Vertragstage, sonst die Jahresbasis (240 bei üblicher 5-Tage-Woche). Fehlt die regelmässige Rückkehr, entfällt die Grenzgängereigenschaft nach Art. 15a. Quellen: Fedlex AS 2025 791; Merkblatt Kanton Bern 2026.',
+    basel_de_regular_return_over:
+      'Unter 20 % regelmässiger Rückkehr ({used} von {required} Vor-Ort-Tagen): die Grenzgängereigenschaft ist für das Jahr gefährdet. Klären Sie das mit Ihrer Steuerbehörde.',
+    floor_percent_below:
+      'Unter der {limit}%-Untergrenze: {used} von {required} erforderlichen Tagen.',
+    floor_percent_pace:
+      'Projizierte Vor-Ort-Quote etwa {pct}% (Untergrenze {limit}%): bisher {used} von {required} Tagen.',
+    floor_percent_progress:
+      'Vor-Ort-Tage bisher: {used} von {required} für die {limit}%-Untergrenze.',
+    floor_pace_on_track:
+      'Tempo hält die Untergrenze: etwa {pct}% vor Ort bisher.',
+    floor_pace_low:
+      'Tempo unter der Untergrenze: etwa {pct}% vor Ort bisher (Untergrenze {limit}%).',
+    part_year_applied:
+      'Teiljahreskürzung (Protokoll 5(g)): {months} volle Monate + {weeks} volle Wochen → {limit} Tage (Ganzjahr {full}).',
+    part_year_missing:
+      'Beschäftigung unter 100 %, und es sind keine Teiljahres-Monate gesetzt. Wenn Sie nur einen Teil des Jahres gearbeitet haben, tragen Sie volle Monate (und Extra-Wochen) ein: der angezeigte Wert {limit} kann zu hoch sein.',
     basel_de_nonreturn_60: 'Nichtrückkehrtage aus beruflichen Gründen (bis 60 pro Jahr)',
     basel_de_nonreturn_note:
-      'Deutschland–Schweiz: Die Grenzgängereigenschaft entfällt bei mehr als 60 beruflich bedingten Nichtrückkehrtagen pro Jahr (DBA DE–CH Art. 15a; Konsultationsvereinbarung). Gezählt werden hier: Tage, die Sie als «Beruflich auswärts übernachtet» markieren, sowie jeder Arbeitstag ausserhalb Deutschlands und der Schweiz, auch bei Rückkehr am selben Tag. Tagesreisen innerhalb Deutschlands oder der Schweiz sowie Krankheit und Unfall zählen nicht. Bei mehrtägigen, vom Arbeitgeber bezahlten Dienstreisen zählen auch Wochenenden und Feiertage — erfassen Sie sie als Reisetage. Teilzeitbeschäftigte, die nur tageweise arbeiten, haben eine proportional niedrigere Grenze (KonsVerCHEV §9(2): vertraglich vereinbarte Arbeitstage zu 250 bei einer 5-Tage-Woche, 300 bei einer 6-Tage-Woche; Urlaubstage werden nicht abgezogen). Tragen Sie Ihre vertraglichen Arbeitstage pro Jahr ein: Der Zähler zeigt den proportionalen Wert zu 250 als Schätzung, abgerundet, weil die Verordnung keine Rundungsregel nennt. Kürzere Stunden an jedem Arbeitstag fallen nicht unter diese Kürzung. Auch eine Beschäftigung nur während eines Teils des Jahres senkt die Grenze (§10(2): «nach entsprechender Kürzung»), die Verordnung nennt aber keine Formel, und BorderDay wendet deshalb keine an: Wenn Sie nur einen Teil des Jahres arbeiten, kann der Wert 60 zu hoch sein, prüfen Sie Ihre Grenze. Mehrere Arbeitgeber werden zusammen beurteilt. Ganztägige Arbeitstage am Wohnsitz in Deutschland gelten nach der ESTV/BMF-Konsultationsvereinbarung (unterzeichnet am 15. und 18. Juli 2022) nicht als Nichtrückkehrtage. Der Arbeitgeber reicht das Formular Gre-3 ein (31. März im Aargau; prüfen Sie Ihren Kanton). Quellen: Fedlex Art. 15a; ESTV-Konsultationsvereinbarung DE–CH (PDF); KonsVerCHEV §§ 8–9; Merkblatt Kanton Aargau, Stand 1. Jan. 2026.',
+      'Deutschland–Schweiz: Die Grenzgängereigenschaft entfällt bei mehr als 60 beruflich bedingten Nichtrückkehrtagen pro Jahr (DBA DE–CH Art. 15a; Änderungsprotokoll AS 2025 791). Gezählt werden hier: Tage, die Sie als «Beruflich auswärts übernachtet» markieren, sowie jeder Arbeitstag ausserhalb Deutschlands und der Schweiz, auch bei Rückkehr am selben Tag. Tagesreisen innerhalb Deutschlands oder der Schweiz sowie Krankheit und Unfall zählen nicht. Bei mehrtägigen, vom Arbeitgeber bezahlten Dienstreisen zählen auch Wochenenden und Feiertage — erfassen Sie sie als Reisetage. Teilzeitbeschäftigte, die nur tageweise arbeiten, haben eine proportional niedrigere Grenze (Protokoll Ziff. 5(i): vertraglich vereinbarte Arbeitstage zu 240 bei einer 5-Tage-Woche, 280 bei einer 6-Tage-Woche; Urlaubstage werden nicht abgezogen). Tragen Sie Ihre vertraglichen Arbeitstage pro Jahr ein: Der Zähler zeigt den proportionalen Wert zu 240 als Schätzung, abgerundet. Kürzere Stunden an jedem Arbeitstag fallen nicht unter diese Kürzung. Teiljahr: Protokoll Ziff. 5(g) setzt 5 Tage je vollen Beschäftigungsmonat plus 1 Tag je volle Woche — tragen Sie Monate und Extra-Wochen unten ein. Mehrere Arbeitgeber werden zusammen beurteilt. Ganztägige Arbeitstage am Wohnsitz in Deutschland gelten nach der ESTV/BMF-Konsultationsvereinbarung (unterzeichnet am 15. und 18. Juli 2022) nicht als Nichtrückkehrtage. Der Arbeitgeber reicht das Formular Gre-3 ein (31. März im Aargau; prüfen Sie Ihren Kanton). Quellen: Fedlex AS 2025 791; Fedlex Art. 15a; ESTV-Konsultationsvereinbarung DE–CH (PDF); KonsVerCHEV §§ 8–9; Merkblatt Kanton Aargau, Stand 1. Jan. 2026.',
     basel_de_over_60:
       'Über {limit} Tage entfällt die Grenzgängereigenschaft: Die Schweizer Quellensteuer wechselt für das Jahr von 4,5 % zum ordentlichen Tarif. Fragen Sie Ihre Steuerbehörde.',
     floor_week_met: 'Erfüllt durch mindestens einen Vor-Ort-Tag in jeder Woche des Monats.',
@@ -332,7 +351,13 @@ const de: Dict = {
       'Teilzeit und unterjährig zusammen: 80 für 80 % das ganze Jahr, 50 für Vollzeit über sechs Monate. Manche Tagesgrenzen werden damit gekürzt, und er skaliert die Arbeitstage-Basis, wenn Sie keine eigene setzen. In einem Unternehmenskonto sieht HR diesen Wert.',
     contractDaysPerYear: 'Vertragliche Arbeitstage pro Jahr (Deutschland–Schweiz)',
     contractDaysPerYearHint:
-      'Nur wenn Sie an bestimmten Wochentagen arbeiten, zum Beispiel 100 bei einer 2-Tage-Woche. Das kürzt die 60-Tage-Grenze proportional. Urlaubstage nicht abziehen. Leer lassen, wenn Sie jeden Tag mit weniger Stunden arbeiten. In einem Unternehmenskonto sieht HR diesen Wert.',
+      'Nur wenn Sie an bestimmten Wochentagen arbeiten, zum Beispiel 100 bei einer 2-Tage-Woche. Das kürzt die 60-Tage-Grenze proportional zu 240 Vollzeittagen (280 bei einer 6-Tage-Woche — setzen Sie Ihre Basis bei Bedarf). Urlaubstage nicht abziehen. Leer lassen, wenn Sie jeden Tag mit weniger Stunden arbeiten. In einem Unternehmenskonto sieht HR diesen Wert.',
+    employmentFullMonths: 'Volle Beschäftigungsmonate in diesem Jahr (Deutschland–Schweiz)',
+    employmentFullMonthsHint:
+      'Protokoll Ziff. 5(g): Die 60-Tage-Nichtrückkehrgrenze wird zu 5 × volle Monate + 1 × volle Wochen. Leer lassen für ein volles Kalenderjahr.',
+    employmentFullWeeks: 'Zusätzliche volle Wochen über diese Monate hinaus',
+    employmentFullWeeksHint:
+      'Volle Beschäftigungswochen nach den vollen Monaten oben (0–51).',
     a1InPlace: 'A1-Bescheinigung vorhanden (Rahmenübereinkommen)',
     a1ValidUntil: 'A1 gültig bis',
     frontierBefore2012: 'Grenzgänger vor 2012 (Frankreich–Belgien)',

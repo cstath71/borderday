@@ -34,10 +34,16 @@ export interface LimitCounter {
   /** Day limit reduced for part-time and part-year; rounding differs by rule. */
   prorate?: 'floor' | 'ceil';
   /**
-   * KonsVerCHEV §9(2) style: for staff working only on certain days, the limit is cut in proportion
-   * to contract days against this many full-time days. Never derived from employmentPercent.
+   * KonsVerCHEV §9(2) / protocol point 5(i) style: for staff working only on certain days, the limit
+   * is cut in proportion to contract days against this many full-time days. Never derived from
+   * employmentPercent. DE–CH protocol (AS 2025 791) uses 240 (5-day) / 280 (6-day).
    */
   contractDayBase?: number;
+  /**
+   * DE–CH protocol point 5(g): part-year non-return limit = 5 × full months + 1 × full weeks
+   * of employment in the calendar year (capped at the counter limit).
+   */
+  partYearFormula?: 'de_ch_5_1';
   /** Days flagged overnightAway (on-site or trip days) count even if the day type does not. */
   countsOvernight?: boolean;
   /** FR–LU style: any logged fraction of a matching day counts as one whole day. */
@@ -106,6 +112,10 @@ export interface EmploymentProfile {
   employmentPercent?: number | null;
   /** Working days per year in the contract: only for rules with LimitCounter.contractDayBase. */
   contractDaysPerYear?: number | null;
+  /** Full months of employment in the calendar year (DE–CH point 5(g)). */
+  employmentFullMonths?: number | null;
+  /** Extra full weeks beyond those months (DE–CH point 5(g)). */
+  employmentFullWeeks?: number | null;
   a1InPlace?: boolean | null;
   a1ValidUntil?: string | null; // YYYY-MM-DD
   /** FR→BE legacy: frontier worker before 1 Jan 2012 (30-day border-zone rule until 2033). */

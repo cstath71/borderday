@@ -55,7 +55,7 @@ const fr: Dict = {
       'Selon l’accord-cadre UE/EEE/CH, un télétravail dans l’État de résidence de 25 % ou plus du temps de travail y transfère normalement la sécurité sociale, sauf demande d’attestation A1. À partir de 50 %, l’accord-cadre n’est plus disponible. BorderDay affiche les trois tranches, séparément de la fiscalité : moins de 25 %, de 25 % à moins de 50 % (A1 requise) et 50 % ou plus.',
     risk2Title: 'Seuils fiscaux de jours',
     risk2Body:
-      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits, imposés en France), Allemagne→Suisse (60 jours de non-retour), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
+      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits, imposés en France), Allemagne→Suisse (60 jours de non-retour + 20 % de retour régulier), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
     risk3Title: 'Équipes multi-frontières',
     risk3Body:
       'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient, pour leurs propres jours, les mêmes compteurs que les RH voient pour eux.',
@@ -173,7 +173,7 @@ const fr: Dict = {
     basel_de_employer_commute:
       'Règle du personnel de Bâle-Ville : jours sur site ce mois-ci (minimum 5, ou 1 par semaine)',
     basel_de_employer_note:
-      'C’est la règle que le canton de Bâle-Ville applique à son propre personnel (état au 1er janv. 2026) : télétravail seulement si la personne se rend sur son lieu de travail au moins 1 jour par semaine ou au moins 5 jours par mois. Il s’agit d’une consigne RH cantonale pour le personnel public, pas d’un seuil fiscal ou de travail fédéral général pour tous les employeurs. Le § 7 KonsVerCHEV (test 1 jour / 5 jours) ne vise que les geringfügige Arbeitsverhältnisse (emplois marginaux), pas un plancher général de télétravail. D’autres employeurs peuvent appliquer d’autres règles. Source : Département des finances de Bâle-Ville (PDF Homeoffice Vorgaben).',
+      'Règle que le canton de Bâle-Ville applique à son propre personnel (état au 1er janv. 2026) : télétravail à domicile seulement si la personne se rend sur le lieu de travail au moins 1 jour par semaine ou au moins 5 jours par mois. Il s’agit d’une consigne RH cantonale pour le personnel public. KonsVerCHEV § 7 (test 1 jour / 5 jours) ne vise que les geringfügige Arbeitsverhältnisse. Le protocole national DE–CH (AS 2025 791, dès le 1er janv. 2026) définit séparément le retour régulier comme un trajet vers le lieu de travail sur au moins 20 % des jours de travail convenus — ce test a son propre compteur. D’autres employeurs peuvent appliquer d’autres règles internes. Source : Département des finances de Bâle-Ville (PDF Homeoffice Vorgaben).',
     usedOf: '{used} sur {limit}',
     usedOfDays: '{used} sur {allowed} jours',
     percentOfAnnual: '{pct} % de {annual} j/an (plafond {limit} %)',
@@ -242,9 +242,28 @@ const fr: Dict = {
       'Jours de déplacement consignés cette année : {days}. Un travail récurrent hors de l’État de l’employeur peut sortir de l’accord-cadre : vérifiez auprès de votre institution de sécurité sociale.',
     ch_it_over:
       'Seuil dépassé. Au-delà de la limite, les règles normales de l’accord s’appliquent.',
+    basel_de_regular_return_20: 'Retour régulier sur le lieu de travail (au moins 20 % des jours convenus)',
+    basel_de_regular_return_note:
+      'Protocole Allemagne–Suisse (AS 2025 791, point 5(b), dès le 1er janv. 2026) : un retour régulier signifie que la personne se rend du domicile au lieu de travail et retour sur au moins 20 % des jours de travail convenus dans l’année civile. BorderDay compte les jours sur site pour ce plancher, par rapport à vos jours contractuels s’ils sont saisis, sinon la base annuelle (240 pour une semaine habituelle de 5 jours). Sans retour régulier, le statut frontalier au sens de l’art. 15a est remis en cause. Sources : Fedlex AS 2025 791 ; notice du canton de Berne 2026.',
+    basel_de_regular_return_over:
+      'Sous 20 % de retour régulier ({used} sur {required} jours sur site) : le statut frontalier est en risque pour l’année. Vérifiez auprès de votre autorité fiscale.',
+    floor_percent_below:
+      'Sous le plancher de {limit} % : {used} sur {required} jours requis.',
+    floor_percent_pace:
+      'Rythme sur site projeté d’environ {pct} % (plancher {limit} %) : {used} sur {required} jours jusqu’ici.',
+    floor_percent_progress:
+      'Jours sur site jusqu’ici : {used} sur {required} pour le plancher de {limit} %.',
+    floor_pace_on_track:
+      'Rythme compatible avec le plancher : environ {pct} % sur site jusqu’ici.',
+    floor_pace_low:
+      'Rythme sous le plancher : environ {pct} % sur site jusqu’ici (plancher {limit} %).',
+    part_year_applied:
+      'Réduction partielle (protocole 5(g)) : {months} mois complets + {weeks} semaines complètes → {limit} jours (année pleine {full}).',
+    part_year_missing:
+      'Activité sous 100 % et aucun mois partiel n’est saisi. Si vous n’avez travaillé qu’une partie de l’année, indiquez les mois complets (et semaines supplémentaires) : le chiffre {limit} affiché peut être trop élevé.',
     basel_de_nonreturn_60: 'Jours de non-retour pour le travail (jusqu’à 60 par an)',
     basel_de_nonreturn_note:
-      'Allemagne–Suisse : le statut frontalier est perdu au-delà de 60 jours de non-retour professionnels par an (CDI DE–CH art. 15a ; Konsultationsvereinbarung). Sont comptés ici les jours marqués « Nuit hors du domicile pour le travail », plus chaque jour de travail hors d’Allemagne et de Suisse, même avec retour le soir. Les déplacements d’une journée en Allemagne ou en Suisse, la maladie et l’accident ne comptent pas. Lors de voyages de plusieurs jours payés par l’employeur, week-ends et jours fériés comptent aussi : consignez-les en déplacement. Les temps partiels travaillant certains jours seulement ont un seuil réduit proportionnellement (KonsVerCHEV §9(2) : jours prévus au contrat rapportés à 250 pour une semaine de 5 jours, 300 pour une semaine de 6 jours ; les congés ne sont pas déduits). Indiquez vos jours contractuels par an : le compteur affiche le chiffre proportionnel sur 250 à titre d’estimation, arrondi à l’inférieur, car l’ordonnance ne fixe aucune règle d’arrondi. Des horaires réduits sur tous les jours travaillés ne sont pas visés par cette réduction. Une activité sur une partie de l’année réduit aussi le seuil (§10(2) : « nach entsprechender Kürzung »), mais l’ordonnance ne donne aucune formule et BorderDay n’en applique donc aucune : si vous ne travaillez qu’une partie de l’année, le chiffre de 60 peut être trop élevé, vérifiez votre seuil. Plusieurs employeurs sont appréciés ensemble. Les journées entières travaillées à domicile en Allemagne ne sont pas des Nichtrückkehrtage selon la Konsultationsvereinbarung AFC/BMF signée les 15 et 18 juillet 2022. L’employeur dépose le formulaire Gre-3 (31 mars en Argovie ; vérifiez dans votre canton). Sources : Fedlex art. 15a ; PDF AFC Konsultationsvereinbarung DE–CH ; KonsVerCHEV §§ 8–9 ; notice du canton d’Argovie, état au 1er janv. 2026.',
+      'Allemagne–Suisse : le statut frontalier est perdu au-delà de 60 jours de non-retour professionnels par an (CDI DE–CH art. 15a ; protocole modificatif AS 2025 791). Sont comptés ici les jours marqués « Nuit hors du domicile pour le travail », plus chaque jour de travail hors d’Allemagne et de Suisse, même avec retour le soir. Les déplacements d’une journée en Allemagne ou en Suisse, la maladie et l’accident ne comptent pas. Lors de voyages de plusieurs jours payés par l’employeur, week-ends et jours fériés comptent aussi : consignez-les en déplacement. Les temps partiels travaillant certains jours seulement ont un seuil réduit proportionnellement (protocole point 5(i) : jours prévus au contrat rapportés à 240 pour une semaine de 5 jours, 280 pour une semaine de 6 jours ; les congés ne sont pas déduits). Indiquez vos jours contractuels par an : le compteur affiche le chiffre proportionnel sur 240 à titre d’estimation, arrondi à l’inférieur. Des horaires réduits sur tous les jours travaillés ne sont pas visés par cette réduction. Année partielle : le protocole point 5(g) fixe 5 jours par mois complet d’emploi plus 1 jour par semaine complète — saisissez mois et semaines ci-dessous. Plusieurs employeurs sont appréciés ensemble. Les journées entières travaillées à domicile en Allemagne ne sont pas des Nichtrückkehrtage selon la Konsultationsvereinbarung AFC/BMF signée les 15 et 18 juillet 2022. L’employeur dépose le formulaire Gre-3 (31 mars en Argovie ; vérifiez dans votre canton). Sources : Fedlex AS 2025 791 ; Fedlex art. 15a ; PDF AFC Konsultationsvereinbarung DE–CH ; KonsVerCHEV §§ 8–9 ; notice du canton d’Argovie, état au 1er janv. 2026.',
     basel_de_over_60:
       'Au-delà de {limit} jours, le statut frontalier est perdu : l’impôt à la source suisse passe de 4,5 % au barème normal pour l’année. Vérifiez auprès de votre autorité fiscale.',
     floor_week_met: 'Atteint grâce à au moins un jour sur site chaque semaine du mois.',
@@ -331,7 +350,13 @@ const fr: Dict = {
       'Temps partiel et année incomplète ensemble : 80 pour 80 % toute l’année, 50 pour un temps plein sur six mois. Certains seuils en jours sont réduits selon ce chiffre, et il ajuste la base de jours de travail si vous n’indiquez pas la vôtre. Dans un compte entreprise, les RH le voient.',
     contractDaysPerYear: 'Jours contractuels par an (Allemagne–Suisse)',
     contractDaysPerYearHint:
-      'Seulement si vous travaillez certains jours de la semaine, par exemple 100 pour une semaine de 2 jours. Cela réduit le seuil de 60 jours en proportion. Ne déduisez pas les congés. Laissez vide si vous travaillez tous les jours à horaire réduit. Dans un compte entreprise, les RH le voient.',
+      'Seulement si vous travaillez certains jours de la semaine, par exemple 100 pour une semaine de 2 jours. Cela réduit le seuil de 60 jours en proportion de 240 jours à temps plein (280 pour une semaine de 6 jours — indiquez votre base si besoin). Ne déduisez pas les congés. Laissez vide si vous travaillez tous les jours à horaire réduit. Dans un compte entreprise, les RH le voient.',
+    employmentFullMonths: 'Mois complets d’emploi cette année (Allemagne–Suisse)',
+    employmentFullMonthsHint:
+      'Protocole point 5(g) : le plafond de 60 jours de non-retour devient 5 × mois complets + 1 × semaines complètes. Laissez vide pour une année civile complète.',
+    employmentFullWeeks: 'Semaines complètes au-delà de ces mois',
+    employmentFullWeeksHint:
+      'Semaines complètes d’emploi après les mois complets ci-dessus (0–51).',
     a1InPlace: 'Attestation A1 en place (accord-cadre)',
     a1ValidUntil: 'A1 valable jusqu’au',
     frontierBefore2012: 'Frontalier avant 2012 (France–Belgique)',

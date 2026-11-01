@@ -87,7 +87,7 @@ function DemoDashboard() {
   const lang = useLang();
   const d = getDict(lang);
   const [tick, setTick] = useState(0);
-  const year = new Date().getFullYear();
+  const [year, setYear] = useState(() => new Date().getFullYear());
   const { companyId, company, rows, dayLogs, invites } = useMemo(() => {
     void tick;
     const { companyId: id } = seedDemoCompany();
@@ -110,6 +110,7 @@ function DemoDashboard() {
       dayLogs={dayLogs}
       invites={invites}
       year={year}
+      onYearChange={setYear}
       isDemo
       companyBase={`/${lang}/demo/company/${companyId}`}
       joinBase={`/${lang}/demo/join`}
@@ -156,7 +157,7 @@ function DemoHistory() {
   const lang = useLang();
   const d = getDict(lang);
   const { employeeId = '' } = useParams();
-  const year = new Date().getFullYear();
+  const [year, setYear] = useState(() => new Date().getFullYear());
   const { companyId } = seedDemoCompany();
   const entry = listAllMembers(companyId).find((m) => m.member.userId === employeeId);
   const back = `/${lang}/demo/company/${companyId}/dashboard`;

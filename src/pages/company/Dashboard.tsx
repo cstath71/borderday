@@ -43,7 +43,7 @@ export default function CompanyDashboard() {
   const auth = useAuth();
   const location = useLocation();
   const { companyId } = useParams();
-  const year = new Date().getFullYear();
+  const [year, setYear] = useState(() => new Date().getFullYear());
   const userId = auth.user?.id;
   const [state, setState] = useState<State>({ status: 'loading' });
   const [companies, setCompanies] = useState<api.MyCompany[] | null>(null);
@@ -235,6 +235,7 @@ export default function CompanyDashboard() {
           dayLogs={data.dayLogs}
           invites={data.invites}
           year={year}
+          onYearChange={setYear}
           companyBase={`/${lang}/company/${companyId}`}
           joinBase={`/${lang}/join`}
           retentionMonths={data.retentionMonths}

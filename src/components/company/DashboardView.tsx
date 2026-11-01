@@ -173,6 +173,7 @@ export default function DashboardView(props: {
   dayLogs?: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>;
   invites: Invitation[];
   year: number;
+  onYearChange?: (year: number) => void;
   isDemo?: boolean;
   /** e.g. /en/company/<id> or /en/demo/company/<id> */
   companyBase: string;
@@ -191,7 +192,7 @@ export default function DashboardView(props: {
   onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
 }) {
-  const { d, companyName, rows, formerRows = [], dayLogs, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
+  const { d, companyName, rows, formerRows = [], dayLogs, invites, year, onYearChange, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [busy, setBusy] = useState(false);
@@ -252,6 +253,22 @@ export default function DashboardView(props: {
           <p className="meta" role="note">{d.company.hrDisclaimer}</p>
         </div>
         <div className="dash-actions">
+          {onYearChange && (
+            <label className="meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+              <span>{d.company.dashboardYear}</span>
+              <select
+                aria-label={d.company.dashboardYear}
+                value={year}
+                onChange={(e) => onYearChange(Number(e.target.value))}
+              >
+                {Array.from({ length: 3 }, (_, i) => new Date().getFullYear() - i).map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <Link className="btn btn-secondary" to={`${companyBase}/invite`}>
             {d.company.inviteTitle}
           </Link>

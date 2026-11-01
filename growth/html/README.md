@@ -1,5 +1,5 @@
 # BorderDay growth HTML drafts (send nothing)
-Light inline-CSS HTML + plain-text fallback. Hosted images: `https://borderday.com/email/logo.png`, and locale dashboards `https://borderday.com/email/dashboard-{en,fr,de,it,nl}.png` (demo data, locale-fitting names; `dashboard.png` mirrors EN).
+Light inline-CSS HTML + plain-text fallback. Hosted images: `https://borderday.com/email/logo.png`; employer dashboards `https://borderday.com/email/dashboard-{geneva-fr,basel-de,ticino-it,ticino-en,luxembourg-fr,luxembourg-en}.png` (3 demo employees all on that border); partner/multi-region `https://borderday.com/email/dashboard-{en,fr,de,it,nl}.png` (`dashboard.png` mirrors EN).
 Opt-out one-liner included in every draft. Partner drafts keep 20%/12 months.
 | ID | Org | To | Mark | Named greeting | Batch |
 |----|-----|----|------|----------------|-------|
@@ -35,4 +35,4 @@ Opt-out one-liner included in every draft. Partner drafts keep 20%/12 months.
 | P10 | Fidav SA | `info@fidav.ch` | generic | — | partner |
 
 
-Previews: `previews/preview-geneva-fr-employer.html`, `previews/preview-partner-spts.html`, `previews/preview-ticino-it-employer.html`.
+Previews: `previews/preview-geneva-fr-employer.html`, `previews/preview-basel-de-employer.html`, `previews/preview-ticino-it-employer.html`, `previews/preview-luxembourg-fr-employer.html`, `previews/preview-partner-spts.html`.

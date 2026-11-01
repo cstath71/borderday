@@ -341,7 +341,7 @@ const it: Dict = {
     previewMonthOnly: 'L’anteprima consente di registrare solo il mese corrente.',
     savedToAccount: 'Salvato nel vostro account.',
     savedToCompany:
-      'Salvato nel vostro account {company}. Il team HR vede tipo e data di ogni giorno, se è segnato come notte fuori per lavoro, e i vostri contatori.',
+      'Salvato nel vostro account {company}. Il team HR vede tipo e data di ogni giorno, se era una mezza giornata, se è segnato come notte fuori per lavoro, e i vostri contatori.',
     companyRetentionNote: 'Il datore di lavoro conserva i registri aziendali per {months} mesi (impostazione di conservazione; minimo 13). I giorni più vecchi sono cancellati automaticamente.',
     dayLogOtherCompany: 'Questa data è già nel vostro registro presso un’altra azienda, quindi non è stata modificata. BorderDay tiene una sola registrazione per persona e data.',
     saveError: 'Salvataggio non riuscito. Riprovate.',
@@ -658,8 +658,9 @@ const it: Dict = {
     pendingInvites: 'Inviti in sospeso',
     dashboardTitle: 'Dashboard HR',
     dashboardYear: 'Anno civile',
+    refreshAria: 'Aggiorna la dashboard',
     dashboardSubtitle:
-      'Contatori fiscali e di sicurezza sociale per dipendente. Tipi di giorno, segni di notte fuori e conteggi — mai GPS né posizione del dispositivo.',
+      'Contatori fiscali e di sicurezza sociale per dipendente. Tipi di giorno, mezza giornata, segni di notte fuori e conteggi — mai GPS né posizione del dispositivo.',
     filterBorder: 'Filtra per corridoio',
     filterStatus: 'Filtra per situazione',
     filterAll: 'Tutti',
@@ -670,7 +671,7 @@ const it: Dict = {
     viewHistory: 'Cronologia giorni',
     historyTitle: 'Cronologia giorni del dipendente',
     historySubtitle:
-      'Solo tipo di giorno, data e segno di notte fuori. Non vengono memorizzati GPS né posizione del dispositivo, e le note non sono mostrate.',
+      'Solo tipo di giorno, data, mezza giornata e segno di notte fuori. Non vengono memorizzati GPS né posizione del dispositivo, e le note non sono mostrate.',
     backDashboard: 'Torna alla dashboard',
     joinTitle: 'Unitevi alla vostra azienda',
     joinSubtitle:

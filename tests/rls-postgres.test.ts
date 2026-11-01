@@ -386,9 +386,11 @@ describe('real Postgres: HR cannot escalate', () => {
     const company = await newCompany(owner);
     const token = await invite(owner, company, 'revive@example.com');
     await as(owner, `update public.bd_invitations set status = 'revoked' where token = $1`, [token]);
-    await expect(
-      as(owner, `update public.bd_invitations set status = 'pending' where token = $1`, [token]),
-    ).rejects.toThrow(/row-level security/);
+    // USING requires status=pending, so a revive matches no rows (no throw). Status stays revoked.
+    const revived = await as(owner, `update public.bd_invitations set status = 'pending' where token = $1 returning status`, [token]);
+    expect(revived.rowCount).toBe(0);
+    const { rows } = await db.query(`select status from public.bd_invitations where token = $1`, [token]);
+    expect(rows[0].status).toBe('revoked');
   });
 
   it('HR viewer can create employee invites', async () => {

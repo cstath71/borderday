@@ -317,7 +317,7 @@ export default function DashboardView(props: {
             ))}
           </select>
         </label>
-        <button type="button" className="btn btn-ghost" onClick={onRefresh}>
+        <button type="button" className="btn btn-ghost" onClick={onRefresh} aria-label={d.company.refreshAria}>
           ↻
         </button>
       </div>

@@ -37,7 +37,7 @@ describe('audit-2 translation findings', () => {
     expect(de.dayTypes.teleworkHint_ticino).toContain('«zu Hause im Ansässigkeitsstaat»');
   });
 
-  it('#15, #24: pricing uses the defined term, no seat false friends', () => {
+  it('#15, #24 / A2-18: pricing and company seats use the defined term, no seat false friends', () => {
     expect(fr.pricing.companyPrice).toBe('5 € / collaborateur actif / mois');
     expect(fr.pricing.companyMin).toMatch(/par collaborateur actif\)/);
     expect(JSON.stringify(fr.pricing)).not.toMatch(/salarié·e|par poste/);
@@ -45,6 +45,15 @@ describe('audit-2 translation findings', () => {
     expect(JSON.stringify(de)).not.toMatch(/Kopfzahl/);
     expect(nl.pricing.companyMin).toMatch(/per actieve medewerker/);
     expect(JSON.stringify(nl)).not.toMatch(/\bzetel\b/);
+    // A2-18 regression: company billing copy must not use chair/head-office false friends
+    expect(fr.company.seatsLine).toMatch(/collaborateurs actifs.*places/);
+    expect(fr.company.deactivateConfirm).not.toMatch(/siège/i);
+    expect(fr.company.deactivatedBillingPending).not.toMatch(/sièges/i);
+    expect(de.company.seatsLine).toMatch(/aktive Mitarbeitende.*Plätze/);
+    expect(de.company.deactivateConfirm).not.toMatch(/\bSitz\b/);
+    expect(nl.company.seatsLine).toMatch(/actieve medewerkers.*plaatsen/);
+    expect(nl.company.deactivateConfirm).not.toMatch(/stoel/i);
+    expect(nl.company.deactivateConfirm).toMatch(/\bU kunt\b/);
   });
 
   it('#16: Italian DPA names the account administrator, not a second titolare', () => {

@@ -111,3 +111,101 @@ describe('audit-2 low: rules', () => {
     }
   });
 });
+
+describe('audit-2 low: translations', () => {
+  it('#39, #40: the CH–IT notes mirror the Fedlex wording and citation for their language', () => {
+    expect(fr.counters.ch_it_nonreturn_note).toMatch(/jours de vacances ou de maladie/);
+    expect(de.counters.ch_it_nonreturn_note).toMatch(/Ferien- und Krankheitstage/);
+    expect(itDict.counters.ch_it_nonreturn_note).toMatch(/giorni di ferie e di malattia/);
+    expect(fr.counters.ch_it_nonreturn_note).toMatch(/RO 2026 104/);
+    expect(fr.counters.ch_it_nonreturn_note).not.toMatch(/RU 2026 104/);
+    for (const d of [en, de, nl]) {
+      expect(d.counters.ch_it_nonreturn_note).toMatch(/AS 2026 104/);
+      expect(d.counters.ch_it_nonreturn_note).not.toMatch(/RU 2026 104/);
+    }
+    expect(itDict.counters.ch_it_nonreturn_note).toMatch(/RU 2026 104/);
+  });
+
+  it('#41: each locale names the Swiss federal tax administration its own way', () => {
+    expect(JSON.stringify(en.counters)).not.toMatch(/ESTV/);
+    expect(JSON.stringify(fr.counters)).not.toMatch(/ESTV/);
+    expect(JSON.stringify(itDict.counters)).not.toMatch(/ESTV/);
+    expect(JSON.stringify(de.counters)).not.toMatch(/Praxisblatt/);
+  });
+
+  it('#42, #43, #45, #50: single-term and grammar fixes', () => {
+    expect(JSON.stringify(de)).not.toMatch(/Befristete Einsätze|Der Auftragsverarbeiter sitzt|die zur Nachweis|Gerätedstandort/);
+    expect(JSON.stringify(itDict)).not.toMatch(/\b[Ii] Condizioni\b|\b[Ii] Termini\b|\ba assolvere\b|incluso eventuali/);
+  });
+
+  it('#44, #51: Italian keeps "datore di lavoro", one A1 form and the official canton name', () => {
+    const it_ = JSON.stringify(itDict);
+    expect(it_).not.toMatch(/\bdator[ei]\b(?! di lavoro)/);
+    expect(it_).not.toMatch(/\bun A1\b/);
+    expect(it_).not.toMatch(/Valais(?!-)/);
+    expect(it_).not.toMatch(/\bavenant\b/);
+  });
+
+  it('#48: the AI summary uses the current day-type label', async () => {
+    const { llmsFullTxt } = await import('../scripts/seo.mjs');
+    expect(llmsFullTxt()).not.toMatch(/third country/);
+    expect(llmsFullTxt()).toMatch(/third State/);
+  });
+
+  it('#49: no legal page intro is another page\'s intro, in any locale', () => {
+    for (const [lang, d] of Object.entries(dicts)) {
+      const intros = [d.privacy.intro, d.accessibility.intro, d.dpa.intro, d.disclaimer.intro];
+      expect(new Set(intros).size, lang).toBe(intros.length);
+    }
+  });
+
+  it('#49: retired product words and stale coverage numbers stay out', () => {
+    for (const [lang, d] of Object.entries(dicts)) {
+      const blob = JSON.stringify(d);
+      expect(blob, lang).not.toMatch(/\bPaket|Grenzpendler|pacchett[oi] (di )?(confine|frontiera)|border pack/i);
+      expect(blob, lang).not.toMatch(/(corridors?|couloirs?|fiscalité|Steuer|fisco|belastingtellers) (sur |auf |su |op )?(six|sechs|sei|zes)\b/);
+    }
+    const pages = PAGES as Record<string, Record<string, { description: string }>>;
+    expect(pages[''].fr.description).toMatch(/sur sept/);
+    expect(pages[''].de.description).toMatch(/auf sieben/);
+    expect(pages[''].it.description).toMatch(/su sette/);
+  });
+
+  it('#52: frontier zones use each locale\'s own names', () => {
+    expect(en.counters.ch_it_tax_note).toMatch(/Grisons, Ticino, Valais; IT: Lombardy, Piedmont/);
+    expect(fr.counters.ch_it_tax_note).toMatch(/Grisons, Tessin, Valais ; IT : Lombardie, Piémont/);
+    expect(de.counters.ch_it_tax_note).toMatch(/Graubünden, Tessin, Wallis; IT: Lombardei, Piemont/);
+    expect(itDict.counters.ch_it_tax_note).toMatch(/Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte/);
+    expect(nl.counters.ch_it_tax_note).toMatch(/Graubünden, Ticino, Wallis; IT: Lombardije, Piëmont/);
+  });
+
+  it('#53–#56: Dutch uses home, the GDPR term and the official "gewoonlijk"', () => {
+    const blob = JSON.stringify(nl);
+    expect(blob).not.toMatch(/tellerwiskunde|medewerkerview|HR-only-score|getimed|arbeidsbodem|by design|op de woonplaats|op uw woonplaats/);
+    expect(blob).not.toMatch(/\b([Hh]et|[Uu]w|[Mm]ijn) particulier abonnement/);
+    // Staatscourant 2023, 20886 uses "gewoonlijk grensoverschrijdend telewerk"; the audit's "gewoon" was wrong.
+    expect(nl.counters.ss_framework_note).toMatch(/gewoonlijk grensoverschrijdend telewerk/);
+    expect(nl.nav.terms).toMatch(/wettelijke vermeldingen/);
+  });
+
+  it('#57: FR and IT cite BetrVG in their own style', () => {
+    expect(fr.terms.s2Body).toMatch(/§ 87 al\. 1/);
+    expect(itDict.terms.s2Body).toMatch(/§ 87 cpv\. 1/);
+  });
+
+  it('#58: the short trial notes say a card is required', () => {
+    const word = { en: /card required/, fr: /carte requise/, de: /Karte erforderlich/, it: /carta richiesta/, nl: /kaart vereist/ };
+    const pages = PAGES as Record<string, Record<string, { description: string }>>;
+    for (const [lang, d] of Object.entries(dicts)) {
+      expect(d.home.waitlistNote, lang).toMatch(word[lang as keyof typeof word]);
+      expect(pages[''][lang].description, lang).toMatch(word[lang as keyof typeof word]);
+    }
+  });
+
+  it('A3-37: pricing defines an active employee the way billing counts seats', () => {
+    expect(en.pricing.activeEmployeeDef).toMatch(/employee role/);
+    expect(en.pricing.activeEmployeeDef).toMatch(/not counted/);
+    const sql = readFileSync(resolve(__dirname, '../supabase/migrations/20261031140000_bd_employer_first.sql'), 'utf8');
+    expect(sql).toMatch(/m\.active and m\.role = 'employee'/);
+  });
+});

@@ -96,7 +96,7 @@ export const PAGES = {
     en: {
       title: 'BorderDay — Cross-border day limits for HR and employees',
       description:
-        'Employer-first day counting for cross-border staff: social-security counters on nine corridors, tax counters on seven. Company from €5/employee/month (min €39), excl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
+        'Employer-first day counting for cross-border staff: social-security counters on nine corridors, tax counters on seven. Company from €5/employee/month (min €39), excl. VAT. 7-day free trial (card required), then charged automatically on day 8 and renewing until you cancel.',
       h1: 'One place for every border your people work across',
       summary:
         'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on seven of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
@@ -105,7 +105,7 @@ export const PAGES = {
     fr: {
       title: 'BorderDay — Seuils de jours fiscaux et sociaux pour les RH',
       description:
-        'Comptage des jours pour les équipes qui travaillent par-delà les frontières : sécurité sociale sur neuf corridors, fiscalité sur sept. Entreprise dès 5 €/collaborateur actif/mois (min. 39 €), hors TVA. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
+        'Comptage des jours pour les équipes qui travaillent par-delà les frontières : sécurité sociale sur neuf corridors, fiscalité sur sept. Entreprise dès 5 €/collaborateur actif/mois (min. 39 €), hors TVA. Essai gratuit de 7 jours (carte requise), puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
       h1: 'Un seul outil pour toutes les frontières de vos équipes',
       summary:
         'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
@@ -114,7 +114,7 @@ export const PAGES = {
     de: {
       title: 'BorderDay — Grenzüberschreitende Tagesgrenzen für HR',
       description:
-        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Korridoren, Steuer auf sieben. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Korridoren, Steuer auf sieben. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen (Karte erforderlich), danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
       h1: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
       summary:
         'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
@@ -123,7 +123,7 @@ export const PAGES = {
     it: {
       title: 'BorderDay — Soglie di giorni fiscali e previdenziali per HR',
       description:
-        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove corridoi, fisco su sette. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove corridoi, fisco su sette. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni (carta richiesta), poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
       h1: 'Un solo strumento per tutti i confini dei vostri team',
       summary:
         'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per dipendente: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per dipendente attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
@@ -424,7 +424,7 @@ export const PAGES = {
         'Accordo pubblico sul trattamento dei dati per gli account aziendali BorderDay (art. 28 GDPR e LPD svizzera): ruoli, sicurezza, sub-responsabili e trasferimenti.',
       h1: 'Accordo sul trattamento dei dati',
       summary:
-        'Quando un datore usa un account aziendale BorderDay, BorderDay tratta i registri dei giorni dei dipendenti come responsabile del trattamento ai sensi dell’art. 28 GDPR e della LPD. Questa pagina è l’ATD pubblico. Sub-responsabili: Supabase (eu-central-1), Resend, GitHub Pages e Google opzionale; Stripe/Link sono titolari indipendenti per il pagamento.',
+        'Quando un datore di lavoro usa un account aziendale BorderDay, BorderDay tratta i registri dei giorni dei dipendenti come responsabile del trattamento ai sensi dell’art. 28 GDPR e della LPD. Questa pagina è l’ATD pubblico. Sub-responsabili: Supabase (eu-central-1), Resend, GitHub Pages e Google opzionale; Stripe/Link sono titolari indipendenti per il pagamento.',
       crumbs: [
         ['Home', ''],
         ['Accordo sul trattamento dei dati', 'dpa'],
@@ -727,7 +727,7 @@ PAGES.accessibility.nl = {
 PAGES[''].nl = {
   title: 'BorderDay — Grensoverschrijdende daglimieten voor HR en medewerkers',
   description:
-    'Dagtelling voor werkgevers van grensoverschrijdend personeel: socialezekerheidstellers op negen corridors, belastingtellers op zeven. Bedrijf vanaf €5/medewerker/maand (min. €39), excl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+    'Dagtelling voor werkgevers van grensoverschrijdend personeel: socialezekerheidstellers op negen corridors, belastingtellers op zeven. Bedrijf vanaf €5/medewerker/maand (min. €39), excl. btw. 7 dagen gratis proberen (kaart vereist), daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
   h1: 'Eén plek voor elke grens waarover uw mensen werken',
   summary:
     'BorderDay helpt HR telewerk-, ter-plaatse- en reisdagen per medewerker bij te houden: socialezekerheidstellers op alle negen corridors in vijf regio’s, belastingtellers op zeven daarvan. Bedrijfsabonnement: €5 per actieve medewerker per maand (minimum €39), excl. btw; particulieren €4,99/maand of €49/jaar, incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Een registratietool — geen belasting- of juridisch advies.',
@@ -1154,7 +1154,7 @@ export function llmsFullTxt() {
     `
 ## Product summary
 
-BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / third country / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export. Five languages.
+BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / work trip or third State / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export. Five languages.
 
 ## Pricing (as published on the site)
 

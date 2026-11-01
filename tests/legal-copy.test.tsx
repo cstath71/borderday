@@ -7,7 +7,7 @@ import Seo from '../src/components/Seo';
 import { getDict, type Lang } from '../src/i18n';
 
 const auth = vi.hoisted(() => ({
-  value: { ready: true, configured: true, user: null as null | { id: string; email: string }, signOut: vi.fn() },
+  value: { ready: true, configured: true, user: null as null | { id: string; email: string }, signingOut: false, signOut: vi.fn(), signOutAndGo: vi.fn() },
 }));
 vi.mock('../src/lib/auth', () => ({ useAuth: () => auth.value, AuthProvider: ({ children }: any) => children }));
 vi.mock('../src/lib/companyApi', async (original) => ({

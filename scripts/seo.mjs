@@ -58,6 +58,8 @@ export const PUBLIC_PATHS = [
   'withdrawal',
   'cancel',
   'company/signup',
+  'employers/geneva',
+  'employers/luxembourg',
 ];
 
 /** SPA shells that must exist for GitHub Pages but stay noindex. */
@@ -667,6 +669,131 @@ export const PAGES = {
       ],
     },
   },
+
+  'employers/geneva': {
+    en: {
+      title: 'Geneva employers — telework day tracking (FR→CH) — BorderDay',
+      description:
+        'For Geneva HR: track telework days for staff living in France. Tax counters for the 40% telework share and 10 mission days, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+      h1: 'Geneva employers: telework days for staff living in France',
+      summary:
+        'BorderDay helps Geneva employers log telework, on-site and trip days for people who live in France and work in Switzerland. Tax: up to 40% telework and 10 temporary mission days (ge.ch / ESTV). Social security: framework bands under 25%, 25% to under 50% (A1), and 50% or more. Employer telework-rate duty: first AFC transmission planned for January 2027 for 2026 data. Not tax or legal advice.',
+      crumbs: [
+        ['Home', ''],
+        ['Employers Geneva', 'employers/geneva'],
+      ],
+    },
+    fr: {
+      title: 'Employeurs Genève — suivi télétravail (FR→CH) — BorderDay',
+      description:
+        'Pour les RH genevoises: suivre les jours de télétravail du personnel résidant en France. Compteurs fiscaux 40% / 10 jours de mission et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+      h1: 'Employeurs à Genève: jours de télétravail pour le personnel résidant en France',
+      summary:
+        'BorderDay aide les employeurs genevois à enregistrer télétravail, jours sur site et déplacements pour les personnes qui résident en France et travaillent en Suisse. Fiscalité: jusqu’à 40% de télétravail et 10 jours de missions (ge.ch / AFC). Sécurité sociale: bandes sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Obligation employeur: première transmission AFC prévue en janvier 2027 pour 2026. Pas un conseil fiscal ou juridique.',
+      crumbs: [
+        ['Accueil', ''],
+        ['Employeurs Genève', 'employers/geneva'],
+      ],
+    },
+    de: {
+      title: 'Arbeitgeber Genf — Telearbeitstage (FR→CH) — BorderDay',
+      description:
+        'Für HR in Genf: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Frankreich erfassen. Steuerzähler 40% / 10 temporäre Einsatztage und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+      h1: 'Arbeitgeber in Genf: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich',
+      summary:
+        'BorderDay hilft Genfer Arbeitgebern, Telearbeit, Vor-Ort- und Reisetage für Personen zu erfassen, die in Frankreich wohnen und in der Schweiz arbeiten. Steuer: bis 40% Telearbeit und 10 temporäre Einsatztage (ge.ch / ESTV). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Arbeitgeberpflicht: erste AFC-Übermittlung laut ge.ch für Januar 2027 (Daten 2026). Keine Steuer- oder Rechtsberatung.',
+      crumbs: [
+        ['Start', ''],
+        ['Arbeitgeber Genf', 'employers/geneva'],
+      ],
+    },
+    it: {
+      title: 'Datori di lavoro Ginevra — giorni di telelavoro (FR→CH) — BorderDay',
+      description:
+        'Per HR a Ginevra: registrare i giorni di telelavoro del personale residente in Francia. Contatori fiscali 40% / 10 giorni di impiego temporaneo e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+      h1: 'Datori di lavoro a Ginevra: giorni di telelavoro per il personale residente in Francia',
+      summary:
+        'BorderDay aiuta i datori di lavoro ginevrini a registrare telelavoro, giorni in sede e trasferte per chi risiede in Francia e lavora in Svizzera. Fisco: fino al 40% di telelavoro e 10 giorni di missioni (ge.ch / AFC). Previdenza: fasce sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Obbligo del datore di lavoro: prima trasmissione AFC a gennaio 2027 per il 2026. Non è consulenza fiscale o legale.',
+      crumbs: [
+        ['Home', ''],
+        ['Datori di lavoro Ginevra', 'employers/geneva'],
+      ],
+    },
+    nl: {
+      title: 'Werkgevers Genève — telewerkdagen (FR→CH) — BorderDay',
+      description:
+        'Voor HR in Genève: telewerkdagen bijhouden van medewerkers die in Frankrijk wonen. Belastingstellers 40% / 10 missiedagen en EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+      h1: 'Werkgevers in Genève: telewerkdagen voor medewerkers die in Frankrijk wonen',
+      summary:
+        'BorderDay helpt Geneefse werkgevers telewerk-, ter-plaatse- en reisdagen te registreren voor mensen die in Frankrijk wonen en in Zwitserland werken. Fiscaal: tot 40% telewerk en 10 missiedagen (ge.ch / ESTV). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Werkgeversplicht: eerste AFC-indiening in januari 2027 voor 2026. Geen belasting- of juridisch advies.',
+      crumbs: [
+        ['Home', ''],
+        ['Werkgevers Genève', 'employers/geneva'],
+      ],
+    },
+  },
+  'employers/luxembourg': {
+    en: {
+      title: 'Luxembourg employers — FR/BE/DE telework days — BorderDay',
+      description:
+        'One employer page for France→LU, Belgium→LU and Germany→LU: 34-day tax tolerance and the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+      h1: 'Luxembourg employers: telework days for staff living in France, Belgium or Germany',
+      summary:
+        'BorderDay covers all three Luxembourg residence routes in one company account: France→LU, Belgium→LU and Germany→LU. Each has a 34-day tax tolerance counter (with pack-specific part-time rules) plus the shared social-security framework under 50%. Day types only — no location tracking. Not tax or legal advice.',
+      crumbs: [
+        ['Home', ''],
+        ['Employers Luxembourg', 'employers/luxembourg'],
+      ],
+    },
+    fr: {
+      title: 'Employeurs Luxembourg — télétravail FR/BE/DE — BorderDay',
+      description:
+        'Une page employeur pour France→LU, Belgique→LU et Allemagne→LU: tolérance fiscale de 34 jours et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+      h1: 'Employeurs au Luxembourg: jours de télétravail pour le personnel résidant en France, Belgique ou Allemagne',
+      summary:
+        'BorderDay couvre les trois corridors de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de 34 jours (règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique.',
+      crumbs: [
+        ['Accueil', ''],
+        ['Employeurs Luxembourg', 'employers/luxembourg'],
+      ],
+    },
+    de: {
+      title: 'Arbeitgeber Luxemburg — Telearbeit FR/BE/DE — BorderDay',
+      description:
+        'Eine Arbeitgeberseite für Frankreich→LU, Belgien→LU und Deutschland→LU: steuerliche 34-Tage-Toleranz und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+      h1: 'Arbeitgeber in Luxemburg: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich, Belgien oder Deutschland',
+      summary:
+        'BorderDay deckt alle drei Wohnsitzrouten nach Luxemburg in einem Unternehmenskonto ab: Frankreich→LU, Belgien→LU und Deutschland→LU. Jede hat einen 34-Tage-Steuerzähler (packspezifische Teilzeitregeln) plus den Sozialversicherungsrahmen unter 50%. Nur Tagesarten. Keine Steuer- oder Rechtsberatung.',
+      crumbs: [
+        ['Start', ''],
+        ['Arbeitgeber Luxemburg', 'employers/luxembourg'],
+      ],
+    },
+    it: {
+      title: 'Datori di lavoro Lussemburgo — telelavoro FR/BE/DE — BorderDay',
+      description:
+        'Una pagina datore di lavoro per Francia→LU, Belgio→LU e Germania→LU: tolleranza fiscale di 34 giorni e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+      h1: 'Datori di lavoro in Lussemburgo: giorni di telelavoro per personale residente in Francia, Belgio o Germania',
+      summary:
+        'BorderDay copre i tre corridoi di residenza verso il Lussemburgo in un unico account aziendale: Francia→LU, Belgio→LU e Germania→LU. Ognuno ha un contatore fiscale di 34 giorni (regole part-time del pack) e il quadro previdenziale sotto il 50%. Solo tipologie di giorno. Non è consulenza fiscale o legale.',
+      crumbs: [
+        ['Home', ''],
+        ['Datori di lavoro Lussemburgo', 'employers/luxembourg'],
+      ],
+    },
+    nl: {
+      title: 'Werkgevers Luxemburg — telewerk FR/BE/DE — BorderDay',
+      description:
+        'Eén werkgevers pagina voor Frankrijk→LU, België→LU en Duitsland→LU: fiscale tolerantie van 34 dagen en EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+      h1: 'Werkgevers in Luxemburg: telewerkdagen voor medewerkers die in Frankrijk, België of Duitsland wonen',
+      summary:
+        'BorderDay dekt alle drie de woonroutes naar Luxemburg in één bedrijfsaccount: Frankrijk→LU, België→LU en Duitsland→LU. Elk heeft een fiscale 34-dagen-teller (pack-specifieke deeltijdregels) plus het socialezekerheidskader onder 50%. Alleen dagtypes. Geen belasting- of juridisch advies.',
+      crumbs: [
+        ['Home', ''],
+        ['Werkgevers Luxemburg', 'employers/luxembourg'],
+      ],
+    },
+  },
 };
 
 // Dutch legal locale: clone EN SEO for every path, then override legal pages.
@@ -1083,11 +1210,89 @@ export function breadcrumbLd(lang, crumbs) {
   };
 }
 
-export function faqLd(lang) {
-  const pairs = FAQ[lang] || FAQ.en;
+/** Optional page-specific FAQ pairs for employer SEO pages (and future landing pages). */
+export const PAGE_FAQS = {
+  'employers/geneva': {
+    en: [
+      ['Does BorderDay replace the AFC telework-rate filing?', 'No. It keeps a working day log so HR can prepare figures. The annual attestation remains the employer’s filing under ge.ch rules.'],
+      ['Which border route should Geneva staff living in France pick?', 'The Geneva / non-1983 cantons←France pack (geneva_fr): 40% telework, 10 mission days, and the shared social-security framework counter.'],
+      ['Do you track employee location?', 'No. Employees log a day type and optional overnight-away yes/no. HR never sees GPS or device coordinates.'],
+      ['What does the social-security 50% counter mean?', 'Under the framework agreement, telework in the residence state of 50% or more of working time generally means residence-state social security; between 25% and under 50% an A1 is normally needed. BorderDay shows those bands separately from tax.'],
+      ['Is this tax or legal advice?', 'No. It is a tracking tool with counters based on public sources linked on this page and in the app. Confirm with your adviser or authority.'],
+    ],
+    fr: [
+      ['BorderDay remplace-t-il la déclaration de taux AFC?', 'Non. Il tient un journal de jours pour préparer les chiffres. L’attestation annuelle reste le dépôt de l’employeur selon ge.ch.'],
+      ['Quel corridor choisir pour un collaborateur résidant en France?', 'Le pack Genève / cantons hors accord 1983←France (geneva_fr): 40% télétravail, 10 jours de mission, et le compteur de sécurité sociale du cadre.'],
+      ['Suivez-vous la localisation des collaborateurs?', 'Non. Uniquement le type de jour et éventuellement nuit hors domicile oui/non. Jamais de GPS.'],
+      ['Que signifie le compteur sécurité sociale à 50%?', 'Selon le cadre, un télétravail dans l’État de résidence de 50% ou plus du temps de travail conduit en principe à l’affiliation de résidence; entre 25% et moins de 50%, un A1 est en principe nécessaire. BorderDay affiche ces bandes séparément de la fiscalité.'],
+      ['Est-ce un conseil fiscal ou juridique?', 'Non. C’est un outil de suivi dont les compteurs s’appuient sur des sources publiques liées ici et dans l’app. Confirmez auprès de votre conseiller ou de l’autorité.'],
+    ],
+    de: [
+      ['Ersetzt BorderDay die AFC-Meldung der Telearbeitsquote?', 'Nein. Es führt ein Arbeitstagebuch zur Vorbereitung. Die jährliche Bescheinigung bleibt die Meldung des Arbeitgebers nach ge.ch.'],
+      ['Welche Route für Mitarbeitende mit Wohnsitz in Frankreich?', 'Das Pack Genf / Nicht-1983-Kantone←Frankreich (geneva_fr): 40% Telearbeit, 10 temporäre Einsatztage und der Sozialversicherungszähler des Rahmens.'],
+      ['Erfasst ihr den Standort der Mitarbeitenden?', 'Nein. Nur Tagesart und optional Übernachtung auswärts ja/nein. Nie GPS.'],
+      ['Was bedeutet der Sozialversicherungszähler bei 50%?', 'Laut Rahmen führt Telearbeit im Wohnstaat von 50% oder mehr der Arbeitszeit in der Regel zur Wohnsitz-Affiliation; zwischen 25% und unter 50% ist in der Regel ein A1 nötig. BorderDay zeigt diese Bänder getrennt von der Steuer.'],
+      ['Ist das Steuer- oder Rechtsberatung?', 'Nein. Es ist ein Erfassungstool mit Zählern auf Basis öffentlicher Quellen, die hier und in der App verlinkt sind. Mit Berater oder Behörde bestätigen.'],
+    ],
+    it: [
+      ['BorderDay sostituisce la dichiarazione AFC del tasso?', 'No. Tiene un diario dei giorni per preparare le cifre. L’attestazione annuale resta il deposito del datore di lavoro secondo ge.ch.'],
+      ['Quale corridoio per un collaboratore residente in Francia?', 'Il pack Ginevra / cantoni fuori accordo 1983←Francia (geneva_fr): 40% telelavoro, 10 giorni di impiego temporaneo e il contatore previdenziale del quadro.'],
+      ['Tracciate la posizione dei collaboratori?', 'No. Solo tipologia di giorno e, opzionale, notte fuori casa sì/no. Mai GPS.'],
+      ['Cosa significa il contatore previdenziale al 50%?', 'Secondo il quadro, il telelavoro nello Stato di residenza pari o superiore al 50% del tempo di lavoro porta in genere all’affiliazione di residenza; tra 25% e meno del 50% di norma serve un certificato A1. BorderDay mostra queste fasce separate dal fisco.'],
+      ['È consulenza fiscale o legale?', 'No. È uno strumento di tracking con contatori basati su fonti pubbliche collegate qui e nell’app. Confermate con il vostro consulente o l’autorità.'],
+    ],
+    nl: [
+      ['Vervangt BorderDay de AFC-aangifte van het telewerkpercentage?', 'Nee. Het houdt een werkdagboek bij om cijfers voor te bereiden. De jaarlijkse attestatie blijft de indiening van de werkgever volgens ge.ch.'],
+      ['Welke route voor medewerkers die in Frankrijk wonen?', 'Het pack Genève / niet-1983-kantons←Frankrijk (geneva_fr): 40% telewerk, 10 missiedagen en de socialezekerheidsteller van het kader.'],
+      ['Volgen jullie de locatie van medewerkers?', 'Nee. Alleen dagtype en optioneel overnachting elders ja/nee. Nooit GPS.'],
+      ['Wat betekent de socialezekerheidsteller bij 50%?', 'Volgens het kader leidt telewerk in de woonstaat van 50% of meer van de werktijd doorgaans tot woonstaat-aansluiting; tussen 25% en onder 50% is doorgaans een A1 nodig. BorderDay toont die banden los van fiscaliteit.'],
+      ['Is dit belasting- of juridisch advies?', 'Nee. Het is een trackingtool met tellers op basis van openbare bronnen die hier en in de app zijn gelinkt. Bevestig bij uw adviseur of autoriteit.'],
+    ],
+  },
+  'employers/luxembourg': {
+    en: [
+      ['Can one company account cover staff from France, Belgium and Germany?', 'Yes. Each employee picks France→LU, Belgium→LU or Germany→LU. HR sees all three on the same dashboard.'],
+      ['Is the 34-day limit the same on every route?', 'The headline tolerance is 34 days on all three. Part-time reduction applies on France→LU only; Belgium→LU and Germany→LU keep 34 days without that reduction, per the cited official notes.'],
+      ['What about social security versus tax?', 'They are separate counters. Tax uses the 34-day tolerance; social security uses the framework percentage bands (25% / under 50% / 50%+), including CCSS Luxembourg guidance for employers.'],
+      ['Do you use GPS?', 'No. Only day types and an optional overnight-away mark. Never device coordinates.'],
+      ['Is BorderDay legal or tax advice?', 'No. It tracks days against public thresholds linked here and in the app. Confirm filings with your adviser or the competent administration.'],
+    ],
+    fr: [
+      ['Un seul compte peut-il couvrir FR, BE et DE?', 'Oui. Chaque collaborateur choisit France→LU, Belgique→LU ou Allemagne→LU. Les RH voient les trois sur le même tableau de bord.'],
+      ['Les 34 jours sont-ils identiques sur chaque corridor?', 'La tolérance affichée est de 34 jours sur les trois. La réduction pour temps partiel s’applique seulement France→LU; BE→LU et DE→LU gardent 34 jours sans cette réduction, selon les notes officielles citées.'],
+      ['Sécurité sociale versus fiscalité?', 'Compteurs séparés. La fiscalité utilise la tolérance de 34 jours; la sécurité sociale utilise les bandes en pourcentage du cadre (25% / sous 50% / 50%+), y compris les indications CCSS pour les employeurs.'],
+      ['Utilisez-vous le GPS?', 'Non. Uniquement des types de jours et une marque optionnelle de nuit hors domicile. Jamais de coordonnées.'],
+      ['BorderDay est-il un conseil juridique ou fiscal?', 'Non. Il suit les jours par rapport à des seuils publics liés ici et dans l’app. Confirmez les dépôts avec votre conseiller ou l’administration compétente.'],
+    ],
+    de: [
+      ['Kann ein Konto Mitarbeitende aus FR, BE und DE abdecken?', 'Ja. Jede Person wählt Frankreich→LU, Belgien→LU oder Deutschland→LU. HR sieht alle drei im selben Dashboard.'],
+      ['Sind die 34 Tage auf jeder Route gleich?', 'Die Toleranz beträgt auf allen dreien 34 Tage. Die Teilzeitreduktion gilt nur Frankreich→LU; BE→LU und DE→LU behalten 34 Tage ohne diese Reduktion laut zitierten amtlichen Hinweisen.'],
+      ['Sozialversicherung versus Steuer?', 'Getrennte Zähler. Die Steuer nutzt die 34-Tage-Toleranz; die Sozialversicherung die Prozentbänder des Rahmens (25% / unter 50% / 50%+), einschliesslich CCSS-Hinweisen für Arbeitgeber.'],
+      ['Nutzt ihr GPS?', 'Nein. Nur Tagesarten und optional Übernachtung auswärts. Nie Gerätekoordinaten.'],
+      ['Ist BorderDay Rechts- oder Steuerberatung?', 'Nein. Es trackt Tage gegen öffentliche Schwellen, die hier und in der App verlinkt sind. Meldungen mit Berater oder zuständiger Verwaltung bestätigen.'],
+    ],
+    it: [
+      ['Un solo account può coprire FR, BE e DE?', 'Sì. Ciascun collaboratore sceglie Francia→LU, Belgio→LU o Germania→LU. Le HR vedono tutti e tre sullo stesso cruscotto.'],
+      ['I 34 giorni sono uguali su ogni corridoio?', 'La tolleranza è di 34 giorni su tutti e tre. La riduzione part-time vale solo Francia→LU; BE→LU e DE→LU restano a 34 senza quella riduzione, secondo le note ufficiali citate.'],
+      ['Previdenza versus fisco?', 'Contatori separati. Il fisco usa la tolleranza di 34 giorni; la previdenza le fasce percentuali del quadro (25% / sotto 50% / 50%+), incluse le indicazioni CCSS per i datori di lavoro.'],
+      ['Usate il GPS?', 'No. Solo tipologie di giorno e un segno opzionale di notte fuori casa. Mai coordinate del dispositivo.'],
+      ['BorderDay è consulenza legale o fiscale?', 'No. Traccia i giorni rispetto a soglie pubbliche collegate qui e nell’app. Confermate i depositi con il consulente o l’amministrazione competente.'],
+    ],
+    nl: [
+      ['Kan één account medewerkers uit FR, BE en DE dekken?', 'Ja. Elke medewerker kiest Frankrijk→LU, België→LU of Duitsland→LU. HR ziet alle drie op hetzelfde dashboard.'],
+      ['Zijn de 34 dagen op elke route hetzelfde?', 'De tolerantie is op alle drie 34 dagen. De deeltijdreductie geldt alleen Frankrijk→LU; BE→LU en DE→LU houden 34 dagen zonder die reductie, volgens de geciteerde officiële nota’s.'],
+      ['Sociale zekerheid versus fiscaliteit?', 'Aparte tellers. Fiscaliteit gebruikt de 34-dagen-tolerantie; sociale zekerheid de percentagebanden van het kader (25% / onder 50% / 50%+), inclusief CCSS-richtlijnen voor werkgevers.'],
+      ['Gebruiken jullie GPS?', 'Nee. Alleen dagtypes en optioneel een markering overnachting elders. Nooit apparaatcoördinaten.'],
+      ['Is BorderDay juridisch of fiscaal advies?', 'Nee. Het volgt dagen af tegen openbare drempels die hier en in de app zijn gelinkt. Bevestig indieningen bij uw adviseur of de bevoegde administratie.'],
+    ],
+  },
+};
+
+export function faqLd(lang, pairs) {
+  const list = pairs || FAQ[lang] || FAQ.en;
   return {
     '@type': 'FAQPage',
-    mainEntity: pairs.map(([q, a]) => ({
+    mainEntity: list.map(([q, a]) => ({
       '@type': 'Question',
       name: q,
       acceptedAnswer: { '@type': 'Answer', text: a },
@@ -1133,6 +1338,8 @@ export function llmsTxt() {
 - ${BASE}/en/faq/ — FAQ
 - ${BASE}/en/for-individuals/ — Individual plan
 - ${BASE}/en/company/signup/ — Company sign-up
+- ${BASE}/en/employers/geneva/ — Geneva employers (FR→CH telework days)
+- ${BASE}/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
 - ${BASE}/en/privacy/ — Privacy
 - ${BASE}/en/dpa/ — Data processing agreement (company accounts)
 - ${BASE}/en/disclaimer/ — Legal disclaimer

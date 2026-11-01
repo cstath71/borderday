@@ -1014,6 +1014,92 @@ const fr: Dict = {
     signUpTerms:
       'La création d’un compte est gratuite. Une offre payante ne commence qu’au checkout : essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation. À lire :',
   },
+
+  employersGeneva: {
+    metaTitle: 'Employeurs Genève — suivi télétravail (FR→CH) — BorderDay',
+    metaDescription:
+      'Pour les RH genevoises: suivre les jours de télétravail du personnel résidant en France. Compteurs fiscaux 40% / 10 jours de mission et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+    heroTitle: 'Employeurs à Genève: jours de télétravail pour le personnel résidant en France',
+    inShort:
+      'BorderDay aide les employeurs genevois à enregistrer télétravail, jours sur site et déplacements pour les personnes qui résident en France et travaillent en Suisse. Fiscalité: jusqu’à 40% de télétravail et 10 jours de missions temporaires (ge.ch / AFC). Sécurité sociale: bandes du cadre sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Obligation employeur: première transmission AFC du taux prévue en janvier 2027 pour 2026. Pas un conseil fiscal ou juridique.',
+    thresholdsTitle: 'Ce que compte le pack geneva_fr aujourd’hui',
+    thresholdTax40:
+      'Fiscalité — part de télétravail: jusqu’à 40% du temps de travail dans l’État de résidence (inclus). Au-delà, l’imposition en France peut s’appliquer dès le premier jour (ge.ch).',
+    thresholdMissions10:
+      'Fiscalité — missions temporaires à l’étranger: limite annuelle de 10 jours (inclus), selon l’accord amiable AFC/ESTV sur l’articulation avec les 40%.',
+    thresholdSs50:
+      'Sécurité sociale — cadre UE/EEE/CH: sous 25% le cadre ne s’applique pas; de 25% à moins de 50% un A1 est en principe requis; à 50% ou plus, affiliation de l’État de résidence. Séparé de la fiscalité.',
+    thresholdEmployerDuty:
+      'Obligation employeur (Genève): attestation annuelle du taux de télétravail — ge.ch indique actuellement la première transmission en janvier 2027 pour l’année 2026, y compris à 0%.',
+    howTitle: 'Comment BorderDay aide les RH',
+    howBody:
+      'Invitez les collaborateurs; chacun choisit le corridor Genève←France et enregistre uniquement des types de jours. Les RH voient les mêmes compteurs fiscaux et sociaux, des alertes à l’approche des seuils, et peuvent exporter en CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
+    sourcesTitle: 'Sources officielles (identiques au pack produit)',
+    disclaimer:
+      'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
+    ctaPrimary: 'Créer un compte entreprise',
+    ctaPricing: 'Voir les tarifs',
+    faqTitle: 'FAQ employeurs Genève',
+    faq1q: 'BorderDay remplace-t-il la déclaration de taux AFC?',
+    faq1a:
+      'Non. Il tient un journal de jours pour préparer les chiffres. L’attestation annuelle reste le dépôt de l’employeur selon ge.ch.',
+    faq2q: 'Quel corridor choisir pour un collaborateur résidant en France?',
+    faq2a:
+      'Le pack Genève / cantons hors accord 1983←France (geneva_fr): 40% télétravail, 10 jours de mission, et le compteur de sécurité sociale du cadre.',
+    faq3q: 'Suivez-vous la localisation des collaborateurs?',
+    faq3a: 'Non. Uniquement le type de jour et éventuellement nuit hors domicile oui/non. Jamais de GPS.',
+    faq4q: 'Que signifie le compteur sécurité sociale à 50%?',
+    faq4a:
+      'Selon le cadre, un télétravail dans l’État de résidence de 50% ou plus du temps de travail conduit en principe à l’affiliation de résidence; entre 25% et moins de 50%, un A1 est en principe nécessaire. BorderDay affiche ces bandes séparément de la fiscalité.',
+    faq5q: 'Est-ce un conseil fiscal ou juridique?',
+    faq5a:
+      'Non. C’est un outil de suivi dont les compteurs s’appuient sur des sources publiques liées ici et dans l’app. Confirmez auprès de votre conseiller ou de l’autorité.',
+  },
+  employersLuxembourg: {
+    metaTitle: 'Employeurs Luxembourg — télétravail FR/BE/DE — BorderDay',
+    metaDescription:
+      'Une page employeur pour France→LU, Belgique→LU et Allemagne→LU: tolérance fiscale de 34 jours et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+    heroTitle: 'Employeurs au Luxembourg: jours de télétravail pour le personnel résidant en France, Belgique ou Allemagne',
+    inShort:
+      'BorderDay couvre les trois corridors de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de tolérance de 34 jours (avec règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique.',
+    routesTitle: 'Trois corridors, un tableau de bord RH',
+    routeFr:
+      'France→Luxembourg (luxembourg_fr): tolérance fiscale de 34 jours; le temps partiel / année partielle utilise la réduction officielle (arrondi vers le bas) selon l’accord FR–LU.',
+    routeBe:
+      'Belgique→Luxembourg (luxembourg_be): tolérance de 34 jours; notes officielles LU: pas de réduction pour temps partiel ou année partielle; toute fraction de journée compte pour une journée entière.',
+    routeDe:
+      'Allemagne→Luxembourg (luxembourg_de): tolérance de 34 jours (depuis 2024); pas de réduction temps partiel/année partielle; circulaire 71 / accord de consultation BMF (même un court travail hors Luxembourg peut compter comme un jour — voir la note in-app et les sources ACD/BMF).',
+    thresholdsTitle: 'Fiscalité 34 jours + sécurité sociale ~50%',
+    thresholdTax34:
+      'Fiscalité: les trois packs comptent le télétravail et les jours de déplacement / État tiers vers une tolérance annuelle de 34 jours (inclus). Les jours sur site au Luxembourg ne comptent pas dans ce compteur fiscal.',
+    thresholdPartTime:
+      'Temps partiel: France→LU réduit les 34 jours (floor). Belgique→LU et Allemagne→LU ne réduisent pas les 34 jours — conformément aux notes LU et à l’accord DE–LU.',
+    thresholdSs50:
+      'Sécurité sociale: même cadre UE/EEE/CH sur les trois packs — sous 25% / 25%–moins de 50% (A1) / 50% ou plus — avec sources CCSS Luxembourg et dépositaire FPS liées dans le produit.',
+    howTitle: 'Comment BorderDay aide les employeurs LU',
+    howBody:
+      'Un compte entreprise pour le personnel résidant en FR, BE ou DE. Chaque personne choisit son corridor et enregistre des types de jours; les RH suivent le rythme des 34 jours et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Entreprise: 5 € par collaborateur actif/mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
+    sourcesTitle: 'Sources officielles (packs luxembourg_fr / _be / _de)',
+    disclaimer:
+      'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
+    ctaPrimary: 'Créer un compte entreprise',
+    ctaPricing: 'Voir les tarifs',
+    faqTitle: 'FAQ employeurs Luxembourg',
+    faq1q: 'Un seul compte peut-il couvrir FR, BE et DE?',
+    faq1a:
+      'Oui. Chaque collaborateur choisit France→LU, Belgique→LU ou Allemagne→LU. Les RH voient les trois sur le même tableau de bord.',
+    faq2q: 'Les 34 jours sont-ils identiques sur chaque corridor?',
+    faq2a:
+      'La tolérance affichée est de 34 jours sur les trois. La réduction pour temps partiel s’applique seulement France→LU; BE→LU et DE→LU gardent 34 jours sans cette réduction, selon les notes officielles citées.',
+    faq3q: 'Sécurité sociale versus fiscalité?',
+    faq3a:
+      'Compteurs séparés. La fiscalité utilise la tolérance de 34 jours; la sécurité sociale utilise les bandes en pourcentage du cadre (25% / sous 50% / 50%+), y compris les indications CCSS pour les employeurs.',
+    faq4q: 'Utilisez-vous le GPS?',
+    faq4a: 'Non. Uniquement des types de jours et une marque optionnelle de nuit hors domicile. Jamais de coordonnées.',
+    faq5q: 'BorderDay est-il un conseil juridique ou fiscal?',
+    faq5a:
+      'Non. Il suit les jours par rapport à des seuils publics liés ici et dans l’app. Confirmez les dépôts avec votre conseiller ou l’administration compétente.',
+  },
 };
 
 export default fr;

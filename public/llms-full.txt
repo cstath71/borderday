@@ -26,6 +26,8 @@
 - https://borderday.com/en/faq/ — FAQ
 - https://borderday.com/en/for-individuals/ — Individual plan
 - https://borderday.com/en/company/signup/ — Company sign-up
+- https://borderday.com/en/employers/geneva/ — Geneva employers (FR→CH telework days)
+- https://borderday.com/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
 - https://borderday.com/en/privacy/ — Privacy
 - https://borderday.com/en/dpa/ — Data processing agreement (company accounts)
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
@@ -88,3 +90,5 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/en/withdrawal/
 - https://borderday.com/en/cancel/
 - https://borderday.com/en/company/signup/
+- https://borderday.com/en/employers/geneva/
+- https://borderday.com/en/employers/luxembourg/

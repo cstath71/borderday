@@ -226,7 +226,7 @@ describe('companyApi', () => {
       const [member] = await api.listMembers('c1');
       expect(member).toMatchObject({ userId: 'e1', employmentPercent: null, a1InPlace: false, a1ValidUntil: null });
       const [mine] = await api.listMyCompanies();
-      expect(mine.profile).toEqual({ employmentPercent: null, contractDaysPerYear: null, a1InPlace: false, a1ValidUntil: null, frontierBefore2012: false });
+      expect(mine.profile).toEqual({ employmentPercent: null, contractDaysPerYear: null, employmentFullMonths: null, employmentFullWeeks: null, a1InPlace: false, a1ValidUntil: null, frontierBefore2012: false });
     });
 
     it('logging a plain day still works: the unset flag is dropped', async () => {

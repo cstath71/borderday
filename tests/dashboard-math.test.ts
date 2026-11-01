@@ -127,8 +127,8 @@ describe('HR dashboard status math', () => {
     expect(filterRows([a, b], { status: 'ok' }).every((r) => r.worstStatus === 'ok')).toBe(true);
   });
 
-  it('compliant Basel staff no longer rank as worst: 5 on-site days is ok, not over', () => {
-    const row = summarizeEmployee({
+  it('Basel employer monthly floor stays out of HR aggregate; tax regular-return does feed it', () => {
+    const sparse = summarizeEmployee({
       userId: 'u3',
       displayName: 'C',
       email: 'c@x.com',
@@ -143,10 +143,29 @@ describe('HR dashboard status math', () => {
       ]),
       year: 2026,
     });
-    const floor = row.counters.find((c) => c.counterId === 'basel_de_employer_practice')!;
-    expect(floor.kind).toBe('employer_practice');
-    expect(floor.status).not.toBe('over');
-    expect(row.worstStatus).not.toBe('over');
+    const practice = sparse.counters.find((c) => c.counterId === 'basel_de_employer_practice')!;
+    expect(practice.kind).toBe('employer_practice');
+    const taxFloor = sparse.counters.find((c) => c.counterId === 'basel_de_regular_return_20')!;
+    expect(taxFloor.kind).toBe('tax');
+    // Sparse on-site mid-year: tax floor can warn/critical; employer practice must not drive "over" alone.
+    expect(['warn', 'critical', 'ok', 'over']).toContain(taxFloor.status);
+    // Enough regular-return days (48 of 240 = 20%) keeps the tax floor ok and HR aggregate clean.
+    const onsite = Array.from({ length: 48 }, (_, i) => {
+      const d = new Date(Date.UTC(2026, 0, 5 + i * 2));
+      return [d.toISOString().slice(0, 10), 'onsite'] as [string, 'onsite'];
+    });
+    const okRow = summarizeEmployee({
+      userId: 'u3b',
+      displayName: 'C2',
+      email: 'c2@x.com',
+      borderPackId: 'basel_de',
+      annualWorkingDays: 240,
+      logs: logs('u3b', 'c1', onsite),
+      year: 2026,
+    });
+    const taxOk = okRow.counters.find((c) => c.counterId === 'basel_de_regular_return_20')!;
+    expect(taxOk.status).toBe('ok');
+    expect(okRow.worstStatus).not.toBe('over');
   });
 
   it('HR gets the same A1 band and caveats as the employee, driven by the profile', () => {

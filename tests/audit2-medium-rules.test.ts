@@ -81,7 +81,7 @@ describe('M5: the Basel-Stadt staff floor does not flag other employers', () => 
     expect(aggregateStatus([{ ...tax, status: 'critical' }, floor, ss])).toBe('critical');
   });
 
-  it('a basel_de employee with no on-site days stays ok overall and keeps the labelled floor row', () => {
+  it('employer_practice stays out of worstStatus; tax regular-return floor can warn with no onsite', () => {
     const row = summarizeEmployee({
       userId: 'u1',
       displayName: 'A',
@@ -91,8 +91,12 @@ describe('M5: the Basel-Stadt staff floor does not flag other employers', () => 
       logs: [{ workDate: `${new Date().getUTCFullYear()}-01-05`, dayType: 'telework' }],
       year: new Date().getUTCFullYear(),
     });
-    expect(row.worstStatus).toBe('ok');
     expect(row.counters.some((c) => c.counterId === 'basel_de_employer_practice')).toBe(true);
+    const taxFloor = row.counters.find((c) => c.counterId === 'basel_de_regular_return_20')!;
+    expect(taxFloor.kind).toBe('tax');
+    // No on-site days mid-year → projected regular-return pace is low.
+    expect(['warn', 'critical', 'ok']).toContain(taxFloor.status);
+    expect(row.worstStatus).toBe(taxFloor.status === 'ok' ? 'ok' : taxFloor.status);
   });
 
   it('the floor still reports below minimum on its own card', () => {

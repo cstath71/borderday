@@ -52,7 +52,7 @@ const en = {
       'Under the EU/EEA/CH framework agreement, telework in the residence state of 25% or more of working time normally moves social security there unless an A1 is requested. At 50% or more the framework is no longer available. BorderDay shows the three bands: under 25%, 25% to under 50% (A1 required) and 50% or more, separately from tax.',
     risk2Title: 'Tax day thresholds',
     risk2Body:
-      'Tax counters run today on seven corridors: Geneva and other non-1983 cantons (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). France→Belgium and Netherlands→Belgium say plainly that no general tax counter runs. We never invent a number.',
+      'Tax counters run today on seven corridors: Geneva and other non-1983 cantons (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). France→Belgium and Netherlands→Belgium say plainly that no general tax counter runs. We never invent a number.',
     risk3Title: 'Multi-border teams',
     risk3Body:
       'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see the same counters for their own days that HR sees for them.',
@@ -168,7 +168,7 @@ const en = {
     basel_de_employer_commute:
       'Basel-Stadt staff rule: on-site days this month (minimum 5, or 1 a week)',
     basel_de_employer_note:
-      'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): telework from home only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. It is cantonal HR guidance for public staff, not a general federal tax or labour floor for all employers. KonsVerCHEV § 7 (1-day / 5-day test) applies only to geringfügige Arbeitsverhältnisse (marginal employment), not as a general home-office minimum. Other employers may apply different rules. Source: Basel-Stadt Finance Department (Homeoffice Vorgaben PDF).',
+      'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): telework from home only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. It is cantonal HR guidance for public staff. KonsVerCHEV § 7 (1-day / 5-day test) applies only to geringfügige Arbeitsverhältnisse (marginal employment). The national DE–CH protocol (AS 2025 791, from 1 Jan 2026) defines regular return separately as commuting on at least 20% of agreed working days — that test has its own counter. Other employers may apply different staff rules. Source: Basel-Stadt Finance Department (Homeoffice Vorgaben PDF).',
     usedOf: '{used} of {limit}',
     usedOfDays: '{used} of {allowed} days',
     percentOfAnnual: '{pct}% of {annual} days/yr (limit {limit}%)',
@@ -237,9 +237,28 @@ const en = {
       'Trip days logged this year: {days}. Recurring work outside the employer’s state may fall outside the framework: check with your social-security institution.',
     ch_it_over:
       'Limit exceeded. Above the limit, the normal rules of the agreement apply.',
+    basel_de_regular_return_20: 'Regular return to the workplace (at least 20% of agreed days)',
+    basel_de_regular_return_note:
+      'Germany–Switzerland protocol (AS 2025 791, point 5(b), from 1 Jan 2026): regular return means the employee travels from the place of residence to the place of work and back on at least 20% of the agreed working days in the calendar year. BorderDay counts on-site days toward that floor, against your contract days when set, otherwise the annual working-days base (240 for a usual 5-day week). Losing regular return ends cross-border status under Art. 15a. Sources: Fedlex AS 2025 791; Canton Bern 2026 leaflet.',
+    basel_de_regular_return_over:
+      'Below 20% regular return ({used} of {required} on-site days): cross-border status is at risk for the year. Check with your tax authority.',
+    floor_percent_below:
+      'Below the {limit}% floor: {used} of {required} required days.',
+    floor_percent_pace:
+      'Projected on-site pace about {pct}% (floor {limit}%): {used} of {required} days so far.',
+    floor_percent_progress:
+      'On-site days so far: {used} of {required} needed for the {limit}% floor.',
+    floor_pace_on_track:
+      'Pace on track for the floor: about {pct}% on-site so far.',
+    floor_pace_low:
+      'Pace below the floor: about {pct}% on-site so far (floor {limit}%).',
+    part_year_applied:
+      'Part-year cut (protocol 5(g)): {months} full months + {weeks} full weeks → {limit} days (full-year {full}).',
+    part_year_missing:
+      'Employment is below 100% and no part-year months are set. If you worked only part of the year, enter full months (and extra weeks): the {limit} shown can be too high.',
     basel_de_nonreturn_60: 'Non-return days for work (up to 60 a year)',
     basel_de_nonreturn_note:
-      'Germany–Switzerland: cross-border status is lost above 60 work-related non-return days a year (DBA DE–CH Art. 15a; Konsultationsvereinbarung). Counted here: days you mark “stayed away overnight for work”, plus every day of work outside Germany and Switzerland, even with same-day return. Same-day trips inside Germany or Switzerland, illness and accident do not count. On multi-day business trips paid by the employer, weekends and holidays count too, so log them as trip days. Part-time staff working only certain days have a proportionally lower limit (KonsVerCHEV §9(2): contract days against 250 for a 5-day week, 300 for a 6-day week; holidays are not deducted). Enter your contract days per year and the counter shows the proportional figure against 250 as an estimate, rounded down, because the ordinance gives no rounding rule. Shorter hours on every working day are not covered by this cut. Part-year work also lowers the limit (§10(2): “nach entsprechender Kürzung”), but the ordinance gives no formula, so BorderDay does not apply one: if you work only part of the year, the 60 shown can be too high, so check your limit. Several employers are assessed together. Full days worked at your home in Germany are not Nichtrückkehrtage under the FTA/BMF Konsultationsvereinbarung signed on 15 and 18 July 2022. The employer files form Gre-3 (31 March in Aargau; check your canton). Sources: Fedlex Art. 15a; FTA Konsultationsvereinbarung DE–CH (PDF); KonsVerCHEV §§ 8–9; Canton Aargau leaflet, status 1 Jan 2026.',
+      'Germany–Switzerland: cross-border status is lost above 60 work-related non-return days a year (DBA DE–CH Art. 15a; amending protocol AS 2025 791). Counted here: days you mark “stayed away overnight for work”, plus every day of work outside Germany and Switzerland, even with same-day return. Same-day trips inside Germany or Switzerland, illness and accident do not count. On multi-day business trips paid by the employer, weekends and holidays count too, so log them as trip days. Part-time staff working only certain days have a proportionally lower limit (protocol point 5(i): contract days against 240 for a 5-day week, 280 for a 6-day week; holidays are not deducted). Enter your contract days per year and the counter shows the proportional figure against 240 as an estimate, rounded down. Shorter hours on every working day are not covered by this cut. Part-year work: protocol point 5(g) sets 5 days per full month of employment plus 1 day per full week — enter your months and extra weeks below. Several employers are assessed together. Full days worked at your home in Germany are not Nichtrückkehrtage under the FTA/BMF Konsultationsvereinbarung signed on 15 and 18 July 2022. The employer files form Gre-3 (31 March in Aargau; check your canton). Sources: Fedlex AS 2025 791; Fedlex Art. 15a; FTA Konsultationsvereinbarung DE–CH (PDF); KonsVerCHEV §§ 8–9; Canton Aargau leaflet, status 1 Jan 2026.',
     basel_de_over_60:
       'Above {limit} days, cross-border status is lost: Swiss withholding moves from 4.5% to the normal rate for the year. Check with your tax authority.',
     floor_week_met: 'Met through at least one on-site day in every week of the month.',
@@ -326,7 +345,13 @@ const en = {
       'Part-time and part-year together: 80 for 80% all year, 50 for full-time for six months. Some day limits are reduced with this figure, and it scales the working-days base unless you set your own. In a company account, HR sees it.',
     contractDaysPerYear: 'Contract days per year (Germany–Switzerland)',
     contractDaysPerYearHint:
-      'Only if you work on certain days of the week, for example 100 for a 2-day week. It cuts the 60-day limit in proportion. Do not deduct holidays. Leave empty if you work every day with shorter hours. In a company account, HR sees it.',
+      'Only if you work on certain days of the week, for example 100 for a 2-day week. It cuts the 60-day limit in proportion to 240 full-time days (280 for a 6-day week — set your base if needed). Do not deduct holidays. Leave empty if you work every day with shorter hours. In a company account, HR sees it.',
+    employmentFullMonths: 'Full months employed this year (Germany–Switzerland)',
+    employmentFullMonthsHint:
+      'Protocol point 5(g): the 60-day non-return limit becomes 5 × full months + 1 × full weeks of employment. Leave empty for a full calendar year.',
+    employmentFullWeeks: 'Extra full weeks beyond those months',
+    employmentFullWeeksHint:
+      'Full weeks of employment after counting the full months above (0–51).',
     a1InPlace: 'A1 certificate in place (framework agreement)',
     a1ValidUntil: 'A1 valid until',
     frontierBefore2012: 'Frontier worker before 2012 (France–Belgium)',

@@ -6,6 +6,7 @@ import { createServer } from 'node:net';
 import EmbeddedPostgres from 'embedded-postgres';
 import pg from 'pg';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { LANGS } from '../src/i18n';
 
 /**
  * RLS against a real PostgreSQL server, with every file in supabase/migrations applied in
@@ -337,6 +338,25 @@ describe('real Postgres: bd_accept_invite email match (H2)', () => {
     const token = await invite(owner, company, 'unconfirmed@example.com');
     const user = await newUser('unconfirmed@example.com', false);
     await expect(accept(user, token)).rejects.toThrow(/email not confirmed/);
+  });
+
+  it.each(LANGS)('A3-02: accepts an invite on a %s page and records that language', async (lang) => {
+    const owner = await newUser(`o-lang-${lang}@example.com`);
+    const company = await newCompany(owner);
+    const email = `lang-${lang}@example.com`;
+    const token = await invite(owner, company, email);
+    const user = await newUser(email);
+    await as(user, `select public.bd_accept_invite($1, 'v1', $2)`, [token, lang]);
+    const { rows } = await db.query(`select text_lang from public.bd_consents where user_id = $1`, [user]);
+    expect(rows).toEqual([{ text_lang: lang }]);
+  });
+
+  it('A3-02: the constraint allows exactly the site languages', async () => {
+    const { rows } = await db.query(
+      `select pg_get_constraintdef(oid) as def from pg_constraint where conname = 'bd_consents_text_lang_check'`,
+    );
+    const allowed = [...rows[0].def.matchAll(/'([a-z]{2})'/g)].map((m: RegExpMatchArray) => m[1]);
+    expect(allowed.sort()).toEqual([...LANGS].sort());
   });
 
   it('accepts a case-insensitive match, records consent, and creates a missing profile', async () => {

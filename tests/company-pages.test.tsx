@@ -183,31 +183,25 @@ describe('Dashboard', () => {
       fireEvent.click(screen.getByRole('button', { name: en.company.retentionSave }));
     };
 
-    it('setting 1 month warns of irreversible deletion, and saves nothing if refused', async () => {
+    it('rejects below the 13-month floor without calling save', async () => {
       asHr();
-      const confirm = vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValue(true);
+      const confirm = vi.spyOn(window, 'confirm');
       open('/en/company/c1/dashboard');
       await screen.findByText('Real Employee');
       await setMonths('1');
-      expect(confirm).toHaveBeenCalledTimes(1);
-      const text = confirm.mock.calls[0][0] as string;
-      expect(text).toContain('Lower retention to 1 months?');
-      expect(text).toContain('permanently deleted at the next daily purge');
-      expect(text).toContain('cannot be undone');
-      expect(text).toContain(en.company.retentionConfirmShort);
+      expect(confirm).not.toHaveBeenCalled();
       expect(mocked.updateCompanyRetention).not.toHaveBeenCalled();
-      await setMonths('1');
-      await waitFor(() => expect(mocked.updateCompanyRetention).toHaveBeenCalledWith('c1', 1));
+      expect((await screen.findByRole('alert')).textContent).toBe(en.company.retentionInvalid);
       confirm.mockRestore();
     });
 
-    it('lowering to 13 months or more warns without the calendar-year line', async () => {
+    it('lowering to the 13-month floor warns with the calendar-year line', async () => {
       asHr();
       const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
       open('/en/company/c1/dashboard');
       await screen.findByText('Real Employee');
       await setMonths('13');
-      expect(confirm.mock.calls[0][0]).not.toContain(en.company.retentionConfirmShort);
+      expect(confirm.mock.calls[0][0]).toContain(en.company.retentionConfirmShort);
       await waitFor(() => expect(mocked.updateCompanyRetention).toHaveBeenCalledWith('c1', 13));
       confirm.mockRestore();
     });

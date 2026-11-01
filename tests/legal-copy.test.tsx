@@ -105,7 +105,7 @@ describe('C1 Privacy content', () => {
     expect(flat(getDict('en').privacy)).not.toMatch(/authentication and company invites only/);
   });
 
-  it('H3: states the scheduled purge and the 1–120 month company window', () => {
+  it('H3: states the scheduled purge and the 13–120 month company window', () => {
     const purge: Record<Lang, RegExp> = {
       en: /daily scheduled job deletes company day logs/,
       fr: /job quotidien planifié supprime les journaux entreprise/,
@@ -115,7 +115,7 @@ describe('C1 Privacy content', () => {
     for (const [lang, d] of dicts) {
       expect(d.privacy.s6Body).toMatch(purge[lang]);
       expect(flat(d)).not.toMatch(/deleted or anonymised|suppression ou anonymisation|Löschung oder Anonymisierung|cancellazione o anonimizzazione/);
-      expect(d.privacy.s6Body).toMatch(/1–120/);
+      expect(d.privacy.s6Body).toMatch(/13–120/);
       expect(d.privacy.s6Body).not.toMatch(/not in place yet|pas encore en place|noch nicht eingerichtet|non è ancora attiva/);
     }
   });
@@ -190,8 +190,8 @@ describe('C4 notice, not consent', () => {
     expect(getDict('it').company.noticeBody).toMatch(/non una richiesta di consenso/);
   });
 
-  it('says company day-log retention is automated within 1–120 months', () => {
-    for (const [, d] of dicts) expect(d.company.noticeBody).toMatch(/1–120/);
+  it('says company day-log retention is automated within 13–120 months', () => {
+    for (const [, d] of dicts) expect(d.company.noticeBody).toMatch(/13–120/);
     expect(getDict('en').company.noticeBody).toMatch(/deleted automatically each day/);
   });
 });

@@ -35,11 +35,11 @@ from public.bd_contract_requests where handled_at is null order by received_at;
 4. Cancellation: cancel in Stripe, then confirm by email.
 5. `update public.bd_contract_requests set handled_at = now() where id = '…';`
 
-These rows are not deleted automatically: the retention period has not been set.
+Handled rows are deleted automatically 36 months after `handled_at` by the daily `bd_purge_expired_data` job. Open (unhandled) rows are kept until handled.
 
 ## Company closure
 
-Cancelling a plan closes nothing and deletes nothing. A company account ends only on the owner's written instruction to `privacy@borderday.com`. No job does this yet, because no post-termination period has been set: an owner who cancels and goes silent keeps their data, under the retention setting, until that is decided.
+Cancelling a plan does not delete data immediately. After `subscription_status` is `canceled` and `current_period_end` plus the company's `data_retention_months` (minimum 13) have passed, the daily `bd_purge_expired_data` job closes the company: remaining day logs and invitations are deleted, members are deactivated, and `closed_at` is set. Profile emails are not rewritten (they may belong to other companies or an individual plan). An owner can also instruct closure sooner via `privacy@borderday.com`.
 
 1. Check the sender is an active `owner` of that company. If not, ask an owner to confirm from their account address.
 2. Cancel any live subscription in Stripe first, and wait for the webhook to record it.
@@ -50,11 +50,14 @@ Cancelling a plan closes nothing and deletes nothing. A company account ends onl
 ## Retention
 
 Daily `pg_cron` job `bd_purge_expired_data_daily` (03:17 UTC) runs `public.bd_purge_expired_data()`:
-- deletes `bd_day_logs` whose `work_date` is older than the company `data_retention_months` (default 24, owner-editable 1–120 on the HR dashboard);
+- deletes `bd_day_logs` whose `work_date` is older than the company `data_retention_months` (default 24, owner-editable 13–120 on the HR dashboard);
 - marks pending `bd_invitations` with `expires_at` in the past as `expired`;
-- deletes `expired` or `revoked` invites 30 days after `expires_at`.
+- deletes `expired` or `revoked` invites 30 days after `expires_at`;
+- deletes handled `bd_contract_requests` 36 months after `handled_at`;
+- deletes `bd_stripe_events` 36 months after `received_at`;
+- closes canceled companies after `data_retention_months` past `current_period_end` (see Company closure).
 
-Personal day logs, whole accounts, membership and billing rows are not timed-deleted — handle those via the steps above or privacy@borderday.com.
+Personal day logs and individual-plan accounts are not timed-deleted — handle those via the steps above or privacy@borderday.com. Billing references may be kept where accounting law requires.
 
 ## What an HR viewer can do (A2-02)
 

@@ -343,6 +343,7 @@ const de: Dict = {
     savedToAccount: 'In Ihrem Konto gespeichert.',
     savedToCompany:
       'In Ihrem {company}-Konto gespeichert. Ihr HR-Team sieht Art und Datum jedes Tages, ob er als berufliche Übernachtung markiert ist, und Ihre Zähler.',
+    companyRetentionNote: 'Ihr Arbeitgeber bewahrt Unternehmens-Tagesprotokolle {months} Monate auf (seine Aufbewahrungseinstellung; Mindestwert 13). Ältere Tage werden automatisch gelöscht.',
     dayLogOtherCompany: 'Dieses Datum ist bereits in Ihrem Protokoll bei einem anderen Unternehmen erfasst und wurde nicht geändert. BorderDay führt einen Eintrag je Person und Datum.',
     saveError: 'Speichern fehlgeschlagen. Bitte versuchen Sie es erneut.',
     deleteAllAccountConfirm: 'Alle in Ihrem Konto gespeicherten Tage löschen? Das kann nicht rückgängig gemacht werden.',
@@ -524,7 +525,7 @@ const de: Dict = {
         basis: 'Vom Arbeitgeber als Verantwortlichem festgelegt, zum Beispiel eine rechtliche Verpflichtung oder berechtigte Interessen. BorderDay stützt sich hier nicht auf eine Einwilligung der Mitarbeitenden.',
         recipients: 'Die Kontoinhaber und HR des Arbeitgebers; Supabase',
         transfer: 'Hosting in der EU (eu-central-1); Anbieter mit Sitz in den USA; Garantien siehe unten',
-        retention: 'Standardmässig 24 Monate (Unternehmenseinstellung, 1–120 Monate). Ein täglicher Job löscht Tagesprotokolle, deren Arbeitsdatum älter als dieses Fenster ist.',
+        retention: 'Standardmässig 24 Monate (Unternehmenseinstellung, 13–120 Monate). Ein täglicher Job löscht Tagesprotokolle, deren Arbeitsdatum älter als dieses Fenster ist.',
       },
       {
         purpose: 'Einladungen und Nachweis des Hinweises',
@@ -566,7 +567,7 @@ const de: Dict = {
       'Der Verantwortliche hat seinen Sitz in der Schweiz. Nach dem Beschluss 2000/518/EG der Kommission gilt die Schweiz als ein Land, das ein angemessenes Schutzniveau für aus der EU übermittelte personenbezogene Daten gewährleistet; der Bericht der Kommission vom 15. Januar 2024 (COM(2024) 7 final) bestätigt, dass diese Angemessenheit unter der DSGVO fortbesteht. Die Schweiz erkennt ihrerseits die EU- und EWR-Staaten als angemessen an. Für Stripe, GitHub und Google in den Vereinigten Staaten stützen wir uns auf die EU–US- und Swiss–US Data Privacy Frameworks (Swiss-U.S. Active). Für Resend und Supabase beanspruchen wir keine Swiss–US-DPF-Zertifizierung; wir stützen uns auf die Standardvertragsklauseln (mit schweizerischen Anpassungen) in den veröffentlichten Auftragsverarbeitungsbedingungen dieser Anbieter, und Supabase hostet die Datenbank in der EU (eu-central-1). Eine Kopie dieser Garantien erhalten Sie unter privacy@borderday.com.',
     s6Title: 'Aufbewahrung',
     s6Body:
-      'Unternehmens-Tagesprotokolle: standardmässig 24 Monate oder die Unternehmenseinstellung (1–120 Monate), sofern anwendbares Recht keine längere Frist verlangt. Ein täglich geplanter Job löscht Unternehmens-Tagesprotokolle, deren Arbeitsdatum ausserhalb dieses Fensters liegt, markiert ausstehende Einladungen nach Ablauf der 14 Tage als abgelaufen und löscht nie angenommene Einladungen 30 Tage nach Ablauf des Links. Tagesprotokolle des Einzelplans bleiben, bis Sie sie löschen oder das Konto schliessen. Ganze Konten, Unternehmensmitgliedschaft und Abrechnungsdaten werden nicht zeitgesteuert gelöscht: Konto schliessen oder an privacy@borderday.com schreiben. Demo-Daten sind mit DEMO gekennzeichnet und können jederzeit zurückgesetzt werden.',
+      'Unternehmens-Tagesprotokolle: standardmässig 24 Monate oder die Unternehmenseinstellung (13–120 Monate), sofern anwendbares Recht keine längere Frist verlangt. Ein täglich geplanter Job löscht Unternehmens-Tagesprotokolle, deren Arbeitsdatum ausserhalb dieses Fensters liegt, markiert ausstehende Einladungen nach Ablauf der 14 Tage als abgelaufen, löscht nie angenommene Einladungen 30 Tage nach Ablauf des Links, löscht erledigte Vertragsanfragen nach 36 Monaten, Stripe-Ereignisse nach 36 Monaten und schliesst gekündigte Unternehmenskonten nach Ablauf der Aufbewahrungsfrist nach Periodenende. Tagesprotokolle des Einzelplans bleiben, bis Sie sie löschen oder das Konto schliessen. Ganze Konten, Unternehmensmitgliedschaft und Abrechnungsdaten werden nicht zeitgesteuert gelöscht: Konto schliessen oder an privacy@borderday.com schreiben. Demo-Daten sind mit DEMO gekennzeichnet und können jederzeit zurückgesetzt werden.',
     s4Title: 'Ihre Rechte',
     rightsIntro: 'Im gesetzlichen Rahmen haben Sie folgende Rechte:',
     rights: [
@@ -721,7 +722,7 @@ const de: Dict = {
     profileSaved: 'Gespeichert.',
     noticeTitle: 'Hinweis — was HR sehen kann',
     noticeBody:
-      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob es ein halber Tag war, ob er als auswärtige berufliche Übernachtung markiert ist, auf der Route Frankreich–Belgien den Status als Grenzgänger vor 2012, falls eingetragen, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad, Ihre Arbeitstage-Basis, Ihre vertraglichen Arbeitstage, Ihre A1 und diesen Status Frankreich–Belgien eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll jederzeit exportieren. Nach dem Verlassen des Unternehmens können Sie Ihre eigene Kopie im Konto weiterhin exportieren oder löschen; die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist. Fragen Sie Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 1–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist. Erfassungstool, keine Steuer- oder Rechtsberatung.',
+      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob es ein halber Tag war, ob er als auswärtige berufliche Übernachtung markiert ist, auf der Route Frankreich–Belgien den Status als Grenzgänger vor 2012, falls eingetragen, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad, Ihre Arbeitstage-Basis, Ihre vertraglichen Arbeitstage, Ihre A1 und diesen Status Frankreich–Belgien eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll jederzeit exportieren. Nach dem Verlassen des Unternehmens können Sie Ihre eigene Kopie im Konto weiterhin exportieren oder löschen; die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist. Fragen Sie Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 13–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist. Erfassungstool, keine Steuer- oder Rechtsberatung.',
     noticeAck: 'Ich habe diesen Hinweis gelesen',
     noticeRequired: 'Bestätigen Sie, dass Sie den Hinweis gelesen haben, um fortzufahren.',
     noticePrivacyLink: 'Vollständige Datenschutzerklärung',
@@ -732,11 +733,11 @@ const de: Dict = {
     retentionConfirmShort:
       'Unter 13 Monaten können auch Tage vom Anfang dieses Kalenderjahres gelöscht werden, und die Zähler des Jahres würden sinken.',
     retentionTitle: 'Aufbewahrung der Tagesprotokolle',
-    retentionHelp: 'Unternehmens-Tagesprotokolle älter als diese Anzahl Monate werden täglich automatisch gelöscht (1–120). Standard 24. Mitgliedschaft, Abrechnung und ganze Konten werden nicht zeitgesteuert gelöscht.',
+    retentionHelp: 'Unternehmens-Tagesprotokolle älter als diese Anzahl Monate werden täglich automatisch gelöscht (13–120). Standard 24. Mitgliedschaft, Abrechnung und ganze Konten werden nicht zeitgesteuert gelöscht.',
     retentionMonths: 'Monate',
     retentionSave: 'Aufbewahrung speichern',
     retentionSaved: 'Aufbewahrung aktualisiert.',
-    retentionInvalid: 'Geben Sie eine ganze Zahl von Monaten zwischen 1 und 120 ein.',
+    retentionInvalid: 'Geben Sie eine ganze Zahl von Monaten zwischen 13 und 120 ein.',
     hrDisclaimer:
       'Die Zähler bilden nur die hier erfassten Tage ab und sind keine rechtliche oder steuerliche Beurteilung. Der Arbeitgeber bleibt für A1-Anträge, Lohnabrechnung und Steuermeldungen verantwortlich. Prüfen Sie bei der zuständigen Behörde.',
     inviteLanguage: 'Sprache der Person',

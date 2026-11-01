@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getBorderPack, listBorderPacks } from '../../borders/packs';
 import type { BorderId, DayType } from '../../borders/types';
 import type { AggregateStatus, EmployeeDashboardRow } from '../../company/dashboardMath';
-import { clampRetentionMonths, dayRowsToCsv, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
+import { RETENTION_MONTHS_MAX, RETENTION_MONTHS_MIN, clampRetentionMonths, dayRowsToCsv, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { t, type Dict } from '../../i18n';
 import { download } from '../../lib/download';
@@ -98,9 +98,6 @@ function EmployeeProfileForm(props: {
 }
 
 
-/** Under this, days earlier in the current calendar year can be purged, and the year's counters drop. */
-const RETENTION_YEAR_FLOOR = 13;
-
 function RetentionForm(props: {
   d: Dict;
   months: number;
@@ -117,8 +114,8 @@ function RetentionForm(props: {
         {d.company.retentionMonths}
         <input
           type="number"
-          min={1}
-          max={120}
+          min={RETENTION_MONTHS_MIN}
+          max={RETENTION_MONTHS_MAX}
           value={value}
           onChange={(e) => {
             setValue(e.target.value);
@@ -133,7 +130,13 @@ function RetentionForm(props: {
           const raw = value.trim();
           const n = Number(raw);
           // F13: surface empty / out-of-range before silent clamp.
-          if (raw === '' || !Number.isFinite(n) || n < 1 || n > 120 || !Number.isInteger(n)) {
+          if (
+            raw === '' ||
+            !Number.isFinite(n) ||
+            n < RETENTION_MONTHS_MIN ||
+            n > RETENTION_MONTHS_MAX ||
+            !Number.isInteger(n)
+          ) {
             setState('error');
             return;
           }
@@ -145,7 +148,7 @@ function RetentionForm(props: {
           // Lowering deletes at the next daily purge, and the purge has no undo.
           if (next < months) {
             const warning = t(d.company.retentionConfirm, { months: next });
-            const message = next < RETENTION_YEAR_FLOOR ? `${warning} ${d.company.retentionConfirmShort}` : warning;
+            const message = next <= RETENTION_MONTHS_MIN ? `${warning} ${d.company.retentionConfirmShort}` : warning;
             if (!window.confirm(message)) return;
           }
           onSave(next).then(

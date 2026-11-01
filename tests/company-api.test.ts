@@ -104,7 +104,7 @@ describe('companyApi', () => {
     expect(state.calls[0].args).toEqual({ cid: 'c1', employee: 'e1' });
     expect(op(state.calls[1], 'range')[0]).toEqual([1000, 1999]);
     expect(logs).toHaveLength(1001);
-    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1 });
+    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null });
     expect(JSON.stringify(logs)).not.toContain('secret');
   });
 
@@ -178,7 +178,7 @@ describe('companyApi', () => {
           : { data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'telework' }], error: null };
       const logs = await api.listDayLogs('c1');
       expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_records', 'bd_list_day_types']);
-      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1 }]);
+      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null }]);
     });
 
     it('listDayLogs still throws on a real error', async () => {
@@ -474,18 +474,16 @@ describe('companyApi', () => {
     });
   });
 
-  it('F26: deleteMyDayLog deletes only that work_date for the caller', async () => {
+  it('F26/A2-01: deleteMyDayLog soft-voids that work_date via RPC', async () => {
     state.respond = () => ({ data: null, error: null });
     await api.deleteMyDayLog('c1', '2026-03-15');
-    const call = state.calls.find((c) => c.table === 'bd_day_logs');
-    expect(op(call!, 'eq')).toEqual(
-      expect.arrayContaining([
-        ['company_id', 'c1'],
-        ['employee_user_id', 'me'],
-        ['work_date', '2026-03-15'],
-      ]),
-    );
-    expect(op(call!, 'delete')).toHaveLength(1);
+    const call = state.calls.find((c) => c.rpc === 'bd_void_my_day_log');
+    expect(call?.args).toEqual({ p_company_id: 'c1', p_work_date: '2026-03-15' });
+  });
+
+  it('A2-01: deleteMyDayLogs refuses bulk wipe for an active member', async () => {
+    state.respond = () => ({ data: { active: true }, error: null });
+    await expect(api.deleteMyDayLogs('c1')).rejects.toThrow('bulk_clear_not_allowed');
   });
 
   it('F32/RC-01: deactivateMember sets active false only; trigger owns removed_at', async () => {

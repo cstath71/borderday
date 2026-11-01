@@ -298,6 +298,7 @@ const it: Dict = {
     exportCsv: 'Esporta CSV',
     deleteAll: 'Elimina tutti i giorni',
     clearDay: 'Cancella questo giorno',
+    clearDayConfirm: 'Cancellare il {date}? Il vostro datore di lavoro conserva una traccia di correzione di quel giorno secondo il proprio periodo di conservazione. Potrete registrarlo di nuovo più tardi.',
     plannedDayWarning: 'Giorno futuro — registrato come pianificato; conterà da quella data.',
     priorYearNote: 'Questo giorno è nel {year}. Conta per i contatori di quell’anno, non dell’anno in corso.',
     deleteAllConfirm: 'Eliminare tutti i giorni su questo dispositivo? Azione irreversibile.',

@@ -279,9 +279,12 @@ export default function AppPage() {
     }
   }
 
-  /** F26: Clear button removes just the selected day's log. Re-tapping the type does not clear. */
+  /** F26 / A2-01: Clear removes one day. Company mode soft-voids (employer keeps a trail) and confirms first. */
   async function clearSelectedDay() {
     if (!store || !selectedEntry || !canLogSelected) return;
+    if (access?.mode === 'company') {
+      if (!window.confirm(t(d.app.clearDayConfirm, { date: selectedDate }))) return;
+    }
     const date = selectedDate;
     setDays((prev) => prev.filter((e) => e.date !== date));
     setBusy(true);
@@ -723,9 +726,11 @@ export default function AppPage() {
           >
             {d.app.exportCsv}
           </button>
-          <button className="btn btn-danger" type="button" onClick={() => void onDeleteAll()}>
-            {d.app.deleteAll}
-          </button>
+          {access.mode !== 'company' && (
+            <button className="btn btn-danger" type="button" onClick={() => void onDeleteAll()}>
+              {d.app.deleteAll}
+            </button>
+          )}
         </div>
         <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.app.installHint}</p>
       </div>

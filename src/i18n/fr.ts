@@ -568,7 +568,7 @@ const fr: Dict = {
       'Le responsable du traitement est en Suisse. Aux termes de la décision 2000/518/CE de la Commission, la Suisse est considérée comme assurant un niveau de protection adéquat des données à caractère personnel transférées depuis l’UE ; le rapport de la Commission du 15 janvier 2024 (COM(2024) 7 final) a confirmé que cette adéquation continue de s’appliquer au titre du RGPD. La Suisse reconnaît à son tour les États de l’UE et de l’EEE comme adéquats. Pour Stripe, GitHub et Google aux États-Unis, nous nous appuyons sur les Data Privacy Frameworks UE–États-Unis et Suisse–États-Unis (Swiss-U.S. Active). Pour Resend et Supabase, nous ne revendiquons pas de certification Swiss–US DPF ; nous nous appuyons sur les clauses contractuelles types (avec adaptations suisses) de leurs conditions publiées de traitement, et Supabase héberge la base dans l’UE (eu-central-1). Demandez une copie de ces garanties à privacy@borderday.com.',
     s6Title: 'Conservation des données',
     s6Body:
-      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (13–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, marque expirées les invitations en attente au-delà de 14 jours, supprime les invitations jamais acceptées 30 jours après l’expiration du lien, supprime les demandes de contrat traitées après 36 mois, les événements Stripe après 36 mois, et clôture les comptes entreprise annulés après la fenêtre de conservation suivant la fin de période payée. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DEMO et peuvent être réinitialisées à tout moment.',
+      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (13–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, marque expirées les invitations en attente au-delà de 14 jours, supprime les invitations jamais acceptées 30 jours après l’expiration du lien, supprime les demandes de contrat traitées après 36 mois, les événements Stripe après 36 mois, et clôture les comptes entreprise annulés après la fenêtre de conservation suivant la fin de période payée. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DÉMO et peuvent être réinitialisées à tout moment.',
     s4Title: 'Vos droits',
     rightsIntro: 'Dans les limites fixées par la loi, vous disposez des droits suivants :',
     rights: [
@@ -684,9 +684,9 @@ const fr: Dict = {
     joinSuccess:
       'C’est fait : vous faites partie de l’entreprise. Ouvrez l’app collaborateur pour enregistrer vos jours.',
     pickBorder: 'Votre itinéraire',
-    demoDataBadge: 'DONNÉES DEMO',
+    demoDataBadge: 'DONNÉES DÉMO',
     demoBanner: 'Cette entreprise est étiquetée DEMO. Chiffres d’exemple pour l’aperçu produit — pas de vrais collaborateurs.',
-    loadDemo: 'Charger l’entreprise DEMO',
+    loadDemo: 'Charger l’entreprise DÉMO',
     loading: 'Chargement…',
     loadError: 'Impossible de charger cette page. Réessayez.',
     accessDenied: 'Il vous faut un accès RH ou administrateur du compte à cette entreprise.',

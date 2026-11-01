@@ -47,7 +47,7 @@ const REGION_SHOTS = [
     owner: 'Camille Dupont',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'sophie.demo@borderday.example',
         name: 'Sophie Martin (Annemasse)',
         border: 'geneva_fr',
         annual: 240,
@@ -59,7 +59,7 @@ const REGION_SHOTS = [
         ],
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'lucas.demo@borderday.example',
         name: 'Lucas Bernard (Thonon-les-Bains)',
         border: 'geneva_fr',
         annual: 240,
@@ -70,7 +70,7 @@ const REGION_SHOTS = [
         })),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'camille.demo@borderday.example',
         name: 'Camille Roux (Saint-Julien-en-Genevois)',
         border: 'geneva_fr',
         annual: 240,
@@ -91,7 +91,7 @@ const REGION_SHOTS = [
     owner: 'Anna Müller',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'marie.demo@borderday.example',
         name: 'Marie Schneider (Saint-Louis)',
         border: 'basel_fr',
         annual: 240,
@@ -102,7 +102,7 @@ const REGION_SHOTS = [
         ],
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'jonas.demo@borderday.example',
         name: 'Jonas Weber (Lörrach)',
         border: 'basel_de',
         annual: 240,
@@ -118,7 +118,7 @@ const REGION_SHOTS = [
         }),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'lea.demo@borderday.example',
         name: 'Léa Hoffmann (Huningue)',
         border: 'basel_fr',
         annual: 240,
@@ -137,7 +137,7 @@ const REGION_SHOTS = [
     owner: 'Giulia Conti',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'giulia.demo@borderday.example',
         name: 'Giulia Bianchi (Como)',
         border: 'ticino_it',
         annual: 240,
@@ -148,7 +148,7 @@ const REGION_SHOTS = [
         ],
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'marco.demo@borderday.example',
         name: 'Marco Ferrari (Varese)',
         border: 'ticino_it',
         annual: 240,
@@ -164,7 +164,7 @@ const REGION_SHOTS = [
         }),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'elena.demo@borderday.example',
         name: 'Elena Rossi (Como)',
         border: 'ticino_it',
         annual: 240,
@@ -183,7 +183,7 @@ const REGION_SHOTS = [
     owner: 'Giulia Conti',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'giulia.demo@borderday.example',
         name: 'Giulia Bianchi (Como)',
         border: 'ticino_it',
         annual: 240,
@@ -194,7 +194,7 @@ const REGION_SHOTS = [
         ],
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'marco.demo@borderday.example',
         name: 'Marco Ferrari (Varese)',
         border: 'ticino_it',
         annual: 240,
@@ -209,7 +209,7 @@ const REGION_SHOTS = [
         }),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'elena.demo@borderday.example',
         name: 'Elena Rossi (Como)',
         border: 'ticino_it',
         annual: 240,
@@ -228,14 +228,14 @@ const REGION_SHOTS = [
     owner: 'Camille Dupont',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'emilie.demo@borderday.example',
         name: 'Émilie Moreau (Thionville)',
         border: 'luxembourg_fr',
         annual: 220,
         days: teleworkDays(2026, 3, 8),
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'pieter.demo@borderday.example',
         name: 'Pieter Janssens (Arlon)',
         border: 'luxembourg_be',
         annual: 220,
@@ -243,7 +243,7 @@ const REGION_SHOTS = [
         days: teleworkDays(2026, 3, 28),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'anna.demo@borderday.example',
         name: 'Anna Schneider (Trier)',
         border: 'luxembourg_de',
         annual: 220,
@@ -262,21 +262,21 @@ const REGION_SHOTS = [
     owner: 'Alex Morgan',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'emilie.demo@borderday.example',
         name: 'Émilie Moreau (Thionville)',
         border: 'luxembourg_fr',
         annual: 220,
         days: teleworkDays(2026, 3, 8),
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'pieter.demo@borderday.example',
         name: 'Pieter Janssens (Arlon)',
         border: 'luxembourg_be',
         annual: 220,
         days: teleworkDays(2026, 3, 28),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'anna.demo@borderday.example',
         name: 'Anna Schneider (Trier)',
         border: 'luxembourg_de',
         annual: 220,
@@ -295,7 +295,7 @@ const REGION_SHOTS = [
     owner: 'Sophie de Vries',
     employees: [
       {
-        email: 'alice.demo@borderday.example',
+        email: 'lars.demo@borderday.example',
         name: 'Lars Jansen (Maastricht)',
         border: 'belgium_nl',
         annual: 240,
@@ -305,7 +305,7 @@ const REGION_SHOTS = [
         ],
       },
       {
-        email: 'bruno.demo@borderday.example',
+        email: 'eva.demo@borderday.example',
         name: 'Eva Bakker (Breda)',
         border: 'belgium_nl',
         annual: 240,
@@ -319,7 +319,7 @@ const REGION_SHOTS = [
         }),
       },
       {
-        email: 'chiara.demo@borderday.example',
+        email: 'noah.demo@borderday.example',
         name: 'Noah Visser (Eindhoven)',
         border: 'belgium_nl',
         annual: 240,
@@ -392,30 +392,38 @@ async function applyTenant(page, { company, owner, employees, replaceDays }) {
       const co = db.companies.find((c) => c.isDemo);
       if (!co) throw new Error('no demo company');
       co.name = company;
-      const byEmail = Object.fromEntries(employees.map((e) => [e.email, e]));
+      // Seed slots (order) → rewrite email + displayName so emails match demo names
+      const SEED = [
+        'alice.demo@borderday.example',
+        'bruno.demo@borderday.example',
+        'chiara.demo@borderday.example',
+      ];
+      const bound = [];
+      for (let i = 0; i < employees.length; i++) {
+        const e = employees[i];
+        const slot = SEED[i];
+        const p =
+          db.profiles.find((x) => x.email === e.email) ||
+          (slot && db.profiles.find((x) => x.email === slot));
+        if (!p) throw new Error('no profile for ' + (e.email || slot));
+        p.email = e.email;
+        p.displayName = e.name;
+        bound.push({ e, p });
+      }
       for (const p of db.profiles) {
         if (p.email === 'hr.demo@borderday.example') p.displayName = owner;
-        const e = byEmail[p.email];
-        if (e) p.displayName = e.name;
       }
-      for (const m of db.members) {
-        const p = db.profiles.find((x) => x.id === m.userId);
-        if (!p) continue;
-        const e = byEmail[p.email];
-        if (!e) continue;
+      for (const { e, p } of bound) {
+        const m = db.members.find((x) => x.userId === p.id);
+        if (!m) continue;
         m.borderPackId = e.border;
         if (e.annual != null) m.annualWorkingDays = e.annual;
       }
       if (replaceDays) {
-        const empIds = new Set();
-        for (const e of employees) {
-          const p = db.profiles.find((x) => x.email === e.email);
-          if (p) empIds.add(p.id);
-        }
+        const empIds = new Set(bound.map(({ p }) => p.id));
         db.dayLogs = db.dayLogs.filter((d) => !empIds.has(d.employeeUserId));
-        for (const e of employees) {
-          const p = db.profiles.find((x) => x.email === e.email);
-          if (!p || !e.days) continue;
+        for (const { e, p } of bound) {
+          if (!e.days) continue;
           for (const day of e.days) {
             db.dayLogs.push({
               id: `demo-${p.id}-${day.workDate}`,
@@ -426,14 +434,6 @@ async function applyTenant(page, { company, owner, employees, replaceDays }) {
               overnightAway: day.overnightAway || false,
             });
           }
-        }
-      } else {
-        // multi: only rename + border remap, keep default day seed for LU attention
-        for (const m of db.members) {
-          const p = db.profiles.find((x) => x.id === m.userId);
-          if (!p) continue;
-          const e = byEmail[p.email];
-          if (e?.border) m.borderPackId = e.border;
         }
       }
       localStorage.setItem(key, JSON.stringify(db));
@@ -457,10 +457,19 @@ async function captureClip(page, rawPath) {
       [data-testid="former-employees"],
       .filters { display: none !important; }
       .employee-card { padding: 0.65rem 0.9rem !important; margin-bottom: 0.45rem !important; }
-      .dash-actions .btn, .dash-actions label { font-size: 0.85rem; }
+      .dash-actions .btn, .dash-actions label { font-size: 0.78rem; padding: 0.35rem 0.55rem !important; }
+      .dash-actions { gap: 0.35rem !important; margin-bottom: 0.25rem !important; }
+      .dash-head { margin-bottom: 0.25rem !important; gap: 0.35rem !important; }
+      .dash-head h1, .dash-head h2 { font-size: 1.1rem !important; margin: 0 !important; }
+      .employee-list { gap: 0.3rem !important; }
+      /* Keep invite; drop CSV exports to show 3 cards fully in LI crops */
     `,
   });
   await page.waitForTimeout(120);
+  // Compact chrome so all 3 employee cards fit fully in LI 1200 crops
+  await page.evaluate(() => {
+    for (const el of document.querySelectorAll('.dash-actions')) el.style.display = 'none';
+  });
   const head = page.locator('.dash-head').first();
   const list = page.locator('.employee-list').first();
   const lastHead = page.locator('.employee-card .employee-head').last();
@@ -483,7 +492,7 @@ async function captureClip(page, rawPath) {
 async function shot(lang, outName, patch, replaceDays) {
   const ctx = await browser.newContext({
     viewport: { width: 640, height: 1800 },
-    deviceScaleFactor: 1,
+    deviceScaleFactor: 2,
   });
   const page = await ctx.newPage();
   await page.goto(`${BASE}/${lang}/demo`, { waitUntil: 'networkidle' });
@@ -545,7 +554,7 @@ async function resizePng(src, dest, width) {
     const img = sharp(src);
     const meta = await img.metadata();
     const h = Math.round((meta.height * width) / meta.width);
-    await img.resize(width, h).png().toFile(dest);
+    await img.resize(width, h, { kernel: sharp.kernel.lanczos3 }).png({ compressionLevel: 9 }).toFile(dest);
     return;
   } catch {
     /* canvas fallback */

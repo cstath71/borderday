@@ -44,7 +44,7 @@ describe('A3-12 HR-visible data is disclosed', () => {
 
   for (const [lang, d] of Object.entries(dicts) as Array<[keyof typeof dicts, typeof en]>) {
     const invite = buildInviteEmail({ lang, companyName: 'Acme', joinUrl: 'https://x/j', siteUrl: 'https://x' });
-    const companyRow = d.privacy.tableRows.find((r) => /A1/.test(r.data) && !/notes\b|notes,|Notizen,|note,|notities,/i.test(r.data.split('.')[0]));
+    const companyRow = d.privacy.tableRows.find((r) => /A1/.test(r.data) && /employer|employeur|Arbeitgeber|datore di lavoro|werkgever/i.test(r.purpose));
     const surfaces = {
       notice: d.company.noticeBody,
       privacyData: d.privacy.s1Body,

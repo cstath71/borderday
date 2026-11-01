@@ -209,3 +209,72 @@ describe('audit-2 low: translations', () => {
     expect(sql).toMatch(/m\.active and m\.role = 'employee'/);
   });
 });
+
+describe('audit-2 low: compliance', () => {
+  it('A3-24: the build adds a CSP that allows no inline or third-party script, and Supabase only', async () => {
+    const { contentSecurityPolicy } = await import('../vite.config');
+    const csp = contentSecurityPolicy();
+    expect(csp).toMatch(/script-src 'self'(;|$)/);
+    expect(csp).toMatch(/connect-src 'self' https:\/\/\*\.supabase\.co wss:\/\/\*\.supabase\.co(;|$)/);
+    expect(csp).toMatch(/object-src 'none'/);
+    expect(csp).toMatch(/base-uri 'self'/);
+    // Browsers ignore frame-ancestors in a meta tag, so it must not look as if it were enforced.
+    expect(csp).not.toMatch(/frame-ancestors/);
+    expect(contentSecurityPolicy('https://uufmlmwgvoqhhtqgrclu.supabase.co')).toBe(csp);
+    expect(contentSecurityPolicy('https://db.example.com')).toMatch(/connect-src [^;]*https:\/\/db\.example\.com/);
+    expect(readFileSync(resolve(__dirname, '../index.html'), 'utf8')).toMatch(/name="referrer" content="strict-origin-when-cross-origin"/);
+    const security = readFileSync(resolve(__dirname, '../public/.well-known/security.txt'), 'utf8');
+    expect(security).toMatch(/^Contact: mailto:/m);
+    expect(new Date(security.match(/^Expires: (.+)$/m)![1]).getTime()).toBeGreaterThan(Date.now());
+  });
+
+  it('A3-25: browser origins are limited to the site and local development', async () => {
+    const { corsHeaders } = await import('../supabase/functions/_shared/http');
+    const origin = (o: string | null, site?: string) => corsHeaders(o, site)['Access-Control-Allow-Origin'];
+    expect(origin('https://borderday.com')).toBe('https://borderday.com');
+    expect(origin('https://www.borderday.com')).toBe('https://www.borderday.com');
+    expect(origin('http://127.0.0.1:4173')).toBe('http://127.0.0.1:4173');
+    expect(origin('http://localhost:5173')).toBe('http://localhost:5173');
+    expect(origin('https://staging.example', 'https://staging.example/')).toBe('https://staging.example');
+    for (const bad of ['https://evil.example', 'https://borderday.com.evil.example', 'http://localhost.evil.example', null]) {
+      expect(origin(bad)).toBe('https://borderday.com');
+    }
+    expect(corsHeaders('https://borderday.com').Vary).toBe('Origin');
+  });
+
+  it('A3-25: no edge function returns raw error text or allows any origin', () => {
+    for (const fn of ['bd-create-checkout', 'bd-customer-portal', 'bd-send-invite', 'bd-sync-company-billing', 'bd-contract-request', 'bd-stripe-webhook']) {
+      const code = readFileSync(resolve(__dirname, `../supabase/functions/${fn}/index.ts`), 'utf8');
+      expect(code, fn).not.toMatch(/e instanceof Error \? e\.message/);
+      expect(code, fn).not.toMatch(/Access-Control-Allow-Origin": "\*"/);
+    }
+    expect(readFileSync(resolve(__dirname, '../supabase/functions/bd-send-invite/index.ts'), 'utf8')).not.toMatch(/dryRun: false, result/);
+  });
+
+  it('A3-33: the portal return link and Stripe Checkout know Dutch', () => {
+    const portal = readFileSync(resolve(__dirname, '../supabase/functions/bd-customer-portal/index.ts'), 'utf8');
+    expect(portal).toMatch(/body\.lang === "nl"/);
+    const checkout = readFileSync(resolve(__dirname, '../supabase/functions/bd-create-checkout/index.ts'), 'utf8');
+    expect(checkout).toMatch(/CHECKOUT_LOCALES = \["en", "fr", "de", "it", "nl"\]/);
+    expect(checkout).toMatch(/locale: lang/);
+  });
+
+  it('A3-34: Privacy says what an individual plan really keeps on the device', () => {
+    const device = { en: /Notes and the other fields stay on your device/, fr: /autres champs restent sur votre appareil/, de: /übrigen Felder bleiben auf Ihrem Gerät/, it: /altri campi restano sul vostro dispositivo/, nl: /overige velden blijven op uw apparaat/ };
+    for (const [lang, d] of Object.entries(dicts)) {
+      expect(d.privacy.s1Body, lang).toMatch(device[lang as keyof typeof device]);
+    }
+    // The client never sends a note or a profile field for an individual plan.
+    const api = readFileSync(resolve(__dirname, '../src/lib/companyApi.ts'), 'utf8');
+    const write = api.slice(api.indexOf("from('bd_personal_day_logs')\n        .upsert"));
+    expect(write.slice(0, 400)).not.toMatch(/\bnote\b|employment_percent/);
+  });
+
+  it('A3-30: every locale explains the refused save', () => {
+    for (const [lang, d] of Object.entries(dicts)) expect(d.app.dayLogOtherCompany, lang).toBeTruthy();
+  });
+
+  it('A3-31: the internal legal memo is no longer in the tracked tree', () => {
+    expect(readFileSync(resolve(__dirname, '../.gitignore'), 'utf8')).toMatch(/^LEGAL_REVIEW\*\.md$/m);
+  });
+});

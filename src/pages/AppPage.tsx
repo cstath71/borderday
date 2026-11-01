@@ -8,7 +8,7 @@ import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
-import { resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
+import { isDayLogOtherCompany, resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
 import { annualBaseFor, evaluatePack, usesContractDays, zurichToday } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import { download } from '../lib/download';
@@ -183,8 +183,8 @@ export default function AppPage() {
     try {
       await store.put({ date: selectedDate, type, overnightAway, dayShare }, borderId);
       await refresh();
-    } catch {
-      setError(d.app.saveError);
+    } catch (e) {
+      setError(isDayLogOtherCompany(e) ? d.app.dayLogOtherCompany : d.app.saveError);
     } finally {
       setBusy(false);
     }

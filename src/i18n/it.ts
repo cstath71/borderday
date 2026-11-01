@@ -305,6 +305,7 @@ const it: Dict = {
     savedToAccount: 'Salvato nel vostro account.',
     savedToCompany:
       'Salvato nel vostro account {company}. Il team HR vede tipo e data di ogni giorno, se è segnato come notte fuori per lavoro, e i vostri contatori.',
+    dayLogOtherCompany: 'Questa data è già nel vostro registro presso un’altra azienda, quindi non è stata modificata. BorderDay tiene una sola registrazione per persona e data.',
     saveError: 'Salvataggio non riuscito. Riprovate.',
     deleteAllAccountConfirm: 'Eliminare tutti i giorni salvati nel vostro account? Azione irreversibile.',
     importLocal: 'Copiate {count} giorni da questo dispositivo al vostro account',
@@ -423,7 +424,7 @@ const it: Dict = {
       'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni).',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: gli stessi dati, salvati nel vostro account. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
+      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: corridoio, tipo e data di ogni giorno e segni di mezza giornata e di notte fuori sono salvati nel vostro account. Le note e gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
       'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
@@ -457,7 +458,7 @@ const it: Dict = {
       },
       {
         purpose: 'Piano individuale: il vostro registro e i vostri contatori',
-        data: 'Corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012',
+        data: 'Nel vostro account: corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori. Solo sul vostro dispositivo: note, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012',
         basis: 'Contratto (art. 6, par. 1, lett. b)',
         recipients: 'Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',

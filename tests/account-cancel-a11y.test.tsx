@@ -27,6 +27,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
     hasIndividualAccess: vi.fn(async () => false),
     hasCancellableIndividualPlan: vi.fn(async () => false),
     listPersonalDayLogs: vi.fn(async () => []),
+    getOwnAccountRecords: vi.fn(async () => ({ displayName: null, noticeRecords: [], subscriptions: [] })),
     listDayLogs: vi.fn(async () => []),
     resolveAppAccess: vi.fn(async () => ({ mode: 'preview', unpaidCompany: null })),
   };
@@ -197,8 +198,17 @@ describe('H4 Account page', () => {
     mocked.listPersonalDayLogs.mockResolvedValue([{ date: '2026-01-02', type: 'telework', borderPackId: null, overnightAway: false }]);
     mocked.listMyCompanies.mockResolvedValue([company({ profile: { employmentPercent: 80, a1InPlace: true, a1ValidUntil: '2027-01-01' } })]);
     mocked.listDayLogs.mockResolvedValue([{ employeeUserId: 'u1', workDate: '2026-02-03', dayType: 'onsite', overnightAway: true }]);
+    mocked.getOwnAccountRecords.mockResolvedValue({
+      displayName: 'Me',
+      noticeRecords: [{ companyId: 'c1', version: 'v5', language: 'fr', acceptedAt: '2026-01-01T00:00:00Z' }],
+      subscriptions: [{ planKind: 'individual', status: 'active', currentPeriodEnd: null, trialEndsAt: null, stripeCustomerId: 'cus_1', stripeSubscriptionId: 'sub_1' }],
+    });
     const data = await collectAccountExport({ id: 'u1', email: 'me@example.test' });
     expect(mocked.listDayLogs).toHaveBeenCalledWith('c1', 'u1');
+    expect(mocked.getOwnAccountRecords).toHaveBeenCalledWith('u1');
+    expect(data.account).toEqual({ email: 'me@example.test', displayName: 'Me' });
+    expect(data.noticeRecords[0]).toMatchObject({ company: 'Acme SA', version: 'v5', language: 'fr' });
+    expect(data.subscriptions[0]).toMatchObject({ planKind: 'individual', status: 'active' });
     expect(data.individualPlan.days).toHaveLength(1);
     expect(data.companies[0]).toMatchObject({ company: 'Acme SA', employmentPercent: 80, a1InPlace: true });
     expect(data.companies[0].days[0]).toEqual({ date: '2026-02-03', type: 'onsite', overnightAway: true });
@@ -211,7 +221,9 @@ describe('H4 Account page', () => {
     const data: AccountExport = {
       version: 1,
       exportedAt: 'x',
-      account: { email: null },
+      account: { email: null, displayName: null },
+      noticeRecords: [],
+      subscriptions: [],
       individualPlan: { days: [] },
       companies: [
         {

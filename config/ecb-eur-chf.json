@@ -5,5 +5,5 @@
   "quote": "CHF",
   "source": "ECB euro foreign exchange reference rate via https://api.frankfurter.app (ECB publication)",
   "ecbXml": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
-  "fetchedAt": "2026-11-01T09:02:59.284Z"
+  "fetchedAt": "2026-11-01T13:34:38.169Z"
 }

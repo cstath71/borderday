@@ -305,6 +305,7 @@ const fr: Dict = {
     savedToAccount: 'Enregistré dans votre compte.',
     savedToCompany:
       'Enregistré dans votre compte {company}. Vos RH voient le type et la date de chaque jour, s’il est marqué comme nuit hors du domicile pour le travail, et vos compteurs.',
+    dayLogOtherCompany: 'Cette date figure déjà dans votre journal auprès d’une autre entreprise : elle n’a pas été modifiée. BorderDay garde un seul enregistrement par personne et par date.',
     saveError: 'Enregistrement impossible. Réessayez.',
     deleteAllAccountConfirm: 'Supprimer tous les jours enregistrés dans votre compte ? Action irréversible.',
     importLocal: 'Copier {count} jours de cet appareil vers votre compte',
@@ -422,7 +423,7 @@ const fr: Dict = {
       'Dans un compte entreprise, l’employeur décide pourquoi et comment les jours de ses collaborateurs sont enregistrés. L’employeur est donc responsable du traitement de ces journaux et de leur usage par les RH, y compris la base légale, et BorderDay les traite pour lui en tant que sous-traitant. Les questions sur les raisons de cet enregistrement ou sur les documents que l’employeur doit conserver s’adressent d’abord à lui ; nous transmettons les demandes envoyées à privacy@borderday.com. L’accord public de traitement des données pour les comptes entreprise est disponible à /dpa/ (lié depuis Tarifs, l’inscription entreprise et les Conditions).',
     s1Title: 'Ce que nous collectons',
     s1Body:
-      'Aperçu gratuit, sur votre appareil : itinéraire, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), demi-journée éventuelle, marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si vous les indiquez. Offre individuelle : les mêmes données, enregistrées dans votre compte. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, jours de travail, jours contractuels, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
+      'Aperçu gratuit, sur votre appareil : itinéraire, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), demi-journée éventuelle, marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si vous les indiquez. Offre individuelle : l’itinéraire, le type et la date de chaque jour et les marques de demi-journée et de nuit hors du domicile sont enregistrés dans votre compte. Les notes et les autres champs restent sur votre appareil. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, jours de travail, jours contractuels, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
     s2Title: 'Ce que nous ne collectons pas',
     s2Body:
       'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi les jours de travail, les jours contractuels, le taux d’emploi, l’A1 et le statut France–Belgique d’avant 2012 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaires. Pas de vente de données personnelles.',
@@ -456,7 +457,7 @@ const fr: Dict = {
       },
       {
         purpose: 'Offre individuelle : votre journal et vos compteurs',
-        data: 'Itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, notes, jours de travail, jours contractuels, taux d’emploi, A1, statut France–Belgique d’avant 2012',
+        data: 'Dans votre compte : itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile. Sur votre appareil uniquement : notes, jours de travail, jours contractuels, taux d’emploi, A1, statut France–Belgique d’avant 2012',
         basis: 'Contrat (art. 6, par. 1, let. b)',
         recipients: 'Supabase',
         transfer: 'Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis ; garanties ci-dessous',

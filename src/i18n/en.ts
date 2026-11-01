@@ -300,6 +300,7 @@ const en = {
     savedToAccount: 'Saved to your account.',
     savedToCompany:
       'Saved to your {company} account. Your HR team sees each day’s type and date, whether you marked it as a night away for work, and your counters.',
+    dayLogOtherCompany: 'This date is already in your record at another company, so it was not changed. BorderDay keeps one record per person and date.',
     saveError: 'Could not save. Try again.',
     deleteAllAccountConfirm: 'Delete every day saved in your account? This cannot be undone.',
     importLocal: 'Copy {count} days from this device to your account',
@@ -416,7 +417,7 @@ const en = {
       'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. The public data processing agreement for company accounts is at /dpa/ (linked from Pricing, company sign-up and the Terms).',
     s1Title: 'What we collect',
     s1Body:
-      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether it was a half day, whether you marked a night away for work, optional notes, contractual working days per year, employment percentage, A1 record and pre-2012 France–Belgium status if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border route, day types and dates, half-day and night-away marks, working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
+      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether it was a half day, whether you marked a night away for work, optional notes, contractual working days per year, employment percentage, A1 record and pre-2012 France–Belgium status if you enter them. Individual plan: border route, each day’s type and date, and half-day and night-away marks are saved to your account. Notes and the other fields stay on your device. Company accounts: company name, member emails and names, roles, border route, day types and dates, half-day and night-away marks, working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
     s2Title: 'What we do not collect',
     s2Body:
       'No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee. HR also sees working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and counts: the same counters the employee sees. No IP address is stored as a work location. No advertising trackers. No sale of personal data.',
@@ -450,7 +451,7 @@ const en = {
       },
       {
         purpose: 'Individual plan: your day log and counters',
-        data: 'Border route, day types and dates, half-day and night-away marks, notes, working days, contract days, employment percentage, A1 record, pre-2012 France–Belgium status',
+        data: 'In your account: border route, day types and dates, half-day and night-away marks. On your device only: notes, working days, contract days, employment percentage, A1 record, pre-2012 France–Belgium status',
         basis: 'Contract (Art. 6(1)(b))',
         recipients: 'Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',

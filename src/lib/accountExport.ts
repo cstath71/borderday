@@ -1,11 +1,13 @@
 import type { BorderId, DayEntry, DayType } from '../borders/types';
-import { listDayLogs, listMyCompanies, listPersonalDayLogs } from './companyApi';
+import { getOwnAccountRecords, listDayLogs, listMyCompanies, listPersonalDayLogs, type OwnAccountRecords } from './companyApi';
 import { csvCell } from './csvCell';
 
 export interface AccountExport {
   version: 1;
   exportedAt: string;
-  account: { email: string | null };
+  account: { email: string | null; displayName: string | null };
+  noticeRecords: Array<OwnAccountRecords['noticeRecords'][number] & { company: string | null }>;
+  subscriptions: OwnAccountRecords['subscriptions'];
   individualPlan: { days: Array<DayEntry & { borderPackId: BorderId | null }> };
   companies: Array<{
     company: string;
@@ -22,7 +24,7 @@ export interface AccountExport {
 
 /** Everything the server holds about the caller's own days. Other members' days are never included. */
 export async function collectAccountExport(user: { id: string; email?: string | null }): Promise<AccountExport> {
-  const [personal, companies] = await Promise.all([listPersonalDayLogs(), listMyCompanies()]);
+  const [personal, companies, own] = await Promise.all([listPersonalDayLogs(), listMyCompanies(), getOwnAccountRecords(user.id)]);
   const perCompany = await Promise.all(
     companies.map(async (c) => {
       const logs = await listDayLogs(c.id, user.id);
@@ -42,7 +44,12 @@ export async function collectAccountExport(user: { id: string; email?: string | 
   return {
     version: 1,
     exportedAt: new Date().toISOString(),
-    account: { email: user.email ?? null },
+    account: { email: user.email ?? null, displayName: own.displayName },
+    noticeRecords: own.noticeRecords.map((n) => ({
+      ...n,
+      company: companies.find((c) => c.id === n.companyId)?.name ?? null,
+    })),
+    subscriptions: own.subscriptions,
     individualPlan: { days: personal },
     companies: perCompany,
   };

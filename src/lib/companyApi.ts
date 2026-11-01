@@ -475,6 +475,11 @@ async function upsertWithDayAttrs(
   if (error) throw error;
 }
 
+/** The date is held by the caller's other company: the database refuses to move it (A3-30). */
+export function isDayLogOtherCompany(e: unknown): boolean {
+  return (e as { code?: string } | null)?.code === 'BD001';
+}
+
 export async function upsertDayLog(opts: {
   companyId: string;
   workDate: string;
@@ -554,6 +559,52 @@ export async function hasIndividualAccess(): Promise<boolean> {
     .eq('user_id', userId);
   if (error) throw error;
   return (data || []).some((s) => companyHasPaidAccess(s.status, s.trial_ends_at));
+}
+
+export interface OwnAccountRecords {
+  displayName: string | null;
+  noticeRecords: Array<{ companyId: string; version: string; language: string; acceptedAt: string }>;
+  subscriptions: Array<{
+    planKind: string;
+    status: string;
+    currentPeriodEnd: string | null;
+    trialEndsAt: string | null;
+    stripeCustomerId: string | null;
+    stripeSubscriptionId: string | null;
+  }>;
+}
+
+/** The caller's own profile, notice records and individual subscriptions, for the account export. */
+export async function getOwnAccountRecords(userId: string): Promise<OwnAccountRecords> {
+  const c = client();
+  const [profile, notices, subs] = await Promise.all([
+    c.from('bd_profiles').select('display_name').eq('id', userId).maybeSingle(),
+    c.from('bd_consents').select('company_id, consent_version, text_lang, accepted_at').eq('user_id', userId),
+    c
+      .from('bd_subscriptions')
+      .select('plan_kind, status, current_period_end, trial_ends_at, stripe_customer_id, stripe_subscription_id')
+      .eq('user_id', userId),
+  ]);
+  if (profile.error) throw profile.error;
+  if (notices.error) throw notices.error;
+  if (subs.error) throw subs.error;
+  return {
+    displayName: profile.data?.display_name ?? null,
+    noticeRecords: (notices.data || []).map((n) => ({
+      companyId: n.company_id,
+      version: n.consent_version,
+      language: n.text_lang,
+      acceptedAt: n.accepted_at,
+    })),
+    subscriptions: (subs.data || []).map((s) => ({
+      planKind: s.plan_kind,
+      status: s.status,
+      currentPeriodEnd: s.current_period_end,
+      trialEndsAt: s.trial_ends_at,
+      stripeCustomerId: s.stripe_customer_id,
+      stripeSubscriptionId: s.stripe_subscription_id,
+    })),
+  };
 }
 
 /** Any individual plan not yet cancelled, including past_due: see planIsCancellable. */

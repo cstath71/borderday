@@ -39,6 +39,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
     updateMyDisplayName: vi.fn(),
     listDayLogs: vi.fn(async () => []),
     upsertDayLog: vi.fn(),
+    isDayLogOtherCompany: actual.isDayLogOtherCompany,
     deleteMyDayLogs: vi.fn(),
     hasIndividualAccess: vi.fn(async () => false),
     listPersonalDayLogs: vi.fn(async () => []),

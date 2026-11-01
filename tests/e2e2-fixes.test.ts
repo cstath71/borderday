@@ -108,6 +108,13 @@ describe('F27 / F28 app calendar helpers (source contracts)', () => {
     expect(appPage).not.toMatch(/if\s*\(\s*selectedEntry\?\.type\s*===\s*type/);
   });
 
+  it('A2-01/AR3-02: company mode confirms Clear and hides Delete-all', () => {
+    expect(appPage).toContain('clearDayConfirm');
+    expect(appPage).toMatch(/mode === 'company'/);
+    expect(appPage).toContain("access.mode !== 'company'");
+    expect(appPage).toContain('deleteAll');
+  });
+
   it('F28: language switch preserves selected day via sessionStorage keep key', () => {
     expect(layout).toContain('bd_selected_date_keep');
     expect(appPage).toContain('bd_selected_date_keep');

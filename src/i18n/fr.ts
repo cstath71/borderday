@@ -294,6 +294,7 @@ const fr: Dict = {
     today: 'Aujourd’hui',
     logDay: 'Enregistrer ce jour',
     clearDay: 'Effacer ce jour',
+    clearDayConfirm: 'Effacer le {date} ? Votre employeur conserve une trace de correction de ce jour selon sa durée de conservation. Vous pourrez l’enregistrer à nouveau plus tard.',
     plannedDayWarning: 'Jour futur — enregistré comme planifié ; il comptera à cette date.',
     priorYearNote: 'Ce jour est en {year}. Il compte pour les compteurs de cette année-là, pas l’année en cours.',
     calendar: 'Calendrier',

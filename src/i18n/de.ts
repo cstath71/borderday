@@ -301,6 +301,7 @@ const de: Dict = {
     exportCsv: 'CSV exportieren',
     deleteAll: 'Alle Tage löschen',
     clearDay: 'Diesen Tag löschen',
+    clearDayConfirm: '{date} löschen? Ihr Arbeitgeber behält einen Korrektureintrag zu diesem Tag gemäß seiner Aufbewahrungsfrist. Sie können ihn später erneut erfassen.',
     plannedDayWarning: 'Zukünftiger Tag — als geplant erfasst; er zählt ab diesem Datum.',
     priorYearNote: 'Dieser Tag liegt in {year}. Er zählt für die Zähler jenes Jahres, nicht für das laufende Jahr.',
     deleteAllConfirm: 'Alle Tage auf diesem Gerät löschen? Das kann nicht rückgängig gemacht werden.',

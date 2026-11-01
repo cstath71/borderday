@@ -555,6 +555,20 @@ describe('real Postgres: contract requests (A3-08)', () => {
   });
 });
 
+describe('real Postgres: Stripe events (A3-16)', () => {
+  it('only the service role can touch them', async () => {
+    const insert = `insert into public.bd_stripe_events (event_id, event_type, event_created_at) values ('evt_x', 'invoice.upcoming', now())`;
+    const user = await newUser('a316@example.com');
+    await expect(as(user, insert)).rejects.toThrow(/permission denied/);
+    await expect(as(null, insert)).rejects.toThrow(/permission denied/);
+    await db.query(insert);
+    await expect(as(user, `select * from public.bd_stripe_events`)).rejects.toThrow(/permission denied/);
+    await expect(as(null, `select * from public.bd_stripe_events`)).rejects.toThrow(/permission denied/);
+    const { rows } = await db.query(`select processed_at from public.bd_stripe_events where event_id = 'evt_x'`);
+    expect(rows[0].processed_at).toBeNull();
+  });
+});
+
 describe('real Postgres: day logs', () => {
   it('employee cannot read another employee day logs by table or RPC', async () => {
     const owner = await newUser('o19@example.com');

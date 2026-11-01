@@ -2,6 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { isCompanyFlatMinimumPrice, resolveCompanyBilling } from "../_shared/companyPricing.ts";
 import { inviteLang } from "../_shared/inviteEmail.ts";
+import { beginEvent, checkWrite, finishEvent, WebhookWriteError } from "../_shared/stripeEvents.ts";
 import { invoiceSubscriptionId } from "../_shared/stripeInvoice.ts";
 
 Deno.serve(async (req) => {
@@ -91,10 +92,11 @@ Deno.serve(async (req) => {
     const trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
 
     if (companyId) {
-      const { data: company } = await admin.from("bd_companies")
+      const companyRead = await admin.from("bd_companies")
         .select("seat_count, stripe_customer_id")
         .eq("id", companyId).maybeSingle();
-      const dbSeats = company?.seat_count ?? 0;
+      checkWrite(companyRead, "read company");
+      const dbSeats = companyRead.data?.seat_count ?? 0;
       let seatCountToStore = dbSeats;
       if (!opts?.preferDbSeats && !onFlat && Number.isFinite(stripeQty) && stripeQty > 0) {
         seatCountToStore = stripeQty;
@@ -106,18 +108,18 @@ Deno.serve(async (req) => {
         sub = await syncCompanySubscriptionItem(sub, dbSeats);
       }
 
-      await admin.from("bd_companies").update({
+      checkWrite(await admin.from("bd_companies").update({
         stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
         subscription_status: status,
         ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
         current_period_end: periodEnd,
         trial_ends_at: trialEnd,
         plan_kind: "company",
-      }).eq("id", companyId);
+      }).eq("id", companyId), "update company");
     }
 
     const billedQty = sub.items?.data?.[0]?.quantity ?? stripeQty;
-    await admin.from("bd_subscriptions").upsert({
+    checkWrite(await admin.from("bd_subscriptions").upsert({
       company_id: companyId || null,
       user_id: plan === "individual" ? userId : null,
       plan_kind: plan,
@@ -129,13 +131,14 @@ Deno.serve(async (req) => {
       current_period_end: periodEnd,
       trial_ends_at: trialEnd,
       updated_at: new Date().toISOString(),
-    }, { onConflict: "stripe_subscription_id" });
+    }, { onConflict: "stripe_subscription_id" }), "upsert subscription");
   }
 
   /** Consumer safeguard (H12): remind before yearly individual renewal. Honours RESEND_LIVE. */
   async function sendConsumerReminder(opts: {
     kind: "yearly_renewal" | "trial_ending";
     to: string;
+    subscriptionId: string;
     renewOnIso: string | null;
     /** Checkout language from subscription metadata. Text is English until translated templates exist; the link follows it. */
     lang: unknown;
@@ -156,7 +159,7 @@ Deno.serve(async (req) => {
       ? `Your BorderDay individual yearly plan (€49 incl. VAT) renews on ${renewOn} unless you cancel.\n\nCancel anytime: ${cancelUrl}\n(or use Cancel subscription in the footer / your Link order tools).\n\nAfter the first year you can cancel a renewed plan at any time; unused-period refunds apply where mandatory consumer law requires them.\n\n— BorderDay`
       : `Your BorderDay free trial ends on ${renewOn}. After that, the plan you chose is charged automatically and renews until you cancel.\n\nCancel before the trial ends and nothing is charged: ${cancelUrl}\n\n— BorderDay`;
     if (!live || !apiKey) {
-      console.log("[bd-stripe-webhook] reminder dry-run", { kind: opts.kind, to: opts.to, renewOn });
+      console.log("[bd-stripe-webhook] reminder dry-run", { kind: opts.kind, subscriptionId: opts.subscriptionId });
       return;
     }
     const r = await fetch("https://api.resend.com/emails", {
@@ -169,7 +172,7 @@ Deno.serve(async (req) => {
         text,
       }),
     });
-    console.log("[bd-stripe-webhook] reminder", { kind: opts.kind, to: opts.to, ok: r.ok });
+    console.log("[bd-stripe-webhook] reminder", { kind: opts.kind, subscriptionId: opts.subscriptionId, ok: r.ok });
   }
 
   async function customerEmail(customerRef: string | { id?: string } | null): Promise<string | null> {
@@ -193,44 +196,58 @@ Deno.serve(async (req) => {
     return false;
   }
 
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const session = event.data.object;
-      if (session.subscription) {
-        const sub = await stripe.subscriptions.retrieve(session.subscription as string);
-        if (!sub.metadata?.company_id && session.metadata?.company_id) {
-          await stripe.subscriptions.update(sub.id, { metadata: session.metadata });
-          sub.metadata = session.metadata;
+  try {
+    const state = await beginEvent(admin, event);
+    if (state === "duplicate") {
+      return new Response(JSON.stringify({ received: true, duplicate: true }), { headers: { "Content-Type": "application/json" } });
+    }
+    if (state === "process") {
+      switch (event.type) {
+        case "checkout.session.completed": {
+          const session = event.data.object;
+          if (session.subscription) {
+            const sub = await stripe.subscriptions.retrieve(session.subscription as string);
+            if (!sub.metadata?.company_id && session.metadata?.company_id) {
+              await stripe.subscriptions.update(sub.id, { metadata: session.metadata });
+              sub.metadata = session.metadata;
+            }
+            await upsertFromSubscription(sub, { preferDbSeats: true });
+          }
+          break;
         }
-        await upsertFromSubscription(sub, { preferDbSeats: true });
+        case "customer.subscription.updated":
+        case "customer.subscription.deleted":
+          await upsertFromSubscription(event.data.object, { preferDbSeats: true });
+          break;
+        case "invoice.upcoming": {
+          const inv = event.data.object;
+          const subId = invoiceSubscriptionId(inv);
+          if (!subId) break;
+          const sub = await stripe.subscriptions.retrieve(subId);
+          if (!isIndividualYearly(sub)) break;
+          const email = await customerEmail(sub.customer);
+          if (!email) break;
+          const renewUnix = inv.next_payment_attempt || inv.period_end || null;
+          const renewOnIso = renewUnix ? new Date(renewUnix * 1000).toISOString() : periodEndIso(sub);
+          await sendConsumerReminder({ kind: "yearly_renewal", to: email, subscriptionId: sub.id, renewOnIso, lang: sub.metadata?.lang });
+          break;
+        }
+        case "customer.subscription.trial_will_end": {
+          const sub = event.data.object;
+          const email = await customerEmail(sub.customer);
+          if (!email) break;
+          const trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
+          await sendConsumerReminder({ kind: "trial_ending", to: email, subscriptionId: sub.id, renewOnIso: trialEnd, lang: sub.metadata?.lang });
+          break;
+        }
       }
-      break;
     }
-    case "customer.subscription.updated":
-    case "customer.subscription.deleted":
-      await upsertFromSubscription(event.data.object, { preferDbSeats: true });
-      break;
-    case "invoice.upcoming": {
-      const inv = event.data.object;
-      const subId = invoiceSubscriptionId(inv);
-      if (!subId) break;
-      const sub = await stripe.subscriptions.retrieve(subId);
-      if (!isIndividualYearly(sub)) break;
-      const email = await customerEmail(sub.customer);
-      if (!email) break;
-      const renewUnix = inv.next_payment_attempt || inv.period_end || null;
-      const renewOnIso = renewUnix ? new Date(renewUnix * 1000).toISOString() : periodEndIso(sub);
-      await sendConsumerReminder({ kind: "yearly_renewal", to: email, renewOnIso, lang: sub.metadata?.lang });
-      break;
-    }
-    case "customer.subscription.trial_will_end": {
-      const sub = event.data.object;
-      const email = await customerEmail(sub.customer);
-      if (!email) break;
-      const trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
-      await sendConsumerReminder({ kind: "trial_ending", to: email, renewOnIso: trialEnd, lang: sub.metadata?.lang });
-      break;
-    }
+    await finishEvent(admin, event);
+  } catch (e) {
+    // Non-200 makes Stripe retry. Log which write failed, never the error text: it can hold row values.
+    const what = e instanceof WebhookWriteError ? e.what : "handler error";
+    console.error("[bd-stripe-webhook] failed", { eventId: event.id, type: event.type, what });
+    return new Response(JSON.stringify({ received: false }), { status: 500, headers: { "Content-Type": "application/json" } });
   }
   return new Response(JSON.stringify({ received: true }), { headers: { "Content-Type": "application/json" } });
 });

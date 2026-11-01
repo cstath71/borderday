@@ -9,7 +9,15 @@ import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
-import { isDayLogOtherCompany, resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
+import {
+  isDayLogOtherCompany,
+  listFormerCompanies,
+  resolveAppAccess,
+  updateMemberSelf,
+  updateMyProfile,
+  type AppAccess,
+  type FormerCompany,
+} from '../lib/companyApi';
 import { annualBaseFor, evaluatePack, usesContractDays, zurichToday } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import { download } from '../lib/download';
@@ -38,6 +46,8 @@ function canBeOvernight(type: DayType): boolean {
 }
 
 const DAYS_PER_WEEK = [1, 2, 3, 4, 5];
+/** Also enforced by the bd_*_note_length checks. */
+const NOTE_MAX_LENGTH = 500;
 
 /** The full-time base assumes a 5-day week; rounds like annualBaseFor scaling by employment %. */
 export function annualForDaysPerWeek(fullTimeBase: number, daysPerWeek: number): number {
@@ -73,6 +83,8 @@ export default function AppPage() {
   const [busy, setBusy] = useState(false);
   /** Half day ticked on a date with no day type yet. A logged day keeps its own value in the entry. */
   const [halfBeforeType, setHalfBeforeType] = useState<Record<string, boolean>>({});
+  const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
+  const [former, setFormer] = useState<FormerCompany[]>([]);
 
   // Fail closed: if access cannot be resolved, the visitor stays on the on-device preview.
   useEffect(() => {
@@ -97,6 +109,23 @@ export default function AppPage() {
       cancelled = true;
     };
   }, [auth.ready, userId, d.company.loadError]);
+
+  // Someone removed from a company falls back to the preview: tell them their days are not gone (E24).
+  useEffect(() => {
+    if (!userId) {
+      setFormer([]);
+      return;
+    }
+    let cancelled = false;
+    listFormerCompanies()
+      .then((list) => {
+        if (!cancelled) setFormer(list);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
 
   const store = useMemo(() => (access ? dayStoreFor(access, userId) : null), [access, userId]);
   const isPreview = access?.mode === 'preview';
@@ -196,10 +225,24 @@ export default function AppPage() {
     setBusy(true);
     setError(null);
     try {
-      await store.put({ date: selectedDate, type, overnightAway, dayShare }, borderId);
+      await store.put({ date: selectedDate, type, overnightAway, dayShare, note: selectedEntry?.note }, borderId);
       await refresh();
     } catch (e) {
       setError(isDayLogOtherCompany(e) ? d.app.dayLogOtherCompany : d.app.saveError);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function saveNote(entry: DayEntry, note: string) {
+    if (!store || note.trim() === (entry.note ?? '')) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await store.put({ ...entry, note: note.trim() }, borderId);
+      await refresh();
+    } catch {
+      setError(d.app.saveError);
     } finally {
       setBusy(false);
     }
@@ -275,6 +318,12 @@ export default function AppPage() {
             </span>
           )}
         </h1>
+        {former.map((c) => (
+          <p className="meta" key={c.companyId}>
+            {t(d.app.formerCompanyDays, { company: c.company, count: c.dayCount })}{' '}
+            <Link to={`/${lang}/account`}>{d.nav.account}</Link>
+          </p>
+        ))}
         {access.mode === 'individual' && <p className="meta">{d.app.savedToAccount}</p>}
         {access.mode === 'company' && (
           <p className="meta">
@@ -468,6 +517,21 @@ export default function AppPage() {
                   ? d.dayTypes.halfDayPending
                   : d.dayTypes.halfDayHint}
             </div>
+          </label>
+          <label style={{ display: 'block', marginTop: '0.75rem' }}>
+            <strong>{d.app.noteLabel}</strong>
+            <div className="meta">{selectedEntry ? d.app.noteHint : d.app.noteNeedsType}</div>
+            <textarea
+              rows={2}
+              maxLength={NOTE_MAX_LENGTH}
+              style={{ marginTop: '0.35rem', width: '100%' }}
+              disabled={busy || !canLogSelected || !selectedEntry}
+              value={noteDrafts[selectedDate] ?? selectedEntry?.note ?? ''}
+              onChange={(e) => setNoteDrafts((prev) => ({ ...prev, [selectedDate]: e.target.value }))}
+              onBlur={(e) => {
+                if (selectedEntry) void saveNote(selectedEntry, e.target.value);
+              }}
+            />
           </label>
         </div>
 

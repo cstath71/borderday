@@ -1,16 +1,98 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import CancelPanel from '../components/CancelPanel';
 import { mailtoHref } from '../components/RequestForm';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
-import { getDict, t } from '../i18n';
+import { getDict, t, type Dict } from '../i18n';
 import { accountExportCsv, collectAccountExport } from '../lib/accountExport';
 import { useAuth } from '../lib/auth';
+import { deleteMyDayLogs, listFormerCompanies, listMyDaysIn, type FormerCompany, type OwnDay } from '../lib/companyApi';
 import { download } from '../lib/download';
 import { exportCsv, exportJson } from '../lib/storage';
 
 const PRIVACY_MAILBOX = 'privacy@borderday.com';
+
+/** E24: the join notice promises a day log can be exported or deleted, and leaving a company does not end that. */
+function FormerCompanies({ d, userId }: { d: Dict; userId: string }) {
+  const a = d.account;
+  const [companies, setCompanies] = useState<FormerCompany[]>([]);
+  const [days, setDays] = useState<Record<string, OwnDay[]>>({});
+  const [notice, setNotice] = useState<{ tone: 'status' | 'alert'; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const list = await listFormerCompanies();
+      const loaded = await Promise.all(list.map(async (c) => [c.companyId, await listMyDaysIn(c.companyId)] as const));
+      if (cancelled) return;
+      setCompanies(list);
+      setDays(Object.fromEntries(loaded));
+    })().catch(() => {
+      if (!cancelled) setNotice({ tone: 'alert', text: a.formerError });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, a.formerError]);
+
+  async function remove(c: FormerCompany) {
+    if (!window.confirm(t(a.formerDeleteConfirm, { count: c.dayCount, company: c.company }))) return;
+    setBusy(true);
+    setNotice(null);
+    try {
+      await deleteMyDayLogs(c.companyId);
+      setCompanies((list) => list.filter((x) => x.companyId !== c.companyId));
+      setNotice({ tone: 'status', text: t(a.formerDeleted, { company: c.company }) });
+    } catch {
+      setNotice({ tone: 'alert', text: a.formerError });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (companies.length === 0 && !notice) return null;
+  return (
+    <div className="card" style={{ marginBottom: '1rem' }}>
+      <h2>{a.formerTitle}</h2>
+      {companies.length > 0 && <p>{a.formerBody}</p>}
+      {companies.map((c) => (
+        <div key={c.companyId} style={{ marginBottom: '0.75rem' }}>
+          <details>
+            <summary>{t(a.formerSummary, { company: c.company, count: c.dayCount, first: c.firstDate, last: c.lastDate })}</summary>
+            <table className="counter-table">
+              <thead>
+                <tr>
+                  <th>{d.company.colDate}</th>
+                  <th>{d.company.colDayType}</th>
+                  <th>{d.dayTypes.halfDayShort}</th>
+                  <th>{d.dayTypes.overnightAwayShort}</th>
+                  <th>{a.noteColumn}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(days[c.companyId] ?? []).map((day) => (
+                  <tr key={day.date}>
+                    <td>{day.date}</td>
+                    <td>{(d.dayTypes as Record<string, string>)[day.type] ?? day.type}</td>
+                    <td>{day.dayShare === 0.5 ? '½' : ''}</td>
+                    <td>{day.overnightAway ? '✓' : ''}</td>
+                    <td>{day.note ?? ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </details>
+          <button type="button" className="btn btn-danger" style={{ marginTop: '0.5rem' }} disabled={busy} onClick={() => void remove(c)}>
+            {t(a.formerDelete, { company: c.company })}
+          </button>
+        </div>
+      ))}
+      {notice && <p role={notice.tone}>{notice.text}</p>}
+    </div>
+  );
+}
 
 /** Data-subject controls. Deletion is an email request: the client cannot call Auth Admin (docs/DATA_REQUESTS.md). */
 export default function Account() {
@@ -73,6 +155,8 @@ export default function Account() {
               </p>
             )}
           </div>
+
+          <FormerCompanies d={d} userId={user.id} />
 
           <div className="card" style={{ marginBottom: '1rem' }}>
             <h2>{a.deviceTitle}</h2>

@@ -38,9 +38,12 @@ vi.mock('../src/lib/companyApi', async (original) => {
     updateEmployeeProfile: vi.fn(async () => undefined),
     updateMyDisplayName: vi.fn(),
     listDayLogs: vi.fn(async () => []),
+    listMyDayNotes: vi.fn(async () => new Map()),
+    listMyDaysIn: vi.fn(async () => []),
+    listFormerCompanies: vi.fn(async () => []),
+    deleteMyDayLogs: vi.fn(async () => undefined),
     upsertDayLog: vi.fn(),
     isDayLogOtherCompany: actual.isDayLogOtherCompany,
-    deleteMyDayLogs: vi.fn(),
     hasIndividualAccess: vi.fn(async () => false),
     listPersonalDayLogs: vi.fn(async () => []),
     upsertPersonalDayLog: vi.fn(),
@@ -636,6 +639,31 @@ describe('/app gate', () => {
       const whole = screen.getByRole('button', { name: new RegExp(`\\b12\\b.*: ${en.dayTypes.telework}$`) });
       expect(whole.className).not.toContain('half');
       expect(whole.textContent).not.toContain('½');
+    });
+
+    it('E15: a note saves with its day, stays when the type changes, and needs a day type first', async () => {
+      paid();
+      mocked.listDayLogs.mockResolvedValue([log(iso(10), 'telework')]);
+      mocked.listMyDayNotes.mockResolvedValue(new Map([[iso(10), 'saved note']]));
+      open('/en/app');
+      await screen.findByRole('button', { name: new RegExp(`\\b10\\b.*: ${en.dayTypes.telework}$`) });
+      const area = () => screen.getByRole('textbox', { name: new RegExp(en.app.noteLabel) }) as HTMLTextAreaElement;
+      fireEvent.click(cell(new Date().getDate() === 12 ? 13 : 12));
+      expect(area().disabled).toBe(true);
+      screen.getByText(en.app.noteNeedsType);
+      fireEvent.click(cell(10));
+      expect(area().value).toBe('saved note');
+      fireEvent.click(screen.getByText(en.dayTypes.onsite).closest('button')!);
+      await waitFor(() =>
+        expect(mocked.upsertDayLog).toHaveBeenCalledWith(expect.objectContaining({ workDate: iso(10), dayType: 'onsite', note: 'saved note' })),
+      );
+      mocked.upsertDayLog.mockClear();
+      await waitFor(() => expect(area().disabled).toBe(false));
+      fireEvent.change(area(), { target: { value: '  changed  ' } });
+      fireEvent.blur(area());
+      await waitFor(() =>
+        expect(mocked.upsertDayLog).toHaveBeenCalledWith(expect.objectContaining({ workDate: iso(10), note: 'changed' })),
+      );
     });
 
     it('E19: picking days a week fills in the yearly figure and saves it', async () => {

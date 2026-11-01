@@ -279,6 +279,10 @@ const it: Dict = {
     status_floor_no_data: 'Nessun giorno registrato',
   },
   app: {
+    noteLabel: "Nota privata",
+    noteHint: "In BorderDay potete vederla solo voi: l’HR e gli export aziendali non la mostrano mai. Viene eliminata con il giorno. Evitate dati sulla salute o altro che non vorreste salvare.",
+    noteNeedsType: "Scegliete prima un tipo di giornata, poi aggiungete una nota.",
+    formerCompanyDays: "Avete lasciato {company}. I {count} giorni registrati lì restano vostri: potete vederli, esportarli o eliminarli nel vostro account.",
     daysPerWeek: "Oppure scegliete i giorni a settimana",
     daysPerWeekHint: "Compila la cifra annuale: {default} × giorni ÷ 5, la stessa proporzione della percentuale d’impiego. È un punto di partenza: usate la cifra del vostro contratto se l’avete.",
     title: 'Il vostro diario dei giorni',
@@ -430,7 +434,7 @@ const it: Dict = {
       'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni).',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: corridoio, tipo e data di ogni giorno e segni di mezza giornata e di notte fuori sono salvati nel vostro account. Le note e gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
+      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: corridoio, tipo e data di ogni giorno segni di mezza giornata e di notte fuori e note sono salvati nel vostro account. Gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note private (salvate con il giorno, mai mostrate all’HR), giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
       'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
@@ -464,7 +468,7 @@ const it: Dict = {
       },
       {
         purpose: 'Piano individuale: il vostro registro e i vostri contatori',
-        data: 'Nel vostro account: corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori. Solo sul vostro dispositivo: note, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012',
+        data: 'Nel vostro account: corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note. Solo sul vostro dispositivo: giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012',
         basis: 'Contratto (art. 6, par. 1, lett. b)',
         recipients: 'Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
@@ -765,11 +769,19 @@ const it: Dict = {
     back: 'Modifica i dati',
   },
   account: {
+    formerTitle: "Giorni delle aziende che avete lasciato",
+    formerBody: "Non siete più membri di queste aziende, ma potete ancora vedere, esportare ed eliminare i giorni che avete registrato. Sono inclusi nell’export qui sopra. Finché non li eliminate o non termina il periodo di conservazione dell’azienda, anche l’azienda può ancora vederli.",
+    formerSummary: "{company}: {count} giorni, dal {first} al {last}",
+    formerDelete: "Elimina i miei giorni di {company}",
+    formerDeleteConfirm: "Eliminare i {count} giorni registrati presso {company}? Vengono rimossi anche per l’azienda. L’operazione è irreversibile.",
+    formerDeleted: "I vostri giorni di {company} sono stati eliminati.",
+    formerError: "Non ha funzionato. Riprovate o scrivete a privacy@borderday.com.",
+    noteColumn: "Nota",
     title: 'Il vostro account',
     signedInAs: 'Accesso effettuato con {email}',
     exportTitle: 'Esportate i registri salvati',
     exportBody:
-      'Scarica ciò che è salvato sui nostri server per il vostro account: il registro del piano individuale, e il vostro registro e le vostre impostazioni in ogni azienda di cui fate parte.',
+      'Scarica ciò che è salvato sui nostri server per il vostro account: il registro del piano individuale, e il vostro registro e le vostre impostazioni in ogni azienda di cui fate parte, le vostre note private e i giorni registrati nelle aziende che avete lasciato.',
     exportError: 'Impossibile preparare l’export. Riprovate.',
     deviceTitle: 'Solo questo dispositivo',
     deviceBody: 'Giorni dell’anteprima gratuita, memorizzati in questo browser e non sui nostri server.',

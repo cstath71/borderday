@@ -281,6 +281,10 @@ const fr: Dict = {
     status_floor_no_data: 'Aucun jour consigné',
   },
   app: {
+    noteLabel: "Note privée",
+    noteHint: "Dans BorderDay, vous seul pouvez la voir : les RH et les exports de l’entreprise ne l’affichent jamais. Elle est supprimée avec le jour. Évitez les données de santé ou tout ce que vous ne voudriez pas voir enregistré.",
+    noteNeedsType: "Choisissez d’abord un type de journée, puis ajoutez une note.",
+    formerCompanyDays: "Vous avez quitté {company}. Les {count} jours que vous y avez consignés restent à vous : consultez-les, exportez-les ou supprimez-les dans votre compte.",
     daysPerWeek: "Ou choisissez des jours par semaine",
     daysPerWeekHint: "Remplit le chiffre annuel : {default} × jours ÷ 5, la même mise à l’échelle que le taux d’emploi. C’est un point de départ : utilisez le chiffre de votre contrat si vous l’avez.",
     title: 'Votre journal de jours',
@@ -429,7 +433,7 @@ const fr: Dict = {
       'Dans un compte entreprise, l’employeur décide pourquoi et comment les jours de ses collaborateurs sont enregistrés. L’employeur est donc responsable du traitement de ces journaux et de leur usage par les RH, y compris la base légale, et BorderDay les traite pour lui en tant que sous-traitant. Les questions sur les raisons de cet enregistrement ou sur les documents que l’employeur doit conserver s’adressent d’abord à lui ; nous transmettons les demandes envoyées à privacy@borderday.com. L’accord public de traitement des données pour les comptes entreprise est disponible à /dpa/ (lié depuis Tarifs, l’inscription entreprise et les Conditions).',
     s1Title: 'Ce que nous collectons',
     s1Body:
-      'Aperçu gratuit, sur votre appareil : itinéraire, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), demi-journée éventuelle, marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si vous les indiquez. Offre individuelle : l’itinéraire, le type et la date de chaque jour et les marques de demi-journée et de nuit hors du domicile sont enregistrés dans votre compte. Les notes et les autres champs restent sur votre appareil. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, jours de travail, jours contractuels, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
+      'Aperçu gratuit, sur votre appareil : itinéraire, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), demi-journée éventuelle, marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si vous les indiquez. Offre individuelle : l’itinéraire, le type et la date de chaque jour les marques de demi-journée et de nuit hors du domicile et les notes sont enregistrés dans votre compte. Les autres champs restent sur votre appareil. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, notes privées (enregistrées avec le jour, jamais montrées aux RH), jours de travail, jours contractuels, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
     s2Title: 'Ce que nous ne collectons pas',
     s2Body:
       'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi les jours de travail, les jours contractuels, le taux d’emploi, l’A1 et le statut France–Belgique d’avant 2012 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaires. Pas de vente de données personnelles.',
@@ -463,7 +467,7 @@ const fr: Dict = {
       },
       {
         purpose: 'Offre individuelle : votre journal et vos compteurs',
-        data: 'Dans votre compte : itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile. Sur votre appareil uniquement : notes, jours de travail, jours contractuels, taux d’emploi, A1, statut France–Belgique d’avant 2012',
+        data: 'Dans votre compte : itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, notes. Sur votre appareil uniquement : jours de travail, jours contractuels, taux d’emploi, A1, statut France–Belgique d’avant 2012',
         basis: 'Contrat (art. 6, par. 1, let. b)',
         recipients: 'Supabase',
         transfer: 'Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis ; garanties ci-dessous',
@@ -765,11 +769,19 @@ const fr: Dict = {
     back: 'Modifier les informations',
   },
   account: {
+    formerTitle: "Jours des entreprises que vous avez quittées",
+    formerBody: "Vous n’êtes plus membre de ces entreprises, mais vous pouvez toujours consulter, exporter et supprimer les jours que vous avez consignés. Ils figurent dans l’export ci-dessus. Tant que vous ne les supprimez pas et que la durée de conservation de l’entreprise n’est pas écoulée, l’entreprise peut aussi encore les voir.",
+    formerSummary: "{company} : {count} jours, du {first} au {last}",
+    formerDelete: "Supprimer mes jours de {company}",
+    formerDeleteConfirm: "Supprimer les {count} jours que vous avez consignés chez {company} ? Ils sont aussi retirés pour l’entreprise. Cette action est irréversible.",
+    formerDeleted: "Vos jours de {company} sont supprimés.",
+    formerError: "Cela n’a pas fonctionné. Réessayez ou écrivez à privacy@borderday.com.",
+    noteColumn: "Note",
     title: 'Votre compte',
     signedInAs: 'Connecté avec {email}',
     exportTitle: 'Exporter vos journaux enregistrés',
     exportBody:
-      'Télécharge ce qui est enregistré sur nos serveurs pour votre compte : le journal de votre offre individuelle, ainsi que votre propre journal et vos réglages dans chaque entreprise dont vous faites partie.',
+      'Télécharge ce qui est enregistré sur nos serveurs pour votre compte : le journal de votre offre individuelle, ainsi que votre propre journal et vos réglages dans chaque entreprise dont vous faites partie, vos notes privées, et les jours consignés dans les entreprises que vous avez quittées.',
     exportError: 'Impossible de préparer l’export. Réessayez.',
     deviceTitle: 'Cet appareil uniquement',
     deviceBody: 'Jours de l’aperçu gratuit, stockés dans ce navigateur et non sur nos serveurs.',

@@ -475,6 +475,10 @@ async function upsertWithDayAttrs(
   if (error) throw error;
 }
 
+function noteColumn(note: string | undefined): { note?: string | null } {
+  return note === undefined ? {} : { note: note.trim() || null };
+}
+
 /** The date is held by the caller's other company: the database refuses to move it (A3-30). */
 export function isDayLogOtherCompany(e: unknown): boolean {
   return (e as { code?: string } | null)?.code === 'BD001';
@@ -486,6 +490,8 @@ export async function upsertDayLog(opts: {
   dayType: DayType;
   overnightAway?: boolean;
   dayShare?: 0.5 | 1;
+  /** Undefined leaves a saved note as it is; empty clears it. */
+  note?: string;
 }): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
@@ -501,6 +507,7 @@ export async function upsertDayLog(opts: {
             work_date: opts.workDate,
             day_type: opts.dayType,
             updated_at: new Date().toISOString(),
+            ...noteColumn(opts.note),
             ...extra,
           },
           { onConflict: 'employee_user_id,work_date' },
@@ -533,6 +540,76 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     dayType: r.day_type,
     overnightAway: !!r.overnight_away_for_work,
     dayShare: r.day_share === 0.5 ? 0.5 : 1,
+  }));
+}
+
+/**
+ * The caller's own private notes. A direct read, so RLS limits it to their own rows, unlike the RPC
+ * above that HR shares, which never returns a note.
+ */
+export async function listMyDayNotes(companyId: string): Promise<Map<string, string>> {
+  const userId = await currentUserId();
+  if (!userId) return new Map();
+  const rows = await allPages<{ work_date: string; note: string }>((from, to) =>
+    client()
+      .from('bd_day_logs')
+      .select('work_date, note')
+      .eq('company_id', companyId)
+      .eq('employee_user_id', userId)
+      .not('note', 'is', null)
+      .order('work_date', { ascending: true })
+      .range(from, to),
+  );
+  return new Map(rows.map((r) => [r.work_date, r.note]));
+}
+
+export interface FormerCompany {
+  companyId: string;
+  company: string;
+  dayCount: number;
+  firstDate: string;
+  lastDate: string;
+}
+
+/** Companies the caller has left but still holds logged days in (E24). */
+export async function listFormerCompanies(): Promise<FormerCompany[]> {
+  const { data, error } = await client().rpc('bd_my_day_log_companies');
+  if (isSchemaLag(error)) return [];
+  if (error) throw error;
+  type Row = { company_id: string; company_name: string; active: boolean; day_count: number; first_date: string; last_date: string };
+  return ((data ?? []) as Row[])
+    .filter((r) => !r.active)
+    .map((r) => ({
+      companyId: r.company_id,
+      company: r.company_name,
+      dayCount: Number(r.day_count),
+      firstDate: r.first_date,
+      lastDate: r.last_date,
+    }));
+}
+
+export type OwnDay = { date: string; type: DayType; overnightAway: boolean; dayShare: 0.5 | 1; note?: string };
+
+/** The caller's own days in one company, notes included. RLS allows this after they have left it. */
+export async function listMyDaysIn(companyId: string): Promise<OwnDay[]> {
+  const userId = await currentUserId();
+  if (!userId) return [];
+  type Row = { work_date: string; day_type: DayType; overnight_away_for_work: boolean; day_share: number; note: string | null };
+  const rows = await allPages<Row>((from, to) =>
+    client()
+      .from('bd_day_logs')
+      .select('work_date, day_type, overnight_away_for_work, day_share, note')
+      .eq('company_id', companyId)
+      .eq('employee_user_id', userId)
+      .order('work_date', { ascending: true })
+      .range(from, to),
+  );
+  return rows.map((r) => ({
+    date: r.work_date,
+    type: r.day_type,
+    overnightAway: !!r.overnight_away_for_work,
+    dayShare: r.day_share === 0.5 ? 0.5 : 1,
+    ...(r.note ? { note: r.note } : {}),
   }));
 }
 
@@ -629,6 +706,7 @@ export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPa
     border_pack_id: BorderId | null;
     overnight_away_for_work?: boolean;
     day_share?: number;
+    note?: string | null;
   };
   const read = (columns: string) =>
     allPages<Row>((from, to) =>
@@ -639,7 +717,7 @@ export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPa
         .order('work_date', { ascending: true })
         .range(from, to),
     );
-  const base = 'work_date, day_type, border_pack_id';
+  const base = 'work_date, day_type, border_pack_id, note';
   const withOvernight = `${base}, overnight_away_for_work`;
   const withShare = `${withOvernight}, day_share`;
   const rows = await read(withShare).catch((e) => {
@@ -655,6 +733,7 @@ export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPa
     borderPackId: r.border_pack_id,
     overnightAway: !!r.overnight_away_for_work,
     dayShare: r.day_share === 0.5 ? 0.5 : 1,
+    ...(r.note ? { note: r.note } : {}),
   }));
 }
 
@@ -664,6 +743,8 @@ export async function upsertPersonalDayLog(opts: {
   borderPackId: BorderId | null;
   overnightAway?: boolean;
   dayShare?: 0.5 | 1;
+  /** Undefined leaves a saved note as it is; empty clears it. */
+  note?: string;
 }): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
@@ -679,6 +760,7 @@ export async function upsertPersonalDayLog(opts: {
             day_type: opts.dayType,
             border_pack_id: opts.borderPackId,
             updated_at: new Date().toISOString(),
+            ...noteColumn(opts.note),
             ...extra,
           },
           { onConflict: 'user_id,work_date' },

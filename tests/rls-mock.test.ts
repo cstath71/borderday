@@ -75,6 +75,7 @@ describe('multi-tenant RLS (mock)', () => {
     expect(logs[0].dayType).toBe('telework');
     expect(logs[0]).not.toHaveProperty('latitude');
     expect(logs[0]).not.toHaveProperty('location');
+    expect(logs[0]).not.toHaveProperty('note');
   });
 
   it('rejects invite accept when signed-in email mismatches', () => {

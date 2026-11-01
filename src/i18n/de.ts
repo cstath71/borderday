@@ -282,6 +282,10 @@ const de: Dict = {
     status_floor_no_data: 'Keine Tage erfasst',
   },
   app: {
+    noteLabel: "Private Notiz",
+    noteHint: "In BorderDay sehen nur Sie diese Notiz: HR und Unternehmensexporte zeigen sie nie. Sie wird mit dem Tag gelöscht. Vermeiden Sie Gesundheitsangaben und alles, was nicht gespeichert werden soll.",
+    noteNeedsType: "Wählen Sie zuerst eine Tagesart und fügen Sie dann eine Notiz hinzu.",
+    formerCompanyDays: "Sie haben {company} verlassen. Die {count} dort erfassten Tage gehören weiterhin Ihnen: Sie können sie in Ihrem Konto ansehen, exportieren oder löschen.",
     daysPerWeek: "Oder Tage pro Woche wählen",
     daysPerWeekHint: "Füllt die Jahreszahl aus: {default} × Tage ÷ 5, gleich skaliert wie der Beschäftigungsgrad. Das ist ein Ausgangswert: Verwenden Sie die Zahl aus Ihrem Vertrag, wenn Sie sie haben.",
     title: 'Ihr Tagesprotokoll',
@@ -430,7 +434,7 @@ const de: Dict = {
       'In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage seiner Mitarbeitenden erfasst werden. Der Arbeitgeber ist daher Verantwortlicher für diese Tagesprotokolle und deren Nutzung durch HR, einschliesslich der Rechtsgrundlage, und BorderDay bearbeitet sie für ihn als Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Fragen dazu, warum Ihr Arbeitgeber diese Tage erfasst oder welche Unterlagen er aufbewahren muss, richten Sie zuerst an ihn; an privacy@borderday.com gesendete Anfragen leiten wir weiter. Der öffentliche Auftragsverarbeitungsvertrag für Unternehmenskonten steht unter /dpa/ (verlinkt von Preisen, Unternehmensanmeldung und den Nutzungsbedingungen).',
     s1Title: 'Was wir erheben',
     s1Body:
-      'Kostenlose Vorschau, auf Ihrem Gerät: Grenzroute, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), ob es ein halber Tag war, Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen. Einzelplan: Grenzroute, Art und Datum jedes Tages sowie Markierungen halber Tage und auswärtiger Übernachtung werden in Ihrem Konto gespeichert. Notizen und die übrigen Felder bleiben auf Ihrem Gerät. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzroute, Tagesarten und Daten, Markierungen halber Tage und auswärtiger Übernachtung, Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
+      'Kostenlose Vorschau, auf Ihrem Gerät: Grenzroute, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), ob es ein halber Tag war, Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen. Einzelplan: Grenzroute, Art und Datum jedes Tages Markierungen halber Tage und auswärtiger Übernachtung sowie Notizen werden in Ihrem Konto gespeichert. Die übrigen Felder bleiben auf Ihrem Gerät. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzroute, Tagesarten und Daten, Markierungen halber Tage und auswärtiger Übernachtung, private Notizen (mit dem Tag gespeichert, HR nie angezeigt), Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
     s2Title: 'Was wir nicht erheben',
     s2Body:
       'Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und halber Tag und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat. HR sieht zudem Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, und Anzahlen: dieselben Zähler wie die Mitarbeitenden. Keine IP-Adresse wird als Arbeitsort gespeichert. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
@@ -464,7 +468,7 @@ const de: Dict = {
       },
       {
         purpose: 'Einzelplan: Ihr Tagesprotokoll und Ihre Zähler',
-        data: 'In Ihrem Konto: Grenzroute, Tagesarten und Daten, Markierungen halber Tage und auswärtiger Übernachtung. Nur auf Ihrem Gerät: Notizen, Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1, Status Frankreich–Belgien vor 2012',
+        data: 'In Ihrem Konto: Grenzroute, Tagesarten und Daten, Markierungen halber Tage und auswärtiger Übernachtung, Notizen. Nur auf Ihrem Gerät: Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1, Status Frankreich–Belgien vor 2012',
         basis: 'Vertrag (Art. 6 Abs. 1 lit. b)',
         recipients: 'Supabase',
         transfer: 'Hosting in der EU (eu-central-1); Anbieter mit Sitz in den USA; Garantien siehe unten',
@@ -764,11 +768,19 @@ const de: Dict = {
     back: 'Angaben ändern',
   },
   account: {
+    formerTitle: "Tage aus Unternehmen, die Sie verlassen haben",
+    formerBody: "Sie sind nicht mehr Mitglied dieser Unternehmen, können die von Ihnen erfassten Tage aber weiterhin ansehen, exportieren und löschen. Sie sind im Export oben enthalten. Bis Sie sie löschen oder die Aufbewahrungsfrist des Unternehmens endet, kann auch das Unternehmen sie noch sehen.",
+    formerSummary: "{company}: {count} Tage, {first} bis {last}",
+    formerDelete: "Meine Tage von {company} löschen",
+    formerDeleteConfirm: "Die {count} bei {company} erfassten Tage löschen? Sie werden auch für das Unternehmen entfernt. Das kann nicht rückgängig gemacht werden.",
+    formerDeleted: "Ihre Tage von {company} sind gelöscht.",
+    formerError: "Das hat nicht geklappt. Versuchen Sie es erneut oder schreiben Sie an privacy@borderday.com.",
+    noteColumn: "Notiz",
     title: 'Ihr Konto',
     signedInAs: 'Angemeldet als {email}',
     exportTitle: 'Gespeicherte Tagesprotokolle exportieren',
     exportBody:
-      'Lädt herunter, was auf unseren Servern zu Ihrem Konto gespeichert ist: das Tagesprotokoll Ihres Einzelplans sowie Ihr eigenes Protokoll und Ihre Einstellungen in jedem Unternehmen, dem Sie angehören.',
+      'Lädt herunter, was auf unseren Servern zu Ihrem Konto gespeichert ist: das Tagesprotokoll Ihres Einzelplans sowie Ihr eigenes Protokoll und Ihre Einstellungen in jedem Unternehmen, dem Sie angehören, Ihre privaten Notizen sowie die in verlassenen Unternehmen erfassten Tage.',
     exportError: 'Der Export konnte nicht vorbereitet werden. Bitte versuchen Sie es erneut.',
     deviceTitle: 'Nur dieses Gerät',
     deviceBody:

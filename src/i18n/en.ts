@@ -276,6 +276,10 @@ const en = {
     status_floor_no_data: 'No days logged',
   },
   app: {
+    noteLabel: "Private note",
+    noteHint: "In BorderDay only you can see this: HR and company exports never show it. It is deleted with the day. Avoid health details or anything else you would not want stored.",
+    noteNeedsType: "Pick a day type first, then add a note.",
+    formerCompanyDays: "You have left {company}. The {count} days you logged there are still yours: see, export or delete them in your account.",
     daysPerWeek: "Or pick days a week",
     daysPerWeekHint: "Fills in the yearly figure: {default} × days ÷ 5, the same scaling as the employment percentage. It is a starting point: use the figure from your contract if you have it.",
     title: 'Your day log',
@@ -423,7 +427,7 @@ const en = {
       'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. The public data processing agreement for company accounts is at /dpa/ (linked from Pricing, company sign-up and the Terms).',
     s1Title: 'What we collect',
     s1Body:
-      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether it was a half day, whether you marked a night away for work, optional notes, contractual working days per year, employment percentage, A1 record and pre-2012 France–Belgium status if you enter them. Individual plan: border route, each day’s type and date, and half-day and night-away marks are saved to your account. Notes and the other fields stay on your device. Company accounts: company name, member emails and names, roles, border route, day types and dates, half-day and night-away marks, working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
+      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether it was a half day, whether you marked a night away for work, optional notes, contractual working days per year, employment percentage, A1 record and pre-2012 France–Belgium status if you enter them. Individual plan: border route, each day’s type and date, half-day and night-away marks and notes are saved to your account. The other fields stay on your device. Company accounts: company name, member emails and names, roles, border route, day types and dates, half-day and night-away marks, private notes (saved with the day, never shown to HR), working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
     s2Title: 'What we do not collect',
     s2Body:
       'No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee. HR also sees working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and counts: the same counters the employee sees. No IP address is stored as a work location. No advertising trackers. No sale of personal data.',
@@ -457,7 +461,7 @@ const en = {
       },
       {
         purpose: 'Individual plan: your day log and counters',
-        data: 'In your account: border route, day types and dates, half-day and night-away marks. On your device only: notes, working days, contract days, employment percentage, A1 record, pre-2012 France–Belgium status',
+        data: 'In your account: border route, day types and dates, half-day and night-away marks, notes. On your device only: working days, contract days, employment percentage, A1 record, pre-2012 France–Belgium status',
         basis: 'Contract (Art. 6(1)(b))',
         recipients: 'Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
@@ -754,11 +758,19 @@ const en = {
     back: 'Change details',
   },
   account: {
+    formerTitle: "Days from companies you have left",
+    formerBody: "You are no longer a member of these companies, but the days you logged are still yours to see, export and delete. They are in the export above. Until you delete them or the company’s retention period ends, the company can also still see them.",
+    formerSummary: "{company}: {count} days, {first} to {last}",
+    formerDelete: "Delete my days from {company}",
+    formerDeleteConfirm: "Delete the {count} days you logged at {company}? They are also removed for the company. This cannot be undone.",
+    formerDeleted: "Your days from {company} are deleted.",
+    formerError: "That did not work. Try again, or write to privacy@borderday.com.",
+    noteColumn: "Note",
     title: 'Your account',
     signedInAs: 'Signed in as {email}',
     exportTitle: 'Export your saved day logs',
     exportBody:
-      'Downloads what is saved on our servers for your account: your individual plan’s day log, and your own day log and settings in each company you belong to.',
+      'Downloads what is saved on our servers for your account: your individual plan’s day log, and your own day log and settings in each company you belong to, your private notes, and the days you logged at companies you have left.',
     exportError: 'Could not prepare the export. Try again.',
     deviceTitle: 'This device only',
     deviceBody: 'Days from the free preview, stored in this browser and not on our servers.',

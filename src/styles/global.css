@@ -40,34 +40,35 @@ img { max-width: 100%; height: auto; }
 }
 .site-header .inner {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 0.75rem; padding: 0.75rem 0;
+  gap: 0.85rem; padding: 0.85rem 0;
   flex-wrap: nowrap;
+  min-height: 84px;
 }
 .brand {
   display: flex; align-items: center; gap: 0.5rem;
   flex-shrink: 0;
 }
 .brand img {
-  height: 40px;
+  height: 58px; /* ~1.45× prior 40px mark+wordmark */
   width: auto;
   max-width: none; /* override global img { max-width:100% } so wordmark is never cropped */
   display: block;
   flex-shrink: 0;
 }
-.nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.65rem 0.85rem; min-width: 0; }
-.nav a { color: var(--ink); font-weight: 500; font-size: 0.95rem; white-space: nowrap; }
+.nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.7rem 1rem; min-width: 0; }
+.nav a { color: var(--ink); font-weight: 500; font-size: 1.05rem; white-space: nowrap; }
 .nav a.active { color: var(--primary); }
 .lang-switch {
-  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 0.35rem;
+  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 0.4rem;
   flex-shrink: 0; white-space: nowrap; margin-left: 0.25rem;
 }
 .lang-switch select {
   border: 1px solid var(--border); border-radius: 8px;
-  padding: 0.35rem 0.5rem; background: var(--surface); color: var(--ink);
-  max-width: 9.5rem;
+  padding: 0.45rem 0.6rem; background: var(--surface); color: var(--ink);
+  font-size: 0.95rem; max-width: 10.5rem;
 }
 .lang-switch .btn {
-  padding: 0.35rem 0.7rem; font-size: 0.85rem; white-space: nowrap;
+  padding: 0.45rem 0.85rem; font-size: 0.95rem; white-space: nowrap;
 }
 
 .btn {
@@ -208,19 +209,45 @@ select.border-select, input.num {
 main:focus { outline: none; }
 .nav-toggle { display: none; }
 
-@media (max-width: 640px) {
-  .site-header .inner { flex-wrap: wrap; }
-  .nav-toggle { display: inline-flex; order: 2; }
+/* Below desktop: hamburger so a larger logo/nav never wraps the top bar */
+@media (max-width: 1199px) {
+  .site-header .inner {
+    /* wrap only so an opened menu can drop below; closed chrome stays one line */
+    flex-wrap: wrap;
+    min-height: 72px;
+    padding: 0.65rem 0;
+    gap: 0.6rem;
+  }
+  .brand img { height: 48px; }
+  .nav-toggle { display: inline-flex; order: 2; flex-shrink: 0; padding: 0.4rem 0.7rem; font-size: 0.9rem; }
   .lang-switch { order: 3; margin-left: auto; }
-  .nav { order: 4; flex-wrap: wrap; }
+  .lang-switch .lang-apply { display: none; } /* select onChange applies */
+  .lang-switch select { max-width: 9rem; }
+  .nav {
+    order: 4; flex-wrap: wrap;
+    /* Closed: keep chrome on one line — hide inline nav links until opened */
+  }
+  .nav:not(.open) { display: none; }
+  .nav.open {
+    display: flex; flex-direction: column; align-items: flex-start;
+    width: 100%; flex-basis: 100%;
+  }
   .nav .hide-sm { display: none; }
-  .nav.open { flex-direction: column; align-items: flex-start; width: 100%; }
   .nav.open .hide-sm { display: inline; }
   .day-type-grid { grid-template-columns: 1fr; }
 }
-@media (min-width: 641px) and (max-width: 1100px) {
-  .nav a { font-size: 0.88rem; }
-  .lang-switch select { max-width: 8.5rem; }
+@media (max-width: 640px) {
+  .site-header .inner { min-height: 64px; padding: 0.5rem 0; gap: 0.45rem; }
+  .brand img { height: 46px; } /* bigger than prior 40px mobile */
+  .lang-switch select { max-width: 7.75rem; font-size: 0.85rem; padding: 0.35rem 0.4rem; }
+  .nav-toggle { padding: 0.35rem 0.55rem; font-size: 0.85rem; }
+}
+@media (min-width: 1200px) and (max-width: 1359px) {
+  /* Slightly tighter gaps so NL/DE still fit on one line at 1280 */
+  .nav { gap: 0.55rem 0.75rem; }
+  .nav a { font-size: 1rem; }
+  .lang-switch { gap: 0.3rem; margin-left: 0.1rem; }
+  .lang-switch select { max-width: 9.75rem; }
 }
 
 /* Employer-first */

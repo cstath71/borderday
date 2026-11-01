@@ -385,3 +385,27 @@ describe('language switcher path rewrite (5×5)', () => {
     expect(formStart).toBeGreaterThan(navEnd);
   });
 });
+
+describe('header sizing (no wrap)', () => {
+  const css = readFileSync(join(__dirname, '../src/styles/global.css'), 'utf8');
+  const layout = readFileSync(join(__dirname, '../src/components/Layout.tsx'), 'utf8');
+
+  it('scales logo and desktop header height, keeps nowrap on the desktop bar', () => {
+    expect(css).toMatch(/\.brand img\s*\{[^}]*height:\s*58px/);
+    expect(css).toMatch(/\.site-header \.inner\s*\{[^}]*flex-wrap:\s*nowrap/);
+    expect(css).toMatch(/\.site-header \.inner\s*\{[^}]*min-height:\s*84px/);
+    expect(css).toMatch(/\.nav a\s*\{[^}]*font-size:\s*1\.05rem/);
+    expect(css).toMatch(/\.nav\s*\{[^}]*flex-wrap:\s*nowrap/);
+    expect(css).toMatch(/\.lang-switch\s*\{[^}]*flex-wrap:\s*nowrap/);
+    expect(layout).toMatch(/width=\{232\}\s+height=\{68\}/);
+  });
+
+  it('collapses into the mobile menu below 1200px so mid widths never wrap', () => {
+    expect(css).toMatch(/@media \(max-width:\s*1199px\)/);
+    expect(css).toMatch(/\.nav:not\(\.open\)\s*\{\s*display:\s*none/);
+    expect(css).toMatch(/\.brand img\s*\{\s*height:\s*46px/);
+    expect(css).toMatch(/\.lang-switch \.lang-apply\s*\{\s*display:\s*none/);
+    expect(layout).toContain('lang-apply');
+    expect(layout).toContain("matchMedia('(max-width: 1199px)')");
+  });
+});

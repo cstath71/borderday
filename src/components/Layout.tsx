@@ -26,7 +26,7 @@ export default function Layout() {
       <header className="site-header">
         <div className="container inner">
           <Link to={`/${lang}/`} className="brand" aria-label={d.nav.homeLabel}>
-            <img src="/logo-header.png" alt="BorderDay" width={160} height={47} />
+            <img src="/logo-header.png" alt="BorderDay" width={232} height={68} />
           </Link>
           <button
             type="button"
@@ -77,7 +77,17 @@ export default function Layout() {
               <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>
                 {d.lang.label}
               </span>
-              <select name="lang" aria-label={d.lang.label} defaultValue={lang}>
+              <select
+                name="lang"
+                aria-label={d.lang.label}
+                defaultValue={lang}
+                onChange={(e) => {
+                  // Below the desktop breakpoint the Apply button is hidden — switch immediately.
+                  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 1199px)').matches) {
+                    e.currentTarget.form?.requestSubmit();
+                  }
+                }}
+              >
                 {LANGS.map((l) => (
                   <option key={l} value={l}>
                     {d.lang[l]}
@@ -85,7 +95,7 @@ export default function Layout() {
                 ))}
               </select>
             </label>{' '}
-            <button type="submit" className="btn btn-ghost">
+            <button type="submit" className="btn btn-ghost lang-apply">
               {d.lang.apply}
             </button>
           </form>

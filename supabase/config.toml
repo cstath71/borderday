@@ -19,3 +19,7 @@ verify_jwt = false
 [functions.bd-auth-send-email]
 # Auth Send Email Hook verifies with SEND_EMAIL_HOOK_SECRET (Standard Webhooks), not a user JWT.
 verify_jwt = false
+
+[functions.bd-stripe-webhook]
+# Stripe signs the body; there is no user JWT. A plain deploy with the default (true) would 401 every delivery.
+verify_jwt = false

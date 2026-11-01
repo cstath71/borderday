@@ -185,6 +185,7 @@ export function createInvitation(
     invitedBy: session.userId,
     createdAt: nowIso(),
     expiresAt: new Date(Date.now() + 14 * 864e5).toISOString(),
+    lang: 'en',
   };
   db.invitations.push(inv);
   save(db);
@@ -513,6 +514,7 @@ export function seedDemoCompany(): { companyId: string } {
     invitedBy: owner.id,
     createdAt: nowIso(),
     expiresAt: new Date(Date.now() + 14 * 864e5).toISOString(),
+    lang: 'en',
   });
 
   db.session = { userId: owner.id, email: owner.email };

@@ -10,7 +10,7 @@ import { accountExportCsv, collectAccountExport, type AccountExport } from '../s
 import { rowsToCsv } from '../src/company/dashboardMath';
 
 const auth = vi.hoisted(() => ({
-  value: { ready: true, configured: true, user: null as null | { id: string; email: string }, signOut: vi.fn() },
+  value: { ready: true, configured: true, user: null as null | { id: string; email: string }, signingOut: false, signOut: vi.fn(), signOutAndGo: vi.fn() },
 }));
 vi.mock('../src/lib/auth', () => ({ useAuth: () => auth.value, AuthProvider: ({ children }: any) => children }));
 vi.mock('../src/lib/supabaseMock', () => {
@@ -62,6 +62,7 @@ function open(path: string) {
 beforeEach(() => {
   vi.clearAllMocks();
   auth.value.user = null;
+  auth.value.signingOut = false;
   mocked.listMyCompanies.mockResolvedValue([]);
   mocked.hasIndividualAccess.mockResolvedValue(false);
   mocked.hasCancellableIndividualPlan.mockResolvedValue(false);
@@ -243,6 +244,28 @@ describe('H4 Account page', () => {
       ],
     };
     expect(accountExportCsv(data)).toContain(`"'=HYPERLINK(""x"")"`);
+  });
+});
+
+describe('E27: sign out goes home without sign-in flash', () => {
+  it('account Sign out calls signOutAndGo', async () => {
+    auth.value.user = { id: 'u1', email: 'me@example.test' };
+    auth.value.signingOut = false;
+    auth.value.signOutAndGo = vi.fn();
+    open('/en/account');
+    await screen.findByRole('heading', { name: en.account.exportTitle });
+    const btns = screen.getAllByRole('button', { name: en.auth.signOut });
+    expect(btns.length).toBeGreaterThanOrEqual(1);
+    fireEvent.click(btns[btns.length - 1]);
+    expect(auth.value.signOutAndGo).toHaveBeenCalledWith('en');
+  });
+
+  it('while signingOut the account guard does not bounce to sign-in', async () => {
+    auth.value.user = null;
+    auth.value.signingOut = true;
+    open('/en/account');
+    expect(screen.queryByRole('heading', { name: en.auth.signInTitle })).toBeNull();
+    expect(screen.getByRole('status').textContent).toBeTruthy();
   });
 });
 

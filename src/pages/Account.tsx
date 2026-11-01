@@ -120,6 +120,7 @@ export default function Account() {
     };
   }, [userId]);
 
+  if (auth.signingOut) return <p role="status">{d.company.loading}</p>;
   if (auth.ready && !auth.user) {
     return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/account`)}`} replace />;
   }
@@ -158,9 +159,7 @@ export default function Account() {
               type="button"
               className="btn btn-secondary"
               onClick={() => {
-                void auth.signOut().then(() => {
-                  window.location.assign(`/${lang}/`);
-                });
+                void auth.signOutAndGo(lang);
               }}
             >
               {d.auth.signOut}

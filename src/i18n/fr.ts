@@ -188,13 +188,13 @@ const fr: Dict = {
     ch_fr_1983_missions_note:
       'Missions temporaires en France ou dans un État tiers : jusqu’à 10 jours par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. Temps partiel ou année partielle : les 10 jours sont réduits au prorata et arrondis vers le haut. Tout jour de mission en France au-delà met fin au régime de 1983. BorderDay ne distingue pas la France d’un État tiers : traitez chaque jour de mission en excès comme un risque. Sources : fiche ESTV ; accord amiable 1983 impots.gouv.fr.',
     ch_fr_1983_nights_note:
-      'Pas plus de 45 nuits par an hors du domicile pour le travail en Suisse ou dans un État tiers (inclus), selon l’accord frontalier de 1983 et la clarification des autorités compétentes de 2005. BorderDay ne compte que les jours marqués « nuit hors du domicile pour le travail » sur un jour sur site ou en déplacement. Au-delà, le régime de 1983 cesse. Sources : texte de l’accord de 1983 ; BOFiP 14 A-5-05 (45 nuitées) ; Canton du Jura ; fiche ESTV.',
+      'Pas plus de 45 nuits par an hors du domicile pour le travail en Suisse ou dans un État tiers (inclus), selon l’accord frontalier de 1983 et la clarification des autorités compétentes de 2005. Le BOFiP précise aussi que le séjour dans l’État d’exercice ne doit pas excéder une nuitée par semaine de travail. Temps partiel sur toute l’année : les 45 sont réduits proportionnellement et arrondis à l’inférieur (80 % = 36, 70 % = 31), selon votre taux d’emploi. Année incomplète : le BOFiP retient 20 % des journées de travail ; BorderDay ne l’applique pas, réservez donc le taux d’emploi au temps partiel et vérifiez votre limite auprès de votre autorité fiscale. BorderDay ne compte que les jours marqués « nuit hors du domicile pour le travail » sur un jour sur site ou en déplacement. Au-delà, le régime de 1983 cesse. Sources : texte de l’accord de 1983 ; BOFiP 14 A-5-05 (45 nuitées) ; Canton du Jura ; fiche ESTV.',
     ch_fr_1983_over_40:
       'Au-delà de 40 % : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
     ch_fr_1983_over_mission:
       'Jours de mission au-delà du plafond de 10 (et de ce qui rentre encore sous 40 %) : tout jour de ce type effectué en France met fin au régime de 1983. BorderDay ne distingue pas la France d’un État tiers. Vérifiez auprès de votre autorité fiscale.',
     ch_fr_1983_over_45:
-      'Au-delà de 45 nuits de travail hors du domicile : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
+      'Au-delà de {limit} nuits de travail hors du domicile : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
     ch_fr_1983_mission_excess:
       'Sur vos jours de mission, {counted} comptent dans les 40 % et {excess} non. Tout jour en excès en France met fin au régime de 1983 ; BorderDay ne distingue pas la France d’un État tiers.',
     ch_fr_1983_value: 'Voir les compteurs 40 % / 10 missions / 45 nuits',

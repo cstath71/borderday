@@ -406,7 +406,7 @@ export function evaluateCounter(
   const ratio = limit > 0 ? used / limit : null;
   let status = statusFor(ratio, counter);
   if (status === 'at_limit') messages.push({ key: 'at_limit_note', tone: 'warn' });
-  if (status === 'over' && counter.overKey) messages.push({ key: counter.overKey, tone: 'warn' });
+  if (status === 'over' && counter.overKey) messages.push({ key: counter.overKey, tone: 'warn', vars: { limit } });
 
   if (counter.missionRole === 'missions' && shareCounter) {
     const split = missionSplit();

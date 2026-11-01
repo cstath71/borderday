@@ -183,13 +183,13 @@ const en = {
     ch_fr_1983_missions_note:
       'Temporary missions in France or a third State: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Any excess mission day in France ends the 1983 regime. BorderDay cannot tell France from a third state, so treat every excess mission day as a risk. Sources: ESTV practical sheet; impots.gouv.fr 1983 interpretative agreement.',
     ch_fr_1983_nights_note:
-      'No more than 45 nights a year spent away from home for work in Switzerland or a third state (inclusive), under the 1983 frontier agreement and the 2005 competent-authority clarification. BorderDay counts only days you mark “stayed away overnight for work” on an on-site or trip day. Excess nights end the 1983 regime. Sources: 1983 agreement text; BOFiP 14 A-5-05 (45 nuitées); Canton of Jura; ESTV practical sheet.',
+      'No more than 45 nights a year spent away from home for work in Switzerland or a third state (inclusive), under the 1983 frontier agreement and the 2005 competent-authority clarification. BOFiP also says a stay in the work state should not exceed one night per working week. Part-time for the full year: the 45 is reduced in proportion and rounded down (80% = 36, 70% = 31), using your employment percentage. Part-year: BOFiP uses 20% of working days instead; BorderDay does not apply this, so use the percentage for part-time only and check your own limit with your tax authority. BorderDay counts only days you mark “stayed away overnight for work” on an on-site or trip day. Excess nights end the 1983 regime. Sources: 1983 agreement text; BOFiP 14 A-5-05 (45 nuitées); Canton of Jura; ESTV practical sheet.',
     ch_fr_1983_over_40:
       'Above 40%: the 1983 frontier regime is lost. Check with your tax authority.',
     ch_fr_1983_over_mission:
       'Mission days over the 10-day cap (and over what still fits under 40%): any of those days that took place in France ends the 1983 regime. BorderDay cannot tell France from a third state. Check with your tax authority.',
     ch_fr_1983_over_45:
-      'Above 45 work nights away: the 1983 frontier regime is lost. Check with your tax authority.',
+      'Above {limit} work nights away: the 1983 frontier regime is lost. Check with your tax authority.',
     ch_fr_1983_mission_excess:
       'Of your mission days, {counted} count inside the 40% and {excess} do not. Any excess day in France ends the 1983 regime; BorderDay cannot tell France from a third state.',
     ch_fr_1983_value: 'See 40% / 10 mission / 45 night counters',

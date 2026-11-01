@@ -850,3 +850,40 @@ describe('R-h9: dayShare and LU fractionCountsAsFull', () => {
   });
 });
 
+
+describe('basel_fr 45 nights: part-time reduction (C1, BOFiP 14 A-5-05)', () => {
+  const pack = getBorderPack('basel_fr')!;
+  const nights = counterOf(pack, 'basel_fr_tax_nights_45');
+  const at = (count: number, employmentPercent?: number) =>
+    evaluateCounter(pack, nights, run(count, 'onsite', '2026-01-01', { overnightAway: true }), {
+      year: 2026,
+      annualWorkingDays: 240,
+      profile: employmentPercent === undefined ? {} : { employmentPercent },
+    });
+
+  it.each([
+    [50, 22],
+    [80, 36],
+    [70, 31],
+    [100, 45],
+  ])('at %i%% the limit is %i, rounded down', (pct, limit) => {
+    expect(at(1, pct).limit).toBe(limit);
+    expect(at(limit, pct).status).toBe('at_limit');
+    expect(at(limit + 1, pct).status).toBe('over');
+  });
+
+  it('turns the audit scenario red: 50% with 30 nights is over 22, and the message names the reduced limit', () => {
+    const r = at(30, 50);
+    expect(r.used).toBe(30);
+    expect(r.limit).toBe(22);
+    expect(r.status).toBe('over');
+    expect(r.messages.find((m) => m.key === 'ch_fr_1983_over_45')?.vars).toEqual({ limit: 22 });
+    expect(keysOf(r)).toContain('prorate_applied');
+  });
+
+  it('asks for the percentage rather than assuming a reduction, and invents no part-year figure', () => {
+    const r = at(10);
+    expect(r.limit).toBe(45);
+    expect(r.messages.find((m) => m.key === 'prorate_missing')?.vars).toEqual({ limit: 45 });
+  });
+});

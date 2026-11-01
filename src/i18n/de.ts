@@ -189,13 +189,13 @@ const de: Dict = {
     ch_fr_1983_missions_note:
       'Befristete Einsätze in Frankreich oder einem Drittstaat: bis zu 10 Tage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit noch Platz haben. Teilzeit oder Teiljahr: die 10 Tage werden anteilig gekürzt und aufgerundet. Jeder überschüssige Einsatztag in Frankreich beendet das Regime von 1983. BorderDay unterscheidet Frankreich nicht von einem Drittstaat: behandeln Sie jeden überschüssigen Einsatztag als Risiko. Quellen: ESTV-Merkblatt; Verständigungsvereinbarung 1983 impots.gouv.fr.',
     ch_fr_1983_nights_note:
-      'Höchstens 45 Nächte pro Jahr auswärts für die Arbeit in der Schweiz oder einem Drittstaat (einschliesslich), nach dem Grenzgängerabkommen von 1983 und der Klarstellung der zuständigen Behörden von 2005. BorderDay zählt nur Tage, die Sie auf einem Präsenz- oder Reisetag als «beruflich auswärts übernachtet» markieren. Darüber hinaus endet das Regime von 1983. Quellen: Text des Abkommens von 1983; BOFiP 14 A-5-05 (45 nuitées); Kanton Jura; ESTV-Praxisblatt.',
+      'Höchstens 45 Nächte pro Jahr auswärts für die Arbeit in der Schweiz oder einem Drittstaat (einschliesslich), nach dem Grenzgängerabkommen von 1983 und der Klarstellung der zuständigen Behörden von 2005. Laut BOFiP soll der Aufenthalt im Tätigkeitsstaat zudem eine Nacht pro Arbeitswoche nicht überschreiten. Teilzeit über das ganze Jahr: die 45 werden anteilig gekürzt und abgerundet (80 % = 36, 70 % = 31), anhand Ihres Beschäftigungsgrads. Unterjährige Beschäftigung: das BOFiP nimmt stattdessen 20 % der Arbeitstage; BorderDay wendet das nicht an, tragen Sie den Beschäftigungsgrad daher nur für Teilzeit ein und klären Sie Ihre Grenze mit Ihrer Steuerbehörde. BorderDay zählt nur Tage, die Sie auf einem Präsenz- oder Reisetag als «beruflich auswärts übernachtet» markieren. Darüber hinaus endet das Regime von 1983. Quellen: Text des Abkommens von 1983; BOFiP 14 A-5-05 (45 nuitées); Kanton Jura; ESTV-Praxisblatt.',
     ch_fr_1983_over_40:
       'Über 40 %: das Grenzgängerregime von 1983 entfällt. Fragen Sie Ihre Steuerbehörde.',
     ch_fr_1983_over_mission:
       'Einsatztage über der 10-Tage-Grenze (und über dem, was noch unter 40 % Platz hat): jeder solche Tag in Frankreich beendet das Regime von 1983. BorderDay unterscheidet Frankreich nicht von einem Drittstaat. Fragen Sie Ihre Steuerbehörde.',
     ch_fr_1983_over_45:
-      'Über 45 Arbeitsnächte auswärts: das Grenzgängerregime von 1983 entfällt. Fragen Sie Ihre Steuerbehörde.',
+      'Über {limit} Arbeitsnächte auswärts: das Grenzgängerregime von 1983 entfällt. Fragen Sie Ihre Steuerbehörde.',
     ch_fr_1983_mission_excess:
       'Von Ihren Einsatztagen zählen {counted} innerhalb der 40 % und {excess} nicht. Jeder überschüssige Tag in Frankreich beendet das Regime von 1983; BorderDay unterscheidet Frankreich nicht von einem Drittstaat.',
     ch_fr_1983_value: 'Siehe Zähler 40 % / 10 Einsätze / 45 Nächte',

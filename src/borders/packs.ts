@@ -344,6 +344,9 @@ export const BORDER_PACKS: BorderPack[] = [
         limit: 45,
         inclusive: true,
         countsOvernight: true,
+        // BOFiP 14 A-5-05: part-time all year, proportional and rounded down (80% → 36, 70% → 31).
+        // Its part-year rule (20% of working days) is a different formula and is not applied here.
+        prorate: 'floor',
         unit: 'days_per_year',
         countsAs: {
           telework: 'none',

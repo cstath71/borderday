@@ -94,6 +94,9 @@ describe('border-route naming (T56/T59)', () => {
       expect(blob, lang).not.toMatch(/pacchetto confine|pacchetto di confine|pacchetto frontiera/);
       expect(blob, lang).not.toMatch(/border pack/i);
     }
+    // The German and Italian leftovers the singular patterns above could not catch (#9, #10).
+    expect(JSON.stringify(de)).not.toMatch(/\bPaket|-Paket|Grenzpendler/);
+    expect(JSON.stringify(itDict)).not.toMatch(/pacchett[oi] (di )?(confine|frontiera)/);
     expect(en.company.pickBorder).toMatch(/route/i);
     expect(fr.company.pickBorder).toMatch(/itinéraire/i);
     expect(de.company.pickBorder).toMatch(/Grenzroute/);
@@ -351,7 +354,8 @@ describe('NL locale is fully translated (no EN fallback body)', () => {
 
   it('Belgian tax authority wording uses FOD Financiën where Belgium is named', () => {
     expect(nl.counters.lu_be_over_34).toMatch(/FOD Financiën/);
-    expect(nl.counters.be_fr_pre2012_over).toMatch(/FOD Financiën/);
+    // A resident of France checks with their own tax authority (#35): no Belgian body here.
+    expect(nl.counters.be_fr_pre2012_over).not.toMatch(/FOD Financiën/);
   });
 
   it('NL SEO pages are not EN clones for home/pricing/faq', () => {

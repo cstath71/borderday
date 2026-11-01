@@ -43,7 +43,7 @@ const COPY = {
     fallback: "een bedrijf",
     intro: (company: string) => `U bent uitgenodigd om lid te worden van ${company} op BorderDay.`,
     notice:
-      "Als u lid wordt, kan het HR-team van uw werkgever uw naam, e-mail, grenscorridor, tewerkstellingspercentage en A1 indien ingevoerd zien, en per datum de dagsoort en nacht-uit ja/nee, plus uw tellers. Geen GPS of apparaatlocatie. Notities blijven privé.",
+      "Als u lid wordt, kan het HR-team van uw werkgever uw naam, e-mail, grensroute, tewerkstellingspercentage en A1 indien ingevoerd zien, en per datum het dagtype en overnachting elders ja/nee, plus uw tellers. Geen GPS of apparaatlocatie. Notities blijven privé.",
     accept: "Uitnodiging accepteren",
     privacy: "Privacyverklaring",
   },

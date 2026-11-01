@@ -438,7 +438,7 @@ export const PAGES = {
         'BorderDay accessibility statement: scope, current status and how to report barriers. Feedback: hello@borderday.com.',
       h1: 'Accessibility',
       summary:
-        'We aim for WCAG 2.2 Level AA. Automated axe scans of the main screens reported no violations on 31 October 2026; manual gaps remain and are listed on this page.',
+        'We aim for WCAG 2.1 Level AA. Automated axe scans of the main screens reported no violations on 31 October 2026; manual gaps remain and are listed on this page.',
       crumbs: [
         ['Home', ''],
         ['Accessibility', 'accessibility'],
@@ -450,7 +450,7 @@ export const PAGES = {
         'Déclaration d’accessibilité BorderDay : périmètre, état actuel et comment signaler un obstacle. Contact : hello@borderday.com.',
       h1: 'Accessibilité',
       summary:
-        'Nous visons le niveau AA des WCAG 2.2. Les scans axe des écrans principaux n’ont signalé aucune violation le 31 octobre 2026 ; des écarts manuels restent listés sur cette page.',
+        'Nous visons le niveau AA des WCAG 2.1. Les scans axe des écrans principaux n’ont signalé aucune violation le 31 octobre 2026 ; des écarts manuels restent listés sur cette page.',
       crumbs: [
         ['Accueil', ''],
         ['Accessibilité', 'accessibility'],
@@ -462,7 +462,7 @@ export const PAGES = {
         'BorderDay-Erklärung zur Barrierefreiheit: Geltungsbereich, aktueller Stand und Rückmeldung. Kontakt: hello@borderday.com.',
       h1: 'Barrierefreiheit',
       summary:
-        'Wir orientieren uns an WCAG 2.2 Stufe AA. Automatisierte axe-Scans meldeten am 31. Oktober 2026 keine Verstösse; manuelle Lücken stehen auf dieser Seite.',
+        'Wir orientieren uns an WCAG 2.1 Stufe AA. Automatisierte axe-Scans meldeten am 31. Oktober 2026 keine Verstösse; manuelle Lücken stehen auf dieser Seite.',
       crumbs: [
         ['Home', ''],
         ['Barrierefreiheit', 'accessibility'],
@@ -474,7 +474,7 @@ export const PAGES = {
         'Dichiarazione di accessibilità BorderDay: ambito, stato attuale e come segnalare una barriera. Contatto: hello@borderday.com.',
       h1: 'Accessibilità',
       summary:
-        'Miriamo al livello AA delle WCAG 2.2. Gli scan axe delle schermate principali non hanno segnalato violazioni il 31 ottobre 2026; le lacune manuali sono elencate in questa pagina.',
+        'Miriamo al livello AA delle WCAG 2.1. Gli scan axe delle schermate principali non hanno segnalato violazioni il 31 ottobre 2026; le lacune manuali sono elencate in questa pagina.',
       crumbs: [
         ['Home', ''],
         ['Accessibilità', 'accessibility'],
@@ -677,17 +677,17 @@ PAGES.privacy.nl = {
   description:
     'Wat BorderDay verwerkt, waarom, wie ontvangt, waar gegevens naartoe gaan en hoe lang ze worden bewaard. AVG en Zwitserse DSG. Geen GPS of apparaatlocatie.',
   h1: 'Privacyverklaring',
-  summary: 'Geen GPS of apparaatlocatie: HR ziet per datum de dagsoort en overnachting weg ja/nee, een landcategorie, nooit coördinaten. De werkgever is verwerkingsverantwoordelijke voor medewerkersdagboeken. Contact privacy@borderday.com.',
+  summary: 'Geen GPS of apparaatlocatie: HR ziet per datum het dagtype en overnachting elders ja/nee, een landcategorie, nooit coördinaten. De werkgever is verwerkingsverantwoordelijke voor de dagregistraties van medewerkers. Contact privacy@borderday.com.',
   crumbs: [
     ['Home', ''],
     ['Privacyverklaring', 'privacy'],
   ],
 };
 PAGES.terms.nl = {
-  title: 'BorderDay — Voorwaarden & impressum',
+  title: 'BorderDay — Voorwaarden & wettelijke vermeldingen',
   description:
-    'Voorwaarden, impressum en herroepingsrecht. Abonnementen via Stripe Managed Payments (Link). 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
-  h1: 'Voorwaarden & impressum',
+    'Voorwaarden, wettelijke vermeldingen en herroepingsrecht. Abonnementen via Stripe Managed Payments (Link). 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+  h1: 'Voorwaarden & wettelijke vermeldingen',
   summary:
     'Abonnementen starten met 7 dagen gratis proberen: daarna wordt het abonnement betaald tegen de vermelde prijs, met automatische incasso op dag 8 en verlenging tot u opzegt. Bedrijfsprijzen excl. btw; particulier incl. btw. EU-herroeping en opzegging staan op deze pagina beschreven.',
   crumbs: [
@@ -720,7 +720,7 @@ PAGES.withdrawal.nl = {
 };
 PAGES.accessibility.nl = {
   title: 'BorderDay — Toegankelijkheid',
-  description: 'Toegankelijkheidsverklaring voor borderday.com (richting WCAG 2.2 AA).',
+  description: 'Toegankelijkheidsverklaring voor borderday.com (richting WCAG 2.1 AA).',
   h1: 'Toegankelijkheid',
   summary: 'Korte openbare toegankelijkheidsverklaring voor BorderDay.',
 };
@@ -730,7 +730,7 @@ PAGES[''].nl = {
     'Dagtelling voor werkgevers van grensoverschrijdend personeel: socialezekerheidstellers op negen corridors, belastingtellers op zeven. Bedrijf vanaf €5/medewerker/maand (min. €39), excl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
   h1: 'Eén plek voor elke grens waarover uw mensen werken',
   summary:
-    'BorderDay helpt HR telewerk-, ter-plaatse- en reisdagen per medewerker bij te houden: socialezekerheidstellers op alle negen corridors in vijf regio’s, belastingtellers op zeven daarvan. Bedrijfsabonnement: €5 per actieve medewerker per maand (minimum €39), excl. btw; particulieren €4,99/maand of €49/jaar, incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding. Een registratietool — geen belasting- of juridisch advies.',
+    'BorderDay helpt HR telewerk-, ter-plaatse- en reisdagen per medewerker bij te houden: socialezekerheidstellers op alle negen corridors in vijf regio’s, belastingtellers op zeven daarvan. Bedrijfsabonnement: €5 per actieve medewerker per maand (minimum €39), excl. btw; particulieren €4,99/maand of €49/jaar, incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Een registratietool — geen belasting- of juridisch advies.',
   crumbs: [['Home', '']],
 };
 PAGES.pricing.nl = {
@@ -739,7 +739,7 @@ PAGES.pricing.nl = {
     'Bedrijf: €5 per actieve medewerker per maand, minimum €39; jaarlijks minimum €390. Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
   h1: 'Prijzen',
   summary:
-    'Bedrijf / HR: €5 per actieve medewerker per maand, minimum €39/maand (dekt tot 7 actieve medewerkers); jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding. Checkout via Stripe Managed Payments (verkocht via Link).',
+    'Bedrijf / HR: €5 per actieve medewerker per maand, minimum €39/maand (dekt tot 7 actieve medewerkers); jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Checkout via Stripe Managed Payments (verkocht via Link).',
   crumbs: [['Home', ''], ['Prijzen', 'pricing']],
 };
 PAGES.faq.nl = {
@@ -748,7 +748,7 @@ PAGES.faq.nl = {
     'Veelgestelde vragen over BorderDay: opslag, locatie, corridors, prijzen, betalingen en wat de tool niet dekt.',
   h1: 'FAQ',
   summary:
-    'BorderDay is een registratie- en herinneringstool, geen belasting- of juridisch advies. Met abonnement wordt het logboek in het account bewaard, de gratis preview blijft op het apparaat; geen GPS en geen apparaatlocatie. Negen corridors: socialezekerheidstellers op alle, belastingtellers op zeven. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding.',
+    'BorderDay is een registratie- en herinneringstool, geen belasting- of juridisch advies. Met abonnement wordt het logboek in het account bewaard, de gratis preview blijft op het apparaat; geen GPS en geen apparaatlocatie. Negen corridors: socialezekerheidstellers op alle, belastingtellers op zeven. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie.',
   crumbs: [['Home', ''], ['FAQ', 'faq']],
 };
 PAGES['for-individuals'].nl = {
@@ -757,7 +757,7 @@ PAGES['for-individuals'].nl = {
     'Registreer zelf telewerk- en reisdagen. €4,99/maand of €49/jaar incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
   h1: 'Registreer uw eigen grensdagen',
   summary:
-    'Medewerkers registreren zelf telewerk-, ter-plaatse-, reis- en niet-werkdagen. Socialezekerheidstellers op elke corridor, belastingtellers op zeven. Particulier abonnement: €4,99/maand of €49/jaar (incl. btw). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding. Gebruikt de werkgever BorderDay, aansluiten via de uitnodigingslink: dezelfde tellers als HR.',
+    'Medewerkers registreren zelf telewerk-, ter-plaatse-, reis- en niet-werkdagen. Socialezekerheidstellers op elke corridor, belastingtellers op zeven. Particulier abonnement: €4,99/maand of €49/jaar (incl. btw). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Gebruikt de werkgever BorderDay, aansluiten via de uitnodigingslink: dezelfde tellers als HR.',
   crumbs: [['Home', ''], ['Particulieren', 'for-individuals']],
 };
 PAGES.cancel.nl = {
@@ -775,7 +775,7 @@ PAGES['company/signup'].nl = {
     'Maak een bedrijfsaccount met e-mail of Google, nodig medewerkers uit, abonneer u onder Prijzen. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw.',
   h1: 'Bedrijfsaccount aanmaken',
   summary:
-    'Bedrijfsaccount met e-mail of Google aanmaken, medewerkers uitnodigen, onder Prijzen abonneren. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding.',
+    'Bedrijfsaccount met e-mail of Google aanmaken, medewerkers uitnodigen, onder Prijzen abonneren. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie.',
   crumbs: [['Home', ''], ['Bedrijfsaccount', 'company/signup']],
 };
 
@@ -925,7 +925,7 @@ FAQ.nl = [
   ],
   [
     'Wat kost BorderDay?',
-    'Bedrijf: €5 per actieve medewerker per maand met een maandelijks minimum van €39; jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding.',
+    'Bedrijf: €5 per actieve medewerker per maand met een maandelijks minimum van €39; jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie.',
   ],
   [
     'Hoe werken betalingen?',
@@ -1109,7 +1109,7 @@ export function llmsTxt() {
 > BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on seven. HR sees day types per date, night-away marks and counts, never GPS or device location.
 
 - Site: ${BASE}
-- Languages: English, French, German, Italian
+- Languages: English, French, German, Italian, Dutch
 - Corridors covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
 - Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
@@ -1127,6 +1127,7 @@ export function llmsTxt() {
 - ${BASE}/fr/ — French landing
 - ${BASE}/de/ — German landing
 - ${BASE}/it/ — Italian landing
+- ${BASE}/nl/ — Dutch landing
 - ${BASE}/en/pricing/ — Pricing
 - ${BASE}/en/faq/ — FAQ
 - ${BASE}/en/for-individuals/ — Individual plan

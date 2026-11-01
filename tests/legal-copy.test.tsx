@@ -261,7 +261,7 @@ describe('C6 withdrawal wording', () => {
       fr: /garantie volontaire de remboursement intégral de 14 jours/,
       de: /freiwillige 14-tägige Vollrückerstattungsgarantie/,
       it: /garanzia volontaria di rimborso integrale di 14 giorni/,
-      nl: /vrijwillige restitutiegarantie van 14 dagen/,
+      nl: /vrijwillige terugbetalingsgarantie van 14 dagen/,
     };
     for (const [lang, d] of dicts) {
       expect(d.terms.s5EffectsBody, lang).toMatch(expressTerms[lang]);

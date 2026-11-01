@@ -218,7 +218,7 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     'year',
   ];
   const disclaimer =
-    '# BorderDay working export — day types and counts only, never location. Not the annual telework-rate filing some cantons (e.g. AFC) require. Compute and submit that rate with your authority.';
+    '# BorderDay working export — day types and counts only, never location. Not the annual telework-rate filing some cantons require (e.g. Geneva, to its cantonal tax office, the AFC). Compute and submit that rate with your authority.';
   const filing =
     ' Dates we could verify: Geneva, first transmission to the AFC in January 2027 for 2026 data; Jura, attestation by 31 January following the fiscal period, from fiscal period 2026. Other cantons not verified.';
   const lines = [needsFilingNote(rows) ? disclaimer + filing : disclaimer, header.join(',')];

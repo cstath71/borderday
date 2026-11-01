@@ -3,7 +3,7 @@
 > BorderDay is an employer-first record-keeping and reminder tool for cross-border day counting. HR and employees track telework, on-site, trip and non-working days. Social-security telework counters run on all nine corridors; tax counters run on seven. HR sees day types per date, night-away marks and counts, never GPS or device location.
 
 - Site: https://borderday.com
-- Languages: English, French, German, Italian
+- Languages: English, French, German, Italian, Dutch
 - Corridors covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
 - Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
@@ -21,6 +21,7 @@
 - https://borderday.com/fr/ — French landing
 - https://borderday.com/de/ — German landing
 - https://borderday.com/it/ — Italian landing
+- https://borderday.com/nl/ — Dutch landing
 - https://borderday.com/en/pricing/ — Pricing
 - https://borderday.com/en/faq/ — FAQ
 - https://borderday.com/en/for-individuals/ — Individual plan

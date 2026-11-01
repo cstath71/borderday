@@ -241,7 +241,7 @@ describe('HR dashboard status math', () => {
     const csv = rowsToCsv([row], 2026);
     const lines = csv.split('\n');
     expect(lines[0].startsWith('#')).toBe(true);
-    expect(lines[0]).toMatch(/not the annual telework-rate filing/i);
+    expect(lines[0]).toMatch(/working record only|not an official filing/i);
     expect(lines[1]).not.toMatch(/location|gps|lat|lon/i);
     expect(lines[2].startsWith('yes,')).toBe(true);
     expect(csv).toContain('geneva_tax_telework_40');

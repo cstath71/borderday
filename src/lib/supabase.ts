@@ -24,8 +24,9 @@ export function siteOrigin(): string {
 }
 
 /**
- * Where Supabase sends the person back. Carrying locale and next in the URL makes a confirmation link
- * work on another device too. Needs `<site>/**` in the Supabase redirect allow list (docs/GOOGLE_OAUTH.md).
+ * Where Supabase sends the person back after email/OAuth. Locale and next ride in the URL so the
+ * destination is correct, but PKCE still requires the same browser that started sign-in (see Callback).
+ * Needs `<site>/**` in the Supabase redirect allow list (docs/GOOGLE_OAUTH.md).
  */
 export function authCallbackUrl(lang?: string, next?: string | null): string {
   const query = next ? `?next=${encodeURIComponent(next)}` : '';

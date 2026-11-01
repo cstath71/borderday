@@ -372,6 +372,7 @@ function mapInvite(row: any): Invitation {
     invitedBy: row.invited_by,
     createdAt: row.created_at,
     expiresAt: row.expires_at,
+    lang: row.lang || 'en',
   };
 }
 
@@ -397,14 +398,19 @@ export async function createInvite(
 
   // F10: reuse a pending invite for the same address instead of minting a new token.
   const pending = await listInvites(companyId, 'pending');
-  const existing = pending.find((i) => i.email.trim().toLowerCase() === normalized);
+  let existing = pending.find((i) => i.email.trim().toLowerCase() === normalized);
   if (existing) {
+    // Keep stored invite language in sync with the language HR chose for this send.
+    if (existing.lang !== lang) {
+      await c.from('bd_invitations').update({ lang }).eq('id', existing.id).eq('company_id', companyId);
+      existing = { ...existing, lang };
+    }
     return { invite: existing, reused: true, ...(await resendInvite(companyId, existing.id, lang)) };
   }
 
   const { data, error } = await c
     .from('bd_invitations')
-    .insert({ company_id: companyId, email: normalized, role, invited_by: await currentUserId() })
+    .insert({ company_id: companyId, email: normalized, role, invited_by: await currentUserId(), lang })
     .select('*')
     .single();
   if (error) throw error;

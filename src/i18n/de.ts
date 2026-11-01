@@ -456,7 +456,7 @@ const de: Dict = {
       'Checkout nutzt Stripe Managed Payments: Stripe übernimmt Merchant-of-Record-Funktionen und MWST/GST im Checkout; der Kunde kann Link als Merchant of Record sehen. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; eine Karte ist bei der Anmeldung nötig. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig (Einzelperson 4,99 €/Monat oder 49 €/Jahr inkl. MWST; Unternehmen 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €/Monat, oder mindestens 390 €/Jahr, zzgl. MWST), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Aktionscodes werden akzeptiert. Siehe Nutzungsbedingungen zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
     q8: 'Was deckt BorderDay nicht ab?',
     a8:
-      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die von manchen Kantonen verlangte jährliche Telearbeitsquote. Im Zweifel fragen Sie Ihre Behörde.',
+      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die jährliche Telearbeitsquoten-Bescheinigung, die alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen einreichen müssen (auch bei 0 %). Im Zweifel fragen Sie Ihre Behörde.',
   },
   privacy: {
     title: 'Datenschutz',
@@ -587,7 +587,7 @@ const de: Dict = {
       'Für ein Konto ist eine E-Mail-Adresse nötig, für die Zähler sind es Tagesdaten: Ohne sie kann der Dienst nicht erbracht werden. Beschäftigungsgrad, A1 und Notizen sind freiwillig, manche Grenzen sind ohne sie aber ungenauer. BorderDay trifft keine automatisierten Entscheidungen mit Rechtswirkung: Die Zähler rechnen nur mit den erfassten Tagen.',
     storageTitle: 'Speicherung auf Ihrem Gerät',
     storageBody:
-      'BorderDay setzt keine Cookies und verwendet keine Werbe- oder Analysetracker. Auf Ihrem Gerät speichert es nur, was die App braucht: IndexedDB für Tagesprotokoll und Einstellungen der kostenlosen Vorschau, localStorage für Ihre Anmeldesitzung und das Demo-Unternehmen sowie einen Service-Worker-Cache für den Offline-Start. Das ist für den Dienst unbedingt erforderlich. Nach Art. 45c FMG (Fernmeldegesetz / LTC) informieren wir Sie, dass diese Bearbeitung auf Ihrem Endgerät der Diensterbringung dient; Sie können sie ablehnen, indem Sie die Website-Daten löschen oder das Produkt nicht nutzen. Für diese unbedingt erforderlichen Speicherungen wird kein Einwilligungsbanner gezeigt. Sie können sie in den Browsereinstellungen löschen.',
+      'BorderDay setzt keine Cookies und verwendet keine Werbe- oder Analysetracker. Auf Ihrem Gerät speichert es nur, was die App braucht: IndexedDB für Tagesprotokoll und Einstellungen der kostenlosen Vorschau, localStorage für Ihre Anmeldesitzung, die zuletzt gewählte Sprache und das Demo-Unternehmen sowie einen Service-Worker-Cache für den Offline-Start. Das ist für den Dienst unbedingt erforderlich. Nach Art. 45c FMG (Fernmeldegesetz / LTC) informieren wir Sie, dass diese Bearbeitung auf Ihrem Endgerät der Diensterbringung dient; Sie können sie ablehnen, indem Sie die Website-Daten löschen oder das Produkt nicht nutzen. Für diese unbedingt erforderlichen Speicherungen wird kein Einwilligungsbanner gezeigt. Sie können sie in den Browsereinstellungen löschen.',
     s7Title: 'Transparenz Mitarbeitende / HR',
     s7Body:
       'Kein versteckter HR-Score. Die Zählerlogik (genutzte Tage, erlaubte Tage, Status) ist für Mitarbeitende und HR-Dashboard identisch.',
@@ -662,8 +662,7 @@ const de: Dict = {
     filterStatus: 'Nach Status filtern',
     filterAll: 'Alle',
     exportCsv: 'CSV exportieren',
-    exportCsvNote:
-      'Nur Arbeitsunterlage. Nicht die jährliche Telearbeitsquote, die manche Kantone verlangen (z. B. Genf bei seiner kantonalen Steuerverwaltung, der AFC) — diese Quote bei Ihrer Behörde berechnen und einreichen.',
+    exportCsvNote: 'Nur Arbeitsunterlage. Nicht die jährliche Bescheinigung der Telearbeitsquote, die alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen zu Beginn des Folgejahres bei der kantonalen Steuerbehörde einreichen müssen — auch bei 0 %. Erste Einreichung: Anfang 2027 für 2026. Genf und Waadt haben ein eigenes Formular (Genf AFC / ge.ch); sonst Bundesformular oder ELM/kantonales Portal. Diese Quote bei Ihrer Behörde berechnen und einreichen.',
     employees: 'Mitarbeitende',
     noEmployees: 'Noch keine Mitarbeitenden. Einladungslink erstellen.',
     viewHistory: 'Tageshistorie',
@@ -705,8 +704,7 @@ const de: Dict = {
     emptyCounters: 'Noch keine Grenzroute gewählt.',
     workingDaysBase: 'Arbeitstage-Basis',
     workingDaysBaseHint: 'Dient den Prozentsätzen dieser Person. Aktuell {annual} Tage. Leer lassen, um dem Beschäftigungsgrad zu folgen.',
-    filingNote:
-      'Meldetermine für Arbeitgeber, die wir prüfen konnten. Genf: erste Übermittlung der Telearbeitsquote an die AFC im Januar 2027 für die Daten von 2026 (ge.ch). Jura: Bescheinigung bis 31. Januar nach der Steuerperiode, ab Steuerperiode 2026 (jura.ch). Andere Kantone wurden nicht geprüft. Dieses Dashboard und sein CSV sind eine Arbeitsunterlage, keine Meldung.',
+    filingNote: 'Alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen bescheinigen zu Beginn des Folgejahres eine Telearbeitsquote bei der kantonalen Steuerbehörde, auch bei 0 %. Erste Einreichung: Anfang 2027 für 2026. Genf und Waadt haben ein eigenes Formular (Genf AFC / ge.ch); andere Kantone nutzen das Bundesformular oder ELM/kantonales Portal. Jura: Bescheinigung bis 31. Januar nach der Steuerperiode, ab Steuerperiode 2026 (jura.ch). Dieses Dashboard und sein CSV sind eine Arbeitsunterlage, keine Meldung.',
     deactivateMember: '{name} entfernen',
     deactivateConfirm: '{name} aus diesem Unternehmen entfernen? Der Zugang endet sofort. Die Tage bleiben in den Akten (Ehemalige Mitarbeitende) gemäß Aufbewahrung. Der Sitz wird nicht mehr berechnet. Sie können später erneut einladen.',
     deactivated: '{name} wurde entfernt.',
@@ -1005,6 +1003,7 @@ const de: Dict = {
     notConfigured: 'Die Authentifizierung ist in diesem Build nicht konfiguriert.',
     completing: 'Anmeldung wird abgeschlossen…',
     callbackFailed: 'Anmeldung fehlgeschlagen. Erneut versuchen.',
+    callbackPkceHint: 'Dieser Bestätigungslink muss auf demselben Gerät und Browser geöffnet werden, mit dem die Anmeldung gestartet wurde. Öffnen Sie BorderDay dort, oder melden Sie sich auf diesem Gerät erneut an.',
     paymentsUnavailable: 'Checkout konnte nicht gestartet werden — erneut versuchen oder Support kontaktieren.',
     signOut: 'Abmelden',
     signUpTerms:

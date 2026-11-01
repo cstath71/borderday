@@ -69,10 +69,10 @@ Nine corridors in five regions. Social-security counters on all nine. Tax counte
 Company: €5 per active employee per month with a €39 monthly minimum; yearly €390 minimum (2 months free). Individual: €4.99/month or €49/year. Company prices exclude VAT; individual prices include VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup.
 
 ### How do payments work?
-Checkout uses Stripe Managed Payments: Stripe is the merchant of record and handles VAT/GST in Checkout; checkout branding may show purchases as sold through Link. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.
+Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.
 
 ### What does BorderDay not cover?
-The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate report some cantons require. When in doubt, check with your authority.
+The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate attestation all Swiss employers of France residents must file (including at 0%). When in doubt, check with your authority.
 
 ## Sitemap
 

@@ -406,6 +406,7 @@ describe('companyApi', () => {
       email: 'x@y.com',
       role: 'employee',
       invited_by: 'me',
+      lang: 'en',
     });
     expect(state.invoke).toHaveBeenCalledWith('bd-send-invite', { body: { invitationId: 'i1', companyId: 'c1', lang: 'en' } });
     expect(invite.token).toBe('t');

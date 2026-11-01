@@ -480,7 +480,7 @@ const en = {
         basis: 'Invitations: the employer as controller, as above. Notice record: legitimate interests in proving the notice was given (Art. 6(1)(f))',
         recipients: 'Resend (invitation email); Supabase',
         transfer: 'United States (Resend) and EU hosting (Supabase); safeguards below',
-        retention: 'Invite links expire after 14 days; a daily job marks overdue pending invites as expired. Membership and invite records stay while the membership or company account exists.',
+        retention: 'Invite links expire after 14 days; a daily job marks overdue pending invites as expired. Invites never accepted are deleted 30 days after the link expired. Membership and accepted-invite records stay while the membership or company account exists.',
       },
       {
         purpose: 'Subscriptions and payments',
@@ -514,7 +514,7 @@ const en = {
       'The controller is in Switzerland. Under Commission Decision 2000/518/EC, Switzerland is considered as providing an adequate level of protection for personal data transferred from the EU; the European Commission’s report of 15 January 2024 (COM(2024) 7 final) confirmed that this adequacy continues to apply under the GDPR. Switzerland in turn recognises the EU and EEA states as adequate. For Stripe, GitHub and Google in the United States we rely on the EU–US and Swiss–US Data Privacy Frameworks (Swiss-U.S. Active). For Resend and Supabase we do not claim Swiss–US DPF certification; we rely on the standard contractual clauses (with Swiss adaptations) in those providers’ published data-processing terms, and Supabase hosts the database in the EU (eu-central-1). Ask privacy@borderday.com for a copy of these safeguards.',
     s6Title: 'Data retention',
     s6Body:
-      'Company day logs: 24 months by default, or the company’s setting (1–120 months), unless applicable law requires longer. A daily scheduled job deletes company day logs whose work date falls outside that window, and marks pending invites past their 14-day expiry as expired. Individual-plan day logs stay until you delete them or close the account. Whole accounts, company membership and billing records are not timed-deleted: close the account or write to privacy@borderday.com. Demo data is labelled DEMO and may be reset at any time.',
+      'Company day logs: 24 months by default, or the company’s setting (1–120 months), unless applicable law requires longer. A daily scheduled job deletes company day logs whose work date falls outside that window, marks pending invites past their 14-day expiry as expired, and deletes invites never accepted 30 days after the link expired. Individual-plan day logs stay until you delete them or close the account. Whole accounts, company membership and billing records are not timed-deleted: close the account or write to privacy@borderday.com. Demo data is labelled DEMO and may be reset at any time.',
     s4Title: 'Your rights',
     rightsIntro: 'Within the limits set by law, you have these rights:',
     rights: [
@@ -802,7 +802,7 @@ const en = {
 
   dpa: {
     title: 'Data processing agreement (company accounts)',
-    updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    updated: 'Last updated: 1 Nov 2026 (Europe/Zurich)',
     intro:
       'This data processing agreement (“DPA”) applies when an employer uses a BorderDay company account so that BorderDay processes personal data of that employer’s employees (day logs and related membership data). It is offered under Article 28 of the GDPR and under the Swiss Federal Act on Data Protection (FADP / LPD / DSG) for processing by a processor / Auftragsbearbeiter. Creating or using a company account, or continuing to use one after this page is published, constitutes the employer’s acceptance of this DPA for that processing.',
     partiesTitle: 'Parties',
@@ -846,7 +846,7 @@ const en = {
       'The processor notifies the employer without undue delay after becoming aware of a personal-data breach affecting that employer’s employee data processed under this DPA, with information then available to help the employer meet its own notification duties.',
     deletionTitle: 'Return and deletion (Art. 28(3)(g))',
     deletionBody:
-      'When the company account ends, or earlier on written instruction, the processor deletes or returns employee day-log data (except where Union, Member State or Swiss law requires storage — for example accounting records of the subscription itself). Export tools in the product, where available, are the primary return method.',
+      'Cancelling a subscription does not by itself end the company account or delete data: day logs keep following the company’s retention setting. A company account ends when its owner instructs the processor in writing (privacy@borderday.com). The processor then deletes or returns employee day-log data, as it also does on any earlier written instruction (except where Union, Member State or Swiss law requires storage — for example accounting records of the subscription itself). Export tools in the product, where available, are the primary return method.',
     auditTitle: 'Information and audits (Art. 28(3)(h))',
     auditBody:
       'The processor makes available information necessary to demonstrate compliance with this DPA, including this page, the Privacy notice and current sub-processor documentation. On-site audits are limited to once per year (unless a competent authority requires more), on reasonable notice, during business hours, without disrupting other customers, and at the employer’s expense unless a material breach by the processor is found.',

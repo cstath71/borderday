@@ -492,6 +492,46 @@ describe('real Postgres: bd_accept_invite email match (H2)', () => {
   });
 });
 
+describe('real Postgres: purge of unaccepted invites (A3-09)', () => {
+  it('deletes never-accepted invites 30 days after expiry, and nothing else', async () => {
+    const owner = await newUser('a309@example.com');
+    const company = await newCompany(owner);
+    const add = async (email: string, status: string, daysAgo: number) => {
+      const { rows } = await db.query(
+        `insert into public.bd_invitations (company_id, email, role, invited_by, status, expires_at)
+         values ($1, $2, 'employee', $3, $4, now() - make_interval(days => $5)) returning id`,
+        [company, email, owner, status, daysAgo],
+      );
+      return rows[0].id as string;
+    };
+    const oldExpired = await add('a@example.com', 'expired', 31);
+    const oldRevoked = await add('b@example.com', 'revoked', 31);
+    const oldPending = await add('c@example.com', 'pending', 31);
+    const recentExpired = await add('d@example.com', 'expired', 29);
+    const recentRevoked = await add('e@example.com', 'revoked', 29);
+    const recentPending = await add('f@example.com', 'pending', 1);
+    const oldAccepted = await add('g@example.com', 'accepted', 400);
+    const live = await add('h@example.com', 'pending', -5);
+
+    const { rows } = await db.query(`select public.bd_purge_expired_data() as result`);
+    expect(rows[0].result.invites_deleted).toBeGreaterThanOrEqual(3);
+    const left = (await db.query(`select id, status from public.bd_invitations where company_id = $1`, [company])).rows;
+    const status = Object.fromEntries(left.map((r) => [r.id, r.status]));
+    for (const gone of [oldExpired, oldRevoked, oldPending]) expect(status[gone]).toBeUndefined();
+    expect(status[recentExpired]).toBe('expired');
+    expect(status[recentRevoked]).toBe('revoked');
+    expect(status[recentPending]).toBe('expired');
+    expect(status[oldAccepted]).toBe('accepted');
+    expect(status[live]).toBe('pending');
+  });
+
+  it('clients still cannot run the purge', async () => {
+    const user = await newUser('a309b@example.com');
+    await expect(as(user, `select public.bd_purge_expired_data()`)).rejects.toThrow(/permission denied/);
+    await expect(as(null, `select public.bd_purge_expired_data()`)).rejects.toThrow(/permission denied/);
+  });
+});
+
 describe('real Postgres: contract requests (A3-08)', () => {
   it('only the service role can touch them: clients can neither read nor write', async () => {
     const insert = `insert into public.bd_contract_requests (kind, name, email) values ('withdrawal', 'Ana', 'a@example.com')`;

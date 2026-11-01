@@ -120,6 +120,29 @@ describe('C1 Privacy content', () => {
     }
   });
 
+  it('A3-09: states the invite deletion rule, and the DPA does not promise a post-termination period', () => {
+    const invite: Record<Lang, RegExp> = {
+      en: /Invites never accepted are deleted 30 days after the link expired/,
+      fr: /invitations jamais acceptées sont supprimées 30 jours après l’expiration du lien/,
+      de: /Nie angenommene Einladungen werden 30 Tage nach Ablauf des Links gelöscht/,
+      it: /inviti mai accettati sono cancellati 30 giorni dopo la scadenza del link/,
+      nl: /Nooit aanvaarde uitnodigingen worden 30 dagen na het verlopen van de link gewist/,
+    };
+    const cancelNoDelete: Record<Lang, RegExp> = {
+      en: /Cancelling a subscription does not by itself end the company account/,
+      fr: /résiliation d’un abonnement ne met pas fin à elle seule au compte entreprise/,
+      de: /Kündigung eines Abonnements beendet das Unternehmenskonto nicht von selbst/,
+      it: /disdetta di un abbonamento non chiude da sola l’account aziendale/,
+      nl: /opzeggen van een abonnement beëindigt het bedrijfsaccount niet vanzelf/,
+    };
+    for (const [lang, d] of dicts) {
+      expect(flat(d.privacy), lang).toMatch(invite[lang]);
+      expect(d.dpa.deletionBody, lang).toMatch(cancelNoDelete[lang]);
+      expect(d.dpa.deletionBody, lang).toMatch(/privacy@borderday\.com/);
+      expect(d.dpa.deletionBody, lang).not.toMatch(/\d+ (days|jours|Tage|giorni|dagen|months|mois|Monate|mesi|maanden)/);
+    }
+  });
+
   it('H5: says what HR sees, in place of "never location"', () => {
     expect(getDict('en').privacy.s2Body).toContain(
       'No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',

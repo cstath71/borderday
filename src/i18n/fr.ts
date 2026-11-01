@@ -486,7 +486,7 @@ const fr: Dict = {
         basis: 'Invitations : l’employeur en tant que responsable du traitement, comme ci-dessus. Preuve de l’avis : intérêts légitimes à prouver que l’avis a été donné (art. 6, par. 1, let. f)',
         recipients: 'Resend (e-mail d’invitation) ; Supabase',
         transfer: 'États-Unis (Resend) et hébergement UE (Supabase) ; garanties ci-dessous',
-        retention: 'Les liens d’invitation expirent après 14 jours ; un job quotidien marque expirées les invitations en attente dépassées. Les enregistrements d’adhésion et d’invitation restent tant que l’adhésion ou le compte entreprise existe.',
+        retention: 'Les liens d’invitation expirent après 14 jours ; un job quotidien marque expirées les invitations en attente dépassées. Les invitations jamais acceptées sont supprimées 30 jours après l’expiration du lien. Les enregistrements d’adhésion et d’invitation acceptée restent tant que l’adhésion ou le compte entreprise existe.',
       },
       {
         purpose: 'Abonnements et paiements',
@@ -520,7 +520,7 @@ const fr: Dict = {
       'Le responsable du traitement est en Suisse. Aux termes de la décision 2000/518/CE de la Commission, la Suisse est considérée comme assurant un niveau de protection adéquat des données à caractère personnel transférées depuis l’UE ; le rapport de la Commission du 15 janvier 2024 (COM(2024) 7 final) a confirmé que cette adéquation continue de s’appliquer au titre du RGPD. La Suisse reconnaît à son tour les États de l’UE et de l’EEE comme adéquats. Pour Stripe, GitHub et Google aux États-Unis, nous nous appuyons sur les Data Privacy Frameworks UE–États-Unis et Suisse–États-Unis (Swiss-U.S. Active). Pour Resend et Supabase, nous ne revendiquons pas de certification Swiss–US DPF ; nous nous appuyons sur les clauses contractuelles types (avec adaptations suisses) de leurs conditions publiées de traitement, et Supabase héberge la base dans l’UE (eu-central-1). Demandez une copie de ces garanties à privacy@borderday.com.',
     s6Title: 'Conservation des données',
     s6Body:
-      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (1–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, et marque expirées les invitations en attente au-delà de 14 jours. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DEMO et peuvent être réinitialisées à tout moment.',
+      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (1–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, marque expirées les invitations en attente au-delà de 14 jours, et supprime les invitations jamais acceptées 30 jours après l’expiration du lien. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DEMO et peuvent être réinitialisées à tout moment.',
     s4Title: 'Vos droits',
     rightsIntro: 'Dans les limites fixées par la loi, vous disposez des droits suivants :',
     rights: [
@@ -812,7 +812,7 @@ const fr: Dict = {
   },
   dpa: {
     title: 'Accord de traitement des données (comptes entreprise)',
-    updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
+    updated: 'Dernière mise à jour : 1er nov. 2026 (Europe/Zurich)',
     intro:
       'Le présent accord de traitement des données (« ATD ») s’applique lorsqu’un employeur utilise un compte entreprise BorderDay afin que BorderDay traite des données personnelles des collaborateurs de cet employeur (journaux de jours et données d’appartenance associées). Il est proposé au titre de l’article 28 du RGPD et de la loi fédérale suisse sur la protection des données (LPD) pour un traitement par un sous-traitant. La création ou l’utilisation d’un compte entreprise, ou la poursuite de son utilisation après la publication de cette page, vaut acceptation de cet ATD par l’employeur pour ce traitement.',
     partiesTitle: 'Parties',
@@ -856,7 +856,7 @@ const fr: Dict = {
       'Le sous-traitant notifie l’employeur sans retard injustifié après avoir pris connaissance d’une violation de données personnelles affectant les données de collaborateurs de cet employeur traitées au titre du présent ATD, avec les informations alors disponibles pour aider l’employeur à remplir ses propres obligations de notification.',
     deletionTitle: 'Restitution et suppression (art. 28, § 3, g)',
     deletionBody:
-      'Lorsque le compte entreprise prend fin, ou plus tôt sur instruction écrite, le sous-traitant supprime ou restitue les journaux de jours (sauf obligation de conservation issue du droit de l’Union, d’un État membre ou suisse — par exemple les pièces comptables de l’abonnement). Les outils d’export du produit, lorsqu’ils existent, sont le mode principal de restitution.',
+      'La résiliation d’un abonnement ne met pas fin à elle seule au compte entreprise et ne supprime aucune donnée : les journaux de jours restent soumis au réglage de conservation de l’entreprise. Un compte entreprise prend fin lorsque son administrateur en donne l’instruction écrite au sous-traitant (privacy@borderday.com). Le sous-traitant supprime ou restitue alors les journaux de jours, comme il le fait aussi sur toute instruction écrite antérieure (sauf obligation de conservation issue du droit de l’Union, d’un État membre ou suisse — par exemple les pièces comptables de l’abonnement). Les outils d’export du produit, lorsqu’ils existent, sont le mode principal de restitution.',
     auditTitle: 'Informations et audits (art. 28, § 3, h)',
     auditBody:
       'Le sous-traitant met à disposition les informations nécessaires pour démontrer le respect du présent ATD, y compris cette page, l’avis de confidentialité et la documentation actuelle des sous-traitants ultérieurs. Les audits sur site sont limités à une fois par an (sauf exigence d’une autorité compétente), sur préavis raisonnable, pendant les heures ouvrables, sans perturber les autres clients, et aux frais de l’employeur sauf constatation d’une violation matérielle du sous-traitant.',

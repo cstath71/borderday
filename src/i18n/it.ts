@@ -487,7 +487,7 @@ const it: Dict = {
         basis: 'Inviti: il datore di lavoro come titolare, come sopra. Prova dell’avviso: legittimi interessi a dimostrare che l’avviso è stato dato (art. 6, par. 1, lett. f)',
         recipients: 'Resend (e-mail di invito); Supabase',
         transfer: 'Stati Uniti (Resend) e hosting nell’UE (Supabase); garanzie qui sotto',
-        retention: 'I link di invito scadono dopo 14 giorni; un job giornaliero segna come scaduti gli inviti in sospeso oltre la scadenza. I dati di adesione e di invito restano finché esistono l’adesione o l’account aziendale.',
+        retention: 'I link di invito scadono dopo 14 giorni; un job giornaliero segna come scaduti gli inviti in sospeso oltre la scadenza. Gli inviti mai accettati sono cancellati 30 giorni dopo la scadenza del link. I dati di adesione e di invito accettato restano finché esistono l’adesione o l’account aziendale.',
       },
       {
         purpose: 'Abbonamenti e pagamenti',
@@ -521,7 +521,7 @@ const it: Dict = {
       'Il titolare ha sede in Svizzera. Ai sensi della decisione 2000/518/CE della Commissione, la Svizzera è considerata come un Paese che assicura un livello di protezione adeguato dei dati personali trasferiti dall’UE; la relazione della Commissione del 15 gennaio 2024 (COM(2024) 7 final) ha confermato che questa adeguatezza continua ad applicarsi ai sensi del GDPR. La Svizzera riconosce a sua volta come adeguati gli Stati dell’UE e del SEE. Per Stripe, GitHub e Google negli Stati Uniti ci basiamo sui Data Privacy Framework UE–USA e Svizzera–USA (Swiss-U.S. Active). Per Resend e Supabase non rivendichiamo la certificazione Swiss–US DPF; ci basiamo sulle clausole contrattuali tipo (con adattamenti svizzeri) delle loro condizioni pubblicate sul trattamento dei dati, e Supabase ospita il database nell’UE (eu-central-1). Potete chiedere una copia di queste garanzie a privacy@borderday.com.',
     s6Title: 'Conservazione dei dati',
     s6Body:
-      'Registri dei giorni aziendali: 24 mesi per impostazione predefinita, o l’impostazione dell’azienda (1–120 mesi), salvo obblighi di legge più lunghi. Un job giornaliero programmato cancella i registri aziendali la cui data di lavoro è fuori da tale finestra e segna come scaduti gli inviti in sospeso oltre i 14 giorni. I registri del piano individuale restano finché non li cancellate o chiudete l’account. Account interi, appartenenza aziendale e dati di fatturazione non sono cancellati a tempo: chiudete l’account o scrivete a privacy@borderday.com. I dati DEMO sono etichettati DEMO e possono essere azzerati in qualsiasi momento.',
+      'Registri dei giorni aziendali: 24 mesi per impostazione predefinita, o l’impostazione dell’azienda (1–120 mesi), salvo obblighi di legge più lunghi. Un job giornaliero programmato cancella i registri aziendali la cui data di lavoro è fuori da tale finestra, segna come scaduti gli inviti in sospeso oltre i 14 giorni e cancella gli inviti mai accettati 30 giorni dopo la scadenza del link. I registri del piano individuale restano finché non li cancellate o chiudete l’account. Account interi, appartenenza aziendale e dati di fatturazione non sono cancellati a tempo: chiudete l’account o scrivete a privacy@borderday.com. I dati DEMO sono etichettati DEMO e possono essere azzerati in qualsiasi momento.',
     s4Title: 'I vostri diritti',
     rightsIntro: 'Nei limiti previsti dalla legge, avete questi diritti:',
     rights: [
@@ -813,7 +813,7 @@ const it: Dict = {
   },
   dpa: {
     title: 'Accordo sul trattamento dei dati (account aziendali)',
-    updated: 'Ultimo aggiornamento: 31 ott. 2026 (Europe/Zurich)',
+    updated: 'Ultimo aggiornamento: 1° nov. 2026 (Europe/Zurich)',
     intro:
       'Il presente accordo sul trattamento dei dati («ATD») si applica quando un datore di lavoro usa un account aziendale BorderDay affinché BorderDay tratti dati personali dei dipendenti di quel datore di lavoro (registri dei giorni e dati di appartenenza correlati). È offerto ai sensi dell’articolo 28 del GDPR e della legge federale svizzera sulla protezione dei dati (LPD) per il trattamento da parte di un responsabile del trattamento. La creazione o l’uso di un account aziendale, o la prosecuzione dell’uso dopo la pubblicazione di questa pagina, costituisce accettazione di questo ATD da parte del datore di lavoro per tale trattamento.',
     partiesTitle: 'Parti',
@@ -857,7 +857,7 @@ const it: Dict = {
       'Il responsabile notifica il datore di lavoro senza indebito ritardo dopo aver preso conoscenza di una violazione dei dati personali che interessa i dati dei dipendenti di quel datore di lavoro trattati ai sensi del presente ATD, con le informazioni allora disponibili per aiutare il datore di lavoro a assolvere i propri obblighi di notifica.',
     deletionTitle: 'Restituzione e cancellazione (art. 28, par. 3, lett. g)',
     deletionBody:
-      'Quando l’account aziendale termina, o prima su istruzione scritta, il responsabile cancella o restituisce i registri dei giorni (salvo obblighi di conservazione del diritto dell’Unione, di uno Stato membro o svizzero — ad esempio documenti contabili dell’abbonamento stesso). Gli strumenti di esportazione nel prodotto, ove disponibili, sono il metodo primario di restituzione.',
+      'La disdetta di un abbonamento non chiude da sola l’account aziendale e non cancella dati: i registri dei giorni continuano a seguire l’impostazione di conservazione dell’azienda. Un account aziendale termina quando il suo titolare dà istruzione scritta al responsabile (privacy@borderday.com). Il responsabile cancella o restituisce allora i registri dei giorni, come fa anche su ogni istruzione scritta precedente (salvo obblighi di conservazione del diritto dell’Unione, di uno Stato membro o svizzero — ad esempio documenti contabili dell’abbonamento stesso). Gli strumenti di esportazione nel prodotto, ove disponibili, sono il metodo primario di restituzione.',
     auditTitle: 'Informazioni e audit (art. 28, par. 3, lett. h)',
     auditBody:
       'Il responsabile mette a disposizione le informazioni necessarie a dimostrare la conformità al presente ATD, inclusa questa pagina, l’informativa sulla privacy e la documentazione attuale dei sub-responsabili. Gli audit in loco sono limitati a una volta all’anno (salvo richiesta di un’autorità competente), con preavviso ragionevole, in orario lavorativo, senza disturbare altri clienti, e a spese del datore di lavoro salvo accertamento di una violazione sostanziale del responsabile.',

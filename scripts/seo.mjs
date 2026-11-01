@@ -537,7 +537,7 @@ export const PAGES = {
       title: 'Withdraw from contract — BorderDay',
       description: 'How EU/EEA consumers withdraw from a BorderDay individual plan within 14 days of receiving access, without giving a reason.',
       h1: 'Withdraw from contract',
-      summary: 'EU/EEA consumers who bought an individual plan can withdraw within 14 days of receiving access, without giving a reason. This page prepares the message to privacy@borderday.com; Link support can also be contacted for the Order.',
+      summary: 'EU/EEA consumers who bought an individual plan can withdraw within 14 days of receiving access, without giving a reason. This page records the withdrawal and shows the time of receipt; privacy@borderday.com and Link support can also be contacted for the Order.',
       crumbs: [
         ['Home', ''],
         ['Withdraw from contract', 'withdrawal'],
@@ -547,7 +547,7 @@ export const PAGES = {
       title: 'Se rétracter du contrat — BorderDay',
       description: 'Comment les consommateurs UE/EEE se rétractent d’une offre individuelle BorderDay dans les 14 jours suivant la réception de l’accès, sans motif.',
       h1: 'Se rétracter du contrat',
-      summary: 'Les consommateurs UE/EEE ayant acheté une offre individuelle peuvent se rétracter dans les 14 jours suivant la réception de l’accès, sans motif. Cette page prépare le message à privacy@borderday.com ; le support Link peut aussi être contacté pour la commande.',
+      summary: 'Les consommateurs UE/EEE ayant acheté une offre individuelle peuvent se rétracter dans les 14 jours suivant la réception de l’accès, sans motif. Cette page enregistre la rétractation et affiche l’heure de réception ; privacy@borderday.com et le support Link peuvent aussi être contactés pour la commande.',
       crumbs: [
         ['Accueil', ''],
         ['Se rétracter du contrat', 'withdrawal'],
@@ -557,7 +557,7 @@ export const PAGES = {
       title: 'Vertrag widerrufen — BorderDay',
       description: 'So widerrufen Verbraucher in der EU/im EWR einen BorderDay-Einzelplan innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen.',
       h1: 'Vertrag widerrufen',
-      summary: 'Verbraucher in der EU/im EWR mit Einzelplan können innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen widerrufen. Diese Seite bereitet die Nachricht an privacy@borderday.com vor; auch der Link-Support kann zur Bestellung kontaktiert werden.',
+      summary: 'Verbraucher in der EU/im EWR mit Einzelplan können innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen widerrufen. Diese Seite erfasst den Widerruf und zeigt die Uhrzeit des Eingangs an; auch privacy@borderday.com und der Link-Support können zur Bestellung kontaktiert werden.',
       crumbs: [
         ['Start', ''],
         ['Vertrag widerrufen', 'withdrawal'],
@@ -567,7 +567,7 @@ export const PAGES = {
       title: 'Recedere dal contratto — BorderDay',
       description: 'Come i consumatori UE/SEE recedono da un piano individuale BorderDay entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo.',
       h1: 'Recedere dal contratto',
-      summary: 'I consumatori UE/SEE con un piano individuale possono recedere entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo. Questa pagina prepara il messaggio a privacy@borderday.com; si può anche contattare il supporto Link per l’ordine.',
+      summary: 'I consumatori UE/SEE con un piano individuale possono recedere entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo. Questa pagina registra il recesso e mostra l’ora di ricezione; si possono anche contattare privacy@borderday.com e il supporto Link per l’ordine.',
       crumbs: [
         ['Home', ''],
         ['Recedere dal contratto', 'withdrawal'],
@@ -577,7 +577,7 @@ export const PAGES = {
   cancel: {
     en: {
       title: 'Cancel subscription — BorderDay',
-      description: 'Cancel a BorderDay subscription: from your account, through Link, or by email without signing in. Cancellation stops future renewals.',
+      description: 'Cancel a BorderDay subscription: from your account, through Link, or with the form without signing in. Cancellation stops future renewals.',
       h1: 'Cancel subscription',
       summary: 'Cancel your BorderDay subscription here. Cancellation stops future renewals. If you cancel before day 8 of your trial, nothing is charged.',
       crumbs: [
@@ -587,7 +587,7 @@ export const PAGES = {
     },
     fr: {
       title: 'Résilier votre contrat — BorderDay',
-      description: 'Résilier un abonnement BorderDay : depuis votre compte, via Link, ou par e-mail sans vous connecter. La résiliation arrête les renouvellements futurs.',
+      description: 'Résilier un abonnement BorderDay : depuis votre compte, via Link, ou avec le formulaire sans vous connecter. La résiliation arrête les renouvellements futurs.',
       h1: 'Résilier votre contrat',
       summary: 'Résiliez ici votre abonnement BorderDay. La résiliation arrête les renouvellements futurs. Si vous résiliez avant le 8e jour de l’essai, rien n’est débité.',
       crumbs: [
@@ -597,7 +597,7 @@ export const PAGES = {
     },
     de: {
       title: 'Verträge hier kündigen — BorderDay',
-      description: 'BorderDay-Abo kündigen: aus Ihrem Konto, über Link oder per E-Mail ohne Anmeldung. Die Kündigung stoppt künftige Verlängerungen.',
+      description: 'BorderDay-Abo kündigen: aus Ihrem Konto, über Link oder mit dem Formular ohne Anmeldung. Die Kündigung stoppt künftige Verlängerungen.',
       h1: 'Verträge hier kündigen',
       summary: 'Kündigen Sie hier Ihr BorderDay-Abo. Die Kündigung stoppt künftige Verlängerungen. Kündigen Sie vor dem 8. Tag der Testphase, wird nichts abgebucht.',
       crumbs: [
@@ -607,7 +607,7 @@ export const PAGES = {
     },
     it: {
       title: 'Disdire il contratto — BorderDay',
-      description: 'Disdire un abbonamento BorderDay: dall’account, tramite Link o via e-mail senza accedere. La disdetta interrompe i rinnovi futuri.',
+      description: 'Disdire un abbonamento BorderDay: dall’account, tramite Link o con il modulo senza accedere. La disdetta interrompe i rinnovi futuri.',
       h1: 'Disdire il contratto',
       summary: 'Disdite qui il vostro abbonamento BorderDay. La disdetta interrompe i rinnovi futuri. Con la disdetta prima dell’8° giorno di prova non viene addebitato nulla.',
       crumbs: [
@@ -763,10 +763,10 @@ PAGES['for-individuals'].nl = {
 PAGES.cancel.nl = {
   title: 'BorderDay — Abonnement opzeggen',
   description:
-    'Zeg uw BorderDay-abonnement op via het klantenportaal, Link of e-mail. Opzegging vóór dag 8 van de proefperiode: niets wordt aangerekend.',
+    'Zeg uw BorderDay-abonnement op via het klantenportaal, Link of het formulier. Opzegging vóór dag 8 van de proefperiode: niets wordt aangerekend.',
   h1: 'Abonnement opzeggen',
   summary:
-    'Opzegging stopt toekomstige verlengingen. Tijdens de proefperiode vóór dag 8 wordt niets aangerekend. Gebruik het klantenportaal, Link-ordertools of e-mail.',
+    'Opzegging stopt toekomstige verlengingen. Tijdens de proefperiode vóór dag 8 wordt niets aangerekend. Gebruik het klantenportaal, Link-ordertools of het formulier.',
   crumbs: [['Home', ''], ['Abonnement opzeggen', 'cancel']],
 };
 PAGES['company/signup'].nl = {

@@ -487,7 +487,7 @@ const de: Dict = {
         basis: 'Einladungen: der Arbeitgeber als Verantwortlicher, wie oben. Nachweis: berechtigte Interessen am Beleg, dass der Hinweis erteilt wurde (Art. 6 Abs. 1 lit. f)',
         recipients: 'Resend (Einladungs-E-Mail); Supabase',
         transfer: 'USA (Resend) und Hosting in der EU (Supabase); Garantien siehe unten',
-        retention: 'Einladungslinks laufen nach 14 Tagen ab; ein täglicher Job markiert überfällige ausstehende Einladungen als abgelaufen. Mitgliedschafts- und Einladungseinträge bleiben, solange die Mitgliedschaft oder das Unternehmenskonto besteht.',
+        retention: 'Einladungslinks laufen nach 14 Tagen ab; ein täglicher Job markiert überfällige ausstehende Einladungen als abgelaufen. Nie angenommene Einladungen werden 30 Tage nach Ablauf des Links gelöscht. Einträge zu Mitgliedschaften und angenommenen Einladungen bleiben, solange die Mitgliedschaft oder das Unternehmenskonto besteht.',
       },
       {
         purpose: 'Abonnements und Zahlungen',
@@ -521,7 +521,7 @@ const de: Dict = {
       'Der Verantwortliche hat seinen Sitz in der Schweiz. Nach dem Beschluss 2000/518/EG der Kommission gilt die Schweiz als ein Land, das ein angemessenes Schutzniveau für aus der EU übermittelte personenbezogene Daten gewährleistet; der Bericht der Kommission vom 15. Januar 2024 (COM(2024) 7 final) bestätigt, dass diese Angemessenheit unter der DSGVO fortbesteht. Die Schweiz erkennt ihrerseits die EU- und EWR-Staaten als angemessen an. Für Stripe, GitHub und Google in den Vereinigten Staaten stützen wir uns auf die EU–US- und Swiss–US Data Privacy Frameworks (Swiss-U.S. Active). Für Resend und Supabase beanspruchen wir keine Swiss–US-DPF-Zertifizierung; wir stützen uns auf die Standardvertragsklauseln (mit schweizerischen Anpassungen) in den veröffentlichten Auftragsverarbeitungsbedingungen dieser Anbieter, und Supabase hostet die Datenbank in der EU (eu-central-1). Eine Kopie dieser Garantien erhalten Sie unter privacy@borderday.com.',
     s6Title: 'Aufbewahrung',
     s6Body:
-      'Unternehmens-Tagesprotokolle: standardmässig 24 Monate oder die Unternehmenseinstellung (1–120 Monate), sofern anwendbares Recht keine längere Frist verlangt. Ein täglich geplanter Job löscht Unternehmens-Tagesprotokolle, deren Arbeitsdatum ausserhalb dieses Fensters liegt, und markiert ausstehende Einladungen nach Ablauf der 14 Tage als abgelaufen. Tagesprotokolle des Einzelplans bleiben, bis Sie sie löschen oder das Konto schliessen. Ganze Konten, Unternehmensmitgliedschaft und Abrechnungsdaten werden nicht zeitgesteuert gelöscht: Konto schliessen oder an privacy@borderday.com schreiben. Demo-Daten sind mit DEMO gekennzeichnet und können jederzeit zurückgesetzt werden.',
+      'Unternehmens-Tagesprotokolle: standardmässig 24 Monate oder die Unternehmenseinstellung (1–120 Monate), sofern anwendbares Recht keine längere Frist verlangt. Ein täglich geplanter Job löscht Unternehmens-Tagesprotokolle, deren Arbeitsdatum ausserhalb dieses Fensters liegt, markiert ausstehende Einladungen nach Ablauf der 14 Tage als abgelaufen und löscht nie angenommene Einladungen 30 Tage nach Ablauf des Links. Tagesprotokolle des Einzelplans bleiben, bis Sie sie löschen oder das Konto schliessen. Ganze Konten, Unternehmensmitgliedschaft und Abrechnungsdaten werden nicht zeitgesteuert gelöscht: Konto schliessen oder an privacy@borderday.com schreiben. Demo-Daten sind mit DEMO gekennzeichnet und können jederzeit zurückgesetzt werden.',
     s4Title: 'Ihre Rechte',
     rightsIntro: 'Im gesetzlichen Rahmen haben Sie folgende Rechte:',
     rights: [
@@ -813,7 +813,7 @@ const de: Dict = {
   },
   dpa: {
     title: 'Auftragsverarbeitungsvertrag (Unternehmenskonten)',
-    updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
+    updated: 'Zuletzt aktualisiert: 1. Nov. 2026 (Europe/Zurich)',
     intro:
       'Dieser Auftragsverarbeitungsvertrag («AVV») gilt, wenn ein Arbeitgeber ein BorderDay-Unternehmenskonto nutzt, damit BorderDay personenbezogene Daten der Mitarbeitenden dieses Arbeitgebers (Tagesprotokolle und zugehörige Mitgliedschaftsdaten) verarbeitet. Er wird nach Artikel 28 DSGVO und nach dem schweizerischen Datenschutzgesetz (DSG) für die Verarbeitung durch einen Auftragsbearbeiter angeboten. Das Anlegen oder Nutzen eines Unternehmenskontos bzw. die weitere Nutzung nach Veröffentlichung dieser Seite gilt als Annahme dieses AVV durch den Arbeitgeber für diese Verarbeitung.',
     partiesTitle: 'Parteien',
@@ -857,7 +857,7 @@ const de: Dict = {
       'Die Auftragsbearbeiterin benachrichtigt den Arbeitgeber unverzüglich, nachdem sie von einer Verletzung Kenntnis erlangt hat, die personenbezogene Daten der Mitarbeitenden dieses Arbeitgebers unter diesem AVV betrifft, mit den dann verfügbaren Informationen zur Erfüllung der eigenen Meldepflichten des Arbeitgebers.',
     deletionTitle: 'Rückgabe und Löschung (Art. 28 Abs. 3 lit. g)',
     deletionBody:
-      'Endet das Unternehmenskonto oder früher auf schriftliche Weisung, löscht oder gibt die Auftragsbearbeiterin die Tagesprotokolldaten zurück (ausser soweit Unions-, Mitgliedstaaten- oder Schweizer Recht Speicherung verlangt — etwa Buchhaltungsunterlagen des Abonnements selbst). Exportfunktionen im Produkt sind, soweit vorhanden, der primäre Rückgabeweg.',
+      'Die Kündigung eines Abonnements beendet das Unternehmenskonto nicht von selbst und löscht keine Daten: Die Tagesprotokolle folgen weiter der Aufbewahrungseinstellung des Unternehmens. Ein Unternehmenskonto endet, wenn seine Inhaberin oder sein Inhaber die Auftragsbearbeiterin schriftlich anweist (privacy@borderday.com). Die Auftragsbearbeiterin löscht dann die Tagesprotokolldaten oder gibt sie zurück, wie auch auf jede frühere schriftliche Weisung (ausser soweit Unions-, Mitgliedstaaten- oder Schweizer Recht Speicherung verlangt — etwa Buchhaltungsunterlagen des Abonnements selbst). Exportfunktionen im Produkt sind, soweit vorhanden, der primäre Rückgabeweg.',
     auditTitle: 'Informationen und Prüfungen (Art. 28 Abs. 3 lit. h)',
     auditBody:
       'Die Auftragsbearbeiterin stellt Informationen zur Verfügung, die zur Nachweis der Einhaltung dieses AVV erforderlich sind, einschliesslich dieser Seite, der Datenschutzerklärung und der aktuellen Unterauftragsbearbeiter-Dokumentation. Vor-Ort-Audits sind auf einmal pro Jahr beschränkt (es sei denn, eine zuständige Behörde verlangt mehr), mit angemessener Vorankündigung, während der Geschäftszeiten, ohne Störung anderer Kunden, und auf Kosten des Arbeitgebers, sofern kein wesentlicher Verstoss der Auftragsbearbeiterin festgestellt wird.',

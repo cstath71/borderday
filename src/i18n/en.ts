@@ -648,6 +648,7 @@ const en = {
     inviteCreated: 'Invite created. Share the link with the employee.',
     pendingInvites: 'Pending invites',
     dashboardTitle: 'HR dashboard',
+    dashboardYear: 'Calendar year',
     dashboardSubtitle:
       'Tax and social-security counters per employee. Day types, night-away marks and counts — never GPS or device location.',
     filterBorder: 'Filter by border route',

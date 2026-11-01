@@ -229,6 +229,8 @@ const it: Dict = {
       'In avvicinamento al {from}%: da lì serve un’A1 per restare nello Stato del datore di lavoro.',
     ss_band_a1_required:
       'Dal 25% a meno del 50%: A1 richiesto. Senza, diventa di norma competente lo Stato di residenza. Indicatelo qui appena il datore di lavoro lo ha ottenuto.',
+    ss_band_pace_a1:
+      'In traiettoria verso il {from}%+: serve il certificato A1 ora. Pace finora circa {pct}% del tempo di lavoro. Sotto l’accordo quadro sul telelavoro il certificato A1 può risalire al massimo di tre mesi — chiedetelo per tempo. Reg. 987/2009 art. 14 §10: le istituzioni guardano i 12 mesi successivi.',
     ss_band_a1_recorded:
       'A1 registrato, valido fino al {until}. BorderDay non verifica il certificato.',
     ss_band_a1_recorded_nodate:
@@ -291,6 +293,7 @@ const it: Dict = {
     status_at_limit: 'Al limite',
     status_ss_under: 'Sotto il 25%',
     status_a1_required: 'A1 richiesto',
+    status_a1_pace: 'In traiettoria verso il 25%+: serve A1',
     status_a1_recorded: 'A1 registrato',
     status_ss_residence: '50% o più: Stato di residenza',
     status_floor_met: 'Minimo raggiunto',

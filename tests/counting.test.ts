@@ -848,6 +848,51 @@ describe('E4/E26: current pace', () => {
   });
 });
 
+
+describe('A3-R5: SS band follows projected pace', () => {
+  const pack = getBorderPack('geneva_fr')!;
+  const ss = counterOf(pack, 'geneva_ss_50');
+
+  it('2 telework days a week from Jan: by end of April days-so-far stay under 25% but pace raises A1 needed', () => {
+    // ~34 telework days by 30 Apr on a 2-day week ≈ 14% of 240, but pace ~40%.
+    const entries = Array.from({ length: 34 }, (_, i) => {
+      // Mon/Tue each week from 5 Jan
+      const week = Math.floor(i / 2);
+      const dow = i % 2; // 0=Mon, 1=Tue
+      const d = new Date(Date.UTC(2026, 0, 5 + week * 7 + dow));
+      return { date: d.toISOString().slice(0, 10), type: 'telework' as const };
+    });
+    const r = evaluateCounter(pack, ss, entries, {
+      year: 2026,
+      annualWorkingDays: 240,
+      today: '2026-04-30',
+    });
+    expect(r.percentOfAnnual).toBeLessThan(25);
+    expect(r.statusLabelKey).toBe('status_a1_pace');
+    expect(r.status).not.toBe('ok');
+    expect(r.messages.map((m) => m.key)).toContain('ss_band_pace_a1');
+    expect(r.messages.map((m) => m.key)).not.toContain('ss_band_under');
+    expect(r.messages.map((m) => m.key)).toContain('pace_above');
+  });
+
+  it('with an A1 in place, projected pace above 25% does not force status_a1_pace', () => {
+    const entries = Array.from({ length: 34 }, (_, i) => {
+      const week = Math.floor(i / 2);
+      const dow = i % 2;
+      const d = new Date(Date.UTC(2026, 0, 5 + week * 7 + dow));
+      return { date: d.toISOString().slice(0, 10), type: 'telework' as const };
+    });
+    const r = evaluateCounter(pack, ss, entries, {
+      year: 2026,
+      annualWorkingDays: 240,
+      today: '2026-04-30',
+      profile: { a1InPlace: true, a1ValidUntil: '2026-12-31' },
+    });
+    expect(r.statusLabelKey).not.toBe('status_a1_pace');
+    expect(r.messages.map((m) => m.key)).not.toContain('ss_band_pace_a1');
+  });
+});
+
 describe('E16: work-trip days inside the CH-FR 40% (accord of 29 Apr 2026 §1.a; ge.ch examples)', () => {
   const pack = getBorderPack('geneva_fr')!;
   const tax = counterOf(pack, 'geneva_tax_telework_40');

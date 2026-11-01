@@ -232,6 +232,8 @@ const de: Dict = {
       'Annäherung an {from} %: Ab dann ist eine A1 nötig, um im Arbeitgeberstaat zu bleiben.',
     ss_band_a1_required:
       '25 % bis unter 50 %: A1 erforderlich. Ohne sie wird normalerweise der Wohnstaat zuständig. Tragen Sie sie hier ein, sobald Ihr Arbeitgeber sie hat.',
+    ss_band_pace_a1:
+      'Auf Kurs für {from}%+: jetzt A1 nötig. Bisherige Pace etwa {pct}% der Arbeitszeit. Nach dem Telearbeits-Rahmenabkommen reicht ein A1 höchstens drei Monate zurück — früh beantragen. VO 987/2009 Art. 14 Abs. 10: Institutionen betrachten die nächsten 12 Monate.',
     ss_band_a1_recorded:
       'A1 erfasst, gültig bis {until}. BorderDay prüft die Bescheinigung nicht.',
     ss_band_a1_recorded_nodate:
@@ -294,6 +296,7 @@ const de: Dict = {
     status_at_limit: 'An der Grenze',
     status_ss_under: 'Unter 25 %',
     status_a1_required: 'A1 erforderlich',
+    status_a1_pace: 'Auf Kurs für 25%+: A1 nötig',
     status_a1_recorded: 'A1 erfasst',
     status_ss_residence: 'Ab 50 %: Wohnstaat',
     status_floor_met: 'Minimum erfüllt',

@@ -47,6 +47,11 @@ Deno.serve(async (req) => {
       lang?: string;
       expressStartAcknowledged?: boolean;
     };
+    if (body.plan !== "company" && body.plan !== "individual") {
+      return new Response(JSON.stringify({ available: false, message: "Invalid plan" }), {
+        status: 200, headers: { ...cors, "Content-Type": "application/json" },
+      });
+    }
     if (!body.expressStartAcknowledged) {
       return new Response(JSON.stringify({ available: false, message: "Express start acknowledgement required" }), {
         status: 200, headers: { ...cors, "Content-Type": "application/json" },

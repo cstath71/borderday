@@ -4,6 +4,7 @@ import { isCompanyFlatMinimumPrice, resolveCompanyBilling } from "../_shared/com
 import { inviteLang } from "../_shared/inviteEmail.ts";
 import { beginEvent, checkWrite, finishEvent, WebhookWriteError } from "../_shared/stripeEvents.ts";
 import { invoiceSubscriptionId } from "../_shared/stripeInvoice.ts";
+import { normalizePlanKind, subscriptionWriteAction } from "../_shared/subscriptionOrphan.ts";
 
 Deno.serve(async (req) => {
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -83,7 +84,12 @@ Deno.serve(async (req) => {
     const status = statusMap[sub.status] || "none";
     let companyId = meta.company_id as string | undefined;
     const userId = meta.user_id as string | undefined;
-    const plan = (meta.plan as string) || (companyId ? "company" : "individual");
+    const plan = normalizePlanKind(meta.plan, !!companyId);
+    if (!plan) {
+      // Poison metadata must not 500-loop Stripe; refuse the write and ack.
+      console.log("[bd-stripe-webhook] orphan", { reason: "invalid_plan", subscriptionId: sub.id });
+      return;
+    }
     const priceId = sub.items?.data?.[0]?.price?.id as string | undefined;
     const stripeQty = sub.items?.data?.[0]?.quantity ?? 1;
     const onFlat = isCompanyFlatMinimumPrice(priceId, priceCompanyMinMonth, priceCompanyMinYear);
@@ -91,41 +97,69 @@ Deno.serve(async (req) => {
     const periodEnd = periodEndIso(sub);
     const trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
 
+    let companyExists = false;
     if (companyId) {
       const companyRead = await admin.from("bd_companies")
         .select("seat_count, stripe_customer_id")
         .eq("id", companyId).maybeSingle();
       checkWrite(companyRead, "read company");
       if (!companyRead.data) {
-        // Company deleted (cleanup / churn): keep the Stripe row without a dead FK.
-        companyId = undefined;
-      } else {
-        const dbSeats = companyRead.data.seat_count ?? 0;
-        let seatCountToStore = dbSeats;
-        if (!opts?.preferDbSeats && !onFlat && Number.isFinite(stripeQty) && stripeQty > 0) {
-          seatCountToStore = stripeQty;
-        } else if (Number.isFinite(metaSeats) && metaSeats >= 0 && dbSeats === 0) {
-          seatCountToStore = metaSeats;
-        }
-
-        if ((status === "active" || status === "trialing") && typeof dbSeats === "number") {
-          sub = await syncCompanySubscriptionItem(sub, dbSeats);
-        }
-
-        checkWrite(await admin.from("bd_companies").update({
-          stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
-          subscription_status: status,
-          ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
-          current_period_end: periodEnd,
-          trial_ends_at: trialEnd,
-          plan_kind: "company",
-        }).eq("id", companyId), "update company");
+        // AR3-10: company gone — do not upsert plan_kind=company with null company_id (23514).
+        console.log("[bd-stripe-webhook] orphan", { reason: "company_deleted", subscriptionId: sub.id });
+        return;
       }
+      companyExists = true;
+      const dbSeats = companyRead.data.seat_count ?? 0;
+      let seatCountToStore = dbSeats;
+      if (!opts?.preferDbSeats && !onFlat && Number.isFinite(stripeQty) && stripeQty > 0) {
+        seatCountToStore = stripeQty;
+      } else if (Number.isFinite(metaSeats) && metaSeats >= 0 && dbSeats === 0) {
+        seatCountToStore = metaSeats;
+      }
+
+      if ((status === "active" || status === "trialing") && typeof dbSeats === "number") {
+        sub = await syncCompanySubscriptionItem(sub, dbSeats);
+      }
+
+      checkWrite(await admin.from("bd_companies").update({
+        stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
+        subscription_status: status,
+        ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
+        current_period_end: periodEnd,
+        trial_ends_at: trialEnd,
+        plan_kind: "company",
+      }).eq("id", companyId), "update company");
+    }
+
+    let userExists = false;
+    if (plan === "individual") {
+      if (!userId) {
+        console.log("[bd-stripe-webhook] orphan", { reason: "missing_user_id", subscriptionId: sub.id });
+        return;
+      }
+      const userRead = await admin.from("bd_profiles").select("id").eq("id", userId).maybeSingle();
+      checkWrite(userRead, "read profile");
+      if (!userRead.data) {
+        console.log("[bd-stripe-webhook] orphan", { reason: "user_deleted", subscriptionId: sub.id });
+        return;
+      }
+      userExists = true;
+    }
+
+    if (subscriptionWriteAction({
+      plan,
+      companyId,
+      userId,
+      companyExists,
+      userExists,
+    }) === "orphan_ack") {
+      console.log("[bd-stripe-webhook] orphan", { reason: "check_constraint", subscriptionId: sub.id });
+      return;
     }
 
     const billedQty = sub.items?.data?.[0]?.quantity ?? stripeQty;
     checkWrite(await admin.from("bd_subscriptions").upsert({
-      company_id: companyId || null,
+      company_id: plan === "company" ? companyId : null,
       user_id: plan === "individual" ? userId : null,
       plan_kind: plan,
       stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
@@ -139,8 +173,7 @@ Deno.serve(async (req) => {
     }, { onConflict: "stripe_subscription_id" }), "upsert subscription");
   }
 
-  /** Consumer safeguard (H12): remind before yearly individual renewal. Honours RESEND_LIVE. */
-  async function sendConsumerReminder(opts: {
+async function sendConsumerReminder(opts: {
     kind: "yearly_renewal" | "trial_ending";
     to: string;
     subscriptionId: string;

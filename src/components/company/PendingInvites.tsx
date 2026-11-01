@@ -74,7 +74,12 @@ export default function PendingInvites(props: {
             return (
               <li key={i.id} style={{ marginBottom: '1rem' }}>
                 <div>
-                  {i.email} · {i.role}
+                  {i.email} ·{' '}
+                  {i.role === 'owner'
+                    ? c.roleOwner
+                    : i.role === 'hr_viewer'
+                      ? c.roleHr
+                      : c.roleEmployee}
                 </div>
                 <input
                   readOnly

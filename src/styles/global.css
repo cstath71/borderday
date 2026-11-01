@@ -180,10 +180,10 @@ img { max-width: 100%; height: auto; }
   background: white; cursor: pointer; padding: 2px;
 }
 .cal-cell.muted { opacity: 0.35; }
-.cal-cell.telework { background: #DBEAFE; border-color: #93C5FD; }
-.cal-cell.onsite { background: #D1FAE5; border-color: #6EE7B7; }
-.cal-cell.third_country { background: #FEF3C7; border-color: #FCD34D; }
-.cal-cell.non_working { background: #F1F5F9; }
+.cal-cell.telework { background: #BFDBFE; border-color: #60A5FA; }
+.cal-cell.onsite { background: #A7F3D0; border-color: #34D399; }
+.cal-cell.third_country { background: #FDE68A; border-color: #FBBF24; }
+.cal-cell.non_working { background: #E2E8F0; border-color: #94A3B8; color: #334155; font-weight: 600; }
 .cal-cell.half { border-style: dashed; }
 .cal-cell.half.telework { background: linear-gradient(135deg, #DBEAFE 50%, white 50%); }
 .cal-cell.half.onsite { background: linear-gradient(135deg, #D1FAE5 50%, white 50%); }
@@ -271,7 +271,7 @@ main:focus { outline: none; }
   align-items: flex-start;
   margin-bottom: 1rem;
 }
-.dash-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.dash-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
 .filters {
   display: flex;
   flex-wrap: wrap;

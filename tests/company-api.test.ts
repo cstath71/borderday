@@ -117,7 +117,8 @@ describe('companyApi', () => {
       await expect(api.deactivateMember('c1', 'e1')).resolves.toEqual({ billingSynced: true });
       const [call] = state.calls;
       expect(call.table).toBe('bd_company_members');
-      expect(update(call)).toEqual({ active: false });
+      expect(update(call)).toMatchObject({ active: false });
+      expect(typeof (update(call) as { removed_at?: string }).removed_at).toBe('string');
       expect(op(call, 'eq')).toEqual(expect.arrayContaining([['company_id', 'c1'], ['user_id', 'e1']]));
       expect(op(call, 'neq')).toContainEqual(['role', 'owner']);
       expect(state.invoke).toHaveBeenCalledWith('bd-sync-company-billing', { body: { companyId: 'c1' } });
@@ -383,13 +384,22 @@ describe('companyApi', () => {
     });
   });
 
+  /** F8/F10: listMembers then listInvites then insert — empty members/pending by default. */
+  function inviteRespond(insertRow: Record<string, unknown>) {
+    state.respond = (call) => {
+      if (call.table === 'bd_company_members') return { data: [], error: null };
+      if (call.table === 'bd_invitations' && !call.ops.some(([n]) => n === 'insert')) {
+        return { data: [], error: null };
+      }
+      return { data: insertRow, error: null };
+    };
+  }
+
   it('createInvite normalises the email and reports a dry run as not emailed', async () => {
-    state.respond = () => ({
-      data: { id: 'i1', company_id: 'c1', email: 'x@y.com', role: 'employee', token: 't', status: 'pending' },
-      error: null,
-    });
+    inviteRespond({ id: 'i1', company_id: 'c1', email: 'x@y.com', role: 'employee', token: 't', status: 'pending' });
     const { invite, emailed } = await api.createInvite('c1', '  X@Y.com ');
-    expect(op(state.calls[0], 'insert')[0][0]).toEqual({
+    const insertCall = state.calls.find((c) => c.table === 'bd_invitations' && c.ops.some(([n]) => n === 'insert'));
+    expect(op(insertCall!, 'insert')[0][0]).toEqual({
       company_id: 'c1',
       email: 'x@y.com',
       role: 'employee',
@@ -401,22 +411,91 @@ describe('companyApi', () => {
   });
 
   it('createInvite reports a real send as emailed, and survives a failed send', async () => {
-    state.respond = () => ({ data: { id: 'i1', token: 't' }, error: null });
+    inviteRespond({ id: 'i1', token: 't', email: 'a@b.com', role: 'employee', status: 'pending', company_id: 'c1' });
     state.invoke.mockResolvedValueOnce({ data: { sent: true }, error: null });
     expect((await api.createInvite('c1', 'a@b.com')).emailed).toBe(true);
+    inviteRespond({ id: 'i2', token: 't2', email: 'a@b.com', role: 'employee', status: 'pending', company_id: 'c1' });
     state.invoke.mockResolvedValueOnce({ data: null, error: new Error('403') });
     expect((await api.createInvite('c1', 'a@b.com')).emailed).toBe(false);
   });
 
   it('createInvite says why the function refused to email', async () => {
-    state.respond = () => ({ data: { id: 'i1', token: 't' }, error: null });
+    inviteRespond({ id: 'i1', token: 't', email: 'a@b.com', role: 'employee', status: 'pending', company_id: 'c1' });
     const refused = (status: number) => Object.assign(new Error('refused'), { context: { status } });
     state.invoke.mockResolvedValueOnce({ data: null, error: refused(402) });
     expect(await api.createInvite('c1', 'a@b.com')).toMatchObject({ emailed: false, emailBlock: 'no_access' });
+    inviteRespond({ id: 'i2', token: 't', email: 'a@b.com', role: 'employee', status: 'pending', company_id: 'c1' });
     state.invoke.mockResolvedValueOnce({ data: null, error: refused(429) });
     expect(await api.createInvite('c1', 'a@b.com')).toMatchObject({ emailed: false, emailBlock: 'rate_limited' });
+    inviteRespond({ id: 'i3', token: 't', email: 'a@b.com', role: 'employee', status: 'pending', company_id: 'c1' });
     state.invoke.mockResolvedValueOnce({ data: { sent: true }, error: null });
     expect(await api.createInvite('c1', 'a@b.com')).toMatchObject({ emailed: true, emailBlock: null });
+  });
+
+  it('F8: createInvite refuses an active member email', async () => {
+    state.respond = (call) => {
+      if (call.table === 'bd_company_members') {
+        return {
+          data: [{
+            id: 'm1', role: 'employee', active: true, removed_at: null, user_id: 'u1', joined_at: 'x',
+            border_pack_id: null, annual_working_days: null,
+            bd_profiles: { email: 'Owner@Acme.test', display_name: 'Owner' },
+          }],
+          error: null,
+        };
+      }
+      return { data: [], error: null };
+    };
+    await expect(api.createInvite('c1', ' owner@acme.test ')).rejects.toMatchObject({ code: 'already_member' });
+    expect(state.invoke).not.toHaveBeenCalled();
+  });
+
+  it('F10: createInvite reuses a pending invite instead of inserting again', async () => {
+    state.respond = (call) => {
+      if (call.table === 'bd_company_members') return { data: [], error: null };
+      if (call.table === 'bd_invitations') {
+        return {
+          data: [{
+            id: 'i-old', company_id: 'c1', email: 'new@acme.test', role: 'employee', token: 'same-tok',
+            status: 'pending', invited_by: 'me', created_at: 'x', expires_at: 'y',
+          }],
+          error: null,
+        };
+      }
+      return { data: null, error: null };
+    };
+    state.invoke.mockResolvedValueOnce({ data: { sent: true }, error: null });
+    const result = await api.createInvite('c1', 'new@acme.test', 'employee', 'fr');
+    expect(result).toMatchObject({ reused: true, emailed: true, invite: { id: 'i-old', token: 'same-tok' } });
+    expect(state.calls.some((c) => c.ops.some(([n]) => n === 'insert'))).toBe(false);
+    expect(state.invoke).toHaveBeenCalledWith('bd-send-invite', {
+      body: { invitationId: 'i-old', companyId: 'c1', lang: 'fr' },
+    });
+  });
+
+  it('F26: deleteMyDayLog deletes only that work_date for the caller', async () => {
+    state.respond = () => ({ data: null, error: null });
+    await api.deleteMyDayLog('c1', '2026-03-15');
+    const call = state.calls.find((c) => c.table === 'bd_day_logs');
+    expect(op(call!, 'eq')).toEqual(
+      expect.arrayContaining([
+        ['company_id', 'c1'],
+        ['employee_user_id', 'me'],
+        ['work_date', '2026-03-15'],
+      ]),
+    );
+    expect(op(call!, 'delete')).toHaveLength(1);
+  });
+
+  it('F32: deactivateMember sets active false and removed_at', async () => {
+    state.respond = () => ({ data: [{ id: 'm1' }], error: null });
+    state.invoke.mockResolvedValueOnce({ data: { available: true }, error: null });
+    const result = await api.deactivateMember('c1', 'emp1');
+    expect(result.billingSynced).toBe(true);
+    const call = state.calls.find((c) => c.table === 'bd_company_members' && c.ops.some(([n]) => n === 'update'));
+    const [payload] = op(call!, 'update')[0] as [Record<string, unknown>];
+    expect(payload.active).toBe(false);
+    expect(typeof payload.removed_at).toBe('string');
   });
 
   it('listInvites maps bd_invitations rows', async () => {

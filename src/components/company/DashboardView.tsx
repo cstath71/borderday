@@ -129,12 +129,18 @@ function RetentionForm(props: {
         type="button"
         className="btn btn-secondary"
         onClick={() => {
-          const n = Number(value);
-          if (!Number.isFinite(n)) {
+          const raw = value.trim();
+          const n = Number(raw);
+          // F13: surface empty / out-of-range before silent clamp.
+          if (raw === '' || !Number.isFinite(n) || n < 1 || n > 120 || !Number.isInteger(n)) {
             setState('error');
             return;
           }
           const next = clampRetentionMonths(n);
+          if (next !== n) {
+            setState('error');
+            return;
+          }
           // Lowering deletes at the next daily purge, and the purge has no undo.
           if (next < months) {
             const warning = t(d.company.retentionConfirm, { months: next });
@@ -150,7 +156,7 @@ function RetentionForm(props: {
         {d.company.retentionSave}
       </button>{' '}
       {state === 'saved' && <span role="status">{d.company.retentionSaved}</span>}
-      {state === 'error' && <span role="alert">{d.app.saveError}</span>}
+      {state === 'error' && <span role="alert">{d.company.retentionInvalid}</span>}
     </div>
   );
 }
@@ -160,6 +166,8 @@ export default function DashboardView(props: {
   d: Dict;
   companyName: string;
   rows: EmployeeDashboardRow[];
+  /** Soft-deactivated employees with retained day history (F32). */
+  formerRows?: EmployeeDashboardRow[];
   /** What the optional day-level CSV is built from. It has no note field. */
   dayLogs?: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>;
   invites: Invitation[];
@@ -182,7 +190,7 @@ export default function DashboardView(props: {
   onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
 }) {
-  const { d, companyName, rows, dayLogs, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
+  const { d, companyName, rows, formerRows = [], dayLogs, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [busy, setBusy] = useState(false);
@@ -211,11 +219,14 @@ export default function DashboardView(props: {
   const packs = listBorderPacks();
 
   function exportCsv() {
-    download(`borderday-export-${year}.csv`, rowsToCsv(filtered, year), 'text/csv;charset=utf-8');
+    // F32: include former employees' retained rows until retention purge.
+    const all = [...filtered, ...formerRows];
+    download(`borderday-export-${year}.csv`, rowsToCsv(all, year), 'text/csv;charset=utf-8');
   }
 
   function exportDaysCsv() {
-    download(`borderday-days-${year}.csv`, dayRowsToCsv(filtered, dayLogs ?? [], year), 'text/csv;charset=utf-8');
+    const all = [...filtered, ...formerRows];
+    download(`borderday-days-${year}.csv`, dayRowsToCsv(all, dayLogs ?? [], year), 'text/csv;charset=utf-8');
   }
 
   function borderLabel(id: string | null): string {
@@ -335,6 +346,35 @@ export default function DashboardView(props: {
               )}
             </article>
           ))}
+        </div>
+      )}
+
+      {formerRows.length > 0 && (
+        <div className="card" style={{ marginTop: '1.5rem' }} data-testid="former-employees">
+          <h2>
+            {d.company.formerEmployees} ({formerRows.length})
+          </h2>
+          <p className="meta">{d.company.formerEmployeesHelp}</p>
+          <div className="employee-list">
+            {formerRows.map((row) => (
+              <article className="card employee-card" key={`former-${row.userId}`}>
+                <div className="employee-head">
+                  <div>
+                    <strong>{row.displayName}</strong>
+                    <div className="meta">{row.email}</div>
+                    <div className="meta">{borderLabel(row.borderPackId)}</div>
+                    <div className="meta">{d.company.formerReadOnly}</div>
+                  </div>
+                  <span className={`badge ${row.worstStatus}`}>{statusLabel(d, row.worstStatus)}</span>
+                </div>
+                <h3 className="meta">{d.company.countersHeading}</h3>
+                <CounterTable d={d} counters={row.counters} />
+                <Link className="btn btn-ghost" to={`${companyBase}/employee/${row.userId}`} style={{ marginTop: '0.75rem' }}>
+                  {d.company.viewHistory}
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
       )}
 

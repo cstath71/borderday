@@ -147,6 +147,8 @@ export interface CompanyMemberRow {
   borderPackId: BorderId | null;
   annualWorkingDays: number | null;
   active: boolean;
+  /** When soft-deactivated (F32). Null while active. */
+  removedAt: string | null;
   joinedAt: string;
   email: string;
   displayName: string;
@@ -168,7 +170,7 @@ export async function updateCompanyRetention(companyId: string, months: number) 
 }
 
 export async function listMembers(companyId: string): Promise<CompanyMemberRow[]> {
-  const base = 'id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)';
+  const base = 'id, role, border_pack_id, annual_working_days, active, removed_at, user_id, joined_at, bd_profiles(email, display_name)';
   const query = (columns: string) => client().from('bd_company_members').select(columns).eq('company_id', companyId);
   const data = await selectWithProfileFallback(base, query);
   return (data || []).map((m: any) => ({
@@ -178,6 +180,7 @@ export async function listMembers(companyId: string): Promise<CompanyMemberRow[]
     borderPackId: m.border_pack_id,
     annualWorkingDays: m.annual_working_days,
     active: m.active,
+    removedAt: m.removed_at ?? null,
     joinedAt: m.joined_at,
     email: m.bd_profiles?.email ?? '',
     displayName: m.bd_profiles?.display_name?.trim() || m.bd_profiles?.email || '',
@@ -290,7 +293,7 @@ export function canDeactivateMember(
 export async function deactivateMember(companyId: string, memberUserId: string): Promise<{ billingSynced: boolean }> {
   const { data, error } = await client()
     .from('bd_company_members')
-    .update({ active: false })
+    .update({ active: false, removed_at: new Date().toISOString() })
     .eq('company_id', companyId)
     .eq('user_id', memberUserId)
     .neq('role', 'owner')
@@ -332,16 +335,33 @@ function mapInvite(row: any): Invitation {
 /** Why bd-send-invite refused to email: no paid or trial access, or a send limit. */
 export type InviteEmailBlock = 'no_access' | 'rate_limited';
 
+export type CreateInviteError = 'already_member' | 'pending_exists';
+
 export async function createInvite(
   companyId: string,
   email: string,
   role: CompanyRole = 'employee',
   lang = 'en',
-): Promise<{ invite: Invitation; emailed: boolean; emailBlock: InviteEmailBlock | null }> {
+): Promise<{ invite: Invitation; emailed: boolean; emailBlock: InviteEmailBlock | null; reused?: boolean }> {
   const c = client();
+  const normalized = email.trim().toLowerCase();
+
+  // F8: refuse when this address is already an active member (including self-invite).
+  const members = await listMembers(companyId);
+  if (members.some((m) => m.active && m.email.trim().toLowerCase() === normalized)) {
+    throw Object.assign(new Error('already_member'), { code: 'already_member' as CreateInviteError });
+  }
+
+  // F10: reuse a pending invite for the same address instead of minting a new token.
+  const pending = await listInvites(companyId, 'pending');
+  const existing = pending.find((i) => i.email.trim().toLowerCase() === normalized);
+  if (existing) {
+    return { invite: existing, reused: true, ...(await resendInvite(companyId, existing.id, lang)) };
+  }
+
   const { data, error } = await c
     .from('bd_invitations')
-    .insert({ company_id: companyId, email: email.trim().toLowerCase(), role, invited_by: await currentUserId() })
+    .insert({ company_id: companyId, email: normalized, role, invited_by: await currentUserId() })
     .select('*')
     .single();
   if (error) throw error;
@@ -618,6 +638,31 @@ export async function listMyDaysIn(companyId: string): Promise<OwnDay[]> {
     dayShare: r.day_share === 0.5 ? 0.5 : 1,
     ...(r.note ? { note: r.note } : {}),
   }));
+}
+
+/** F26: remove one day from the caller's live company log (active members only). */
+export async function deleteMyDayLog(companyId: string, workDate: string): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client()
+    .from('bd_day_logs')
+    .delete()
+    .eq('company_id', companyId)
+    .eq('employee_user_id', userId)
+    .eq('work_date', workDate);
+  if (error) throw error;
+}
+
+/** F26: remove one day from the individual plan log. */
+export async function deleteMyPersonalDayLog(workDate: string): Promise<void> {
+  const userId = await currentUserId();
+  if (!userId) throw new Error('not authenticated');
+  const { error } = await client()
+    .from('bd_personal_day_logs')
+    .delete()
+    .eq('user_id', userId)
+    .eq('work_date', workDate);
+  if (error) throw error;
 }
 
 export async function deleteMyDayLogs(companyId: string): Promise<void> {

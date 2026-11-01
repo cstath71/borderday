@@ -1,0 +1,25 @@
+{{ if eq .Data.lang "en" }}
+<h2>Your sign-in code</h2>
+<p>Use the code below to sign in. It expires shortly.</p>
+<p><strong>Sign-in code: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "fr" }}
+<h2>Votre code de connexion</h2>
+<p>Utilisez le code ci-dessous pour vous connecter. Il expire bientôt.</p>
+<p><strong>Code de connexion: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "de" }}
+<h2>Ihr Anmeldecode</h2>
+<p>Verwenden Sie den Code unten zur Anmeldung. Er läuft bald ab.</p>
+<p><strong>Anmeldecode: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "it" }}
+<h2>Il tuo codice di accesso</h2>
+<p>Usa il codice sotto per accedere. Scade a breve.</p>
+<p><strong>Codice di accesso: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "nl" }}
+<h2>Je aanmeldcode</h2>
+<p>Gebruik de code hieronder om in te loggen. Deze verloopt binnenkort.</p>
+<p><strong>Aanmeldcode: {{ .Token }}</strong></p>
+{{ else }}
+<h2>Your sign-in code</h2>
+<p>Use the code below to sign in. It expires shortly.</p>
+<p><strong>Sign-in code: {{ .Token }}</strong></p>
+{{ end }}

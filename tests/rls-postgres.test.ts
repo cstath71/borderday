@@ -689,7 +689,7 @@ describe('real Postgres: day logs', () => {
       [company, emp],
     );
     const { rows } = await as(hr, `select * from public.bd_list_day_records($1, $2)`, [company, emp]);
-    expect(Object.keys(rows[0]).sort()).toEqual(['corrected_at', 'day_share', 'day_type', 'employee_user_id', 'overnight_away_for_work', 'prior_day_type', 'voided_at', 'work_date']);
+    expect(Object.keys(rows[0]).sort()).toEqual(['corrected_at', 'day_share', 'day_type', 'employee_label', 'employee_user_id', 'overnight_away_for_work', 'prior_day_type', 'voided_at', 'work_date']);
     expect(rows[0].overnight_away_for_work).toBe(true);
     expect(JSON.stringify(rows)).not.toContain('Lugano');
     const self = await as(emp, `select * from public.bd_list_day_records($1)`, [company]);
@@ -949,6 +949,39 @@ describe('real Postgres: paid access (C8)', () => {
     await expect(logDay(emp, company, '2026-04-01')).rejects.toThrow(/row-level security/);
     await db.query(`update public.bd_companies set subscription_status = 'trialing' where id = $1`, [company]);
     await expect(logDay(emp, company, '2026-04-01')).resolves.toMatchObject({ rowCount: 1 });
+  });
+
+
+  it('AR3-03: deleting the auth user detaches day logs and consents for HR retention', async () => {
+    const owner = await newUser('o-ar303@example.com');
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    await logDay(emp, company, '2026-05-10');
+    await db.query(
+      `insert into public.bd_consents (user_id, company_id, consent_version, text_lang)
+       values ($1, $2, 'employer_notice_v1', 'en')
+       on conflict do nothing`,
+      [emp, company],
+    );
+    await db.query(`delete from auth.users where id = $1`, [emp]);
+    const kept = await db.query(
+      `select employee_user_id, employee_label, day_type from public.bd_day_logs where company_id = $1`,
+      [company],
+    );
+    expect(kept.rowCount).toBe(1);
+    expect(kept.rows[0].employee_user_id).toBeNull();
+    expect(kept.rows[0].employee_label).toBeTruthy();
+    const hr = await as(owner, `select employee_user_id, employee_label from public.bd_list_day_records($1)`, [company]);
+    expect(hr.rowCount).toBe(1);
+    expect(hr.rows[0].employee_user_id).toBeNull();
+    expect(hr.rows[0].employee_label).toBeTruthy();
+    const cons = await db.query(
+      `select user_id, subject_email, subject_label from public.bd_consents where company_id = $1`,
+      [company],
+    ).catch(() => ({ rowCount: 0, rows: [] as { user_id: unknown }[] }));
+    if (cons.rowCount && cons.rowCount > 0) {
+      expect(cons.rows.every((r) => r.user_id == null)).toBe(true);
+    }
   });
 
   it('a lapsed company blocks new logs but keeps the employee able to read and soft-void their own', async () => {

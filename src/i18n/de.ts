@@ -551,7 +551,7 @@ const de: Dict = {
       'Widerruf der Einwilligung: soweit anwendbar, Widerruf der Einwilligung, ohne die Rechtmässigkeit der vorherigen Bearbeitung zu berühren.',
     ],
     rightsHow:
-      'Nutzen Sie die Kontoseite, um Ihre Tagesprotokolle zu exportieren, nach dem Verlassen eines Unternehmens Ihre eigene Kopie zu löschen oder die Kontolöschung zu beantragen, oder schreiben Sie an privacy@borderday.com. Die DSGVO gibt uns einen Monat für die Antwort, das DSG 30 Tage. Bei Tagesprotokollen in einem Unternehmenskonto ist der Arbeitgeber Verantwortlicher: das Löschen Ihrer Kopie entfernt nicht die Unterlagen, die er gemäss seiner Aufbewahrungsfrist behält.',
+      'Nutzen Sie die Kontoseite, um Ihre Tagesprotokolle zu exportieren, nach dem Verlassen eines Unternehmens Ihre eigene Kopie zu löschen oder die Kontolöschung zu beantragen, oder schreiben Sie an privacy@borderday.com. Die DSGVO gibt uns einen Monat für die Antwort, das DSG 30 Tage. Bei Tagesprotokollen in einem Unternehmenskonto ist der Arbeitgeber Verantwortlicher: das Löschen Ihrer Kopie entfernt nicht die Unterlagen, die er gemäss seiner Aufbewahrungsfrist behält. Die Kontoschließung belässt auch diese Protokolle und Nachweisunterlagen beim Arbeitgeber bis zum Ende der Aufbewahrung.',
     complaintBody:
       'Sie können sich beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten beschweren (EDÖB, www.edoeb.admin.ch). Wenn Sie in der EU/im EWR leben oder arbeiten, können Sie sich auch bei Ihrer örtlichen Datenschutzbehörde beschweren.',
     requiredBody:
@@ -830,7 +830,7 @@ const de: Dict = {
       'Tage aus der Gratisvorschau, in diesem Browser gespeichert und nicht auf unseren Servern.',
     deleteTitle: 'Kontolöschung beantragen',
     deleteBody:
-      'Die Löschung eines Kontos bearbeiten wir von Hand, nicht automatisch. Senden Sie den Antrag unten: Wir löschen Ihr Konto und Ihr persönliches Tagesprotokoll und antworten innerhalb eines Monats. Bei Tagesprotokollen in einem Unternehmenskonto ist Ihr Arbeitgeber Verantwortlicher und muss möglicherweise Unterlagen aufbewahren: Wir teilen Ihnen dies gegebenenfalls mit. Kündigen Sie zuerst jeden kostenpflichtigen Plan.',
+      'Die Löschung eines Kontos bearbeiten wir von Hand, nicht automatisch. Senden Sie den Antrag unten: Wir löschen Ihr Konto und Ihr persönliches Tagesprotokoll und antworten innerhalb eines Monats. Tagesprotokolle und Nachweisunterlagen in einem Unternehmenskonto bleiben beim Arbeitgeber (von Ihrer Anmeldung getrennt) bis deren Aufbewahrungsfrist endet — er bleibt Verantwortlicher für diesen Bestand. Kündigen Sie zuerst jeden kostenpflichtigen Plan.',
     deleteConfirm: 'Ich möchte die Löschung meines Kontos beantragen',
     deleteSend: 'Löschantrag in meinem E-Mail-Programm öffnen',
     deleteHint: 'Der Antrag ist gestellt, wenn Sie die E-Mail an {to} senden.',

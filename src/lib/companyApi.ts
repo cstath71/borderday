@@ -483,6 +483,8 @@ export interface DayLogView {
   voidedAt?: string | null;
   priorDayType?: DayType | null;
   correctedAt?: string | null;
+  /** Kept when the employee account is deleted (AR3-03). */
+  employeeLabel?: string | null;
 }
 
 /**
@@ -558,6 +560,7 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     voided_at?: string | null;
     prior_day_type?: DayType | null;
     corrected_at?: string | null;
+    employee_label?: string | null;
   };
   const read = (rpc: 'bd_list_day_records' | 'bd_list_day_types') =>
     allPages<Row>((from, to) =>
@@ -578,6 +581,7 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     voidedAt: r.voided_at ?? null,
     priorDayType: r.prior_day_type ?? null,
     correctedAt: r.corrected_at ?? null,
+    employeeLabel: r.employee_label ?? null,
   }));
 }
 

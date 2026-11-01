@@ -544,7 +544,7 @@ const en = {
       'Withdrawal of consent: where applicable, withdrawing consent without affecting the lawfulness of processing before withdrawal.',
     ],
     rightsHow:
-      'Use the Account page to export your day logs, clear your own copy after you leave a company, or request account deletion, or write to privacy@borderday.com. The GDPR gives us one month to answer and the FADP 30 days. For day logs in a company account the employer is the controller: clearing your copy does not delete the employer’s retained records under their retention setting.',
+      'Use the Account page to export your day logs, clear your own copy after you leave a company, or request account deletion, or write to privacy@borderday.com. The GDPR gives us one month to answer and the FADP 30 days. For day logs in a company account the employer is the controller: clearing your copy does not delete the employer’s retained records under their retention setting. Closing the account also leaves those company day logs and notice proof with the employer until retention ends.',
     complaintBody:
       'You can complain to the Swiss Federal Data Protection and Information Commissioner (FDPIC, www.edoeb.admin.ch). If you live or work in the EU/EEA, you can also complain to your local data protection authority.',
     requiredBody:
@@ -819,7 +819,7 @@ const en = {
     deviceBody: 'Days from the free preview, stored in this browser and not on our servers.',
     deleteTitle: 'Request account deletion',
     deleteBody:
-      'Deleting an account is handled by us, not automatically. Send the request below and we delete your account and personal day log and answer within one month. For day logs in a company account your employer is the controller and may need to keep some records: we tell you if so. Cancel any paid plan first.',
+      'Deleting an account is handled by us, not automatically. Send the request below and we delete your account and personal day log and answer within one month. Day logs and notice proof in a company account stay with your employer (detached from your login) until their retention period ends — they remain the controller of that record. Cancel any paid plan first.',
     deleteConfirm: 'I want to request the deletion of my account',
     deleteSend: 'Open deletion request in my email app',
     deleteHint: 'The request is made when you send the email to {to}.',

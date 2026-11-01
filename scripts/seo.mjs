@@ -105,7 +105,7 @@ export const PAGES = {
     fr: {
       title: 'BorderDay — Seuils de jours fiscaux et sociaux pour les RH',
       description:
-        'Comptage des jours pour les équipes qui travaillent par-delà les frontières : sécurité sociale sur neuf corridors, fiscalité sur six. Entreprise dès 5 €/collaborateur actif/mois (min. 39 €), hors TVA. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
+        'Comptage des jours pour les équipes qui travaillent par-delà les frontières : sécurité sociale sur neuf corridors, fiscalité sur sept. Entreprise dès 5 €/collaborateur actif/mois (min. 39 €), hors TVA. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
       h1: 'Un seul outil pour toutes les frontières de vos équipes',
       summary:
         'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
@@ -114,7 +114,7 @@ export const PAGES = {
     de: {
       title: 'BorderDay — Grenzüberschreitende Tagesgrenzen für HR',
       description:
-        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Korridoren, Steuer auf sechs. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Korridoren, Steuer auf sieben. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
       h1: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
       summary:
         'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
@@ -123,7 +123,7 @@ export const PAGES = {
     it: {
       title: 'BorderDay — Soglie di giorni fiscali e previdenziali per HR',
       description:
-        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove corridoi, fisco su sei. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove corridoi, fisco su sette. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
       h1: 'Un solo strumento per tutti i confini dei vostri team',
       summary:
         'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per dipendente: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per dipendente attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
@@ -808,7 +808,7 @@ export const FAQ = {
     ],
     [
       'How do payments work?',
-      'Checkout uses Stripe Managed Payments: Link is the merchant of record and handles VAT/GST in Checkout. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
+      'Checkout uses Stripe Managed Payments: Stripe is the merchant of record and handles VAT/GST in Checkout; checkout branding may show purchases as sold through Link. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
     ],
     [
       'What does BorderDay not cover?',
@@ -838,7 +838,7 @@ export const FAQ = {
     ],
     [
       'Comment fonctionnent les paiements ?',
-      'Le paiement utilise Stripe Managed Payments : Link est le marchand officiel (merchant of record) et gère TVA/GST. Codes promo acceptés. Voir les CGU pour la résiliation et le droit de rétractation UE de 14 jours.',
+      'Le paiement utilise Stripe Managed Payments : Stripe est le marchand officiel (merchant of record) et gère la TVA/GST au checkout ; la présentation du checkout peut indiquer un achat vendu via Link. Codes promo acceptés. Voir les CGU pour la résiliation et le droit de rétractation UE de 14 jours.',
     ],
     [
       'Que ne couvre pas BorderDay ?',
@@ -868,7 +868,7 @@ export const FAQ = {
     ],
     [
       'Wie funktionieren Zahlungen?',
-      'Checkout über Stripe Managed Payments: Link ist Merchant of Record und handhabt MWST/GST. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
+      'Checkout über Stripe Managed Payments: Stripe ist der Merchant of Record und übernimmt MWST/GST im Checkout; im Checkout kann der Kauf als «über Link verkauft» erscheinen. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
     ],
     [
       'Was deckt BorderDay nicht ab?',
@@ -898,7 +898,7 @@ export const FAQ = {
     ],
     [
       'Come funzionano i pagamenti?',
-      'Il checkout usa Stripe Managed Payments: Link è il merchant of record e gestisce IVA/GST. Codici promo supportati. Vedete le Condizioni per disdetta e recesso UE di 14 giorni.',
+      'Il checkout usa Stripe Managed Payments: Stripe è il merchant of record e gestisce IVA/GST nel checkout; il checkout può indicare l’acquisto come venduto tramite Link. Codici promo supportati. Vedete le Condizioni per disdetta e recesso UE di 14 giorni.',
     ],
     [
       'Cosa non copre BorderDay?',
@@ -929,7 +929,7 @@ FAQ.nl = [
   ],
   [
     'Hoe werken betalingen?',
-    'Checkout gebruikt Stripe Managed Payments: Link is de merchant of record en behandelt btw/GST in Checkout. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
+    'Checkout gebruikt Stripe Managed Payments: Stripe is de merchant of record en behandelt btw/GST in Checkout; in de checkout kan de aankoop worden getoond als verkocht via Link. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
   ],
   [
     'Wat dekt BorderDay niet?',

@@ -80,4 +80,4 @@ export interface TenantDb {
 }
 
 // Proof of which notice text someone acknowledged. Bump it when company.noticeBody changes.
-export const CONSENT_VERSION = '2026-10-31-v3';
+export const CONSENT_VERSION = '2026-11-01-v4';

@@ -46,6 +46,8 @@ export function isSchemaLag(error: unknown): boolean {
 }
 
 const MEMBER_PROFILE_COLUMNS =
+  'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012, contract_days_per_year, employment_full_months, employment_full_weeks';
+const PROFILE_WITHOUT_PART_YEAR =
   'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012, contract_days_per_year';
 const PROFILE_WITHOUT_CONTRACT_DAYS = 'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012';
 const PROFILE_WITHOUT_FRONTIER = 'employment_percent, a1_in_place, a1_valid_until';
@@ -56,6 +58,7 @@ async function selectWithProfileFallback(
   query: (columns: string) => PromiseLike<{ data: unknown; error: unknown }>,
 ): Promise<any> {
   let { data, error } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_PART_YEAR}`));
   if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_CONTRACT_DAYS}`));
   if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
   if (isSchemaLag(error)) ({ data, error } = await query(base));
@@ -66,6 +69,8 @@ async function selectWithProfileFallback(
 export interface MemberProfile {
   employmentPercent: number | null;
   contractDaysPerYear?: number | null;
+  employmentFullMonths?: number | null;
+  employmentFullWeeks?: number | null;
   a1InPlace: boolean;
   a1ValidUntil: string | null;
   frontierBefore2012?: boolean;
@@ -75,6 +80,8 @@ function mapProfile(m: any): MemberProfile {
   return {
     employmentPercent: m.employment_percent ?? null,
     contractDaysPerYear: m.contract_days_per_year ?? null,
+    employmentFullMonths: m.employment_full_months ?? null,
+    employmentFullWeeks: m.employment_full_weeks ?? null,
     a1InPlace: m.a1_in_place ?? false,
     a1ValidUntil: m.a1_valid_until ?? null,
     frontierBefore2012: m.frontier_before_2012 ?? false,
@@ -232,14 +239,29 @@ export async function updateMyProfile(companyId: string, profile: MemberProfile)
     p_frontier_before_2012: !!profile.frontierBefore2012,
   });
   if (error) throw error;
-  if (profile.contractDaysPerYear === undefined) return;
-  // Its own additive RPC, so the profile RPC above keeps its signature while the site deploys.
-  const { error: daysError } = await client().rpc('bd_update_member_contract_days', {
-    p_company_id: companyId,
-    p_contract_days_per_year: profile.contractDaysPerYear,
-  });
-  // Clearing a value the database cannot hold yet is harmless; setting one must fail visibly.
-  if (daysError && !(isSchemaLag(daysError) && profile.contractDaysPerYear === null)) throw daysError;
+  if (profile.contractDaysPerYear !== undefined) {
+    const { error: daysError } = await client().rpc('bd_update_member_contract_days', {
+      p_company_id: companyId,
+      p_contract_days_per_year: profile.contractDaysPerYear,
+    });
+    if (daysError && !(isSchemaLag(daysError) && profile.contractDaysPerYear === null)) throw daysError;
+  }
+  if (profile.employmentFullMonths !== undefined || profile.employmentFullWeeks !== undefined) {
+    const { error: pyError } = await client().rpc('bd_update_member_part_year', {
+      p_company_id: companyId,
+      p_employment_full_months: profile.employmentFullMonths ?? null,
+      p_employment_full_weeks: profile.employmentFullWeeks ?? null,
+    });
+    if (
+      pyError &&
+      !(
+        isSchemaLag(pyError) &&
+        (profile.employmentFullMonths == null || profile.employmentFullMonths === undefined) &&
+        (profile.employmentFullWeeks == null || profile.employmentFullWeeks === undefined)
+      )
+    )
+      throw pyError;
+  }
 }
 
 /**
@@ -258,17 +280,35 @@ export async function updateEmployeeProfile(
     frontier_before_2012: !!profile.frontierBefore2012,
     ...(profile.annualWorkingDays === undefined ? {} : { annual_working_days: profile.annualWorkingDays }),
   };
-  const run = (extra: { contract_days_per_year?: number | null }) =>
+  const extra: Record<string, number | null> = {};
+  if (profile.contractDaysPerYear !== undefined) extra.contract_days_per_year = profile.contractDaysPerYear;
+  if (profile.employmentFullMonths !== undefined) extra.employment_full_months = profile.employmentFullMonths;
+  if (profile.employmentFullWeeks !== undefined) extra.employment_full_weeks = profile.employmentFullWeeks;
+  const run = (patch: Record<string, number | null>) =>
     client()
       .from('bd_company_members')
-      .update({ ...fields, ...extra })
+      .update({ ...fields, ...patch })
       .eq('company_id', companyId)
       .eq('user_id', employeeUserId)
       .select('id');
-  const contractDays = profile.contractDaysPerYear;
-  let { data, error } = await run(contractDays === undefined ? {} : { contract_days_per_year: contractDays });
+  let { data, error } = await run(extra);
   // Clearing a value the database cannot hold yet is harmless; setting one must fail visibly.
-  if (isSchemaLag(error) && contractDays == null) ({ data, error } = await run({}));
+  if (isSchemaLag(error)) {
+    const clearing =
+      (profile.contractDaysPerYear == null || profile.contractDaysPerYear === undefined) &&
+      (profile.employmentFullMonths == null || profile.employmentFullMonths === undefined) &&
+      (profile.employmentFullWeeks == null || profile.employmentFullWeeks === undefined);
+    if (clearing) ({ data, error } = await run({}));
+    else if ('employment_full_months' in extra || 'employment_full_weeks' in extra) {
+      const withoutPy = { ...extra };
+      delete withoutPy.employment_full_months;
+      delete withoutPy.employment_full_weeks;
+      ({ data, error } = await run(withoutPy));
+      if (isSchemaLag(error) && (profile.contractDaysPerYear == null || profile.contractDaysPerYear === undefined)) {
+        ({ data, error } = await run({}));
+      }
+    }
+  }
   if (error) throw error;
   // RLS hides a forbidden row instead of raising, so "nothing updated" is the refusal.
   if (!data?.length) throw new Error('profile update denied');

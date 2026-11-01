@@ -145,8 +145,29 @@ export function contractDaysLimit(limit: number, contractDays: number, base: num
   return Math.max(1, Math.floor((limit * contractDays) / base));
 }
 
+/** DE–CH protocol point 5(g): 5 days per full month + 1 day per full week of employment. */
+export function partYearDaysLimit(limit: number, months: number, weeks: number): number {
+  const m = Math.max(0, Math.min(12, Math.trunc(months)));
+  const w = Math.max(0, Math.min(51, Math.trunc(weeks)));
+  return Math.max(0, Math.min(limit, 5 * m + w));
+}
+
+export function validEmploymentMonths(p: EmploymentProfile | undefined): number | null {
+  const v = p?.employmentFullMonths;
+  return typeof v === 'number' && v >= 0 && v <= 12 ? Math.trunc(v) : null;
+}
+
+export function validEmploymentWeeks(p: EmploymentProfile | undefined): number {
+  const v = p?.employmentFullWeeks;
+  return typeof v === 'number' && v >= 0 && v <= 51 ? Math.trunc(v) : 0;
+}
+
 export function usesContractDays(pack: BorderPack): boolean {
   return pack.counters.some((c) => c.enabled && c.contractDayBase != null);
+}
+
+export function usesPartYearFormula(pack: BorderPack): boolean {
+  return pack.counters.some((c) => c.enabled && c.partYearFormula === 'de_ch_5_1');
 }
 
 /**
@@ -376,6 +397,103 @@ function paceMessage(
  * (or pack default), not against days logged so far. Ratio = usedDays / allowance so
  * warnings fire at 75/90% of the real annual allowance.
  */
+/**
+ * Year-level percentage floor (DE–CH protocol point 5(b): regular return on at least 20% of
+ * agreed working days). Agreed days = contract days when set, otherwise the annual base.
+ * Mid-year status follows projected pace; after the year it is a hard used-vs-required check.
+ */
+function evaluatePercentFloor(
+  pack: BorderPack,
+  counter: LimitCounter,
+  entries: DayEntry[],
+  opts: EvaluateOptions,
+  today: string,
+): CounterResult {
+  const annualWorkingDays = annualBaseFor(pack, opts.annualWorkingDays, opts.profile);
+  const agreed = validContractDays(opts.profile) ?? annualWorkingDays;
+  const limitPct = counter.limit!;
+  const required = allowedDaysForPercent(limitPct, agreed);
+  const yearEntries = entries.filter((e) => yearOf(e.date) === opts.year);
+  const counted = (list: DayEntry[]) =>
+    sumWeights(list, counter, (e) => {
+      const c = contribution(counter, e.type);
+      return c === 'toward_percent' || c === 'full';
+    });
+  const usedDays = counted(yearEntries);
+  const percentOfAnnual = agreed > 0 ? Math.round((usedDays / agreed) * 10000) / 100 : 0;
+  const ratio = required > 0 ? usedDays / required : null;
+
+  const messages: CounterMessage[] = [];
+  const base = baseMessage(pack, opts.annualWorkingDays, opts.profile);
+  if (base) messages.push(base);
+
+  let status: CounterStatus = 'ok';
+  let statusLabelKey = 'status_floor_met';
+  const yearDone = yearOf(today) > opts.year || (yearOf(today) === opts.year && today >= `${opts.year}-12-31`);
+
+  if (ratio !== null && usedDays >= required) {
+    status = 'ok';
+    statusLabelKey = 'status_floor_met';
+  } else if (yearDone) {
+    status = 'over';
+    statusLabelKey = 'status_floor_below';
+    if (counter.overKey) messages.push({ key: counter.overKey, tone: 'warn', vars: { limit: limitPct, required, used: usedDays } });
+    else messages.push({ key: 'floor_percent_below', tone: 'warn', vars: { limit: limitPct, required, used: usedDays } });
+  } else {
+    // Projected commute share vs the floor.
+    const soFar = yearEntries.filter((e) => e.date <= today);
+    const usedSoFar = counted(soFar);
+    const from = soFar.length ? soFar.reduce((min, e) => (e.date < min ? e.date : min), today) : `${opts.year}-01-01`;
+    const daysInYear = daysBetweenInclusive(`${opts.year}-01-01`, `${opts.year}-12-31`);
+    const expected = Math.max(
+      (agreed * daysBetweenInclusive(from, today)) / daysInYear,
+      workingDays(soFar).length,
+      1,
+    );
+    const projectedPct = (usedSoFar / expected) * 100;
+    if (expected >= PACE_MIN_EXPECTED_DAYS && projectedPct < limitPct) {
+      status = projectedPct < limitPct * 0.75 ? 'critical' : 'warn';
+      statusLabelKey = 'status_floor_below';
+      messages.push({
+        key: 'floor_percent_pace',
+        tone: 'warn',
+        vars: { limit: limitPct, pct: Math.round(projectedPct), required, used: usedDays },
+      });
+    } else {
+      statusLabelKey = usedDays === 0 ? 'status_floor_progress' : 'status_floor_progress';
+      messages.push({
+        key: 'floor_percent_progress',
+        tone: 'info',
+        vars: { limit: limitPct, required, used: usedDays },
+      });
+    }
+  }
+
+  const pace = paceMessage(yearEntries, counted, agreed, limitPct, opts.year, today);
+  // For a floor, pace_above is good; rewrite tone when present.
+  if (pace) {
+    if (pace.key === 'pace_above') messages.push({ ...pace, key: 'floor_pace_on_track', tone: 'info' });
+    else if (pace.key === 'pace_line') messages.push({ ...pace, key: 'floor_pace_low', tone: 'warn' });
+    else messages.push(pace);
+  }
+
+  return {
+    counterId: counter.id,
+    enabled: true,
+    used: percentOfAnnual,
+    limit: limitPct,
+    unit: counter.unit!,
+    ratio,
+    status,
+    usedDays,
+    allowedDays: required,
+    percentOfAnnual,
+    annualWorkingDays: agreed,
+    statusLabelKey,
+    messages,
+  };
+}
+
 export function evaluateCounter(
   pack: BorderPack,
   counter: LimitCounter,
@@ -388,6 +506,9 @@ export function evaluateCounter(
   }
 
   const today = opts.today ?? zurichToday();
+  if (counter.direction === 'floor' && counter.unit === 'percent_of_working_time') {
+    return evaluatePercentFloor(pack, counter, entries, opts, today);
+  }
   if (counter.direction === 'floor') {
     return evaluateFloor(counter, entries, opts.referenceMonth ?? monthOf(today), today);
   }
@@ -520,6 +641,21 @@ export function evaluateCounter(
     }
   }
 
+  if (counter.partYearFormula === 'de_ch_5_1') {
+    const months = validEmploymentMonths(opts.profile);
+    const weeks = validEmploymentWeeks(opts.profile);
+    if (months != null) {
+      limit = partYearDaysLimit(limit, months, weeks);
+      messages.push({
+        key: 'part_year_applied',
+        tone: 'info',
+        vars: { months, weeks, limit, full: counter.limit },
+      });
+    } else if (employmentPercent != null && employmentPercent < 100) {
+      messages.push({ key: 'part_year_missing', tone: 'warn', vars: { limit } });
+    }
+  }
+
   if (counter.contractDayBase != null) {
     const contractDays = validContractDays(opts.profile);
     if (contractDays != null && contractDays < counter.contractDayBase) {
@@ -527,7 +663,7 @@ export function evaluateCounter(
       messages.push({
         key: 'contract_days_estimate',
         tone: 'info',
-        vars: { days: contractDays, base: counter.contractDayBase, limit, full: counter.limit },
+        vars: { days: contractDays, base: counter.contractDayBase, limit, full: counter.limit! },
       });
     } else if (contractDays == null && employmentPercent != null && employmentPercent < 100) {
       messages.push({ key: 'contract_days_missing', tone: 'warn', vars: { limit } });

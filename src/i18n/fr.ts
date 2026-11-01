@@ -1015,6 +1015,56 @@ const fr: Dict = {
       'La création d’un compte est gratuite. Une offre payante ne commence qu’au checkout : essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation. À lire :',
   },
 
+  employersHub: {
+    title: 'Pages employeurs',
+    linkTicino: 'Employeurs Tessin (IT→CH)',
+    linkGeneva: 'Employeurs Genève (FR→CH)',
+    linkLuxembourg: 'Employeurs Luxembourg (FR/BE/DE→LU)',
+  },
+  employersTicino: {
+    metaTitle: 'Employeurs Tessin — suivi télétravail (IT→CH) — BorderDay',
+    metaDescription:
+      'Pour les RH tessinoises: suivre les jours de télétravail du personnel résidant en Italie. Compteurs fiscaux 25% et 45 jours de non-retour selon l’accord Italie–Suisse, plus le cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+    heroTitle: 'Employeurs au Tessin: jours de télétravail pour le personnel résidant en Italie',
+    inShort:
+      'BorderDay aide les employeurs tessinois à enregistrer télétravail, jours sur site et nuits hors domicile pour les personnes qui résident en Italie et travaillent en Suisse selon l’accord Italie–Suisse  (Accordo Art. 2, tel que modifié pour le télétravail). Fiscalité: au plus 25% de télétravail au domicile et jusqu’à 45 jours de non-retour par an (protocole Fedlex RU 2026 104; en vigueur le 9 février 2026, applicable dès le 1er janvier 2024). Sécurité sociale: bandes du cadre UE/EEE/CH sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Pas un conseil fiscal ou juridique.',
+    agreementTitle: 'Accord Italie–Suisse (2020 / protocole 2023)',
+    agreementBody:
+      'L’accord Italie–Suisse du 23 décembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) couvre des zones frontalières définies (CH: Grisons, Tessin, Valais; IT: Lombardie, Piémont, Vallée d’Aoste, province de Bolzano), avec des conditions de résidence et de lieu de travail à l’Art. 2(b). Le protocole télétravail est publié comme Fedlex RU 2026 104; l’OFAS indique l’entrée en vigueur le 9 février 2026 avec application dès le 1er janvier 2024, y compris pour les travailleurs en régime transitoire. Vérifiez l’adéquation avec votre conseiller ou l’autorité avant de vous fier à ces compteurs.',
+    thresholdsTitle: 'Ce que compte le pack ticino_it aujourd’hui',
+    thresholdTax25:
+      'Fiscalité — télétravail au domicile: au maximum 25% de l’activité salariée en télétravail au domicile en Italie sur une année civile, sans modifier le statut fiscal de résidence pour ce télétravail (protocole / Accordo). Le co-working n’est pas confirmé dans le texte du protocole — demandez à votre autorité.',
+    thresholdNonreturn45:
+      'Fiscalité — jours de non-retour: en principe jusqu’à 45 jours par année civile sans rentrer quotidiennement au domicile pour raisons professionnelles. Congés et maladie ne comptent pas. BorderDay ne compte que les jours marqués nuit hors domicile pour le travail; un déplacement aller-retour le même jour ne compte pas.',
+    thresholdSs50:
+      'Sécurité sociale — cadre UE/EEE/CH: sous 25% le cadre ne s’applique pas; de 25% à moins de 50% un A1 est en principe requis; à 50% ou plus, affiliation de l’État de résidence. Séparé de la fiscalité. Sources notamment le mémorandum du dépositaire FPS belge.',
+    thresholdEmployerDuty:
+      'Obligations employeur: conserver des registres de jours cohérents avec les compteurs ci-dessus. Cette page n’indique pas de date de transmission annuelle du taux de télétravail spécifique au Tessin comparable à la première transmission AFC de Genève (janvier 2027) — confirmez dépôts et obligations A1 auprès des autorités suisses/italiennes compétentes.',
+    howTitle: 'Comment BorderDay aide les RH',
+    howBody:
+      'Invitez les collaborateurs; chacun choisit le corridor Tessin←Italie et enregistre uniquement des types de jours (télétravail / sur site / déplacement / non travaillé) plus la nuit hors domicile si pertinent. Les RH voient la part fiscale de 25%, le compteur de 45 jours de non-retour et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
+    sourcesTitle: 'Sources officielles (identiques au pack ticino_it)',
+    disclaimer:
+      'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
+    ctaPrimary: 'Créer un compte entreprise',
+    ctaPricing: 'Voir les tarifs',
+    faqTitle: 'FAQ employeurs Tessin',
+    faq1q: 'Quel corridor choisir pour un collaborateur au Tessin résidant en Italie?',
+    faq1a:
+      'Le pack Tessin ← Italie (ticino_it): 25% de télétravail au domicile, 45 jours de non-retour et le compteur de sécurité sociale partagé — lorsque les zones et conditions de l’Accordo Art. 2 sont remplies.',
+    faq2q: 'La règle des 45 jours compte-t-elle les déplacements d’une journée?',
+    faq2a:
+      'BorderDay ne compte que les jours marqués «nuit hors domicile pour le travail». Un aller-retour le même jour n’incrémente pas le compteur de non-retour. Congés et maladie sont exclus selon la note du protocole dans le pack.',
+    faq3q: 'Suivez-vous la localisation des collaborateurs?',
+    faq3a:
+      'Non. Uniquement le type de jour et éventuellement nuit hors domicile oui/non. Jamais de GPS.',
+    faq4q: 'Que signifie le compteur sécurité sociale à 50%?',
+    faq4a:
+      'Selon le cadre, un télétravail dans l’État de résidence de 50% ou plus du temps de travail conduit en principe à l’affiliation de résidence; entre 25% et moins de 50%, un A1 est en principe nécessaire. BorderDay affiche ces bandes séparément de la fiscalité.',
+    faq5q: 'Est-ce un conseil fiscal ou juridique?',
+    faq5a:
+      'Non. C’est un outil de suivi dont les compteurs s’appuient sur des sources publiques liées ici et dans l’app. Confirmez auprès de votre conseiller ou de l’autorité.',
+  },
   employersGeneva: {
     metaTitle: 'Employeurs Genève — suivi télétravail (FR→CH) — BorderDay',
     metaDescription:

@@ -1014,6 +1014,55 @@ const de: Dict = {
       'Das Anlegen eines Kontos ist kostenlos. Ein kostenpflichtiger Plan beginnt erst im Checkout: 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Bitte lesen:',
   },
 
+  employersHub: {
+    title: 'Arbeitgeberseiten',
+    linkTicino: 'Arbeitgeber Tessin (IT→CH)',
+    linkGeneva: 'Arbeitgeber Genf (FR→CH)',
+    linkLuxembourg: 'Arbeitgeber Luxemburg (FR/BE/DE→LU)',
+  },
+  employersTicino: {
+    metaTitle: 'Arbeitgeber Tessin — Telearbeitstage (IT→CH) — BorderDay',
+    metaDescription:
+      'Für HR im Tessin: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Italien erfassen. Steuerzähler 25% Telearbeit und 45 Nicht-Rückkehrtage laut Abkommen Italien–Schweiz, plus EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+    heroTitle: 'Arbeitgeber im Tessin: Telearbeitstage für Mitarbeitende mit Wohnsitz in Italien',
+    inShort:
+      'BorderDay hilft Tessiner Arbeitgebern, Telearbeit, Vor-Ort-Tage und Übernachtungen auswärts für Personen zu erfassen, die in Italien wohnen und in der Schweiz arbeiten — gemäss dem Abkommen Italien–Schweiz (Accordo Art. 2) (Accordo Art. 2, geändert für Telearbeit). Steuer: höchstens 25% Telearbeit am Wohnsitz und bis 45 Nicht-Rückkehrtage pro Jahr (Protokoll Fedlex RU 2026 104; in Kraft 9. Feb 2026, anwendbar ab 1. Jan 2024). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Keine Steuer- oder Rechtsberatung.',
+    agreementTitle: 'Abkommen Italien–Schweiz (2020 / Protokoll 2023)',
+    agreementBody:
+      'Das Abkommen Italien–Schweiz vom 23. Dezember 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) erfasst definierte Grenzzonen (CH: Graubünden, Tessin, Wallis; IT: Lombardei, Piemont, Aostatal, Provinz Bozen) mit Wohnsitz- und Arbeitsortbedingungen in Art. 2(b). Das Telearbeits-Protokoll ist als Fedlex RU 2026 104 veröffentlicht; das BSV nennt Inkrafttreten am 9. Februar 2026 mit Anwendung ab 1. Januar 2024, auch für Übergangsregime. Passung mit Berater oder Behörde prüfen, bevor Sie sich auf diese Zähler stützen.',
+    thresholdsTitle: 'Was das Pack ticino_it heute zählt',
+    thresholdTax25:
+      'Steuer — Telearbeit am Wohnsitz: höchstens 25% der unselbständigen Tätigkeit als Telearbeit zu Hause in Italien im Kalenderjahr, ohne Änderung des betroffene Personstatus für diese Telearbeit (Protokoll / Accordo). Co-Working ist im Protokollwortlaut nicht bestätigt — bei der Behörde nachfragen.',
+    thresholdNonreturn45:
+      'Steuer — Nicht-Rückkehrtage: grundsätzlich bis 45 Tage pro Kalenderjahr ohne tägliche Rückkehr nach Hause aus beruflichen Gründen. Urlaub und Krankheit zählen nicht. BorderDay zählt nur Tage mit Markierung Übernachtung auswärts für die Arbeit; eine Hin- und Rückfahrt am selben Tag zählt nicht.',
+    thresholdSs50:
+      'Sozialversicherung — EU/EWR/CH-Rahmen: unter 25% gilt der Rahmen nicht; von 25% bis unter 50% ist in der Regel ein A1 nötig; bei 50% oder mehr Wohnsitz-Affiliation. Getrennt von der Steuer. Quellen u. a. das Memorandum der belgischen FPS-Depositärstelle.',
+    thresholdEmployerDuty:
+      'Arbeitgeberpflichten: Tagesaufzeichnungen führen, die zu den Zählern oben passen. Diese Seite nennt kein tessin-spezifisches jährliches Melde-Datum der Telearbeitsquote vergleichbar mit der Genfer AFC-Erstmeldung (Januar 2027) — Melde- und A1-Pflichten bei den zuständigen CH/IT-Behörden bestätigen.',
+    howTitle: 'Wie BorderDay HR hilft',
+    howBody:
+      'Mitarbeitende einladen; jede Person wählt die Route Tessin←Italien und erfasst nur Tagesarten (Telearbeit / vor Ort / Reise / arbeitsfrei) plus Übernachtung auswärts wenn relevant. HR sieht die 25%-Steuerquote, den 45-Tage-Nicht-Rückkehrzähler und Sozialversicherungsbänder, mit CSV-Export. Kein GPS. Unternehmen: 5 € je aktive mitarbeitende Person/Monat (Minimum 39 €), zzgl. MWST; 7-Tage-Test, Karte erforderlich.',
+    sourcesTitle: 'Offizielle Quellen (wie Pack ticino_it)',
+    disclaimer:
+      'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit qualifiziertem Berater oder zuständiger Behörde prüfen.',
+    ctaPrimary: 'Unternehmenskonto erstellen',
+    ctaPricing: 'Preise ansehen',
+    faqTitle: 'FAQ für Arbeitgeber im Tessin',
+    faq1q: 'Welche Route für Mitarbeitende im Tessin mit Wohnsitz in Italien?',
+    faq1a:
+      'Das Pack Tessin ← Italien (ticino_it): 25% Telearbeit am Wohnsitz, 45 Nicht-Rückkehrtage und der gemeinsame Sozialversicherungszähler — wenn Zonen und Bedingungen von Accordo Art. 2 passen.',
+    faq2q: 'Zählt die 45-Tage-Regel Same-Day-Reisen?',
+    faq2a:
+      'BorderDay zählt nur Tage mit Markierung «Übernachtung auswärts für die Arbeit». Eine Hin- und Rückfahrt am selben Tag erhöht den Nicht-Rückkehrzähler nicht. Urlaub und Krankheit sind laut Protokollnotiz im Pack ausgeschlossen.',
+    faq3q: 'Erfasst ihr den Standort der Mitarbeitenden?',
+    faq3a: 'Nein. Nur Tagesart und optional Übernachtung auswärts ja/nein. Nie GPS.',
+    faq4q: 'Was bedeutet der Sozialversicherungszähler bei 50%?',
+    faq4a:
+      'Laut Rahmen führt Telearbeit im Wohnstaat von 50% oder mehr der Arbeitszeit in der Regel zur Wohnsitz-Affiliation; zwischen 25% und unter 50% ist in der Regel ein A1 nötig. BorderDay zeigt diese Bänder getrennt von der Steuer.',
+    faq5q: 'Ist das Steuer- oder Rechtsberatung?',
+    faq5a:
+      'Nein. Es ist ein Erfassungstool mit Zählern auf Basis öffentlicher Quellen, die hier und in der App verlinkt sind. Mit Berater oder Behörde bestätigen.',
+  },
   employersGeneva: {
     metaTitle: 'Arbeitgeber Genf — Telearbeitstage (FR→CH) — BorderDay',
     metaDescription:

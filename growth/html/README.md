@@ -1,5 +1,5 @@
 # BorderDay growth HTML drafts (send nothing)
-Light inline-CSS HTML + plain-text fallback. Hosted images: `https://borderday.com/email/logo.png`, `https://borderday.com/email/dashboard.png` (demo dashboard, sample names).
+Light inline-CSS HTML + plain-text fallback. Hosted images: `https://borderday.com/email/logo.png`, and locale dashboards `https://borderday.com/email/dashboard-{en,fr,de,it,nl}.png` (demo data, locale-fitting names; `dashboard.png` mirrors EN).
 Opt-out one-liner included in every draft. Partner drafts keep 20%/12 months.
 | ID | Org | To | Mark | Named greeting | Batch |
 |----|-----|----|------|----------------|-------|
@@ -33,3 +33,6 @@ Opt-out one-liner included in every draft. Partner drafts keep 20%/12 months.
 | P8 | InterGest Belgium | `consult@intergest.be` | generic | — | partner |
 | P9 | Confides AG | `confides@confides.ch` | generic | — | partner |
 | P10 | Fidav SA | `info@fidav.ch` | generic | — | partner |
+
+
+Previews: `previews/preview-geneva-fr-employer.html`, `previews/preview-partner-spts.html`, `previews/preview-ticino-it-employer.html`.

@@ -26,6 +26,7 @@
 - https://borderday.com/en/faq/ — FAQ
 - https://borderday.com/en/for-individuals/ — Individual plan
 - https://borderday.com/en/company/signup/ — Company sign-up
+- https://borderday.com/en/employers/ticino/ — Ticino employers (IT→CH, 25% telework + 45 non-return days)
 - https://borderday.com/en/employers/geneva/ — Geneva employers (FR→CH telework days)
 - https://borderday.com/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
 - https://borderday.com/en/privacy/ — Privacy

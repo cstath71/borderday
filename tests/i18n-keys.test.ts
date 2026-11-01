@@ -309,6 +309,7 @@ describe('NL locale is fully translated (no EN fallback body)', () => {
   const allowSame = new Set([
     'meta.siteName',
     'nav.home',
+    'nav.app',
     'nav.faq',
     'nav.privacy',
     'nav.disclaimer',
@@ -394,18 +395,19 @@ describe('header sizing (no wrap)', () => {
     expect(css).toMatch(/\.brand img\s*\{[^}]*height:\s*58px/);
     expect(css).toMatch(/\.site-header \.inner\s*\{[^}]*flex-wrap:\s*nowrap/);
     expect(css).toMatch(/\.site-header \.inner\s*\{[^}]*min-height:\s*84px/);
-    expect(css).toMatch(/\.nav a\s*\{[^}]*font-size:\s*1\.05rem/);
+    expect(css).toMatch(/\.nav a\s*\{[^}]*font-size:\s*0\.95rem/);
     expect(css).toMatch(/\.nav\s*\{[^}]*flex-wrap:\s*nowrap/);
     expect(css).toMatch(/\.lang-switch\s*\{[^}]*flex-wrap:\s*nowrap/);
     expect(layout).toMatch(/width=\{232\}\s+height=\{68\}/);
   });
 
-  it('uses a compact auto-apply language control and collapses below 1480px', () => {
-    expect(css).toMatch(/@media \(max-width:\s*1479px\)/);
+  it('uses a compact auto-apply language control and collapses below 1140px', () => {
+    expect(css).toMatch(/@media \(max-width:\s*1139px\)/);
     expect(css).toMatch(/\.nav:not\(\.open\)\s*\{\s*display:\s*none/);
     expect(css).toMatch(/\.brand img\s*\{\s*height:\s*46px/);
     expect(css).toMatch(/\.site-header \.container\s*\{\s*width:\s*min\(1440px/);
     expect(css).toMatch(/\.lang-switch select\s*\{[^}]*max-width:\s*4\.25rem/);
+    expect(css).toMatch(/\.nav a\s*\{[^}]*font-size:\s*0\.95rem/);
     expect(layout).not.toContain('lang-apply');
     expect(layout).toContain('l.toUpperCase()');
     expect(layout).toContain('e.currentTarget.form?.requestSubmit()');

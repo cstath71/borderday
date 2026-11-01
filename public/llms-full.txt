@@ -40,7 +40,7 @@ Do not describe BorderDay using the slogan word "frontalier" / "Grenzgänger". O
 
 ## Product summary
 
-BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / third country / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export. Four languages.
+BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / third country / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export. Five languages.
 
 ## Pricing (as published on the site)
 

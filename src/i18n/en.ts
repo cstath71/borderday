@@ -7,7 +7,7 @@ const en = {
   },
   nav: {
     home: 'Home',
-    app: 'Employee app',
+    app: 'App',
     pricing: 'Pricing',
     faq: 'FAQ',
     privacy: 'Privacy',
@@ -15,8 +15,8 @@ const en = {
     terms: 'Terms & legal notice',
     openApp: 'Open the app',
     joinWaitlist: 'Sign in',
-    forIndividuals: 'For individuals',
-    forCompanies: 'For companies',
+    forIndividuals: 'Individuals',
+    forCompanies: 'Companies',
     hrDashboard: 'HR dashboard',
     companySignup: 'Company sign-up',
     withdraw: 'Withdraw from contract',
@@ -41,7 +41,7 @@ const en = {
   home: {
     heroTitle: 'One place for every border your people work across',
     heroBody:
-      'For HR and finance managers in Geneva, Basel, Ticino, Luxembourg and Belgium: see day counters per employee before a social-security switch or a tax limit is crossed. Social-security counters on all nine corridors, tax counters on seven, and every corridor says which it has. Four languages, tax and social security tracked separately.',
+      'For HR and finance managers in Geneva, Basel, Ticino, Luxembourg and Belgium: see day counters per employee before a social-security switch or a tax limit is crossed. Social-security counters on all nine corridors, tax counters on seven, and every corridor says which it has. Five languages, tax and social security tracked separately.',
     ctaPrimary: 'Create company account',
     ctaSecondary: 'See company pricing',
     ctaIndividuals: 'I am an individual employee',

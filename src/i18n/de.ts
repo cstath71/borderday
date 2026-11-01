@@ -10,7 +10,7 @@ const de: Dict = {
   },
   nav: {
     home: 'Start',
-    app: 'Mitarbeiter-App',
+    app: 'App',
     pricing: 'Preise',
     faq: 'FAQ',
     privacy: 'Datenschutz',
@@ -18,8 +18,8 @@ const de: Dict = {
     terms: 'Nutzungsbedingungen & Impressum',
     openApp: 'App öffnen',
     joinWaitlist: 'Anmelden',
-    forIndividuals: 'Für Einzelpersonen',
-    forCompanies: 'Für Unternehmen',
+    forIndividuals: 'Einzelpersonen',
+    forCompanies: 'Unternehmen',
     hrDashboard: 'HR-Dashboard',
     companySignup: 'Unternehmen anlegen',
     withdraw: 'Vertrag widerrufen',
@@ -44,7 +44,7 @@ const de: Dict = {
   home: {
     heroTitle: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
     heroBody:
-      'Für HR und Finanzverantwortliche in Genf, in Basel, im Tessin, in Luxemburg und in Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Korridoren, Steuerzähler auf sieben, und jeder Korridor zeigt, was er abdeckt. Vier Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
+      'Für HR und Finanzverantwortliche in Genf, in Basel, im Tessin, in Luxemburg und in Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Korridoren, Steuerzähler auf sieben, und jeder Korridor zeigt, was er abdeckt. Fünf Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
     ctaPrimary: 'Unternehmenskonto erstellen',
     ctaSecondary: 'Unternehmenspreise ansehen',
     ctaIndividuals: 'Ich bin einzelne Mitarbeiterin / einzelner Mitarbeiter',

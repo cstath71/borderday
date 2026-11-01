@@ -31,7 +31,7 @@ img { max-width: 100%; height: auto; }
 
 .container { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
 /* Header needs more room than body copy so Account + DE/FR labels never collide with the lang control */
-.site-header .container { width: min(1440px, calc(100% - 2rem)); }
+.site-header .container { width: min(1440px, calc(100% - 48px)); }
 
 .site-header {
   position: sticky; top: 0; z-index: 20;
@@ -42,7 +42,7 @@ img { max-width: 100%; height: auto; }
 }
 .site-header .inner {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 0.85rem; padding: 0.85rem 0;
+  gap: 0.5rem; padding: 0.75rem 0;
   flex-wrap: nowrap;
   min-height: 84px;
 }
@@ -57,8 +57,8 @@ img { max-width: 100%; height: auto; }
   display: block;
   flex-shrink: 0;
 }
-.nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.65rem 0.9rem; flex: 1 1 auto; min-width: 0; }
-.nav a { color: var(--ink); font-weight: 500; font-size: 1.05rem; white-space: nowrap; }
+.nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.3rem 0.5rem; flex: 1 1 auto; min-width: 0; justify-content: flex-end; }
+.nav a { color: var(--ink); font-weight: 500; font-size: 0.95rem; white-space: nowrap; }
 .nav a.active { color: var(--primary); }
 .lang-switch {
   display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 0.25rem;
@@ -209,8 +209,8 @@ select.border-select, input.num {
 main:focus { outline: none; }
 .nav-toggle { display: none; }
 
-/* Below ~1480: hamburger — FR/DE signed-in+out + Safari/macOS font metrics need more than 1080–1280 */
-@media (max-width: 1479px) {
+/* Below ~1140: hamburger — longest locale + Account + ~40px Safari/macOS font margin */
+@media (max-width: 1139px) {
   .site-header .inner {
     /* wrap only so an opened menu can drop below; closed chrome stays one line */
     flex-wrap: wrap;
@@ -223,7 +223,7 @@ main:focus { outline: none; }
   .lang-switch { order: 3; margin-left: auto; }
   .lang-switch select { max-width: 4.25rem; }
   .nav {
-    order: 4; flex-wrap: wrap; flex: 1 1 100%;
+    order: 4; flex-wrap: wrap; flex: 1 1 100%; justify-content: flex-start;
     /* Closed: keep chrome on one line — hide inline nav links until opened */
   }
   .nav:not(.open) { display: none; }
@@ -240,11 +240,6 @@ main:focus { outline: none; }
   .brand img { height: 46px; } /* bigger than prior 40px mobile */
   .lang-switch select { max-width: 4rem; font-size: 0.85rem; padding: 0.35rem 0.4rem; }
   .nav-toggle { padding: 0.35rem 0.55rem; font-size: 0.85rem; }
-}
-@media (min-width: 1480px) and (max-width: 1599px) {
-  /* Slightly tighter gaps just above the collapse point */
-  .nav { gap: 0.55rem 0.8rem; }
-  .nav a { font-size: 1rem; }
 }
 
 /* Employer-first */

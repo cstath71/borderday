@@ -10,7 +10,7 @@ const fr: Dict = {
   },
   nav: {
     home: 'Accueil',
-    app: 'App collaborateur',
+    app: 'App',
     pricing: 'Tarifs',
     faq: 'FAQ',
     privacy: 'Confidentialité',
@@ -18,8 +18,8 @@ const fr: Dict = {
     terms: 'CGU et mentions légales',
     openApp: 'Ouvrir l’app',
     joinWaitlist: 'Connexion',
-    forIndividuals: 'Pour les particuliers',
-    forCompanies: 'Pour les entreprises',
+    forIndividuals: 'Particuliers',
+    forCompanies: 'Entreprises',
     hrDashboard: 'Tableau de bord RH',
     companySignup: 'Créer une entreprise',
     withdraw: 'Se rétracter du contrat',
@@ -44,7 +44,7 @@ const fr: Dict = {
   home: {
     heroTitle: 'Un seul outil pour toutes les frontières de vos équipes',
     heroBody:
-      'Pour les RH et responsables finance à Genève, à Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur sept, et chaque corridor indique ce qu’il couvre. Quatre langues, fiscalité et sécurité sociale suivies séparément.',
+      'Pour les RH et responsables finance à Genève, à Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur sept, et chaque corridor indique ce qu’il couvre. Cinq langues, fiscalité et sécurité sociale suivies séparément.',
     ctaPrimary: 'Créer un compte entreprise',
     ctaSecondary: 'Voir les tarifs entreprise',
     ctaIndividuals: 'Je suis un collaborateur individuel',

@@ -9,7 +9,7 @@ const it: Dict = {
   },
   nav: {
     home: 'Home',
-    app: 'App dipendente',
+    app: 'App',
     pricing: 'Prezzi',
     faq: 'FAQ',
     privacy: 'Privacy',
@@ -17,8 +17,8 @@ const it: Dict = {
     terms: 'Condizioni e note legali',
     openApp: 'Apri l’app',
     joinWaitlist: 'Accedi',
-    forIndividuals: 'Per i privati',
-    forCompanies: 'Per le aziende',
+    forIndividuals: 'Privati',
+    forCompanies: 'Aziende',
     hrDashboard: 'Dashboard HR',
     companySignup: 'Crea azienda',
     withdraw: 'Recedere dal contratto',
@@ -43,7 +43,7 @@ const it: Dict = {
   home: {
     heroTitle: 'Un solo strumento per tutti i confini dei vostri team',
     heroBody:
-      'Per HR e responsabili finanziari a Ginevra, a Basilea, in Ticino, in Lussemburgo e in Belgio: contatori di giorni per dipendente, prima di un cambio di affiliazione o del superamento di una soglia fiscale. Contatori di sicurezza sociale su tutti i nove corridoi, contatori fiscali su sette, e ogni corridoio indica cosa copre. Quattro lingue, fisco e sicurezza sociale seguiti separatamente.',
+      'Per HR e responsabili finanziari a Ginevra, a Basilea, in Ticino, in Lussemburgo e in Belgio: contatori di giorni per dipendente, prima di un cambio di affiliazione o del superamento di una soglia fiscale. Contatori di sicurezza sociale su tutti i nove corridoi, contatori fiscali su sette, e ogni corridoio indica cosa copre. Cinque lingue, fisco e sicurezza sociale seguiti separatamente.',
     ctaPrimary: 'Crea account azienda',
     ctaSecondary: 'Vedi prezzi azienda',
     ctaIndividuals: 'Sono un dipendente individuale',

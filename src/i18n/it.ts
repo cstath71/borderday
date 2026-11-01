@@ -342,6 +342,7 @@ const it: Dict = {
     savedToAccount: 'Salvato nel vostro account.',
     savedToCompany:
       'Salvato nel vostro account {company}. Il team HR vede tipo e data di ogni giorno, se è segnato come notte fuori per lavoro, e i vostri contatori.',
+    companyRetentionNote: 'Il datore di lavoro conserva i registri aziendali per {months} mesi (impostazione di conservazione; minimo 13). I giorni più vecchi sono cancellati automaticamente.',
     dayLogOtherCompany: 'Questa data è già nel vostro registro presso un’altra azienda, quindi non è stata modificata. BorderDay tiene una sola registrazione per persona e data.',
     saveError: 'Salvataggio non riuscito. Riprovate.',
     deleteAllAccountConfirm: 'Eliminare tutti i giorni salvati nel vostro account? Azione irreversibile.',
@@ -524,7 +525,7 @@ const it: Dict = {
         basis: 'Stabilita dal datore di lavoro come titolare, per esempio un obbligo di legge o legittimi interessi. BorderDay non si basa qui sul consenso del dipendente.',
         recipients: 'Gli amministratori dell’account e i lettori HR del datore di lavoro; Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
-        retention: '24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi). Un job giornaliero cancella i registri la cui data di lavoro è più vecchia di tale finestra.',
+        retention: '24 mesi per impostazione predefinita (impostazione aziendale, 13–120 mesi). Un job giornaliero cancella i registri la cui data di lavoro è più vecchia di tale finestra.',
       },
       {
         purpose: 'Inviti e prova dell’avviso',
@@ -566,7 +567,7 @@ const it: Dict = {
       'Il titolare ha sede in Svizzera. Ai sensi della decisione 2000/518/CE della Commissione, la Svizzera è considerata come un Paese che assicura un livello di protezione adeguato dei dati personali trasferiti dall’UE; la relazione della Commissione del 15 gennaio 2024 (COM(2024) 7 final) ha confermato che questa adeguatezza continua ad applicarsi ai sensi del GDPR. La Svizzera riconosce a sua volta come adeguati gli Stati dell’UE e del SEE. Per Stripe, GitHub e Google negli Stati Uniti ci basiamo sui Data Privacy Framework UE–USA e Svizzera–USA (Swiss-U.S. Active). Per Resend e Supabase non rivendichiamo la certificazione Swiss–US DPF; ci basiamo sulle clausole contrattuali tipo (con adattamenti svizzeri) delle loro condizioni pubblicate sul trattamento dei dati, e Supabase ospita il database nell’UE (eu-central-1). Potete chiedere una copia di queste garanzie a privacy@borderday.com.',
     s6Title: 'Conservazione dei dati',
     s6Body:
-      'Registri dei giorni aziendali: 24 mesi per impostazione predefinita, o l’impostazione dell’azienda (1–120 mesi), salvo obblighi di legge più lunghi. Un job giornaliero programmato cancella i registri aziendali la cui data di lavoro è fuori da tale finestra, segna come scaduti gli inviti in sospeso oltre i 14 giorni e cancella gli inviti mai accettati 30 giorni dopo la scadenza del link. I registri del piano individuale restano finché non li cancellate o chiudete l’account. Account interi, appartenenza aziendale e dati di fatturazione non sono cancellati a tempo: chiudete l’account o scrivete a privacy@borderday.com. I dati DEMO sono etichettati DEMO e possono essere azzerati in qualsiasi momento.',
+      'Registri dei giorni aziendali: 24 mesi per impostazione predefinita, o l’impostazione dell’azienda (13–120 mesi), salvo obblighi di legge più lunghi. Un job giornaliero programmato cancella i registri aziendali la cui data di lavoro è fuori da tale finestra, segna come scaduti gli inviti in sospeso oltre i 14 giorni, cancella gli inviti mai accettati 30 giorni dopo la scadenza del link, cancella le richieste di contratto gestite dopo 36 mesi, gli eventi Stripe dopo 36 mesi e chiude gli account aziendali annullati dopo la finestra di conservazione successiva alla fine del periodo pagato. I registri del piano individuale restano finché non li cancellate o chiudete l’account. Account interi, appartenenza aziendale e dati di fatturazione non sono cancellati a tempo: chiudete l’account o scrivete a privacy@borderday.com. I dati DEMO sono etichettati DEMO e possono essere azzerati in qualsiasi momento.',
     s4Title: 'I vostri diritti',
     rightsIntro: 'Nei limiti previsti dalla legge, avete questi diritti:',
     rights: [
@@ -725,7 +726,7 @@ const it: Dict = {
     profileSaved: 'Salvato.',
     noticeTitle: 'Avviso — cosa può vedere l’HR',
     noticeBody:
-      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, corridoio scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se si tratta di una mezza giornata, se è segnato come notte fuori per lavoro, sul corridoio Francia–Belgio lo status di frontaliere prima del 2012 se inserito, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego, la base di giorni lavorativi, i giorni contrattuali, il vostro A1 e questo status Francia–Belgio. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare il registro in qualsiasi momento. Dopo aver lasciato l’azienda potete ancora esportare o cancellare la vostra copia da Account; la copia del datore di lavoro resta secondo il suo periodo di conservazione. Chiedete al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
+      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, corridoio scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se si tratta di una mezza giornata, se è segnato come notte fuori per lavoro, sul corridoio Francia–Belgio lo status di frontaliere prima del 2012 se inserito, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego, la base di giorni lavorativi, i giorni contrattuali, il vostro A1 e questo status Francia–Belgio. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare il registro in qualsiasi momento. Dopo aver lasciato l’azienda potete ancora esportare o cancellare la vostra copia da Account; la copia del datore di lavoro resta secondo il suo periodo di conservazione. Chiedete al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 13–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
     noticeAck: 'Ho letto questo avviso',
     noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
     noticePrivacyLink: 'Informativa privacy completa',
@@ -736,11 +737,11 @@ const it: Dict = {
     retentionConfirmShort:
       'Sotto i 13 mesi possono essere cancellati anche giorni dell’inizio di quest’anno civile, e i contatori dell’anno scenderebbero.',
     retentionTitle: 'Conservazione dei registri dei giorni',
-    retentionHelp: 'I registri aziendali più vecchi di questo numero di mesi sono cancellati automaticamente ogni giorno (1–120). Predefinito 24. Adesione, fatturazione e account interi non sono cancellati a tempo.',
+    retentionHelp: 'I registri aziendali più vecchi di questo numero di mesi sono cancellati automaticamente ogni giorno (13–120). Predefinito 24. Adesione, fatturazione e account interi non sono cancellati a tempo.',
     retentionMonths: 'Mesi',
     retentionSave: 'Salva conservazione',
     retentionSaved: 'Conservazione aggiornata.',
-    retentionInvalid: 'Inserisci un numero intero di mesi tra 1 e 120.',
+    retentionInvalid: 'Inserisci un numero intero di mesi tra 13 e 120.',
     hrDisclaimer:
       'I contatori riflettono solo i giorni registrati qui e non costituiscono una valutazione giuridica o fiscale. Il datore di lavoro resta responsabile delle richieste di A1, delle paghe e delle dichiarazioni fiscali. Verificate con l’autorità competente.',
     inviteLanguage: 'Lingua del dipendente',

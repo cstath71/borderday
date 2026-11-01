@@ -101,6 +101,7 @@ export interface MyCompany {
   subscription_status: string;
   trial_ends_at: string | null;
   seat_count: number;
+  dataRetentionMonths: number;
   borderPackId: BorderId | null;
   annualWorkingDays: number | null;
   profile: MemberProfile;
@@ -117,7 +118,7 @@ export async function listMyCompanies(): Promise<MyCompany[]> {
   const userId = await currentUserId();
   if (!userId) return [];
   const base =
-    'role, border_pack_id, annual_working_days, bd_companies(id, name, subscription_status, trial_ends_at, seat_count)';
+    'role, border_pack_id, annual_working_days, bd_companies(id, name, subscription_status, trial_ends_at, seat_count, data_retention_months)';
   // HR can read every member row of their company, so filter to the caller's own.
   const query = (columns: string) =>
     supabase!.from('bd_company_members').select(columns).eq('user_id', userId).eq('active', true);
@@ -128,6 +129,7 @@ export async function listMyCompanies(): Promise<MyCompany[]> {
     role: m.role as CompanyRole,
     subscription_status: m.bd_companies.subscription_status,
     trial_ends_at: m.bd_companies.trial_ends_at,
+    dataRetentionMonths: m.bd_companies.data_retention_months ?? 24,
     seat_count: m.bd_companies.seat_count,
     borderPackId: m.border_pack_id,
     annualWorkingDays: m.annual_working_days,

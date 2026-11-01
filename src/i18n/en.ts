@@ -337,6 +337,7 @@ const en = {
     savedToAccount: 'Saved to your account.',
     savedToCompany:
       'Saved to your {company} account. Your HR team sees each day’s type and date, whether you marked it as a night away for work, and your counters.',
+    companyRetentionNote: 'Your employer keeps company day logs for {months} months (their retention setting; minimum 13). Older days are deleted automatically.',
     dayLogOtherCompany: 'This date is already in your record at another company, so it was not changed. BorderDay keeps one record per person and date.',
     saveError: 'Could not save. Try again.',
     deleteAllAccountConfirm: 'Delete every day saved in your account? This cannot be undone.',
@@ -517,7 +518,7 @@ const en = {
         basis: 'Decided by the employer as controller, for example a legal obligation or legitimate interests. BorderDay does not rely on employee consent here.',
         recipients: 'The employer’s account owners and HR viewers; Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
-        retention: 'Default 24 months (company setting, 1–120 months). A daily job deletes day logs whose work date is older than that window.',
+        retention: 'Default 24 months (company setting, 13–120 months). A daily job deletes day logs whose work date is older than that window.',
       },
       {
         purpose: 'Invitations and the record of the notice',
@@ -533,7 +534,7 @@ const en = {
         basis: 'Contract; legal obligations in accounting and tax (Art. 6(1)(b), (c))',
         recipients: 'Stripe and Link, as independent controllers under their own privacy notices',
         transfer: 'EU and United States; see the Stripe and Link notices',
-        retention: 'Stripe and Link: see their notices. BorderDay: while the account exists and as long as accounting law requires.',
+        retention: 'Stripe and Link: see their notices. BorderDay stores Stripe event IDs for 36 months after receipt for idempotent webhooks; subscription and invoice records follow accounting law.',
       },
       {
         purpose: 'Support, rights requests, withdrawal and cancellation messages',
@@ -541,7 +542,7 @@ const en = {
         basis: 'Contract; legal obligations; legitimate interests in answering you (Art. 6(1)(b), (c), (f))',
         recipients: 'Supabase (storing form requests); Resend (receipt email); Zoho (mailboxes)',
         transfer: 'EU hosting (Supabase, Zoho EU); United States (Resend); safeguards below',
-        retention: 'As long as needed to deal with the request, and any legal retention period',
+        retention: 'Handled withdrawal and cancellation rows are deleted after 36 months. Open (unhandled) rows are kept until handled, then follow the same period.',
       },
     ],
     s5Title: 'Recipients',
@@ -559,7 +560,7 @@ const en = {
       'The controller is in Switzerland. Under Commission Decision 2000/518/EC, Switzerland is considered as providing an adequate level of protection for personal data transferred from the EU; the European Commission’s report of 15 January 2024 (COM(2024) 7 final) confirmed that this adequacy continues to apply under the GDPR. Switzerland in turn recognises the EU and EEA states as adequate. For Stripe, GitHub and Google in the United States we rely on the EU–US and Swiss–US Data Privacy Frameworks (Swiss-U.S. Active). For Resend and Supabase we do not claim Swiss–US DPF certification; we rely on the standard contractual clauses (with Swiss adaptations) in those providers’ published data-processing terms, and Supabase hosts the database in the EU (eu-central-1). Ask privacy@borderday.com for a copy of these safeguards.',
     s6Title: 'Data retention',
     s6Body:
-      'Company day logs: 24 months by default, or the company’s setting (1–120 months), unless applicable law requires longer. A daily scheduled job deletes company day logs whose work date falls outside that window, marks pending invites past their 14-day expiry as expired, and deletes invites never accepted 30 days after the link expired. Individual-plan day logs stay until you delete them or close the account. Whole accounts, company membership and billing records are not timed-deleted: close the account or write to privacy@borderday.com. Demo data is labelled DEMO and may be reset at any time.',
+      'Company day logs: 24 months by default, or the company’s setting (13–120 months), unless applicable law requires longer. A daily scheduled job deletes company day logs whose work date falls outside that window, marks pending invites past their 14-day expiry as expired, deletes invites never accepted 30 days after the link expired, deletes handled withdrawal/cancellation rows after 36 months, deletes Stripe webhook event IDs after 36 months, and closes canceled company accounts once their retention window after the paid period ends (day logs removed, member contact fields cleared; billing references kept where accounting law requires). Individual-plan day logs stay until you delete them or close the account. Demo data is labelled DEMO and may be reset at any time.',
     s4Title: 'Your rights',
     rightsIntro: 'Within the limits set by law, you have these rights:',
     rights: [
@@ -715,7 +716,7 @@ const en = {
     profileSaved: 'Saved.',
     noticeTitle: 'Notice — what HR can see',
     noticeBody:
-      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether it was a half day, whether you marked it as a night away for work, on the France–Belgium route whether you were a frontier worker before 2012 if entered, and the same tax and social-security counters you see. They can also record your employment percentage, working-days base, contract days, A1 and that France–Belgium status. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export your day log anytime. After you leave the company you can still export or clear your own copy from Account; the employer’s copy stays under their retention setting. Ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. This is a tracking tool, not tax or legal advice.',
+      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether it was a half day, whether you marked it as a night away for work, on the France–Belgium route whether you were a frontier worker before 2012 if entered, and the same tax and social-security counters you see. They can also record your employment percentage, working-days base, contract days, A1 and that France–Belgium status. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export your day log anytime. After you leave the company you can still export or clear your own copy from Account; the employer’s copy stays under their retention setting. Ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 13–120 months); company day logs older than that window are deleted automatically each day. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. This is a tracking tool, not tax or legal advice.',
     noticeAck: 'I have read this notice',
     noticeRequired: 'Confirm that you have read the notice to continue.',
     noticePrivacyLink: 'Full privacy notice',
@@ -726,11 +727,11 @@ const en = {
     retentionConfirmShort:
       'Under 13 months, days from earlier in this calendar year can be deleted too, and this year’s counters would drop.',
     retentionTitle: 'Day-log retention',
-    retentionHelp: 'Company day logs older than this many months are deleted automatically each day (1–120). Default 24. Membership, billing and whole accounts are not timed-deleted.',
+    retentionHelp: 'Company day logs older than this many months are deleted automatically each day (13–120). Default 24. Membership, billing and whole accounts are not timed-deleted.',
     retentionMonths: 'Months',
     retentionSave: 'Save retention',
     retentionSaved: 'Retention updated.',
-    retentionInvalid: 'Enter a whole number of months between 1 and 120.',
+    retentionInvalid: 'Enter a whole number of months between 13 and 120.',
     hrDisclaimer:
       'Counters only reflect the days logged here and are not a legal or tax determination. The employer remains responsible for A1 applications, payroll and tax filings. Verify with the competent authority.',
     inviteLanguage: 'Employee’s language',

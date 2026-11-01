@@ -499,6 +499,36 @@ describe('Invite', () => {
     await screen.findByText(en.company.inviteEmailed);
   });
 
+  it('reused pending + rate limit uses inviteReused (not invite-created wording)', async () => {
+    asHr();
+    mocked.createInvite.mockResolvedValue({
+      invite: { token: 'tok123' } as any,
+      emailed: false,
+      emailBlock: 'rate_limited',
+      reused: true,
+    });
+    open('/en/company/c1/invite');
+    fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
+    fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
+    await screen.findByText(en.company.inviteReused);
+    expect(screen.queryByText(en.company.inviteNotEmailedLimit)).toBeNull();
+    expect(screen.queryByText(/Invite created, but not emailed/i)).toBeNull();
+  });
+
+  it('reused pending + emailed uses inviteReusedEmailed', async () => {
+    asHr();
+    mocked.createInvite.mockResolvedValue({
+      invite: { token: 'tok123' } as any,
+      emailed: true,
+      emailBlock: null,
+      reused: true,
+    });
+    open('/en/company/c1/invite');
+    fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
+    fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
+    await screen.findByText(en.company.inviteReusedEmailed);
+  });
+
   it('only owners are offered the owner role', async () => {
     asHr();
     mocked.myMembership.mockResolvedValue({ role: 'hr_viewer', borderPackId: null, annualWorkingDays: null });

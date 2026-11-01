@@ -456,7 +456,7 @@ const it: Dict = {
       'Il checkout usa Stripe Managed Payments: Stripe svolge le funzioni di merchant of record e gestisce IVA/GST nel checkout; il cliente può vedere Link come merchant of record. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato (individuale 4,99 €/mese o 49 €/anno IVA inclusa; azienda 5 € per dipendente attivo al mese, minimo 39 €/mese, o minimo 390 €/anno, IVA esclusa), addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta. I codici promo sono accettati. Vedete le Condizioni per la disdetta e il diritto di recesso di 14 giorni (consumatori UE).',
     q8: 'Cosa non copre BorderDay?',
     a8:
-      'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. I corridoi non elencati, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni corridoio. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come il tasso annuo di telelavoro richiesto da alcuni cantoni. In caso di dubbio, verificate con la vostra autorità.',
+      'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. I corridoi non elencati, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni corridoio. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come l’attestazione annuale del tasso di telelavoro che tutti i datori di lavoro svizzeri di residenti fiscali in Francia devono trasmettere (anche allo 0 %). In caso di dubbio, verificate con la vostra autorità.',
   },
   privacy: {
     title: 'Privacy',
@@ -587,7 +587,7 @@ const it: Dict = {
       'Per un account serve un indirizzo e-mail, per i contatori servono i dati dei giorni: senza di essi il servizio non può essere fornito. Percentuale d’impiego, A1 e note sono facoltativi, ma alcune soglie sono meno precise senza di essi. BorderDay non prende decisioni automatizzate con effetti giuridici: i contatori calcolano solo a partire dai giorni registrati.',
     storageTitle: 'Memorizzazione sul vostro dispositivo',
     storageBody:
-      'BorderDay non imposta cookie e non usa tracker pubblicitari o di analisi. Sul dispositivo memorizza solo ciò che serve all’app: IndexedDB per il registro e le impostazioni dell’anteprima gratuita, localStorage per la sessione di accesso e l’azienda dimostrativa, e una cache del service worker per il caricamento offline. Sono elementi strettamente necessari al servizio. Ai sensi dell’art. 45c LTC (legge sulle telecomunicazioni / FMG), vi informiamo che questo trattamento sul vostro terminale serve a fornire il servizio; potete rifiutarlo cancellando i dati del sito o non usando il prodotto. Non viene mostrato alcun banner di consenso per questi archivi strettamente necessari. Potete cancellarli nelle impostazioni del browser.',
+      'BorderDay non imposta cookie e non usa tracker pubblicitari o di analisi. Sul dispositivo memorizza solo ciò che serve all’app: IndexedDB per il registro e le impostazioni dell’anteprima gratuita, localStorage per la sessione di accesso, l’ultima lingua scelta e l’azienda dimostrativa, e una cache del service worker per il caricamento offline. Sono elementi strettamente necessari al servizio. Ai sensi dell’art. 45c LTC (legge sulle telecomunicazioni / FMG), vi informiamo che questo trattamento sul vostro terminale serve a fornire il servizio; potete rifiutarlo cancellando i dati del sito o non usando il prodotto. Non viene mostrato alcun banner di consenso per questi archivi strettamente necessari. Potete cancellarli nelle impostazioni del browser.',
     s7Title: 'Trasparenza dipendente / HR',
     s7Body:
       'Nessun punteggio nascosto per l’HR. La logica dei contatori (giorni usati, ammessi, stato) è identica per il dipendente e la dashboard HR.',
@@ -664,8 +664,7 @@ const it: Dict = {
     filterStatus: 'Filtra per situazione',
     filterAll: 'Tutti',
     exportCsv: 'Esporta CSV',
-    exportCsvNote:
-      'Solo documento di lavoro. Non è il tasso annuale di telelavoro richiesto da alcuni Cantoni (p. es. Ginevra, presso la propria amministrazione fiscale cantonale, l’AFC): calcolate e presentate quel tasso all’autorità competente.',
+    exportCsvNote: 'Solo documento di lavoro. Non è l’attestazione annuale del tasso di telelavoro che tutti i datori di lavoro svizzeri di residenti fiscali in Francia devono trasmettere all’inizio dell’anno successivo all’autorità fiscale cantonale — anche allo 0 %. Prima trasmissione: inizio 2027 per il 2026. Ginevra e Vaud hanno un proprio modulo (Ginevra AFC / ge.ch); altrimenti modulo federale o ELM/portale cantonale. Calcolate e presentate quel tasso all’autorità competente.',
     employees: 'Dipendenti',
     noEmployees: 'Nessun dipendente. Create un link di invito.',
     viewHistory: 'Cronologia giorni',
@@ -709,8 +708,7 @@ const it: Dict = {
     emptyCounters: 'Il dipendente non ha ancora scelto un corridoio.',
     workingDaysBase: 'Base di giorni lavorativi',
     workingDaysBaseHint: 'Usata per le percentuali di questa persona. Attualmente {annual} giorni. Lasciate vuoto per seguire la percentuale d’impiego.',
-    filingNote:
-      'Date di trasmissione per i datori di lavoro che abbiamo potuto verificare. Ginevra: prima trasmissione del tasso di telelavoro all’AFC a gennaio 2027 per i dati del 2026 (ge.ch). Giura: attestazione entro il 31 gennaio successivo al periodo fiscale, dal periodo fiscale 2026 (jura.ch). Gli altri Cantoni non sono stati verificati. Questa dashboard e il suo CSV sono un documento di lavoro, non una dichiarazione.',
+    filingNote: 'Tutti i datori di lavoro svizzeri di residenti fiscali in Francia attestano un tasso di telelavoro all’inizio dell’anno successivo presso l’autorità fiscale cantonale, anche allo 0 %. Prima: inizio 2027 per il 2026. Ginevra e Vaud hanno un proprio modulo (Ginevra AFC / ge.ch); gli altri Cantoni usano il modulo federale o ELM/portale cantonale. Giura: attestazione entro il 31 gennaio successivo al periodo fiscale, dal periodo fiscale 2026 (jura.ch). Questa dashboard e il suo CSV sono un documento di lavoro, non una dichiarazione.',
     deactivateMember: 'Rimuovi {name}',
     deactivateConfirm: 'Rimuovere {name} da questa azienda? L’accesso termina subito. I giorni restano in archivio (Ex dipendenti) secondo la conservazione. Il posto non è più fatturato. Potrai reinvitarli più tardi.',
     deactivated: '{name} è stato/a rimosso/a.',
@@ -1005,6 +1003,7 @@ const it: Dict = {
     notConfigured: 'Autenticazione non configurata in questa build.',
     completing: 'Completamento accesso…',
     callbackFailed: 'Impossibile completare l’accesso. Riprovate.',
+    callbackPkceHint: 'Questo link di conferma va aperto sullo stesso dispositivo e browser con cui avete avviato l’accesso. Aprite BorderDay lì, oppure accedete di nuovo su questo dispositivo.',
     paymentsUnavailable: 'Impossibile avviare il checkout — riprovate o contattate il supporto.',
     signOut: 'Esci',
     signUpTerms:

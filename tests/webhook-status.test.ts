@@ -48,11 +48,12 @@ describe('A3-06 renewal reminder', () => {
     const metadata = checkout.indexOf('const metadata: Record<string, string>');
     expect(lang).toBeGreaterThan(-1);
     expect(lang).toBeLessThan(metadata);
-    // A3-01: version + language + time travel with express_start, not only "1".
-    expect(checkout).toMatch(/express_start: "1"/);
-    expect(checkout).toMatch(/express_start_version:/);
-    expect(checkout).toMatch(/express_start_lang: lang/);
-    expect(checkout).toMatch(/express_start_at:/);
+    // A3-01 / AR3-22: individual (B2C) only stores express_start version + language + time.
+    expect(checkout).toMatch(/body\.plan === "individual"/);
+    expect(checkout).toMatch(/metadata\.express_start = "1"/);
+    expect(checkout).toMatch(/express_start_version/);
+    expect(checkout).toMatch(/express_start_lang/);
+    expect(checkout).toMatch(/express_start_at/);
     expect(checkout.slice(metadata, metadata + 400)).toMatch(/\blang,?/);
     expect(checkout).toMatch(/subscription_data: \{\s*metadata,/);
   });

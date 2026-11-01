@@ -96,7 +96,7 @@ export default function CompanyInvite() {
         canEmail={state.canEmail}
         pricingHref={`/${lang}/pricing`}
         canManage={(invite) => state.role === 'owner' || invite.role !== 'owner'}
-        onResend={(invite) => api.resendInvite(companyId, invite.id, lang)}
+        onResend={(invite) => api.resendInvite(companyId, invite.id, invite.lang || lang)}
         onRevoke={async (inviteId) => {
           await api.revokeInvite(companyId, inviteId);
           setState(await load());

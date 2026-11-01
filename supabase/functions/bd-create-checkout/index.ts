@@ -52,7 +52,8 @@ Deno.serve(async (req) => {
         status: 200, headers: { ...cors, "Content-Type": "application/json" },
       });
     }
-    if (!body.expressStartAcknowledged) {
+    // Consumer withdrawal / express-start tick: individual (B2C) only. Company checkout is B2B.
+    if (body.plan === "individual" && !body.expressStartAcknowledged) {
       return new Response(JSON.stringify({ available: false, message: "Express start acknowledgement required" }), {
         status: 200, headers: { ...cors, "Content-Type": "application/json" },
       });
@@ -66,12 +67,14 @@ Deno.serve(async (req) => {
     const metadata: Record<string, string> = {
       plan: body.plan,
       user_id: user.id,
-      express_start: "1",
-      express_start_version: EXPRESS_START_VERSION,
-      express_start_lang: lang,
-      express_start_at: new Date().toISOString(),
       lang,
     };
+    if (body.plan === "individual" && body.expressStartAcknowledged) {
+      metadata.express_start = "1";
+      metadata.express_start_version = EXPRESS_START_VERSION;
+      metadata.express_start_lang = lang;
+      metadata.express_start_at = new Date().toISOString();
+    }
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const recordedStatuses: Array<string | null> = [];
 

@@ -290,9 +290,9 @@ describe('H6: filing dates for Geneva and Jura', () => {
 
   it('the CSV note carries the dates only then, and stays one comment line', () => {
     const lines = rowsToCsv([row('geneva_fr')], 2026).split('\n');
-    expect(lines[0]).toMatch(/^# .*January 2027 for 2026 data.*Jura.*31 January.*Other cantons not verified/);
+    expect(lines[0]).toMatch(/^# .*Nationwide FR–CH.*including at 0%.*early 2027 for 2026.*Jura.*31 January.*jura\.ch/);
     expect(lines[1].startsWith('demo,')).toBe(true);
-    expect(rowsToCsv([row('luxembourg_fr')], 2026).split('\n')[0]).not.toMatch(/2027|Jura/);
+    expect(rowsToCsv([row('luxembourg_fr')], 2026).split('\n')[0]).not.toMatch(/2027|Jura|Nationwide FR–CH/);
   });
 
   it('every locale cites Geneva and Jura, and keeps "working record, not a filing"', () => {

@@ -16,6 +16,7 @@ export default function Pricing() {
   const auth = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [note, setNote] = useState<string | null>(null);
+  const [signInNeeded, setSignInNeeded] = useState(false);
   const [banner, setBanner] = useState<'success' | 'cancel' | null>(null);
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [ownedCompanies, setOwnedCompanies] = useState<Array<{ id: string; name: string }>>([]);
@@ -77,15 +78,16 @@ export default function Pricing() {
 
   async function buy(plan: 'company' | 'individual', interval: 'month' | 'year') {
     setNote(null);
+    setSignInNeeded(false);
     if (!auth.user) {
-      setNote(d.auth.signInTitle);
+      setSignInNeeded(true);
       return;
     }
     if (plan === 'company' && !companyId) {
       setNote(d.pricing.needCompany);
       return;
     }
-    if (!expressStart) {
+    if (plan === 'individual' && !expressStart) {
       setNote(d.pricing.expressStartRequired);
       return;
     }
@@ -96,7 +98,7 @@ export default function Pricing() {
         interval,
         companyId: plan === 'company' ? companyId ?? undefined : undefined,
         lang,
-        expressStartAcknowledged: true,
+        expressStartAcknowledged: plan === 'individual' ? true : undefined,
       });
       if (res.ok) {
         window.location.assign(res.url);
@@ -141,28 +143,6 @@ export default function Pricing() {
           <p style={{ fontSize: '0.9rem' }}>
             <Link to={`/${lang}/cancel`}>{d.nav.cancel}</Link>
           </p>
-          <label
-            style={{
-              display: 'flex',
-              gap: '0.75rem',
-              alignItems: 'flex-start',
-              marginTop: '1.25rem',
-              padding: '0.85rem 1rem',
-              borderRadius: 8,
-              border: '1px solid color-mix(in srgb, var(--ink-muted) 35%, transparent)',
-              fontSize: '0.9rem',
-              lineHeight: 1.45,
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={expressStart}
-              onChange={(e) => setExpressStart(e.target.checked)}
-              required
-              style={{ marginTop: '0.2rem' }}
-            />
-            <span>{d.pricing.expressStartLabel}</span>
-          </label>
           <div className="price-grid" style={{ marginTop: '1.5rem' }}>
             <article className="card price-card" style={{ borderColor: 'var(--primary)', borderWidth: 2 }}>
               <div className="meta" style={{ color: 'var(--primary)', fontWeight: 700 }}>{d.pricing.recommended}</div>
@@ -247,6 +227,29 @@ export default function Pricing() {
               </ul>
               <p style={{ fontSize: '0.9rem' }}><strong>{d.pricing.trialIndividual}</strong></p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.yearlyRenewal}</p>
+              <label
+                style={{
+                  display: 'flex',
+                  gap: '0.75rem',
+                  alignItems: 'flex-start',
+                  marginTop: '1rem',
+                  marginBottom: '0.75rem',
+                  padding: '0.85rem 1rem',
+                  borderRadius: 8,
+                  border: '1px solid color-mix(in srgb, var(--ink-muted) 35%, transparent)',
+                  fontSize: '0.9rem',
+                  lineHeight: 1.45,
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={expressStart}
+                  onChange={(e) => setExpressStart(e.target.checked)}
+                  required
+                  style={{ marginTop: '0.2rem' }}
+                />
+                <span>{d.pricing.expressStartLabel}</span>
+              </label>
               <LegalLinks d={d} lang={lang} intro={d.pricing.readBefore} />
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <Link className="btn btn-secondary" to={`/${lang}/auth/sign-up`}>{d.pricing.waitlistCta}</Link>
@@ -271,6 +274,13 @@ export default function Pricing() {
           </div>
           <p className="meta" style={{ marginTop: '1rem', fontSize: '0.85rem' }}>{d.pricing.trialOnce}</p>
           <p className="meta" style={{ marginTop: '1rem', fontSize: '0.85rem' }}>{chfNote}</p>
+          {signInNeeded && (
+            <p className="meta" role="alert" style={{ marginTop: '1rem' }}>
+              <Link to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/pricing`)}`}>
+                {d.auth.signInTitle}
+              </Link>
+            </p>
+          )}
           {note && <p className="meta" role="alert" style={{ marginTop: '1rem' }}>{note}</p>}
         </div>
       </section>

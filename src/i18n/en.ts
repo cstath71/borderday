@@ -449,7 +449,7 @@ const en = {
       'Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. Company and individual plans start with a 7-day free trial, and a card is required at signup. After 7 days the plan becomes paid at the stated price (individual €4.99/month or €49/year incl. VAT; company €5 per active employee per month, minimum €39/month, or minimum €390/year, excl. VAT), charged automatically on day 8 and renewing until you cancel. Promo codes are supported at checkout. See the Terms for cancellation and the 14-day EU withdrawal right for consumers.',
     q8: 'What does BorderDay not cover?',
     a8:
-      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate report some cantons require. When in doubt, check with your authority.',
+      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate attestation all Swiss employers of France residents must file (including at 0%). When in doubt, check with your authority.',
   },
   privacy: {
     title: 'Privacy',
@@ -580,7 +580,7 @@ const en = {
       'An email address is needed for an account, and day data is needed for the counters: without them the service cannot be provided. Employment percentage, A1 record and notes are optional, though some limits are less precise without them. BorderDay takes no automated decisions with legal effect: counters only calculate from the days logged.',
     storageTitle: 'Storage on your device',
     storageBody:
-      'BorderDay sets no cookies and uses no advertising or analytics trackers. It stores only what the app needs on your device: IndexedDB for the free preview’s day log and settings, localStorage for your sign-in session and the demo company, and a service-worker cache so the app loads offline. These are strictly necessary for the service. Under Swiss FMG Art. 45c (Loi sur les télécommunications / Fernmeldegesetz), we inform you that this processing on your terminal device is for providing the service; you can refuse it by clearing site data or not using the product. No consent banner is shown for these strictly necessary stores. You can clear them in your browser settings.',
+      'BorderDay sets no cookies and uses no advertising or analytics trackers. It stores only what the app needs on your device: IndexedDB for the free preview’s day log and settings, localStorage for your sign-in session, the last language you chose, and the demo company, and a service-worker cache so the app loads offline. These are strictly necessary for the service. Under Swiss FMG Art. 45c (Loi sur les télécommunications / Fernmeldegesetz), we inform you that this processing on your terminal device is for providing the service; you can refuse it by clearing site data or not using the product. No consent banner is shown for these strictly necessary stores. You can clear them in your browser settings.',
     s7Title: 'Transparency between employee and HR',
     s7Body:
       'There is no hidden HR-only score. Counter math (used days, allowed days, status) is identical for the employee view and the HR dashboard.',
@@ -656,8 +656,7 @@ const en = {
     filterStatus: 'Filter by status',
     filterAll: 'All',
     exportCsv: 'Export CSV',
-    exportCsvNote:
-      'Working record only. Not the annual telework-rate filing some cantons require (for example Geneva, to its cantonal tax office, the AFC) — compute and submit that rate with your authority.',
+    exportCsvNote: 'Working record only. Not the annual telework-rate attestation all Swiss employers of France residents must file early the following year with the cantonal tax authority — including at 0%. First filing: early 2027 for 2026. Geneva and Vaud use their own form (Geneva AFC / ge.ch); otherwise the federal form or ELM/cantonal portal. Compute and submit that rate with your authority.',
     employees: 'Employees',
     noEmployees: 'No employees yet. Create an invite link.',
     viewHistory: 'Day history',
@@ -699,8 +698,7 @@ const en = {
     emptyCounters: 'Employee has not chosen a border route yet.',
     workingDaysBase: 'Working-days base',
     workingDaysBaseHint: 'Used for this employee’s percentages. Currently {annual} days. Leave empty to follow the employment percentage.',
-    filingNote:
-      'Employer filing dates we could verify. Geneva: first transmission of the telework rate to the AFC in January 2027 for 2026 data (ge.ch). Jura: attestation by 31 January following the fiscal period, from fiscal period 2026 (jura.ch). Other cantons were not verified. This dashboard and its CSV are a working record, not a filing.',
+    filingNote: 'All Swiss employers of France residents attest a telework rate early the following year to the cantonal tax authority, including at 0%. First: early 2027 for 2026. Geneva and Vaud use their own form (Geneva AFC / ge.ch); other cantons use the federal form or ELM/cantonal portal. Jura: attestation by 31 January following the fiscal period, from fiscal period 2026 (jura.ch). This dashboard and its CSV are a working record, not a filing.',
     deactivateMember: 'Remove {name}',
     deactivateConfirm: 'Remove {name} from this company? Access ends immediately. Their days stay on file (Former employees) under retention. The seat is no longer billed. You can invite them again later.',
     deactivated: '{name} was removed.',
@@ -994,6 +992,7 @@ const en = {
     notConfigured: 'The authentication backend is not configured in this build.',
     completing: 'Completing sign-in…',
     callbackFailed: 'Could not complete sign-in. Try again.',
+    callbackPkceHint: 'This confirmation link must be opened on the same device and browser that started sign-in. Open BorderDay there, or sign in again on this device.',
     paymentsUnavailable: 'Could not start checkout — try again or contact support.',
     signOut: 'Sign out',
     signUpTerms:

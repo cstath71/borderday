@@ -169,7 +169,9 @@ describe('audit-2 translation findings', () => {
     for (const [lang, entries] of Object.entries(FAQ) as Array<[string, Array<[string, string]>]>) {
       const answers = entries.filter(([, a]) => a.includes('Stripe Managed Payments'));
       expect(answers.length, lang).toBe(1);
-      expect(answers[0][1], lang).toMatch(/Stripe (is|est|ist|è)( the| le| der| il| de)? (merchant|marchand)/i);
+      // Terms wording: Stripe provides MoR functions; customer may see Link as MoR (not "Stripe is the MoR").
+      expect(answers[0][1], lang).toMatch(/merchant.of.record|marchand officiel|Merchant of Record/i);
+      expect(answers[0][1], lang).not.toMatch(/Stripe (is|est|ist|è)( the| le| der| il| de)? (merchant|marchand)/i);
     }
   });
 

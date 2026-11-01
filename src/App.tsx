@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { getPreferredLang } from './lib/preferredLang';
 import Layout from './components/Layout';
 import Account from './pages/Account';
 import AppPage from './pages/AppPage';
@@ -26,10 +27,14 @@ import AuthCallback from './pages/auth/Callback';
 // The browser-local mock stays out of the main bundle: it is only reachable under /demo.
 const DemoRoutes = lazy(() => import('./pages/demo/DemoRoutes'));
 
+function PreferredHome() {
+  return <Navigate to={`/${getPreferredLang()}/`} replace />;
+}
+
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/en/" replace />} />
+      <Route path="/" element={<PreferredHome />} />
       <Route path="/auth/callback" element={<AuthCallback />} />
       <Route path="/:lang" element={<Layout />}>
         <Route index element={<Home />} />
@@ -64,7 +69,7 @@ export default function App() {
           }
         />
       </Route>
-      <Route path="*" element={<Navigate to="/en/" replace />} />
+      <Route path="*" element={<PreferredHome />} />
     </Routes>
   );
 }

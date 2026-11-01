@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getDict, isLang, LANGS, type Lang } from '../i18n';
 import { useAuth } from '../lib/auth';
+import { setPreferredLang } from '../lib/preferredLang';
 
 export function useLang(): Lang {
   const { lang } = useParams();
@@ -17,6 +18,9 @@ export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => {
+    setPreferredLang(lang);
+  }, [lang]);
 
   return (
     <>
@@ -86,6 +90,7 @@ export default function Layout() {
               onChange={(e) => {
                 const next = e.target.value as Lang;
                 if (!isLang(next) || next === lang) return;
+                setPreferredLang(next);
                 // F28: keep selected calendar day across instant language remount.
                 try {
                   const d = sessionStorage.getItem('bd_selected_date');

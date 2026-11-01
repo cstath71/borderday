@@ -8,8 +8,8 @@ Clocks: GDPR one month, FADP 30 days. Withdrawal: confirm receipt by email and h
 
 1. Check the request came from the account's address. The message carries the account email and ID.
 2. Cancel any active subscription first (Stripe dashboard, or ask the customer to use the Cancel page).
-3. If the person is an employee in a company account, the employer is controller of those day logs: tell the employer before deleting, and tell the person if a record must be kept.
-4. Supabase dashboard → Authentication → Users → delete the user. `bd_profiles`, memberships, day logs, personal day logs, notice records and subscriptions cascade from it. A company the person alone administers stays and needs its own decision.
+3. If the person is an employee in a company account, the employer is controller of those day logs: tell the employer before deleting. Employer day logs and notice-proof rows are kept (detached) until the company's retention window ends — tell the person that.
+4. Supabase dashboard → Authentication → Users → delete the user. `bd_profiles`, memberships, personal day logs and the person's own subscriptions cascade. Company `bd_day_logs` and `bd_consents` stay: `employee_user_id` / `user_id` become null and a label/email snapshot is kept for HR. A company the person alone administers stays and needs its own decision.
 5. Reply to confirm.
 
 ## Export
@@ -18,7 +18,7 @@ The Account page exports the person's own server data, private notes included. R
 
 ## Someone removed from a company
 
-They keep their own day log: the Account page lists each company they left, with the days and their notes, includes them in the export, and lets them delete them. Deleting also removes those days for the company. Notes are never visible to HR. `bd_my_day_log_companies` names the companies; reads and deletes go through the employee's own RLS.
+They keep their own day log: the Account page lists each company they left, with the days and their notes, includes them in the export, and lets them delete them. Clearing their copy hides the days from them and wipes private notes; the employer’s copy stays under retention (soft-void while active, or employee_cleared_at after they leave). Notes are never visible to HR. `bd_my_day_log_companies` names the companies; reads and deletes go through the employee's own RLS.
 
 ## Withdrawal and cancellation requests
 

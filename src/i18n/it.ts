@@ -551,7 +551,7 @@ const it: Dict = {
       'Revoca del consenso: ove applicabile, revocare il consenso senza pregiudicare la liceità del trattamento precedente alla revoca.',
     ],
     rightsHow:
-      'Usate la pagina Account per esportare i registri, cancellare la vostra copia dopo aver lasciato un’azienda o chiedere la cancellazione dell’account, oppure scrivete a privacy@borderday.com. Il GDPR ci dà un mese per rispondere e la LPD 30 giorni. Per i registri di un account aziendale il titolare è il datore di lavoro: cancellare la vostra copia non elimina i documenti che conserva secondo il suo periodo di conservazione.',
+      'Usate la pagina Account per esportare i registri, cancellare la vostra copia dopo aver lasciato un’azienda o chiedere la cancellazione dell’account, oppure scrivete a privacy@borderday.com. Il GDPR ci dà un mese per rispondere e la LPD 30 giorni. Per i registri di un account aziendale il titolare è il datore di lavoro: cancellare la vostra copia non elimina i documenti che conserva secondo il suo periodo di conservazione. La chiusura dell’account lascia anche quei registri e prove di notifica presso il datore di lavoro fino alla fine della conservazione.',
     complaintBody:
       'Potete presentare reclamo all’Incaricato federale della protezione dei dati e della trasparenza (IFPDT, www.edoeb.admin.ch). Se vivete o lavorate nell’UE/SEE, potete rivolgervi anche alla vostra autorità locale di protezione dei dati.',
     requiredBody:
@@ -830,7 +830,7 @@ const it: Dict = {
     deviceBody: 'Giorni dell’anteprima gratuita, memorizzati in questo browser e non sui nostri server.',
     deleteTitle: 'Richiedere la cancellazione dell’account',
     deleteBody:
-      'La cancellazione di un account è gestita da noi, non automaticamente. Inviate la richiesta qui sotto: cancelliamo l’account e il registro personale e rispondiamo entro un mese. Per i registri di un account aziendale il titolare è il datore di lavoro, che può dover conservare alcuni documenti: in tal caso ve lo comunichiamo. Disdite prima ogni piano a pagamento.',
+      'La cancellazione di un account è gestita da noi, non automaticamente. Inviate la richiesta qui sotto: cancelliamo l’account e il registro personale e rispondiamo entro un mese. I registri e le prove di notifica di un account aziendale restano presso il datore di lavoro (scollegati dal vostro accesso) fino alla fine del periodo di conservazione — resta titolare di quel trattamento. Disdite prima ogni piano a pagamento.',
     deleteConfirm: 'Desidero richiedere la cancellazione del mio account',
     deleteSend: 'Apri la richiesta di cancellazione nella mia e-mail',
     deleteHint: 'La richiesta è fatta quando inviate l’e-mail a {to}.',

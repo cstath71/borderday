@@ -33,11 +33,11 @@
 | G2 | Commune de Plan-les-Ouates | ~200 | FR | `rh@plan-les-ouates.ch` | https://www.plan-les-ouates.ch/pages/la-commune/la-mairie/services-communaux/service-des-ressources-humaines |
 | G3 | Edouard Brun & Cie | régie; human-scale | FR | `rh@regiebrun.ch` | https://www.regiebrun.ch/emploi/ |
 | G4 | Pilet & Renaud | régie familiale | FR | `candidature@pilet-renaud.ch` | https://www.pilet-renaud.ch/fr/emploi |
-| G5 | Probus Pleion Suisse | ~60 | FR | `info@probuspleion.ch` | https://www.probuspleion.ch/fr/contact/ (and /contact/) |
+| G5 | Probus Pleion Suisse | ~60 | FR | `mtischhauser@probuspleion.ch` (named-public) | https://www.probuspleion.ch/fr/contact/ (and /contact/) |
 | G6 | Palexpo SA | ~200 fixed | FR | `ressources.humaines@palexpo.ch` | https://www.palexpo.ch/carrieres/ |
 | B1 | Celonic | 500+ (Basel biotech) | DE | `career@celonic.com` | https://www.celonic.com/contact/ |
 | B2 | Rosenmund Haustechnik | Basel HLKS | DE | `personal@rosenmund.ch` | https://rosenmund.ch/karriere/arbeitgeber/ |
-| B3 | Morath AG | ~140 | DE | `bewerbungen@morath.ch` | https://morath.ch/spengler/karriere/ |
+| B3 | Morath AG | ~140 | DE | `lisa.franzoni@morath.ch` (named-public) | https://morath.ch/spengler/karriere/ |
 | B4 | Tschantré AG | Muttenz; 1d HO benefit | DE | `personal@tschantre.com` | https://www.tschantre.com/karriere/ |
 | B5 | E. Kalt AG | ~90 Basel | DE | `basel@ekaltag.ch` | https://www.ekaltag.ch/kontakt/ |
 | T1 | Croce Rossa Ticino | ~360 | IT | `info@crocerossaticino.ch` | https://www.crocerossaticino.ch/contatti |
@@ -48,7 +48,7 @@
 | L3 | Orange Luxembourg | 160 | FR | `jobs@orangeluxembourg.lu` | https://www.orange.lu/fr/a-propos/jobs-orange/ |
 | L4 | BIL (Banque Internationale à Luxembourg) | ~1 790 group | FR | `recruitment@bil.com` | https://stayforacareer.com/ (footer) |
 | L5 | ATOZ Tax Advisers | mid-size tax firm | EN | `recruiting@atoz.lu` | https://www.atoz.lu/careers |
-| L6 | Arendt | LU law / services (multi-national staff) | EN | `hr@arendt.com` | https://www.arendt.com/careers/ |
+| L6 | Arendt | LU law / services (multi-national staff) | EN | `chloe.philibert@arendt.com` (named-public) | https://www.arendt.com/careers/ |
 
 ---
 
@@ -392,3 +392,8 @@ https://borderday.com
 - [ ] Approve recipient subset  
 - [ ] Approve each language draft  
 - [ ] Agent must **not** send until approval names recipients + final text
+
+
+## HTML light drafts (2026-11-01 20:21 Zurich, send nothing)
+
+See `growth/html/` (`employer-g1.html` … `employer-l6.html`) with plain-text `.txt` fallbacks. Recipient marks and HR sources are in each `employer-*.md` sidecar.

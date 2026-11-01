@@ -243,3 +243,8 @@ https://borderday.com
 - [ ] Approve exact recipient subset  
 - [ ] Approve each language draft  
 - [ ] Agent must **not** send until that approval names recipients + final text
+
+
+## HTML light drafts (2026-11-01, send nothing)
+
+See `growth/html/` (`partner-p1.html` … `partner-p10.html`) with plain-text `.txt` fallbacks. All marked `generic`. Opt-out line included. Partner offer remains 20% / 12 months.

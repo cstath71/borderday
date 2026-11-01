@@ -51,3 +51,18 @@ Daily `pg_cron` job `bd_purge_expired_data_daily` (03:17 UTC) runs `public.bd_pu
 - deletes `expired` or `revoked` invites 30 days after `expires_at`.
 
 Personal day logs, whole accounts, membership and billing rows are not timed-deleted — handle those via the steps above or privacy@borderday.com.
+
+## What an HR viewer can do today
+
+This records current behaviour. It has not been decided that this is what the role should allow, and the role has not been changed.
+
+`hr_viewer` is not read-only. Besides reading colleagues' day records through the dashboard, an active HR viewer can:
+
+- change another member's role to `hr_viewer`, and remove members and invites;
+- edit employees' profile figures;
+- start checkout and open the billing portal, including cancelling the company plan;
+- read the company's Stripe customer and subscription IDs through `bd_subscriptions`.
+
+Owners can do all of this too. Answer access questions from employers on this basis.
+
+A personal-data breach follows `docs/BREACH_RESPONSE.md`.

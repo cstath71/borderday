@@ -1030,7 +1030,7 @@ const fr: Dict = {
     thresholdSs50:
       'Sécurité sociale — cadre UE/EEE/CH: sous 25% le cadre ne s’applique pas; de 25% à moins de 50% un A1 est en principe requis; à 50% ou plus, affiliation de l’État de résidence. Séparé de la fiscalité.',
     thresholdEmployerDuty:
-      'Obligation employeur (Genève): attestation annuelle du taux de télétravail — ge.ch indique actuellement la première transmission en janvier 2027 pour l’année 2026, y compris à 0%.',
+      'Obligation employeur (Genève): attestation annuelle du taux de télétravail — ge.ch indique actuellement la première transmission en janvier 2027 pour l’année 2026.',
     howTitle: 'Comment BorderDay aide les RH',
     howBody:
       'Invitez les collaborateurs; chacun choisit le corridor Genève←France et enregistre uniquement des types de jours. Les RH voient les mêmes compteurs fiscaux et sociaux, des alertes à l’approche des seuils, et peuvent exporter en CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',

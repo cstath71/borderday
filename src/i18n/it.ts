@@ -1028,7 +1028,7 @@ const it: Dict = {
     thresholdSs50:
       'Previdenza — quadro UE/SEE/CH: sotto il 25% il quadro non si applica; dal 25% a meno del 50% di norma serve un certificato A1; al 50% o più, affiliazione dello Stato di residenza. Separato dal fisco.',
     thresholdEmployerDuty:
-      'Obbligo del datore di lavoro (Ginevra): attestazione annuale del tasso di telelavoro — ge.ch indica attualmente la prima trasmissione a gennaio 2027 per l’anno 2026, anche allo 0%.',
+      'Obbligo del datore di lavoro (Ginevra): attestazione annuale del tasso di telelavoro — ge.ch indica attualmente la prima trasmissione a gennaio 2027 per l’anno 2026.',
     howTitle: 'Come BorderDay aiuta le HR',
     howBody:
       'Invitate i collaboratori; ciascuno sceglie il corridoio Ginevra←Francia e registra solo tipologie di giorno. Le HR vedono gli stessi contatori fiscali e previdenziali, avvisi e export CSV. Niente GPS. Piano azienda: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',

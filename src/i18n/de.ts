@@ -713,8 +713,8 @@ const de: Dict = {
     inviteFailed:
       'Die Einladung konnte nicht erstellt werden. Prüfen Sie die Adresse und versuchen Sie es erneut.',
     inviteAlreadyMember: 'Diese Adresse ist bereits aktives Mitglied dieses Unternehmens.',
-    inviteReused: 'Für diese Adresse gibt es bereits eine ausstehende Einladung. Teilen Sie den Link unten (oder später erneut senden).',
-    inviteReusedEmailed: 'Es gibt bereits eine ausstehende Einladung; die E-Mail wurde erneut gesendet. Sie können den Link auch teilen.',
+    inviteReused: 'Für diese Adresse gibt es bereits eine ausstehende Einladung. Wir haben sie nicht erneut per E-Mail gesendet, weil in der letzten Stunde schon eine gesendet wurde; teilen Sie den Link oder versuchen Sie es später.',
+    inviteReusedEmailed: 'Einladung bereits ausstehend; E-Mail erneut gesendet.',
   },
 
   terms: {

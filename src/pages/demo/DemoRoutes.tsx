@@ -157,7 +157,7 @@ function DemoHistory() {
   const lang = useLang();
   const d = getDict(lang);
   const { employeeId = '' } = useParams();
-  const [year, setYear] = useState(() => new Date().getFullYear());
+  const year = new Date().getFullYear();
   const { companyId } = seedDemoCompany();
   const entry = listAllMembers(companyId).find((m) => m.member.userId === employeeId);
   const back = `/${lang}/demo/company/${companyId}/dashboard`;

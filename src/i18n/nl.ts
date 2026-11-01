@@ -531,6 +531,7 @@ const nl: Dict = {
     inviteCreated: "Uitnodiging aangemaakt. Deel de link met de medewerker.",
     pendingInvites: "Openstaande uitnodigingen",
     dashboardTitle: "HR-dashboard",
+    dashboardYear: "Kalenderjaar",
     dashboardSubtitle: "Belasting- en socialezekerheidstellers per medewerker. Dagtypes, overnacht-elders-markeringen en tellingen — nooit GPS of apparaatlocatie.",
     filterBorder: "Filter op grensroute",
     filterStatus: "Filter op status",

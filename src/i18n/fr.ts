@@ -655,6 +655,7 @@ const fr: Dict = {
     inviteCreated: 'Invitation créée. Partagez le lien avec le collaborateur.',
     pendingInvites: 'Invitations en attente',
     dashboardTitle: 'Tableau de bord RH',
+    dashboardYear: 'Année civile',
     dashboardSubtitle:
       'Compteurs fiscaux et de sécurité sociale par collaborateur. Types de jours, marques de nuit hors du domicile et totaux — jamais de GPS ni de localisation de l’appareil.',
     filterBorder: 'Filtrer par itinéraire',

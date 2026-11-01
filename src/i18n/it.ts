@@ -656,6 +656,7 @@ const it: Dict = {
     inviteCreated: 'Invito creato. Condividete il link con il dipendente.',
     pendingInvites: 'Inviti in sospeso',
     dashboardTitle: 'Dashboard HR',
+    dashboardYear: 'Anno civile',
     dashboardSubtitle:
       'Contatori fiscali e di sicurezza sociale per dipendente. Tipi di giorno, segni di notte fuori e conteggi — mai GPS né posizione del dispositivo.',
     filterBorder: 'Filtra per corridoio',

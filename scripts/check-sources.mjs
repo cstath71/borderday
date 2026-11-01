@@ -4,6 +4,8 @@
  * date, or on a schedule. A 200 says the document is there, not that it still says the same: read
  * the changed sources before moving their dates.
  * EUR-Lex answers scripts with an empty 202, so that is reported as "not checkable" and not as a failure.
+ * Fedlex returns 200 with an app shell for any /eli/ path, so a 200 there proves little. Read the text through
+ * https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/... instead.
  */
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';

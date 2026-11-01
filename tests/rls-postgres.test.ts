@@ -1103,3 +1103,27 @@ describe('real Postgres: audit-2 low hardening', () => {
     await expect(db.query(guard)).rejects.toThrow(/migration repair --status applied 20261031120000/);
   });
 });
+
+describe('real Postgres: A3-34 account export reads', () => {
+  it('a member reads their own name, notice records and subscription, and nobody else’s', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const employee = await addMember(owner, company);
+    const other = await addMember(owner, company);
+    await db.query(`insert into public.bd_subscriptions (user_id, plan_kind, status) values ($1, 'individual', 'active')`, [employee]);
+    await db.query(`insert into public.bd_subscriptions (user_id, plan_kind, status) values ($1, 'individual', 'active')`, [other]);
+    const profile = await as(employee, `select display_name from public.bd_profiles where id = $1`, [employee]);
+    expect(profile.rowCount).toBe(1);
+    const notices = await as(employee, `select company_id, consent_version, text_lang, accepted_at from public.bd_consents where user_id = $1`, [employee]);
+    expect(notices.rows[0]).toMatchObject({ company_id: company, consent_version: 'v1', text_lang: 'en' });
+    const subs = await as(
+      employee,
+      `select plan_kind, status, current_period_end, trial_ends_at, stripe_customer_id, stripe_subscription_id
+       from public.bd_subscriptions where user_id = $1`,
+      [employee],
+    );
+    expect(subs.rows[0]).toMatchObject({ plan_kind: 'individual', status: 'active' });
+    expect((await as(employee, `select id from public.bd_subscriptions where user_id = $1`, [other])).rowCount).toBe(0);
+    expect((await as(employee, `select id from public.bd_consents where user_id = $1`, [other])).rowCount).toBe(0);
+  });
+});

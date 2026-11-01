@@ -108,6 +108,62 @@ describe('companyApi', () => {
     expect(JSON.stringify(logs)).not.toContain('secret');
   });
 
+  describe('A3-04 offboarding', () => {
+    const update = (call: Call) => op(call, 'update')[0]?.[0];
+
+    it('deactivateMember sets active false, never on an owner row, then syncs billing', async () => {
+      state.respond = () => ({ data: [{ id: 'm1' }], error: null });
+      state.invoke.mockResolvedValueOnce({ data: { available: true, synced: true }, error: null });
+      await expect(api.deactivateMember('c1', 'e1')).resolves.toEqual({ billingSynced: true });
+      const [call] = state.calls;
+      expect(call.table).toBe('bd_company_members');
+      expect(update(call)).toEqual({ active: false });
+      expect(op(call, 'eq')).toEqual(expect.arrayContaining([['company_id', 'c1'], ['user_id', 'e1']]));
+      expect(op(call, 'neq')).toContainEqual(['role', 'owner']);
+      expect(state.invoke).toHaveBeenCalledWith('bd-sync-company-billing', { body: { companyId: 'c1' } });
+    });
+
+    it('a row RLS hid is a refusal, and billing is not touched', async () => {
+      state.respond = () => ({ data: [], error: null });
+      await expect(api.deactivateMember('c1', 'e1')).rejects.toThrow('deactivation denied');
+      expect(state.invoke).not.toHaveBeenCalled();
+    });
+
+    it('reports an unconfirmed billing sync, without undoing the removal', async () => {
+      state.respond = () => ({ data: [{ id: 'm1' }], error: null });
+      state.invoke.mockResolvedValueOnce({ data: { available: false, message: 'Forbidden' }, error: null });
+      await expect(api.deactivateMember('c1', 'e1')).resolves.toEqual({ billingSynced: false });
+      state.invoke.mockResolvedValueOnce({ data: null, error: new Error('500') });
+      await expect(api.deactivateMember('c1', 'e1')).resolves.toEqual({ billingSynced: false });
+      state.invoke.mockResolvedValueOnce({ data: { available: true, synced: false, reason: 'no_subscription' }, error: null });
+      await expect(api.deactivateMember('c1', 'e1')).resolves.toEqual({ billingSynced: true });
+    });
+
+    it('canDeactivateMember: HR and owners, never an owner or yourself, never an employee actor', () => {
+      const can = (actor: 'owner' | 'hr_viewer' | 'employee', target: 'owner' | 'hr_viewer' | 'employee', self = false) =>
+        api.canDeactivateMember({ userId: 'a', role: actor }, { userId: self ? 'a' : 'b', role: target });
+      expect(can('owner', 'employee')).toBe(true);
+      expect(can('owner', 'hr_viewer')).toBe(true);
+      expect(can('hr_viewer', 'employee')).toBe(true);
+      expect(can('hr_viewer', 'hr_viewer')).toBe(true);
+      expect(can('owner', 'owner')).toBe(false);
+      expect(can('hr_viewer', 'owner')).toBe(false);
+      expect(can('employee', 'employee')).toBe(false);
+      expect(can('hr_viewer', 'hr_viewer', true)).toBe(false);
+    });
+
+    it('revokeInvite touches only a pending invite of this company, and reports a refusal', async () => {
+      state.respond = () => ({ data: [{ id: 'i1' }], error: null });
+      await api.revokeInvite('c1', 'i1');
+      const [call] = state.calls;
+      expect(call.table).toBe('bd_invitations');
+      expect(update(call)).toEqual({ status: 'revoked' });
+      expect(op(call, 'eq')).toEqual(expect.arrayContaining([['id', 'i1'], ['company_id', 'c1'], ['status', 'pending']]));
+      state.respond = () => ({ data: [], error: null });
+      await expect(api.revokeInvite('c1', 'i1')).rejects.toThrow('revoke denied');
+    });
+  });
+
   describe('Phase 2 schema not live yet (site deployed before the migration)', () => {
     const missingFn = { data: null, error: { code: 'PGRST202', message: 'function not found' } };
     const missingCol = { data: null, error: { code: '42703', message: 'column does not exist' } };

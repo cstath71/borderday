@@ -270,6 +270,41 @@ export async function updateEmployeeProfile(
   if (!data?.length) throw new Error('profile update denied');
 }
 
+/**
+ * Leavers: the owner role stays out of reach here, and HR's own row is refused by RLS. An owner
+ * could lock themselves out otherwise, as bd_members_update allows owners every row.
+ */
+export function canDeactivateMember(
+  actor: { userId: string; role: CompanyRole },
+  target: { userId: string; role: CompanyRole },
+): boolean {
+  return isHrRole(actor.role) && target.role !== 'owner' && target.userId !== actor.userId;
+}
+
+/**
+ * Ends a member's access; day logs stay under the company's retention setting. Then aligns Stripe
+ * with the seat count the database trigger has already updated. billingSynced false means the
+ * member is gone but the subscription was not confirmed as updated.
+ */
+export async function deactivateMember(companyId: string, memberUserId: string): Promise<{ billingSynced: boolean }> {
+  const { data, error } = await client()
+    .from('bd_company_members')
+    .update({ active: false })
+    .eq('company_id', companyId)
+    .eq('user_id', memberUserId)
+    .neq('role', 'owner')
+    .select('id');
+  if (error) throw error;
+  // RLS hides a forbidden row instead of raising, so "nothing updated" is the refusal.
+  if (!data?.length) throw new Error('deactivation denied');
+  try {
+    const sync = await syncCompanyBilling(companyId);
+    return { billingSynced: sync?.available !== false };
+  } catch {
+    return { billingSynced: false };
+  }
+}
+
 export async function updateMyDisplayName(displayName: string): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
@@ -317,6 +352,19 @@ export async function createInvite(
     emailed: !sent.error && sent.data?.sent === true,
     emailBlock: status === 402 ? 'no_access' : status === 429 ? 'rate_limited' : null,
   };
+}
+
+/** Only a pending invite can be revoked. RLS keeps owner invites to owners. */
+export async function revokeInvite(companyId: string, inviteId: string): Promise<void> {
+  const { data, error } = await client()
+    .from('bd_invitations')
+    .update({ status: 'revoked' })
+    .eq('id', inviteId)
+    .eq('company_id', companyId)
+    .eq('status', 'pending')
+    .select('id');
+  if (error) throw error;
+  if (!data?.length) throw new Error('revoke denied');
 }
 
 export async function listInvites(companyId: string, status?: InviteStatus): Promise<Invitation[]> {

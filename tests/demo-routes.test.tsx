@@ -34,6 +34,13 @@ describe('/demo (mock only, labelled)', () => {
     expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow');
   });
 
+  it('A3-04: offers no remove or revoke control on sample data', async () => {
+    open('/en/demo');
+    await screen.findByText(/DEMO — Acme Cross-Border SA/);
+    expect(screen.queryByRole('button', { name: /^Remove / })).toBeNull();
+    expect(screen.queryByRole('button', { name: /^Revoke invite/ })).toBeNull();
+  });
+
   it('keeps every link inside /demo', async () => {
     const { container } = open('/en/demo');
     await screen.findByText(/DEMO — Acme Cross-Border SA/);

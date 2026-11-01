@@ -279,6 +279,55 @@ describe('real Postgres: HR cannot escalate', () => {
     expect(await roleOf(company, hr)).toBe('owner');
   });
 
+  it('A3-04: deactivating an employee drops the seat, the member loses access, and a re-invite restores it', async () => {
+    const owner = await newUser('a304a@example.com');
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const email = 'a304b@example.com';
+    const emp = await newUser(email);
+    await accept(emp, await invite(owner, company, email));
+    const seats = async () =>
+      (await db.query(`select seat_count from public.bd_companies where id = $1`, [company])).rows[0].seat_count;
+    expect(await seats()).toBe(1);
+
+    const res = await as(hr, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2 and role <> 'owner' returning id`, [company, emp]);
+    expect(res.rowCount).toBe(1);
+    expect(await seats()).toBe(0);
+
+    await expect(
+      as(emp, `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type) values ($1, $2, '2026-03-02', 'telework')`, [company, emp]),
+    ).rejects.toThrow(/row-level security/);
+    expect((await as(emp, `select id from public.bd_companies where id = $1`, [company])).rowCount).toBe(0);
+
+    await accept(emp, await invite(owner, company, email));
+    expect(await seats()).toBe(1);
+  });
+
+  it('A3-04: HR cannot deactivate an owner or themselves; an employee cannot deactivate anyone', async () => {
+    const owner = await newUser('a304c@example.com');
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const emp = await addMember(owner, company);
+    const update = (by: string, target: string) =>
+      as(by, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [company, target]);
+    expect((await update(hr, owner)).rowCount).toBe(0);
+    expect((await update(hr, hr)).rowCount).toBe(0);
+    expect((await update(emp, hr)).rowCount).toBe(0);
+    expect((await update(emp, emp)).rowCount).toBe(0);
+  });
+
+  it('A3-04: HR revokes a pending invite, and the link stops working', async () => {
+    const owner = await newUser('a304d@example.com');
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const email = 'a304e@example.com';
+    const token = await invite(hr, company, email);
+    const res = await as(hr, `update public.bd_invitations set status = 'revoked' where token = $1 and status = 'pending' returning id`, [token]);
+    expect(res.rowCount).toBe(1);
+    const person = await newUser(email);
+    await expect(accept(person, token)).rejects.toThrow(/not found or expired/);
+  });
+
   it('HR viewer cannot create an owner invite or rewrite an existing one', async () => {
     const owner = await newUser('o9@example.com');
     const company = await newCompany(owner);

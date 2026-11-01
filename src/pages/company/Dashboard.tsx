@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
-import DashboardView from '../../components/company/DashboardView';
+import DashboardView, { type TeamMember } from '../../components/company/DashboardView';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { buildDashboardRows } from '../../company/buildRows';
@@ -18,6 +18,7 @@ type Loaded = {
   invites: Invitation[];
   retentionMonths: number;
   isOwner: boolean;
+  hrViewers: TeamMember[];
 };
 
 type State =
@@ -83,6 +84,9 @@ export default function CompanyDashboard() {
           invites,
           retentionMonths: company.data_retention_months ?? 24,
           isOwner: membership?.role === 'owner',
+          hrViewers: members
+            .filter((m) => m.active && api.canDeactivateMember({ userId: userId!, role: membership!.role }, m) && m.role === 'hr_viewer')
+            .map((m) => ({ userId: m.userId, displayName: m.displayName, email: m.email })),
         },
       });
     })().catch(() => {
@@ -160,7 +164,18 @@ export default function CompanyDashboard() {
           joinBase={`/${lang}/join`}
           retentionMonths={data.retentionMonths}
           canEditRetention={data.isOwner}
+          hrViewers={data.hrViewers}
+          canRevokeInvite={(invite) => data.isOwner || invite.role !== 'owner'}
           onRefresh={() => setTick((x) => x + 1)}
+          onDeactivateMember={async (memberId) => {
+            const result = await api.deactivateMember(companyId!, memberId);
+            setTick((x) => x + 1);
+            return result;
+          }}
+          onRevokeInvite={async (inviteId) => {
+            await api.revokeInvite(companyId!, inviteId);
+            setTick((x) => x + 1);
+          }}
           onSaveProfile={async (employeeId, profile) => {
             await api.updateEmployeeProfile(companyId!, employeeId, profile);
             setTick((x) => x + 1);

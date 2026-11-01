@@ -20,6 +20,9 @@ vi.mock('../src/lib/companyApi', async (original) => {
     isInviteOpen: actual.isInviteOpen,
     sameEmail: actual.sameEmail,
     pickAppAccess: actual.pickAppAccess,
+    canDeactivateMember: actual.canDeactivateMember,
+    deactivateMember: vi.fn(async () => ({ billingSynced: true })),
+    revokeInvite: vi.fn(async () => undefined),
     createCompany: vi.fn(),
     listMyCompanies: vi.fn(async () => []),
     getCompany: vi.fn(),
@@ -153,6 +156,78 @@ describe('Dashboard', () => {
       annualWorkingDays: 240,
     });
     await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
+  });
+
+  describe('A3-04 offboarding', () => {
+    const inviteRow = {
+      id: 'inv1', companyId: 'c1', email: 'new@acme.test', role: 'employee' as const, token: 'tok',
+      status: 'pending' as const, invitedBy: 'hr1', createdAt: '2026-10-01', expiresAt: '2026-10-15',
+    };
+
+    it('deactivates only after confirmation, reloads, and says it worked', async () => {
+      asHr();
+      const confirm = vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValue(true);
+      open('/en/company/c1/dashboard');
+      await screen.findByText('Real Employee');
+      const button = screen.getByRole('button', { name: 'Remove Real Employee' });
+      fireEvent.click(button);
+      expect(mocked.deactivateMember).not.toHaveBeenCalled();
+      const calls = mocked.listMembers.mock.calls.length;
+      fireEvent.click(button);
+      await screen.findByText('Real Employee was removed.');
+      expect(mocked.deactivateMember).toHaveBeenCalledWith('c1', 'emp1');
+      await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
+      confirm.mockRestore();
+    });
+
+    it('says when billing was not confirmed, and when the removal was refused', async () => {
+      asHr();
+      const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+      mocked.deactivateMember.mockResolvedValueOnce({ billingSynced: false });
+      open('/en/company/c1/dashboard');
+      fireEvent.click(await screen.findByRole('button', { name: 'Remove Real Employee' }));
+      expect((await screen.findByRole('alert')).textContent).toContain('hello@borderday.com');
+      mocked.deactivateMember.mockRejectedValueOnce(new Error('deactivation denied'));
+      fireEvent.click(await screen.findByRole('button', { name: 'Remove Real Employee' }));
+      await screen.findByText(en.company.deactivateFailed);
+      confirm.mockRestore();
+    });
+
+    it('lists other HR viewers, not the signed-in user or owners', async () => {
+      asHr();
+      const me = { ...empRow, id: 'm2', userId: 'hr1', role: 'hr_viewer' as const, displayName: 'Me Myself' };
+      const other = { ...empRow, id: 'm3', userId: 'hr2', role: 'hr_viewer' as const, displayName: 'Other Viewer' };
+      const owner = { ...empRow, id: 'm4', userId: 'o1', role: 'owner' as const, displayName: 'The Owner' };
+      const gone = { ...empRow, id: 'm5', userId: 'hr3', role: 'hr_viewer' as const, displayName: 'Gone Viewer', active: false };
+      mocked.listMembers.mockResolvedValue([empRow, me, other, owner, gone]);
+      open('/en/company/c1/dashboard');
+      await screen.findByRole('heading', { name: en.company.hrViewersTitle });
+      screen.getByRole('button', { name: 'Remove Other Viewer' });
+      for (const name of ['Remove Me Myself', 'Remove The Owner', 'Remove Gone Viewer']) {
+        expect(screen.queryByRole('button', { name })).toBeNull();
+      }
+    });
+
+    it('revokes a pending invite after confirmation', async () => {
+      asHr();
+      const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+      mocked.listInvites.mockResolvedValue([inviteRow]);
+      open('/en/company/c1/dashboard');
+      fireEvent.click(await screen.findByRole('button', { name: 'Revoke invite for new@acme.test' }));
+      await screen.findByText('Invite for new@acme.test revoked.');
+      expect(mocked.revokeInvite).toHaveBeenCalledWith('c1', 'inv1');
+      confirm.mockRestore();
+    });
+
+    it('an HR viewer gets no revoke button on an owner invite', async () => {
+      asHr();
+      mocked.myMembership.mockResolvedValue({ role: 'hr_viewer', borderPackId: null, annualWorkingDays: null });
+      mocked.listInvites.mockResolvedValue([{ ...inviteRow, role: 'owner' }]);
+      open('/en/company/c1/dashboard');
+      await screen.findByText(en.company.pendingInvites);
+      expect(screen.queryByRole('button', { name: 'Revoke invite for new@acme.test' })).toBeNull();
+    });
+
   });
 
   it('says so when saving the profile is refused', async () => {

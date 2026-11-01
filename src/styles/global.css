@@ -30,6 +30,8 @@ a:hover { text-decoration: underline; }
 img { max-width: 100%; height: auto; }
 
 .container { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
+/* Header needs more room than body copy so Account + DE/FR labels never collide with the lang control */
+.site-header .container { width: min(1440px, calc(100% - 2rem)); }
 
 .site-header {
   position: sticky; top: 0; z-index: 20;
@@ -55,20 +57,18 @@ img { max-width: 100%; height: auto; }
   display: block;
   flex-shrink: 0;
 }
-.nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.7rem 1rem; min-width: 0; }
+.nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.65rem 0.9rem; flex: 1 1 auto; min-width: 0; }
 .nav a { color: var(--ink); font-weight: 500; font-size: 1.05rem; white-space: nowrap; }
 .nav a.active { color: var(--primary); }
 .lang-switch {
-  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 0.4rem;
-  flex-shrink: 0; white-space: nowrap; margin-left: 0.25rem;
+  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 0.25rem;
+  flex-shrink: 0; white-space: nowrap; margin-left: 0.35rem;
 }
 .lang-switch select {
   border: 1px solid var(--border); border-radius: 8px;
-  padding: 0.45rem 0.6rem; background: var(--surface); color: var(--ink);
-  font-size: 0.95rem; max-width: 10.5rem;
-}
-.lang-switch .btn {
-  padding: 0.45rem 0.85rem; font-size: 0.95rem; white-space: nowrap;
+  padding: 0.4rem 0.45rem; background: var(--surface); color: var(--ink);
+  font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
+  max-width: 4.25rem; min-width: 3.5rem;
 }
 
 .btn {
@@ -209,8 +209,8 @@ select.border-select, input.num {
 main:focus { outline: none; }
 .nav-toggle { display: none; }
 
-/* Below desktop: hamburger so a larger logo/nav never wraps the top bar */
-@media (max-width: 1199px) {
+/* Below ~1480: hamburger — FR/DE signed-in+out + Safari/macOS font metrics need more than 1080–1280 */
+@media (max-width: 1479px) {
   .site-header .inner {
     /* wrap only so an opened menu can drop below; closed chrome stays one line */
     flex-wrap: wrap;
@@ -221,10 +221,9 @@ main:focus { outline: none; }
   .brand img { height: 48px; }
   .nav-toggle { display: inline-flex; order: 2; flex-shrink: 0; padding: 0.4rem 0.7rem; font-size: 0.9rem; }
   .lang-switch { order: 3; margin-left: auto; }
-  .lang-switch .lang-apply { display: none; } /* select onChange applies */
-  .lang-switch select { max-width: 9rem; }
+  .lang-switch select { max-width: 4.25rem; }
   .nav {
-    order: 4; flex-wrap: wrap;
+    order: 4; flex-wrap: wrap; flex: 1 1 100%;
     /* Closed: keep chrome on one line — hide inline nav links until opened */
   }
   .nav:not(.open) { display: none; }
@@ -239,15 +238,13 @@ main:focus { outline: none; }
 @media (max-width: 640px) {
   .site-header .inner { min-height: 64px; padding: 0.5rem 0; gap: 0.45rem; }
   .brand img { height: 46px; } /* bigger than prior 40px mobile */
-  .lang-switch select { max-width: 7.75rem; font-size: 0.85rem; padding: 0.35rem 0.4rem; }
+  .lang-switch select { max-width: 4rem; font-size: 0.85rem; padding: 0.35rem 0.4rem; }
   .nav-toggle { padding: 0.35rem 0.55rem; font-size: 0.85rem; }
 }
-@media (min-width: 1200px) and (max-width: 1359px) {
-  /* Slightly tighter gaps so NL/DE still fit on one line at 1280 */
-  .nav { gap: 0.55rem 0.75rem; }
+@media (min-width: 1480px) and (max-width: 1599px) {
+  /* Slightly tighter gaps just above the collapse point */
+  .nav { gap: 0.55rem 0.8rem; }
   .nav a { font-size: 1rem; }
-  .lang-switch { gap: 0.3rem; margin-left: 0.1rem; }
-  .lang-switch select { max-width: 9.75rem; }
 }
 
 /* Employer-first */

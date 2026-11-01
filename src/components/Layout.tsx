@@ -51,9 +51,11 @@ export default function Layout() {
             <NavLink to={`/${lang}/pricing`} className="hide-sm">
               {d.nav.pricing}
             </NavLink>
-            <NavLink to={`/${lang}/auth/sign-in`} className="hide-sm">
-              {d.nav.joinWaitlist}
-            </NavLink>
+            {!auth.user && (
+              <NavLink to={`/${lang}/auth/sign-in`} className="hide-sm">
+                {d.nav.joinWaitlist}
+              </NavLink>
+            )}
             <NavLink to={`/${lang}/faq`} className="hide-sm">
               {d.nav.faq}
             </NavLink>
@@ -82,22 +84,17 @@ export default function Layout() {
                 aria-label={d.lang.label}
                 defaultValue={lang}
                 onChange={(e) => {
-                  // Below the desktop breakpoint the Apply button is hidden — switch immediately.
-                  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 1199px)').matches) {
-                    e.currentTarget.form?.requestSubmit();
-                  }
+                  // Compact EN/FR/… control: apply immediately on change (no separate Apply button).
+                  e.currentTarget.form?.requestSubmit();
                 }}
               >
                 {LANGS.map((l) => (
                   <option key={l} value={l}>
-                    {d.lang[l]}
+                    {l.toUpperCase()}
                   </option>
                 ))}
               </select>
-            </label>{' '}
-            <button type="submit" className="btn btn-ghost lang-apply">
-              {d.lang.apply}
-            </button>
+            </label>
           </form>
         </div>
       </header>

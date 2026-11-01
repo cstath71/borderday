@@ -400,12 +400,15 @@ describe('header sizing (no wrap)', () => {
     expect(layout).toMatch(/width=\{232\}\s+height=\{68\}/);
   });
 
-  it('collapses into the mobile menu below 1200px so mid widths never wrap', () => {
-    expect(css).toMatch(/@media \(max-width:\s*1199px\)/);
+  it('uses a compact auto-apply language control and collapses below 1480px', () => {
+    expect(css).toMatch(/@media \(max-width:\s*1479px\)/);
     expect(css).toMatch(/\.nav:not\(\.open\)\s*\{\s*display:\s*none/);
     expect(css).toMatch(/\.brand img\s*\{\s*height:\s*46px/);
-    expect(css).toMatch(/\.lang-switch \.lang-apply\s*\{\s*display:\s*none/);
-    expect(layout).toContain('lang-apply');
-    expect(layout).toContain("matchMedia('(max-width: 1199px)')");
+    expect(css).toMatch(/\.site-header \.container\s*\{\s*width:\s*min\(1440px/);
+    expect(css).toMatch(/\.lang-switch select\s*\{[^}]*max-width:\s*4\.25rem/);
+    expect(layout).not.toContain('lang-apply');
+    expect(layout).toContain('l.toUpperCase()');
+    expect(layout).toContain('e.currentTarget.form?.requestSubmit()');
+    expect(layout).toContain('{!auth.user && (');
   });
 });

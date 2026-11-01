@@ -10,7 +10,7 @@ export async function startCheckout(opts: {
   interval: 'month' | 'year';
   companyId?: string;
   lang?: string;
-  /** Required: customer expressly asked to start service and acknowledged withdrawal ends once it starts. */
+  /** Required: customer expressly asked to start service during the withdrawal period and acknowledged the statutory right ends only on full performance. */
   expressStartAcknowledged: boolean;
 }): Promise<CheckoutResult> {
   if (!supabaseConfigured || !supabase) {

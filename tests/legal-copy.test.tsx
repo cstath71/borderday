@@ -179,29 +179,78 @@ describe('C6 withdrawal wording', () => {
     expect(all).not.toMatch(/once performance has begun|une fois l’exécution commencée|mit Leistungsbeginn erlischt|una volta iniziata l’esecuzione/);
   });
 
-  it('states express-start loss of statutory withdrawal plus voluntary 14-day full refund', () => {
-    const express: Record<Lang, RegExp> = {
+  // A3-01: for a digital service the statutory right ends on full performance, not on start.
+  const FULL_PERFORMANCE: Record<Lang, RegExp> = {
+    en: /ends only once the contract has been fully performed, not when performance starts/,
+    fr: /ne prend (donc )?fin qu’une fois le contrat pleinement exécuté, et non au début de l’exécution/,
+    de: /erst mit vollständiger Vertragserfüllung.*nicht schon mit Leistungsbeginn/,
+    it: /cessa (quindi )?solo a seguito della completa esecuzione del contratto, non al suo inizio/,
+    nl: /(eindigt pas|pas eindigt) wanneer de overeenkomst volledig is uitgevoerd, niet wanneer de uitvoering begint/,
+  };
+  const ENDS_ON_START =
+    /once (the service|it|performance) (has )?(started|starts|begun|begins)|lose the statutory|une fois le service commencé|perd(re|ez) le droit légal|sobald der Dienst begonnen|Widerrufsrecht verlier|una volta che il servizio è iniziato|perdere il diritto legale|zodra de dienst is gestart|herroepingsrecht .{0,20}verlies/i;
+
+  it.each(dicts)('%s: checkbox and Terms tie the statutory right to full performance, never to start', (lang, d) => {
+    expect(d.pricing.expressStartLabel).toMatch(FULL_PERFORMANCE[lang]);
+    expect(d.terms.s5EffectsBody).toMatch(FULL_PERFORMANCE[lang]);
+    const required: Record<Lang, RegExp> = {
+      en: /ends only on full performance of the contract/,
+      fr: /ne prend fin qu’à la pleine exécution du contrat/,
+      de: /erst mit vollständiger Vertragserfüllung erlischt/,
+      it: /cessa solo a seguito della completa esecuzione del contratto/,
+      nl: /pas eindigt bij volledige uitvoering van de overeenkomst/,
+    };
+    expect(d.pricing.expressStartRequired).toMatch(required[lang]);
+    // Every surface a consumer reads, including the prerendered pages and FAQ.
+    expect(flat(d)).not.toMatch(ENDS_ON_START);
+    expect(flat(PAGES.pricing[lang]) + flat(PAGES.terms[lang]) + flat(FAQ[lang])).not.toMatch(ENDS_ON_START);
+  });
+
+  it('the ban on the digital-content formula can actually fail', () => {
+    for (const bad of [
+      'I lose the statutory 14-day right of withdrawal once the service has started',
+      'une fois le service commencé',
+      'sobald der Dienst begonnen hat',
+      'una volta che il servizio è iniziato',
+      'zodra de dienst is gestart',
+    ]) {
+      expect(bad).toMatch(ENDS_ON_START);
+    }
+  });
+
+  it('keeps the express request and the voluntary 14-day full refund, separate from the statutory right', () => {
+    const expressTerms: Record<Lang, RegExp> = {
       en: /expressly asking us to start the service/,
       fr: /demandant expressément le démarrage du service/,
       de: /ausdrücklich verlangen, dass der Dienst/,
       it: /chiedete espressamente l’inizio del servizio/,
       nl: /uitdrukkelijk vraagt de dienst.*te starten/,
     };
+    const expressBox: Record<Lang, RegExp> = {
+      en: /expressly ask BorderDay to start the service during the withdrawal period/,
+      fr: /demande expressément à BorderDay de commencer le service pendant le délai de rétractation/,
+      de: /verlange ausdrücklich, dass BorderDay den Dienst während der Widerrufsfrist beginnt/,
+      it: /Chiedo espressamente a BorderDay di avviare il servizio durante il periodo di recesso/,
+      nl: /vraag BorderDay uitdrukkelijk de dienst tijdens de herroepingstermijn te starten/,
+    };
     const voluntary: Record<Lang, RegExp> = {
       en: /voluntary 14-day full-refund guarantee/,
       fr: /garantie volontaire de remboursement intégral de 14 jours/,
       de: /freiwillige 14-tägige Vollrückerstattungsgarantie/,
       it: /garanzia volontaria di rimborso integrale di 14 giorni/,
-      nl: /vrijwillige restitutiegantie van 14 dagen/,
+      nl: /vrijwillige restitutiegarantie van 14 dagen/,
     };
     for (const [lang, d] of dicts) {
-      expect(d.terms.s5EffectsBody, lang).toMatch(express[lang]);
+      expect(d.terms.s5EffectsBody, lang).toMatch(expressTerms[lang]);
       expect(d.terms.s5EffectsBody, lang).toMatch(voluntary[lang]);
+      expect(d.pricing.expressStartLabel, lang).toMatch(expressBox[lang]);
+      expect(d.pricing.expressStartLabel, lang).toMatch(voluntary[lang]);
+      expect(d.terms.s5EffectsBody, lang).toMatch(/C-565\/22/);
+      expect(d.terms.s5EffectsBody, lang).toMatch(/C-234\/25/);
       expect(d.terms.s5Body).toMatch(/\b14\b/);
-      expect(d.pricing.expressStartLabel.length).toBeGreaterThan(40);
     }
     expect(getDict('en').terms.s5Body).toMatch(/the day you receive access/);
-    expect(getDict('en').terms.s5EffectsBody).toMatch(/C-565\/22/);
+    expect(getDict('en').terms.s5EffectsBody).toMatch(/C-565\/22 \(Sofatutor\)/);
   });
 
   it('carries the Annex I(B) fields', () => {

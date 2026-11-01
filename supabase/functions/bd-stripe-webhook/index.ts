@@ -1,6 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { isCompanyFlatMinimumPrice, resolveCompanyBilling } from "../_shared/companyPricing.ts";
+import { inviteLang } from "../_shared/inviteEmail.ts";
+import { invoiceSubscriptionId } from "../_shared/stripeInvoice.ts";
 
 Deno.serve(async (req) => {
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -135,13 +137,15 @@ Deno.serve(async (req) => {
     kind: "yearly_renewal" | "trial_ending";
     to: string;
     renewOnIso: string | null;
+    /** Checkout language from subscription metadata. Text is English until translated templates exist; the link follows it. */
+    lang: unknown;
   }) {
     const from = Deno.env.get("RESEND_FROM") || "BorderDay <hello@borderday.com>";
     const apiKey = Deno.env.get("RESEND_API_KEY_BORDERDAY") || Deno.env.get("RESEND_API_KEY");
     // Live email approved 2026-10-31 (Gus t415u). Default on; set RESEND_LIVE=0 to pause.
     const live = (Deno.env.get("RESEND_LIVE") ?? "1") === "1";
     const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
-    const cancelUrl = `${siteUrl}/en/cancel`;
+    const cancelUrl = `${siteUrl}/${inviteLang(opts.lang)}/cancel`;
     const renewOn = opts.renewOnIso
       ? new Date(opts.renewOnIso).toLocaleDateString("en-GB", { timeZone: "Europe/Zurich" })
       : "the renewal date";
@@ -208,7 +212,7 @@ Deno.serve(async (req) => {
       break;
     case "invoice.upcoming": {
       const inv = event.data.object;
-      const subId = typeof inv.subscription === "string" ? inv.subscription : inv.subscription?.id;
+      const subId = invoiceSubscriptionId(inv);
       if (!subId) break;
       const sub = await stripe.subscriptions.retrieve(subId);
       if (!isIndividualYearly(sub)) break;
@@ -216,7 +220,7 @@ Deno.serve(async (req) => {
       if (!email) break;
       const renewUnix = inv.next_payment_attempt || inv.period_end || null;
       const renewOnIso = renewUnix ? new Date(renewUnix * 1000).toISOString() : periodEndIso(sub);
-      await sendConsumerReminder({ kind: "yearly_renewal", to: email, renewOnIso });
+      await sendConsumerReminder({ kind: "yearly_renewal", to: email, renewOnIso, lang: sub.metadata?.lang });
       break;
     }
     case "customer.subscription.trial_will_end": {
@@ -224,7 +228,7 @@ Deno.serve(async (req) => {
       const email = await customerEmail(sub.customer);
       if (!email) break;
       const trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
-      await sendConsumerReminder({ kind: "trial_ending", to: email, renewOnIso: trialEnd });
+      await sendConsumerReminder({ kind: "trial_ending", to: email, renewOnIso: trialEnd, lang: sub.metadata?.lang });
       break;
     }
   }

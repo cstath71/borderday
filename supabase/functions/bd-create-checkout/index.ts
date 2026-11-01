@@ -49,8 +49,9 @@ Deno.serve(async (req) => {
     }
     let priceId = "";
     let quantity = 1;
-    const metadata: Record<string, string> = { plan: body.plan, user_id: user.id, express_start: "1" };
     const lang = (body.lang && /^[a-z]{2}$/.test(body.lang)) ? body.lang : "en";
+    // lang: which language to use for this subscription's reminder emails.
+    const metadata: Record<string, string> = { plan: body.plan, user_id: user.id, express_start: "1", lang };
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const recordedStatuses: Array<string | null> = [];
 

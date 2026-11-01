@@ -17,12 +17,9 @@ const RAW = join(ROOT, 'screenshots');
 const BASE = process.env.BD_PREVIEW || 'http://127.0.0.1:4173';
 const STORAGE_KEY = 'borderday-tenant-v1';
 const TARGET_W = 560;
-const LI_HIRES = process.env.LI_HIRES === '1';
-const LI_SRC = join(ROOT, 'growth/li-images/dash-src');
 
 mkdirSync(OUT, { recursive: true });
 mkdirSync(RAW, { recursive: true });
-if (LI_HIRES) mkdirSync(LI_SRC, { recursive: true });
 
 function teleworkDays(year, month, count) {
   const out = [];
@@ -463,9 +460,8 @@ async function captureClip(page, rawPath) {
       .dash-actions .btn, .dash-actions label { font-size: 0.78rem; padding: 0.35rem 0.55rem !important; }
       .dash-actions { gap: 0.35rem !important; margin-bottom: 0.25rem !important; }
       .dash-head { margin-bottom: 0.25rem !important; gap: 0.35rem !important; }
-      .dash-head h1, .dash-head h2 { font-size: 1.25rem !important; margin: 0 !important; }
-      .employee-card { font-size: 1.02rem !important; }
-      .employee-list { gap: 0.35rem !important; }
+      .dash-head h1, .dash-head h2 { font-size: 1.1rem !important; margin: 0 !important; }
+      .employee-list { gap: 0.3rem !important; }
       /* Keep invite; drop CSV exports to show 3 cards fully in LI crops */
     `,
   });
@@ -494,10 +490,9 @@ async function captureClip(page, rawPath) {
 }
 
 async function shot(lang, outName, patch, replaceDays) {
-  // LI hires: narrow CSS + high DPR so fit-to-width stays sharp and phone-legible
   const ctx = await browser.newContext({
-    viewport: { width: LI_HIRES ? 600 : 640, height: 1800 },
-    deviceScaleFactor: LI_HIRES ? 4 : 2,
+    viewport: { width: 640, height: 1800 },
+    deviceScaleFactor: 2,
   });
   const page = await ctx.newPage();
   await page.goto(`${BASE}/${lang}/demo`, { waitUntil: 'networkidle' });
@@ -506,35 +501,14 @@ async function shot(lang, outName, patch, replaceDays) {
   await applyTenant(page, { ...patch, replaceDays });
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForSelector('.employee-card');
-  // LI-only: SS-framework badge wording for NL→BE (no tax-day threshold)
-  if (process.env.LI_SS_BADGES === '1') {
-    await page.addStyleTag({
-      content: `.employee-head .badge.ok, .employee-head .badge.warn { white-space: nowrap; font-size: 0.72rem !important; }`,
-    });
-    await page.evaluate(() => {
-      const map = {
-        'Onder de gevolgde limiet': 'Onder SS-kader (<50%)',
-        'Let op': 'SS-kader: let op',
-      };
-      for (const el of document.querySelectorAll('.employee-head .badge')) {
-        const t = (el.textContent || '').trim();
-        if (map[t]) el.textContent = map[t];
-      }
-    });
-  }
+  // sanity: read labels
   const labels = await page.locator('.employee-card .employee-head').allTextContents();
   const rawPath = join(RAW, `email-${outName}-raw.png`);
   const rawH = await captureClip(page, rawPath);
+  const outPath = join(OUT, `${outName}.png`);
+  await resizePng(rawPath, outPath, TARGET_W);
   const cards = await page.locator('.employee-card').count();
-  if (LI_HIRES) {
-    const hi = join(LI_SRC, `${outName}.png`);
-    copyFileSync(rawPath, hi);
-    console.log('wrote LI hires', hi, 'cards=', cards, 'clipH=', Math.round(rawH));
-  } else {
-    const outPath = join(OUT, `${outName}.png`);
-    await resizePng(rawPath, outPath, TARGET_W);
-    console.log('wrote', outPath, 'cards=', cards, 'clipH=', Math.round(rawH));
-  }
+  console.log('wrote', outPath, 'cards=', cards, 'clipH=', Math.round(rawH));
   console.log('  heads:', labels.map((s) => s.replace(/\s+/g, ' ').slice(0, 80)).join(' | '));
   await ctx.close();
 }
@@ -569,10 +543,8 @@ for (const [lang, names] of Object.entries(MULTI_SHOTS)) {
   );
 }
 
-if (!LI_HIRES) {
-  copyFileSync(join(OUT, 'dashboard-en.png'), join(OUT, 'dashboard.png'));
-  console.log('mirrored dashboard-en.png -> dashboard.png');
-}
+copyFileSync(join(OUT, 'dashboard-en.png'), join(OUT, 'dashboard.png'));
+console.log('mirrored dashboard-en.png -> dashboard.png');
 await browser.close();
 
 async function resizePng(src, dest, width) {

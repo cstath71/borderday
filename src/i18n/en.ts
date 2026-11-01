@@ -136,6 +136,10 @@ const en = {
     overnightAwayShort: 'Overnight away',
   },
   counters: {
+    decimalMark: ".",
+    half_day_note: "Half days count as 0.5, so a total can end in .5. They count as 1 where a rule treats any part of a day as a whole day, and on the night and non-return counters.",
+    pace_early: "Current pace: too early to tell. It compares the days counted here with the working days expected since the first logged day ({from}), and needs about a month of them (about {expected} so far).",
+    ch_fr_share_includes_missions: "This share is {telework} telework days plus {counted} work-trip or third-State days. Under the Swiss–French rules, up to 10 such days a year (fewer part-time) count inside the 40%, after ordinary telework.",
     tax: 'Tax',
     social_security: 'Social security',
     ch_fr_tax_telework_40: 'Telework share (max 40% of annual working time)',
@@ -253,10 +257,8 @@ const en = {
       'Optional counter for frontier workers before 2012. Tick “frontier worker before 2012” in settings to enable it.',
     pending_be_nl_tax:
       'No home-working tolerance found on the Dutch tax authority page; check with an adviser.',
-    pace_line:
-      'Current pace: {pct}% of working days logged so far ({days}).',
-    pace_above:
-      'Current pace: {pct}% of working days logged so far ({days}), above {limit}%. If this continues, that line will be crossed.',
+    pace_line: "Current pace: about {pct}%, that is {used} counted days out of about {expected} working days expected since the first logged day ({from}). Expected days are the {annual} days a year spread evenly over the calendar, so this is an estimate. The line to watch is {limit}%.",
+    pace_above: "Current pace: about {pct}%, that is {used} counted days out of about {expected} working days expected since the first logged day ({from}), above {limit}%. Expected days are the {annual} days a year spread evenly over the calendar, so this is an estimate. A full year at this pace would end above that line.",
     multi_employer_note:
       'These counters only cover days logged here. Other jobs in the same year can count too.',
     ruleAndConditions: 'Rule and conditions',

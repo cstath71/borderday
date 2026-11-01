@@ -139,6 +139,10 @@ const it: Dict = {
     overnightAwayShort: 'Notte fuori',
   },
   counters: {
+    decimalMark: ",",
+    half_day_note: "Le mezze giornate contano 0,5, quindi un totale può finire con ,5. Contano 1 quando una regola tratta ogni frazione di giorno come un giorno intero, e nei contatori di notti e mancati rientri.",
+    pace_early: "Ritmo attuale: troppo presto per dirlo. Confronta i giorni contati qui con i giorni lavorativi attesi dal primo giorno registrato ({from}) e ne servono circa un mese (finora circa {expected}).",
+    ch_fr_share_includes_missions: "Questa quota comprende {telework} giorni di telelavoro e {counted} giorni di trasferta o in Stato terzo. Secondo le regole franco-svizzere, fino a 10 di questi giorni all’anno (meno a tempo parziale) contano nel 40%, dopo il telelavoro ordinario.",
     tax: 'Fiscale',
     social_security: 'Sicurezza sociale',
     ch_fr_tax_telework_40: 'Quota di telelavoro (max 40% del tempo di lavoro annuo)',
@@ -256,10 +260,8 @@ const it: Dict = {
       'Contatore opzionale per i frontalieri prima del 2012. Spuntate «frontaliere prima del 2012» nelle impostazioni per attivarlo.',
     pending_be_nl_tax:
       'Nessuna tolleranza per il lavoro da casa trovata sulla pagina del fisco olandese; verificate con un consulente.',
-    pace_line:
-      'Ritmo attuale: {pct}% dei giorni lavorativi registrati finora ({days}).',
-    pace_above:
-      'Ritmo attuale: {pct}% dei giorni lavorativi registrati finora ({days}), sopra il {limit}%. Se continua, questa soglia sarà superata.',
+    pace_line: "Ritmo attuale: circa {pct}%, cioè {used} giorni contati su circa {expected} giorni lavorativi attesi dal primo giorno registrato ({from}). I giorni attesi sono i {annual} giorni all’anno distribuiti in modo uniforme sul calendario: è quindi una stima. La soglia da tenere d’occhio è il {limit}%.",
+    pace_above: "Ritmo attuale: circa {pct}%, cioè {used} giorni contati su circa {expected} giorni lavorativi attesi dal primo giorno registrato ({from}), sopra il {limit}%. I giorni attesi sono i {annual} giorni all’anno distribuiti in modo uniforme sul calendario: è quindi una stima. Un anno intero a questo ritmo finirebbe sopra questa soglia.",
     multi_employer_note:
       'Questi contatori coprono solo i giorni registrati qui. Altri impieghi nello stesso anno possono contare.',
     ruleAndConditions: 'Regola e condizioni',

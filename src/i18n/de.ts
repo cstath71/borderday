@@ -141,6 +141,10 @@ const de: Dict = {
     overnightAwayShort: 'Auswärts übernachtet',
   },
   counters: {
+    decimalMark: ",",
+    half_day_note: "Halbe Tage zählen als 0,5, daher kann eine Summe auf ,5 enden. Sie zählen als 1, wo eine Regel jeden Tagesteil als ganzen Tag behandelt, sowie bei den Zählern für Nächte und Nichtrückkehrtage.",
+    pace_early: "Aktuelles Tempo: noch zu früh für eine Aussage. Es vergleicht die hier gezählten Tage mit den erwarteten Arbeitstagen seit dem ersten erfassten Tag ({from}) und braucht dafür etwa einen Monat (bisher etwa {expected}).",
+    ch_fr_share_includes_missions: "Dieser Anteil umfasst {telework} Telearbeitstage und {counted} Tage Dienstreise oder Drittstaat. Nach den schweizerisch-französischen Regeln zählen bis zu 10 solche Tage pro Jahr (bei Teilzeit weniger) innerhalb der 40 %, nach der gewöhnlichen Telearbeit.",
     tax: 'Steuer',
     social_security: 'Sozialversicherung',
     ch_fr_tax_telework_40: 'Telearbeitsanteil (max. 40 % der jährlichen Arbeitszeit)',
@@ -259,10 +263,8 @@ const de: Dict = {
       'Optionaler Zähler für Grenzgänger vor 2012. Aktivieren Sie «Grenzgänger vor 2012» in den Einstellungen.',
     pending_be_nl_tax:
       'Auf der Abkommensseite der niederländischen Steuerbehörde wurde keine Homeoffice-Toleranz gefunden; fragen Sie eine Beratung.',
-    pace_line:
-      'Aktuelles Tempo: {pct} % der bisher erfassten Arbeitstage ({days}).',
-    pace_above:
-      'Aktuelles Tempo: {pct} % der bisher erfassten Arbeitstage ({days}), über {limit} %. Bleibt es so, wird diese Schwelle überschritten.',
+    pace_line: "Aktuelles Tempo: etwa {pct} %, also {used} gezählte Tage von etwa {expected} erwarteten Arbeitstagen seit dem ersten erfassten Tag ({from}). Erwartete Tage sind die {annual} Tage pro Jahr, gleichmässig über den Kalender verteilt, also eine Schätzung. Die zu beachtende Schwelle ist {limit} %.",
+    pace_above: "Aktuelles Tempo: etwa {pct} %, also {used} gezählte Tage von etwa {expected} erwarteten Arbeitstagen seit dem ersten erfassten Tag ({from}), über {limit} %. Erwartete Tage sind die {annual} Tage pro Jahr, gleichmässig über den Kalender verteilt, also eine Schätzung. Ein ganzes Jahr in diesem Tempo würde über dieser Schwelle enden.",
     multi_employer_note:
       'Diese Zähler erfassen nur die hier eingetragenen Tage. Andere Stellen im selben Jahr können ebenfalls zählen.',
     ruleAndConditions: 'Regel und Bedingungen',

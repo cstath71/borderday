@@ -1,5 +1,6 @@
 import type { EmployeeCounterSummary } from '../../company/dashboardMath';
 import { t, type Dict } from '../../i18n';
+import { formatDays } from '../../lib/counting';
 import { badgeLabel, CounterMessages, CounterSources, kindLabel } from '../CounterCards';
 
 export function statusLabel(d: Dict, status: string): string {
@@ -42,14 +43,14 @@ export default function CounterTable({ d, counters }: { d: Dict; counters: Emplo
                 <td>
                   {c.enabled
                     ? t(d.counters.usedOfDays, {
-                        used: c.usedDays ?? 0,
+                        used: formatDays(c.usedDays ?? 0, d.counters.decimalMark),
                         allowed: c.allowedDays ?? 0,
                       })
                     : (text[c.pendingValueKey ?? ''] ?? '—')}
                   {c.enabled && c.unit === 'percent_of_working_time' && (
                     <div className="meta">
                       {t(d.counters.percentOfAnnual, {
-                        pct: c.percentOfAnnual ?? 0,
+                        pct: formatDays(c.percentOfAnnual ?? 0, d.counters.decimalMark),
                         annual: c.annualWorkingDays ?? 0,
                         limit: c.limit ?? 0,
                       })}
@@ -64,6 +65,7 @@ export default function CounterTable({ d, counters }: { d: Dict; counters: Emplo
           })}
         </tbody>
       </table>
+      <p className="meta">{d.counters.half_day_note}</p>
       <p className="meta">{d.counters.multi_employer_note}</p>
     </>
   );

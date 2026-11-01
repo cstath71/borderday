@@ -140,6 +140,10 @@ const fr: Dict = {
     overnightAwayShort: 'Nuit hors domicile',
   },
   counters: {
+    decimalMark: ",",
+    half_day_note: "Les demi-journées comptent pour 0,5 : un total peut donc finir par ,5. Elles comptent pour 1 lorsqu’une règle traite toute fraction de jour comme un jour entier, et sur les compteurs de nuits et de non-retours.",
+    pace_early: "Rythme actuel : trop tôt pour le dire. Il compare les jours comptés ici aux jours de travail attendus depuis le premier jour consigné ({from}) et il lui faut environ un mois de ces jours (environ {expected} à ce stade).",
+    ch_fr_share_includes_missions: "Cette part comprend {telework} jours de télétravail et {counted} jours de déplacement professionnel ou en État tiers. Selon les règles franco-suisses, jusqu’à 10 de ces jours par an (moins à temps partiel) comptent dans les 40 %, après le télétravail ordinaire.",
     tax: 'Fiscalité',
     social_security: 'Sécurité sociale',
     ch_fr_tax_telework_40: 'Part de télétravail (max. 40 % du temps de travail annuel)',
@@ -258,10 +262,8 @@ const fr: Dict = {
       'Compteur optionnel pour les frontaliers avant 2012. Cochez « frontalier avant 2012 » dans les réglages pour l’activer.',
     pending_be_nl_tax:
       'Aucune tolérance pour le travail à domicile trouvée sur la page de l’administration fiscale néerlandaise ; vérifiez auprès d’un conseiller.',
-    pace_line:
-      'Rythme actuel : {pct} % des jours travaillés consignés ({days}).',
-    pace_above:
-      'Rythme actuel : {pct} % des jours travaillés consignés ({days}), au-dessus de {limit} %. S’il se maintient, ce seuil sera franchi.',
+    pace_line: "Rythme actuel : environ {pct} %, soit {used} jours comptés sur environ {expected} jours de travail attendus depuis le premier jour consigné ({from}). Les jours attendus sont les {annual} jours par an répartis également sur le calendrier : c’est donc une estimation. Le seuil à surveiller est {limit} %.",
+    pace_above: "Rythme actuel : environ {pct} %, soit {used} jours comptés sur environ {expected} jours de travail attendus depuis le premier jour consigné ({from}), au-dessus de {limit} %. Les jours attendus sont les {annual} jours par an répartis également sur le calendrier : c’est donc une estimation. Une année entière à ce rythme finirait au-dessus de ce seuil.",
     multi_employer_note:
       'Ces compteurs ne couvrent que les jours consignés ici. D’autres emplois dans la même année peuvent aussi compter.',
     ruleAndConditions: 'Règle et conditions',

@@ -288,17 +288,17 @@ describe('E24: days from a company the person has left', () => {
     expect(screen.queryByRole('heading', { name: en.account.formerTitle })).toBeNull();
   });
 
-  it('delete asks first, and a refusal changes nothing', async () => {
+  it('clear asks first, and a refusal changes nothing', async () => {
     const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
     open('/en/account');
-    const button = await screen.findByRole('button', { name: 'Delete my days from Old Co' });
+    const button = await screen.findByRole('button', { name: 'Clear my copy from Old Co' });
     fireEvent.click(button);
     expect(mocked.deleteMyDayLogs).not.toHaveBeenCalled();
     confirm.mockReturnValue(true);
     fireEvent.click(button);
-    await screen.findByText('Your days from Old Co are deleted.');
+    await screen.findByText(/Your copy of the days from Old Co is cleared/);
     expect(mocked.deleteMyDayLogs).toHaveBeenCalledWith('old');
-    expect(screen.queryByRole('button', { name: 'Delete my days from Old Co' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Clear my copy from Old Co' })).toBeNull();
     confirm.mockRestore();
   });
 

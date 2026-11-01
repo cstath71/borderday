@@ -607,6 +607,7 @@ export async function listMyDaysIn(companyId: string): Promise<OwnDay[]> {
       .select('work_date, day_type, overnight_away_for_work, day_share, note')
       .eq('company_id', companyId)
       .eq('employee_user_id', userId)
+      .is('employee_cleared_at', null)
       .order('work_date', { ascending: true })
       .range(from, to),
   );
@@ -622,6 +623,20 @@ export async function listMyDaysIn(companyId: string): Promise<OwnDay[]> {
 export async function deleteMyDayLogs(companyId: string): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
+  // E24: leavers clear only their own copy (notes wiped, company row kept under retention).
+  // Active members still hard-delete when correcting the live log.
+  const { data: mem, error: memErr } = await client()
+    .from('bd_company_members')
+    .select('active')
+    .eq('company_id', companyId)
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (memErr) throw memErr;
+  if (!mem?.active) {
+    const { error } = await client().rpc('bd_clear_my_day_log_copy', { p_company_id: companyId });
+    if (error) throw error;
+    return;
+  }
   const { error } = await client()
     .from('bd_day_logs')
     .delete()

@@ -284,7 +284,7 @@ const fr: Dict = {
     noteLabel: "Note privée",
     noteHint: "Dans BorderDay, vous seul pouvez la voir : les RH et les exports de l’entreprise ne l’affichent jamais. Elle est supprimée avec le jour. Évitez les données de santé ou tout ce que vous ne voudriez pas voir enregistré.",
     noteNeedsType: "Choisissez d’abord un type de journée, puis ajoutez une note.",
-    formerCompanyDays: "Vous avez quitté {company}. Les {count} jours que vous y avez consignés restent à vous : consultez-les, exportez-les ou supprimez-les dans votre compte.",
+    formerCompanyDays: "Vous avez quitté {company}. Les {count} jours que vous y avez consignés restent visibles et exportables dans votre compte. Effacer votre copie laisse celle de l’employeur selon son délai de conservation.",
     daysPerWeek: "Ou choisissez des jours par semaine",
     daysPerWeekHint: "Remplit le chiffre annuel : {default} × jours ÷ 5, la même mise à l’échelle que le taux d’emploi. C’est un point de départ : utilisez le chiffre de votre contrat si vous l’avez.",
     title: 'Votre journal de jours',
@@ -543,7 +543,7 @@ const fr: Dict = {
       'Retrait du consentement : le cas échéant, retirer votre consentement sans affecter la licéité du traitement effectué avant le retrait.',
     ],
     rightsHow:
-      'Utilisez la page Compte pour exporter vos journaux ou demander la suppression, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement et peut devoir conserver certains documents.',
+      'Utilisez la page Compte pour exporter vos journaux, effacer votre propre copie après avoir quitté une entreprise, ou demander la suppression du compte, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement : effacer votre copie ne supprime pas les documents qu’il conserve selon son délai.',
     complaintBody:
       'Vous pouvez saisir le Préposé fédéral à la protection des données et à la transparence (PFPDT, www.edoeb.admin.ch). Si vous vivez ou travaillez dans l’UE/EEE, vous pouvez aussi saisir votre autorité locale de protection des données.',
     requiredBody:
@@ -681,7 +681,7 @@ const fr: Dict = {
     profileSaved: 'Enregistré.',
     noticeTitle: 'Avis — ce que les RH peuvent voir',
     noticeBody:
-      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, l’itinéraire choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, s’il s’agit d’une demi-journée, sa marque éventuelle de nuit hors du domicile pour le travail, sur l’itinéraire France–Belgique le statut de frontalier avant 2012 s’il est indiqué, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi, votre base de jours de travail, vos jours contractuels, votre A1 et ce statut France–Belgique. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter ou supprimer votre journal et interroger votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. L’art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Ceci est un outil de suivi, pas un conseil fiscal ou juridique.',
+      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, l’itinéraire choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, s’il s’agit d’une demi-journée, sa marque éventuelle de nuit hors du domicile pour le travail, sur l’itinéraire France–Belgique le statut de frontalier avant 2012 s’il est indiqué, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi, votre base de jours de travail, vos jours contractuels, votre A1 et ce statut France–Belgique. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter votre journal à tout moment. Après avoir quitté l’entreprise, vous pouvez encore exporter ou effacer votre propre copie depuis Compte ; la copie de l’employeur reste selon son délai de conservation. Interrogez votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. L’art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Ceci est un outil de suivi, pas un conseil fiscal ou juridique.',
     noticeAck: 'J’ai lu cet avis',
     noticeRequired: 'Confirmez que vous avez lu l’avis pour continuer.',
     noticePrivacyLink: 'Politique de confidentialité complète',
@@ -795,11 +795,11 @@ const fr: Dict = {
   },
   account: {
     formerTitle: "Jours des entreprises que vous avez quittées",
-    formerBody: "Vous n’êtes plus membre de ces entreprises, mais vous pouvez toujours consulter, exporter et supprimer les jours que vous avez consignés. Ils figurent dans l’export ci-dessus. Tant que vous ne les supprimez pas et que la durée de conservation de l’entreprise n’est pas écoulée, l’entreprise peut aussi encore les voir.",
+    formerBody: "Vous n’êtes plus membre de ces entreprises, mais vous pouvez encore consulter et exporter les jours consignés (inclus dans l’export ci-dessus). Effacer votre copie ne les retire que de votre compte ; la copie de l’employeur reste selon son délai de conservation.",
     formerSummary: "{company} : {count} jours, du {first} au {last}",
-    formerDelete: "Supprimer mes jours de {company}",
-    formerDeleteConfirm: "Supprimer les {count} jours que vous avez consignés chez {company} ? Ils sont aussi retirés pour l’entreprise. Cette action est irréversible.",
-    formerDeleted: "Vos jours de {company} sont supprimés.",
+    formerDelete: "Effacer ma copie chez {company}",
+    formerDeleteConfirm: "Effacer votre copie des {count} jours consignés chez {company} ? Vos notes privées partent aussi. La copie de l’employeur reste selon son délai de conservation. Irréversible.",
+    formerDeleted: "Votre copie des jours de {company} est effacée. La copie de l’employeur reste selon son délai de conservation.",
     formerError: "Cela n’a pas fonctionné. Réessayez ou écrivez à privacy@borderday.com.",
     noteColumn: "Note",
     title: 'Votre compte',
@@ -855,7 +855,7 @@ const fr: Dict = {
       'Cette déclaration porte sur le site public et le produit connecté sur borderday.com (anglais, français, allemand, italien et néerlandais). Le checkout tiers (Stripe / Link) et les clients de messagerie suivent leurs propres pratiques d’accessibilité.',
     statusTitle: 'État actuel',
     statusBody:
-      'Des contrôles automatiques axe des pages publiques et de la démo n’ont signalé aucune violation lors du dernier scan interne (1er novembre 2026). Les écrans connectés n’en faisaient pas partie. Le sélecteur de langue ne change désormais la langue que lorsque vous appuyez sur Appliquer. Certaines erreurs de formulaire peuvent encore devoir être mieux annoncées. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
+      'Des contrôles automatiques axe des pages publiques et de la démo n’ont signalé aucune violation lors du dernier scan interne (1er novembre 2026). Les écrans connectés n’en faisaient pas partie. Le sélecteur de langue change la langue dès que vous choisissez une autre option. Certaines erreurs de formulaire peuvent encore devoir être mieux annoncées. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
     feedbackTitle: 'Retour',
     feedbackBody:
       'Si vous rencontrez une barrière, écrivez à privacy@borderday.com ou hello@borderday.com en indiquant l’URL de la page, votre navigateur ou technologie d’assistance, et ce que vous essayiez de faire. Nous visons une réponse sous cinq jours ouvrés.',

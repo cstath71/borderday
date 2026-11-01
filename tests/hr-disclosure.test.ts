@@ -65,7 +65,7 @@ describe('A3-12 HR-visible data is disclosed', () => {
   }
 
   it('the notice version moved with the copy', () => {
-    expect(CONSENT_VERSION).toBe('2026-11-01-v5');
+    expect(CONSENT_VERSION).toBe('2026-11-01-v6');
   });
 });
 

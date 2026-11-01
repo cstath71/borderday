@@ -285,7 +285,7 @@ const de: Dict = {
     noteLabel: "Private Notiz",
     noteHint: "In BorderDay sehen nur Sie diese Notiz: HR und Unternehmensexporte zeigen sie nie. Sie wird mit dem Tag gelöscht. Vermeiden Sie Gesundheitsangaben und alles, was nicht gespeichert werden soll.",
     noteNeedsType: "Wählen Sie zuerst eine Tagesart und fügen Sie dann eine Notiz hinzu.",
-    formerCompanyDays: "Sie haben {company} verlassen. Die {count} dort erfassten Tage gehören weiterhin Ihnen: Sie können sie in Ihrem Konto ansehen, exportieren oder löschen.",
+    formerCompanyDays: "Sie haben {company} verlassen. Die {count} dort erfassten Tage können Sie in Ihrem Konto weiterhin ansehen oder exportieren. Das Löschen Ihrer Kopie lässt die Kopie des Arbeitgebers gemäss seiner Aufbewahrungsfrist bestehen.",
     daysPerWeek: "Oder Tage pro Woche wählen",
     daysPerWeekHint: "Füllt die Jahreszahl aus: {default} × Tage ÷ 5, gleich skaliert wie der Beschäftigungsgrad. Das ist ein Ausgangswert: Verwenden Sie die Zahl aus Ihrem Vertrag, wenn Sie sie haben.",
     title: 'Ihr Tagesprotokoll',
@@ -544,7 +544,7 @@ const de: Dict = {
       'Widerruf der Einwilligung: soweit anwendbar, Widerruf der Einwilligung, ohne die Rechtmässigkeit der vorherigen Bearbeitung zu berühren.',
     ],
     rightsHow:
-      'Nutzen Sie die Kontoseite, um Ihre Tagesprotokolle zu exportieren oder die Löschung zu beantragen, oder schreiben Sie an privacy@borderday.com. Die DSGVO gibt uns einen Monat für die Antwort, das DSG 30 Tage. Bei Tagesprotokollen in einem Unternehmenskonto ist der Arbeitgeber Verantwortlicher und muss möglicherweise bestimmte Unterlagen aufbewahren.',
+      'Nutzen Sie die Kontoseite, um Ihre Tagesprotokolle zu exportieren, nach dem Verlassen eines Unternehmens Ihre eigene Kopie zu löschen oder die Kontolöschung zu beantragen, oder schreiben Sie an privacy@borderday.com. Die DSGVO gibt uns einen Monat für die Antwort, das DSG 30 Tage. Bei Tagesprotokollen in einem Unternehmenskonto ist der Arbeitgeber Verantwortlicher: das Löschen Ihrer Kopie entfernt nicht die Unterlagen, die er gemäss seiner Aufbewahrungsfrist behält.',
     complaintBody:
       'Sie können sich beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten beschweren (EDÖB, www.edoeb.admin.ch). Wenn Sie in der EU/im EWR leben oder arbeiten, können Sie sich auch bei Ihrer örtlichen Datenschutzbehörde beschweren.',
     requiredBody:
@@ -678,7 +678,7 @@ const de: Dict = {
     profileSaved: 'Gespeichert.',
     noticeTitle: 'Hinweis — was HR sehen kann',
     noticeBody:
-      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR-Leser Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob es ein halber Tag war, ob er als auswärtige berufliche Übernachtung markiert ist, auf der Route Frankreich–Belgien den Status als Grenzgänger vor 2012, falls eingetragen, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad, Ihre Arbeitstage-Basis, Ihre vertraglichen Arbeitstage, Ihre A1 und diesen Status Frankreich–Belgien eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll exportieren oder löschen und Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten fragen. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 1–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist. Erfassungstool, keine Steuer- oder Rechtsberatung.',
+      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR-Leser Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob es ein halber Tag war, ob er als auswärtige berufliche Übernachtung markiert ist, auf der Route Frankreich–Belgien den Status als Grenzgänger vor 2012, falls eingetragen, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad, Ihre Arbeitstage-Basis, Ihre vertraglichen Arbeitstage, Ihre A1 und diesen Status Frankreich–Belgien eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll jederzeit exportieren. Nach dem Verlassen des Unternehmens können Sie Ihre eigene Kopie im Konto weiterhin exportieren oder löschen; die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist. Fragen Sie Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 1–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist. Erfassungstool, keine Steuer- oder Rechtsberatung.',
     noticeAck: 'Ich habe diesen Hinweis gelesen',
     noticeRequired: 'Bestätigen Sie, dass Sie den Hinweis gelesen haben, um fortzufahren.',
     noticePrivacyLink: 'Vollständige Datenschutzerklärung',
@@ -794,11 +794,11 @@ const de: Dict = {
   },
   account: {
     formerTitle: "Tage aus Unternehmen, die Sie verlassen haben",
-    formerBody: "Sie sind nicht mehr Mitglied dieser Unternehmen, können die von Ihnen erfassten Tage aber weiterhin ansehen, exportieren und löschen. Sie sind im Export oben enthalten. Bis Sie sie löschen oder die Aufbewahrungsfrist des Unternehmens endet, kann auch das Unternehmen sie noch sehen.",
+    formerBody: "Sie sind nicht mehr Mitglied dieser Unternehmen, können die erfassten Tage aber weiterhin ansehen und exportieren (im Export oben enthalten). Das Löschen Ihrer Kopie entfernt sie nur aus Ihrem Konto; die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist.",
     formerSummary: "{company}: {count} Tage, {first} bis {last}",
-    formerDelete: "Meine Tage von {company} löschen",
-    formerDeleteConfirm: "Die {count} bei {company} erfassten Tage löschen? Sie werden auch für das Unternehmen entfernt. Das kann nicht rückgängig gemacht werden.",
-    formerDeleted: "Ihre Tage von {company} sind gelöscht.",
+    formerDelete: "Meine Kopie bei {company} löschen",
+    formerDeleteConfirm: "Ihre Kopie der {count} bei {company} erfassten Tage löschen? Private Notizen entfallen ebenfalls. Die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist. Das kann nicht rückgängig gemacht werden.",
+    formerDeleted: "Ihre Kopie der Tage von {company} ist gelöscht. Die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist.",
     formerError: "Das hat nicht geklappt. Versuchen Sie es erneut oder schreiben Sie an privacy@borderday.com.",
     noteColumn: "Notiz",
     title: 'Ihr Konto',
@@ -856,7 +856,7 @@ const de: Dict = {
       'Diese Erklärung betrifft die öffentliche Website und das angemeldete Produkt auf borderday.com (Englisch, Französisch, Deutsch, Italienisch und Niederländisch). Drittanbieter-Checkout (Stripe / Link) und E-Mail-Clients folgen eigenen Barrierefreiheitspraktiken.',
     statusTitle: 'Aktueller Stand',
     statusBody:
-      'Automatisierte axe-Prüfungen der öffentlichen Seiten und der Demo meldeten beim letzten internen Scan (1. November 2026) keine Verstösse. Angemeldete Bildschirme waren nicht Teil dieses Scans. Die Sprachauswahl wechselt die Sprache jetzt erst, wenn Sie auf Übernehmen klicken. Einige Formularfehler müssen möglicherweise noch besser angekündigt werden. Ein vollständiger Screenreader-Abnahmetest steht noch aus.',
+      'Automatisierte axe-Prüfungen der öffentlichen Seiten und der Demo meldeten beim letzten internen Scan (1. November 2026) keine Verstösse. Angemeldete Bildschirme waren nicht Teil dieses Scans. Die Sprachauswahl wechselt die Sprache sofort, wenn Sie eine andere Option wählen. Einige Formularfehler müssen möglicherweise noch besser angekündigt werden. Ein vollständiger Screenreader-Abnahmetest steht noch aus.',
     feedbackTitle: 'Rückmeldung',
     feedbackBody:
       'Wenn Sie auf eine Barriere stossen, schreiben Sie an privacy@borderday.com oder hello@borderday.com mit Seiten-URL, Browser oder Hilfsmittel und dem, was Sie tun wollten. Wir antworten in der Regel innerhalb von fünf Werktagen.',

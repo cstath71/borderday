@@ -279,7 +279,7 @@ const en = {
     noteLabel: "Private note",
     noteHint: "In BorderDay only you can see this: HR and company exports never show it. It is deleted with the day. Avoid health details or anything else you would not want stored.",
     noteNeedsType: "Pick a day type first, then add a note.",
-    formerCompanyDays: "You have left {company}. The {count} days you logged there are still yours: see, export or delete them in your account.",
+    formerCompanyDays: "You have left {company}. The {count} days you logged there are still yours to see or export in your account. Clearing your copy leaves the employer’s copy under their retention setting.",
     daysPerWeek: "Or pick days a week",
     daysPerWeekHint: "Fills in the yearly figure: {default} × days ÷ 5, the same scaling as the employment percentage. It is a starting point: use the figure from your contract if you have it.",
     title: 'Your day log',
@@ -537,7 +537,7 @@ const en = {
       'Withdrawal of consent: where applicable, withdrawing consent without affecting the lawfulness of processing before withdrawal.',
     ],
     rightsHow:
-      'Use the Account page to export your day logs or request deletion, or write to privacy@borderday.com. The GDPR gives us one month to answer and the FADP 30 days. For day logs in a company account the employer is the controller, and it may need to keep some records.',
+      'Use the Account page to export your day logs, clear your own copy after you leave a company, or request account deletion, or write to privacy@borderday.com. The GDPR gives us one month to answer and the FADP 30 days. For day logs in a company account the employer is the controller: clearing your copy does not delete the employer’s retained records under their retention setting.',
     complaintBody:
       'You can complain to the Swiss Federal Data Protection and Information Commissioner (FDPIC, www.edoeb.admin.ch). If you live or work in the EU/EEA, you can also complain to your local data protection authority.',
     requiredBody:
@@ -672,7 +672,7 @@ const en = {
     profileSaved: 'Saved.',
     noticeTitle: 'Notice — what HR can see',
     noticeBody:
-      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether it was a half day, whether you marked it as a night away for work, on the France–Belgium route whether you were a frontier worker before 2012 if entered, and the same tax and social-security counters you see. They can also record your employment percentage, working-days base, contract days, A1 and that France–Belgium status. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export or delete your day log, and ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. This is a tracking tool, not tax or legal advice.',
+      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether it was a half day, whether you marked it as a night away for work, on the France–Belgium route whether you were a frontier worker before 2012 if entered, and the same tax and social-security counters you see. They can also record your employment percentage, working-days base, contract days, A1 and that France–Belgium status. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export your day log anytime. After you leave the company you can still export or clear your own copy from Account; the employer’s copy stays under their retention setting. Ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. This is a tracking tool, not tax or legal advice.',
     noticeAck: 'I have read this notice',
     noticeRequired: 'Confirm that you have read the notice to continue.',
     noticePrivacyLink: 'Full privacy notice',
@@ -784,11 +784,11 @@ const en = {
   },
   account: {
     formerTitle: "Days from companies you have left",
-    formerBody: "You are no longer a member of these companies, but the days you logged are still yours to see, export and delete. They are in the export above. Until you delete them or the company’s retention period ends, the company can also still see them.",
+    formerBody: "You are no longer a member of these companies, but you can still see and export the days you logged (included in the export above). Clearing your copy removes them from your account only; the employer’s copy stays under their retention setting.",
     formerSummary: "{company}: {count} days, {first} to {last}",
-    formerDelete: "Delete my days from {company}",
-    formerDeleteConfirm: "Delete the {count} days you logged at {company}? They are also removed for the company. This cannot be undone.",
-    formerDeleted: "Your days from {company} are deleted.",
+    formerDelete: "Clear my copy from {company}",
+    formerDeleteConfirm: "Clear your copy of the {count} days you logged at {company}? Your private notes go too. The employer’s copy stays under their retention setting. This cannot be undone.",
+    formerDeleted: "Your copy of the days from {company} is cleared. The employer’s copy stays under their retention setting.",
     formerError: "That did not work. Try again, or write to privacy@borderday.com.",
     noteColumn: "Note",
     title: 'Your account',
@@ -844,7 +844,7 @@ const en = {
       'This statement covers the public website and the signed-in product on borderday.com (English, French, German, Italian and Dutch). Third-party checkout (Stripe / Link) and email clients follow their own accessibility practices.',
     statusTitle: 'Current status',
     statusBody:
-      'Automated axe checks of the public pages and the demo reported no violations on the last internal scan (1 November 2026). Signed-in screens were not part of that scan. The language selector now changes language only when you press Apply. Some form errors may still need clearer announcements. We have not yet completed a full screen-reader acceptance pass.',
+      'Automated axe checks of the public pages and the demo reported no violations on the last internal scan (1 November 2026). Signed-in screens were not part of that scan. The language selector changes language as soon as you choose another option. Some form errors may still need clearer announcements. We have not yet completed a full screen-reader acceptance pass.',
     feedbackTitle: 'Feedback',
     feedbackBody:
       'If you find a barrier, email privacy@borderday.com or hello@borderday.com with the page URL, your browser or assistive technology, and what you were trying to do. We aim to reply within five working days.',

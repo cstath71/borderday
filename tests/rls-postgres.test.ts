@@ -859,7 +859,7 @@ describe('real Postgres: E15 private notes', () => {
 });
 
 describe('real Postgres: E24 removed member keeps their own days', () => {
-  it('sees the company name and their days, with the note; can delete them; cannot add more', async () => {
+  it('sees the company name and their days, with the note; can clear own copy; cannot add more', async () => {
     const owner = await newUser('r1o@example.com');
     const company = await newCompany(owner, 'Left Co');
     const emp = await addMember(owner, company);
@@ -879,8 +879,19 @@ describe('real Postgres: E24 removed member keeps their own days', () => {
 
     await expect(logDay(emp, company, '2026-10-03')).rejects.toThrow(/row-level security/);
     await expect(as(emp, `update public.bd_day_logs set note = 'x' where employee_user_id = $1`, [emp])).rejects.toThrow(/row-level security/);
-    expect((await as(emp, `delete from public.bd_day_logs where company_id = $1 and employee_user_id = $2`, [company, emp])).rowCount).toBe(2);
+    // Inactive leavers cannot hard-delete; soft-clear hides their copy and wipes notes. Company rows remain.
+    expect((await as(emp, `delete from public.bd_day_logs where company_id = $1 and employee_user_id = $2`, [company, emp])).rowCount).toBe(0);
+    await as(emp, `select public.bd_clear_my_day_log_copy($1)`, [company]);
     expect((await as(emp, `select * from public.bd_my_day_log_companies()`)).rowCount).toBe(0);
+    // HR cannot SELECT the table; company retention is verified as postgres (bypass RLS).
+    const kept = await db.query(
+      `select note, employee_cleared_at is not null as cleared from public.bd_day_logs where company_id = $1 order by work_date`,
+      [company],
+    );
+    expect(kept.rowCount).toBe(2);
+    expect(kept.rows.every((r) => r.cleared && r.note === null)).toBe(true);
+    const hr = await as(owner, `select * from public.bd_list_day_records($1)`, [company]);
+    expect(hr.rowCount).toBe(2);
   });
 
   it('shows a stranger nothing, and anon cannot call it', async () => {

@@ -72,12 +72,6 @@ img { max-width: 100%; height: auto; }
   font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
   max-width: 4.25rem; min-width: 3.5rem;
 }
-.lang-apply {
-  border: 1px solid var(--border); border-radius: 8px;
-  padding: 0.4rem 0.5rem; background: var(--surface); color: var(--ink);
-  font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap;
-}
-.lang-apply:hover { background: #d5e6fa; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -251,7 +245,6 @@ main:focus { outline: none; }
   .site-header .inner { min-height: 64px; padding: 0.5rem 0; gap: 0.45rem; }
   .brand img { height: 46px; } /* bigger than prior 40px mobile */
   .lang-switch select { max-width: 4rem; font-size: 0.85rem; padding: 0.35rem 0.4rem; min-width: 3rem; }
-  .lang-apply { font-size: 0.78rem; padding: 0.35rem 0.3rem; }
   .nav-toggle { padding: 0.35rem 0.55rem; font-size: 0.85rem; }
 }
 

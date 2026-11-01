@@ -58,6 +58,7 @@ export const PUBLIC_PATHS = [
   'withdrawal',
   'cancel',
   'company/signup',
+  'employers/ticino',
   'employers/geneva',
   'employers/luxembourg',
 ];
@@ -670,6 +671,68 @@ export const PAGES = {
     },
   },
 
+  'employers/ticino': {
+    en: {
+      title: 'Ticino employers — telework day tracking (IT→CH) — BorderDay',
+      description:
+        'For Ticino HR: track telework days for staff living in Italy. Tax counters for the 25% telework share and 45 non-return days under the Italy–Switzerland agreement, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+      h1: 'Ticino employers: telework days for staff living in Italy',
+      summary:
+        'BorderDay helps Ticino employers log telework, on-site and overnight-away days for people who live in Italy and work in Switzerland under the Italy–Switzerland frontier-worker agreement (Accordo Art. 2 zones, as amended for telework). Tax: at most 25% telework at domicile and up to 45 non-return days per year (protocol Fedlex RU 2026 104; in force 9 Feb 2026, applying from 1 Jan 2024). Social security: EU/EEA/CH framework bands under 25%, 25% to under 50% (A1), and 50% or more. Not tax or legal advice.',
+      crumbs: [
+        ['Home', ''],
+        ['Employers Ticino', 'employers/ticino'],
+      ],
+    },
+    fr: {
+      title: 'Employeurs Tessin — suivi télétravail (IT→CH) — BorderDay',
+      description:
+        'Pour les RH tessinoises: suivre les jours de télétravail du personnel résidant en Italie. Compteurs fiscaux 25% télétravail et 45 jours de non-retour selon l’accord Italie–Suisse, plus le cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+      h1: 'Employeurs au Tessin: jours de télétravail pour le personnel résidant en Italie',
+      summary:
+        'BorderDay aide les employeurs tessinois à enregistrer télétravail, jours sur site et nuits hors domicile pour les personnes qui résident en Italie et travaillent en Suisse selon l’accord Italie–Suisse (Accordo Art. 2, tel que modifié pour le télétravail). Fiscalité: au plus 25% de télétravail au domicile et jusqu’à 45 jours de non-retour par an (protocole Fedlex RU 2026 104; en vigueur le 9 février 2026, applicable dès le 1er janvier 2024). Sécurité sociale: bandes du cadre UE/EEE/CH sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Pas un conseil fiscal ou juridique.',
+      crumbs: [
+        ['Accueil', ''],
+        ['Employeurs Tessin', 'employers/ticino'],
+      ],
+    },
+    de: {
+      title: 'Arbeitgeber Tessin — Telearbeitstage (IT→CH) — BorderDay',
+      description:
+        'Für HR im Tessin: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Italien erfassen. Steuerzähler 25% Telearbeit und 45 Nicht-Rückkehrtage laut Abkommen Italien–Schweiz, plus EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+      h1: 'Arbeitgeber im Tessin: Telearbeitstage für Mitarbeitende mit Wohnsitz in Italien',
+      summary:
+        'BorderDay hilft Tessiner Arbeitgebern, Telearbeit, Vor-Ort-Tage und Übernachtungen auswärts für Personen zu erfassen, die in Italien wohnen und in der Schweiz arbeiten — gemäss dem Abkommen Italien–Schweiz (Accordo Art. 2, geändert für Telearbeit). Steuer: höchstens 25% Telearbeit am Wohnsitz und bis 45 Nicht-Rückkehrtage pro Jahr (Protokoll Fedlex RU 2026 104; in Kraft 9. Feb 2026, anwendbar ab 1. Jan 2024). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Keine Steuer- oder Rechtsberatung.',
+      crumbs: [
+        ['Start', ''],
+        ['Arbeitgeber Tessin', 'employers/ticino'],
+      ],
+    },
+    it: {
+      title: 'Datori di lavoro Ticino — giorni di telelavoro (IT→CH) — BorderDay',
+      description:
+        'Per le HR in Ticino: registrare i giorni di telelavoro del personale residente in Italia. Contatori fiscali 25% telelavoro e 45 giorni di non rientro dell’accordo Italia–Svizzera, più il quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+      h1: 'Datori di lavoro in Ticino: giorni di telelavoro per il personale residente in Italia',
+      summary:
+        'BorderDay aiuta i datori di lavoro in Ticino a registrare telelavoro, giorni in sede e notti fuori casa per chi risiede in Italia e lavora in Svizzera secondo l’accordo Italia–Svizzera (Accordo Art. 2, come modificato per il telelavoro). Fisco: al massimo il 25% di telelavoro al domicilio e fino a 45 giorni di non rientro all’anno (protocollo Fedlex RU 2026 104; in vigore dal 9 febbraio 2026, con effetto dal 1° gennaio 2024). Previdenza: fasce del quadro UE/SEE/CH sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Non è consulenza fiscale o legale.',
+      crumbs: [
+        ['Home', ''],
+        ['Datori di lavoro Ticino', 'employers/ticino'],
+      ],
+    },
+    nl: {
+      title: 'Werkgevers Ticino — telewerkdagen (IT→CH) — BorderDay',
+      description:
+        'Voor HR in Ticino: telewerkdagen bijhouden van medewerkers die in Italië wonen. Belastingstellers 25% telewerk en 45 niet-terugkeerdagen volgens het akkoord Italië–Zwitserland, plus EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+      h1: 'Werkgevers in Ticino: telewerkdagen voor medewerkers die in Italië wonen',
+      summary:
+        'BorderDay helpt Ticinese werkgevers telewerk-, ter-plaatse- en overnachtingsdagen elders te registreren voor mensen die in Italië wonen en in Zwitserland werken volgens het grenswerkersakkoord Italië–Zwitserland (Accordo Art. 2, gewijzigd voor telewerk). Fiscaal: hoogstens 25% telewerk aan de woonplaats en tot 45 niet-terugkeerdagen per jaar (protocol Fedlex RU 2026 104; in werking 9 feb 2026, toepasselijk vanaf 1 jan 2024). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Geen belasting- of juridisch advies.',
+      crumbs: [
+        ['Home', ''],
+        ['Werkgevers Ticino', 'employers/ticino'],
+      ],
+    },
+  },
   'employers/geneva': {
     en: {
       title: 'Geneva employers — telework day tracking (FR→CH) — BorderDay',
@@ -1212,6 +1275,43 @@ export function breadcrumbLd(lang, crumbs) {
 
 /** Optional page-specific FAQ pairs for employer SEO pages (and future landing pages). */
 export const PAGE_FAQS = {
+  'employers/ticino': {
+    en: [
+      ['Which border route should Ticino staff living in Italy pick?', 'The Ticino ← Italy pack (ticino_it): 25% telework at domicile, 45 non-return days, and the shared social-security framework counter — when Accordo Art. 2 zone and residence/workplace conditions fit.'],
+      ['Does the 45-day rule count same-day trips?', 'BorderDay counts only days marked “stayed away overnight for work”. A same-day trip does not increment the non-return counter. Leave and sickness are excluded per the protocol note in the pack.'],
+      ['Do you track employee location?', 'No. Employees log a day type and optional overnight-away yes/no. HR never sees GPS or device coordinates.'],
+      ['What does the social-security 50% counter mean?', 'Under the framework agreement, telework in the residence state of 50% or more of working time generally means residence-state social security; between 25% and under 50% an A1 is normally needed. BorderDay shows those bands separately from tax.'],
+      ['Is this tax or legal advice?', 'No. It is a tracking tool with counters based on public sources linked on this page and in the app. Confirm with your adviser or authority.'],
+    ],
+    fr: [
+      ['Quel corridor choisir pour un collaborateur au Tessin résidant en Italie?', 'Le pack Tessin ← Italie (ticino_it): 25% de télétravail au domicile, 45 jours de non-retour et le compteur de sécurité sociale partagé — lorsque les zones et conditions de l’Accordo Art. 2 sont remplies.'],
+      ['La règle des 45 jours compte-t-elle les déplacements d’une journée?', 'BorderDay ne compte que les jours marqués «nuit hors domicile pour le travail». Un aller-retour le même jour n’incrémente pas le compteur de non-retour. Congés et maladie sont exclus selon la note du protocole dans le pack.'],
+      ['Suivez-vous la localisation des collaborateurs?', 'Non. Uniquement le type de jour et éventuellement nuit hors domicile oui/non. Jamais de GPS.'],
+      ['Que signifie le compteur sécurité sociale à 50%?', 'Selon le cadre, un télétravail dans l’État de résidence de 50% ou plus du temps de travail conduit en principe à l’affiliation de résidence; entre 25% et moins de 50%, un A1 est en principe nécessaire. BorderDay affiche ces bandes séparément de la fiscalité.'],
+      ['Est-ce un conseil fiscal ou juridique?', 'Non. C’est un outil de suivi dont les compteurs s’appuient sur des sources publiques liées ici et dans l’app. Confirmez auprès de votre conseiller ou de l’autorité.'],
+    ],
+    de: [
+      ['Welche Route für Mitarbeitende im Tessin mit Wohnsitz in Italien?', 'Das Pack Tessin ← Italien (ticino_it): 25% Telearbeit am Wohnsitz, 45 Nicht-Rückkehrtage und der gemeinsame Sozialversicherungszähler — wenn Zonen und Bedingungen von Accordo Art. 2 passen.'],
+      ['Zählt die 45-Tage-Regel Same-Day-Reisen?', 'BorderDay zählt nur Tage mit Markierung «Übernachtung auswärts für die Arbeit». Eine Hin- und Rückfahrt am selben Tag erhöht den Nicht-Rückkehrzähler nicht. Urlaub und Krankheit sind laut Protokollnotiz im Pack ausgeschlossen.'],
+      ['Erfasst ihr den Standort der Mitarbeitenden?', 'Nein. Nur Tagesart und optional Übernachtung auswärts ja/nein. Nie GPS.'],
+      ['Was bedeutet der Sozialversicherungszähler bei 50%?', 'Laut Rahmen führt Telearbeit im Wohnstaat von 50% oder mehr der Arbeitszeit in der Regel zur Wohnsitz-Affiliation; zwischen 25% und unter 50% ist in der Regel ein A1 nötig. BorderDay zeigt diese Bänder getrennt von der Steuer.'],
+      ['Ist das Steuer- oder Rechtsberatung?', 'Nein. Es ist ein Erfassungstool mit Zählern auf Basis öffentlicher Quellen, die hier und in der App verlinkt sind. Mit Berater oder Behörde bestätigen.'],
+    ],
+    it: [
+      ['Quale corridoio devono scegliere i collaboratori in Ticino residenti in Italia?', 'Il pack Ticino ← Italia (ticino_it): 25% di telelavoro al domicilio, 45 giorni di non rientro e il contatore previdenziale condiviso — quando le zone e le condizioni dell’Accordo Art. 2 sono soddisfatte.'],
+      ['La regola dei 45 giorni conta le trasferte di sola giornata?', 'BorderDay conta solo i giorni segnati «notte fuori casa per lavoro». Una trasferta di andata e ritorno nello stesso giorno non incrementa il contatore di non rientro. Ferie e malattia sono escluse secondo la nota del protocollo nel pack.'],
+      ['Tracciate la posizione dei collaboratori?', 'No. I collaboratori registrano una tipologia di giorno e, opzionale, notte fuori casa sì/no. Le HR non vedono mai GPS né coordinate del dispositivo.'],
+      ['Cosa significa il contatore previdenziale al 50%?', 'Secondo il quadro, il telelavoro nello Stato di residenza pari o superiore al 50% del tempo di lavoro porta in genere all’affiliazione di residenza; tra 25% e meno del 50% di norma serve un A1. BorderDay mostra queste fasce separate dal fisco.'],
+      ['È consulenza fiscale o legale?', 'No. È uno strumento di tracking con contatori basati su fonti pubbliche collegate qui e nell’app. Confermate con il vostro consulente o l’autorità.'],
+    ],
+    nl: [
+      ['Welke route voor medewerkers in Ticino die in Italië wonen?', 'Het pack Ticino ← Italië (ticino_it): 25% telewerk aan de woonplaats, 45 niet-terugkeerdagen en de gedeelde socialezekerheidsteller — wanneer zones en voorwaarden van Accordo Art. 2 passen.'],
+      ['Telt de 45-dagenregel same-day-reizen?', 'BorderDay telt alleen dagen gemarkeerd «overnachting elders voor werk». Een heen-en-weer-reis op dezelfde dag verhoogt de niet-terugkeerteller niet. Verlof en ziekte zijn uitgesloten volgens de protocolnota in het pack.'],
+      ['Volgen jullie de locatie van medewerkers?', 'Nee. Alleen dagtype en optioneel overnachting elders ja/nee. Nooit GPS.'],
+      ['Wat betekent de socialezekerheidsteller bij 50%?', 'Volgens het kader leidt telewerk in de woonstaat van 50% of meer van de werktijd doorgaans tot woonstaat-aansluiting; tussen 25% en onder 50% is doorgaans een A1 nodig. BorderDay toont die banden los van fiscaliteit.'],
+      ['Is dit belasting- of juridisch advies?', 'Nee. Het is een trackingtool met tellers op basis van openbare bronnen die hier en in de app zijn gelinkt. Bevestig bij uw adviseur of autoriteit.'],
+    ],
+  },
   'employers/geneva': {
     en: [
       ['Does BorderDay replace the AFC telework-rate filing?', 'No. It keeps a working day log so HR can prepare figures. The annual attestation remains the employer’s filing under ge.ch rules.'],
@@ -1338,6 +1438,7 @@ export function llmsTxt() {
 - ${BASE}/en/faq/ — FAQ
 - ${BASE}/en/for-individuals/ — Individual plan
 - ${BASE}/en/company/signup/ — Company sign-up
+- ${BASE}/en/employers/ticino/ — Ticino employers (IT→CH, 25% telework + 45 non-return days)
 - ${BASE}/en/employers/geneva/ — Geneva employers (FR→CH telework days)
 - ${BASE}/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
 - ${BASE}/en/privacy/ — Privacy

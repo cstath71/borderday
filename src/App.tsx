@@ -9,6 +9,7 @@ import Accessibility from './pages/Accessibility';
 import Disclaimer from './pages/Disclaimer';
 import Faq from './pages/Faq';
 import ForIndividuals from './pages/ForIndividuals';
+import EmployersTicino from './pages/employers/Ticino';
 import EmployersGeneva from './pages/employers/Geneva';
 import EmployersLuxembourg from './pages/employers/Luxembourg';
 import Home from './pages/Home';
@@ -42,6 +43,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="app" element={<AppPage />} />
         <Route path="for-individuals" element={<ForIndividuals />} />
+        <Route path="employers/ticino" element={<EmployersTicino />} />
         <Route path="employers/geneva" element={<EmployersGeneva />} />
         <Route path="employers/luxembourg" element={<EmployersLuxembourg />} />
         <Route path="pricing" element={<Pricing />} />

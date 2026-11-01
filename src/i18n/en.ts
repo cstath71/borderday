@@ -333,6 +333,7 @@ const en = {
     previewBody: 'Free preview: days stay in this browser on this device, and only the current month can be logged. A plan unlocks every month and saves your log to your account.',
     previewCompanyBody: '{company} has no active subscription yet, so this is the free preview. Days stay in this browser on this device, and only the current month can be logged.',
     previewCta: 'See plans',
+    previewAskEmployer: 'Ask your employer to start the plan.',
     previewMonthOnly: 'The preview only logs the current month.',
     savedToAccount: 'Saved to your account.',
     savedToCompany:
@@ -382,6 +383,7 @@ const en = {
     yearlyNote: 'About two months free vs monthly.',
     companyPrice: '€5 / active employee / month',
     companyMin: 'Minimum €39 / month (the minimum covers up to 7 active employees; beyond that you pay per seat)',
+    chfMinAbbrev: 'min.',
     companyYearly: 'Yearly billing: 2 months free (€390 / year minimum)',
     billingCompany: 'Billing to: {company}',
     pickBillingCompany: 'Company to bill',
@@ -432,7 +434,7 @@ const en = {
     a1:
       'No. It is a record-keeping and reminder tool for employers and employees. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.',
     q2: 'Where is my day log stored?',
-    a2: 'Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.',
+    a2: 'Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. You can export JSON or CSV anytime. On a free or individual plan you can delete your log; in a company account, clearing your copy leaves the employer’s records under their retention setting.',
     q3: 'Why are some counters disabled?',
     a3:
       'We only show a number when we have confirmed how to count it on an official source. Otherwise the card says why no counter runs and points you to your authority. It never invents a figure.',
@@ -627,7 +629,7 @@ const en = {
     planManage: "Update payment or cancel",
     seatsLine: '{active} active employees · {seats} seats',
     formerEmployees: 'Former employees',
-    formerEmployeesHelp: 'Soft-removed members. Day history stays until retention purge and is included in CSV exports.',
+    formerEmployeesHelp: 'Removed members (no access). Day history stays until retention purge and is included in CSV exports.',
     formerReadOnly: 'Read-only — day history retained',
     signupTitle: 'Create a company account',
     creating: 'Creating…',
@@ -660,6 +662,7 @@ const en = {
     exportCsvNote: 'Working record only. Not the annual telework-rate attestation all Swiss employers of France residents must file early the following year with the cantonal tax authority — including at 0%. First filing: early 2027 for 2026. Geneva and Vaud use their own form (Geneva AFC / ge.ch); otherwise the federal form or ELM/cantonal portal. Compute and submit that rate with your authority.',
     employees: 'Employees',
     noEmployees: 'No employees yet. Create an invite link.',
+    noFilterMatches: 'No employees match these filters.',
     viewHistory: 'Day history',
     historyTitle: 'Employee day history',
     historySubtitle:

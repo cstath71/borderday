@@ -367,9 +367,13 @@ export default function AppPage() {
               ? t(d.app.previewCompanyBody, { company: access.unpaidCompany })
               : d.app.previewBody}
             <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-              <Link className="btn btn-primary" to={`/${lang}/pricing`}>
-                {d.app.previewCta}
-              </Link>
+              {access.unpaidCompany ? (
+                <p style={{ margin: 0 }}>{d.app.previewAskEmployer}</p>
+              ) : (
+                <Link className="btn btn-primary" to={`/${lang}/pricing`}>
+                  {d.app.previewCta}
+                </Link>
+              )}
               {!auth.user && (
                 <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/app`)}`}>
                   {d.auth.signIn}

@@ -282,7 +282,8 @@ export function canDeactivateMember(
   actor: { userId: string; role: CompanyRole },
   target: { userId: string; role: CompanyRole },
 ): boolean {
-  return isHrRole(actor.role) && target.role !== 'owner' && target.userId !== actor.userId;
+  // A2-02: remove/reactivate/promote are owner-only (RLS trigger + UI).
+  return actor.role === 'owner' && target.role !== 'owner' && target.userId !== actor.userId;
 }
 
 /**

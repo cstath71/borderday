@@ -245,7 +245,7 @@ describe('real Postgres: HR cannot escalate', () => {
         company,
         emp,
       ]),
-    ).rejects.toThrow(/row-level security/);
+    ).rejects.toThrow(/row-level security|only an owner may change role or active/);
     expect(
       (
         await as(hr, `update public.bd_company_members set role = 'employee' where company_id = $1 and user_id = $2`, [
@@ -259,19 +259,23 @@ describe('real Postgres: HR cannot escalate', () => {
     expect(await roleOf(company, emp)).toBe('employee');
   });
 
-  it('HR viewer can deactivate an employee, and owner can change roles', async () => {
+  it('A2-02: HR viewer cannot deactivate or promote; owner can change roles', async () => {
     const owner = await newUser('o8@example.com');
     const company = await newCompany(owner);
     const hr = await addMember(owner, company, 'hr_viewer');
     const emp = await addMember(owner, company);
-    expect(
-      (
-        await as(hr, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [
-          company,
-          emp,
-        ])
-      ).rowCount,
-    ).toBe(1);
+    await expect(
+      as(hr, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [
+        company,
+        emp,
+      ]),
+    ).rejects.toThrow(/only an owner may change role or active|42501|permission denied/i);
+    await expect(
+      as(hr, `update public.bd_company_members set role = 'hr_viewer' where company_id = $1 and user_id = $2`, [
+        company,
+        emp,
+      ]),
+    ).rejects.toThrow(/only an owner may change role or active|42501|permission denied|row-level security/i);
     await as(owner, `update public.bd_company_members set role = 'owner' where company_id = $1 and user_id = $2`, [
       company,
       hr,
@@ -283,6 +287,7 @@ describe('real Postgres: HR cannot escalate', () => {
     const owner = await newUser('a304a@example.com');
     const company = await newCompany(owner);
     const hr = await addMember(owner, company, 'hr_viewer');
+    void hr;
     const email = 'a304b@example.com';
     const emp = await newUser(email);
     await accept(emp, await invite(owner, company, email));
@@ -290,7 +295,7 @@ describe('real Postgres: HR cannot escalate', () => {
       (await db.query(`select seat_count from public.bd_companies where id = $1`, [company])).rows[0].seat_count;
     expect(await seats()).toBe(1);
 
-    const res = await as(hr, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2 and role <> 'owner' returning id`, [company, emp]);
+    const res = await as(owner, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2 and role <> 'owner' returning id`, [company, emp]);
     expect(res.rowCount).toBe(1);
     expect(await seats()).toBe(0);
 
@@ -338,7 +343,7 @@ describe('real Postgres: HR cannot escalate', () => {
     expect(back.rows[0]).toMatchObject({ active: true, removed_at: null });
   });
 
-  it('A3-04: HR cannot deactivate an owner or themselves; an employee cannot deactivate anyone', async () => {
+  it('A3-04/A2-02: HR cannot deactivate anyone; an employee cannot deactivate anyone', async () => {
     const owner = await newUser('a304c@example.com');
     const company = await newCompany(owner);
     const hr = await addMember(owner, company, 'hr_viewer');
@@ -347,6 +352,7 @@ describe('real Postgres: HR cannot escalate', () => {
       as(by, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [company, target]);
     expect((await update(hr, owner)).rowCount).toBe(0);
     expect((await update(hr, hr)).rowCount).toBe(0);
+    await expect(update(hr, emp)).rejects.toThrow(/only an owner may change role or active|42501|permission denied/i);
     expect((await update(emp, hr)).rowCount).toBe(0);
     expect((await update(emp, emp)).rowCount).toBe(0);
   });

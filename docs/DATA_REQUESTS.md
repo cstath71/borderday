@@ -56,17 +56,16 @@ Daily `pg_cron` job `bd_purge_expired_data_daily` (03:17 UTC) runs `public.bd_pu
 
 Personal day logs, whole accounts, membership and billing rows are not timed-deleted — handle those via the steps above or privacy@borderday.com.
 
-## What an HR viewer can do today
+## What an HR viewer can do (A2-02)
 
-This records current behaviour. It has not been decided that this is what the role should allow, and the role has not been changed.
+Decision (2026-11-01): remove, reactivate, promote, billing and Stripe are **owners only** (RLS trigger + checkout/portal edge functions). Labels no longer say "read-only".
 
-`hr_viewer` is not read-only. Besides reading colleagues' day records through the dashboard, an active HR viewer can:
+An active `hr_viewer` can:
 
-- change another member's role to `hr_viewer`, and remove members and invites;
-- edit employees' profile figures;
-- start checkout and open the billing portal, including cancelling the company plan;
-- read the company's Stripe customer and subscription IDs through `bd_subscriptions`.
+- read colleagues' day records through the dashboard;
+- invite and revoke non-owner invites;
+- edit employees' profile figures (employment %, A1, contract days).
 
-Owners can do all of this too. Answer access questions from employers on this basis.
+They cannot flip `role`/`active`, open checkout or the billing portal for the company, or cancel the company plan. Owners can do all of those. Answer access questions from employers on this basis.
 
 A personal-data breach follows `docs/BREACH_RESPONSE.md`.

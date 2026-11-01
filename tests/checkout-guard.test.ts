@@ -37,7 +37,10 @@ describe('A3-05 duplicate subscription guard', () => {
     expect(guard).toBeLessThan(src.indexOf('checkout.sessions.create'));
     expect(src).toContain('recordedStatuses.push(company.subscription_status)');
     expect(src).toContain('subscriptions.eq("user_id", user.id).eq("plan_kind", "individual")');
-    expect(src).not.toMatch(/customers\.(list|search)/);
+    // AR3-05: customer reuse lives in stripeCheckoutCustomer (list/create); checkout must not
+    // invent a second customer via customer_email.
+    expect(src).not.toContain('customer_email:');
+    expect(src).toContain('resolveStripeCustomerId');
     // A failed read must refuse, not fall through to a new session.
     expect(src).toContain('if (subsError) throw');
     expect(src).toContain('if (companyError) throw');

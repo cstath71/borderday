@@ -8,6 +8,11 @@ import {
   trialAlreadyUsed,
 } from "../_shared/checkoutGuard.ts";
 import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
+import {
+  expireOpenCheckoutSessions,
+  resolveStripeCustomerId,
+  stripeCustomerHasBlockingSubscription,
+} from "../_shared/stripeCheckoutCustomer.ts";
 import { TRIAL_DAYS } from "../_shared/trial.ts";
 import { corsHeaders, GENERIC_ERROR, logFailure } from "../_shared/http.ts";
 
@@ -39,6 +44,7 @@ Deno.serve(async (req) => {
     });
     const { data: { user }, error: userErr } = await supabase.auth.getUser();
     if (userErr || !user) throw new Error("Unauthorized");
+    if (!user.email) throw new Error("Missing email");
 
     const body = await req.json() as {
       plan: "company" | "individual";
@@ -77,6 +83,7 @@ Deno.serve(async (req) => {
     }
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const recordedStatuses: Array<string | null> = [];
+    let existingCustomerId: string | null = null;
 
     if (body.plan === "company") {
       if (!body.companyId) throw new Error("companyId required");
@@ -84,9 +91,10 @@ Deno.serve(async (req) => {
         .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
       if (!mem || mem.role !== "owner") throw new Error("Forbidden");
       const { data: company, error: companyError } = await admin.from("bd_companies")
-        .select("seat_count, subscription_status, trial_ends_at").eq("id", body.companyId).single();
+        .select("seat_count, subscription_status, trial_ends_at, stripe_customer_id").eq("id", body.companyId).single();
       if (companyError) throw new Error("Could not check the existing subscription");
       recordedStatuses.push(company.subscription_status);
+      existingCustomerId = company.stripe_customer_id ?? null;
       const seats = company.seat_count ?? 0;
       const billing = resolveCompanyBilling(seats, body.interval === "year" ? "year" : "month");
       quantity = billing.quantity;
@@ -100,6 +108,10 @@ Deno.serve(async (req) => {
       metadata.billing_mode = billing.mode;
     } else {
       priceId = body.interval === "year" ? (priceIndivYear || "") : (priceIndivMonth || "");
+      const { data: priorCust } = await admin.from("bd_subscriptions").select("stripe_customer_id")
+        .eq("user_id", user.id).not("stripe_customer_id", "is", null)
+        .order("updated_at", { ascending: false }).limit(1).maybeSingle();
+      existingCustomerId = priorCust?.stripe_customer_id ?? null;
     }
     if (!priceId) {
       return new Response(JSON.stringify({ available: false, message: "Payments not yet available" }), {
@@ -107,8 +119,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    // A3-05: a second session would mean a second customer, plan and free trial. What the webhook has
-    // recorded is enough (Gus: nobody has paid yet), so no live Stripe lookup. If it cannot be read, refuse.
+    // AR3-05: DB guard first (fast path). Stripe customer reuse + open-session expiry + live Stripe
+    // subscription check close the race before the webhook has written anything.
     const subscriptions = admin.from("bd_subscriptions").select("status");
     const { data: subs, error: subsError } = await (body.plan === "company"
       ? subscriptions.eq("company_id", body.companyId!)
@@ -151,6 +163,27 @@ Deno.serve(async (req) => {
     const Stripe = (await import("https://esm.sh/stripe@18.5.0?target=deno")).default;
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
 
+    const customerId = await resolveStripeCustomerId(stripe, {
+      existingId: existingCustomerId,
+      email: user.email,
+      metadata: {
+        user_id: user.id,
+        ...(body.plan === "company" && body.companyId ? { company_id: body.companyId } : {}),
+      },
+    });
+    await expireOpenCheckoutSessions(stripe, customerId);
+    if (await stripeCustomerHasBlockingSubscription(stripe, customerId, {
+      plan: body.plan,
+      companyId: body.companyId,
+      userId: user.id,
+    })) {
+      return new Response(JSON.stringify({
+        available: false,
+        code: ALREADY_SUBSCRIBED_CODE,
+        message: "This plan already has a subscription. No new checkout was started.",
+      }), { status: 200, headers: { ...cors, "Content-Type": "application/json" } });
+    }
+
     // Managed Payments (MoR): managed_payments[enabled]=true.
     // Must NOT send automatic_tax, tax_id_collection, or payment_method_types
     // (docs.stripe.com/payments/managed-payments/update-checkout).
@@ -158,6 +191,7 @@ Deno.serve(async (req) => {
     // allow_promotion_codes, subscription_data (trial + trial_settings + metadata).
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
+      customer: customerId,
       line_items: [{ price: priceId, quantity }],
       success_url: checkoutSuccessUrl(siteUrl, lang, body.plan, body.companyId),
       cancel_url: `${siteUrl}/${lang}/pricing?checkout=cancel`,
@@ -171,7 +205,6 @@ Deno.serve(async (req) => {
       allow_promotion_codes: true,
       // Card required up front so a trial can convert (or cancel if missing).
       payment_method_collection: "always",
-      customer_email: user.email,
       billing_address_collection: "required",
       // Otherwise the page follows the browser. Not on the Managed Payments unsupported list.
       ...(CHECKOUT_LOCALES.includes(lang) ? { locale: lang } : {}),

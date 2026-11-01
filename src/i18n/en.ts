@@ -706,8 +706,8 @@ const en = {
     inviteLanguage: 'Employee’s language',
     inviteFailed: 'Could not create the invite. Check the address and try again.',
     inviteAlreadyMember: 'That address is already an active member of this company.',
-    inviteReused: 'A pending invite already exists for that address. Share the link below (or resend later).',
-    inviteReusedEmailed: 'A pending invite already exists; the email was resent. You can also share the link.',
+    inviteReused: "An invite for this address is already pending. We didn't email it again because it was emailed in the last hour; share the link or try later.",
+    inviteReusedEmailed: 'Invite already pending; email sent again.',
   },
 
   terms: {

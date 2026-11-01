@@ -1003,6 +1003,56 @@ const en = {
       'Creating an account is free. A paid plan starts only through checkout: 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel. Read:',
   },
 
+  employersHub: {
+    title: 'Employer pages',
+    linkTicino: 'Ticino employers (IT→CH)',
+    linkGeneva: 'Geneva employers (FR→CH)',
+    linkLuxembourg: 'Luxembourg employers (FR/BE/DE→LU)',
+  },
+  employersTicino: {
+    metaTitle: 'Ticino employers — telework day tracking (IT→CH) — BorderDay',
+    metaDescription:
+      'For Ticino HR: track telework days for staff living in Italy. Tax counters for the 25% telework share and 45 non-return days under the Italy–Switzerland agreement, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+    heroTitle: 'Ticino employers: telework days for staff living in Italy',
+    inShort:
+      'BorderDay helps Ticino employers log telework, on-site and overnight-away days for people who live in Italy and work in Switzerland under the Italy–Switzerland Italy–Switzerland agreement (Accordo Art. 2 zones, as amended for telework). Tax: at most 25% telework at domicile and up to 45 non-return days per year (protocol Fedlex RU 2026 104; in force 9 Feb 2026, applying from 1 Jan 2024). Social security: EU/EEA/CH framework bands under 25%, 25% to under 50% (A1), and 50% or more. Not tax or legal advice.',
+    agreementTitle: 'Italy–Switzerland agreement (2020 / 2023 protocol)',
+    agreementBody:
+      'The Italy–Switzerland agreement of 23 December 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) covers defined frontier zones (CH: Grisons, Ticino, Valais; IT: Lombardy, Piedmont, Aosta Valley, Province of Bolzano), with residence and workplace conditions in Art. 2(b). The telework amending protocol is published as Fedlex RU 2026 104; FSIO notes it entered into force on 9 February 2026 and applies from 1 January 2024, including transitional-regime workers. Confirm fit with your adviser or authority before relying on these counters.',
+    thresholdsTitle: 'What the ticino_it pack counts today',
+    thresholdTax25:
+      'Tax — telework at domicile: at most 25% of employed activity as telework at home in Italy in a calendar year (“al massimo il 25 per cento”), without changing tax-residence status for that telework (protocol / Accordo). Co-working is not confirmed in the protocol wording — check with your authority.',
+    thresholdNonreturn45:
+      'Tax — non-return days: in principle up to 45 days per calendar year without returning home daily for work (“per un massimo di 45 giorni”). Leave and sickness do not count. BorderDay counts only days marked overnight-away for work; a same-day trip does not count.',
+    thresholdSs50:
+      'Social security — EU/EEA/CH framework: under 25% the framework does not apply; from 25% to under 50% an A1 is normally required; at 50% or more residence-state affiliation. Separate from tax. Sources include the Belgian FPS depositary memorandum.',
+    thresholdEmployerDuty:
+      'Employer duties: keep day records that match the counters above. This page does not state a Ticino-specific annual telework-rate filing date comparable to Geneva’s AFC January 2027 transmission — confirm filing and A1 duties with the competent Swiss/Italian authorities.',
+    howTitle: 'How BorderDay helps HR',
+    howBody:
+      'Invite employees; each picks the Ticino←Italy route and logs day types only (telework / on site / trip / non-working) plus overnight-away when relevant. HR sees the 25% tax share, the 45-day non-return counter and social-security bands, with CSV export. No GPS. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; 7-day free trial, card required.',
+    sourcesTitle: 'Official sources (same as the ticino_it pack)',
+    disclaimer:
+      'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',
+    ctaPrimary: 'Create company account',
+    ctaPricing: 'See pricing',
+    faqTitle: 'FAQ for Ticino employers',
+    faq1q: 'Which border route should Ticino staff living in Italy pick?',
+    faq1a:
+      'The Ticino ← Italy pack (ticino_it): 25% telework at domicile, 45 non-return days, and the shared social-security framework counter — when Accordo Art. 2 zone and residence/workplace conditions fit.',
+    faq2q: 'Does the 45-day rule count same-day trips?',
+    faq2a:
+      'BorderDay counts only days marked “stayed away overnight for work”. A same-day trip does not increment the non-return counter. Leave and sickness are excluded per the protocol note in the pack.',
+    faq3q: 'Do you track employee location?',
+    faq3a:
+      'No. Employees log a day type and optional overnight-away yes/no. HR never sees GPS or device coordinates.',
+    faq4q: 'What does the social-security 50% counter mean?',
+    faq4a:
+      'Under the framework agreement, telework in the residence state of 50% or more of working time generally means residence-state social security; between 25% and under 50% an A1 is normally needed. BorderDay shows those bands separately from tax.',
+    faq5q: 'Is this tax or legal advice?',
+    faq5a:
+      'No. It is a tracking tool with counters based on public sources linked on this page and in the app. Confirm with your adviser or authority.',
+  },
   employersGeneva: {
     metaTitle: 'Geneva employers — telework day tracking (FR→CH) — BorderDay',
     metaDescription:

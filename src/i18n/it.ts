@@ -1013,6 +1013,56 @@ const it: Dict = {
       'La creazione di un account è gratuita. Un piano a pagamento inizia solo con il checkout: prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta. Leggete:',
   },
 
+  employersHub: {
+    title: 'Pagine per datori di lavoro',
+    linkTicino: 'Datori di lavoro Ticino (IT→CH)',
+    linkGeneva: 'Datori di lavoro Ginevra (FR→CH)',
+    linkLuxembourg: 'Datori di lavoro Lussemburgo (FR/BE/DE→LU)',
+  },
+  employersTicino: {
+    metaTitle: 'Datori di lavoro Ticino — giorni di telelavoro (IT→CH) — BorderDay',
+    metaDescription:
+      'Per le HR in Ticino: registrare i giorni di telelavoro del personale residente in Italia. Contatori fiscali 25% telelavoro e 45 giorni di non rientro dell’accordo Italia–Svizzera, più il quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+    heroTitle: 'Datori di lavoro in Ticino: giorni di telelavoro per il personale residente in Italia',
+    inShort:
+      'BorderDay aiuta i datori di lavoro in Ticino a registrare telelavoro, giorni in sede e notti fuori casa per chi risiede in Italia e lavora in Svizzera secondo l’accordo Italia–Svizzera (Accordo Art. 2) (Accordo Art. 2, come modificato per il telelavoro). Fisco: al massimo il 25% di telelavoro al domicilio e fino a 45 giorni di non rientro all’anno (protocollo Fedlex RU 2026 104; in vigore dal 9 febbraio 2026, con effetto dal 1° gennaio 2024). Previdenza: fasce del quadro UE/SEE/CH sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Non è consulenza fiscale o legale.',
+    agreementTitle: 'Accordo Italia–Svizzera (2020 / protocollo 2023)',
+    agreementBody:
+      'L’accordo Italia–Svizzera del 23 dicembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) riguarda zone di frontiera definite (CH: Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano), con condizioni di residenza e luogo di lavoro all’Art. 2(b). Il protocollo sul telelavoro è pubblicato come Fedlex RU 2026 104; l’UFAS indica l’entrata in vigore il 9 febbraio 2026 con applicazione dal 1° gennaio 2024, anche per i lavoratori in regime transitorio. Verificate l’idoneità con il consulente o l’autorità prima di basarvi su questi contatori.',
+    thresholdsTitle: 'Cosa conta oggi il pack ticino_it',
+    thresholdTax25:
+      'Fisco — telelavoro al domicilio: al massimo il 25% dell’attività lavorativa subordinata come telelavoro a casa in Italia in un anno civile, senza modificare lo status fiscale di residenza per quel telelavoro (protocollo / Accordo). Il co-working non è confermato dal testo del protocollo — chiedete all’autorità.',
+    thresholdNonreturn45:
+      'Fisco — giorni di non rientro: in linea di principio fino a 45 giorni per anno civile senza rientrare quotidianamente a domicilio per motivi professionali. Ferie e malattia non contano. BorderDay conta solo i giorni segnati come notte fuori casa per lavoro; una trasferta di sola andata e ritorno nello stesso giorno non conta.',
+    thresholdSs50:
+      'Previdenza — quadro UE/SEE/CH: sotto il 25% il quadro non si applica; dal 25% a meno del 50% di norma serve un A1; al 50% o più affiliazione nello Stato di residenza. Separato dal fisco. Fonti: tra le altre, il memorandum del depositario FPS belga.',
+    thresholdEmployerDuty:
+      'Obblighi del datore di lavoro: conservare registri di giorni coerenti con i contatori sopra. Questa pagina non indica una data di trasmissione annuale del tasso di telelavoro specifica per il Ticino analoga alla prima trasmissione AFC di Ginevra (gennaio 2027) — confermate depositi e obblighi A1 con le autorità svizzere/italiane competenti.',
+    howTitle: 'Come BorderDay aiuta le HR',
+    howBody:
+      'Invitate i collaboratori; ciascuno sceglie il corridoio Ticino←Italia e registra solo tipologie di giorno (telelavoro / in sede / trasferta / non lavorativo) più la notte fuori casa quando rilevante. Le HR vedono la quota fiscale del 25%, il contatore dei 45 giorni di non rientro e le fasce previdenziali, con export CSV. Niente GPS. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',
+    sourcesTitle: 'Fonti ufficiali (come nel pack ticino_it)',
+    disclaimer:
+      'BorderDay è uno strumento di registrazione e di richiamo. Le soglie provengono da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con un consulente qualificato o l’autorità competente.',
+    ctaPrimary: 'Crea account aziendale',
+    ctaPricing: 'Vedi i prezzi',
+    faqTitle: 'FAQ per datori di lavoro in Ticino',
+    faq1q: 'Quale corridoio devono scegliere i collaboratori in Ticino residenti in Italia?',
+    faq1a:
+      'Il pack Ticino ← Italia (ticino_it): 25% di telelavoro al domicilio, 45 giorni di non rientro e il contatore previdenziale condiviso — quando le zone e le condizioni dell’Accordo Art. 2 sono soddisfatte.',
+    faq2q: 'La regola dei 45 giorni conta le trasferte di sola giornata?',
+    faq2a:
+      'BorderDay conta solo i giorni segnati «notte fuori casa per lavoro». Una trasferta di andata e ritorno nello stesso giorno non incrementa il contatore di non rientro. Ferie e malattia sono escluse secondo la nota del protocollo nel pack.',
+    faq3q: 'Tracciate la posizione dei collaboratori?',
+    faq3a:
+      'No. I collaboratori registrano una tipologia di giorno e, opzionale, notte fuori casa sì/no. Le HR non vedono mai GPS né coordinate del dispositivo.',
+    faq4q: 'Cosa significa il contatore previdenziale al 50%?',
+    faq4a:
+      'Secondo il quadro, il telelavoro nello Stato di residenza pari o superiore al 50% del tempo di lavoro porta in genere all’affiliazione di residenza; tra 25% e meno del 50% di norma serve un A1. BorderDay mostra queste fasce separate dal fisco.',
+    faq5q: 'È consulenza fiscale o legale?',
+    faq5a:
+      'No. È uno strumento di tracking con contatori basati su fonti pubbliche collegate qui e nell’app. Confermate con il vostro consulente o l’autorità.',
+  },
   employersGeneva: {
     metaTitle: 'Datori di lavoro Ginevra — giorni di telelavoro (FR→CH) — BorderDay',
     metaDescription:

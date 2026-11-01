@@ -312,7 +312,7 @@ export const PAGES = {
         'Wie BorderDay Personendaten bearbeitet: Zwecke, Rechtsgrundlagen, Empfänger, Übermittlungen, Aufbewahrung und Ihre Rechte (DSGVO und Schweizer DSG). Kein GPS und kein Gerätestandort.',
       h1: 'Datenschutz',
       summary:
-        'Kein GPS und kein Gerätestandort: HR sieht je Datum die Tagesart und auswärtige Übernachtung ja/nein, eine Länderkategorie, nie Koordinaten. Der Arbeitgeber ist Verantwortlicher für die Tagesprotokolle der Mitarbeitenden. Empfänger: Supabase (Hosting in der EU), Resend, GitHub Pages, Zoho, Google falls gewählt, sowie Stripe/Link als unabhängige Verantwortliche. Kontakt privacy@borderday.com.',
+        'Kein GPS und kein Gerätestandort: HR sieht je Datum die Tagesart, halber Tag und auswärtige Übernachtung ja/nein, eine Länderkategorie, nie Koordinaten. Der Arbeitgeber ist Verantwortlicher für die Tagesprotokolle der Mitarbeitenden. Empfänger: Supabase (Hosting in der EU), Resend, GitHub Pages, Zoho, Google falls gewählt, sowie Stripe/Link als unabhängige Verantwortliche. Kontakt privacy@borderday.com.',
       crumbs: [
         ['Start', ''],
         ['Datenschutz', 'privacy'],
@@ -324,7 +324,7 @@ export const PAGES = {
         'Come BorderDay tratta i dati personali: finalità, basi giuridiche, destinatari, trasferimenti, conservazione e vostri diritti (GDPR e LPD svizzera). Nessuna localizzazione GPS né posizione del dispositivo.',
       h1: 'Privacy',
       summary:
-        'Nessuna localizzazione GPS né posizione del dispositivo: l’HR vede per data il tipo di giorno e la notte fuori sì/no, una categoria di paese, mai coordinate. Il datore di lavoro è titolare dei registri dei dipendenti. Destinatari: Supabase (hosting UE), Resend, GitHub Pages, Zoho, Google se scelto, e Stripe/Link come titolari autonomi. Contatto privacy@borderday.com.',
+        'Nessuna localizzazione GPS né posizione del dispositivo: l’HR vede per data il tipo di giorno, la mezza giornata e la notte fuori sì/no, una categoria di paese, mai coordinate. Il datore di lavoro è titolare dei registri dei dipendenti. Destinatari: Supabase (hosting UE), Resend, GitHub Pages, Zoho, Google se scelto, e Stripe/Link come titolari autonomi. Contatto privacy@borderday.com.',
       crumbs: [
         ['Home', ''],
         ['Privacy', 'privacy'],
@@ -678,7 +678,7 @@ PAGES.privacy.nl = {
   description:
     'Wat BorderDay verwerkt, waarom, wie ontvangt, waar gegevens naartoe gaan en hoe lang ze worden bewaard. AVG en Zwitserse DSG. Geen GPS of apparaatlocatie.',
   h1: 'Privacyverklaring',
-  summary: 'Geen GPS of apparaatlocatie: HR ziet per datum het dagtype en overnachting elders ja/nee, een landcategorie, nooit coördinaten. De werkgever is verwerkingsverantwoordelijke voor de dagregistraties van medewerkers. Contact privacy@borderday.com.',
+  summary: 'Geen GPS of apparaatlocatie: HR ziet per datum het dagtype, halve dag en overnachting elders ja/nee, een landcategorie, nooit coördinaten. De werkgever is verwerkingsverantwoordelijke voor de dagregistraties van medewerkers. Contact privacy@borderday.com.',
   crumbs: [
     ['Home', ''],
     ['Privacyverklaring', 'privacy'],
@@ -793,11 +793,11 @@ export const FAQ = {
     ],
     [
       'Where is my day log stored?',
-      'Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.',
+      'Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. You can export JSON or CSV anytime. On a free or individual plan you can delete your log; in a company account, clearing your copy leaves the employer’s records under their retention setting.',
     ],
     [
       'Do you track my location?',
-      'No. You log days yourself. No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
+      'No. You log days yourself. No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     ],
     [
       'Which borders do you cover?',
@@ -809,7 +809,7 @@ export const FAQ = {
     ],
     [
       'How do payments work?',
-      'Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
+      'Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. The free trial is once per person and once per company. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
     ],
     [
       'What does BorderDay not cover?',
@@ -823,11 +823,11 @@ export const FAQ = {
     ],
     [
       'Où est stocké mon journal de jours ?',
-      'Sans abonnement, uniquement sur votre appareil (IndexedDB dans le navigateur). Avec un abonnement actif ou un compte entreprise, dans votre compte BorderDay. Dans tous les cas, vous pouvez exporter en JSON ou CSV, ou tout supprimer.',
+      'Sans abonnement, uniquement sur votre appareil (IndexedDB dans le navigateur). Avec un abonnement actif ou un compte entreprise, dans votre compte BorderDay. Vous pouvez exporter en JSON ou CSV à tout moment. Sur un plan gratuit ou individuel, vous pouvez supprimer votre journal ; dans un compte entreprise, effacer votre copie laisse les dossiers de l’employeur selon sa durée de conservation.',
     ],
     [
       'Suivez-vous ma localisation ?',
-      'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
+      'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
     ],
     [
       'Quelles frontières couvrez-vous ?',
@@ -839,7 +839,7 @@ export const FAQ = {
     ],
     [
       'Comment fonctionnent les paiements ?',
-      'Le paiement utilise Stripe Managed Payments : Stripe assure les fonctions de marchand officiel (merchant of record) et gère la TVA/GST au checkout ; le client peut voir Link comme marchand officiel. Codes promo acceptés. Voir les CGU pour la résiliation et le droit de rétractation UE de 14 jours.',
+      'Le paiement utilise Stripe Managed Payments : Stripe assure les fonctions de marchand officiel (merchant of record) et gère la TVA/GST au checkout ; le client peut voir Link comme marchand officiel. L’essai gratuit est offert une fois par personne et une fois par entreprise. Codes promo acceptés. Voir les CGU pour la résiliation et le droit de rétractation UE de 14 jours.',
     ],
     [
       'Que ne couvre pas BorderDay ?',
@@ -853,7 +853,7 @@ export const FAQ = {
     ],
     [
       'Wo wird mein Tagesprotokoll gespeichert?',
-      'Ohne Abo nur auf Ihrem Gerät (IndexedDB im Browser). Mit aktivem Abo oder Unternehmenskonto in Ihrem BorderDay-Konto. In beiden Fällen können Sie JSON oder CSV exportieren oder alles löschen.',
+      'Ohne Abo nur auf Ihrem Gerät (IndexedDB im Browser). Mit aktivem Abo oder Unternehmenskonto in Ihrem BorderDay-Konto. Sie können jederzeit JSON oder CSV exportieren. Im kostenlosen oder Einzelabo können Sie Ihr Protokoll löschen; in einem Unternehmenskonto belässt das Löschen Ihrer Kopie die Unterlagen des Arbeitgebers gemäss seiner Aufbewahrungsfrist.',
     ],
     [
       'Erfassen Sie meinen Standort?',
@@ -869,7 +869,7 @@ export const FAQ = {
     ],
     [
       'Wie funktionieren Zahlungen?',
-      'Checkout über Stripe Managed Payments: Stripe stellt Merchant-of-Record-Funktionen bereit und übernimmt MWST/GST im Checkout; Kundinnen und Kunden können Link als Merchant of Record sehen. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
+      'Checkout über Stripe Managed Payments: Stripe stellt Merchant-of-Record-Funktionen bereit und übernimmt MWST/GST im Checkout; Kundinnen und Kunden können Link als Merchant of Record sehen. Die kostenlose Testphase gibt es einmal pro Person und einmal pro Unternehmen. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
     ],
     [
       'Was deckt BorderDay nicht ab?',
@@ -883,7 +883,7 @@ export const FAQ = {
     ],
     [
       'Dove è memorizzato il diario dei giorni?',
-      'Senza abbonamento, solo sul vostro dispositivo (IndexedDB nel browser). Con un abbonamento attivo o un account aziendale, nel vostro account BorderDay. In ogni caso potete esportare JSON o CSV, o eliminare tutto.',
+      'Senza un piano, solo sul vostro dispositivo (IndexedDB nel browser). Con un piano attivo o un account aziendale, nel vostro account BorderDay. Potete esportare JSON o CSV in qualsiasi momento. Con un piano gratuito o individuale potete cancellare il diario; in un account aziendale, cancellare la vostra copia lascia i documenti del datore di lavoro secondo la sua conservazione.',
     ],
     [
       'Tracciate la mia posizione?',
@@ -899,7 +899,7 @@ export const FAQ = {
     ],
     [
       'Come funzionano i pagamenti?',
-      'Il checkout usa Stripe Managed Payments: Stripe fornisce funzioni di merchant of record e gestisce IVA/GST nel checkout; il cliente può vedere Link come merchant of record. Codici promo supportati. Vedete le Condizioni per disdetta e recesso UE di 14 giorni.',
+      'Il checkout usa Stripe Managed Payments: Stripe fornisce funzioni di merchant of record e gestisce IVA/GST nel checkout; il cliente può vedere Link come merchant of record. La prova gratuita è offerta una volta per persona e una volta per azienda. Codici promo supportati. Vedete le Condizioni per disdetta e recesso UE di 14 giorni.',
     ],
     [
       'Cosa non copre BorderDay?',
@@ -914,7 +914,7 @@ FAQ.nl = [
   ],
   [
     'Waar wordt mijn daglogboek bewaard?',
-    'Zonder abonnement alleen op uw apparaat (IndexedDB in de browser). Met een actief abonnement of bedrijfsaccount in uw BorderDay-account. In beide gevallen kunt u JSON of CSV exporteren, of alles wissen.',
+    "Zonder abonnement alleen op uw apparaat (IndexedDB in de browser). Met een actief abonnement of bedrijfsaccount in uw BorderDay-account. U kunt altijd JSON of CSV exporteren. Op een gratis of individueel abonnement kunt u uw logboek wissen; in een bedrijfsaccount laat het wissen van uw kopie de dossiers van de werkgever bestaan volgens zijn bewaartermijn.",
   ],
   [
     'Volgt u mijn locatie?',
@@ -930,7 +930,7 @@ FAQ.nl = [
   ],
   [
     'Hoe werken betalingen?',
-    'Checkout gebruikt Stripe Managed Payments: Stripe verricht merchant-of-record-functies en behandelt btw/GST in Checkout; de klant kan Link als merchant of record zien. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
+    'Checkout gebruikt Stripe Managed Payments: Stripe verricht merchant-of-record-functies en behandelt btw/GST in Checkout; de klant kan Link als merchant of record zien. De gratis proefperiode geldt eenmaal per persoon en eenmaal per bedrijf. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
   ],
   [
     'Wat dekt BorderDay niet?',

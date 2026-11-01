@@ -328,7 +328,7 @@ export default function DashboardView(props: {
         {d.company.employees} ({filtered.length})
       </h2>
       {filtered.length === 0 ? (
-        <p>{d.company.noEmployees}</p>
+        <p>{rows.length === 0 ? d.company.noEmployees : d.company.noFilterMatches}</p>
       ) : (
         <div className="employee-list">
           {filtered.map((row) => (

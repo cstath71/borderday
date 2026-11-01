@@ -57,10 +57,10 @@ BorderDay is built employer-first: company accounts and an HR dashboard come fir
 No. It is a record-keeping and reminder tool for employers and employees. Thresholds are taken from public official sources and may change. Always verify with your employer, a qualified adviser, or the competent authority.
 
 ### Where is my day log stored?
-Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. Either way you can export JSON or CSV, or delete everything.
+Without a plan, only on your device (IndexedDB in the browser). With an active plan or a company account, in your BorderDay account. You can export JSON or CSV anytime. On a free or individual plan you can delete your log; in a company account, clearing your copy leaves the employer’s records under their retention setting.
 
 ### Do you track my location?
-No. You log days yourself. No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.
+No. You log days yourself. No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.
 
 ### Which borders do you cover?
 Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.
@@ -69,7 +69,7 @@ Nine corridors in five regions. Social-security counters on all nine. Tax counte
 Company: €5 per active employee per month with a €39 monthly minimum; yearly €390 minimum (2 months free). Individual: €4.99/month or €49/year. Company prices exclude VAT; individual prices include VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup.
 
 ### How do payments work?
-Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.
+Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. The free trial is once per person and once per company. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.
 
 ### What does BorderDay not cover?
 The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate attestation all Swiss employers of France residents must file (including at 0%). When in doubt, check with your authority.

@@ -7,6 +7,7 @@ import { useLang } from '../components/Layout';
 import { getDict, t, type Dict } from '../i18n';
 import { accountExportCsv, collectAccountExport } from '../lib/accountExport';
 import { useAuth } from '../lib/auth';
+import { supabase } from '../lib/supabase';
 import { deleteMyDayLogs, isHrRole, listFormerCompanies, listMyCompanies, listMyDaysIn, type FormerCompany, type OwnDay } from '../lib/companyApi';
 import { download } from '../lib/download';
 import { exportCsv, exportJson } from '../lib/storage';
@@ -120,6 +121,16 @@ export default function Account() {
     };
   }, [userId]);
 
+  // F31: when the tab becomes visible again, refresh session so signed-in-as stays current.
+  useEffect(() => {
+    const onVis = () => {
+      if (document.visibilityState !== 'visible') return;
+      void supabase?.auth.getSession();
+    };
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, []);
+
   if (auth.signingOut) return <p role="status">{d.company.loading}</p>;
   if (auth.ready && !auth.user) {
     return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/account`)}`} replace />;
@@ -131,7 +142,14 @@ export default function Account() {
     setBusy(true);
     setExportFailed(false);
     try {
-      const data = await collectAccountExport(user);
+      // F31: re-read session so a stale tab cannot export under the wrong signed-in user.
+      const { data: sessionData } = (await supabase?.auth.getSession()) ?? { data: { session: null } };
+      const sessionUser = sessionData.session?.user;
+      if (!sessionUser || sessionUser.id !== user.id) {
+        setExportFailed(true);
+        return;
+      }
+      const data = await collectAccountExport(sessionUser);
       if (format === 'json') download('borderday-account.json', JSON.stringify(data, null, 2), 'application/json');
       else download('borderday-account.csv', accountExportCsv(data), 'text/csv;charset=utf-8');
     } catch {

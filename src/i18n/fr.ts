@@ -48,6 +48,7 @@ const fr: Dict = {
     ctaPrimary: 'Créer un compte entreprise',
     ctaSecondary: 'Voir les tarifs entreprise',
     ctaIndividuals: 'Je suis un collaborateur individuel',
+    ctaIndividualSignup: 'Inscription individuelle',
     riskTitle: 'Pourquoi les seuils de jours comptent pour l’employeur',
     risk1Title: 'Affiliation à la sécurité sociale',
     risk1Body:
@@ -292,6 +293,9 @@ const fr: Dict = {
     pickBorderHint: 'Résidence → lieu de travail',
     today: 'Aujourd’hui',
     logDay: 'Enregistrer ce jour',
+    clearDay: 'Effacer ce jour',
+    plannedDayWarning: 'Jour futur — enregistré comme planifié ; il comptera à cette date.',
+    priorYearNote: 'Ce jour est en {year}. Il compte pour les compteurs de cette année-là, pas l’année en cours.',
     calendar: 'Calendrier',
     counters: 'Vos compteurs',
     noBorder: 'Choisissez un itinéraire pour voir les compteurs.',
@@ -378,6 +382,8 @@ const fr: Dict = {
     goToAccount: 'Aller au compte',
     alreadySubscribed: "Cette offre a déjà un abonnement actif, en essai ou en attente de paiement : aucun nouveau paiement n’a été lancé et rien n’a été débité. Pour le modifier ou le régulariser, utilisez le lien « {cancel} » de cette page, qui mène au portail client.",
     needCompany: 'Créez ou ouvrez d\'abord un compte entreprise, puis abonnez-vous.',
+    billingCompany: 'Le paiement sera facturé à : {company}',
+    pickBillingCompany: 'Entreprise à facturer',
     waitlistCta: 'Créer un compte',
     recommended: 'Recommandé pour les employeurs',
     trialCompany:
@@ -587,6 +593,11 @@ const fr: Dict = {
     joinPreviewFor: "Cette invitation est destinée à {email}. Utilisez cette adresse pour vous connecter ou créer votre compte.",
     checkoutDone: "Paiement configuré. Le statut de l’offre se met à jour ici dès que Stripe le confirme.",
     planLabel: "Offre",
+    seatsLine: '{active} employés actifs · {seats} sièges',
+    formerEmployees: 'Anciens employés',
+    formerEmployeesHelp: 'Membres retirés (accès coupé). L’historique des jours est conservé jusqu’à la purge de rétention et inclus dans les exports CSV.',
+    formerReadOnly: 'Lecture seule — historique des jours conservé',
+    retentionInvalid: 'Indiquez un nombre entier de mois entre 1 et 120.',
     planTrialing: "essai gratuit jusqu’au {date}",
     planActive: "active, la période en cours se termine le {date}",
     planActiveNoDate: "active",
@@ -595,6 +606,7 @@ const fr: Dict = {
     planNone: "aucune offre active",
     planManage: "Mettre à jour le paiement ou résilier",
     signupTitle: 'Créer un compte entreprise',
+    creating: 'Création…',
     signupSubtitle:
       'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Abonnez-vous ensuite sur la page Tarifs.',
     companyName: 'Nom de l’entreprise',
@@ -633,6 +645,8 @@ const fr: Dict = {
     joinSubtitle:
       'Acceptez l’invitation, lisez l’avis sur ce que les RH peuvent voir et choisissez votre itinéraire.',
     joinButton: 'Rejoindre l’entreprise',
+    joining: 'Adhésion…',
+    nameRequired: 'Indiquez votre nom.',
     joinSuccess:
       'C’est fait : vous faites partie de l’entreprise. Ouvrez l’app collaborateur pour enregistrer vos jours.',
     pickBorder: 'Votre itinéraire',
@@ -667,7 +681,7 @@ const fr: Dict = {
     filingNote:
       'Dates de transmission par l’employeur que nous avons pu vérifier. Genève : première transmission du taux de télétravail à l’AFC en janvier 2027 pour les données de 2026 (ge.ch). Jura : attestation au 31 janvier suivant la période fiscale, dès la période fiscale 2026 (jura.ch). Les autres cantons n’ont pas été vérifiés. Ce tableau de bord et son CSV sont un document de travail, pas une déclaration.',
     deactivateMember: 'Retirer {name}',
-    deactivateConfirm: 'Retirer {name} de cette entreprise ? L’accès prend fin immédiatement. Ses journaux restent soumis à votre réglage de conservation, et le siège ne compte plus pour la facturation. Vous pourrez l’inviter à nouveau plus tard.',
+    deactivateConfirm: 'Retirer {name} de cette entreprise ? L’accès est coupé immédiatement. Les jours restent sur le dossier (Anciens employés) selon la rétention. Le siège n’est plus facturé. Vous pourrez réinviter plus tard.',
     deactivated: '{name} a été retiré·e.',
     deactivatedBillingPending: '{name} a été retiré·e, mais nous n’avons pas pu confirmer la mise à jour de l’abonnement. Écrivez à hello@borderday.com pour corriger le nombre de sièges.',
     deactivateFailed: 'Impossible de retirer cette personne. Réessayez.',
@@ -700,6 +714,9 @@ const fr: Dict = {
       'Les compteurs ne reflètent que les jours enregistrés ici et ne constituent pas une appréciation juridique ou fiscale. L’employeur reste responsable des demandes d’A1, de la paie et des déclarations fiscales. Vérifiez auprès de l’autorité compétente.',
     inviteLanguage: 'Langue du collaborateur',
     inviteFailed: 'Impossible de créer l’invitation. Vérifiez l’adresse et réessayez.',
+    inviteAlreadyMember: 'Cette adresse est déjà membre actif de cette entreprise.',
+    inviteReused: 'Une invitation en attente existe déjà pour cette adresse. Partagez le lien ci-dessous (ou renvoyez plus tard).',
+    inviteReusedEmailed: 'Une invitation en attente existe déjà ; l’e-mail a été renvoyé. Vous pouvez aussi partager le lien.',
   },
 
   terms: {
@@ -945,6 +962,14 @@ const fr: Dict = {
     googleHint: 'OAuth Google sécurisé — nous ne voyons jamais votre mot de passe Google.',
     googleNotReady: "Google n'est pas encore activé. Utilisez l'e-mail pour l'instant.",
     checkEmail: 'Vérifiez votre e-mail pour confirmer le compte (si demandé), puis continuez.',
+    checkEmailNamed: 'Consultez {email} pour confirmer votre compte, puis continuez.',
+    checkEmailHint: "Le formulaire est verrouillé pour éviter un second compte. Vous pouvez renvoyer l'e-mail de confirmation ci-dessous.",
+    resendConfirmation: "Renvoyer l'e-mail de confirmation",
+    creating: 'Création…',
+    passwordTooShort: 'Utilisez au moins {min} caractères.',
+    signUpInviteTitle: 'Rejoindre votre entreprise',
+    signUpInviteSubtitle: 'Créez votre compte BorderDay pour rejoindre {company}. Utilisez {email}.',
+
     noAccount: 'Pas encore de compte ?',
     hasAccount: 'Déjà un compte ?',
     notConfigured: "L'authentification n'est pas configurée dans cette version.",

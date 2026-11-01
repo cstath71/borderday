@@ -43,6 +43,8 @@ vi.mock('../src/lib/companyApi', async (original) => {
     listMyDaysIn: vi.fn(async () => []),
     listFormerCompanies: vi.fn(async () => []),
     deleteMyDayLogs: vi.fn(async () => undefined),
+    deleteMyDayLog: vi.fn(async () => undefined),
+    deleteMyPersonalDayLog: vi.fn(async () => undefined),
     upsertDayLog: vi.fn(),
     isDayLogOtherCompany: actual.isDayLogOtherCompany,
     hasIndividualAccess: vi.fn(async () => false),
@@ -108,6 +110,7 @@ beforeEach(() => {
   mocked.listMyCompanies.mockResolvedValue([]);
   mocked.listInvites.mockResolvedValue([]);
   mocked.listDayLogs.mockResolvedValue([]);
+  sessionStorage.clear();
 });
 afterEach(cleanup);
 
@@ -346,7 +349,7 @@ describe('Dashboard', () => {
     open('/en/company/c1/dashboard');
     await screen.findByText('Real Employee');
     expect(screen.getByText(en.company.billingInactive, { exact: false })).toBeTruthy();
-    expect(screen.getByRole('link', { name: en.company.billingCta }).getAttribute('href')).toBe('/en/pricing');
+    expect(screen.getByRole('link', { name: en.company.billingCta }).getAttribute('href')).toBe('/en/pricing?companyId=c1');
   });
 
   it('denies an employee and loads no company data', async () => {
@@ -532,7 +535,9 @@ describe('Join', () => {
       screen.getByText(en.company.noticeBody);
       screen.getByText(/This invite is for EMP@acme\.test/);
       const next = encodeURIComponent('/en/join/?t=tok');
-      expect(screen.getByRole('link', { name: en.auth.signUp }).getAttribute('href')).toBe(`/en/auth/sign-up?next=${next}`);
+      expect(screen.getByRole('link', { name: en.auth.signUp }).getAttribute('href')).toBe(
+        `/en/auth/sign-up?next=${next}&inviteEmail=${encodeURIComponent('EMP@acme.test')}&inviteCompany=${encodeURIComponent('Acme Real SA')}`,
+      );
       expect(screen.getAllByRole('link', { name: en.auth.signIn }).some((a) => a.getAttribute('href') === `/en/auth/sign-in?next=${next}`)).toBe(true);
       expect(screen.queryByRole('button', { name: en.company.joinButton })).toBeNull();
       expect(mocked.acceptInvite).not.toHaveBeenCalled();
@@ -657,7 +662,7 @@ describe('E2: sign-in with nothing asked for', () => {
     fireEvent.change(screen.getByLabelText(en.auth.password), { target: { value: 'password1' } });
     fireEvent.click(screen.getByRole('button', { name: en.auth.createAccount }));
     await waitFor(() => expect(signUpEmail).toHaveBeenCalledWith('a@x.test', 'password1', 'Ann ', { lang: 'en', next: '/en/join/tok' }));
-    await screen.findByText(en.auth.checkEmail);
+    await screen.findByText('Check a@x.test to confirm your account, then continue.');
   });
 });
 

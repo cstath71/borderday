@@ -1,0 +1,25 @@
+{{ if eq .Data.lang "en" }}
+<h2>Your sign-in link</h2>
+<p>Follow the link below to sign in. This link expires shortly and can only be used once.</p>
+<p><a href="{{ .ConfirmationURL }}">Sign in</a></p>
+{{ else if eq .Data.lang "fr" }}
+<h2>Votre lien de connexion</h2>
+<p>Suivez le lien ci-dessous pour vous connecter. Ce lien expire bientôt et ne peut être utilisé qu'une seule fois.</p>
+<p><a href="{{ .ConfirmationURL }}">Se connecter</a></p>
+{{ else if eq .Data.lang "de" }}
+<h2>Ihr Anmeldelink</h2>
+<p>Folgen Sie dem Link unten zur Anmeldung. Der Link läuft bald ab und kann nur einmal verwendet werden.</p>
+<p><a href="{{ .ConfirmationURL }}">Anmelden</a></p>
+{{ else if eq .Data.lang "it" }}
+<h2>Il tuo link di accesso</h2>
+<p>Segui il link sotto per accedere. Il link scade a breve e può essere usato una sola volta.</p>
+<p><a href="{{ .ConfirmationURL }}">Accedi</a></p>
+{{ else if eq .Data.lang "nl" }}
+<h2>Je aanmeldlink</h2>
+<p>Volg de link hieronder om in te loggen. Deze link verloopt binnenkort en kan maar één keer worden gebruikt.</p>
+<p><a href="{{ .ConfirmationURL }}">Inloggen</a></p>
+{{ else }}
+<h2>Your sign-in link</h2>
+<p>Follow the link below to sign in. This link expires shortly and can only be used once.</p>
+<p><a href="{{ .ConfirmationURL }}">Sign in</a></p>
+{{ end }}

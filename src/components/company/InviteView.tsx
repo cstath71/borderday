@@ -5,7 +5,7 @@ import { LANGS, type Dict, type Lang } from '../../i18n';
 import type { ResendResult } from '../../lib/companyApi';
 import PendingInvites from './PendingInvites';
 
-type Created = { link: string; emailed: boolean; emailBlock?: 'no_access' | 'rate_limited' | null };
+type Created = { link: string; emailed: boolean; emailBlock?: 'no_access' | 'rate_limited' | null; reused?: boolean };
 
 /** Presentational: the real invite page and /demo supply the data and the create action. */
 export default function InviteView(props: {
@@ -35,12 +35,15 @@ export default function InviteView(props: {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    setCreated(null); // F11: one status region — drop prior success before the next attempt
     setBusy(true);
     try {
       setCreated(await onCreate(email, role, inviteLang));
       setEmail('');
-    } catch {
-      setError(d.company.inviteFailed);
+    } catch (err) {
+      const code = err && typeof err === 'object' && 'code' in err ? String((err as { code?: string }).code) : '';
+      if (code === 'already_member') setError(d.company.inviteAlreadyMember);
+      else setError(d.company.inviteFailed);
     } finally {
       setBusy(false);
     }
@@ -98,13 +101,19 @@ export default function InviteView(props: {
         {created && (
           <div>
             <p role="status">
-              {created.emailed
-                ? d.company.inviteEmailed
-                : created.emailBlock === 'no_access'
-                  ? d.company.inviteNotEmailedNoPlan
+              {created.reused
+                ? created.emailed
+                  ? d.company.inviteReusedEmailed
                   : created.emailBlock === 'rate_limited'
                     ? d.company.inviteNotEmailedLimit
-                    : d.company.inviteCreated}
+                    : d.company.inviteReused
+                : created.emailed
+                  ? d.company.inviteEmailed
+                  : created.emailBlock === 'no_access'
+                    ? d.company.inviteNotEmailedNoPlan
+                    : created.emailBlock === 'rate_limited'
+                      ? d.company.inviteNotEmailedLimit
+                      : d.company.inviteCreated}
             </p>
             <label>
               {d.company.inviteLinkLabel}

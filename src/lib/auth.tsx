@@ -4,9 +4,11 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
+import { flushSync } from 'react-dom';
 import type { Session, User } from '@supabase/supabase-js';
 import { authCallbackUrl, supabase, supabaseConfigured } from './supabase';
 
@@ -35,6 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(!supabaseConfigured);
   const [session, setSession] = useState<Session | null>(null);
   const [signingOut, setSigningOut] = useState(false);
+  const signingOutRef = useRef(false);
 
   useEffect(() => {
     if (!supabase) return;
@@ -56,12 +59,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signUpEmail = useCallback(async (email: string, password: string, displayName?: string, back?: AuthReturn) => {
     if (!supabase) return { error: 'Auth not configured' };
     const name = displayName?.trim();
+    const lang = back?.lang && ['en', 'fr', 'de', 'it', 'nl'].includes(back.lang) ? back.lang : 'en';
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: authCallbackUrl(back?.lang, back?.next),
-        data: name ? { display_name: name } : undefined,
+        // F23: locale for confirmation / auth emails (hook or templates read user_metadata.lang).
+        data: { ...(name ? { display_name: name } : {}), lang },
       },
     });
     return { error: error?.message ?? null };
@@ -75,9 +80,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInMagicLink = useCallback(async (email: string, back?: AuthReturn) => {
     if (!supabase) return { error: 'Auth not configured' };
+    const lang = back?.lang && ['en', 'fr', 'de', 'it', 'nl'].includes(back.lang) ? back.lang : 'en';
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: authCallbackUrl(back?.lang, back?.next) },
+      options: {
+        emailRedirectTo: authCallbackUrl(back?.lang, back?.next),
+        // F23: locale for magic-link auth emails (hook / templates read user_metadata.lang).
+        data: { lang },
+      },
     });
     return { error: error?.message ?? null };
   }, []);
@@ -98,7 +108,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOutAndGo = useCallback(async (lang: string) => {
     const dest = `/${lang}/`;
-    setSigningOut(true);
+    // F33: flush so signingOut is true before onAuthStateChange / guards re-render.
+    signingOutRef.current = true;
+    flushSync(() => setSigningOut(true));
     try {
       if (supabase) await supabase.auth.signOut();
     } finally {

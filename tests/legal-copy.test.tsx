@@ -283,13 +283,17 @@ describe('C6 withdrawal wording', () => {
     expect(getDict('it').terms.s5Form).toMatch(/Ordinato il \/ ricevuto il.*Nome del consumatore.*Indirizzo del consumatore.*Firma.*Data/s);
   });
 
-  it('H12: says a renewed yearly plan can be cancelled at any time after the first year, and cites L215-1 without invented refund maths', () => {
-    expect(getDict('en').terms.s3YearlyBody).toMatch(/After the first year you can cancel a renewed yearly plan at any time/);
-    expect(getDict('de').terms.s3YearlyBody).toMatch(/Nach dem ersten Jahr/);
-    expect(getDict('fr').terms.s3YearlyBody).toMatch(/Après la première année/);
-    expect(getDict('it').terms.s3YearlyBody).toMatch(/Dopo il primo anno/);
+  it('H12: yearly Terms match the Stripe portal — cancel anytime, stop at period end, no partial refunds except where law requires; L215-1 kept; no invented refund maths', () => {
+    expect(getDict('en').terms.s3YearlyBody).toMatch(/You can cancel at any time; the plan then stops at the end of the current paid period/);
+    expect(getDict('en').terms.s3YearlyBody).toMatch(/no partial refunds for the unused part of a period, except where the law requires them/i);
+    expect(getDict('fr').terms.s3YearlyBody).toMatch(/Vous pouvez résilier à tout moment ; l’offre prend alors fin à la fin de la période payée en cours/);
+    expect(getDict('de').terms.s3YearlyBody).toMatch(/Sie können jederzeit kündigen; der Plan endet dann am Ende der laufenden bezahlten Periode/);
+    expect(getDict('it').terms.s3YearlyBody).toMatch(/Potete disdire in qualsiasi momento; il piano cessa allora alla fine del periodo pagato in corso/);
+    expect(getDict('nl').terms.s3YearlyBody).toMatch(/U kunt op elk moment opzeggen; het abonnement stopt dan aan het einde van de lopende betaalde periode/);
     for (const [, d] of dicts) {
       expect(d.terms.s3YearlyBody).toMatch(/L215-1/);
+      // Statutory free-end-after-renewal (L215-1) stays; product “after first year / end anytime after renewal” is gone.
+      expect(d.terms.s3YearlyBody).not.toMatch(/After the first year|Après la première année|Nach dem ersten Jahr|Dopo il primo anno|Na het eerste jaar/);
       // No invented euro/day refund maths — article cites and worded month windows only.
       expect(d.terms.s3YearlyBody).not.toMatch(/€\d|\d+%/);
     }

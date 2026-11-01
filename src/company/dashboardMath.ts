@@ -188,7 +188,7 @@ export function filterRows(
 }
 
 /**
- * Corridors with an employer telework-rate filing we could verify: Geneva (ge.ch) under geneva_fr,
+ * Nationwide FR–CH employer telework-rate attestation (ESTV); Geneva (ge.ch) under geneva_fr uses its own form,
  * Jura (jura.ch) under basel_fr. Other cantons in these corridors were not verified.
  */
 const FILING_NOTE_PACKS: ReadonlySet<BorderId> = new Set<BorderId>(['geneva_fr', 'basel_fr']);
@@ -229,9 +229,9 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     'year',
   ];
   const disclaimer =
-    '# BorderDay working export — day types and counts only, never location. Not the annual telework-rate filing some cantons require (e.g. Geneva, to its cantonal tax office, the AFC). Compute and submit that rate with your authority.';
+    '# BorderDay working export — day types and counts only, never location. Working record only — not an official filing. Compute and submit any required rate with your authority.';
   const filing =
-    ' Dates we could verify: Geneva, first transmission to the AFC in January 2027 for 2026 data; Jura, attestation by 31 January following the fiscal period, from fiscal period 2026. Other cantons not verified.';
+    ' Nationwide FR–CH telework-rate attestation: all Swiss employers of France residents file early the following year with the cantonal tax authority, including at 0%. First: early 2027 for 2026. Geneva and Vaud use their own form (Geneva AFC / ge.ch); otherwise federal form or ELM/cantonal portal. Jura: attestation by 31 January following the fiscal period, from fiscal period 2026 (jura.ch).';
   const lines = [needsFilingNote(rows) ? disclaimer + filing : disclaimer, header.join(',')];
   for (const r of rows) {
     // Working calc of telework % for this employee (not an AFC filing figure).

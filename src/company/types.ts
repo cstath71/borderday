@@ -43,6 +43,8 @@ export interface Invitation {
   invitedBy: string | null;
   createdAt: string;
   expiresAt: string;
+  /** UI language chosen when the invite was created (A2-06). */
+  lang: string;
 }
 
 export interface DayLog {

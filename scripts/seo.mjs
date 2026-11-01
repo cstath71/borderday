@@ -809,11 +809,11 @@ export const FAQ = {
     ],
     [
       'How do payments work?',
-      'Checkout uses Stripe Managed Payments: Stripe is the merchant of record and handles VAT/GST in Checkout; checkout branding may show purchases as sold through Link. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
+      'Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. Promo codes are supported. See Terms for cancellation and the EU 14-day withdrawal right for consumers.',
     ],
     [
       'What does BorderDay not cover?',
-      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate report some cantons require. When in doubt, check with your authority.',
+      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate attestation all Swiss employers of France residents must file (including at 0%). When in doubt, check with your authority.',
     ],
   ],
   fr: [
@@ -839,11 +839,11 @@ export const FAQ = {
     ],
     [
       'Comment fonctionnent les paiements ?',
-      'Le paiement utilise Stripe Managed Payments : Stripe est le marchand officiel (merchant of record) et gère la TVA/GST au checkout ; la présentation du checkout peut indiquer un achat vendu via Link. Codes promo acceptés. Voir les CGU pour la résiliation et le droit de rétractation UE de 14 jours.',
+      'Le paiement utilise Stripe Managed Payments : Stripe assure les fonctions de marchand officiel (merchant of record) et gère la TVA/GST au checkout ; le client peut voir Link comme marchand officiel. Codes promo acceptés. Voir les CGU pour la résiliation et le droit de rétractation UE de 14 jours.',
     ],
     [
       'Que ne couvre pas BorderDay ?',
-      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme le taux de télétravail annuel exigé par certains cantons. En cas de doute, vérifiez auprès de votre autorité.',
+      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme l’attestation annuelle du taux de télétravail que tous les employeurs suisses de résidents fiscaux français doivent transmettre (y compris à 0 %). En cas de doute, vérifiez auprès de votre autorité.',
     ],
   ],
   de: [
@@ -869,11 +869,11 @@ export const FAQ = {
     ],
     [
       'Wie funktionieren Zahlungen?',
-      'Checkout über Stripe Managed Payments: Stripe ist der Merchant of Record und übernimmt MWST/GST im Checkout; im Checkout kann der Kauf als «über Link verkauft» erscheinen. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
+      'Checkout über Stripe Managed Payments: Stripe stellt Merchant-of-Record-Funktionen bereit und übernimmt MWST/GST im Checkout; Kundinnen und Kunden können Link als Merchant of Record sehen. Promo-Codes möglich. Kündigung und 14-tägiges EU-Widerrufsrecht: siehe Nutzungsbedingungen.',
     ],
     [
       'Was deckt BorderDay nicht ab?',
-      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die von manchen Kantonen verlangte jährliche Telearbeitsquote. Im Zweifel fragen Sie Ihre Behörde.',
+      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die jährliche Telearbeitsquoten-Bescheinigung, die alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen einreichen müssen (auch bei 0 %). Im Zweifel fragen Sie Ihre Behörde.',
     ],
   ],
   it: [
@@ -899,11 +899,11 @@ export const FAQ = {
     ],
     [
       'Come funzionano i pagamenti?',
-      'Il checkout usa Stripe Managed Payments: Stripe è il merchant of record e gestisce IVA/GST nel checkout; il checkout può indicare l’acquisto come venduto tramite Link. Codici promo supportati. Vedete le Condizioni per disdetta e recesso UE di 14 giorni.',
+      'Il checkout usa Stripe Managed Payments: Stripe fornisce funzioni di merchant of record e gestisce IVA/GST nel checkout; il cliente può vedere Link come merchant of record. Codici promo supportati. Vedete le Condizioni per disdetta e recesso UE di 14 giorni.',
     ],
     [
       'Cosa non copre BorderDay?',
-      'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. I corridoi non elencati, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni corridoio. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come il tasso annuo di telelavoro richiesto da alcuni cantoni. In caso di dubbio, verificate con la vostra autorità.',
+      'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. I corridoi non elencati, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni corridoio. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come l’attestazione annuale del tasso di telelavoro che tutti i datori di lavoro svizzeri di residenti fiscali in Francia devono trasmettere (anche allo 0 %). In caso di dubbio, verificate con la vostra autorità.',
     ],
   ],
 };
@@ -930,11 +930,11 @@ FAQ.nl = [
   ],
   [
     'Hoe werken betalingen?',
-    'Checkout gebruikt Stripe Managed Payments: Stripe is de merchant of record en behandelt btw/GST in Checkout; in de checkout kan de aankoop worden getoond als verkocht via Link. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
+    'Checkout gebruikt Stripe Managed Payments: Stripe verricht merchant-of-record-functies en behandelt btw/GST in Checkout; de klant kan Link als merchant of record zien. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
   ],
   [
     'Wat dekt BorderDay niet?',
-    'Zelfstandigen, bijzondere regels voor de openbare sector, personen met werkgevers in meerdere staten, en niet-IT-werk onder het telewerkkader. Niet vermelde corridors, zoals Frankrijk→Duitsland of Nederland→Duitsland. Tellers zien alleen hier geregistreerde dagen, dus andere jobs in het jaar zijn niet inbegrepen. Belastingtellers lopen niet op elke corridor. De CSV-export is een werkdocument, geen officiële aangifte zoals het jaarlijkse telewerkpercentage-rapport dat sommige kantons eisen. Twijfelt u, controleer bij uw autoriteit.',
+    'Zelfstandigen, bijzondere regels voor de openbare sector, personen met werkgevers in meerdere staten, en niet-IT-werk onder het telewerkkader. Niet vermelde corridors, zoals Frankrijk→Duitsland of Nederland→Duitsland. Tellers zien alleen hier geregistreerde dagen, dus andere jobs in het jaar zijn niet inbegrepen. Belastingtellers lopen niet op elke corridor. De CSV-export is een werkdocument, geen officiële aangifte zoals de jaarlijkse telewerkpercentage-attestatie die alle Zwitserse werkgevers van fiscale inwoners van Frankrijk moeten indienen (ook bij 0%). Twijfelt u, controleer bij uw autoriteit.',
   ],
 ];
 

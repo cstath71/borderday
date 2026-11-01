@@ -455,7 +455,7 @@ const fr: Dict = {
       'Le paiement utilise Stripe Managed Payments : Stripe assure les fonctions de marchand officiel (merchant of record) et gère la TVA/GST au checkout ; le client peut voir Link comme marchand officiel. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte est requise à l’inscription. Après 7 jours, l’offre devient payante au prix indiqué (individuel 4,99 €/mois ou 49 €/an TVA incluse ; entreprise 5 € par collaborateur actif et par mois, minimum 39 €/mois, ou minimum 390 €/an, hors TVA), débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation. Les codes promo sont acceptés. Voir les CGU pour la résiliation et le droit de rétractation de 14 jours (consommateurs UE).',
     q8: 'Que ne couvre pas BorderDay ?',
     a8:
-      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme le taux de télétravail annuel exigé par certains cantons. En cas de doute, vérifiez auprès de votre autorité.',
+      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme l’attestation annuelle du taux de télétravail que tous les employeurs suisses de résidents fiscaux français doivent transmettre (y compris à 0 %). En cas de doute, vérifiez auprès de votre autorité.',
   },
   privacy: {
     title: 'Confidentialité',
@@ -586,7 +586,7 @@ const fr: Dict = {
       'Une adresse e-mail est nécessaire pour un compte et les données de jours pour les compteurs : sans elles, le service ne peut pas être fourni. Le taux d’emploi, l’A1 et les notes sont facultatifs, mais certains seuils sont moins précis sans eux. BorderDay ne prend aucune décision automatisée produisant des effets juridiques : les compteurs ne font que calculer à partir des jours enregistrés.',
     storageTitle: 'Stockage sur votre appareil',
     storageBody:
-      'BorderDay n’installe pas de cookies et n’utilise pas de traqueurs publicitaires ou d’analyse. Il ne stocke sur votre appareil que ce dont l’application a besoin : IndexedDB pour le journal et les réglages de l’aperçu gratuit, localStorage pour votre session de connexion et l’entreprise de démonstration, et un cache du service worker pour le chargement hors ligne. Ces éléments sont strictement nécessaires au service. En vertu de l’art. 45c LTC (loi sur les télécommunications / FMG), nous vous informons que ce traitement sur votre terminal sert à fournir le service ; vous pouvez le refuser en effaçant les données du site ou en n’utilisant pas le produit. Aucune bannière de consentement n’est affichée pour ces stockages strictement nécessaires. Vous pouvez les effacer dans les paramètres de votre navigateur.',
+      'BorderDay n’installe pas de cookies et n’utilise pas de traqueurs publicitaires ou d’analyse. Il ne stocke sur votre appareil que ce dont l’application a besoin : IndexedDB pour le journal et les réglages de l’aperçu gratuit, localStorage pour votre session de connexion, la dernière langue choisie et l’entreprise de démonstration, et un cache du service worker pour le chargement hors ligne. Ces éléments sont strictement nécessaires au service. En vertu de l’art. 45c LTC (loi sur les télécommunications / FMG), nous vous informons que ce traitement sur votre terminal sert à fournir le service ; vous pouvez le refuser en effaçant les données du site ou en n’utilisant pas le produit. Aucune bannière de consentement n’est affichée pour ces stockages strictement nécessaires. Vous pouvez les effacer dans les paramètres de votre navigateur.',
     s7Title: 'Transparence collaborateur / RH',
     s7Body:
       'Aucun score caché réservé aux RH. Le calcul des compteurs (jours utilisés, autorisés, statut) est identique pour le collaborateur et le tableau de bord RH.',
@@ -663,8 +663,7 @@ const fr: Dict = {
     filterStatus: 'Filtrer par statut',
     filterAll: 'Tous',
     exportCsv: 'Exporter CSV',
-    exportCsvNote:
-      'Document de travail uniquement. Ce n’est pas le taux de télétravail annuel exigé par certains cantons (par ex. Genève, auprès de son administration fiscale cantonale, l’AFC) : calculez et déclarez ce taux auprès de votre autorité.',
+    exportCsvNote: 'Document de travail uniquement. Ce n’est pas l’attestation annuelle du taux de télétravail que tous les employeurs suisses de résidents fiscaux français doivent transmettre en début d’année suivante à l’autorité fiscale cantonale — y compris à 0 %. Première transmission : début 2027 pour 2026. Genève et Vaud ont leur propre formulaire (Genève AFC / ge.ch) ; sinon formulaire fédéral ou ELM/portail cantonal. Calculez et déclarez ce taux auprès de votre autorité.',
     employees: 'Collaborateurs',
     noEmployees: 'Aucun collaborateur. Créez un lien d’invitation.',
     viewHistory: 'Historique des jours',
@@ -709,8 +708,7 @@ const fr: Dict = {
     emptyCounters: 'Le collaborateur n’a pas encore choisi d’itinéraire.',
     workingDaysBase: 'Base de jours de travail',
     workingDaysBaseHint: 'Sert aux pourcentages de cet employé. Actuellement {annual} jours. Laissez vide pour suivre le taux d’emploi.',
-    filingNote:
-      'Dates de transmission par l’employeur que nous avons pu vérifier. Genève : première transmission du taux de télétravail à l’AFC en janvier 2027 pour les données de 2026 (ge.ch). Jura : attestation au 31 janvier suivant la période fiscale, dès la période fiscale 2026 (jura.ch). Les autres cantons n’ont pas été vérifiés. Ce tableau de bord et son CSV sont un document de travail, pas une déclaration.',
+    filingNote: 'Tous les employeurs suisses de résidents fiscaux français attestent un taux de télétravail en début d’année suivante auprès de l’autorité fiscale cantonale, y compris à 0 %. Première transmission : début 2027 pour 2026. Genève et Vaud ont leur propre formulaire (Genève AFC / ge.ch) ; les autres cantons utilisent le formulaire fédéral ou ELM/portail cantonal. Jura : attestation au 31 janvier suivant la période fiscale, dès la période fiscale 2026 (jura.ch). Ce tableau de bord et son CSV sont un document de travail, pas une déclaration.',
     deactivateMember: 'Retirer {name}',
     deactivateConfirm: 'Retirer {name} de cette entreprise ? L’accès est coupé immédiatement. Les jours restent sur le dossier (Anciens employés) selon la rétention. Le siège n’est plus facturé. Vous pourrez réinviter plus tard.',
     deactivated: '{name} a été retiré·e.',
@@ -1006,6 +1004,7 @@ const fr: Dict = {
     notConfigured: "L'authentification n'est pas configurée dans cette version.",
     completing: 'Finalisation de la connexion…',
     callbackFailed: 'Impossible de terminer la connexion. Réessayez.',
+    callbackPkceHint: 'Ce lien de confirmation doit être ouvert sur le même appareil et navigateur que ceux qui ont démarré la connexion. Ouvrez BorderDay là-bas, ou reconnectez-vous sur cet appareil.',
     paymentsUnavailable: 'Impossible de démarrer le paiement — réessayez ou contactez le support.',
     signOut: 'Se déconnecter',
     signUpTerms:

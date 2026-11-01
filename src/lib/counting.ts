@@ -46,9 +46,15 @@ function contribution(
 
 /** Weight of one logged day for this counter (0.5 or 1; LU fractionCountsAsFull → always 1). */
 function entryWeight(counter: LimitCounter, e: DayEntry): number {
-  const share = e.dayShare === 0.5 ? 0.5 : 1;
+  const share = dayShareOf(e);
   if (counter.fractionCountsAsFull) return share > 0 ? 1 : 0;
+  // A night away is binary, and KonsVerCHEV §8(5) third-state days "zählen stets": neither halves on a half day.
+  if (counter.countsOvernight && countsAsDay(counter, e)) return 1;
   return share;
+}
+
+function dayShareOf(e: DayEntry): number {
+  return e.dayShare === 0.5 ? 0.5 : 1;
 }
 
 function sumWeights(entries: DayEntry[], counter: LimitCounter, pred: (e: DayEntry) => boolean): number {
@@ -362,7 +368,7 @@ export function evaluateCounter(
   const shareCounter = pack.counters.find((c) => c.missionRole === 'share');
   const missionSplit = () => {
     const by = (type: DayType) =>
-      yearEntries.reduce((sum, e) => (e.type === type ? sum + (e.dayShare === 0.5 ? 0.5 : 1) : sum), 0);
+      yearEntries.reduce((sum, e) => (e.type === type ? sum + dayShareOf(e) : sum), 0);
     return chFrMissionSplit({
       telework: by('telework'),
       missions: by('third_country'),
@@ -450,7 +456,11 @@ export function evaluateCounter(
   let excessIncluded = 0;
   if (counter.includeMissionExcess && shareCounter && missionsCounter) {
     const split = missionSplit();
-    const flaggedTrips = sumWeights(inPeriod, counter, (e) => e.type === 'third_country' && countsAsDay(counter, e));
+    // In day shares, like the split: a flagged half-day trip weighs one night but half a mission day.
+    const flaggedTrips = inPeriod.reduce(
+      (sum, e) => (e.type === 'third_country' && countsAsDay(counter, e) ? sum + dayShareOf(e) : sum),
+      0,
+    );
     excessIncluded = Math.min(split.excess, split.counted + split.excess - flaggedTrips);
     used += excessIncluded;
   }

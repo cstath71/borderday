@@ -45,7 +45,7 @@ export interface EmployeeDashboardRow {
   storedAnnualWorkingDays: number | null;
   profile: EmploymentProfile;
   counters: EmployeeCounterSummary[];
-  /** Worst non-disabled status across enabled counters. */
+  /** Worst status across enabled tax and social-security counters. */
   worstStatus: AggregateStatus;
   isDemo: boolean;
 }
@@ -67,6 +67,21 @@ type CountedLog = Pick<DayLog, 'workDate' | 'dayType' | 'note' | 'overnightAway'
 
 export function dayLogsToEntries(logs: CountedLog[]): DayEntry[] {
   return logs.map((l) => ({ date: l.workDate, type: l.dayType, note: l.note, overnightAway: l.overnightAway, dayShare: l.dayShare }));
+}
+
+/**
+ * The dashboard status of one employee. Staff rules of one employer (Basel-Stadt's floor) stay out:
+ * BorderDay does not know whose staff this is, so that counter keeps its own badge in the detail view
+ * but cannot flag the employee overall.
+ */
+export function aggregateStatus(counters: Pick<EmployeeCounterSummary, 'kind' | 'enabled' | 'status'>[]): AggregateStatus {
+  if (counters.every((c) => c.status === 'disabled' || !c.enabled)) return 'disabled';
+  let worst: AggregateStatus = 'ok';
+  for (const c of counters) {
+    if (c.status === 'disabled' || c.kind === 'employer_practice') continue;
+    worst = worse(worst, c.status);
+  }
+  return worst;
 }
 
 export function summarizeEmployee(opts: {
@@ -144,12 +159,7 @@ export function summarizeEmployee(opts: {
       sources: c.sources,
     };
   });
-  let worst: AggregateStatus = 'ok';
-  for (const c of counters) {
-    if (c.status === 'disabled') continue;
-    worst = worse(worst, c.status);
-  }
-  if (counters.every((c) => c.status === 'disabled' || !c.enabled)) worst = 'disabled';
+  const worst = aggregateStatus(counters);
   return {
     userId: opts.userId,
     displayName: opts.displayName,

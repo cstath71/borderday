@@ -19,7 +19,7 @@ const SRC = {
   geCalc: {
     title: 'ge.ch — calculer le taux de télétravail',
     url: 'https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres/comment-calculer-taux-teletravail',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   estvAi: {
     title: 'ESTV amicable agreement CH–FR (PDF)',
@@ -46,10 +46,11 @@ const SRC = {
     url: 'https://www.cleiss.fr/particuliers/teletravail-transfrontalier.html',
     checked: CHECKED,
   },
-  sifIt: {
-    title: 'SIF — Switzerland–Italy home office rules in force',
+  // Supports the 25%, the 9 Feb 2026 entry into force and the 1 Jan 2024 start. It does not mention the 45 days.
+  fsioIt: {
+    title: 'FSIO (BSV/OFAS/UFAS) — release of 13 Feb 2026: Switzerland–Italy home office rules in force',
     url: 'https://www.bsv.admin.ch/en/newnsb/KIyFJwwqspqaOcHDaT7u0',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   fedlex: {
     title: 'Fedlex RU 2026 104 — protocollo CH–IT (published)',
@@ -59,7 +60,7 @@ const SRC = {
   baselStadt: {
     title: 'Basel-Stadt — Homeoffice Vorgaben (rules for its own staff)',
     url: 'https://media.bs.ch/original_file/e51a326a9041d841276beda8d30aa16451ad97ca/homeoffice-vorgaben-fuer-grenzgaengerinnen-und-grenzgaenger.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   fwMemo: {
     title: 'Belgian FPS — framework agreement, explanatory memorandum (25% and 50%)',
@@ -79,7 +80,7 @@ const SRC = {
   ge40: {
     title: 'ge.ch — au-delà de 40% de télétravail (imposable en France dès le 1er jour)',
     url: 'https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres/au-dela-40-activite-teletravail',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   ai1983: {
     title: 'impots.gouv.fr — accord amiable du 30 juin 2023 (accord frontalier de 1983)',
@@ -94,7 +95,7 @@ const SRC = {
   impotsCantons: {
     title: 'impots.gouv.fr — tax treatment of cross-border workers, by canton',
     url: 'https://www.impots.gouv.fr/international-particulier/questions/tax-treatment-cross-border-workers',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   jura: {
     title: 'Canton du Jura — frontaliers (45 nuits, 4,5 %, attestation au 31 janvier dès 2026)',
@@ -163,9 +164,9 @@ const SRC = {
   },
 
   estvDeCh2022: {
-    title: 'ESTV — Konsultationsvereinbarung DE–CH 26 Jul 2022 (home office ≠ Nichtrückkehr)',
+    title: 'ESTV — Konsultationsvereinbarung DE–CH, signed 15 and 18 Jul 2022 (home office ≠ Nichtrückkehr)',
     url: 'https://www.estv.admin.ch/dam/de/sd-web/otwXkqgI2YRg/int-laender-de-dba-kv-20220718-de.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   art15a: {
     title: 'Fedlex — DBA DE–CH Art. 15a (60 Arbeitstage)',
@@ -174,8 +175,8 @@ const SRC = {
   },
   luCirc71: {
     title: 'ACD Luxembourg — Circulaire L.G. - Conv. D.I. n° 71 (34 jours, 30 min, dès 2024)',
-    url: 'https://impotsdirects.public.lu/dam-assets/fr/legislation/legi24/circulaires/circulaire-lg-conv-di-71-du-18-mars-2024.pdf',
-    checked: CHECKED,
+    url: 'https://impotsdirects.public.lu/dam-assets/fr/legislation/circulaires/circulaire-lg-conv-di-71-du-18-mars-2024.pdf',
+    checked: '2026-11-01',
   },
   bofip45: {
     title: 'BOFiP archives — 14 A-5-05 (45 nuitées, échange de lettres 2005)',
@@ -240,6 +241,7 @@ export const BORDER_PACKS: BorderPack[] = [
     workCountries: ['CH'],
     regionNoteKey: 'geneva_region',
     defaultAnnualWorkingDays: 240,
+    logHintKey: 'logHint_ch_fr',
     dayHintKeys: { telework: 'teleworkHint_ch_fr' },
     counters: [
       {
@@ -296,6 +298,7 @@ export const BORDER_PACKS: BorderPack[] = [
     workCountries: ['CH'],
     regionNoteKey: 'ch_fr_1983_region',
     defaultAnnualWorkingDays: 240,
+    logHintKey: 'logHint_ch_fr',
     dayHintKeys: { telework: 'teleworkHint_ch_fr' },
     counters: [
       {
@@ -619,7 +622,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.fedlex, SRC.accordo2020, SRC.sifIt],
+        sources: [SRC.fedlex, SRC.accordo2020, SRC.fsioIt],
         notesKey: 'ch_it_tax_note',
         overKey: 'ch_it_over',
       },
@@ -641,7 +644,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.fedlex, SRC.accordo2020, SRC.sifIt],
+        sources: [SRC.fedlex, SRC.accordo2020],
         notesKey: 'ch_it_nonreturn_note',
         overKey: 'ch_it_over',
       },

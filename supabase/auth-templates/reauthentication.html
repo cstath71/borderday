@@ -1,0 +1,25 @@
+{{ if eq .Data.lang "en" }}
+<h2>Your verification code</h2>
+<p>Use the code below to verify your identity. It expires shortly.</p>
+<p><strong>Verification code: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "fr" }}
+<h2>Votre code de vérification</h2>
+<p>Utilisez le code ci-dessous pour vérifier votre identité. Il expire bientôt.</p>
+<p><strong>Code de vérification: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "de" }}
+<h2>Ihr Bestätigungscode</h2>
+<p>Verwenden Sie den Code unten zur Identitätsprüfung. Er läuft bald ab.</p>
+<p><strong>Bestätigungscode: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "it" }}
+<h2>Il tuo codice di verifica</h2>
+<p>Usa il codice sotto per verificare la tua identità. Scade a breve.</p>
+<p><strong>Codice di verifica: {{ .Token }}</strong></p>
+{{ else if eq .Data.lang "nl" }}
+<h2>Je verificatiecode</h2>
+<p>Gebruik de code hieronder om je identiteit te verifiëren. Deze verloopt binnenkort.</p>
+<p><strong>Verificatiecode: {{ .Token }}</strong></p>
+{{ else }}
+<h2>Your verification code</h2>
+<p>Use the code below to verify your identity. It expires shortly.</p>
+<p><strong>Verification code: {{ .Token }}</strong></p>
+{{ end }}

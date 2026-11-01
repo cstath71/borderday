@@ -21,13 +21,16 @@ export default function Home() {
           <p id="summary" className="lead"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
           <p className="lead">{d.home.heroBody}</p>
           <div className="hero-cta">
-            <Link className="btn btn-primary" to={`/${lang}/auth/sign-up`}>{d.home.ctaPrimary}
+            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>{d.home.ctaPrimary}
             </Link>
             <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
               {d.home.ctaSecondary}
             </Link>
             <Link className="btn btn-ghost" to={`/${lang}/for-individuals`}>
               {d.home.ctaIndividuals}
+            </Link>
+            <Link className="btn btn-ghost" to={`/${lang}/auth/sign-up`}>
+              {d.home.ctaIndividualSignup}
             </Link>
           </div>
           <p style={{ marginTop: '1rem', color: 'var(--ink-muted)', fontSize: '0.9rem' }}>

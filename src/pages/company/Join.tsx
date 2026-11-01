@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import JoinForm from '../../components/company/JoinForm';
+import LoadingSkeleton from '../../components/LoadingSkeleton';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import type { BorderId } from '../../borders/types';
@@ -32,8 +33,16 @@ export default function JoinCompany() {
   const auth = useAuth();
   const { token: paramToken = '' } = useParams();
   const [searchParams] = useSearchParams();
+  const nav = useNavigate();
   const token = resolveInviteToken(paramToken, searchParams);
   const [peek, setPeek] = useState<Peek>({ status: 'loading' });
+
+  // F17: canonical join URL is /join/?t=… (path token still works once, then is replaced).
+  useEffect(() => {
+    if (!paramToken) return;
+    const t = paramToken;
+    nav(`/${lang}/join/?t=${encodeURIComponent(t)}`, { replace: true });
+  }, [paramToken, lang, nav]);
   const [done, setDone] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -76,7 +85,8 @@ export default function JoinCompany() {
 
   let body: React.ReactNode;
   if (!auth.ready || peek.status === 'loading') {
-    body = <p role="status">{d.company.loading}</p>;
+    // F18: keep page shell; skeleton instead of a blank Loading flash.
+    body = <LoadingSkeleton label={d.company.loading} />;
   } else if (done) {
     body = (
       <div className="card">
@@ -100,7 +110,10 @@ export default function JoinCompany() {
           <Link to={`/${lang}/privacy`}>{d.company.noticePrivacyLink}</Link>
         </p>
         <div className="toolbar">
-          <Link className="btn btn-primary" to={`/${lang}/auth/sign-up?next=${next}`}>
+          <Link
+            className="btn btn-primary"
+            to={`/${lang}/auth/sign-up?next=${next}&inviteEmail=${encodeURIComponent(peek.invite.email)}&inviteCompany=${encodeURIComponent(peek.invite.companyName)}`}
+          >
             {d.auth.signUp}
           </Link>
           <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${next}`}>
@@ -127,6 +140,11 @@ export default function JoinCompany() {
         companyName={peek.invite.companyName}
         email={peek.invite.email}
         role={peek.invite.role}
+        initialDisplayName={
+          (auth.user?.user_metadata?.display_name as string | undefined)?.trim() ||
+          (auth.user?.email ? auth.user.email.split('@')[0] : '') ||
+          ''
+        }
         error={error}
         busy={busy}
         privacyHref={`/${lang}/privacy`}

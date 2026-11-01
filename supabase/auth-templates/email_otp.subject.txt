@@ -1,0 +1,1 @@
+{{ if eq .Data.lang "fr" }}Votre code de connexion BorderDay{{ else if eq .Data.lang "de" }}Ihr BorderDay-Anmeldecode{{ else if eq .Data.lang "it" }}Il tuo codice di accesso BorderDay{{ else if eq .Data.lang "nl" }}Je BorderDay-aanmeldcode{{ else }}Your BorderDay sign-in code{{ end }}

@@ -18,6 +18,7 @@ export default function Pricing() {
   const [note, setNote] = useState<string | null>(null);
   const [banner, setBanner] = useState<'success' | 'cancel' | null>(null);
   const [companyId, setCompanyId] = useState<string | null>(null);
+  const [ownedCompanies, setOwnedCompanies] = useState<Array<{ id: string; name: string }>>([]);
   const [busy, setBusy] = useState(false);
   const [expressStart, setExpressStart] = useState(false);
 
@@ -32,17 +33,33 @@ export default function Pricing() {
   }, [searchParams, setSearchParams]);
 
   useEffect(() => {
-    if (!auth.user) { setCompanyId(null); return; }
+    if (!auth.user) {
+      setCompanyId(null);
+      setOwnedCompanies([]);
+      return;
+    }
     let cancelled = false;
+    const fromUrl = searchParams.get('companyId');
     listMyCompanies()
       .then((list) => {
         if (cancelled) return;
-        const owned = list.find((c) => c.role === 'owner' || c.role === 'hr_viewer');
-        setCompanyId(owned?.id ?? null);
+        const owned = list.filter((c) => c.role === 'owner');
+        setOwnedCompanies(owned.map((c) => ({ id: c.id, name: c.name })));
+        if (fromUrl && owned.some((c) => c.id === fromUrl)) setCompanyId(fromUrl);
+        else if (owned.length === 1) setCompanyId(owned[0].id);
+        else if (owned.length > 1) setCompanyId((prev) => prev && owned.some((c) => c.id === prev) ? prev : owned[0].id);
+        else setCompanyId(null);
       })
-      .catch(() => { if (!cancelled) setCompanyId(null); });
-    return () => { cancelled = true; };
-  }, [auth.user]);
+      .catch(() => {
+        if (!cancelled) {
+          setCompanyId(null);
+          setOwnedCompanies([]);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [auth.user, searchParams]);
 
   const bannerText = useMemo(() => {
     if (banner === 'success') return d.pricing.checkoutSuccess;
@@ -168,6 +185,30 @@ export default function Pricing() {
               </ul>
               <p style={{ fontSize: '0.9rem' }}><strong>{d.pricing.trialCompany}</strong></p>
               <LegalLinks d={d} lang={lang} intro={d.pricing.readBefore} />
+              {auth.user && ownedCompanies.length > 0 && (
+                <div style={{ marginBottom: '0.75rem' }}>
+                  {ownedCompanies.length === 1 ? (
+                    <p className="meta" data-testid="billing-company">
+                      {t(d.pricing.billingCompany, { company: ownedCompanies[0].name })}
+                    </p>
+                  ) : (
+                    <label>
+                      {d.pricing.pickBillingCompany}
+                      <select
+                        value={companyId ?? ''}
+                        onChange={(e) => setCompanyId(e.target.value || null)}
+                        data-testid="billing-company-picker"
+                      >
+                        {ownedCompanies.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
+                </div>
+              )}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <Link className="btn btn-secondary" to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
                 <button

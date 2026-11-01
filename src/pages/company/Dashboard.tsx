@@ -21,6 +21,7 @@ type Loaded = {
   paid: boolean;
   plan: PlanStatus;
   rows: EmployeeDashboardRow[];
+  dayLogs: api.DayLogView[];
   invites: Invitation[];
   retentionMonths: number;
   isOwner: boolean;
@@ -108,6 +109,7 @@ export default function CompanyDashboard() {
           paid: companyHasPaidAccess(company.subscription_status, company.trial_ends_at),
           plan: planStatus(company),
           rows: buildDashboardRows({ members, logs, year }),
+          dayLogs: logs,
           invites,
           retentionMonths: company.data_retention_months ?? 24,
           isOwner: membership?.role === 'owner',
@@ -210,6 +212,7 @@ export default function CompanyDashboard() {
           d={d}
           companyName={data.name}
           rows={data.rows}
+          dayLogs={data.dayLogs}
           invites={data.invites}
           year={year}
           companyBase={`/${lang}/company/${companyId}`}

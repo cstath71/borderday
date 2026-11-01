@@ -570,6 +570,8 @@ const fr: Dict = {
     point3: 'Adhésion entreprise optionnelle — vous voyez ce que voient les RH',
   },
   company: {
+    exportDaysCsv: "Exporter les jours (CSV)",
+    exportDaysNote: "Export des jours : date, type de jour, demi-journée et nuit hors du domicile pour vérifier les comptes, jamais de notes ni de localisation. Une demi-journée compte pour 0,5, sauf si une règle traite toute fraction de jour comme un jour entier.",
     signupRouteNote: "Seul le nom de l’entreprise est nécessaire ici. L’itinéraire se choisit pour chaque collaborateur, lorsqu’il rejoint l’entreprise.",
     inviteNeedsPlan: "Aucune offre ni aucun essai actif : l’invitation sera créée et vous obtiendrez un lien à partager, mais elle ne sera pas envoyée par e-mail. Démarrez une offre sur la page Tarifs pour envoyer des e-mails.",
     sendingInvite: "Envoi en cours…",

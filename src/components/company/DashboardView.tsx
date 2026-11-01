@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getBorderPack, listBorderPacks } from '../../borders/packs';
-import type { BorderId } from '../../borders/types';
+import type { BorderId, DayType } from '../../borders/types';
 import type { AggregateStatus, EmployeeDashboardRow } from '../../company/dashboardMath';
-import { clampRetentionMonths, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
+import { clampRetentionMonths, dayRowsToCsv, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { t, type Dict } from '../../i18n';
+import { download } from '../../lib/download';
 import { usesContractDays } from '../../lib/counting';
 import ProfileFields, { type ProfileValues } from '../ProfileFields';
 import type { ResendResult } from '../../lib/companyApi';
@@ -159,6 +160,8 @@ export default function DashboardView(props: {
   d: Dict;
   companyName: string;
   rows: EmployeeDashboardRow[];
+  /** What the optional day-level CSV is built from. It has no note field. */
+  dayLogs?: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>;
   invites: Invitation[];
   year: number;
   isDemo?: boolean;
@@ -179,7 +182,7 @@ export default function DashboardView(props: {
   onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
 }) {
-  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
+  const { d, companyName, rows, dayLogs, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [busy, setBusy] = useState(false);
@@ -208,14 +211,11 @@ export default function DashboardView(props: {
   const packs = listBorderPacks();
 
   function exportCsv() {
-    const csv = rowsToCsv(filtered, year);
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `borderday-export-${year}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    download(`borderday-export-${year}.csv`, rowsToCsv(filtered, year), 'text/csv;charset=utf-8');
+  }
+
+  function exportDaysCsv() {
+    download(`borderday-days-${year}.csv`, dayRowsToCsv(filtered, dayLogs ?? [], year), 'text/csv;charset=utf-8');
   }
 
   function borderLabel(id: string | null): string {
@@ -246,8 +246,13 @@ export default function DashboardView(props: {
           <button type="button" className="btn btn-primary" onClick={exportCsv}>
             {d.company.exportCsv}
           </button>
+          {dayLogs && (
+            <button type="button" className="btn btn-secondary" onClick={exportDaysCsv}>
+              {d.company.exportDaysCsv}
+            </button>
+          )}
           <p className="meta" role="note" style={{ maxWidth: '16rem', margin: 0 }}>
-            {d.company.exportCsvNote}
+            {d.company.exportCsvNote} {dayLogs && d.company.exportDaysNote}
           </p>
         </div>
       </div>

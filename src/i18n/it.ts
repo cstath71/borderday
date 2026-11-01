@@ -571,6 +571,8 @@ const it: Dict = {
     point3: 'Adesione azienda opzionale — vedete ciò che vede l’HR',
   },
   company: {
+    exportDaysCsv: "Esporta i giorni (CSV)",
+    exportDaysNote: "Export dei giorni: data, tipo di giornata, mezza giornata e notte fuori per verificare i conteggi, mai note o posizione. Una mezza giornata conta 0,5, salvo che una regola tratti ogni frazione di giorno come un giorno intero.",
     signupRouteNote: "Qui serve solo il nome dell’azienda. Il corridoio si sceglie per ogni dipendente, quando si unisce.",
     inviteNeedsPlan: "Nessun piano o prova attivi: l’invito verrà creato e riceverete un link da condividere, ma non verrà inviato via e-mail. Avviate un piano nella pagina Prezzi per inviare e-mail.",
     sendingInvite: "Invio in corso…",

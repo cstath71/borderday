@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   filterRows,
+  dayRowsToCsv,
   rowsToCsv,
   summarizeEmployee,
 } from '../src/company/dashboardMath';
@@ -30,13 +31,19 @@ describe('A3-15 CSV formula defusing', () => {
   const firstDataLine = (displayName: string, email?: string) =>
     rowsToCsv([rowFor(displayName, email)], 2026).split('\n')[2];
 
-  it.each(['=HYPERLINK("http://evil.example","x")', '+1+1', '-2+3', '@SUM(A1)', '\tcmd', '\rcmd'])(
+  it.each(['=HYPERLINK("http://evil.example","x")', '+1+1', '-2+3', '@SUM(A1)'])(
     'defuses a name starting with %j',
     (name) => {
-      // The demo column is empty, so the name is the first thing after the comma.
-      expect(firstDataLine(name).startsWith(`,"'${name.replaceAll('"', '""')}",`)).toBe(true);
+      // The name is the first thing after the demo column.
+      expect(firstDataLine(name).startsWith(`no,"'${name.replaceAll('"', '""')}",`)).toBe(true);
     },
   );
+
+  it('E22: trimming comes first, so whitespace cannot hide a formula or stay in the file', () => {
+    expect(firstDataLine('\tcmd').startsWith('no,"cmd",')).toBe(true);
+    expect(firstDataLine('\rcmd').startsWith('no,"cmd",')).toBe(true);
+    expect(firstDataLine('  =1+1 ').startsWith(`no,"'=1+1",`)).toBe(true);
+  });
 
   it('defuses the email column too, and leaves ordinary values alone', () => {
     const line = firstDataLine('Ana, Maria', '=evil@x.com');
@@ -217,10 +224,67 @@ describe('HR dashboard status math', () => {
     expect(lines[0].startsWith('#')).toBe(true);
     expect(lines[0]).toMatch(/not the annual telework-rate filing/i);
     expect(lines[1]).not.toMatch(/location|gps|lat|lon/i);
-    expect(csv).toContain('DEMO');
+    expect(lines[2].startsWith('yes,')).toBe(true);
     expect(csv).toContain('geneva_tax_telework_40');
     expect(lines[1]).toContain('employment_percent');
     expect(lines[1]).toContain('a1_valid_until');
     expect(lines[1]).toContain('telework_rate_pct_working_calc_not_afc');
+  });
+});
+
+describe('E21, E22, E25: the CSV columns', () => {
+  const row = (fields: object = {}) =>
+    summarizeEmployee({
+      userId: 'u1',
+      displayName: 'BDt Employee ',
+      email: 'e@x.com',
+      borderPackId: 'geneva_fr',
+      annualWorkingDays: 240,
+      logs: [],
+      year: 2026,
+      ...fields,
+    });
+  const lines = rowsToCsv([row()], 2026).split('\n');
+
+  it('E21: says route, not border_pack', () => {
+    expect(lines[1].split(',')).toContain('route');
+    expect(lines[1]).not.toContain('border_pack');
+  });
+  it('E22: trims the name', () => {
+    expect(lines[2]).toContain('"BDt Employee"');
+  });
+  it('E25: demo is always filled', () => {
+    expect(lines[2].startsWith('no,')).toBe(true);
+    expect(rowsToCsv([row({ isDemo: true })], 2026).split('\n')[2].startsWith('yes,')).toBe(true);
+  });
+});
+
+describe('E23: day-level CSV', () => {
+  const r = { userId: 'u1', displayName: ' Ann ', email: 'a@x.com', borderPackId: 'geneva_fr' as const, isDemo: false };
+  const logs = [
+    { employeeUserId: 'u1', workDate: '2026-02-03', dayType: 'telework' as const, dayShare: 0.5 as const, overnightAway: false, note: 'secret' },
+    { employeeUserId: 'u1', workDate: '2026-02-02', dayType: 'onsite' as const, overnightAway: true },
+    { employeeUserId: 'u1', workDate: '2025-12-31', dayType: 'onsite' as const },
+    { employeeUserId: 'gone', workDate: '2026-02-02', dayType: 'onsite' as const },
+  ];
+  const csv = dayRowsToCsv([r], logs, 2026);
+  const lines = csv.split('\n');
+
+  it('has one sorted row per day of the listed employees in that year, with half day and night away', () => {
+    expect(lines.slice(1)).toEqual([
+      'demo,employee_name,employee_email,route,date,day_type,half_day,night_away',
+      'no,"Ann","a@x.com",geneva_fr,2026-02-02,onsite,no,yes',
+      'no,"Ann","a@x.com",geneva_fr,2026-02-03,telework,yes,no',
+    ]);
+  });
+  it('says how half days count and never carries a note, even if one is passed in', () => {
+    expect(lines[0]).toMatch(/half day counts as 0\.5/i);
+    expect(csv).not.toContain('secret');
+    expect(lines[1]).not.toMatch(/note|location|gps/i);
+  });
+  it('every column is already disclosed to the employee: names, route, type, date, half day, night away', () => {
+    for (const col of lines[1].split(',')) {
+      expect(['demo', 'employee_name', 'employee_email', 'route', 'date', 'day_type', 'half_day', 'night_away']).toContain(col);
+    }
   });
 });

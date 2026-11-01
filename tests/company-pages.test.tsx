@@ -680,6 +680,15 @@ describe('Company sign-up', () => {
   });
 });
 
+describe('E23: day-level export on the dashboard', () => {
+  it('offers the button and explains it, with no note in the data it uses', async () => {
+    asHr();
+    open('/en/company/c1/dashboard');
+    await screen.findByRole('button', { name: en.company.exportDaysCsv });
+    screen.getByText(en.company.exportDaysNote, { exact: false });
+  });
+});
+
 describe('E6: company signup', () => {
   it('says the route is chosen per employee', async () => {
     open('/en/company/signup');

@@ -448,6 +448,8 @@ const nl: Dict = {
     point3: "Optioneel aansluiten bij bedrijf — u ziet wat HR ziet",
   },
   company: {
+    exportDaysCsv: "Dagen exporteren (CSV)",
+    exportDaysNote: "Dagenexport: datum, soort dag, halve dag en overnachting elders om tellingen te controleren, nooit notities of locatie. Een halve dag telt als 0,5, tenzij een regel elk deel van een dag als een hele dag behandelt.",
     signupRouteNote: "Hier is alleen de bedrijfsnaam nodig. De grensroute wordt per medewerker gekozen, bij het toetreden.",
     inviteNeedsPlan: "Geen actief abonnement of proefperiode: de uitnodiging wordt aangemaakt en u krijgt een link om te delen, maar ze wordt niet gemaild. Start een abonnement op de pagina Prijzen om e-mails te versturen.",
     sendingInvite: "Bezig met verzenden…",

@@ -565,6 +565,8 @@ const en = {
     point3: 'Optional company join — you see what HR sees',
   },
   company: {
+    exportDaysCsv: "Export days (CSV)",
+    exportDaysNote: "Days export: date, day type, half day and night away for checking counts, never notes or location. A half day counts as 0.5 unless a rule counts any part of a day as a whole day.",
     signupRouteNote: "You only need the company name here. The border route is chosen per employee, when each one joins.",
     inviteNeedsPlan: "No active plan or trial: the invite will be created and you get a link to share, but it will not be emailed. Start a plan on the Pricing page to send emails.",
     sendingInvite: "Sending…",

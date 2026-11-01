@@ -571,6 +571,8 @@ const de: Dict = {
     point3: 'Optionaler Unternehmensbeitritt — Sie sehen, was HR sieht',
   },
   company: {
+    exportDaysCsv: "Tage exportieren (CSV)",
+    exportDaysNote: "Tage-Export: Datum, Tagesart, halber Tag und auswärtige Übernachtung zum Prüfen der Zähler, nie Notizen oder Standort. Ein halber Tag zählt als 0,5, ausser eine Regel behandelt jeden Tagesteil als ganzen Tag.",
     signupRouteNote: "Hier brauchen Sie nur den Namen des Unternehmens. Die Grenzroute wird pro mitarbeitende Person gewählt, wenn sie beitritt.",
     inviteNeedsPlan: "Kein aktiver Plan und keine Testphase: Die Einladung wird erstellt und Sie erhalten einen Link zum Teilen, aber sie wird nicht per E-Mail versendet. Starten Sie auf der Preisseite einen Plan, um E-Mails zu senden.",
     sendingInvite: "Wird gesendet…",

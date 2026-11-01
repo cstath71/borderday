@@ -309,6 +309,70 @@ describe('companyApi', () => {
     await expect(api.updateEmployeeProfile('c1', 'e1', profile)).rejects.toThrow(/denied/);
   });
 
+  describe('E15 notes, E22 names, E10 resend, E24 former companies', () => {
+    const upserted = (call: any) => op(call, 'upsert')[0][0];
+
+    it('a day write leaves a note alone unless one is given, and an empty one clears it', async () => {
+      await api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'telework' });
+      expect(upserted(state.calls.at(-1))).not.toHaveProperty('note');
+      await api.upsertDayLog({ companyId: 'c1', workDate: '2026-01-05', dayType: 'telework', note: ' mine ' });
+      expect(upserted(state.calls.at(-1)).note).toBe('mine');
+      await api.upsertPersonalDayLog({ workDate: '2026-01-05', dayType: 'telework', borderPackId: null, note: '   ' });
+      expect(upserted(state.calls.at(-1)).note).toBeNull();
+    });
+
+    it('listMyDayNotes reads only the caller’s rows that have a note', async () => {
+      state.respond = () => ({ data: [{ work_date: '2026-01-05', note: 'mine' }], error: null });
+      const notes = await api.listMyDayNotes('c1');
+      expect(notes.get('2026-01-05')).toBe('mine');
+      const call = state.calls.at(-1);
+      expect(call.table).toBe('bd_day_logs');
+      expect(op(call, 'eq').map((a: unknown[]) => a[0])).toEqual(['company_id', 'employee_user_id']);
+    });
+
+    it('the HR read still returns no note', async () => {
+      state.respond = () => ({
+        data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'telework', note: 'leak' }],
+        error: null,
+      });
+      expect((await api.listDayLogs('c1'))[0]).not.toHaveProperty('note');
+    });
+
+    it('updateMyDisplayName trims', async () => {
+      await api.updateMyDisplayName('  Ann  ');
+      expect(op(state.calls.at(-1), 'update')[0][0]).toEqual({ display_name: 'Ann' });
+    });
+
+    it('listFormerCompanies keeps companies left, and tolerates the function not being deployed yet', async () => {
+      state.respond = () => ({
+        data: [
+          { company_id: 'a', company_name: 'Now', active: true, day_count: 3, first_date: '2026-01-01', last_date: '2026-01-02' },
+          { company_id: 'b', company_name: 'Left', active: false, day_count: '2', first_date: '2026-02-01', last_date: '2026-02-02' },
+        ],
+        error: null,
+      });
+      expect(await api.listFormerCompanies()).toEqual([
+        { companyId: 'b', company: 'Left', dayCount: 2, firstDate: '2026-02-01', lastDate: '2026-02-02' },
+      ]);
+      state.respond = () => ({ data: null, error: { code: 'PGRST202' } });
+      expect(await api.listFormerCompanies()).toEqual([]);
+      state.respond = () => ({ data: null, error: { code: '42501' } });
+      await expect(api.listFormerCompanies()).rejects.toMatchObject({ code: '42501' });
+    });
+
+    it('resendInvite calls the send function for the existing invite and writes no new row', async () => {
+      state.invoke.mockResolvedValue({ data: { sent: true }, error: null });
+      const before = state.calls.length;
+      expect(await api.resendInvite('c1', 'i1', 'fr')).toEqual({ emailed: true, emailBlock: null });
+      expect(state.invoke).toHaveBeenCalledWith('bd-send-invite', { body: { invitationId: 'i1', companyId: 'c1', lang: 'fr' } });
+      expect(state.calls.length).toBe(before);
+      state.invoke.mockResolvedValue({ data: null, error: { context: { status: 429 } } });
+      expect(await api.resendInvite('c1', 'i1')).toEqual({ emailed: false, emailBlock: 'rate_limited' });
+      state.invoke.mockResolvedValue({ data: null, error: { context: { status: 402 } } });
+      expect(await api.resendInvite('c1', 'i1')).toEqual({ emailed: false, emailBlock: 'no_access' });
+    });
+  });
+
   it('updateMemberSelf uses the RPC and cannot send a role', async () => {
     await api.updateMemberSelf('c1', { borderPackId: 'geneva_fr', annualWorkingDays: 220 });
     expect(state.calls[0].rpc).toBe('bd_update_member_self');

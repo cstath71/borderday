@@ -180,7 +180,7 @@ export async function listMembers(companyId: string): Promise<CompanyMemberRow[]
     active: m.active,
     joinedAt: m.joined_at,
     email: m.bd_profiles?.email ?? '',
-    displayName: m.bd_profiles?.display_name || m.bd_profiles?.email || '',
+    displayName: m.bd_profiles?.display_name?.trim() || m.bd_profiles?.email || '',
     ...mapProfile(m),
   }));
 }
@@ -309,7 +309,7 @@ export async function deactivateMember(companyId: string, memberUserId: string):
 export async function updateMyDisplayName(displayName: string): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
-  const { error } = await client().from('bd_profiles').update({ display_name: displayName }).eq('id', userId);
+  const { error } = await client().from('bd_profiles').update({ display_name: displayName.trim() }).eq('id', userId);
   if (error) throw error;
 }
 

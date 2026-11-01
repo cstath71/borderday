@@ -35,7 +35,11 @@ describe('one telework day is never over-limit for any % counter', () => {
 
   for (const pack of BORDER_PACKS) {
     const percentCounters = pack.counters.filter(
-      (c) => c.enabled && c.unit === 'percent_of_working_time',
+      (c) =>
+        c.enabled &&
+        c.unit === 'percent_of_working_time' &&
+        c.direction !== 'floor' &&
+        (c.countsAs?.telework === 'toward_percent' || c.countsAs?.telework === 'full'),
     );
     for (const counter of percentCounters) {
       it(`${pack.id} / ${counter.id}: 1 telework day stays within limit`, () => {
@@ -50,6 +54,21 @@ describe('one telework day is never over-limit for any % counter', () => {
         expect(r.percentOfAnnual).toBeCloseTo((1 / annual) * 100, 2);
         expect(r.ratio).toBeLessThan(0.75);
         expect(r.status).toBe('ok');
+        expect(r.status).not.toBe('over');
+      });
+    }
+    // A3-R1: regular-return floor counts onsite, not telework.
+    for (const counter of pack.counters.filter(
+      (c) => c.enabled && c.direction === 'floor' && c.unit === 'percent_of_working_time',
+    )) {
+      it(`${pack.id} / ${counter.id}: 1 telework day does not count toward the floor`, () => {
+        const r = evaluateCounter(pack, counter, oneDay, {
+          year: 2026,
+          annualWorkingDays: pack.defaultAnnualWorkingDays,
+          today: '2026-01-05',
+        });
+        expect(r.enabled).toBe(true);
+        expect(r.usedDays).toBe(0);
         expect(r.status).not.toBe('over');
       });
     }

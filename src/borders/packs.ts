@@ -191,6 +191,11 @@ const SRC = {
     url: 'https://www.fedlex.admin.ch/eli/cc/1972/3075_3128_2910/de',
     checked: '2026-11-01',
   },
+  as2025791: {
+    title: 'Fedlex AS 2025 791 — DE–CH amending protocol (regular return 20%, part-year 5+1, base 240/280)',
+    url: 'https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/oc/2025/791/de/pdf-a/fedlex-data-admin-ch-eli-oc-2025-791-de-pdf-a.pdf',
+    checked: '2026-11-01',
+  },
   luCirc71: {
     title: 'ACD Luxembourg — Circulaire L.G. - Conv. D.I. n° 71 (34 jours, 30 min, dès 2024)',
     url: 'https://impotsdirects.public.lu/dam-assets/fr/legislation/circulaires/circulaire-lg-conv-di-71-du-18-mars-2024.pdf',
@@ -392,8 +397,9 @@ export const BORDER_PACKS: BorderPack[] = [
     ],
   },
   {
-    // The 60-day rule is national (DE–CH). The 5-day floor is one canton's staff rule.
-    // 240 is official for CH–FR (ge.ch) only; here it is an assumption. KonsVerCHEV's 250 is for §9(2) only.
+    // The 60-day rule and 20% regular-return test are national (DE–CH protocol AS 2025 791).
+    // The 5-day floor is one canton's staff rule and stays out of the HR aggregate.
+    // Protocol point 5(i): 240 (5-day week) / 280 (6-day week) when the contract does not state days.
     id: 'basel_de',
     nameKey: 'basel_de',
     residenceCountries: ['DE'],
@@ -403,6 +409,26 @@ export const BORDER_PACKS: BorderPack[] = [
     dayHintKeys: { third_country: 'third_countryHint_basel_de' },
     counters: [
       {
+        id: 'basel_de_regular_return_20',
+        kind: 'tax',
+        labelKey: 'basel_de_regular_return_20',
+        enabled: true,
+        limit: 20,
+        direction: 'floor',
+        inclusive: true,
+        unit: 'percent_of_working_time',
+        countsAs: {
+          telework: 'none',
+          onsite: 'toward_percent',
+          third_country: 'none',
+          non_working: 'none',
+        },
+        warningAt: [0.75, 0.9],
+        sources: [SRC.as2025791, SRC.art15a, SRC.estvDeCh2022],
+        notesKey: 'basel_de_regular_return_note',
+        overKey: 'basel_de_regular_return_over',
+      },
+      {
         id: 'basel_de_nonreturn_60',
         kind: 'tax',
         labelKey: 'basel_de_nonreturn_60',
@@ -410,9 +436,9 @@ export const BORDER_PACKS: BorderPack[] = [
         limit: 60,
         inclusive: true, // status lost "bei mehr als 60 Nichtrückkehrtagen"
         countsOvernight: true,
-        // KonsVerCHEV §9(2): 250 for a 5-day week (300 for 6 days; the note says so). Not employmentPercent:
-        // it covers day-based part-time only. §10(2) part-year cut has no formula, so none is applied.
-        contractDayBase: 250,
+        // Protocol point 5(i): 240 for a 5-day week (280 for 6 days). Day-based part-time only.
+        contractDayBase: 240,
+        partYearFormula: 'de_ch_5_1',
         unit: 'days_per_year',
         countsAs: {
           telework: 'none',
@@ -421,7 +447,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.konsVerCHEV, SRC.estvDeCh2022, SRC.art15a, SRC.aargau],
+        sources: [SRC.as2025791, SRC.konsVerCHEV, SRC.estvDeCh2022, SRC.art15a, SRC.aargau],
         notesKey: 'basel_de_nonreturn_note',
         overKey: 'basel_de_over_60',
       },

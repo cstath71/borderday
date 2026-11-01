@@ -18,7 +18,7 @@ import {
   type AppAccess,
   type FormerCompany,
 } from '../lib/companyApi';
-import { annualBaseFor, evaluatePack, usesContractDays, zurichToday } from '../lib/counting';
+import { annualBaseFor, evaluatePack, usesContractDays, usesPartYearFormula, zurichToday } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import { download } from '../lib/download';
 import {
@@ -187,11 +187,13 @@ export default function AppPage() {
   const profile: ProfileValues = {
     employmentPercent: meta?.employmentPercent ?? null,
     contractDaysPerYear: meta?.contractDaysPerYear ?? null,
+    employmentFullMonths: meta?.employmentFullMonths ?? null,
+    employmentFullWeeks: meta?.employmentFullWeeks ?? null,
     a1InPlace: !!meta?.a1InPlace,
     a1ValidUntil: meta?.a1ValidUntil ?? null,
     frontierBefore2012: !!meta?.frontierBefore2012,
   };
-  const { employmentPercent, contractDaysPerYear, a1InPlace, a1ValidUntil, frontierBefore2012 } = profile;
+  const { employmentPercent, contractDaysPerYear, employmentFullMonths, employmentFullWeeks, a1InPlace, a1ValidUntil, frontierBefore2012 } = profile;
   const annual = pack && annualBaseFor(pack, storedAnnual, { employmentPercent });
 
   const results = useMemo(() => {
@@ -200,9 +202,9 @@ export default function AppPage() {
       year: viewYear,
       annualWorkingDays: storedAnnual,
       referenceMonth: `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}`,
-      profile: { employmentPercent, contractDaysPerYear, a1InPlace, a1ValidUntil, frontierBefore2012 },
+      profile: { employmentPercent, contractDaysPerYear, employmentFullMonths, employmentFullWeeks, a1InPlace, a1ValidUntil, frontierBefore2012 },
     });
-  }, [pack, days, viewYear, viewMonth, storedAnnual, employmentPercent, contractDaysPerYear, a1InPlace, a1ValidUntil, frontierBefore2012]);
+  }, [pack, days, viewYear, viewMonth, storedAnnual, employmentPercent, contractDaysPerYear, employmentFullMonths, employmentFullWeeks, a1InPlace, a1ValidUntil, frontierBefore2012]);
 
   const selectedEntry = days.find((e) => e.date === selectedDate);
   const byDate = useMemo(() => {
@@ -495,6 +497,7 @@ export default function AppPage() {
               onCommit={(next) => void saveProfile(next)}
               showFrontierBefore2012={borderId === 'belgium_fr'}
               showContractDays={usesContractDays(pack)}
+              showPartYear={usesPartYearFormula(pack)}
             />
           )}
         </div>

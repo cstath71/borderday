@@ -7,7 +7,7 @@ import { clampRetentionMonths, dayRowsToCsv, filterRows, needsFilingNote, rowsTo
 import type { Invitation } from '../../company/types';
 import { t, type Dict } from '../../i18n';
 import { download } from '../../lib/download';
-import { usesContractDays } from '../../lib/counting';
+import { usesContractDays, usesPartYearFormula } from '../../lib/counting';
 import ProfileFields, { type ProfileValues } from '../ProfileFields';
 import type { ResendResult } from '../../lib/companyApi';
 import CounterTable, { statusLabel } from './CounterTable';
@@ -53,6 +53,7 @@ function EmployeeProfileForm(props: {
         }}
         showFrontierBefore2012={row.borderPackId === 'belgium_fr'}
         showContractDays={!!pack && usesContractDays(pack)}
+        showPartYear={!!pack && usesPartYearFormula(pack)}
       />
       {pack && (
         <>

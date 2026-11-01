@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { getBorderPack } from '../src/borders/packs';
 import type { BorderPack, CounterResult, DayEntry, DayType, EmploymentProfile } from '../src/borders/types';
 import { needsFilingNote, rowsToCsv, summarizeEmployee } from '../src/company/dashboardMath';
-import { annualBaseFor, contractDaysLimit, evaluateCounter, evaluatePack } from '../src/lib/counting';
+import { annualBaseFor, contractDaysLimit,
+  partYearDaysLimit, evaluateCounter, evaluatePack } from '../src/lib/counting';
 import de from '../src/i18n/de';
 import en from '../src/i18n/en';
 import fr from '../src/i18n/fr';
@@ -133,32 +134,33 @@ describe('H3: basel_de 60 days cut by contract days', () => {
   const at = (days: number, profile: EmploymentProfile) =>
     evaluateCounter(pack, c, run(days, 'third_country'), { year: 2026, profile });
 
-  it('audit scenario: 2-day week, 100 contract days, limit 24, and 30 days is over', () => {
+  it('audit scenario: 2-day week, 100 contract days, limit 25 against 240, and 30 days is over', () => {
     const r = at(30, { contractDaysPerYear: 100 });
-    expect(r.limit).toBe(24);
+    expect(r.limit).toBe(25);
     expect(r.status).toBe('over');
     expect(message(r, 'contract_days_estimate')).toEqual({
       key: 'contract_days_estimate',
       tone: 'info',
-      vars: { days: 100, base: 250, limit: 24, full: 60 },
+      vars: { days: 100, base: 240, limit: 25, full: 60 },
     });
-    expect(message(r, 'basel_de_over_60')?.vars).toEqual({ limit: 24 });
+    expect(message(r, 'basel_de_over_60')?.vars).toEqual({ limit: 25 });
   });
 
   it('rounds down, never below 1 and never above the full limit', () => {
-    expect(contractDaysLimit(60, 110, 250)).toBe(26); // 26.4
-    expect(contractDaysLimit(60, 2, 250)).toBe(1);
-    expect(contractDaysLimit(60, 250, 250)).toBe(60);
-    expect(contractDaysLimit(60, 300, 250)).toBe(60);
+    expect(contractDaysLimit(60, 110, 240)).toBe(27); // 27.5
+    expect(contractDaysLimit(60, 2, 240)).toBe(1);
+    expect(contractDaysLimit(60, 240, 240)).toBe(60);
+    expect(contractDaysLimit(60, 300, 240)).toBe(60);
   });
 
   it('does not reuse employment %: 40% with no contract days keeps 60 and warns', () => {
     const r = at(10, { employmentPercent: 40 });
     expect(r.limit).toBe(60);
     expect(message(r, 'contract_days_missing')?.tone).toBe('warn');
+    expect(message(r, 'part_year_missing')?.tone).toBe('warn');
     expect(keys(at(10, {}))).not.toContain('contract_days_missing');
     expect(keys(at(10, { employmentPercent: 100 }))).not.toContain('contract_days_missing');
-    expect(keys(at(10, { employmentPercent: 40, contractDaysPerYear: 250 }))).not.toContain('contract_days_missing');
+    expect(keys(at(10, { employmentPercent: 40, contractDaysPerYear: 240 }))).not.toContain('contract_days_missing');
   });
 
   it('applies to no other corridor', () => {
@@ -169,9 +171,58 @@ describe('H3: basel_de 60 days cut by contract days', () => {
 
   it('the note discloses the estimate and part-year, in every locale', () => {
     for (const [lang, d] of Object.entries(dicts)) {
-      expect(d.counters.basel_de_nonreturn_note, lang).toMatch(/§9\(2\).*250.*300/);
-      expect(d.counters.basel_de_nonreturn_note, lang).toMatch(/§10\(2\)/);
+      expect(d.counters.basel_de_nonreturn_note, lang).toMatch(/240.*280/);
+      expect(d.counters.basel_de_nonreturn_note, lang).toMatch(/5\(g\)|5 \(g\)|point 5\(g\)|Ziff\. 5\(g\)|punt 5\(g\)|punto 5\(g\)/);
       expect(d.counters.basel_de_over_60, lang).toContain('{limit}');
+    }
+  });
+});
+
+
+describe('A3-R1/R2/R3: basel_de regular return, part-year, base 240', () => {
+  const pack = getBorderPack('basel_de')!;
+  const nonreturn = counter(pack, 'basel_de_nonreturn_60');
+  const regular = counter(pack, 'basel_de_regular_return_20');
+
+  it('A3-R3: contractDayBase is 240', () => {
+    expect(nonreturn.contractDayBase).toBe(240);
+  });
+
+  it('A3-R2: 7 full months → limit 35; 40 days is over', () => {
+    const r = evaluateCounter(pack, nonreturn, run(40, 'third_country'), {
+      year: 2026,
+      profile: { employmentFullMonths: 7 },
+    });
+    expect(r.limit).toBe(35);
+    expect(r.status).toBe('over');
+    expect(message(r, 'part_year_applied')?.vars).toEqual({ months: 7, weeks: 0, limit: 35, full: 60 });
+  });
+
+  it('A3-R2: 7 months + 2 weeks → 37', () => {
+    expect(partYearDaysLimit(60, 7, 2)).toBe(37);
+  });
+
+  it('A3-R1: regular-return counter exists and feeds tax status', () => {
+    expect(regular.direction).toBe('floor');
+    expect(regular.limit).toBe(20);
+    expect(regular.kind).toBe('tax');
+  });
+
+  it('A3-R1: 30 onsite of 240 agreed (12.5%) is below the floor at year end', () => {
+    const days = Array.from({ length: 30 }, (_, i) => ({
+      date: `2026-01-${String(i + 1).padStart(2, '0')}`,
+      type: 'onsite' as const,
+    }));
+    const r = evaluateCounter(pack, regular, days, { year: 2026, today: '2026-12-31', annualWorkingDays: 240 });
+    expect(r.allowedDays).toBe(48);
+    expect(r.usedDays).toBe(30);
+    expect(r.status).toBe('over');
+  });
+
+  it('employer note no longer denies a general floor', () => {
+    for (const [lang, d] of Object.entries(dicts)) {
+      expect(d.counters.basel_de_employer_note, lang).not.toMatch(/not a general federal|keine allgemeine bundes|pas un plancher fédéral|non è un minimo federale|geen algemene federale/i);
+      expect(d.counters.basel_de_regular_return_20, lang).toBeTruthy();
     }
   });
 });

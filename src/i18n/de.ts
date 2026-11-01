@@ -360,6 +360,7 @@ const de: Dict = {
     checkoutSuccess: 'Zahlung eingerichtet — Ihre Testphase ist aktiv. Öffnen Sie Ihr Konto, um fortzufahren.',
     checkoutCancel: 'Checkout abgebrochen — keine Belastung. Sie können es jederzeit erneut versuchen.',
     goToAccount: 'Zum Konto',
+    alreadySubscribed: "Dieser Plan hat bereits ein Abonnement, das aktiv, in der Testphase oder zahlungsfällig ist. Es wurde kein neuer Checkout gestartet und nichts belastet. Um es zu ändern oder in Ordnung zu bringen, nutzen Sie den Link «{cancel}» auf dieser Seite, der zum Kundenportal führt.",
     needCompany: 'Legen Sie zuerst ein Unternehmenskonto an oder öffnen Sie eines, dann abonnieren.',
     waitlistCta: 'Konto starten',
     recommended: 'Empfohlen für Arbeitgeber',

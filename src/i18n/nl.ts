@@ -278,6 +278,7 @@ const nl: Dict = {
     checkoutSuccess: "Betaling ingesteld — uw proefperiode is actief. Open uw account om verder te gaan.",
     checkoutCancel: "Checkout geannuleerd — geen kosten. U kunt het altijd opnieuw proberen.",
     goToAccount: "Naar account",
+    alreadySubscribed: "Dit abonnement bestaat al en is actief, in proefperiode of wacht op betaling, dus er is geen nieuwe checkout gestart en niets afgeschreven. Gebruik om het te wijzigen of in orde te brengen de link “{cancel}” op deze pagina, die naar het klantenportaal leidt.",
     needCompany: "Maak of open eerst een bedrijfsaccount, abonneer u daarna.",
     waitlistCta: "Gratis account starten",
     recommended: "Aanbevolen voor werkgevers",

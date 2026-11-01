@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { ALREADY_SUBSCRIBED_CODE, hasLiveSubscription } from "../_shared/checkoutGuard.ts";
 import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
 import { TRIAL_DAYS } from "../_shared/trial.ts";
 
@@ -50,15 +51,19 @@ Deno.serve(async (req) => {
     let quantity = 1;
     const metadata: Record<string, string> = { plan: body.plan, user_id: user.id, express_start: "1" };
     const lang = (body.lang && /^[a-z]{2}$/.test(body.lang)) ? body.lang : "en";
+    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+    const recordedStatuses: Array<string | null> = [];
 
     if (body.plan === "company") {
       if (!body.companyId) throw new Error("companyId required");
-      const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
       const { data: mem } = await admin.from("bd_company_members").select("role")
         .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
       if (!mem || !["owner", "hr_viewer"].includes(mem.role)) throw new Error("Forbidden");
-      const { data: company } = await admin.from("bd_companies").select("seat_count").eq("id", body.companyId).single();
-      const seats = company?.seat_count ?? 0;
+      const { data: company, error: companyError } = await admin.from("bd_companies")
+        .select("seat_count, subscription_status").eq("id", body.companyId).single();
+      if (companyError) throw new Error("Could not check the existing subscription");
+      recordedStatuses.push(company.subscription_status);
+      const seats = company.seat_count ?? 0;
       const billing = resolveCompanyBilling(seats, body.interval === "year" ? "year" : "month");
       quantity = billing.quantity;
       if (billing.priceKind === "min") {
@@ -76,6 +81,21 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ available: false, message: "Payments not yet available" }), {
         status: 200, headers: { ...cors, "Content-Type": "application/json" },
       });
+    }
+
+    // A3-05: a second session would mean a second customer, plan and free trial. What the webhook has
+    // recorded is enough (Gus: nobody has paid yet), so no live Stripe lookup. If it cannot be read, refuse.
+    const subscriptions = admin.from("bd_subscriptions").select("status");
+    const { data: subs, error: subsError } = await (body.plan === "company"
+      ? subscriptions.eq("company_id", body.companyId!)
+      : subscriptions.eq("user_id", user.id).eq("plan_kind", "individual"));
+    if (subsError) throw new Error("Could not check the existing subscription");
+    if (hasLiveSubscription([...recordedStatuses, ...(subs ?? []).map((s) => s.status)])) {
+      return new Response(JSON.stringify({
+        available: false,
+        code: ALREADY_SUBSCRIBED_CODE,
+        message: "This plan already has a subscription. No new checkout was started.",
+      }), { status: 200, headers: { ...cors, "Content-Type": "application/json" } });
     }
 
     // stripe@18+ understands managed_payments; API version must be 2025-03-31.basil+

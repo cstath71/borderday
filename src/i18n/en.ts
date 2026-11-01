@@ -353,6 +353,7 @@ const en = {
     checkoutSuccess: 'Payment set up — your trial is active. Open your account to continue.',
     checkoutCancel: 'Checkout canceled — no charge. You can try again anytime.',
     goToAccount: 'Go to account',
+    alreadySubscribed: "This plan already has a subscription that is active, in trial or awaiting payment, so no new checkout was started and nothing was charged. To change or fix it, use the “{cancel}” link on this page, which leads to the customer portal.",
     needCompany: 'Create or open a company account first, then subscribe.',
     waitlistCta: 'Start free account',
     recommended: 'Recommended for employers',

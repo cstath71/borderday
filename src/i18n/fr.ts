@@ -359,6 +359,7 @@ const fr: Dict = {
     checkoutSuccess: 'Paiement configuré — votre essai est actif. Ouvrez votre compte pour continuer.',
     checkoutCancel: 'Paiement annulé — aucun débit. Vous pouvez réessayer à tout moment.',
     goToAccount: 'Aller au compte',
+    alreadySubscribed: "Cette offre a déjà un abonnement actif, en essai ou en attente de paiement : aucun nouveau paiement n’a été lancé et rien n’a été débité. Pour le modifier ou le régulariser, utilisez le lien « {cancel} » de cette page, qui mène au portail client.",
     needCompany: 'Créez ou ouvrez d\'abord un compte entreprise, puis abonnez-vous.',
     waitlistCta: 'Créer un compte',
     recommended: 'Recommandé pour les employeurs',

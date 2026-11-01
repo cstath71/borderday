@@ -2,7 +2,7 @@ import { supabase, supabaseConfigured } from './supabase';
 
 export type CheckoutResult =
   | { ok: true; url: string }
-  | { ok: false; reason: 'not_available' | 'error'; message: string };
+  | { ok: false; reason: 'not_available' | 'error' | 'already_subscribed'; message: string };
 
 /** Company: €5/active employee/mo, flat €39 for 1–7 seats; yearly = 10 months (2 free). Individual: €4.99/mo or €49/yr. */
 export async function startCheckout(opts: {
@@ -33,7 +33,10 @@ export async function startCheckout(opts: {
     }
     return { ok: false, reason: 'error', message: msg };
   }
-  const body = res.data as { url?: string; available?: boolean; message?: string } | null;
+  const body = res.data as { url?: string; available?: boolean; code?: string; message?: string } | null;
+  if (body?.code === 'already_subscribed') {
+    return { ok: false, reason: 'already_subscribed', message: body.message || 'Already subscribed' };
+  }
   if (!body?.url) {
     return {
       ok: false,

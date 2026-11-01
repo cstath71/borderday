@@ -359,6 +359,7 @@ const it: Dict = {
     checkoutSuccess: 'Pagamento impostato — la prova è attiva. Aprite l’account per continuare.',
     checkoutCancel: 'Checkout annullato — nessun addebito. Potete riprovare in qualsiasi momento.',
     goToAccount: 'Vai all’account',
+    alreadySubscribed: "Questo piano ha già un abbonamento attivo, in prova o in attesa di pagamento: non è stato avviato alcun nuovo checkout e non è stato addebitato nulla. Per modificarlo o regolarizzarlo, usate il link «{cancel}» di questa pagina, che porta al portale clienti.",
     needCompany: 'Create o aprite prima un account azienda, poi abbonatevi.',
     waitlistCta: 'Inizia account',
     recommended: 'Consigliato per i datori di lavoro',

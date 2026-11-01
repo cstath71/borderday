@@ -85,7 +85,7 @@ export default function Pricing() {
         window.location.assign(res.url);
         return;
       }
-      setNote(d.auth.paymentsUnavailable);
+      setNote(res.reason === 'already_subscribed' ? t(d.pricing.alreadySubscribed, { cancel: d.nav.cancel }) : d.auth.paymentsUnavailable);
     } finally {
       setBusy(false);
     }

@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
       if (!body.companyId) throw new Error("companyId required");
       const { data: mem } = await admin.from("bd_company_members").select("role")
         .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
-      if (!mem || !["owner", "hr_viewer"].includes(mem.role)) throw new Error("Forbidden");
+      if (!mem || mem.role !== "owner") throw new Error("Forbidden");
       const { data: company, error: companyError } = await admin.from("bd_companies")
         .select("seat_count, subscription_status, trial_ends_at").eq("id", body.companyId).single();
       if (companyError) throw new Error("Could not check the existing subscription");
@@ -126,7 +126,7 @@ Deno.serve(async (req) => {
       .select("status, trial_ends_at").eq("user_id", user.id);
     if (ownSubsError) throw new Error("Could not check the trial history");
     const { data: ranCompanies, error: ranError } = await admin.from("bd_company_members")
-      .select("company_id").eq("user_id", user.id).in("role", ["owner", "hr_viewer"]);
+      .select("company_id").eq("user_id", user.id).eq("role", "owner");
     if (ranError) throw new Error("Could not check the trial history");
     const companyIds = [...new Set([
       ...(ranCompanies ?? []).map((m) => m.company_id as string),

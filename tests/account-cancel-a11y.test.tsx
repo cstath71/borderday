@@ -85,15 +85,23 @@ describe('H11 permanent cancellation route', () => {
     expect(within(footer).getByRole('link', { name: d.nav.withdraw }).getAttribute('href')).toBe(`/${lang}/withdrawal`);
   });
 
-  it('owner and HR open the portal for their company in their language', async () => {
-    auth.value.user = { id: 'u1', email: 'hr@acme.test' };
-    mocked.listMyCompanies.mockResolvedValue([company({})]);
+  it('owner opens the portal for their company in their language; HR does not get a company cancel button', async () => {
+    auth.value.user = { id: 'u1', email: 'owner@acme.test' };
+    mocked.listMyCompanies.mockResolvedValue([company({ role: 'owner' })]);
     portal.mockResolvedValue({ ok: false, reason: 'not_available', message: 'x' });
     open('/de/cancel');
     const d = getDict('de');
     fireEvent.click(await screen.findByRole('button', { name: 'Abo von Acme SA kündigen' }));
     await screen.findByText(d.cancel.portalError);
     expect(portal).toHaveBeenCalledWith('c1', 'de');
+
+    cleanup();
+    auth.value.user = { id: 'u-hr', email: 'hr@acme.test' };
+    mocked.listMyCompanies.mockResolvedValue([company({ role: 'hr_viewer' })]);
+    mocked.hasCancellableIndividualPlan.mockResolvedValue(false);
+    open('/de/cancel');
+    await screen.findByText(d.cancel.noPlans);
+    expect(screen.queryByRole('button', { name: /Acme SA/ })).toBeNull();
   });
 
   it('employees get no company button, and an individual plan gets its own', async () => {

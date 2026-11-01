@@ -6,13 +6,14 @@ import { useLang } from '../../components/Layout';
 import type { CompanyRole, Invitation } from '../../company/types';
 import { getDict, type Lang } from '../../i18n';
 import { useAuth } from '../../lib/auth';
+import { companyHasPaidAccess } from '../../lib/billing';
 import * as api from '../../lib/companyApi';
 
 type State =
   | { status: 'loading' }
   | { status: 'denied' }
   | { status: 'error' }
-  | { status: 'ready'; role: CompanyRole; invites: Invitation[] };
+  | { status: 'ready'; role: CompanyRole; invites: Invitation[]; canEmail: boolean };
 
 export default function CompanyInvite() {
   const lang = useLang();
@@ -26,8 +27,13 @@ export default function CompanyInvite() {
   const load = useCallback(async () => {
     const membership = await api.myMembership(companyId);
     if (!membership || !api.isHrRole(membership.role)) return { status: 'denied' } as const;
-    const invites = await api.listInvites(companyId, 'pending');
-    return { status: 'ready', role: membership.role, invites } as const;
+    const [invites, company] = await Promise.all([api.listInvites(companyId, 'pending'), api.getCompany(companyId)]);
+    return {
+      status: 'ready',
+      role: membership.role,
+      invites,
+      canEmail: companyHasPaidAccess(company?.subscription_status, company?.trial_ends_at),
+    } as const;
   }, [companyId]);
 
   useEffect(() => {
@@ -79,6 +85,14 @@ export default function CompanyInvite() {
         joinPath={joinPath}
         lang={lang}
         onCreate={onCreate}
+        canEmail={state.canEmail}
+        pricingHref={`/${lang}/pricing`}
+        canManage={(invite) => state.role === 'owner' || invite.role !== 'owner'}
+        onResend={(invite) => api.resendInvite(companyId, invite.id, lang)}
+        onRevoke={async (inviteId) => {
+          await api.revokeInvite(companyId, inviteId);
+          setState(await load());
+        }}
       />
     );
   }

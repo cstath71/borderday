@@ -228,6 +228,7 @@ export default function CompanyDashboard() {
             await api.revokeInvite(companyId!, inviteId);
             setTick((x) => x + 1);
           }}
+          onResendInvite={(invite) => api.resendInvite(companyId!, invite.id, lang)}
           onSaveProfile={async (employeeId, profile) => {
             await api.updateEmployeeProfile(companyId!, employeeId, profile);
             setTick((x) => x + 1);

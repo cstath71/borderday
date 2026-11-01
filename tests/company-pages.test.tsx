@@ -23,6 +23,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
     canDeactivateMember: actual.canDeactivateMember,
     deactivateMember: vi.fn(async () => ({ billingSynced: true })),
     revokeInvite: vi.fn(async () => undefined),
+    resendInvite: vi.fn(async () => ({ emailed: true, emailBlock: null })),
     createCompany: vi.fn(),
     updateCompanyRetention: vi.fn(async () => undefined),
     listMyCompanies: vi.fn(async () => []),
@@ -377,6 +378,88 @@ describe('Dashboard', () => {
 });
 
 describe('Invite', () => {
+  const pending = { id: 'inv1', companyId: 'c1', email: 'new@acme.test', role: 'employee', token: 'tok9', status: 'pending', invitedBy: null, createdAt: '2026-10-01', expiresAt: '2999-01-01' } as any;
+
+  it('E7: warns before submitting when no plan or trial would allow the email', async () => {
+    asHr(false);
+    open('/en/company/c1/invite');
+    await screen.findByText(en.company.inviteNeedsPlan, { exact: false });
+  });
+
+  it('E7: no warning with an active plan, and the button says it is working while it sends', async () => {
+    asHr();
+    let finish!: (v: any) => void;
+    mocked.createInvite.mockReturnValue(new Promise((r) => { finish = r; }));
+    open('/en/company/c1/invite');
+    fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
+    expect(screen.queryByText(en.company.inviteNeedsPlan, { exact: false })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
+    const sending = (await screen.findByRole('button', { name: en.company.sendingInvite })) as HTMLButtonElement;
+    expect(sending.disabled).toBe(true);
+    finish({ invite: { token: 'tok123' }, emailed: true, emailBlock: null });
+    await screen.findByText(en.company.inviteEmailed);
+    screen.getByRole('button', { name: en.company.sendInvite });
+  });
+
+  it('E12: lists pending invites on load, with a full link and the same actions as the dashboard', async () => {
+    asHr();
+    mocked.listInvites.mockResolvedValue([pending]);
+    open('/en/company/c1/invite');
+    const link = (await screen.findByLabelText(`${en.company.inviteLinkLabel}: new@acme.test`)) as HTMLInputElement;
+    expect(link.value).toBe(`${window.location.origin}/en/join/tok9`);
+    screen.getByRole('button', { name: 'Copy link for new@acme.test' });
+    screen.getByRole('button', { name: 'Resend invite to new@acme.test' });
+    screen.getByRole('button', { name: 'Revoke invite for new@acme.test' });
+  });
+
+  it('E12: says so when nothing is pending', async () => {
+    asHr();
+    open('/en/company/c1/invite');
+    await screen.findByText(en.company.noPendingInvites);
+  });
+
+  it('E11: revoking asks first; declining does nothing, confirming revokes and reloads', async () => {
+    asHr();
+    mocked.listInvites.mockResolvedValue([pending]);
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    open('/en/company/c1/invite');
+    fireEvent.click(await screen.findByRole('button', { name: 'Revoke invite for new@acme.test' }));
+    expect(confirm).toHaveBeenCalled();
+    expect(mocked.revokeInvite).not.toHaveBeenCalled();
+    confirm.mockReturnValue(true);
+    mocked.listInvites.mockResolvedValue([]);
+    fireEvent.click(screen.getByRole('button', { name: 'Revoke invite for new@acme.test' }));
+    await screen.findByText(en.company.noPendingInvites);
+    expect(mocked.revokeInvite).toHaveBeenCalledWith('c1', 'inv1');
+    confirm.mockRestore();
+  });
+
+  it.each([
+    [{ emailed: true, emailBlock: null }, 'Invite emailed again to new@acme.test, with the same link.'],
+    [{ emailed: false, emailBlock: 'no_access' }, en.company.resendNoPlan],
+    [{ emailed: false, emailBlock: 'rate_limited' }, en.company.resendLimit],
+    [{ emailed: false, emailBlock: null }, en.company.resendFailed],
+  ] as const)('E10: resend keeps the token and reports %j', async (result, text) => {
+    asHr();
+    mocked.listInvites.mockResolvedValue([pending]);
+    mocked.resendInvite.mockResolvedValue(result as any);
+    open('/en/company/c1/dashboard');
+    fireEvent.click(await screen.findByRole('button', { name: 'Resend invite to new@acme.test' }));
+    await screen.findByText(text);
+    expect(mocked.resendInvite).toHaveBeenCalledWith('c1', 'inv1', 'en');
+    expect(mocked.createInvite).not.toHaveBeenCalled();
+  });
+
+  it('E10: an HR viewer cannot resend or revoke an owner invite', async () => {
+    asHr();
+    mocked.myMembership.mockResolvedValue({ role: 'hr_viewer', borderPackId: null, annualWorkingDays: null });
+    mocked.listInvites.mockResolvedValue([{ ...pending, role: 'owner' }]);
+    open('/en/company/c1/invite');
+    await screen.findByRole('button', { name: 'Copy link for new@acme.test' });
+    expect(screen.queryByRole('button', { name: 'Resend invite to new@acme.test' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Revoke invite for new@acme.test' })).toBeNull();
+  });
+
   it('creates through companyApi and shows the link', async () => {
     asHr();
     mocked.createInvite.mockResolvedValue({ invite: { token: 'tok123' } as any, emailed: false });
@@ -438,10 +521,26 @@ describe('Join', () => {
     expiresAt: '2999-01-01T00:00:00Z',
   };
 
-  it('requires sign-in', async () => {
-    open('/en/join/tok');
-    await screen.findByRole('heading', { name: en.auth.signInTitle });
-    expect(mocked.acceptInvite).not.toHaveBeenCalled();
+  describe('E13: signed out', () => {
+    it('shows who invites them and what HR sees, with sign-in and sign-up that come back here', async () => {
+      mocked.getInviteByToken.mockResolvedValue(invite);
+      open('/en/join/tok');
+      await screen.findByText(/Acme Real SA invites you/);
+      screen.getByText(en.company.noticeBody);
+      screen.getByText(/This invite is for EMP@acme\.test/);
+      const next = encodeURIComponent('/en/join/tok');
+      expect(screen.getByRole('link', { name: en.auth.signUp }).getAttribute('href')).toBe(`/en/auth/sign-up?next=${next}`);
+      expect(screen.getAllByRole('link', { name: en.auth.signIn }).some((a) => a.getAttribute('href') === `/en/auth/sign-in?next=${next}`)).toBe(true);
+      expect(screen.queryByRole('button', { name: en.company.joinButton })).toBeNull();
+      expect(mocked.acceptInvite).not.toHaveBeenCalled();
+    });
+
+    it('says so when the link is dead, instead of asking for an account first', async () => {
+      mocked.getInviteByToken.mockResolvedValue({ ...invite, status: 'revoked' });
+      open('/en/join/tok');
+      await screen.findByText(en.company.inviteInvalid);
+      expect(screen.queryByRole('heading', { name: en.auth.signInTitle })).toBeNull();
+    });
   });
 
   it('blocks a different signed-in email and offers sign-out', async () => {
@@ -545,6 +644,13 @@ describe('Company sign-up', () => {
     const link = await screen.findByRole('link', { name: en.company.loadDemo });
     expect(link.getAttribute('href')).toBe('/en/demo');
     expect(container.textContent).not.toMatch(/Backend|local-mock/);
+  });
+});
+
+describe('E6: company signup', () => {
+  it('says the route is chosen per employee', async () => {
+    open('/en/company/signup');
+    await screen.findByText(en.company.signupRouteNote);
   });
 });
 

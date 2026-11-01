@@ -8,7 +8,9 @@ import type { Invitation } from '../../company/types';
 import { t, type Dict } from '../../i18n';
 import { usesContractDays } from '../../lib/counting';
 import ProfileFields, { type ProfileValues } from '../ProfileFields';
+import type { ResendResult } from '../../lib/companyApi';
 import CounterTable, { statusLabel } from './CounterTable';
+import PendingInvites from './PendingInvites';
 
 const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'at_limit', 'over', 'disabled'];
 
@@ -173,10 +175,11 @@ export default function DashboardView(props: {
   /** Absent under /demo, which then shows no remove or revoke controls. */
   onDeactivateMember?: (userId: string) => Promise<{ billingSynced: boolean }>;
   onRevokeInvite?: (inviteId: string) => Promise<void>;
+  onResendInvite?: (invite: Invitation) => Promise<ResendResult>;
   onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
 }) {
-  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onSaveProfile, onSaveRetention } = props;
+  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [busy, setBusy] = useState(false);
@@ -193,21 +196,6 @@ export default function DashboardView(props: {
       setNotice({ tone: billingSynced ? 'status' : 'alert', text: t(text, { name: member.displayName }) });
     } catch {
       setNotice({ tone: 'alert', text: d.company.deactivateFailed });
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function revoke(invite: Invitation) {
-    if (!onRevokeInvite) return;
-    if (!window.confirm(t(d.company.revokeConfirm, { email: invite.email }))) return;
-    setBusy(true);
-    setNotice(null);
-    try {
-      await onRevokeInvite(invite.id);
-      setNotice({ tone: 'status', text: t(d.company.inviteRevoked, { email: invite.email }) });
-    } catch {
-      setNotice({ tone: 'alert', text: d.company.revokeFailed });
     } finally {
       setBusy(false);
     }
@@ -366,24 +354,14 @@ export default function DashboardView(props: {
       )}
 
       {invites.length > 0 && (
-        <div className="card" style={{ marginTop: '1.5rem' }}>
-          <h2>{d.company.pendingInvites}</h2>
-          <ul>
-            {invites.map((i) => (
-              <li key={i.id}>
-                {i.email} · {i.role} · <Link to={`${joinBase}/${i.token}`}>{d.company.inviteLinkLabel}</Link>
-                {onRevokeInvite && (canRevokeInvite?.(i) ?? true) && (
-                  <>
-                    {' '}
-                    <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => void revoke(i)}>
-                      {t(d.company.revokeInvite, { email: i.email })}
-                    </button>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <PendingInvites
+          d={d}
+          invites={invites}
+          joinPath={(token) => `${joinBase}/${token}`}
+          canManage={canRevokeInvite}
+          onResend={onResendInvite}
+          onRevoke={onRevokeInvite}
+        />
       )}
     </>
   );

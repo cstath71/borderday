@@ -346,10 +346,16 @@ export async function createInvite(
     .single();
   if (error) throw error;
   // The invite exists either way; HR can always share the link if the email is dry-run or fails.
-  const sent = await c.functions.invoke('bd-send-invite', { body: { invitationId: data.id, companyId, lang } });
+  return { invite: mapInvite(data), ...(await resendInvite(companyId, data.id, lang)) };
+}
+
+export type ResendResult = { emailed: boolean; emailBlock: InviteEmailBlock | null };
+
+/** Emails an existing invite: same token, and the same plan check and send limits as the first email. */
+export async function resendInvite(companyId: string, invitationId: string, lang = 'en'): Promise<ResendResult> {
+  const sent = await client().functions.invoke('bd-send-invite', { body: { invitationId, companyId, lang } });
   const status = (sent.error as { context?: { status?: number } } | null)?.context?.status;
   return {
-    invite: mapInvite(data),
     emailed: !sent.error && sent.data?.sent === true,
     emailBlock: status === 402 ? 'no_access' : status === 429 ? 'rate_limited' : null,
   };

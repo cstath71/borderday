@@ -293,7 +293,7 @@ export function canDeactivateMember(
 export async function deactivateMember(companyId: string, memberUserId: string): Promise<{ billingSynced: boolean }> {
   const { data, error } = await client()
     .from('bd_company_members')
-    .update({ active: false, removed_at: new Date().toISOString() })
+    .update({ active: false })
     .eq('company_id', companyId)
     .eq('user_id', memberUserId)
     .neq('role', 'owner')

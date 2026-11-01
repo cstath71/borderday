@@ -218,16 +218,17 @@ describe('Phase 2 rule copy, all five languages', () => {
   });
 
   it('1983 copy says taxed in France and never the Geneva sentence', () => {
-    expect(en.counters.ch_fr_1983_note).toMatch(/taxed in France/);
-    expect(fr.counters.ch_fr_1983_note).toMatch(/imposés en France/);
-    expect(de.counters.ch_fr_1983_note).toMatch(/in Frankreich besteuert/);
-    expect(itDict.counters.ch_fr_1983_note).toMatch(/tassati in Francia/);
-    expect(nl.counters.ch_fr_1983_note).toMatch(/belast in Frankrijk/);
+    expect(en.counters.ch_fr_1983_tax_note).toMatch(/taxed in France/);
+    expect(fr.counters.ch_fr_1983_tax_note).toMatch(/imposés en France/);
+    expect(de.counters.ch_fr_1983_tax_note).toMatch(/in Frankreich besteuert/);
+    expect(itDict.counters.ch_fr_1983_tax_note).toMatch(/tassati in Francia/);
+    expect(nl.counters.ch_fr_1983_tax_note).toMatch(/in Frankrijk belast/);
     for (const [, d] of all) {
-      expect(d.counters.ch_fr_1983_note).toMatch(/45/);
-      expect(d.counters.ch_fr_1983_value).toBeTruthy();
+      expect(d.counters.ch_fr_1983_nights_note).toMatch(/45/);
+      expect('ch_fr_1983_note' in d.counters).toBe(false);
+      expect('ch_fr_1983_value' in d.counters).toBe(false);
     }
-    expect(en.counters.ch_fr_1983_note).not.toMatch(/taxable in Switzerland/);
+    expect(en.counters.ch_fr_1983_tax_note).not.toMatch(/taxable in Switzerland/);
   });
 
   it('no pack label folds 1983 cantons into Geneva', () => {
@@ -264,8 +265,9 @@ describe('Phase 2 rule copy, all five languages', () => {
   });
 
   it('Luxembourg and Belgium pending notes say the honest thing', () => {
-    expect(en.counters.pending_lu_de_tax).toMatch(/34/);
-    expect(en.counters.pending_lu_be_tax).toMatch(/34/);
+    // Both Luxembourg counters run, so no pending note may survive for them (one said no counter runs).
+    expect('pending_lu_de_tax' in en.counters).toBe(false);
+    expect('pending_lu_be_tax' in en.counters).toBe(false);
     expect(en.counters.pending_be_fr_tax).toMatch(/No day tolerance found/);
     expect(en.counters.pending_be_fr_tax).toMatch(/first day/);
     expect(en.counters.pending_be_nl_tax).toMatch(/No home-working tolerance found on the Dutch tax authority page/);

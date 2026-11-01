@@ -86,7 +86,8 @@ const it: Dict = {
       'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per dipendente: contatori di sicurezza sociale su tutti i nove corridoi in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per dipendente attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
     inShortLabel: 'In breve',
     chipTaxYes: 'Fisco: sì',
-    chipTaxNo: 'Fisco: non ancora',
+    chipTaxNo: 'Fisco: nessun contatore',
+    chipTaxNoDayLimit: 'Fisco: nessun limite di giorni',
     chipSsYes: 'Sicurezza sociale: sì',
   },
   borders: {
@@ -120,6 +121,8 @@ const it: Dict = {
       'Giorno di lavoro presso il vostro domicilio in Italia. Il protocollo dice «presso il proprio domicilio»: non è confermato se un giorno in co-working conti, verificate con la vostra autorità.',
     teleworkHint_ch_fr:
       'Giorno di lavoro in Francia (domicilio o coworking locale). Il regime convenzionale CH–FR non è limitato al domicilio.',
+    teleworkHint_ch_fr_1983:
+      'Giorno di lavoro in Francia, fuori dai locali del datore di lavoro (domicilio o coworking locale). L’accordo amichevole del 22 dic. 2022 sul regime del 1983 dice «nel suo Stato di residenza» e non menziona il domicilio.',
     third_countryHint_basel_de:
       'Lavoro fuori da Germania e Svizzera: sempre un giorno di mancato rientro, anche con rientro la sera. Non usatelo per una trasferta di un giorno in Germania o in Svizzera.',
     logHint_luxembourg_fr:
@@ -162,10 +165,6 @@ const it: Dict = {
       'Regola del personale di Basilea Città: giorni in sede questo mese (minimo 5, o 1 a settimana)',
     basel_de_employer_note:
       'È la regola che il Canton Basilea Città applica al proprio personale (stato al 1° gen. 2026): telelavoro solo se la persona si reca sul luogo di lavoro almeno 1 giorno a settimana o almeno 5 giorni al mese. È una guida HR cantonale per il personale pubblico, non un limite fiscale o lavorativo federale generale per tutti i datori di lavoro. Il § 7 KonsVerCHEV (test 1 giorno / 5 giorni) riguarda solo i geringfügige Arbeitsverhältnisse (impieghi marginali), non un minimo generale di telelavoro. Altri datori di lavoro possono applicare regole diverse. Fonte: Dipartimento delle finanze di Basilea Città (PDF Homeoffice Vorgaben).',
-    pending_lu_be_tax:
-      'Belgio–Lussemburgo: il DOC 55 3055/001 Art. I della Camera belga fissa 34 giorni lavorativi («34 jours ouvrables»). Il contatore attivo usa quel limite con le regole di conteggio dell’ACD lussemburghese (frazione di giorno = giorno intero; nessuna riduzione part-time). Verificate il vostro caso presso l’autorità.',
-    pending_lu_de_tax:
-      'Il governo lussemburghese indica che la tolleranza è passata da 19 a 34 giorni dal 2024 per i residenti in Germania. Il testo tedesco su conteggio e tempo parziale non ha potuto essere confermato, quindi nessun contatore è attivo e la riduzione Francia–Lussemburgo non è applicata. Verificate con la vostra autorità.',
     usedOf: '{used} su {limit}',
     usedOfDays: '{used} di {allowed} giorni',
     percentOfAnnual: '{pct}% di {annual} gg/anno (limite {limit}%)',
@@ -184,7 +183,7 @@ const it: Dict = {
     ch_fr_1983_missions_10: 'Impieghi temporanei fuori dalla Svizzera (max 10 giorni/anno, 1983)',
     ch_fr_1983_nights_45: 'Notti di lavoro fuori casa (max 45/anno, 1983)',
     ch_fr_1983_tax_note:
-      'Accordo frontaliero del 1983 (Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel, Giura): i residenti in Francia sono tassati in Francia; la Francia versa il 4,5% del salario lordo alla Svizzera. Il telelavoro dalla Francia fino al 40% del tempo di lavoro annuo resta in quel regime. Fino a 10 giorni di impiego temporaneo all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. Fonti: accordo amichevole del 30 giugno 2023 (impots.gouv.fr); scheda ESTV; Cantone del Giura. Metodo di calcolo: il Cantone del Giura indica che il datore di lavoro sceglie giornate, mezze giornate od ore e deve applicare la scelta in modo uniforme a tutto il personale. ge.ch indica soglie per Ginevra: una giornata se il telelavoro dura più di 4 ore; una mezza giornata da 2 a 4 ore, nulla sotto le 2 ore; oppure ogni ora effettiva. Le giornate e mezze giornate di BorderDay sono un modo di tenere questo registro; non ha un metodo orario: se il datore di lavoro conta in ore, valgono le sue cifre.',
+      'Accordo frontaliero del 1983 (Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel, Giura): i residenti in Francia sono tassati in Francia; la Francia versa il 4,5% del salario lordo alla Svizzera. Il telelavoro dalla Francia fino al 40% del tempo di lavoro annuo resta in quel regime. Fino a 10 giorni di impiego temporaneo all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. La reperibilità conta solo in caso di intervento effettivo. Fonti: accordo amichevole del 30 giugno 2023 (impots.gouv.fr); scheda ESTV; Cantone del Giura. Metodo di calcolo: il Cantone del Giura indica che il datore di lavoro sceglie giornate, mezze giornate od ore e deve applicare la scelta in modo uniforme a tutto il personale. ge.ch indica soglie per Ginevra: una giornata se il telelavoro dura più di 4 ore; una mezza giornata da 2 a 4 ore, nulla sotto le 2 ore; oppure ogni ora effettiva. Le giornate e mezze giornate di BorderDay sono un modo di tenere questo registro; non ha un metodo orario: se il datore di lavoro conta in ore, valgono le sue cifre.',
     ch_fr_1983_missions_note:
       'Impieghi temporanei in Francia o in uno Stato terzo: fino a 10 giorni all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. Tempo parziale o anno parziale: i 10 giorni sono ridotti in proporzione e arrotondati per eccesso. Qualsiasi giorno di impiego temporaneo in eccesso in Francia fa cessare il regime del 1983, e qualsiasi giorno in eccesso in uno Stato terzo conta nei 45. BorderDay non distingue la Francia da uno Stato terzo: trattate ogni giorno di impiego temporaneo in eccesso come un rischio. Fonti: scheda ESTV; accordo amichevole 1983 impots.gouv.fr.',
     ch_fr_1983_nights_note:
@@ -199,13 +198,10 @@ const it: Dict = {
       'Questo totale include {excess} giorni di impiego temporaneo oltre i limiti di 10 giorni e del 40%. I giorni in eccesso in uno Stato terzo contano in questo limite, con o senza notte fuori casa. BorderDay non distingue la Francia da uno Stato terzo.',
     ch_fr_1983_mission_excess:
       'Dei vostri giorni di impiego temporaneo, {counted} contano nel 40% e {excess} no. Qualsiasi giorno in eccesso in Francia fa cessare il regime del 1983, e qualsiasi giorno in eccesso in uno Stato terzo conta nei 45; BorderDay non distingue la Francia da uno Stato terzo.',
-    ch_fr_1983_value: 'Vedere i contatori 40% / 10 impieghi temporanei / 45 notti',
-    ch_fr_1983_note:
-      'Questi cantoni seguono l’accordo del 1983: tassati in Francia (la Francia versa il 4,5% alla Svizzera). I contatori seguono il telelavoro fino al 40%, fino a 10 giorni di impiego temporaneo e al massimo 45 notti di lavoro fuori casa.',
     lu_over_34:
       'Limite superato: la Francia può tassare il tempo effettivamente lavorato in Francia o in uno Stato terzo, dal primo giorno. Verificate con la vostra autorità fiscale.',
     lu_be_tax_note:
-      'Residenti in Belgio impiegati in Lussemburgo: fino a 34 giorni lavorativi («34 jours ouvrables») per anno civile fisicamente presenti in Belgio e/o in uno Stato terzo per lavoro, senza perdere l’imposizione lussemburghese su quei giorni (Camera belga DOC 55 3055/001 Art. I). A differenza di Francia–Lussemburgo, il limite di 34 giorni non è ridotto per part-time o anno parziale secondo il seuil de tolérance ACD lussemburghese. Ogni frazione di giorno conta come giorno intero. I giorni in sede in Lussemburgo e i giorni non lavorativi non contano. Fonti: Camera belga DOC 55 3055/001; Administration des contributions directes del Lussemburgo (PDF seuil de tolérance BE–LU).',
+      'Residenti in Belgio impiegati in Lussemburgo: fino a 34 giorni lavorativi («34 jours ouvrables») per anno civile fisicamente presenti in Belgio e/o in uno Stato terzo per lavoro, senza perdere l’imposizione lussemburghese su quei giorni (Camera belga DOC 55 3055/001 Art. I). A differenza di Francia–Lussemburgo, il limite di 34 giorni non è ridotto per part-time o anno parziale secondo il seuil de tolérance ACD lussemburghese. Ogni frazione di giorno conta come giorno intero. I giorni in sede in Lussemburgo e i giorni non lavorativi non contano. La regola si applica dal 1° gen. 2022 in base all’atto aggiuntivo del 31 ago. 2021, in vigore dal 10 feb. 2023. Spetta a voi provare i giorni: questo registro da solo può non bastare. Fonti: Camera belga DOC 55 3055/001; Administration des contributions directes del Lussemburgo (note seuil de tolérance BE–LU del 1° marzo 2024 e del 2 marzo 2023).',
     lu_be_over_34:
       'Limite superato: il Belgio può tassare il tempo effettivamente lavorato in Belgio o in uno Stato terzo, dal primo giorno. Verificate con la vostra autorità fiscale.',
     lu_de_tax_note:
@@ -294,7 +290,7 @@ const it: Dict = {
     deleted: 'Tutti i giorni eliminati.',
     annualWorkingDays: 'Giorni lavorativi contrattuali / anno',
     annualWorkingDaysHint:
-      'Serve a convertire i giorni in percentuale. Valori predefiniti: 240 è la base semplificata ufficiale a tempo pieno solo per Francia–Svizzera (ge.ch). 220 per i corridoi Lussemburgo/Belgio e 240 per Italia–Svizzera sono ipotesi senza base ufficiale trovata — impostate il vostro valore. Se resta vuoto, il valore predefinito è adattato alla vostra percentuale d’impiego.',
+      'Serve a convertire i giorni in percentuale. Valori predefiniti: 240 è la base semplificata ufficiale a tempo pieno solo per Francia–Svizzera (ge.ch). 220 per i corridoi Lussemburgo/Belgio e 240 per Italia–Svizzera e Germania–Svizzera sono ipotesi senza base ufficiale trovata — impostate il vostro valore. Se resta vuoto, il valore predefinito è adattato alla vostra percentuale d’impiego.',
     installHint: 'Aggiungete BorderDay alla schermata Home per aprirlo con un tocco.',
     emptyMonth: 'Nessun giorno registrato questo mese.',
     weekdays: ['lun', 'mar', 'mer', 'gio', 'ven', 'sab', 'dom'],
@@ -404,7 +400,7 @@ const it: Dict = {
       'No. Registrate voi i giorni. Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
     q5: 'Quali confini coprite?',
     a5:
-      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale per ora: Francia→Belgio e Paesi Bassi→Belgio.',
+      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale: Francia→Belgio non ha un limite di giorni, e per Paesi Bassi→Belgio non è stata trovata alcuna tolleranza.',
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',

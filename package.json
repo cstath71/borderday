@@ -11,6 +11,7 @@
     "test:watch": "vitest",
     "prerender": "node scripts/prerender.mjs",
     "indexnow": "node scripts/indexnow.mjs",
+    "check-sources": "node scripts/check-sources.mjs",
     "make-og": "python3 scripts/make-og.py"
   },
   "dependencies": {

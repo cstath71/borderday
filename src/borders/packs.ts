@@ -1,15 +1,16 @@
 import type { BorderPack, LimitCounter, OfficialSource } from './types';
 
-/** Last content-support review date (Europe/Zurich) for citations that still use this stamp.
- * Prefer a per-source `checked` when a URL was re-read on a different day. Do not stamp a
- * source as checked for a claim its content does not support — remove or disable that citation. */
-const CHECKED = '2026-10-31';
-
+/**
+ * Each source carries its own `checked` date (Europe/Zurich): the day that URL returned the document
+ * and the figures the counter relies on were found in it. `npm run check-sources` repeats the link
+ * part. Change a date only after re-reading that source. Do not stamp a source as checked for a claim
+ * its content does not support: remove or disable that citation.
+ */
 const SRC = {
   geAvenant: {
     title: 'ge.ch — avenant télétravail',
     url: 'https://www.ge.ch/actualite/teletravail-personnes-frontalieres-entree-vigueur-avenant-convention-franco-suisse-29-07-2025',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   geEmployer: {
     title: 'ge.ch — obligations de l’employeur en matière de télétravail (première transmission janvier 2027)',
@@ -24,27 +25,27 @@ const SRC = {
   estvAi: {
     title: 'ESTV amicable agreement CH–FR (PDF)',
     url: 'https://www.estv.admin.ch/dam/fr/sd-web/Bibcb06jL1wG/int-laender-fr-dba-ai-cdi-20260429-fr.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   impots10: {
     title: 'impots.gouv.fr — fiche 10 jours / 40%',
     url: 'https://www.impots.gouv.fr/sites/default/files/media/1_metier/1_particulier/EV/4_changements_de_situation/480_depart_arrivee_france/fiche-pratique-accords-interpretatifs-10-jours-cdi.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   impots34: {
     title: 'impots.gouv.fr — FR–LU seuil 34 jours',
     url: 'https://www.impots.gouv.fr/sites/default/files/media/10_conventions/luxembourg/nid_13587_accord_avec_le_luxembourg_sur_les_modalites_d_application_du_seuil_des_34_jours.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   fps: {
     title: 'Belgian FPS — framework agreement depositary',
     url: 'https://socialsecurity.belgium.be/en/internationally-active/cross-border-telework-eu-eea-and-switzerland',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   cleiss: {
     title: 'CLEISS — télétravail transfrontalier',
     url: 'https://www.cleiss.fr/particuliers/teletravail-transfrontalier.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   // Supports the 25%, the 9 Feb 2026 entry into force and the 1 Jan 2024 start. It does not mention the 45 days.
   fsioIt: {
@@ -55,7 +56,7 @@ const SRC = {
   fedlex: {
     title: 'Fedlex RU 2026 104 — protocollo CH–IT (published)',
     url: 'https://www.fedlex.admin.ch/eli/oc/2026/104/it',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   baselStadt: {
     title: 'Basel-Stadt — Homeoffice Vorgaben (rules for its own staff)',
@@ -65,17 +66,17 @@ const SRC = {
   fwMemo: {
     title: 'Belgian FPS — framework agreement, explanatory memorandum (25% and 50%)',
     url: 'https://socialsecurity.belgium.be/sites/default/files/content/docs/en/international/explanatory_memorandum_to_the_framework_agreement.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   fwText: {
     title: 'Belgian FPS — framework agreement text (Art. 2 exclusions, Art. 3, Art. 4)',
     url: 'https://socialsecurity.belgium.be/sites/default/files/content/docs/en/international/framework_agreement_on_cross-border_telework.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   ccssParent: {
     title: 'CCSS Luxembourg — telework agreement',
     url: 'https://ccss.public.lu/en/employeurs/secteur-prive/activite-etranger/accord-teletravail/notice-teletravail.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   ge40: {
     title: 'ge.ch — au-delà de 40% de télétravail (imposable en France dès le 1er jour)',
@@ -85,12 +86,18 @@ const SRC = {
   ai1983: {
     title: 'impots.gouv.fr — accord amiable du 30 juin 2023 (accord frontalier de 1983)',
     url: 'https://www.impots.gouv.fr/sites/default/files/media/10_conventions/suisse/suisse_accord_interpretatif_teletravail_accord_frontalier_1983.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
+  },
+  // §3 defines telework for the 1983 regime: "dans son Etat de résidence, à distance et en dehors des locaux de l'employeur".
+  ai2022: {
+    title: 'impots.gouv.fr — accord amiable du 22 décembre 2022 (télétravail, accord frontalier de 1983)',
+    url: 'https://www.impots.gouv.fr/sites/default/files/media/10_conventions/suisse/accord-amiable-frontaliers-83.pdf',
+    checked: '2026-11-01',
   },
   ex1983: {
     title: 'ESTV — fiche pratique, accord du 11 avril 1983 (exemples)',
     url: 'https://www.estv.admin.ch/dam/fr/sd-web/Uf-QRIyIOJ5T/int-laender-fr-dba-exemplare-ai-1983-20230630-fr.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   impotsCantons: {
     title: 'impots.gouv.fr — tax treatment of cross-border workers, by canton',
@@ -110,52 +117,58 @@ const SRC = {
   aargau: {
     title: 'Kanton Aargau — Merkblatt Grenzgänger (Stand 1. Januar 2026)',
     url: 'https://www.ag.ch/media/kanton-aargau/dfr/dokumente/steuern/quellensteuer/quellensteuer-arbeitnehmende/qust-merkblaetter/qust-grenzgaenger-2026.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   luDe34: {
     title: 'BMF — Konsultationsvereinbarung DE–LU 11 Jan 2024 (34 Tage)',
     url: 'https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/Internationales_Steuerrecht/Staatenbezogene_Informationen/Laender_A_Z/Luxemburg/2024-01-15-Luxemburg-Abkommen-DBA-Verstaendigungsvereinbarung-Anwendung-Auslegung-DBA.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   luDe34Gov: {
     title: 'gouvernement.lu — nouveautés 2024: DE–LU, 19 à 34 jours',
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2023/12-decembre/29-nouveautes-2024.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   luBe34: {
-    title: 'impotsdirects.public.lu — seuil de tolérance BE–LU 34 jours',
+    title: 'impotsdirects.public.lu — seuil de tolérance BE–LU, note du 1er mars 2024 (34 jours, charge de la preuve)',
+    url: 'https://impotsdirects.public.lu/dam-assets/fr/conventions/conv/seuil-de-tolrance-b-01032024.pdf',
+    checked: '2026-11-01',
+  },
+  // The 2024 note gives only "applicable à partir du 1er janvier 2022"; this one also gives the 10 Feb 2023 entry into force.
+  luBe34Prior: {
+    title: 'impotsdirects.public.lu — seuil de tolérance BE–LU, note du 2 mars 2023 (entrée en vigueur le 10 février 2023)',
     url: 'https://impotsdirects.public.lu/dam-assets/fr/conventions/conv/seuil-de-tolerance-b-03-2023.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   luBe34Gov: {
     title: 'gouvernement.lu — Gaichel 2021: BE–LU, 34 jours dès 2022',
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2021/08-aout/31-gaichel-accords-domaine-fiscal.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   chamberBeLu34: {
     title: 'Belgian Chamber DOC 55 3055/001 — BE–LU 34 jours ouvrables',
     url: 'https://www.dekamer.be/FLWB/PDF/55/3055/55K3055001.pdf',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   reg883: {
     title: 'Regulation (EC) No 883/2004 Art. 13 (CELLAR)',
     url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32004R0883',
-    checked: CHECKED,
+    checked: '2026-10-31',
   },
   reg987: {
     title: 'Regulation (EC) No 987/2009 Art. 14(8)/(10) (CELLAR)',
     url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R0987',
-    checked: CHECKED,
+    checked: '2026-10-31',
   },
   luFrAvenant: {
     title: 'gouvernement.lu — avenant FR–LU du 7 novembre 2022 (34 jours)',
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2022/11-novembre/07-signature-luxembourg-france.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   frBeAnswer: {
     title: 'Assemblée nationale — réponse ministérielle du 28 mai 2024 (FR–BE, art. 11)',
     url: 'https://questions.assemblee-nationale.fr/q16/16-12971QE.htm',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   frBeBofip: {
     title: 'BOFiP — régime frontalier France–Belgique',
@@ -171,7 +184,7 @@ const SRC = {
   art15a: {
     title: 'Fedlex — DBA DE–CH Art. 15a (60 Arbeitstage)',
     url: 'https://www.fedlex.admin.ch/eli/cc/1972/3075_3128_2910/de',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   luCirc71: {
     title: 'ACD Luxembourg — Circulaire L.G. - Conv. D.I. n° 71 (34 jours, 30 min, dès 2024)',
@@ -181,17 +194,17 @@ const SRC = {
   bofip45: {
     title: 'BOFiP archives — 14 A-5-05 (45 nuitées, échange de lettres 2005)',
     url: 'https://bofip-archives.impots.gouv.fr/bofip/23629-AIDA.html/identifiant=14A-5-05-20050518',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   accordo2020: {
     title: 'Fedlex — Accordo CH–IT 23 Dec 2020 Art. 2 (SR 0.642.045.43)',
-    url: 'https://www.fedlex.admin.ch/eli/cc/0.642.045.43/it',
-    checked: CHECKED,
+    url: 'https://www.fedlex.admin.ch/eli/cc/2023/410/it',
+    checked: '2026-11-01',
   },
   nlBe: {
     title: 'Belastingdienst — belastingverdrag met België',
     url: 'https://www.belastingdienst.nl/wps/wcm/connect/nl/buitenland/content/belastingverdrag-met-belgie',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
 } as const;
 
@@ -299,7 +312,7 @@ export const BORDER_PACKS: BorderPack[] = [
     regionNoteKey: 'ch_fr_1983_region',
     defaultAnnualWorkingDays: 240,
     logHintKey: 'logHint_ch_fr',
-    dayHintKeys: { telework: 'teleworkHint_ch_fr' },
+    dayHintKeys: { telework: 'teleworkHint_ch_fr_1983' },
     counters: [
       {
         id: 'basel_fr_tax_telework_40',
@@ -317,7 +330,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.ai1983, SRC.ex1983, SRC.impotsCantons, SRC.jura],
+        sources: [SRC.ai2022, SRC.ai1983, SRC.ex1983, SRC.impotsCantons, SRC.jura],
         notesKey: 'ch_fr_1983_tax_note',
         overKey: 'ch_fr_1983_over_40',
         missionExcessKey: 'ch_fr_1983_mission_excess',
@@ -375,6 +388,7 @@ export const BORDER_PACKS: BorderPack[] = [
   },
   {
     // The 60-day rule is national (DE–CH). The 5-day floor is one canton's staff rule.
+    // 240 is official for CH–FR (ge.ch) only; here it is an assumption. KonsVerCHEV's 250 is for §9(2) only.
     id: 'basel_de',
     nameKey: 'basel_de',
     residenceCountries: ['DE'],
@@ -486,7 +500,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.chamberBeLu34, SRC.luBe34, SRC.luBe34Gov],
+        sources: [SRC.chamberBeLu34, SRC.luBe34, SRC.luBe34Prior, SRC.luBe34Gov],
         notesKey: 'lu_be_tax_note',
         overKey: 'lu_be_over_34',
       },
@@ -537,6 +551,7 @@ export const BORDER_PACKS: BorderPack[] = [
     residenceCountries: ['FR'],
     workCountries: ['BE'],
     defaultAnnualWorkingDays: 220,
+    noTaxChipKey: 'chipTaxNoDayLimit',
     counters: [
       {
         id: 'be_fr_tax',

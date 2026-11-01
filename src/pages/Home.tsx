@@ -82,7 +82,7 @@ export default function Home() {
               <div className="border-chip" key={p.id}>
                 <strong>{(d.borders as Record<string, string>)[p.nameKey]}</strong>
                 <span style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>
-                  {hasTaxCounter(p) ? d.home.chipTaxYes : d.home.chipTaxNo}
+                  {hasTaxCounter(p) ? d.home.chipTaxYes : d.home[p.noTaxChipKey ?? 'chipTaxNo']}
                   {hasSocialSecurityCounter(p) && ` · ${d.home.chipSsYes}`}
                 </span>
               </div>

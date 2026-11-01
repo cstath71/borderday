@@ -187,7 +187,7 @@ export const PAGES = {
         'Is BorderDay tax advice? Where is the day log stored? Which borders are covered? How do payments and the 7-day trial work?',
       h1: 'FAQ',
       summary:
-        'BorderDay is a record-keeping and reminder tool, not tax or legal advice. Paid day logs are saved to your account, the free preview stays on the device; no GPS or device location. Nine corridors: social-security counters on all, tax counters on seven (Geneva and other non-1983 cantons, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg, Italy→Switzerland). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup.',
+        'BorderDay is a record-keeping and reminder tool, not tax or legal advice. Paid day logs are saved to your account, the free preview stays on the device; no GPS or device location. Nine corridors: social-security counters on all, tax counters on seven (Geneva and other non-1983 cantons, 1983-agreement cantons, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg, Italy→Switzerland). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup.',
       crumbs: [
         ['Home', ''],
         ['FAQ', 'faq'],
@@ -199,7 +199,7 @@ export const PAGES = {
         'BorderDay est-il un conseil fiscal ? Où est le journal ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?',
       h1: 'FAQ',
       summary:
-        'BorderDay est un outil de suivi et de rappel, pas un conseil fiscal ou juridique. Avec un abonnement, le journal est enregistré dans votre compte ; l’aperçu gratuit reste sur l’appareil ; ni GPS ni localisation de l’appareil. Neuf corridors : compteurs de sécurité sociale sur tous, compteurs fiscaux sur sept (Genève et autres cantons hors accord de 1983, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg, Italie→Suisse). Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription.',
+        'BorderDay est un outil de suivi et de rappel, pas un conseil fiscal ou juridique. Avec un abonnement, le journal est enregistré dans votre compte ; l’aperçu gratuit reste sur l’appareil ; ni GPS ni localisation de l’appareil. Neuf corridors : compteurs de sécurité sociale sur tous, compteurs fiscaux sur sept (Genève et autres cantons hors accord de 1983, cantons de l’accord de 1983, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg, Italie→Suisse). Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription.',
       crumbs: [
         ['Accueil', ''],
         ['FAQ', 'faq'],
@@ -211,7 +211,7 @@ export const PAGES = {
         'Ist BorderDay Steuerberatung? Wo liegt das Tagesprotokoll? Welche Grenzen? Wie funktionieren Zahlung und die 7-tägige Testphase?',
       h1: 'FAQ',
       summary:
-        'BorderDay ist ein Erfassungs- und Erinnerungstool, keine Steuer- oder Rechtsberatung. Mit Abo wird das Protokoll im Konto gespeichert, die Gratisvorschau bleibt auf dem Gerät; kein GPS und kein Gerätestandort. Neun Korridore: Sozialversicherungszähler auf allen, Steuerzähler auf sieben (Genf und weitere Kantone ausserhalb des Abkommens von 1983, Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg, Italien→Schweiz). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich.',
+        'BorderDay ist ein Erfassungs- und Erinnerungstool, keine Steuer- oder Rechtsberatung. Mit Abo wird das Protokoll im Konto gespeichert, die Gratisvorschau bleibt auf dem Gerät; kein GPS und kein Gerätestandort. Neun Korridore: Sozialversicherungszähler auf allen, Steuerzähler auf sieben (Genf und weitere Kantone ausserhalb des Abkommens von 1983, Kantone des Abkommens von 1983, Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg, Italien→Schweiz). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich.',
       crumbs: [
         ['Start', ''],
         ['FAQ', 'faq'],
@@ -223,7 +223,7 @@ export const PAGES = {
         'BorderDay è consulenza fiscale? Dove si trova il diario? Quali confini? Come funzionano pagamenti e prova di 7 giorni?',
       h1: 'FAQ',
       summary:
-        'BorderDay è uno strumento di registrazione e promemoria, non consulenza fiscale o legale. Con un piano il registro è salvato nell’account, l’anteprima gratuita resta sul dispositivo; niente GPS né posizione del dispositivo. Nove corridoi: contatori di sicurezza sociale su tutti, contatori fiscali su sette (Ginevra e altri cantoni fuori dall’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo, Italia→Svizzera). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione.',
+        'BorderDay è uno strumento di registrazione e promemoria, non consulenza fiscale o legale. Con un piano il registro è salvato nell’account, l’anteprima gratuita resta sul dispositivo; niente GPS né posizione del dispositivo. Nove corridoi: contatori di sicurezza sociale su tutti, contatori fiscali su sette (Ginevra e altri cantoni fuori dall’accordo del 1983, cantoni dell’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo, Italia→Svizzera). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione.',
       crumbs: [
         ['Home', ''],
         ['FAQ', 'faq'],
@@ -748,7 +748,7 @@ PAGES.faq.nl = {
     'Veelgestelde vragen over BorderDay: opslag, locatie, corridors, prijzen, betalingen en wat de tool niet dekt.',
   h1: 'FAQ',
   summary:
-    'BorderDay is een registratie- en herinneringstool, geen belasting- of juridisch advies. Met abonnement wordt het logboek in het account bewaard, de gratis preview blijft op het apparaat; geen GPS en geen apparaatlocatie. Negen corridors: socialezekerheidstellers op alle, belastingtellers op zeven. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie.',
+    'BorderDay is een registratie- en herinneringstool, geen belasting- of juridisch advies. Met abonnement wordt het logboek in het account bewaard, de gratis preview blijft op het apparaat; geen GPS en geen apparaatlocatie. Negen corridors: socialezekerheidstellers op alle, belastingtellers op zeven (Genève en andere niet-1983-kantons, 1983-verdragskantons, Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg, Italië→Zwitserland). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie.',
   crumbs: [['Home', ''], ['FAQ', 'faq']],
 };
 PAGES['for-individuals'].nl = {
@@ -800,7 +800,7 @@ export const FAQ = {
     ],
     [
       'Which borders do you cover?',
-      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter yet: France→Belgium and Netherlands→Belgium.',
+      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
     ],
     [
       'How much does BorderDay cost?',
@@ -830,7 +830,7 @@ export const FAQ = {
     ],
     [
       'Quelles frontières couvrez-vous ?',
-      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal général : France→Belgique et Pays-Bas→Belgique.',
+      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
     ],
     [
       'Combien coûte BorderDay ?',
@@ -860,7 +860,7 @@ export const FAQ = {
     ],
     [
       'Welche Grenzen decken Sie ab?',
-      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Noch kein allgemeiner Steuerzähler: Frankreich→Belgien und Niederlande→Belgien.',
+      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
     ],
     [
       'Was kostet BorderDay?',
@@ -890,7 +890,7 @@ export const FAQ = {
     ],
     [
       'Quali confini coprite?',
-      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale per ora: Francia→Belgio e Paesi Bassi→Belgio.',
+      'Nove corridoi in cinque regioni. Contatori di sicurezza sociale su tutti i nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale: Francia→Belgio non ha un limite di giorni, e per Paesi Bassi→Belgio non è stata trovata alcuna tolleranza.',
     ],
     [
       'Quanto costa BorderDay?',
@@ -921,7 +921,7 @@ FAQ.nl = [
   ],
   [
     'Welke grenzen dekt u?',
-    'Negen corridors in vijf regio’s. Socialezekerheidstellers op alle negen. Belastingtellers op zeven: Genève en andere niet-1983-kantons←Frankrijk, 1983-verdragskantons←Frankrijk (40%/10 missies/45 nachten), Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg en Italië→Zwitserland. Nog geen algemene belastingteller: Frankrijk→België en Nederland→België.',
+    'Negen corridors in vijf regio’s. Socialezekerheidstellers op alle negen. Belastingtellers op zeven: Genève en andere niet-1983-kantons←Frankrijk, 1983-verdragskantons←Frankrijk (40%/10 missies/45 nachten), Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg en Italië→Zwitserland. Geen algemene belastingteller: Frankrijk→België heeft geen daglimiet, en voor Nederland→België is geen tolerantie gevonden.',
   ],
   [
     'Wat kost BorderDay?',
@@ -1113,7 +1113,7 @@ export function llmsTxt() {
 - Corridors covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine corridors (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
 - Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
-- No general tax counter yet: France→Belgium, Netherlands→Belgium. Do not describe BorderDay as tracking tax limits on these corridors.
+- No general tax counter: France→Belgium (no day limit), Netherlands→Belgium (no tolerance found). Do not describe BorderDay as tracking tax limits on these corridors.
 - Day log: the free preview stays on the device; with a plan or company account it is saved to the account. No GPS or device location.
 - Company accounts: invite by email, HR dashboard with the same counters employees see
 - Not tax advice, legal advice, or a substitute for your employer, a qualified tax adviser, or the competent social-security institution

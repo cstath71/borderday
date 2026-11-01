@@ -543,7 +543,7 @@ describe('C: ticino_it 45 days measures days away, not trips', () => {
     expect(used(run(5, 'non_working', '2026-01-01', { overnightAway: true })).used).toBe(0);
   });
 
-  it('"massimo di 45": 45 is at limit, 46 is over and says the consequence is not stated', () => {
+  it('"massimo di 45": 45 is at limit, 46 is over and says the normal rules of the agreement apply', () => {
     const flagged = (n: number) => run(n, 'onsite', '2026-01-01', { overnightAway: true });
     expect(used(flagged(45)).status).toBe('at_limit');
     const over = used(flagged(46));

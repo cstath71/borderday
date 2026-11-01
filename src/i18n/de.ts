@@ -87,7 +87,8 @@ const de: Dict = {
       'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
     inShortLabel: 'Kurz gesagt',
     chipTaxYes: 'Steuer: ja',
-    chipTaxNo: 'Steuer: noch nicht',
+    chipTaxNo: 'Steuer: kein Zähler',
+    chipTaxNoDayLimit: 'Steuer: keine Tagesgrenze',
     chipSsYes: 'Sozialversicherung: ja',
   },
   borders: {
@@ -122,6 +123,8 @@ const de: Dict = {
       'Arbeitstag zu Hause in Italien. Das Protokoll spricht von «zu Hause im Ansässigkeitsstaat»: Ob ein Coworking-Tag zählt, ist nicht bestätigt, fragen Sie Ihre Behörde.',
     teleworkHint_ch_fr:
       'Arbeitstag in Frankreich (Zuhause oder lokales Coworking). Das CH–FR-Abkommensregime ist nicht auf den Wohnsitz beschränkt.',
+    teleworkHint_ch_fr_1983:
+      'Arbeitstag in Frankreich ausserhalb der Räume des Arbeitgebers (zu Hause oder lokales Coworking). Die Verständigungsvereinbarung vom 22. Dez. 2022 zum Regime von 1983 sagt «in seinem Ansässigkeitsstaat» und nennt den Wohnsitz nicht.',
     third_countryHint_basel_de:
       'Arbeit ausserhalb von Deutschland und der Schweiz: immer ein Nichtrückkehrtag, auch bei Rückkehr am selben Abend. Nicht für eintägige Reisen innerhalb von Deutschland oder der Schweiz verwenden.',
     logHint_luxembourg_fr:
@@ -165,10 +168,6 @@ const de: Dict = {
       'Personalregel Basel-Stadt: Vor-Ort-Tage diesen Monat (mindestens 5 oder 1 pro Woche)',
     basel_de_employer_note:
       'Dies ist die Regel, die der Kanton Basel-Stadt für das eigene Personal anwendet (Stand 1. Jan. 2026): Homeoffice nur, wenn die Person mindestens 1 Tag pro Woche oder mindestens 5 Tage pro Monat an den Arbeitsort pendelt. Es handelt sich um kantonale HR-Vorgaben für das öffentliche Personal, nicht um eine allgemeine bundesrechtliche Steuer- oder Arbeitsgrenze für alle Arbeitgeber. KonsVerCHEV § 7 (1-Tages-/5-Tages-Test) gilt nur für geringfügige Arbeitsverhältnisse, nicht als allgemeiner Homeoffice-Mindestumfang. Andere Arbeitgeber können andere Regeln anwenden. Quelle: Finanzdepartement Basel-Stadt (PDF Homeoffice Vorgaben).',
-    pending_lu_be_tax:
-      'Belgien–Luxemburg: Kammer-DOC 55 3055/001 Art. I setzt 34 Arbeitstage («34 jours ouvrables»). Der aktive Zähler nutzt diese Grenze mit den Zählregeln der luxemburgischen ACD (Tagesbruchteil = ganzer Tag; keine Teilzeitkürzung). Prüfen Sie Ihren Fall bei Ihrer Behörde.',
-    pending_lu_de_tax:
-      'Laut der luxemburgischen Regierung stieg die Toleranz ab 2024 für Personen mit Wohnsitz in Deutschland von 19 auf 34 Tage. Der deutsche Text zu Zählweise und Teilzeit konnte nicht bestätigt werden, daher läuft kein Zähler und die Kürzung Frankreich–Luxemburg wird nicht angewendet. Fragen Sie Ihre Behörde.',
     usedOf: '{used} von {limit}',
     usedOfDays: '{used} von {allowed} Tagen',
     percentOfAnnual: '{pct} % von {annual} Tagen/Jahr (Grenze {limit} %)',
@@ -187,7 +186,7 @@ const de: Dict = {
     ch_fr_1983_missions_10: 'Befristete Einsätze ausserhalb der Schweiz (max. 10 Tage/Jahr, 1983)',
     ch_fr_1983_nights_45: 'Arbeitsnächte auswärts (max. 45/Jahr, 1983)',
     ch_fr_1983_tax_note:
-      'Grenzgängerabkommen von 1983 (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Waadt, Wallis, Neuenburg, Jura): Personen mit Wohnsitz in Frankreich werden in Frankreich besteuert; Frankreich überweist 4,5 % des Bruttolohns an die Schweiz. Telearbeit aus Frankreich bis 40 % der jährlichen Arbeitszeit bleibt in diesem Regime. Bis zu 10 Einsatztage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit noch Platz haben. Quellen: Verständigungsvereinbarung vom 30. Juni 2023 (impots.gouv.fr); ESTV-Merkblatt; Kanton Jura. Zählmethode: Der Kanton Jura gibt an, dass der Arbeitgeber Tage, Halbtage oder Stunden wählt und dies einheitlich auf das ganze Personal anwenden muss. ge.ch nennt für Genf Schwellen: ein Tag bei mehr als 4 Stunden Telearbeit; ein Halbtag bei 2 bis 4 Stunden, nichts unter 2 Stunden; oder jede effektive Stunde. Die ganzen und halben Tage von BorderDay sind eine Art, diese Aufzeichnung zu führen; eine Stundenmethode gibt es nicht: Zählt Ihr Arbeitgeber in Stunden, gelten seine Zahlen.',
+      'Grenzgängerabkommen von 1983 (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Waadt, Wallis, Neuenburg, Jura): Personen mit Wohnsitz in Frankreich werden in Frankreich besteuert; Frankreich überweist 4,5 % des Bruttolohns an die Schweiz. Telearbeit aus Frankreich bis 40 % der jährlichen Arbeitszeit bleibt in diesem Regime. Bis zu 10 Einsatztage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit noch Platz haben. Bereitschaftsdienst zählt nur bei tatsächlichem Einsatz. Quellen: Verständigungsvereinbarung vom 30. Juni 2023 (impots.gouv.fr); ESTV-Merkblatt; Kanton Jura. Zählmethode: Der Kanton Jura gibt an, dass der Arbeitgeber Tage, Halbtage oder Stunden wählt und dies einheitlich auf das ganze Personal anwenden muss. ge.ch nennt für Genf Schwellen: ein Tag bei mehr als 4 Stunden Telearbeit; ein Halbtag bei 2 bis 4 Stunden, nichts unter 2 Stunden; oder jede effektive Stunde. Die ganzen und halben Tage von BorderDay sind eine Art, diese Aufzeichnung zu führen; eine Stundenmethode gibt es nicht: Zählt Ihr Arbeitgeber in Stunden, gelten seine Zahlen.',
     ch_fr_1983_missions_note:
       'Befristete Einsätze in Frankreich oder einem Drittstaat: bis zu 10 Tage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit noch Platz haben. Teilzeit oder Teiljahr: die 10 Tage werden anteilig gekürzt und aufgerundet. Jeder überschüssige Einsatztag in Frankreich beendet das Regime von 1983, und jeder solche Tag in einem Drittstaat zählt zu den 45. BorderDay unterscheidet Frankreich nicht von einem Drittstaat: behandeln Sie jeden überschüssigen Einsatztag als Risiko. Quellen: ESTV-Merkblatt; Verständigungsvereinbarung 1983 impots.gouv.fr.',
     ch_fr_1983_nights_note:
@@ -202,13 +201,10 @@ const de: Dict = {
       'Diese Zahl enthält {excess} Einsatztage über die Grenzen von 10 Tagen und 40 % hinaus. Überschüssige Tage in einem Drittstaat zählen zu dieser Grenze, mit oder ohne auswärtige Nacht. BorderDay unterscheidet Frankreich nicht von einem Drittstaat.',
     ch_fr_1983_mission_excess:
       'Von Ihren Einsatztagen zählen {counted} innerhalb der 40 % und {excess} nicht. Jeder überschüssige Tag in Frankreich beendet das Regime von 1983, und jeder überschüssige Tag in einem Drittstaat zählt zu den 45; BorderDay unterscheidet Frankreich nicht von einem Drittstaat.',
-    ch_fr_1983_value: 'Siehe Zähler 40 % / 10 Einsätze / 45 Nächte',
-    ch_fr_1983_note:
-      'Diese Kantone folgen dem Abkommen von 1983: in Frankreich besteuert (Frankreich überweist 4,5 % an die Schweiz). Die Zähler erfassen Telearbeit bis 40 %, bis zu 10 Einsatztage und höchstens 45 Arbeitsnächte auswärts.',
     lu_over_34:
       'Grenze überschritten: Frankreich kann die tatsächlich in Frankreich oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Fragen Sie Ihre Steuerbehörde.',
     lu_be_tax_note:
-      'In Belgien wohnhafte Beschäftigte in Luxemburg: bis zu 34 Arbeitstage («34 jours ouvrables») pro Kalenderjahr physisch in Belgien und/oder einem Drittstaat für die Arbeit, ohne die luxemburgische Besteuerung für diese Tage zu verlieren (belgisches Kammer-DOC 55 3055/001 Art. I). Anders als bei Frankreich–Luxemburg wird die 34-Tage-Grenze nach dem luxemburgischen ACD-Toleranzschwellen-PDF nicht für Teilzeit oder Teiljahr gekürzt. Jeder Tagesbruchteil zählt als ganzer Tag. Vor-Ort-Tage in Luxemburg und arbeitsfreie Tage zählen nicht. Quellen: belgisches Kammer-DOC 55 3055/001; luxemburgische Administration des contributions directes (seuil de tolérance BE–LU PDF).',
+      'In Belgien wohnhafte Beschäftigte in Luxemburg: bis zu 34 Arbeitstage («34 jours ouvrables») pro Kalenderjahr physisch in Belgien und/oder einem Drittstaat für die Arbeit, ohne die luxemburgische Besteuerung für diese Tage zu verlieren (belgisches Kammer-DOC 55 3055/001 Art. I). Anders als bei Frankreich–Luxemburg wird die 34-Tage-Grenze nach dem luxemburgischen ACD-Toleranzschwellen-PDF nicht für Teilzeit oder Teiljahr gekürzt. Jeder Tagesbruchteil zählt als ganzer Tag. Vor-Ort-Tage in Luxemburg und arbeitsfreie Tage zählen nicht. Die Regel gilt ab dem 1. Jan. 2022 nach dem Zusatzabkommen vom 31. Aug. 2021, in Kraft seit dem 10. Feb. 2023. Sie müssen Ihre Tage belegen: Dieses Protokoll allein reicht womöglich nicht. Quellen: belgisches Kammer-DOC 55 3055/001; luxemburgische Administration des contributions directes (seuil-de-tolérance-Mitteilungen BE–LU vom 1. März 2024 und 2. März 2023).',
     lu_be_over_34:
       'Grenze überschritten: Belgien kann die tatsächlich in Belgien oder einem Drittstaat gearbeitete Zeit ab dem ersten Tag besteuern. Fragen Sie Ihre Steuerbehörde.',
     lu_de_tax_note:
@@ -297,7 +293,7 @@ const de: Dict = {
     deleted: 'Alle Tage gelöscht.',
     annualWorkingDays: 'Vertragliche Arbeitstage / Jahr',
     annualWorkingDaysHint:
-      'Dient zur Umrechnung der Tage in einen Prozentsatz. Standardwerte: 240 ist die offizielle vereinfachte Vollzeitbasis nur für Frankreich–Schweiz (ge.ch). 220 für Luxemburg/Belgien-Korridore und 240 für Italien–Schweiz sind Annahmen ohne gefundene offizielle Tagesbasis — setzen Sie Ihren eigenen Wert. Bleibt das Feld leer, wird der Standardwert mit Ihrem Beschäftigungsgrad skaliert.',
+      'Dient zur Umrechnung der Tage in einen Prozentsatz. Standardwerte: 240 ist die offizielle vereinfachte Vollzeitbasis nur für Frankreich–Schweiz (ge.ch). 220 für Luxemburg/Belgien-Korridore und 240 für Italien–Schweiz und Deutschland–Schweiz sind Annahmen ohne gefundene offizielle Tagesbasis — setzen Sie Ihren eigenen Wert. Bleibt das Feld leer, wird der Standardwert mit Ihrem Beschäftigungsgrad skaliert.',
     installHint: 'Fügen Sie BorderDay zum Startbildschirm hinzu für eine App mit einem Tippen.',
     emptyMonth: 'Diesen Monat noch keine Tage erfasst.',
     weekdays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
@@ -404,7 +400,7 @@ const de: Dict = {
       'Nein. Sie erfassen die Tage selbst. Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und halber Tag und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat.',
     q5: 'Welche Grenzen decken Sie ab?',
     a5:
-      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Noch kein allgemeiner Steuerzähler: Frankreich→Belgien und Niederlande→Belgien.',
+      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
     q6: 'Und der App Store?',
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',

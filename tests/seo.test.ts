@@ -163,8 +163,8 @@ describe('honest coverage in SEO copy', () => {
     expect(short).toMatch(/1983-agreement cantons←France \(40% \/ 10 mission days \/ 45 work nights/);
     expect(short).toMatch(/Belgium→Luxembourg/);
     expect(short).toMatch(/Germany→Luxembourg/);
-    expect(short).toMatch(/No general tax counter yet:.*France→Belgium, Netherlands→Belgium/s);
-    expect(short).not.toMatch(/No general tax counter yet:.*Belgium→Luxembourg/s);
+    expect(short).toMatch(/No general tax counter:.*France→Belgium \(no day limit\), Netherlands→Belgium/s);
+    expect(short).not.toMatch(/No general tax counter:.*Belgium→Luxembourg/s);
     expect(short).toMatch(/25%/);
     expect(short).not.toMatch(/Romandie|five borders|official tax and social-security/);
   });

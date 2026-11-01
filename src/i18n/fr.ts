@@ -87,7 +87,8 @@ const fr: Dict = {
       'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
     inShortLabel: 'En bref',
     chipTaxYes: 'Fiscalité : oui',
-    chipTaxNo: 'Fiscalité : pas encore',
+    chipTaxNo: 'Fiscalité : pas de compteur',
+    chipTaxNoDayLimit: 'Fiscalité : pas de limite en jours',
     chipSsYes: 'Sécurité sociale : oui',
   },
   borders: {
@@ -121,6 +122,8 @@ const fr: Dict = {
       'Jour de travail à votre domicile en Italie. Le protocole dit « au domicile » : la prise en compte d’un jour en coworking n’est pas confirmée, vérifiez auprès de votre autorité.',
     teleworkHint_ch_fr:
       'Jour de travail en France (domicile ou espace de coworking local). Le régime conventionnel CH–FR n’est pas limité au domicile.',
+    teleworkHint_ch_fr_1983:
+      'Jour de travail en France, hors des locaux de l’employeur (domicile ou coworking local). L’accord amiable du 22 déc. 2022 sur le régime de 1983 dit « dans son État de résidence » et ne mentionne pas le domicile.',
     third_countryHint_basel_de:
       'Travail hors d’Allemagne et de Suisse : toujours un jour de non-retour, même avec retour le soir. Ne l’utilisez pas pour un déplacement d’une journée en Allemagne ou en Suisse.',
     logHint_luxembourg_fr:
@@ -164,10 +167,6 @@ const fr: Dict = {
       'Règle du personnel de Bâle-Ville : jours sur site ce mois-ci (minimum 5, ou 1 par semaine)',
     basel_de_employer_note:
       'C’est la règle que le canton de Bâle-Ville applique à son propre personnel (état au 1er janv. 2026) : télétravail seulement si la personne se rend sur son lieu de travail au moins 1 jour par semaine ou au moins 5 jours par mois. Il s’agit d’une consigne RH cantonale pour le personnel public, pas d’un seuil fiscal ou de travail fédéral général pour tous les employeurs. Le § 7 KonsVerCHEV (test 1 jour / 5 jours) ne vise que les geringfügige Arbeitsverhältnisse (emplois marginaux), pas un plancher général de télétravail. D’autres employeurs peuvent appliquer d’autres règles. Source : Département des finances de Bâle-Ville (PDF Homeoffice Vorgaben).',
-    pending_lu_be_tax:
-      'Belgique–Luxembourg : le DOC 55 3055/001 Art. I de la Chambre belge fixe 34 jours ouvrables. Le compteur actif utilise cette limite avec les règles de décompte de l’ACD luxembourgeoise (fraction de jour = jour entier ; pas de réduction à temps partiel). Vérifiez auprès de votre autorité pour votre cas.',
-    pending_lu_de_tax:
-      'Le gouvernement luxembourgeois indique que la tolérance est passée de 19 à 34 jours dès 2024 pour les résidents d’Allemagne. Le texte allemand sur ce qui compte et sur le temps partiel n’a pas pu être confirmé : aucun compteur ne fonctionne et la réduction France–Luxembourg n’est pas appliquée. Vérifiez auprès de votre autorité.',
     usedOf: '{used} sur {limit}',
     usedOfDays: '{used} sur {allowed} jours',
     percentOfAnnual: '{pct} % de {annual} j/an (plafond {limit} %)',
@@ -186,7 +185,7 @@ const fr: Dict = {
     ch_fr_1983_missions_10: 'Missions temporaires hors de Suisse (max 10 jours/an, 1983)',
     ch_fr_1983_nights_45: 'Nuits de travail hors du domicile (max 45/an, 1983)',
     ch_fr_1983_tax_note:
-      'Accord frontalier de 1983 (Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel, Jura) : les résidents de France sont imposés en France ; la France reverse 4,5 % du salaire brut à la Suisse. Le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste dans ce régime. Jusqu’à 10 jours de mission par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. Sources : accord amiable du 30 juin 2023 (impots.gouv.fr) ; fiche ESTV ; Canton du Jura. Méthode de décompte : le Canton du Jura indique que l’employeur choisit les journées, les demi-journées ou les heures et doit appliquer ce choix uniformément à tout le personnel. ge.ch donne des seuils pour Genève : une journée si le télétravail dure plus de 4 heures ; une demi-journée de 2 à 4 heures, rien en dessous de 2 heures ; ou chaque heure effective. Les journées et demi-journées de BorderDay sont une façon de tenir ce relevé ; il n’a pas de méthode horaire : si votre employeur décompte en heures, ses chiffres priment.',
+      'Accord frontalier de 1983 (Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel, Jura) : les résidents de France sont imposés en France ; la France reverse 4,5 % du salaire brut à la Suisse. Le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste dans ce régime. Jusqu’à 10 jours de mission par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. L’astreinte ne compte qu’en cas d’intervention effective. Sources : accord amiable du 30 juin 2023 (impots.gouv.fr) ; fiche ESTV ; Canton du Jura. Méthode de décompte : le Canton du Jura indique que l’employeur choisit les journées, les demi-journées ou les heures et doit appliquer ce choix uniformément à tout le personnel. ge.ch donne des seuils pour Genève : une journée si le télétravail dure plus de 4 heures ; une demi-journée de 2 à 4 heures, rien en dessous de 2 heures ; ou chaque heure effective. Les journées et demi-journées de BorderDay sont une façon de tenir ce relevé ; il n’a pas de méthode horaire : si votre employeur décompte en heures, ses chiffres priment.',
     ch_fr_1983_missions_note:
       'Missions temporaires en France ou dans un État tiers : jusqu’à 10 jours par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. Temps partiel ou année partielle : les 10 jours sont réduits au prorata et arrondis vers le haut. Tout jour de mission en France au-delà met fin au régime de 1983, et tout jour au-delà dans un État tiers compte dans les 45. BorderDay ne distingue pas la France d’un État tiers : traitez chaque jour de mission en excès comme un risque. Sources : fiche ESTV ; accord amiable 1983 impots.gouv.fr.',
     ch_fr_1983_nights_note:
@@ -201,13 +200,10 @@ const fr: Dict = {
       'Ce total inclut {excess} jours de mission au-delà des limites de 10 jours et de 40 %. Les jours en excès dans un État tiers comptent dans cette limite, avec ou sans nuit hors du domicile. BorderDay ne distingue pas la France d’un État tiers.',
     ch_fr_1983_mission_excess:
       'Sur vos jours de mission, {counted} comptent dans les 40 % et {excess} non. Tout jour en excès en France met fin au régime de 1983, et tout jour en excès dans un État tiers compte dans les 45 ; BorderDay ne distingue pas la France d’un État tiers.',
-    ch_fr_1983_value: 'Voir les compteurs 40 % / 10 missions / 45 nuits',
-    ch_fr_1983_note:
-      'Ces cantons suivent l’accord de 1983 : imposés en France (la France reverse 4,5 % à la Suisse). Les compteurs suivent le télétravail jusqu’à 40 %, jusqu’à 10 jours de mission et au plus 45 nuits de travail hors du domicile.',
     lu_over_34:
       'Seuil dépassé : la France peut imposer le temps réellement travaillé en France ou dans un État tiers, dès le premier jour. Vérifiez auprès de votre autorité fiscale.',
     lu_be_tax_note:
-      'Résidents de Belgique employés au Luxembourg : jusqu’à 34 jours ouvrables par année civile physiquement présents en Belgique et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur ces jours (Chambre belge DOC 55 3055/001 Art. I). Contrairement à France–Luxembourg, la limite de 34 jours n’est pas réduite pour le temps partiel ou l’année partielle selon le seuil de tolérance ACD luxembourgeois. Toute fraction de jour compte pour un jour entier. Les jours sur site au Luxembourg et les jours non travaillés ne comptent pas. Sources : Chambre belge DOC 55 3055/001 ; Administration des contributions directes du Luxembourg (PDF seuil de tolérance BE–LU).',
+      'Résidents de Belgique employés au Luxembourg : jusqu’à 34 jours ouvrables par année civile physiquement présents en Belgique et/ou dans un État tiers pour le travail, sans perdre l’imposition au Luxembourg sur ces jours (Chambre belge DOC 55 3055/001 Art. I). Contrairement à France–Luxembourg, la limite de 34 jours n’est pas réduite pour le temps partiel ou l’année partielle selon le seuil de tolérance ACD luxembourgeois. Toute fraction de jour compte pour un jour entier. Les jours sur site au Luxembourg et les jours non travaillés ne comptent pas. La règle s’applique depuis le 1er janv. 2022 en vertu de l’avenant du 31 août 2021, en vigueur depuis le 10 févr. 2023. Il vous appartient de prouver vos jours : ce journal seul peut ne pas suffire. Sources : Chambre belge DOC 55 3055/001 ; Administration des contributions directes du Luxembourg (notes seuil de tolérance BE–LU du 1er mars 2024 et du 2 mars 2023).',
     lu_be_over_34:
       'Seuil dépassé : la Belgique peut imposer le temps réellement travaillé en Belgique ou dans un État tiers, dès le premier jour. Vérifiez auprès de votre autorité fiscale.',
     lu_de_tax_note:
@@ -296,7 +292,7 @@ const fr: Dict = {
     deleted: 'Tous les jours ont été supprimés.',
     annualWorkingDays: 'Jours de travail contractuels / an',
     annualWorkingDaysHint:
-      'Sert à convertir les jours en pourcentage. Valeurs par défaut : 240 est la base simplifiée officielle à temps plein pour la France–Suisse uniquement (ge.ch). 220 pour les corridors Luxembourg/Belgique et 240 pour l’Italie–Suisse sont des hypothèses sans base officielle trouvée — indiquez votre propre chiffre. Laissé vide, le chiffre par défaut est ajusté selon votre taux d’emploi.',
+      'Sert à convertir les jours en pourcentage. Valeurs par défaut : 240 est la base simplifiée officielle à temps plein pour la France–Suisse uniquement (ge.ch). 220 pour les corridors Luxembourg/Belgique et 240 pour l’Italie–Suisse et l’Allemagne–Suisse sont des hypothèses sans base officielle trouvée — indiquez votre propre chiffre. Laissé vide, le chiffre par défaut est ajusté selon votre taux d’emploi.',
     installHint: 'Ajoutez BorderDay à l’écran d’accueil pour une application en un geste.',
     emptyMonth: 'Aucun jour enregistré ce mois-ci.',
     weekdays: ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'],
@@ -403,7 +399,7 @@ const fr: Dict = {
       'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
     q5: 'Quelles frontières couvrez-vous ?',
     a5:
-      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas encore de compteur fiscal général : France→Belgique et Pays-Bas→Belgique.',
+      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',

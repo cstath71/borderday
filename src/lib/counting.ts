@@ -158,7 +158,9 @@ export function chFrMissionSplit(opts: {
   capDays: number;
 }) {
   const quota = (opts.quotaPercent * opts.annualWorkingDays) / 100;
-  const counted = Math.min(opts.missions, opts.capDays, Math.max(0, Math.floor(quota - opts.telework)));
+  // Floors to the half day, the smallest unit logged, so a half-day mission that still fits is counted.
+  const room = Math.max(0, Math.floor((quota - opts.telework) * 2) / 2);
+  const counted = Math.min(opts.missions, opts.capDays, room);
   return {
     quota,
     counted,

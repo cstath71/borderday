@@ -86,6 +86,8 @@ export interface BorderPack {
   dayHintKeys?: Partial<Record<DayType, string>>;
   /** i18n key under dayTypes.*: logging guidance shown above the day buttons. */
   logHintKey?: string;
+  /** i18n key under home.* for a corridor with no tax counter, when the rule is known to have no day limit. */
+  noTaxChipKey?: 'chipTaxNoDayLimit';
 }
 
 export interface DayEntry {

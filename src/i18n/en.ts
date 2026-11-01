@@ -83,7 +83,8 @@ const en = {
       'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on seven of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
     inShortLabel: 'In short',
     chipTaxYes: 'Tax: yes',
-    chipTaxNo: 'Tax: not yet',
+    chipTaxNo: 'Tax: no counter',
+    chipTaxNoDayLimit: 'Tax: no day limit',
     chipSsYes: 'Social security: yes',
   },
   borders: {
@@ -117,6 +118,8 @@ const en = {
       'Workday at your home in Italy. The protocol says “at your domicile”: whether a co-working day counts is not confirmed, so check with your authority.',
     teleworkHint_ch_fr:
       'Workday in France (home or local co-working). The CH–FR convention regime is not limited to the domicile.',
+    teleworkHint_ch_fr_1983:
+      'Workday in France, away from the employer’s premises (home or local co-working). The amicable agreement of 22 Dec 2022 on the 1983 regime says “in the state of residence” and names no domicile.',
     third_countryHint_basel_de:
       'Work outside Germany and Switzerland: always a non-return day, even if you return that evening. Do not use it for a same-day trip inside Germany or Switzerland.',
     logHint_luxembourg_fr:
@@ -159,10 +162,6 @@ const en = {
       'Basel-Stadt staff rule: on-site days this month (minimum 5, or 1 a week)',
     basel_de_employer_note:
       'This is the rule the canton of Basel-Stadt applies to its own staff (as of 1 Jan 2026): telework from home only if the employee commutes to the workplace at least 1 day a week or at least 5 days a month. It is cantonal HR guidance for public staff, not a general federal tax or labour floor for all employers. KonsVerCHEV § 7 (1-day / 5-day test) applies only to geringfügige Arbeitsverhältnisse (marginal employment), not as a general home-office minimum. Other employers may apply different rules. Source: Basel-Stadt Finance Department (Homeoffice Vorgaben PDF).',
-    pending_lu_be_tax:
-      'Belgium–Luxembourg: Chamber DOC 55 3055/001 Art. I sets 34 working days (“34 jours ouvrables”). The live counter uses that limit with Luxembourg ACD counting rules (fraction day = whole day; no part-time reduction). Check with your authority for your case.',
-    pending_lu_de_tax:
-      'The Luxembourg government states the tolerance rose from 19 to 34 days from 2024 for residents of Germany. The German text on what counts and on part-time could not be confirmed, so no counter runs and the France–Luxembourg reduction is not applied. Check with your authority.',
     usedOf: '{used} of {limit}',
     usedOfDays: '{used} of {allowed} days',
     percentOfAnnual: '{pct}% of {annual} days/yr (limit {limit}%)',
@@ -181,7 +180,7 @@ const en = {
     ch_fr_1983_missions_10: 'Temporary missions outside Switzerland (max 10 days/year, 1983)',
     ch_fr_1983_nights_45: 'Work nights away from home (max 45/year, 1983)',
     ch_fr_1983_tax_note:
-      '1983 frontier agreement (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel, Jura): residents of France are taxed in France; France remits 4.5% of gross salary to Switzerland. Telework from France up to 40% of annual working time stays in that regime. Up to 10 mission days a year count inside the 40%, only as far as they fit after ordinary telework. Sources: amicable agreement of 30 June 2023 (impots.gouv.fr); ESTV practical sheet; Canton of Jura. Counting method: the Canton of Jura says the employer chooses days, half days or hours and must apply the choice uniformly to all staff. ge.ch gives thresholds for Geneva: a day if telework lasts over 4 hours; a half day for 2 to 4 hours, nothing under 2 hours; or every actual hour. BorderDay’s whole and half days are one way of keeping this record; it has no hourly method, so if your employer counts in hours, its figures prevail.',
+      '1983 frontier agreement (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel, Jura): residents of France are taxed in France; France remits 4.5% of gross salary to Switzerland. Telework from France up to 40% of annual working time stays in that regime. Up to 10 mission days a year count inside the 40%, only as far as they fit after ordinary telework. On-call time counts only if you actually intervened. Sources: amicable agreement of 30 June 2023 (impots.gouv.fr); ESTV practical sheet; Canton of Jura. Counting method: the Canton of Jura says the employer chooses days, half days or hours and must apply the choice uniformly to all staff. ge.ch gives thresholds for Geneva: a day if telework lasts over 4 hours; a half day for 2 to 4 hours, nothing under 2 hours; or every actual hour. BorderDay’s whole and half days are one way of keeping this record; it has no hourly method, so if your employer counts in hours, its figures prevail.',
     ch_fr_1983_missions_note:
       'Temporary missions in France or a third State: up to 10 days a year count inside the 40%, only as far as they fit after ordinary telework. Part-time or part-year: the 10 days are reduced in proportion and rounded up. Any excess mission day in France ends the 1983 regime, and any in a third state counts toward the 45. BorderDay cannot tell France from a third state, so treat every excess mission day as a risk. Sources: ESTV practical sheet; impots.gouv.fr amicable agreement of 30 June 2023.',
     ch_fr_1983_nights_note:
@@ -196,13 +195,10 @@ const en = {
       'This count includes {excess} mission days beyond the 10-day and 40% limits. Excess days in a third state count toward this limit, with or without a night away. BorderDay cannot tell France from a third state.',
     ch_fr_1983_mission_excess:
       'Of your mission days, {counted} count inside the 40% and {excess} do not. Any excess day in France ends the 1983 regime, and any excess day in a third state counts toward the 45; BorderDay cannot tell France from a third state.',
-    ch_fr_1983_value: 'See 40% / 10 mission / 45 night counters',
-    ch_fr_1983_note:
-      'These cantons follow the 1983 agreement: taxed in France (France remits 4.5% to Switzerland). Counters track telework up to 40%, up to 10 mission days, and at most 45 work nights away.',
     lu_over_34:
       'Limit exceeded: France may tax the time actually worked in France or a third state, from the first day. Check with your tax authority.',
     lu_be_tax_note:
-      'Residents of Belgium employed in Luxembourg: up to 34 working days (“34 jours ouvrables”) per calendar year physically present in Belgium and/or a third state for work, without losing Luxembourg taxation for those days (Belgian Chamber DOC 55 3055/001 Art. I). Unlike France–Luxembourg, the 34-day limit is not reduced for part-time or part-year work under the Luxembourg ACD seuil de tolérance. Any fraction of a day counts as a whole day. On-site in Luxembourg and non-working days do not count. Sources: Belgian Chamber DOC 55 3055/001; Luxembourg Administration des contributions directes (seuil de tolérance BE–LU PDF).',
+      'Residents of Belgium employed in Luxembourg: up to 34 working days (“34 jours ouvrables”) per calendar year physically present in Belgium and/or a third state for work, without losing Luxembourg taxation for those days (Belgian Chamber DOC 55 3055/001 Art. I). Unlike France–Luxembourg, the 34-day limit is not reduced for part-time or part-year work under the Luxembourg ACD seuil de tolérance. Any fraction of a day counts as a whole day. On-site in Luxembourg and non-working days do not count. It applies from 1 Jan 2022 under the avenant of 31 Aug 2021, in force since 10 Feb 2023. It is up to you to prove your days: this log alone may not be enough. Sources: Belgian Chamber DOC 55 3055/001; Luxembourg Administration des contributions directes (seuil de tolérance BE–LU notes of 1 Mar 2024 and 2 Mar 2023).',
     lu_be_over_34:
       'Limit exceeded: Belgium may tax the time actually worked in Belgium or a third state, from the first day. Check with your tax authority.',
     lu_de_tax_note:
@@ -291,7 +287,7 @@ const en = {
     deleted: 'All days deleted.',
     annualWorkingDays: 'Contractual working days / year',
     annualWorkingDaysHint:
-      'Used when converting day counts to a percentage. Defaults: 240 is the official simplified full-time base for France–Switzerland only (ge.ch). 220 for Luxembourg/Belgium corridors and 240 for Italy–Switzerland are assumptions with no official day-base found — set your own figure. Left empty, the default is scaled by your employment percentage.',
+      'Used when converting day counts to a percentage. Defaults: 240 is the official simplified full-time base for France–Switzerland only (ge.ch). 220 for Luxembourg/Belgium corridors and 240 for Italy–Switzerland and Germany–Switzerland are assumptions with no official day-base found — set your own figure. Left empty, the default is scaled by your employment percentage.',
     installHint: 'Add BorderDay to your home screen for a one-tap app.',
     emptyMonth: 'No days logged this month yet.',
     weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -397,7 +393,7 @@ const en = {
       'No. You log days yourself. No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     q5: 'Which borders do you cover?',
     a5:
-      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter yet: France→Belgium and Netherlands→Belgium.',
+      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',

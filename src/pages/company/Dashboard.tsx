@@ -126,6 +126,9 @@ export default function CompanyDashboard() {
     };
   }, [userId, companyId, year, tick]);
 
+  if (auth.signingOut) {
+    return <Navigate to={`/${lang}/`} replace />;
+  }
   if (auth.ready && !auth.user) {
     return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(location.pathname)}`} replace />;
   }

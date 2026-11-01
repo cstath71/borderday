@@ -18,11 +18,15 @@ type AuthCtx = {
   configured: boolean;
   session: Session | null;
   user: User | null;
+  /** True while signOutAndGo is in flight — auth guards must not bounce to sign-in. */
+  signingOut: boolean;
   signUpEmail: (email: string, password: string, displayName?: string, back?: AuthReturn) => Promise<{ error: string | null }>;
   signInEmail: (email: string, password: string) => Promise<{ error: string | null }>;
   signInMagicLink: (email: string, back?: AuthReturn) => Promise<{ error: string | null }>;
   signInGoogle: (back?: AuthReturn) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
+  /** Clear session then land on /<lang>/ without a flash through sign-in guards. */
+  signOutAndGo: (lang: string) => Promise<void>;
 };
 
 const Ctx = createContext<AuthCtx | null>(null);
@@ -30,6 +34,7 @@ const Ctx = createContext<AuthCtx | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(!supabaseConfigured);
   const [session, setSession] = useState<Session | null>(null);
+  const [signingOut, setSigningOut] = useState(false);
 
   useEffect(() => {
     if (!supabase) return;
@@ -91,19 +96,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
   }, []);
 
+  const signOutAndGo = useCallback(async (lang: string) => {
+    const dest = `/${lang}/`;
+    setSigningOut(true);
+    try {
+      if (supabase) await supabase.auth.signOut();
+    } finally {
+      window.location.replace(dest);
+    }
+  }, []);
+
   const value = useMemo<AuthCtx>(
     () => ({
       ready,
       configured: supabaseConfigured,
       session,
       user: session?.user ?? null,
+      signingOut,
       signUpEmail,
       signInEmail,
       signInMagicLink,
       signInGoogle,
       signOut,
+      signOutAndGo,
     }),
-    [ready, session, signUpEmail, signInEmail, signInMagicLink, signInGoogle, signOut],
+    [ready, session, signingOut, signUpEmail, signInEmail, signInMagicLink, signInGoogle, signOut, signOutAndGo],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

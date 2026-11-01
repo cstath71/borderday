@@ -6,7 +6,7 @@ import { getDict, LANGS, t } from '../src/i18n';
 
 const startCheckout = vi.hoisted(() => vi.fn());
 vi.mock('../src/lib/auth', () => ({
-  useAuth: () => ({ ready: true, configured: true, user: { id: 'u1', email: 'me@example.test' }, signOut: vi.fn() }),
+  useAuth: () => ({ ready: true, configured: true, user: { id: 'u1', email: 'me@example.test' }, signingOut: false, signOut: vi.fn(), signOutAndGo: vi.fn() }),
   AuthProvider: ({ children }: any) => children,
 }));
 vi.mock('../src/lib/billing', async (original) => ({

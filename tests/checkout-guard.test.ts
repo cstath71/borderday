@@ -94,7 +94,7 @@ describe('E1 one free trial per person and per company', () => {
     expect(check).toBeGreaterThan(-1);
     expect(check).toBeLessThan(src.indexOf('checkout.sessions.create'));
     expect(src).toContain('from("bd_subscriptions")\n      .select("status, trial_ends_at").eq("user_id", user.id)');
-    expect(src).toContain('.in("role", ["owner", "hr_viewer"])');
+    expect(src).toContain('.eq("role", "owner")');
     expect(src).toContain('.in("company_id", companyIds)');
     expect(src.match(/throw new Error\("Could not check the trial history"\)/g)).toHaveLength(3);
     // An employee of a company that once trialled keeps their own individual trial.

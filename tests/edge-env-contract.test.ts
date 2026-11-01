@@ -109,12 +109,12 @@ describe('bd-send-invite authorisation and logging (H2)', () => {
 
 describe('bd-customer-portal authorisation (H2)', () => {
   const src = readFileSync(resolve(root, 'supabase/functions/bd-customer-portal/index.ts'), 'utf8');
-  it('checks owner/hr_viewer with the JWT client before the service-role client exists', () => {
+  it('checks owner with the JWT client before the service-role client exists (A2-02)', () => {
     const check = src.indexOf('supabase.from("bd_company_members")');
     const admin = src.indexOf('SUPABASE_SERVICE_ROLE_KEY');
     expect(check).toBeGreaterThan(-1);
     expect(check).toBeLessThan(admin);
-    expect(src).toContain('["owner", "hr_viewer"].includes(mem.role)');
+    expect(src).toContain('mem.role !== "owner"');
     expect(src).toContain('status: 403');
   });
 });

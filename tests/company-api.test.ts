@@ -141,17 +141,17 @@ describe('companyApi', () => {
       await expect(api.deactivateMember('c1', 'e1')).resolves.toEqual({ billingSynced: true });
     });
 
-    it('canDeactivateMember: HR and owners, never an owner or yourself, never an employee actor', () => {
+    it('canDeactivateMember: owners only, never an owner or yourself, never HR or employee actors', () => {
       const can = (actor: 'owner' | 'hr_viewer' | 'employee', target: 'owner' | 'hr_viewer' | 'employee', self = false) =>
         api.canDeactivateMember({ userId: 'a', role: actor }, { userId: self ? 'a' : 'b', role: target });
       expect(can('owner', 'employee')).toBe(true);
       expect(can('owner', 'hr_viewer')).toBe(true);
-      expect(can('hr_viewer', 'employee')).toBe(true);
-      expect(can('hr_viewer', 'hr_viewer')).toBe(true);
+      expect(can('hr_viewer', 'employee')).toBe(false);
+      expect(can('hr_viewer', 'hr_viewer')).toBe(false);
       expect(can('owner', 'owner')).toBe(false);
       expect(can('hr_viewer', 'owner')).toBe(false);
       expect(can('employee', 'employee')).toBe(false);
-      expect(can('hr_viewer', 'hr_viewer', true)).toBe(false);
+      expect(can('owner', 'employee', true)).toBe(false);
     });
 
     it('revokeInvite touches only a pending invite of this company, and reports a refusal', async () => {

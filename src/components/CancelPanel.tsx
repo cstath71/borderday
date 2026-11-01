@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { getDict, t, type Lang } from '../i18n';
 import { useAuth } from '../lib/auth';
 import { openCustomerPortal, planIsCancellable } from '../lib/billing';
-import { hasCancellableIndividualPlan, isHrRole, listMyCompanies } from '../lib/companyApi';
+import { hasCancellableIndividualPlan, listMyCompanies } from '../lib/companyApi';
 
 type Plans = { companies: Array<{ id: string; name: string }>; individual: boolean };
 
-/** Owner/HR cancel per company and individuals their own plan, through the billing portal. */
+/** Owners cancel per company; individuals cancel their own plan, through the billing portal. */
 export default function CancelPanel({ lang }: { lang: Lang }) {
   const d = getDict(lang);
   const c = d.cancel;
@@ -24,7 +24,7 @@ export default function CancelPanel({ lang }: { lang: Lang }) {
       .then(([companies, individual]) => {
         if (cancelled) return;
         setPlans({
-          companies: companies.filter((m) => isHrRole(m.role) && planIsCancellable(m.subscription_status)),
+          companies: companies.filter((m) => m.role === 'owner' && planIsCancellable(m.subscription_status)),
           individual,
         });
       })

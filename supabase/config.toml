@@ -11,3 +11,7 @@ port = 54321
 [db]
 port = 54322
 major_version = 15
+
+[functions.bd-contract-request]
+# The withdrawal and cancellation forms work signed out; the function validates and rate-limits itself.
+verify_jwt = false

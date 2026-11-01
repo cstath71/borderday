@@ -1,6 +1,6 @@
 # Data-subject and contract requests
 
-Requests reach `privacy@borderday.com` or `hello@borderday.com` by email: the Account, Withdrawal and Cancel pages prepare the message, they do not send it. The browser cannot call Supabase Auth Admin, so account deletion stays a manual step.
+Account deletion requests reach `privacy@borderday.com` by email: the Account page prepares the message, it does not send it. Withdrawal and cancellation requests are stored by `bd-contract-request` (see below), and fall back to a prepared email if that fails. The browser cannot call Supabase Auth Admin, so account deletion stays a manual step.
 
 Clocks: GDPR one month, FADP 30 days. Withdrawal: confirm receipt by email and handle the refund through Link.
 

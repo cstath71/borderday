@@ -413,7 +413,7 @@ const fr: Dict = {
   },
   privacy: {
     title: 'Confidentialité',
-    updated: 'Dernière mise à jour : 31 oct. 2026 (Europe/Zurich)',
+    updated: 'Dernière mise à jour : 1er nov. 2026 (Europe/Zurich)',
     intro:
       'Cet avis explique quelles données personnelles BorderDay traite, pourquoi, qui les reçoit, où elles vont, combien de temps elles sont conservées, ainsi que vos droits au titre du RGPD et de la loi fédérale suisse sur la protection des données (LPD).',
     controllerTitle: 'Responsable du traitement',
@@ -498,17 +498,17 @@ const fr: Dict = {
       },
       {
         purpose: 'Support, demandes liées à vos droits, messages de rétractation et de résiliation',
-        data: 'Votre adresse e-mail et le contenu de votre message',
+        data: 'Votre adresse e-mail et le contenu de votre message. Sur les formulaires de rétractation et de résiliation : votre nom, la référence et la date de commande, l’heure de réception et, si vous êtes connecté·e, votre compte',
         basis: 'Contrat ; obligations légales ; intérêts légitimes à vous répondre (art. 6, par. 1, let. b, c et f)',
-        recipients: 'Zoho (messageries)',
-        transfer: 'Centre de données UE (Zoho EU)',
+        recipients: 'Supabase (stockage des demandes de formulaire) ; Resend (e-mail d’accusé de réception) ; Zoho (messageries)',
+        transfer: 'Hébergement UE (Supabase, Zoho EU) ; États-Unis (Resend) ; garanties ci-dessous',
         retention: 'Le temps de traiter la demande, et toute durée légale de conservation',
       },
     ],
     s5Title: 'Destinataires',
     recipients: [
       'Supabase : base de données et authentification, en tant que sous-traitant. Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis.',
-      'Resend : e-mails de connexion et d’invitation, en tant que sous-traitant. Prestataire basé aux États-Unis.',
+      'Resend : e-mails de connexion, d’invitation et d’accusé de réception de rétractation ou de résiliation, en tant que sous-traitant. Prestataire basé aux États-Unis.',
       'Stripe et Link : checkout, paiement, TVA et remboursements au niveau de la commande, en tant que responsables du traitement indépendants, selon leurs propres politiques de confidentialité. Votre adresse e-mail leur est transmise lorsque vous lancez le checkout.',
       'GitHub Pages : hébergement du site ; reçoit les adresses IP des visiteurs. États-Unis.',
       'Zoho : messageries hello@borderday.com et privacy@borderday.com. Centre de données UE.',
@@ -719,10 +719,10 @@ const fr: Dict = {
   withdrawal: {
     title: 'Se rétracter du contrat',
     intro:
-      'Si vous avez acheté une offre individuelle en tant que consommateur dans l’UE/EEE, vous pouvez vous rétracter dans les 14 jours suivant la réception de l’accès, sans donner de motif. Remplissez les champs, confirmez et envoyez le message préparé depuis votre messagerie.',
+      'Si vous avez acheté une offre individuelle en tant que consommateur dans l’UE/EEE, vous pouvez vous rétracter dans les 14 jours suivant la réception de l’accès, sans donner de motif. Remplissez les champs et confirmez. Nous enregistrons votre rétractation et affichons la date et l’heure de réception.',
     howTitle: 'Comment ça marche',
     how:
-      'Cette page prépare votre message de rétractation à privacy@borderday.com. Votre rétractation est effectuée lorsque vous l’envoyez. Gardez une copie de l’e-mail envoyé comme preuve. Nous confirmons la réception par e-mail et Link traite le remboursement de votre commande.',
+      'Confirmer ici transmet votre rétractation à BorderDay. Votre rétractation est effectuée lorsque vous confirmez. Nous l’enregistrons avec la date et l’heure de réception, les affichons sur cette page et envoyons un accusé de réception à l’adresse indiquée. Link traite le remboursement de votre commande. Si cette page ne peut pas enregistrer votre rétractation, elle prépare à la place le message à privacy@borderday.com : votre rétractation est alors effectuée lorsque vous envoyez cet e-mail, gardez-en une copie comme preuve.',
     linkNote:
       'Vous pouvez aussi contacter le support Link pour votre commande, ou utiliser toute option de rétractation de votre page de commande Link. Nous n’avons pas pu vérifier l’existence d’une fonction de rétractation en un clic sur cette page : cette page-ci et l’adresse e-mail ci-dessus restent donc disponibles.',
     scopeNote:
@@ -739,6 +739,13 @@ const fr: Dict = {
     email: 'E-mail du compte',
     reference: 'Référence de commande',
     referenceHint: 'Sur votre reçu Link, si vous l’avez.',
+    sending: 'Envoi…',
+    receivedTitle: 'Bien reçu',
+    receivedBody: 'Nous avons reçu votre demande le {date} à {time} (Europe/Zurich).',
+    receivedReference: 'Votre référence : {id}',
+    receiptSent: 'Un accusé de réception avec cette date et cette heure est envoyé à {email}.',
+    receiptNotSent: 'Nous n’avons pas pu envoyer d’accusé de réception par e-mail. Votre demande est enregistrée : gardez cette page ou une capture d’écran comme preuve.',
+    failed: 'Nous n’avons pas pu enregistrer cette demande en ligne. Envoyez-la plutôt par e-mail pour qu’elle nous parvienne.',
     reviewTitle: 'Vérifiez votre message',
     to: 'À :',
     subject: 'Objet :',
@@ -779,9 +786,9 @@ const fr: Dict = {
     linkTitle: 'Offres achetées via Link',
     linkBody:
       'Les achats sont vendus via Link. Utilisez le lien de commande de votre reçu Link pour gérer ou résilier l’abonnement, ou contactez le support Link pour votre commande.',
-    formTitle: 'Résilier par e-mail, sans vous connecter',
+    formTitle: 'Résilier sans vous connecter',
     formBody:
-      'Remplissez les champs, confirmez et envoyez le message préparé depuis votre messagerie. Nous confirmons la résiliation par e-mail.',
+      'Remplissez les champs et confirmez. Nous enregistrons votre demande avec la date et l’heure de réception, et confirmons la résiliation par e-mail.',
     submit: 'Continuer vers la confirmation',
     confirm: 'Confirmer la résiliation',
     mailSubject: 'Résiliation de l’abonnement BorderDay',

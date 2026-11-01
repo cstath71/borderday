@@ -414,7 +414,7 @@ const it: Dict = {
   },
   privacy: {
     title: 'Privacy',
-    updated: 'Ultimo aggiornamento: 31 ott. 2026 (Europe/Zurich)',
+    updated: 'Ultimo aggiornamento: 1° nov. 2026 (Europe/Zurich)',
     intro:
       'Questa informativa spiega quali dati personali tratta BorderDay, perché, chi li riceve, dove vanno e per quanto tempo sono conservati, e quali sono i vostri diritti secondo il GDPR e la legge federale svizzera sulla protezione dei dati (LPD).',
     controllerTitle: 'Titolare del trattamento',
@@ -499,17 +499,17 @@ const it: Dict = {
       },
       {
         purpose: 'Supporto, richieste sui vostri diritti, messaggi di recesso e di disdetta',
-        data: 'Il vostro indirizzo e-mail e il contenuto del messaggio',
+        data: 'Il vostro indirizzo e-mail e il contenuto del messaggio. Nei moduli di recesso e di disdetta: nome, riferimento e data dell’ordine, ora di ricezione e, se avete effettuato l’accesso, il vostro account',
         basis: 'Contratto; obblighi di legge; legittimi interessi a rispondervi (art. 6, par. 1, lett. b, c, f)',
-        recipients: 'Zoho (caselle di posta)',
-        transfer: 'Centro dati nell’UE (Zoho EU)',
+        recipients: 'Supabase (conservazione delle richieste dai moduli); Resend (e-mail di conferma di ricezione); Zoho (caselle di posta)',
+        transfer: 'Hosting nell’UE (Supabase, Zoho EU); Stati Uniti (Resend); garanzie qui sotto',
         retention: 'Il tempo necessario a gestire la richiesta, ed eventuali periodi legali di conservazione',
       },
     ],
     s5Title: 'Destinatari',
     recipients: [
       'Supabase: database e autenticazione, come responsabile del trattamento. Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti.',
-      'Resend: e-mail di accesso e di invito, come responsabile del trattamento. Fornitore con sede negli Stati Uniti.',
+      'Resend: e-mail di accesso, di invito e di conferma di ricezione del recesso o della disdetta, come responsabile del trattamento. Fornitore con sede negli Stati Uniti.',
       'Stripe e Link: checkout, pagamento, imposte e rimborsi a livello di ordine, come titolari autonomi secondo le proprie informative. Il vostro indirizzo e-mail viene loro trasmesso all’avvio del checkout.',
       'GitHub Pages: hosting del sito; riceve gli indirizzi IP dei visitatori. Stati Uniti.',
       'Zoho: caselle hello@borderday.com e privacy@borderday.com. Centro dati nell’UE.',
@@ -719,10 +719,10 @@ const it: Dict = {
   withdrawal: {
     title: 'Recedere dal contratto',
     intro:
-      'Se avete acquistato un piano individuale come consumatori nell’UE/SEE, potete recedere entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo. Compilate i campi, confermate e inviate il messaggio preparato dalla vostra e-mail.',
+      'Se avete acquistato un piano individuale come consumatori nell’UE/SEE, potete recedere entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo. Compilate i campi e confermate. Registriamo il vostro recesso e mostriamo la data e l’ora di ricezione.',
     howTitle: 'Come funziona',
     how:
-      'Questa pagina prepara il vostro messaggio di recesso a privacy@borderday.com. Il recesso è esercitato quando lo inviate. Conservate una copia dell’e-mail inviata come prova. Confermiamo la ricezione via e-mail e Link gestisce il rimborso del vostro ordine.',
+      'Confermando qui trasmettete il recesso a BorderDay. Il recesso è esercitato quando confermate. Lo registriamo con la data e l’ora di ricezione, le mostriamo in questa pagina e inviamo una conferma di ricezione all’indirizzo indicato. Link gestisce il rimborso del vostro ordine. Se questa pagina non può registrare il recesso, prepara invece il messaggio a privacy@borderday.com: il recesso è allora esercitato quando inviate quell’e-mail, quindi conservatene una copia come prova.',
     linkNote:
       'Potete anche contattare il supporto Link per il vostro ordine, o usare un’eventuale opzione di recesso nella pagina d’ordine Link. Non abbiamo potuto verificare una funzione di recesso con un clic su quella pagina: questa pagina e l’indirizzo e-mail qui sopra restano quindi disponibili.',
     scopeNote:
@@ -739,6 +739,13 @@ const it: Dict = {
     email: 'E-mail dell’account',
     reference: 'Riferimento dell’ordine',
     referenceHint: 'Dalla ricevuta Link, se disponibile.',
+    sending: 'Invio…',
+    receivedTitle: 'Ricevuto',
+    receivedBody: 'Abbiamo ricevuto la richiesta il {date} alle {time} (Europe/Zurich).',
+    receivedReference: 'Il vostro riferimento: {id}',
+    receiptSent: 'Una conferma di ricezione con questa data e ora sta arrivando a {email}.',
+    receiptNotSent: 'Non abbiamo potuto inviare una conferma via e-mail. La richiesta è registrata: conservate questa pagina o uno screenshot come prova.',
+    failed: 'Non abbiamo potuto registrare la richiesta online. Inviatela invece via e-mail, così ci raggiunge comunque.',
     reviewTitle: 'Controllate il messaggio',
     to: 'A:',
     subject: 'Oggetto:',
@@ -780,9 +787,9 @@ const it: Dict = {
     linkTitle: 'Piani acquistati tramite Link',
     linkBody:
       'Gli acquisti sono venduti tramite Link. Usate il link dell’ordine nella ricevuta Link per gestire o disdire l’abbonamento, oppure contattate il supporto Link per il vostro ordine.',
-    formTitle: 'Disdire via e-mail, senza accedere',
+    formTitle: 'Disdire senza accedere',
     formBody:
-      'Compilate i campi, confermate e inviate il messaggio preparato dalla vostra e-mail. Confermiamo la disdetta via e-mail.',
+      'Compilate i campi e confermate. Registriamo la richiesta con la data e l’ora di ricezione e confermiamo la disdetta via e-mail.',
     submit: 'Continua alla conferma',
     confirm: 'Conferma la disdetta',
     mailSubject: 'Disdetta dell’abbonamento BorderDay',

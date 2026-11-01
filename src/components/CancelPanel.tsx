@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getDict, t, type Lang } from '../i18n';
 import { useAuth } from '../lib/auth';
-import { openCustomerPortal } from '../lib/billing';
-import { hasIndividualAccess, isHrRole, listMyCompanies } from '../lib/companyApi';
+import { openCustomerPortal, planIsCancellable } from '../lib/billing';
+import { hasCancellableIndividualPlan, isHrRole, listMyCompanies } from '../lib/companyApi';
 
 type Plans = { companies: Array<{ id: string; name: string }>; individual: boolean };
 
@@ -20,10 +20,13 @@ export default function CancelPanel({ lang }: { lang: Lang }) {
   useEffect(() => {
     if (!userId) return;
     let cancelled = false;
-    Promise.all([listMyCompanies(), hasIndividualAccess()])
+    Promise.all([listMyCompanies(), hasCancellableIndividualPlan()])
       .then(([companies, individual]) => {
         if (cancelled) return;
-        setPlans({ companies: companies.filter((m) => isHrRole(m.role)), individual });
+        setPlans({
+          companies: companies.filter((m) => isHrRole(m.role) && planIsCancellable(m.subscription_status)),
+          individual,
+        });
       })
       .catch(() => {
         if (!cancelled) setPlans({ companies: [], individual: false });

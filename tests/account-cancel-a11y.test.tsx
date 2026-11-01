@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { buildInviteEmail, inviteLang, joinUrlFor } from '../supabase/functions/_shared/inviteEmail';
-import { getDict, LANGS } from '../src/i18n';
+import { getDict, LANGS, t } from '../src/i18n';
 import { accountExportCsv, collectAccountExport, type AccountExport } from '../src/lib/accountExport';
 import { rowsToCsv } from '../src/company/dashboardMath';
 
@@ -25,6 +25,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
     pickAppAccess: actual.pickAppAccess,
     listMyCompanies: vi.fn(async () => []),
     hasIndividualAccess: vi.fn(async () => false),
+    hasCancellableIndividualPlan: vi.fn(async () => false),
     listPersonalDayLogs: vi.fn(async () => []),
     listDayLogs: vi.fn(async () => []),
     resolveAppAccess: vi.fn(async () => ({ mode: 'preview', unpaidCompany: null })),
@@ -37,13 +38,13 @@ vi.mock('../src/lib/billing', async (original) => ({
 
 import App from '../src/App';
 import * as api from '../src/lib/companyApi';
-import { openCustomerPortal } from '../src/lib/billing';
+import { openCustomerPortal, planIsCancellable } from '../src/lib/billing';
 
 const mocked = vi.mocked(api);
 const portal = vi.mocked(openCustomerPortal);
 const en = getDict('en');
 const company = (over: object) =>
-  ({ id: 'c1', name: 'Acme SA', role: 'owner', borderPackId: 'geneva_fr', annualWorkingDays: 220, profile: {}, ...over }) as any;
+  ({ id: 'c1', name: 'Acme SA', role: 'owner', borderPackId: 'geneva_fr', annualWorkingDays: 220, profile: {}, subscription_status: 'active', ...over }) as any;
 
 function open(path: string) {
   return render(
@@ -58,6 +59,7 @@ beforeEach(() => {
   auth.value.user = null;
   mocked.listMyCompanies.mockResolvedValue([]);
   mocked.hasIndividualAccess.mockResolvedValue(false);
+  mocked.hasCancellableIndividualPlan.mockResolvedValue(false);
 });
 afterEach(cleanup);
 
@@ -91,7 +93,7 @@ describe('H11 permanent cancellation route', () => {
   it('employees get no company button, and an individual plan gets its own', async () => {
     auth.value.user = { id: 'u1', email: 'e@acme.test' };
     mocked.listMyCompanies.mockResolvedValue([company({ role: 'employee' })]);
-    mocked.hasIndividualAccess.mockResolvedValue(true);
+    mocked.hasCancellableIndividualPlan.mockResolvedValue(true);
     portal.mockResolvedValue({ ok: false, reason: 'not_available', message: 'x' });
     open('/en/cancel');
     fireEvent.click(await screen.findByRole('button', { name: en.cancel.individualButton }));
@@ -99,14 +101,34 @@ describe('H11 permanent cancellation route', () => {
     expect(screen.queryByRole('button', { name: /Acme SA/ })).toBeNull();
   });
 
-  it('works without signing in: Link instructions and an email route with a confirm step', async () => {
+  it('A3-08: a past_due company keeps its cancel button; a cancelled or planless one has none', async () => {
+    auth.value.user = { id: 'u1', email: 'hr@acme.test' };
+    mocked.listMyCompanies.mockResolvedValue([
+      company({ id: 'c1', name: 'Late SA', subscription_status: 'past_due' }),
+      company({ id: 'c2', name: 'Gone SA', subscription_status: 'canceled' }),
+      company({ id: 'c3', name: 'Free SA', subscription_status: 'none' }),
+    ]);
+    open('/en/cancel');
+    await screen.findByRole('button', { name: t(en.cancel.companyButton, { company: 'Late SA' }) });
+    expect(screen.queryByRole('button', { name: /Gone SA/ })).toBeNull();
+    expect(screen.queryByRole('button', { name: /Free SA/ })).toBeNull();
+  });
+
+  it('A3-08: planIsCancellable covers every recorded status except cancelled and none', () => {
+    for (const status of ['trialing', 'active', 'past_due', 'incomplete']) expect(planIsCancellable(status)).toBe(true);
+    for (const status of ['canceled', 'none', '', null, undefined]) expect(planIsCancellable(status)).toBe(false);
+  });
+
+  it('works without signing in: Link instructions, a confirm step, and email if it cannot be recorded', async () => {
     open('/en/cancel');
     await screen.findByText(en.cancel.linkBody);
     screen.getByRole('link', { name: en.cancel.signIn });
     fireEvent.change(screen.getByLabelText(en.mailForm.name), { target: { value: 'Ana' } });
     fireEvent.change(screen.getByLabelText(en.mailForm.email), { target: { value: 'ana@example.test' } });
     fireEvent.click(screen.getByRole('button', { name: en.cancel.submit }));
-    const href = screen.getByRole('link', { name: en.cancel.confirm }).getAttribute('href')!;
+    fireEvent.click(screen.getByRole('button', { name: en.cancel.confirm }));
+    const link = await screen.findByRole('link', { name: en.mailForm.send });
+    const href = link.getAttribute('href')!;
     expect(href.startsWith('mailto:hello@borderday.com?')).toBe(true);
     expect(new URLSearchParams(href.split('?')[1]).get('body')).toContain('ana@example.test');
   });

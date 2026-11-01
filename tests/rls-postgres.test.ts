@@ -492,6 +492,29 @@ describe('real Postgres: bd_accept_invite email match (H2)', () => {
   });
 });
 
+describe('real Postgres: contract requests (A3-08)', () => {
+  it('only the service role can touch them: clients can neither read nor write', async () => {
+    const insert = `insert into public.bd_contract_requests (kind, name, email) values ('withdrawal', 'Ana', 'a@example.com')`;
+    const user = await newUser('a308@example.com');
+    await expect(as(user, insert)).rejects.toThrow(/permission denied/);
+    await expect(as(null, insert)).rejects.toThrow(/permission denied/);
+    await db.query(insert);
+    await expect(as(user, `select * from public.bd_contract_requests`)).rejects.toThrow(/permission denied/);
+    await expect(as(null, `select * from public.bd_contract_requests`)).rejects.toThrow(/permission denied/);
+    const { rows } = await db.query(`select received_at, handled_at from public.bd_contract_requests where email = 'a@example.com'`);
+    expect(rows[0].received_at).toBeInstanceOf(Date);
+    expect(rows[0].handled_at).toBeNull();
+  });
+
+  it('rejects an unknown kind or language, and over-long fields', async () => {
+    const row = (kind: string, name: string, lang: string) =>
+      db.query(`insert into public.bd_contract_requests (kind, name, email, lang) values ($1, $2, 'b@example.com', $3)`, [kind, name, lang]);
+    await expect(row('refund', 'Ana', 'en')).rejects.toThrow(/check/);
+    await expect(row('withdrawal', 'x'.repeat(201), 'en')).rejects.toThrow(/check/);
+    await expect(row('withdrawal', 'Ana', 'xx')).rejects.toThrow(/check/);
+  });
+});
+
 describe('real Postgres: day logs', () => {
   it('employee cannot read another employee day logs by table or RPC', async () => {
     const owner = await newUser('o19@example.com');

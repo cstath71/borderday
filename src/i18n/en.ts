@@ -407,7 +407,7 @@ const en = {
   },
   privacy: {
     title: 'Privacy',
-    updated: 'Last updated: 31 Oct 2026 (Europe/Zurich)',
+    updated: 'Last updated: 1 Nov 2026 (Europe/Zurich)',
     intro:
       'This notice explains what personal data BorderDay processes, why, who receives it, where it goes and how long it is kept, and your rights under the GDPR and the Swiss Federal Act on Data Protection (FADP).',
     controllerTitle: 'Data controller',
@@ -492,17 +492,17 @@ const en = {
       },
       {
         purpose: 'Support, rights requests, withdrawal and cancellation messages',
-        data: 'Your email address and what you write',
+        data: 'Your email address and what you write. On the withdrawal and cancellation forms: your name, order reference and date, the time of receipt and, if you are signed in, your account',
         basis: 'Contract; legal obligations; legitimate interests in answering you (Art. 6(1)(b), (c), (f))',
-        recipients: 'Zoho (mailboxes)',
-        transfer: 'EU data centre (Zoho EU)',
+        recipients: 'Supabase (storing form requests); Resend (receipt email); Zoho (mailboxes)',
+        transfer: 'EU hosting (Supabase, Zoho EU); United States (Resend); safeguards below',
         retention: 'As long as needed to deal with the request, and any legal retention period',
       },
     ],
     s5Title: 'Recipients',
     recipients: [
       'Supabase: database and authentication, as processor. EU hosting (eu-central-1); US-based provider.',
-      'Resend: sign-in and invitation email, as processor. US-based provider.',
+      'Resend: sign-in, invitation and withdrawal or cancellation receipt email, as processor. US-based provider.',
       'Stripe and Link: checkout, payment, tax and Order-level refunds, as independent controllers under their own privacy notices. Your email address goes to them when you start checkout.',
       'GitHub Pages: website hosting; receives visitors’ IP addresses. United States.',
       'Zoho: mailboxes for hello@borderday.com and privacy@borderday.com. EU data centre.',
@@ -708,10 +708,10 @@ const en = {
   withdrawal: {
     title: 'Withdraw from contract',
     intro:
-      'If you bought an individual plan as a consumer in the EU/EEA, you can withdraw within 14 days of receiving access, without giving a reason. Fill in the fields, confirm, and send the prepared message from your email.',
+      'If you bought an individual plan as a consumer in the EU/EEA, you can withdraw within 14 days of receiving access, without giving a reason. Fill in the fields and confirm. We record your withdrawal and show the date and time we received it.',
     howTitle: 'How it works',
     how:
-      'This page prepares your withdrawal message to privacy@borderday.com. Your withdrawal is made when you send it. Keep a copy of the sent email as proof. We confirm receipt by email and Link handles the refund for your Order.',
+      'Confirming here sends your withdrawal to BorderDay. Your withdrawal is made when you confirm. We store it with the date and time of receipt, show them on this page, and email a receipt to the address you give. Link handles the refund for your Order. If this page cannot record your withdrawal, it prepares the message to privacy@borderday.com instead: your withdrawal is then made when you send that email, so keep a copy as proof.',
     linkNote:
       'You can also contact Link support for your Order, or use any withdrawal option on your Link order page. We have not been able to verify a one-click withdrawal function there, so this page and the email address above remain available.',
     scopeNote:
@@ -728,6 +728,13 @@ const en = {
     email: 'Account email',
     reference: 'Order reference',
     referenceHint: 'From your Link receipt, if you have it.',
+    sending: 'Sending…',
+    receivedTitle: 'Received',
+    receivedBody: 'We received your request on {date} at {time} (Europe/Zurich).',
+    receivedReference: 'Your reference: {id}',
+    receiptSent: 'A receipt with this date and time is on its way to {email}.',
+    receiptNotSent: 'We could not email a receipt. Your request is recorded: keep this page or a screenshot as proof.',
+    failed: 'We could not record this online. Send it by email instead, so your request still reaches us.',
     reviewTitle: 'Check your message',
     to: 'To:',
     subject: 'Subject:',
@@ -768,9 +775,9 @@ const en = {
     linkTitle: 'Plans bought through Link',
     linkBody:
       'Purchases are sold through Link. Use the order link in your Link receipt email to manage or cancel the subscription, or contact Link support for your Order.',
-    formTitle: 'Cancel by email, without signing in',
+    formTitle: 'Cancel without signing in',
     formBody:
-      'Fill in the fields, confirm, and send the prepared message from your email. We confirm the cancellation by email.',
+      'Fill in the fields and confirm. We record your request with the date and time of receipt, and confirm the cancellation by email.',
     submit: 'Continue to confirmation',
     confirm: 'Confirm cancellation',
     mailSubject: 'BorderDay subscription cancellation',

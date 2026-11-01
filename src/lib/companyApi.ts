@@ -3,7 +3,7 @@
  * The labelled /demo routes use supabaseMock.ts; nothing else may.
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
-import { companyHasPaidAccess } from './billing';
+import { companyHasPaidAccess, planIsCancellable } from './billing';
 import { supabase } from './supabase';
 import type { Invitation, CompanyRole, InviteStatus } from '../company/types';
 import type { BorderId, DayEntry, DayType } from '../borders/types';
@@ -553,6 +553,19 @@ export async function hasIndividualAccess(): Promise<boolean> {
     .eq('user_id', userId);
   if (error) throw error;
   return (data || []).some((s) => companyHasPaidAccess(s.status, s.trial_ends_at));
+}
+
+/** Any individual plan not yet cancelled, including past_due: see planIsCancellable. */
+export async function hasCancellableIndividualPlan(): Promise<boolean> {
+  const userId = await currentUserId();
+  if (!userId) return false;
+  const { data, error } = await client()
+    .from('bd_subscriptions')
+    .select('status')
+    .eq('plan_kind', 'individual')
+    .eq('user_id', userId);
+  if (error) throw error;
+  return (data || []).some((s) => planIsCancellable(s.status));
 }
 
 export async function listPersonalDayLogs(): Promise<Array<DayEntry & { borderPackId: BorderId | null }>> {

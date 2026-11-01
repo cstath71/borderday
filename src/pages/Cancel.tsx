@@ -1,5 +1,5 @@
 import CancelPanel from '../components/CancelPanel';
-import RequestMailForm from '../components/RequestMailForm';
+import RequestForm from '../components/RequestForm';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
@@ -25,8 +25,10 @@ export default function Cancel() {
           <p>{c.linkBody}</p>
           <h2>{c.formTitle}</h2>
           <p>{c.formBody}</p>
-          <RequestMailForm
+          <RequestForm
             d={d}
+            lang={lang}
+            kind="cancellation"
             to="hello@borderday.com"
             subject={c.mailSubject}
             body={(v) =>

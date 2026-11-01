@@ -66,6 +66,14 @@ export async function openCustomerPortal(companyId?: string, lang?: string): Pro
   return { ok: true, url: body.url };
 }
 
+/**
+ * Whether there is a plan left to cancel. Wider than paid access on purpose: a past_due customer has
+ * lost access but is still being billed, and must be able to stop it.
+ */
+export function planIsCancellable(status: string | null | undefined): boolean {
+  return !!status && status !== 'none' && status !== 'canceled';
+}
+
 export function companyHasPaidAccess(status: string | null | undefined, trialEndsAt?: string | null): boolean {
   if (status === 'active' || status === 'trialing') return true;
   if (trialEndsAt && new Date(trialEndsAt).getTime() > Date.now()) return true;

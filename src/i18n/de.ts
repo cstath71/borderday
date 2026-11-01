@@ -414,7 +414,7 @@ const de: Dict = {
   },
   privacy: {
     title: 'Datenschutz',
-    updated: 'Zuletzt aktualisiert: 31. Okt. 2026 (Europe/Zurich)',
+    updated: 'Zuletzt aktualisiert: 1. Nov. 2026 (Europe/Zurich)',
     intro:
       'Dieser Hinweis erklärt, welche Personendaten BorderDay bearbeitet, warum, wer sie erhält, wohin sie gehen und wie lange sie aufbewahrt werden, sowie Ihre Rechte nach der DSGVO und dem schweizerischen Bundesgesetz über den Datenschutz (DSG).',
     controllerTitle: 'Verantwortlicher',
@@ -499,17 +499,17 @@ const de: Dict = {
       },
       {
         purpose: 'Support, Anfragen zu Ihren Rechten, Widerrufs- und Kündigungsnachrichten',
-        data: 'Ihre E-Mail-Adresse und der Inhalt Ihrer Nachricht',
+        data: 'Ihre E-Mail-Adresse und der Inhalt Ihrer Nachricht. Bei den Widerrufs- und Kündigungsformularen: Ihr Name, Bestellreferenz und -datum, die Uhrzeit des Eingangs und, wenn Sie angemeldet sind, Ihr Konto',
         basis: 'Vertrag; rechtliche Pflichten; berechtigte Interessen an der Beantwortung (Art. 6 Abs. 1 lit. b, c, f)',
-        recipients: 'Zoho (Postfächer)',
-        transfer: 'Rechenzentrum in der EU (Zoho EU)',
+        recipients: 'Supabase (Speicherung der Formularanfragen); Resend (Eingangsbestätigung per E-Mail); Zoho (Postfächer)',
+        transfer: 'Hosting in der EU (Supabase, Zoho EU); Vereinigte Staaten (Resend); Garantien siehe unten',
         retention: 'So lange, wie die Bearbeitung der Anfrage es erfordert, sowie gesetzliche Aufbewahrungsfristen',
       },
     ],
     s5Title: 'Empfänger',
     recipients: [
       'Supabase: Datenbank und Authentifizierung, als Auftragsverarbeiter / Auftragsbearbeiter. Hosting in der EU (eu-central-1); Anbieter mit Sitz in den USA.',
-      'Resend: Anmelde- und Einladungs-E-Mails, als Auftragsverarbeiter / Auftragsbearbeiter. Anbieter mit Sitz in den USA.',
+      'Resend: Anmelde- und Einladungs-E-Mails sowie Eingangsbestätigungen für Widerruf und Kündigung, als Auftragsverarbeiter / Auftragsbearbeiter. Anbieter mit Sitz in den USA.',
       'Stripe und Link: Checkout, Zahlung, Steuern und Erstattungen auf Bestellebene, als unabhängige Verantwortliche nach ihren eigenen Datenschutzhinweisen. Ihre E-Mail-Adresse geht beim Start des Checkouts an sie.',
       'GitHub Pages: Hosting der Website; erhält die IP-Adressen der Besucher. USA.',
       'Zoho: Postfächer hello@borderday.com und privacy@borderday.com. Rechenzentrum in der EU.',
@@ -717,10 +717,10 @@ const de: Dict = {
   withdrawal: {
     title: 'Vertrag widerrufen',
     intro:
-      'Wenn Sie einen Einzelplan als Verbraucher in der EU/im EWR gekauft haben, können Sie innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen widerrufen. Füllen Sie die Felder aus, bestätigen Sie und senden Sie die vorbereitete Nachricht aus Ihrem E-Mail-Programm.',
+      'Wenn Sie einen Einzelplan als Verbraucher in der EU/im EWR gekauft haben, können Sie innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen widerrufen. Füllen Sie die Felder aus und bestätigen Sie. Wir erfassen Ihren Widerruf und zeigen Datum und Uhrzeit des Eingangs an.',
     howTitle: 'So funktioniert es',
     how:
-      'Diese Seite bereitet Ihre Widerrufsnachricht an privacy@borderday.com vor. Der Widerruf erfolgt, wenn Sie sie absenden. Bewahren Sie eine Kopie der gesendeten E-Mail als Nachweis auf. Wir bestätigen den Eingang per E-Mail, und Link wickelt die Erstattung für Ihre Bestellung ab.',
+      'Mit der Bestätigung hier übermitteln Sie Ihren Widerruf an BorderDay. Der Widerruf erfolgt, wenn Sie bestätigen. Wir speichern ihn mit Datum und Uhrzeit des Eingangs, zeigen beides auf dieser Seite an und senden eine Eingangsbestätigung an die angegebene Adresse. Link wickelt die Erstattung für Ihre Bestellung ab. Kann diese Seite Ihren Widerruf nicht erfassen, bereitet sie stattdessen die Nachricht an privacy@borderday.com vor: Der Widerruf erfolgt dann, wenn Sie diese E-Mail absenden, bewahren Sie also eine Kopie als Nachweis auf.',
     linkNote:
       'Sie können auch den Link-Support zu Ihrer Bestellung kontaktieren oder eine Widerrufsoption auf Ihrer Link-Bestellseite nutzen. Eine Widerrufsfunktion mit einem Klick konnten wir dort nicht überprüfen, daher bleiben diese Seite und die obige E-Mail-Adresse verfügbar.',
     scopeNote:
@@ -737,6 +737,13 @@ const de: Dict = {
     email: 'Konto-E-Mail',
     reference: 'Bestellreferenz',
     referenceHint: 'Aus Ihrem Link-Beleg, falls vorhanden.',
+    sending: 'Wird gesendet…',
+    receivedTitle: 'Eingegangen',
+    receivedBody: 'Ihre Anfrage ist am {date} um {time} (Europe/Zurich) eingegangen.',
+    receivedReference: 'Ihre Referenz: {id}',
+    receiptSent: 'Eine Eingangsbestätigung mit diesem Datum und dieser Uhrzeit geht an {email}.',
+    receiptNotSent: 'Wir konnten keine Eingangsbestätigung per E-Mail senden. Ihre Anfrage ist erfasst: Bewahren Sie diese Seite oder einen Screenshot als Nachweis auf.',
+    failed: 'Wir konnten dies nicht online erfassen. Senden Sie es stattdessen per E-Mail, damit Ihre Anfrage uns erreicht.',
     reviewTitle: 'Nachricht prüfen',
     to: 'An:',
     subject: 'Betreff:',
@@ -780,9 +787,9 @@ const de: Dict = {
     linkTitle: 'Über Link gekaufte Pläne',
     linkBody:
       'Käufe werden über Link verkauft. Nutzen Sie den Bestelllink in Ihrem Link-Beleg, um das Abo zu verwalten oder zu kündigen, oder kontaktieren Sie den Link-Support zu Ihrer Bestellung.',
-    formTitle: 'Per E-Mail kündigen, ohne Anmeldung',
+    formTitle: 'Ohne Anmeldung kündigen',
     formBody:
-      'Füllen Sie die Felder aus, bestätigen Sie und senden Sie die vorbereitete Nachricht aus Ihrem E-Mail-Programm. Wir bestätigen die Kündigung per E-Mail.',
+      'Füllen Sie die Felder aus und bestätigen Sie. Wir erfassen Ihre Kündigung mit Datum und Uhrzeit des Eingangs und bestätigen sie per E-Mail.',
     submit: 'Weiter zur Bestätigung',
     confirm: 'Jetzt kündigen',
     mailSubject: 'Kündigung des BorderDay-Abos',

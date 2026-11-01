@@ -394,16 +394,17 @@ describe('C5 Withdrawal page', () => {
     expect(d.withdrawal.linkNote.length).toBeGreaterThan(40);
   });
 
-  it('asks for name, email and order, then needs a confirm step before the email opens', async () => {
+  it('asks for name, email and order, needs a confirm step, and falls back to email if it cannot record', async () => {
     open('/en/withdrawal');
     const d = getDict('en');
-    expect(screen.queryByRole('link', { name: d.withdrawal.confirm })).toBeNull();
+    expect(screen.queryByRole('button', { name: d.withdrawal.confirm })).toBeNull();
     fireEvent.change(await screen.findByLabelText(d.mailForm.name), { target: { value: 'Ana Test' } });
     fireEvent.change(screen.getByLabelText(d.mailForm.email), { target: { value: 'ana@example.test' } });
     fireEvent.change(screen.getByLabelText(new RegExp(d.mailForm.reference)), { target: { value: 'ORD-1' } });
     fireEvent.change(screen.getByLabelText(d.withdrawal.orderedOn), { target: { value: '2026-10-20' } });
     fireEvent.click(screen.getByRole('button', { name: d.withdrawal.submit }));
-    const href = screen.getByRole('link', { name: d.withdrawal.confirm }).getAttribute('href')!;
+    fireEvent.click(screen.getByRole('button', { name: d.withdrawal.confirm }));
+    const href = (await screen.findByRole('link', { name: d.mailForm.send })).getAttribute('href')!;
     expect(href.startsWith('mailto:privacy@borderday.com?')).toBe(true);
     const params = new URLSearchParams(href.split('?')[1]);
     expect(params.get('subject')).toBe(d.withdrawal.mailSubject);

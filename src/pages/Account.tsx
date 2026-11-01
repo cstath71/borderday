@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import CancelPanel from '../components/CancelPanel';
-import { mailtoHref } from '../components/RequestMailForm';
+import { mailtoHref } from '../components/RequestForm';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';

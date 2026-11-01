@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import RequestMailForm from '../components/RequestMailForm';
+import RequestForm from '../components/RequestForm';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
 
 /**
- * OPEN C5: this is the labelled route to withdraw, not a full § 356a BGB function with its own
- * confirmation mail. A live test order must show whether Link offers one, and a lawyer must confirm.
+ * A3-08: the labelled route to withdraw. It stores the request on the server, shows the time of
+ * receipt and emails a receipt. A lawyer must confirm it meets § 356a BGB, and whether Link's order
+ * page already discharges this; a live test order must show what Link offers.
  */
 export default function Withdrawal() {
   const lang = useLang();
@@ -22,8 +23,10 @@ export default function Withdrawal() {
         <div className="container" style={{ maxWidth: 640 }}>
           <h1>{w.title}</h1>
           <p>{w.intro}</p>
-          <RequestMailForm
+          <RequestForm
             d={d}
+            lang={lang}
+            kind="withdrawal"
             to="privacy@borderday.com"
             subject={w.mailSubject}
             body={(v) =>

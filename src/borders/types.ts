@@ -41,6 +41,8 @@ export interface LimitCounter {
   a1FromPercent?: number;
   /** CH–FR rule: missions count inside the 40% only after ordinary telework, up to the 10-day cap. */
   missionRole?: 'share' | 'missions';
+  /** 1983 CH–FR rule: mission days beyond the 10-day cap and the 40% quota also count toward this limit. */
+  includeMissionExcess?: boolean;
   /** i18n key for excess mission days (default ch_fr_mission_excess). */
   missionExcessKey?: string;
   /** Only evaluate when this EmploymentProfile boolean is true; otherwise treat as disabled. */

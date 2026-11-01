@@ -887,3 +887,75 @@ describe('basel_fr 45 nights: part-time reduction (C1, BOFiP 14 A-5-05)', () => 
     expect(r.messages.find((m) => m.key === 'prorate_missing')?.vars).toEqual({ limit: 45 });
   });
 });
+
+describe('basel_fr 45 nights: excess mission days count (C2, ESTV 1983 practical sheet)', () => {
+  const pack = getBorderPack('basel_fr')!;
+  const nights = (entries: DayEntry[], employmentPercent?: number) =>
+    evaluatePack(pack, entries, {
+      year: 2026,
+      annualWorkingDays: 240,
+      profile: employmentPercent === undefined ? {} : { employmentPercent },
+    }).find((r) => r.counterId === 'basel_fr_tax_nights_45')!;
+
+  it('ex. 6: 69 telework, 36 third-state and 30 flagged on-site nights → 30 + 26 = 56, over', () => {
+    const r = nights([
+      ...run(69, 'telework'),
+      ...run(36, 'third_country', '2026-04-01'),
+      ...run(30, 'onsite', '2026-06-01', { overnightAway: true }),
+      ...run(105, 'onsite', '2026-07-01'),
+    ]);
+    expect(r.used).toBe(56);
+    expect(r.limit).toBe(45);
+    expect(r.status).toBe('over');
+    expect(keysOf(r)).toContain('ch_fr_1983_over_45');
+    expect(r.messages.find((m) => m.key === 'ch_fr_1983_nights_excess')?.vars).toEqual({ excess: 26 });
+  });
+
+  it('ex. 5: 91 telework and 60 mission days with no night away → 55 excess, over', () => {
+    const r = nights([...run(91, 'telework'), ...run(60, 'third_country', '2026-05-01'), ...run(89, 'onsite', '2026-08-01')]);
+    expect(r.used).toBe(55);
+    expect(r.status).toBe('over');
+    expect(keysOf(r)).toContain('ch_fr_1983_nights_excess');
+  });
+
+  it('ex. 2 stays within 45: 46 telework and 38 missions → 28 excess, no regime loss on this counter', () => {
+    const r = nights([...run(46, 'telework'), ...run(38, 'third_country', '2026-05-01')]);
+    expect(r.used).toBe(28);
+    expect(r.status).toBe('ok');
+    expect(keysOf(r)).not.toContain('ch_fr_1983_over_45');
+    expect(keysOf(r)).toContain('ch_fr_1983_nights_excess');
+  });
+
+  it('adds nothing, and says nothing, while missions fit inside the cap', () => {
+    const r = nights([...run(40, 'telework'), ...run(10, 'third_country', '2026-05-01'), ...run(3, 'onsite', '2026-06-01', { overnightAway: true })]);
+    expect(r.used).toBe(3);
+    expect(keysOf(r)).not.toContain('ch_fr_1983_nights_excess');
+  });
+
+  it('never counts one calendar day twice when an excess trip day is also flagged overnight', () => {
+    const allFlagged = nights([...run(69, 'telework'), ...run(36, 'third_country', '2026-04-01', { overnightAway: true })]);
+    expect(allFlagged.used).toBe(36);
+    // Every trip is already counted as a night, so nothing was added and the line would be wrong.
+    expect(keysOf(allFlagged)).not.toContain('ch_fr_1983_nights_excess');
+
+    const trips = run(36, 'third_country', '2026-04-01').map((e, i) => ({ ...e, overnightAway: i < 5 }));
+    // 5 flagged nights assumed inside the 10-day cap, plus 26 excess: the highest count the logs allow.
+    expect(nights([...run(69, 'telework'), ...trips]).used).toBe(31);
+  });
+
+  it('measures the excess against the part-time mission cap and the part-time ceiling', () => {
+    // 80%: mission cap ceil(8) = 8, so 30 trips leave 22 excess; ceiling 36.
+    const r = nights([...run(40, 'telework'), ...run(30, 'third_country', '2026-05-01'), ...run(15, 'onsite', '2026-07-01', { overnightAway: true })], 80);
+    expect(r.limit).toBe(36);
+    expect(r.used).toBe(37);
+    expect(r.status).toBe('over');
+  });
+
+  it('counts half-day excess by weight, and leaves the Ticino 45-day counter alone', () => {
+    const half = nights([...run(96, 'telework'), ...run(3, 'third_country', '2026-06-01', { dayShare: 0.5 })]);
+    expect(half.used).toBe(1.5);
+    const ticino = getBorderPack('ticino_it')!;
+    const r = evaluateCounter(ticino, counterOf(ticino, 'ticino_tax_nonreturn_45'), run(30, 'third_country'), { year: 2026 });
+    expect(r.used).toBe(0);
+  });
+});

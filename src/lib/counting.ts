@@ -388,7 +388,18 @@ export function evaluateCounter(
     counter.period === 'month'
       ? entries.filter((e) => monthOf(e.date) === (opts.referenceMonth ?? monthOf(today)))
       : yearEntries;
-  const used = sumWeights(inPeriod, counter, (e) => countsAsDay(counter, e));
+  let used = sumWeights(inPeriod, counter, (e) => countsAsDay(counter, e));
+
+  // Non-return count = flagged nights + excess mission days (ESTV 1983 practical sheet, ex. 5–6).
+  // A trip day flagged overnight that is also excess is still one day: logs do not say which trip
+  // days the 10-day cap covers, so assume the flagged ones are inside it and count the most days.
+  let excessIncluded = 0;
+  if (counter.includeMissionExcess && shareCounter && missionsCounter) {
+    const split = missionSplit();
+    const flaggedTrips = sumWeights(inPeriod, counter, (e) => e.type === 'third_country' && countsAsDay(counter, e));
+    excessIncluded = Math.min(split.excess, split.counted + split.excess - flaggedTrips);
+    used += excessIncluded;
+  }
 
   let limit = counter.limit;
   const messages: CounterMessage[] = [];
@@ -407,6 +418,9 @@ export function evaluateCounter(
   let status = statusFor(ratio, counter);
   if (status === 'at_limit') messages.push({ key: 'at_limit_note', tone: 'warn' });
   if (status === 'over' && counter.overKey) messages.push({ key: counter.overKey, tone: 'warn', vars: { limit } });
+  if (excessIncluded > 0) {
+    messages.push({ key: counter.missionExcessKey ?? 'ch_fr_mission_excess', tone: 'warn', vars: { excess: excessIncluded } });
+  }
 
   if (counter.missionRole === 'missions' && shareCounter) {
     const split = missionSplit();

@@ -39,6 +39,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
 const PUBLIC = join(ROOT, 'public');
 
+const PRERENDER_UI = {
+  en: { faq: 'FAQ', pricing: 'Pricing', companySignup: 'Company sign-up', breadcrumb: 'Breadcrumb' },
+  fr: { faq: 'FAQ', pricing: 'Tarifs', companySignup: 'Inscription entreprise', breadcrumb: 'Fil d\'Ariane' },
+  de: { faq: 'FAQ', pricing: 'Preise', companySignup: 'Unternehmenskonto', breadcrumb: 'Brotkrumen' },
+  it: { faq: 'FAQ', pricing: 'Prezzi', companySignup: 'Registrazione azienda', breadcrumb: 'Percorso' },
+  nl: { faq: 'FAQ', pricing: 'Prijzen', companySignup: 'Bedrijfsaccount', breadcrumb: 'Kruimelpad' },
+};
+
 function writeBoth(rel, content) {
   const distPath = join(DIST, rel);
   mkdirSync(dirname(distPath), { recursive: true });
@@ -82,8 +90,9 @@ function headBlock({ lang, path, title, description, noindex }) {
 
 function faqHtml(lang, pairs) {
   const list = pairs || FAQ[lang] || FAQ.en;
+  const ui = PRERENDER_UI[lang] || PRERENDER_UI.en;
   return (
-    `<section class="faq" id="faq"><h2>FAQ</h2>` +
+    `<section class="faq" id="faq"><h2>${esc(ui.faq)}</h2>` +
     list.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('') +
     `</section>`
   );
@@ -92,6 +101,7 @@ function faqHtml(lang, pairs) {
 function prerenderBody(lang, path, page) {
   const pageFaq = PAGE_FAQS[path]?.[lang] || PAGE_FAQS[path]?.en;
   const showFaq = path === '' || path === 'faq' || !!pageFaq;
+  const ui = PRERENDER_UI[lang] || PRERENDER_UI.en;
   const crumbs = (page.crumbs || [])
     .map(([name, p], i, arr) => {
       if (i === arr.length - 1) return `<li aria-current="page">${esc(name)}</li>`;
@@ -100,15 +110,15 @@ function prerenderBody(lang, path, page) {
     .join('');
   const cta =
     path.startsWith('employers/')
-      ? ` · <a href="${esc(absUrl(lang, 'company/signup'))}">Company sign-up</a>`
+      ? ` · <a href="${esc(absUrl(lang, 'company/signup'))}">${esc(ui.companySignup)}</a>`
       : '';
   return `
     <article class="bd-prerender" data-bd-prerender="1">
-      <nav class="crumbs" aria-label="Breadcrumb"><ol>${crumbs}</ol></nav>
+      <nav class="crumbs" aria-label="${esc(ui.breadcrumb)}"><ol>${crumbs}</ol></nav>
       <h1>${esc(page.h1)}</h1>
       <p id="summary"><strong>${esc(IN_SHORT_LABEL[lang] || 'In short')}:</strong> ${esc(page.summary)}</p>
       ${showFaq ? faqHtml(lang, pageFaq) : ''}
-      <p><a href="${esc(absUrl(lang, path))}">${esc(BRAND)}</a> · <a href="${esc(absUrl(lang, 'pricing'))}">Pricing</a>${cta}</p>
+      <p><a href="${esc(absUrl(lang, path))}">${esc(BRAND)}</a> · <a href="${esc(absUrl(lang, 'pricing'))}">${esc(ui.pricing)}</a>${cta}</p>
     </article>`;
 }
 

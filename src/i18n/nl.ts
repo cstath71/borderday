@@ -820,6 +820,55 @@ const nl: Dict = {
     signUpTerms: "Een account aanmaken is gratis. Een betaald abonnement start alleen via checkout: 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt. Lees:",
   },
 
+  employersHub: {
+    title: 'Werkgeverspagina’s',
+    linkTicino: 'Werkgevers Ticino (IT→CH)',
+    linkGeneva: 'Werkgevers Genève (FR→CH)',
+    linkLuxembourg: 'Werkgevers Luxemburg (FR/BE/DE→LU)',
+  },
+  employersTicino: {
+    metaTitle: 'Werkgevers Ticino — telewerkdagen (IT→CH) — BorderDay',
+    metaDescription:
+      'Voor HR in Ticino: telewerkdagen bijhouden van medewerkers die in Italië wonen. Belastingstellers 25% telewerk en 45 niet-terugkeerdagen volgens het akkoord Italië–Zwitserland, plus EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+    heroTitle: 'Werkgevers in Ticino: telewerkdagen voor medewerkers die in Italië wonen',
+    inShort:
+      'BorderDay helpt Ticinese werkgevers telewerk-, ter-plaatse- en overnachtingsdagen elders te registreren voor mensen die in Italië wonen en in Zwitserland werken volgens het akkoord Italië–Zwitserland (Accordo Art. 2) (Accordo Art. 2, gewijzigd voor telewerk). Fiscaal: hoogstens 25% telewerk aan de woonplaats en tot 45 niet-terugkeerdagen per jaar (protocol Fedlex RU 2026 104; in werking 9 feb 2026, toepasselijk vanaf 1 jan 2024). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Geen belasting- of juridisch advies.',
+    agreementTitle: 'Akkoord Italië–Zwitserland (2020 / protocol 2023)',
+    agreementBody:
+      'Het akkoord Italië–Zwitserland van 23 december 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) dekt vastgelegde grenszones (CH: Graubünden, Ticino, Wallis; IT: Lombardije, Piëmont, Valle d’Aosta, provincie Bolzano), met woon- en werkplaatsvoorwaarden in Art. 2(b). Het telewerkprotocol is gepubliceerd als Fedlex RU 2026 104; FSIO noemt inwerkingtreding op 9 februari 2026 met toepassing vanaf 1 januari 2024, ook voor overgangsregime. Controleer passendheid met adviseur of autoriteit voordat u op deze tellers steunt.',
+    thresholdsTitle: 'Wat pack ticino_it vandaag telt',
+    thresholdTax25:
+      'Fiscaliteit — telewerk aan de woonplaats: hoogstens 25% van de loondienstactiviteit als telewerk thuis in Italië in een kalenderjaar, zonder wijziging van grenswerkersstatus voor dat telewerk (protocol / Accordo). Co-working is in de protocoltekst niet bevestigd — vraag het na bij uw autoriteit.',
+    thresholdNonreturn45:
+      'Fiscaliteit — niet-terugkeerdagen: in beginsel tot 45 dagen per kalenderjaar zonder dagelijks naar huis terug te keren om professionele redenen. Verlof en ziekte tellen niet. BorderDay telt alleen dagen gemarkeerd als overnachting elders voor werk; een heen-en-weer-reis op dezelfde dag telt niet.',
+    thresholdSs50:
+      'Sociale zekerheid — EU/EER/CH-kader: onder 25% geldt het kader niet; van 25% tot onder 50% is doorgaans een A1 nodig; bij 50% of meer aansluiting in de woonstaat. Los van fiscaliteit. Bronnen o.a. het memorandum van de Belgische FPS-depositaris.',
+    thresholdEmployerDuty:
+      'Werkgeversplichten: dagregisters bijhouden die bij de tellers hierboven passen. Deze pagina noemt geen Ticino-specifieke jaarlijkse indieningsdatum van het telewerkpercentage vergelijkbaar met de Geneefse AFC-eerste indiening (januari 2027) — bevestig indieningen en A1-plichten bij de bevoegde CH/IT-autoriteiten.',
+    howTitle: 'Hoe BorderDay HR helpt',
+    howBody:
+      'Nodig medewerkers uit; ieder kiest de route Ticino←Italië en registreert alleen dagtypes (telewerk / ter plaatse / reis / niet-werkend) plus overnachting elders wanneer relevant. HR ziet de fiscale 25%-quote, de 45-dagen-niet-terugkeerteller en socialezekerheidsbanden, met CSV-export. Geen GPS. Bedrijfsplan: €5 per actieve medewerker per maand (minimum €39), excl. btw; 7 dagen proef, kaart verplicht.',
+    sourcesTitle: 'Officiële bronnen (zelfde als pack ticino_it)',
+    disclaimer:
+      'BorderDay is een registratie- en herinneringstool. Drempels komen uit openbare officiële bronnen en kunnen wijzigen. Controleer altijd bij een gekwalificeerde adviseur of de bevoegde autoriteit.',
+    ctaPrimary: 'Bedrijfsaccount aanmaken',
+    ctaPricing: 'Bekijk prijzen',
+    faqTitle: 'FAQ voor werkgevers in Ticino',
+    faq1q: 'Welke route voor medewerkers in Ticino die in Italië wonen?',
+    faq1a:
+      'Het pack Ticino ← Italië (ticino_it): 25% telewerk aan de woonplaats, 45 niet-terugkeerdagen en de gedeelde socialezekerheidsteller — wanneer zones en voorwaarden van Accordo Art. 2 passen.',
+    faq2q: 'Telt de 45-dagenregel same-day-reizen?',
+    faq2a:
+      'BorderDay telt alleen dagen gemarkeerd «overnachting elders voor werk». Een heen-en-weer-reis op dezelfde dag verhoogt de niet-terugkeerteller niet. Verlof en ziekte zijn uitgesloten volgens de protocolnota in het pack.',
+    faq3q: 'Volgen jullie de locatie van medewerkers?',
+    faq3a: 'Nee. Alleen dagtype en optioneel overnachting elders ja/nee. Nooit GPS.',
+    faq4q: 'Wat betekent de socialezekerheidsteller bij 50%?',
+    faq4a:
+      'Volgens het kader leidt telewerk in de woonstaat van 50% of meer van de werktijd doorgaans tot woonstaat-aansluiting; tussen 25% en onder 50% is doorgaans een A1 nodig. BorderDay toont die banden los van fiscaliteit.',
+    faq5q: 'Is dit belasting- of juridisch advies?',
+    faq5a:
+      'Nee. Het is een trackingtool met tellers op basis van openbare bronnen die hier en in de app zijn gelinkt. Bevestig bij uw adviseur of autoriteit.',
+  },
   employersGeneva: {
     metaTitle: 'Werkgevers Genève — telewerkdagen (FR→CH) — BorderDay',
     metaDescription:

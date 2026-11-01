@@ -182,9 +182,11 @@ describe('honest coverage in SEO copy', () => {
 
 
 describe('employer SEO landing pages', () => {
-  it('exposes Geneva and Luxembourg employer paths in PUBLIC_PATHS and PAGES', () => {
-    expect(PUBLIC_PATHS).toEqual(expect.arrayContaining(['employers/geneva', 'employers/luxembourg']));
-    for (const path of ['employers/geneva', 'employers/luxembourg']) {
+  it('exposes Ticino, Geneva and Luxembourg employer paths in PUBLIC_PATHS and PAGES', () => {
+    expect(PUBLIC_PATHS).toEqual(
+      expect.arrayContaining(['employers/ticino', 'employers/geneva', 'employers/luxembourg']),
+    );
+    for (const path of ['employers/ticino', 'employers/geneva', 'employers/luxembourg']) {
       expect(PAGES[path]).toBeTruthy();
       for (const lang of LANGS) {
         const page = PAGES[path][lang];
@@ -206,8 +208,18 @@ describe('employer SEO landing pages', () => {
     }
   });
 
+  it('Ticino employer copy covers Italy route with 25% telework and 45 non-return days', () => {
+    for (const lang of LANGS) {
+      const blob = `${PAGES['employers/ticino'][lang].title} ${PAGES['employers/ticino'][lang].description} ${PAGES['employers/ticino'][lang].h1} ${PAGES['employers/ticino'][lang].summary}`;
+      expect(blob).toMatch(/25%/);
+      expect(blob).toMatch(/45/);
+      expect(blob.toLowerCase()).toMatch(/ital|italien|italia/);
+      expect(blob.toLowerCase()).toMatch(/ticino|tessin/);
+    }
+  });
+
   it('PAGE_FAQS provide five Q&A pairs per employer page and language', () => {
-    for (const path of ['employers/geneva', 'employers/luxembourg']) {
+    for (const path of ['employers/ticino', 'employers/geneva', 'employers/luxembourg']) {
       expect(PAGE_FAQS[path]).toBeTruthy();
       for (const lang of LANGS) {
         const pairs = PAGE_FAQS[path][lang];
@@ -220,6 +232,7 @@ describe('employer SEO landing pages', () => {
 
   it('llms.txt lists the employer landing URLs', () => {
     const short = llmsTxt();
+    expect(short).toContain(`${BASE}/en/employers/ticino/`);
     expect(short).toContain(`${BASE}/en/employers/geneva/`);
     expect(short).toContain(`${BASE}/en/employers/luxembourg/`);
   });

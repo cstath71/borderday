@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
+import EmployerRelatedLinks from './RelatedLinks';
 
 const SOURCES = [
   {
@@ -98,6 +99,7 @@ export default function EmployersGeneva() {
               {p.ctaPrimary}
             </Link>
           </div>
+          <EmployerRelatedLinks current="geneva" />
           <h2 id="faq">{p.faqTitle}</h2>
           <div className="faq">
             {faq.map(([q, a]) => (

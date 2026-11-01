@@ -400,7 +400,7 @@ describe('M10 / H10 invitation email', () => {
   });
 
   it('builds the join URL in the recipient language', () => {
-    expect(joinUrlFor(siteUrl, 'it', 'tok')).toBe('https://borderday.com/it/join/tok');
+    expect(joinUrlFor(siteUrl, 'it', 'tok')).toBe('https://borderday.com/it/join/?t=tok');
   });
 
   it.each(['en', 'fr', 'de', 'it'] as const)('%s: localised, with notice and privacy link, no controller name', (lang) => {
@@ -408,7 +408,7 @@ describe('M10 / H10 invitation email', () => {
     expect(mail.subject).toContain('Acme <b>');
     expect(mail.html).toContain('Acme &lt;b&gt;');
     expect(mail.html).not.toContain('Acme <b>');
-    expect(mail.html).toContain(`href="https://borderday.com/${lang}/join/t"`);
+    expect(mail.html).toContain(`href="https://borderday.com/${lang}/join/?t=t"`);
     expect(mail.html).toContain(`href="https://borderday.com/${lang}/privacy/"`);
     expect(mail.text).toContain(`https://borderday.com/${lang}/privacy/`);
     expect(mail.html + mail.text + mail.subject).not.toMatch(/PrimeLogic|CHE-312|Cours des Bastions/);
@@ -439,6 +439,6 @@ describe('M10 / H10 invitation email', () => {
   it('the invite form sends the chosen language and links in it', async () => {
     const invitePage = readFileSync(resolve(__dirname, '../src/pages/company/Invite.tsx'), 'utf8');
     expect(invitePage).toContain('api.createInvite(companyId, email, role, inviteLang)');
-    expect(invitePage).toContain('/${inviteLang}/join/${invite.token}');
+    expect(invitePage).toContain('/${inviteLang}/join/?t=${encodeURIComponent(invite.token)}');
   });
 });

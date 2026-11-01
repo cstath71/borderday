@@ -145,7 +145,10 @@ function main() {
   writeBoth(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY + '\n');
 
   // Root redirect-friendly index keeps SPA entry; also 404 shell.
-  writeFileSync(join(DIST, '404.html'), template);
+  // Old invite links were /<lang>/join/<token> (404 on GitHub Pages). Rewrite to ?t=.
+  const joinLegacyRedirect =
+    '<script>(function(){try{var m=location.pathname.match(/^\\/(en|fr|de|it|nl)\\/join\\/([^\\/?#]+)\\/?$/);if(m)location.replace("/"+m[1]+"/join/?t="+encodeURIComponent(decodeURIComponent(m[2])));}catch(e){}})();</script>';
+  writeFileSync(join(DIST, '404.html'), template.replace('<head>', '<head>' + joinLegacyRedirect));
   // Ensure root index has EN home SEO for bare / crawlers that hit index.html.
   const enHome = PAGES[''].en;
   writeFileSync(

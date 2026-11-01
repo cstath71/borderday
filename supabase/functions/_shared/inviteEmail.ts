@@ -57,7 +57,8 @@ export function inviteLang(value: unknown): InviteLang {
 }
 
 export function joinUrlFor(siteUrl: string, lang: InviteLang, token: string): string {
-  return `${siteUrl}/${lang}/join/${token}`;
+  // Query form so GitHub Pages can serve a prerendered /join/ shell with HTTP 200.
+  return `${siteUrl}/${lang}/join/?t=${encodeURIComponent(token)}`;
 }
 
 /**

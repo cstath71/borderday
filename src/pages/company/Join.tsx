@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import JoinForm from '../../components/company/JoinForm';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
@@ -14,11 +14,25 @@ type Peek =
   | { status: 'invalid' }
   | { status: 'open'; invite: api.InvitePeek };
 
+function resolveInviteToken(paramToken: string, search: URLSearchParams): string {
+  const fromQuery = search.get('t') || search.get('token') || '';
+  if (paramToken) return paramToken;
+  if (fromQuery) return fromQuery;
+  if (typeof window === 'undefined') return '';
+  const raw = window.location.hash.replace(/^#/, '');
+  if (!raw) return '';
+  if (raw.startsWith('t=')) return decodeURIComponent(raw.slice(2));
+  if (raw.startsWith('token=')) return decodeURIComponent(raw.slice(6));
+  return decodeURIComponent(raw);
+}
+
 export default function JoinCompany() {
   const lang = useLang();
   const d = getDict(lang);
   const auth = useAuth();
-  const { token = '' } = useParams();
+  const { token: paramToken = '' } = useParams();
+  const [searchParams] = useSearchParams();
+  const token = resolveInviteToken(paramToken, searchParams);
   const [peek, setPeek] = useState<Peek>({ status: 'loading' });
   const [done, setDone] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -75,7 +89,7 @@ export default function JoinCompany() {
   } else if (peek.status === 'invalid') {
     body = <p role="alert">{d.company.inviteInvalid}</p>;
   } else if (!signedIn) {
-    const next = encodeURIComponent(`/${lang}/join/${token}`);
+    const next = encodeURIComponent(`/${lang}/join/?t=${encodeURIComponent(token)}`);
     body = (
       <div className="card">
         <p>{t(d.company.joinPreviewIntro, { company: peek.invite.companyName })}</p>
@@ -127,7 +141,7 @@ export default function JoinCompany() {
         lang={lang}
         title={`${d.company.joinTitle} — BorderDay`}
         description={d.company.joinSubtitle}
-        path={`join/${token}`}
+        path="join"
         noindex
       />
       <section className="section">

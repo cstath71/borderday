@@ -56,7 +56,17 @@ Deno.serve(async (req) => {
     let quantity = 1;
     const lang = (body.lang && /^[a-z]{2}$/.test(body.lang)) ? body.lang : "en";
     // lang: which language to use for this subscription's reminder emails.
-    const metadata: Record<string, string> = { plan: body.plan, user_id: user.id, express_start: "1", lang };
+    // A3-01: keep wording version + language + time with the Stripe proof, not only express_start: "1".
+    const EXPRESS_START_VERSION = "2026-11-01-v1";
+    const metadata: Record<string, string> = {
+      plan: body.plan,
+      user_id: user.id,
+      express_start: "1",
+      express_start_version: EXPRESS_START_VERSION,
+      express_start_lang: lang,
+      express_start_at: new Date().toISOString(),
+      lang,
+    };
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const recordedStatuses: Array<string | null> = [];
 

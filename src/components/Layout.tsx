@@ -64,6 +64,19 @@ export default function Layout() {
                 {d.nav.account}
               </NavLink>
             )}
+            {auth.user && (
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => {
+                  void auth.signOut().then(() => {
+                    window.location.assign(`/${lang}/`);
+                  });
+                }}
+              >
+                {d.auth.signOut}
+              </button>
+            )}
           </nav>
           <label className="lang-switch">
             <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>

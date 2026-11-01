@@ -288,6 +288,48 @@ const REGION_SHOTS = [
       },
     ],
   },
+  {
+    region: 'belgium-nl',
+    lang: 'nl',
+    company: 'DEMO — Acme België BV',
+    owner: 'Sophie de Vries',
+    employees: [
+      {
+        email: 'alice.demo@borderday.example',
+        name: 'Lars Jansen (Maastricht)',
+        border: 'belgium_nl',
+        annual: 240,
+        days: [
+          ...teleworkDays(2026, 1, 6),
+          { workDate: '2026-01-12', dayType: 'onsite' },
+        ],
+      },
+      {
+        email: 'bruno.demo@borderday.example',
+        name: 'Eva Bakker (Breda)',
+        border: 'belgium_nl',
+        annual: 240,
+        days: Array.from({ length: 70 }, (_, i) => {
+          const month = Math.floor(i / 20) + 1;
+          const day = (i % 20) + 1;
+          return {
+            workDate: `2026-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
+            dayType: 'telework',
+          };
+        }),
+      },
+      {
+        email: 'chiara.demo@borderday.example',
+        name: 'Noah Visser (Eindhoven)',
+        border: 'belgium_nl',
+        annual: 240,
+        days: [
+          ...teleworkDays(2026, 2, 4),
+          { workDate: '2026-02-10', dayType: 'onsite' },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Multi-border demos for partner emails (fiduciaries). */
@@ -462,7 +504,9 @@ async function shot(lang, outName, patch, replaceDays) {
   await ctx.close();
 }
 
+const ONLY = (process.env.ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
 for (const r of REGION_SHOTS) {
+  if (ONLY.length && !ONLY.includes(`${r.region}-${r.lang}`) && !ONLY.includes(r.region)) continue;
   const outName = `dashboard-${r.region}-${r.lang}`;
   await shot(
     r.lang,
@@ -473,6 +517,7 @@ for (const r of REGION_SHOTS) {
 }
 
 for (const [lang, names] of Object.entries(MULTI_SHOTS)) {
+  if (ONLY.length && !ONLY.includes(lang) && !ONLY.includes(`multi-${lang}`)) continue;
   await shot(
     lang,
     `dashboard-${lang}`,

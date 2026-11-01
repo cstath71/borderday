@@ -518,8 +518,8 @@ export const BORDER_PACKS: BorderPack[] = [
   {
     // No general day tolerance (Art. 11 pro rata). Optional 30-day counter only for people who
     // were frontier workers before 1 Jan 2012 (until 2033). Gated by profile flag so hasTaxCounter
-    // stays false. BorderDay counts trip days as the proxy for days outside the Belgian border
-    // zone; it cannot verify zone geography.
+    // stays false. BorderDay counts telework and trip days as the proxy for days outside the
+    // Belgian border zone; it cannot verify zone geography.
     id: 'belgium_fr',
     nameKey: 'belgium_fr',
     residenceCountries: ['FR'],
@@ -547,7 +547,9 @@ export const BORDER_PACKS: BorderPack[] = [
         requiresProfileFlag: 'frontierBefore2012',
         unit: 'days_per_year',
         countsAs: {
-          telework: 'none',
+          // Minister, 28 May 2024: the tolerance is what makes telework possible for these workers;
+          // BOFiP: work counts as in the zone only when physically there.
+          telework: 'full',
           onsite: 'none',
           third_country: 'full',
           non_working: 'none',

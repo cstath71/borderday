@@ -250,9 +250,9 @@ const de: Dict = {
       'Keine Tagestoleranz gefunden. Homeoffice-Tage in Frankreich werden ab dem ersten Tag anteilig in Frankreich besteuert (Art. 11 des Abkommens Frankreich–Belgien; Antwort des französischen Ministers vom 28. Mai 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). Wer vor dem 1. Januar 2012 Grenzgänger wurde, behält bis 2033 ein eigenes Regime: aktivieren Sie diese Option unten, um den 30-Tage-Zähler zu öffnen. Hier läuft kein allgemeiner Steuerzähler.',
     be_fr_pre2012_30: 'Tage ausserhalb der belgischen Grenzzone (max. 30/Jahr, Grenzgänger vor 2012)',
     be_fr_pre2012_note:
-      'Nur für Personen, die vor dem 1. Januar 2012 Grenzgänger unter dem Regime Frankreich–Belgien waren. Bis 2033 behalten sie eine jährliche Grenze von 30 Tagen Arbeit ausserhalb der belgischen Grenzzone. BorderDay zählt Reisetage als Näherung und kann die Geografie der belgischen Grenzzone nicht prüfen. Darüber gilt die normale Art.-11-Regel. Quellen: ministerielle Antwort vom 28. Mai 2024; BOFiP.',
+      'Nur für Personen, die vor dem 1. Januar 2012 Grenzgänger unter dem Regime Frankreich–Belgien waren. Bis 2033 behalten sie eine jährliche Grenze von 30 Tagen Arbeit ausserhalb der belgischen Grenzzone. Arbeit zählt nur dann als in der Zone geleistet, wenn Sie physisch dort sind: Telearbeit ausserhalb der Zone, auch von zu Hause in Frankreich, nutzt daher die Toleranz von 30 Tagen. BorderDay zählt Telearbeits- und Reisetage als Näherung und kann die Geografie der belgischen Grenzzone nicht prüfen. Darüber gilt die normale Art.-11-Regel. Quellen: ministerielle Antwort vom 28. Mai 2024; BOFiP.',
     be_fr_pre2012_over:
-      'Über 30 Tage ausserhalb der Grenzzone: das Übergangsregime vor 2012 deckt diese Tage nicht mehr. Fragen Sie Ihre Steuerbehörde.',
+      'Über 30 Tage ausserhalb der Grenzzone, Telearbeitstage mitgezählt: das Übergangsregime vor 2012 deckt diese Tage nicht mehr. Fragen Sie Ihre Steuerbehörde.',
     be_fr_pre2012_pending:
       'Optionaler Zähler für Grenzgänger vor 2012. Aktivieren Sie «Grenzgänger vor 2012» in den Einstellungen.',
     pending_be_nl_tax:

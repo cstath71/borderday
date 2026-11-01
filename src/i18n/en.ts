@@ -244,9 +244,9 @@ const en = {
       'No day tolerance found. Home-working days in France are taxed in France, pro rata, from the first day (Art. 11 of the France–Belgium convention; French minister’s answer of 28 May 2024, questions.assemblee-nationale.fr/q16/16-12971QE.htm; BOFiP). People who became frontier workers before 1 January 2012 keep a separate regime until 2033: tick that option below to open the 30-day counter. No general tax counter runs here.',
     be_fr_pre2012_30: 'Days outside the Belgian border zone (max 30/year, pre-2012 frontier workers)',
     be_fr_pre2012_note:
-      'Only for people who were frontier workers under the France–Belgium regime before 1 January 2012. Until 2033 they keep a 30-day annual limit for work outside the Belgian border zone. BorderDay counts trip days as a proxy and cannot verify Belgian border-zone geography. Beyond that, the normal Art. 11 rule applies. Sources: French minister’s answer of 28 May 2024; BOFiP.',
+      'Only for people who were frontier workers under the France–Belgium regime before 1 January 2012. Until 2033 they keep a 30-day annual limit for work outside the Belgian border zone. Work counts as inside the zone only when you are physically there, so telework from outside the zone, including from home in France, uses the 30-day tolerance. BorderDay counts telework and trip days as a proxy and cannot verify Belgian border-zone geography. Beyond that, the normal Art. 11 rule applies. Sources: French minister’s answer of 28 May 2024; BOFiP.',
     be_fr_pre2012_over:
-      'Above 30 days outside the border zone: the pre-2012 transitional regime no longer covers those days. Check with your tax authority.',
+      'Above 30 days outside the border zone, telework days included: the pre-2012 transitional regime no longer covers those days. Check with your tax authority.',
     be_fr_pre2012_pending:
       'Optional counter for frontier workers before 2012. Tick “frontier worker before 2012” in settings to enable it.',
     pending_be_nl_tax:

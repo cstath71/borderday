@@ -265,11 +265,25 @@ describe('belgium_fr: Art. 11 pending + optional pre-2012 30-day counter', () =>
     expect(on.status).toBe('ok');
   });
 
-  it('counts only trip days toward the 30-day outside-zone proxy', () => {
+  it('counts telework and trip days toward the 30, not on-site days', () => {
     const c = counterOf(pack, 'be_fr_pre2012_30');
     const entries = [...run(3, 'telework'), ...run(4, 'third_country', '2026-02-01'), ...run(2, 'onsite', '2026-03-01')];
     const r = evaluateCounter(pack, c, entries, { year: 2026, profile: { frontierBefore2012: true } });
-    expect(r.used).toBe(4);
+    expect(r.used).toBe(7);
+  });
+
+  it('C3: 60 telework days with no trips is over the 30', () => {
+    const c = counterOf(pack, 'be_fr_pre2012_30');
+    const r = evaluateCounter(pack, c, run(60, 'telework'), { year: 2026, profile: { frontierBefore2012: true } });
+    expect(r.used).toBe(60);
+    expect(r.limit).toBe(30);
+    expect(r.status).toBe('over');
+    expect(keysOf(r)).toContain('be_fr_pre2012_over');
+  });
+
+  it('C3: telework stays uncounted without the pre-2012 flag', () => {
+    const c = counterOf(pack, 'be_fr_pre2012_30');
+    expect(evaluateCounter(pack, c, run(60, 'telework'), { year: 2026 }).enabled).toBe(false);
   });
 
   it('goes over at 31 trip days and cites AN + BOFiP, not INAMI', () => {

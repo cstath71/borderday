@@ -1018,7 +1018,7 @@ const en = {
     thresholdSs50:
       'Social security — EU/EEA/CH framework: under 25% the framework does not apply; from 25% to under 50% an A1 is normally required; at 50% or more residence-state affiliation. Separate from tax.',
     thresholdEmployerDuty:
-      'Employer duty (Geneva): annual telework-rate attestation — ge.ch currently indicates the first transmission in January 2027 for calendar year 2026, including at 0%.',
+      'Employer duty (Geneva): annual telework-rate attestation — ge.ch currently indicates the first transmission in January 2027 for calendar year 2026.',
     howTitle: 'How BorderDay helps HR',
     howBody:
       'Invite employees, each picks the Geneva←France route, and logs day types only (telework / on site / trip / non-working). HR sees the same tax and social-security counters, warnings as limits approach, and can export CSV. No GPS or device location. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; 7-day free trial, card required.',

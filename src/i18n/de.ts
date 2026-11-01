@@ -1029,7 +1029,7 @@ const de: Dict = {
     thresholdSs50:
       'Sozialversicherung — EU/EWR/CH-Rahmen: unter 25% gilt der Rahmen nicht; von 25% bis unter 50% ist in der Regel ein A1 nötig; ab 50% Wohnstaat-Affiliation. Getrennt von der Steuer.',
     thresholdEmployerDuty:
-      'Arbeitgeberpflicht (Genf): jährliche Bescheinigung der Telearbeitsquote — ge.ch nennt derzeit die erste Übermittlung im Januar 2027 für das Kalenderjahr 2026, auch bei 0%.',
+      'Arbeitgeberpflicht (Genf): jährliche Bescheinigung der Telearbeitsquote — ge.ch nennt derzeit die erste Übermittlung im Januar 2027 für das Kalenderjahr 2026.',
     howTitle: 'Wie BorderDay HR hilft',
     howBody:
       'Mitarbeitende einladen; jede Person wählt die Route Genf←Frankreich und erfasst nur Tagesarten. HR sieht dieselben Steuer- und Sozialversicherungszähler, Warnungen und CSV-Export. Kein GPS. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; 7 Tage Test, Karte erforderlich.',

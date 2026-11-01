@@ -835,7 +835,7 @@ const nl: Dict = {
     thresholdSs50:
       'Sociale zekerheid — EU/EER/CH-kader: onder 25% geldt het kader niet; van 25% tot onder 50% is doorgaans een A1 nodig; bij 50% of meer woonstaat-aansluiting. Los van fiscaliteit.',
     thresholdEmployerDuty:
-      'Werkgeversplicht (Genève): jaarlijkse attestatie van het telewerkpercentage — ge.ch noemt momenteel de eerste indiening in januari 2027 voor kalenderjaar 2026, ook bij 0%.',
+      'Werkgeversplicht (Genève): jaarlijkse attestatie van het telewerkpercentage — ge.ch noemt momenteel de eerste indiening in januari 2027 voor kalenderjaar 2026.',
     howTitle: 'Hoe BorderDay HR helpt',
     howBody:
       'Nodig medewerkers uit; iedereen kiest de route Genève←Frankrijk en registreert alleen dagtypes. HR ziet dezelfde fiscale en socialezekerheidstellers, waarschuwingen en CSV-export. Geen GPS. Bedrijfsplan: €5 per actieve medewerker per maand (minimum €39), excl. btw; 7 dagen proef, kaart vereist.',

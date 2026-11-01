@@ -1012,6 +1012,92 @@ const it: Dict = {
     signUpTerms:
       'La creazione di un account è gratuita. Un piano a pagamento inizia solo con il checkout: prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta. Leggete:',
   },
+
+  employersGeneva: {
+    metaTitle: 'Datori di lavoro Ginevra — giorni di telelavoro (FR→CH) — BorderDay',
+    metaDescription:
+      'Per HR a Ginevra: registrare i giorni di telelavoro del personale residente in Francia. Contatori fiscali 40% / 10 giorni di impiego temporaneo e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+    heroTitle: 'Datori di lavoro a Ginevra: giorni di telelavoro per il personale residente in Francia',
+    inShort:
+      'BorderDay aiuta i datori di lavoro ginevrini a registrare telelavoro, giorni in sede e trasferte per chi risiede in Francia e lavora in Svizzera. Fisco: fino al 40% di telelavoro e 10 giorni di impiego temporaneo (ge.ch / AFC). Previdenza: fasce del quadro sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Obbligo del datore di lavoro: prima trasmissione AFC del tasso prevista a gennaio 2027 per il 2026. Non è consulenza fiscale o legale.',
+    thresholdsTitle: 'Cosa conta oggi il pack geneva_fr',
+    thresholdTax40:
+      'Fisco — quota di telelavoro: fino al 40% del tempo di lavoro nello Stato di residenza (incluso). Oltre, l’imposizione in Francia può applicarsi dal primo giorno (ge.ch).',
+    thresholdMissions10:
+      'Fisco — missioni temporanee all’estero: limite annuo di 10 giorni (incluso), secondo l’accordo amichevole AFC/ESTV sul rapporto con il 40%.',
+    thresholdSs50:
+      'Previdenza — quadro UE/SEE/CH: sotto il 25% il quadro non si applica; dal 25% a meno del 50% di norma serve un certificato A1; al 50% o più, affiliazione dello Stato di residenza. Separato dal fisco.',
+    thresholdEmployerDuty:
+      'Obbligo del datore di lavoro (Ginevra): attestazione annuale del tasso di telelavoro — ge.ch indica attualmente la prima trasmissione a gennaio 2027 per l’anno 2026, anche allo 0%.',
+    howTitle: 'Come BorderDay aiuta le HR',
+    howBody:
+      'Invitate i collaboratori; ciascuno sceglie il corridoio Ginevra←Francia e registra solo tipologie di giorno. Le HR vedono gli stessi contatori fiscali e previdenziali, avvisi e export CSV. Niente GPS. Piano azienda: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',
+    sourcesTitle: 'Fonti ufficiali (come nel pack prodotto)',
+    disclaimer:
+      'BorderDay è uno strumento di registrazione e promemoria. Le soglie derivano da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con un consulente qualificato o l’autorità competente.',
+    ctaPrimary: 'Crea account aziendale',
+    ctaPricing: 'Vedi prezzi',
+    faqTitle: 'FAQ datori di lavoro Ginevra',
+    faq1q: 'BorderDay sostituisce la dichiarazione AFC del tasso?',
+    faq1a:
+      'No. Tiene un diario dei giorni per preparare le cifre. L’attestazione annuale resta il deposito del datore di lavoro secondo ge.ch.',
+    faq2q: 'Quale corridoio per un collaboratore residente in Francia?',
+    faq2a:
+      'Il pack Ginevra / cantoni fuori accordo 1983←Francia (geneva_fr): 40% telelavoro, 10 giorni di impiego temporaneo e il contatore previdenziale del quadro.',
+    faq3q: 'Tracciate la posizione dei collaboratori?',
+    faq3a: 'No. Solo tipologia di giorno e, opzionale, notte fuori casa sì/no. Mai GPS.',
+    faq4q: 'Cosa significa il contatore previdenziale al 50%?',
+    faq4a:
+      'Secondo il quadro, il telelavoro nello Stato di residenza pari o superiore al 50% del tempo di lavoro porta in genere all’affiliazione di residenza; tra 25% e meno del 50% di norma serve un certificato A1. BorderDay mostra queste fasce separate dal fisco.',
+    faq5q: 'È consulenza fiscale o legale?',
+    faq5a:
+      'No. È uno strumento di tracking con contatori basati su fonti pubbliche collegate qui e nell’app. Confermate con il vostro consulente o l’autorità.',
+  },
+  employersLuxembourg: {
+    metaTitle: 'Datori di lavoro Lussemburgo — telelavoro FR/BE/DE — BorderDay',
+    metaDescription:
+      'Una pagina datore di lavoro per Francia→LU, Belgio→LU e Germania→LU: tolleranza fiscale di 34 giorni e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+    heroTitle: 'Datori di lavoro in Lussemburgo: giorni di telelavoro per personale residente in Francia, Belgio o Germania',
+    inShort:
+      'BorderDay copre i tre corridoi di residenza verso il Lussemburgo in un unico account aziendale: Francia→LU, Belgio→LU e Germania→LU. Ognuno ha un contatore fiscale di tolleranza di 34 giorni (con regole part-time specifiche del pack) e il quadro previdenziale sotto il 50%. Solo tipologie di giorno. Non è consulenza fiscale o legale.',
+    routesTitle: 'Tre corridoi, un cruscotto HR',
+    routeFr:
+      'Francia→Lussemburgo (luxembourg_fr): tolleranza fiscale di 34 giorni; part-time/anno parziale con riduzione ufficiale (arrotondamento per difetto) secondo l’accordo FR–LU.',
+    routeBe:
+      'Belgio→Lussemburgo (luxembourg_be): tolleranza di 34 giorni; note ufficiali LU: nessuna riduzione per part-time o anno parziale; ogni frazione di giorno conta come giorno intero.',
+    routeDe:
+      'Germania→Lussemburgo (luxembourg_de): tolleranza di 34 giorni (dal 2024); nessuna riduzione part-time/anno parziale; circolare 71 / accordo di consultazione BMF (anche un breve lavoro fuori dal Lussemburgo può contare come giorno — vedi nota in-app e fonti ACD/BMF).',
+    thresholdsTitle: 'Fisco 34 giorni + previdenza ~50%',
+    thresholdTax34:
+      'Fisco: i tre pack contano telelavoro e giorni di trasferta / Stato terzo verso una tolleranza annuale di 34 giorni (inclusa). I giorni in sede in Lussemburgo non contano in questo contatore fiscale.',
+    thresholdPartTime:
+      'Part-time: Francia→LU riduce i 34 giorni (floor). Belgio→LU e Germania→LU non riducono i 34 giorni — secondo le note LU e l’accordo DE–LU.',
+    thresholdSs50:
+      'Previdenza: stesso quadro UE/SEE/CH sui tre pack — sotto 25% / 25%–meno del 50% (A1) / 50% o più — con fonti CCSS Lussemburgo e depositario FPS nel prodotto.',
+    howTitle: 'Come BorderDay aiuta i datori di lavoro LU',
+    howBody:
+      'Un account aziendale per personale residente in FR, BE o DE. Ciascuno sceglie il corridoio e registra tipologie di giorno; le HR seguono il ritmo dei 34 giorni e le fasce previdenziali, con export CSV. Niente GPS. Azienda: 5 € per collaboratore attivo/mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',
+    sourcesTitle: 'Fonti ufficiali (pack luxembourg_fr / _be / _de)',
+    disclaimer:
+      'BorderDay è uno strumento di registrazione e promemoria. Le soglie derivano da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con un consulente qualificato o l’autorità competente.',
+    ctaPrimary: 'Crea account aziendale',
+    ctaPricing: 'Vedi prezzi',
+    faqTitle: 'FAQ datori di lavoro Lussemburgo',
+    faq1q: 'Un solo account può coprire FR, BE e DE?',
+    faq1a:
+      'Sì. Ciascun collaboratore sceglie Francia→LU, Belgio→LU o Germania→LU. Le HR vedono tutti e tre sullo stesso cruscotto.',
+    faq2q: 'I 34 giorni sono uguali su ogni corridoio?',
+    faq2a:
+      'La tolleranza è di 34 giorni su tutti e tre. La riduzione part-time vale solo Francia→LU; BE→LU e DE→LU restano a 34 senza quella riduzione, secondo le note ufficiali citate.',
+    faq3q: 'Previdenza versus fisco?',
+    faq3a:
+      'Contatori separati. Il fisco usa la tolleranza di 34 giorni; la previdenza le fasce percentuali del quadro (25% / sotto 50% / 50%+), incluse le indicazioni CCSS per i datori di lavoro.',
+    faq4q: 'Usate il GPS?',
+    faq4a: 'No. Solo tipologie di giorno e un segno opzionale di notte fuori casa. Mai coordinate del dispositivo.',
+    faq5q: 'BorderDay è consulenza legale o fiscale?',
+    faq5a:
+      'No. Traccia i giorni rispetto a soglie pubbliche collegate qui e nell’app. Confermate i depositi con il consulente o l’amministrazione competente.',
+  },
 };
 
 export default it;

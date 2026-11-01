@@ -90,6 +90,11 @@ export function proratedLimit(limit: number, rounding: 'floor' | 'ceil', employm
   return rounding === 'floor' ? Math.floor(exact) : Math.ceil(exact);
 }
 
+/** Day counts as shown: never rounded, so a half day stays visible (4.5, with the language's decimal mark). */
+export function formatDays(value: number, decimalMark = '.'): string {
+  return String(value).replace('.', decimalMark);
+}
+
 export function validEmploymentPercent(p: EmploymentProfile | undefined): number | null {
   const v = p?.employmentPercent;
   return typeof v === 'number' && v >= 1 && v <= 100 ? v : null;
@@ -163,6 +168,7 @@ export function chFrMissionSplit(opts: {
   const counted = Math.min(opts.missions, opts.capDays, room);
   return {
     quota,
+    telework: opts.telework,
     counted,
     excess: opts.missions - counted,
     rateDays: opts.telework + counted,
@@ -321,18 +327,46 @@ function applyA1Bands(
 }
 
 /**
- * Below about a working month of logs a pace says nothing, so it stays a neutral line.
+ * Below about a working month of expected days a pace says nothing, so no percentage is shown.
  * This is a display choice, not a rule from any source.
  */
-const PACE_MIN_LOGGED_DAYS = 20;
+const PACE_MIN_EXPECTED_DAYS = 20;
 
-function paceMessage(usedDays: number, logged: number, limit: number): CounterMessage | null {
-  if (logged === 0 || usedDays === 0) return null;
-  const pct = Math.round((usedDays / logged) * 100);
-  const vars = { pct, days: logged, limit };
-  return pct > limit && logged >= PACE_MIN_LOGGED_DAYS
-    ? { key: 'pace_above', tone: 'warn', vars }
-    : { key: 'pace_line', tone: 'info', vars };
+function daysBetweenInclusive(from: string, to: string): number {
+  return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86400000) + 1;
+}
+
+/**
+ * Pace = days this counter counted so far ÷ working days expected so far. Expected days are the annual
+ * base spread evenly over the calendar, from the first logged day of the year to today, and never fewer
+ * than the working days actually logged. The base, not the logged days alone: someone who logs only
+ * their telework would otherwise read 100% whatever their real share is. An estimate for planning only.
+ * It stops being shown once the year is over: the count itself is then the final figure.
+ */
+function paceMessage(
+  entriesInYear: DayEntry[],
+  countedSoFar: (entries: DayEntry[]) => number,
+  annualWorkingDays: number,
+  limit: number,
+  year: number,
+  today: string,
+): CounterMessage | null {
+  if (yearOf(today) !== year) return null;
+  const soFar = entriesInYear.filter((e) => e.date <= today);
+  const used = countedSoFar(soFar);
+  if (used === 0) return null;
+  const from = soFar.reduce((min, e) => (e.date < min ? e.date : min), today);
+  const daysInYear = daysBetweenInclusive(`${year}-01-01`, `${year}-12-31`);
+  const expected = Math.max(
+    (annualWorkingDays * daysBetweenInclusive(from, today)) / daysInYear,
+    workingDays(soFar).length,
+  );
+  const vars = { used, from, annual: annualWorkingDays, expected: Math.round(expected), limit };
+  if (expected < PACE_MIN_EXPECTED_DAYS) return { key: 'pace_early', tone: 'info', vars };
+  const pct = Math.round((used / expected) * 100);
+  return pct > limit
+    ? { key: 'pace_above', tone: 'warn', vars: { ...vars, pct } }
+    : { key: 'pace_line', tone: 'info', vars: { ...vars, pct } };
 }
 
 /**
@@ -368,9 +402,9 @@ export function evaluateCounter(
       ? proratedLimit(missionsCounter.limit!, missionsCounter.prorate, employmentPercent)
       : missionsCounter!.limit!;
   const shareCounter = pack.counters.find((c) => c.missionRole === 'share');
-  const missionSplit = () => {
+  const missionSplit = (list: DayEntry[] = yearEntries) => {
     const by = (type: DayType) =>
-      yearEntries.reduce((sum, e) => (e.type === type ? sum + dayShareOf(e) : sum), 0);
+      list.reduce((sum, e) => (e.type === type ? sum + dayShareOf(e) : sum), 0);
     return chFrMissionSplit({
       telework: by('telework'),
       missions: by('third_country'),
@@ -383,12 +417,14 @@ export function evaluateCounter(
   if (counter.unit === 'percent_of_working_time') {
     const limit = counter.limit;
     const split = counter.missionRole === 'share' ? missionSplit() : null;
-    const usedDays = split
-      ? split.rateDays
-      : sumWeights(yearEntries, counter, (e) => {
-          const c = contribution(counter, e.type);
-          return c === 'toward_percent' || c === 'full';
-        });
+    const counted = (list: DayEntry[]) =>
+      split
+        ? missionSplit(list).rateDays
+        : sumWeights(list, counter, (e) => {
+            const c = contribution(counter, e.type);
+            return c === 'toward_percent' || c === 'full';
+          });
+    const usedDays = counted(yearEntries);
     const allowedDays = allowedDaysForPercent(limit, annualWorkingDays);
     const percentOfAnnual =
       annualWorkingDays > 0
@@ -413,6 +449,10 @@ export function evaluateCounter(
     } else {
       if (status === 'at_limit') messages.push({ key: 'at_limit_note', tone: 'warn' });
       if (status === 'over' && counter.overKey) messages.push({ key: counter.overKey, tone: 'warn' });
+      // Work trips inside the share surprise people: say so (accord of 29 Apr 2026 §1.a; docs/CH_FR_TELEWORK_COUNTING.md).
+      if (split && split.counted > 0) {
+        messages.push({ key: 'ch_fr_share_includes_missions', tone: 'info', vars: { telework: split.telework, counted: split.counted } });
+      }
       if (split && split.excess > 0 && !split.regimeLost) {
         messages.push({
           key: counter.missionExcessKey ?? 'ch_fr_mission_excess',
@@ -424,7 +464,7 @@ export function evaluateCounter(
     // Without an A1 the line that matters on the framework counter is 25%, not 50%.
     const paceLimit =
       counter.a1FromPercent != null && !a1InPlace(opts.profile, today) ? counter.a1FromPercent : limit;
-    const pace = paceMessage(usedDays, workingDays(yearEntries).length, paceLimit);
+    const pace = paceMessage(yearEntries, counted, annualWorkingDays, paceLimit, opts.year, today);
     if (pace) messages.push(pace);
 
     return {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import JoinForm from '../../components/company/JoinForm';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
@@ -25,8 +25,8 @@ export default function JoinCompany() {
   const [error, setError] = useState<string | null>(null);
   const signedIn = !!auth.user;
 
+  // The lookup works signed out, so a visitor sees who is inviting them before being asked for an account.
   useEffect(() => {
-    if (!signedIn) return;
     let cancelled = false;
     api
       .getInviteByToken(token)
@@ -40,11 +40,7 @@ export default function JoinCompany() {
     return () => {
       cancelled = true;
     };
-  }, [signedIn, token]);
-
-  if (auth.ready && !auth.user) {
-    return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/join/${token}`)}`} replace />;
-  }
+  }, [token]);
 
   async function onJoin(values: { displayName: string; borderPackId: BorderId }) {
     setError(null);
@@ -78,6 +74,27 @@ export default function JoinCompany() {
     );
   } else if (peek.status === 'invalid') {
     body = <p role="alert">{d.company.inviteInvalid}</p>;
+  } else if (!signedIn) {
+    const next = encodeURIComponent(`/${lang}/join/${token}`);
+    body = (
+      <div className="card">
+        <p>{t(d.company.joinPreviewIntro, { company: peek.invite.companyName })}</p>
+        <p className="meta">{t(d.company.joinPreviewFor, { email: peek.invite.email })}</p>
+        <h2>{d.company.noticeTitle}</h2>
+        <p>{d.company.noticeBody}</p>
+        <p>
+          <Link to={`/${lang}/privacy`}>{d.company.noticePrivacyLink}</Link>
+        </p>
+        <div className="toolbar">
+          <Link className="btn btn-primary" to={`/${lang}/auth/sign-up?next=${next}`}>
+            {d.auth.signUp}
+          </Link>
+          <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${next}`}>
+            {d.auth.signIn}
+          </Link>
+        </div>
+      </div>
+    );
   } else if (!api.sameEmail(auth.user?.email, peek.invite.email)) {
     body = (
       <div className="card">

@@ -7,7 +7,9 @@ import {
   countType,
   evaluateCounter,
   evaluatePack,
+  formatDays,
 } from '../src/lib/counting';
+import { getDict } from '../src/i18n';
 
 function days(specs: Array<[string, DayEntry['type']]>): DayEntry[] {
   return specs.map(([date, type]) => ({ date, type }));
@@ -745,41 +747,133 @@ describe('H: basel_de 60 non-return days (KonsVerCHEV, Aargau)', () => {
   });
 });
 
-describe('M: current pace', () => {
+describe('E4/E26: current pace', () => {
   const pack = getBorderPack('geneva_fr')!;
   const tax = counterOf(pack, 'geneva_tax_telework_40');
   const ss = counterOf(pack, 'geneva_ss_50');
   const pace = (r: { messages: Array<{ key: string; tone: string; vars?: object }> }) =>
     r.messages.find((m) => m.key.startsWith('pace_'));
-  const logged = (telework: number, onsite: number) => [
-    ...run(telework, 'telework', '2026-01-01'),
-    ...run(onsite, 'onsite', '2026-06-01'),
-  ];
   const opts = { year: 2026, annualWorkingDays: 240, today: TODAY };
 
-  it('one logged day is a neutral line, not an alarm', () => {
-    const m = pace(evaluateCounter(pack, tax, logged(1, 0), opts))!;
-    expect(m.key).toBe('pace_line');
-    expect(m.tone).toBe('info');
+  it('the reported case: 5 logged days across October are not "90%"', () => {
+    const entries: DayEntry[] = [
+      { date: '2026-10-01', type: 'telework' },
+      { date: '2026-10-02', type: 'telework' },
+      { date: '2026-10-05', type: 'telework' },
+      { date: '2026-10-06', type: 'telework', dayShare: 0.5 },
+      { date: '2026-10-07', type: 'third_country' },
+    ];
+    const r = evaluateCounter(pack, tax, entries, opts);
+    expect(r.usedDays).toBe(4.5);
+    // 240 days a year over 31 of 365 calendar days is about 20 expected working days.
+    expect(pace(r)).toMatchObject({
+      key: 'pace_line',
+      tone: 'info',
+      vars: { pct: 22, used: 4.5, expected: 20, from: '2026-10-01', annual: 240, limit: 40 },
+    });
   });
 
-  it('warns on a real sample above the limit, without changing the status', () => {
-    const r = evaluateCounter(pack, tax, logged(12, 8), opts); // 60% of 20
-    expect(pace(r)).toMatchObject({ key: 'pace_above', tone: 'warn', vars: { pct: 60, days: 20, limit: 40 } });
+  it('under about a month of expected days it gives no percentage', () => {
+    const m = pace(evaluateCounter(pack, tax, run(5, 'telework', '2026-10-27'), opts))!;
+    expect(m).toMatchObject({ key: 'pace_early', tone: 'info' });
+    expect(m.vars).not.toHaveProperty('pct');
+  });
+
+  it('logging only telework does not read as 100%', () => {
+    const entries = run(20, 'telework', '2026-01-01');
+    expect(pace(evaluateCounter(pack, tax, entries, opts))).toMatchObject({ key: 'pace_line', vars: { pct: 10 } });
+  });
+
+  it('expected days are never fewer than the working days logged', () => {
+    const entries = [...run(12, 'telework', '2026-02-01'), ...run(12, 'onsite', '2026-02-13')];
+    const r = evaluateCounter(pack, tax, entries, { ...opts, today: '2026-02-24' });
+    expect(pace(r)).toMatchObject({ key: 'pace_above', tone: 'warn', vars: { pct: 50, expected: 24, limit: 40 } });
     expect(r.status).toBe('ok');
   });
 
-  it('on the framework counter, pace is measured against 25% until an A1 is in place', () => {
-    const entries = logged(6, 14); // 30% of 20
-    expect(pace(evaluateCounter(pack, ss, entries, opts))).toMatchObject({ key: 'pace_above', vars: { limit: 25 } });
-    const withA1 = evaluateCounter(pack, ss, entries, { ...opts, profile: { a1InPlace: true } });
-    expect(pace(withA1)).toMatchObject({ key: 'pace_line', vars: { limit: 50 } });
-    const expired = { a1InPlace: true, a1ValidUntil: '2026-01-01' };
-    expect(pace(evaluateCounter(pack, ss, entries, { ...opts, profile: expired }))?.key).toBe('pace_above');
+  it('days planned ahead of today are left out of the pace, but stay in the count', () => {
+    const entries = [...run(21, 'onsite', '2026-01-01'), ...run(10, 'telework', '2026-12-01')];
+    const r = evaluateCounter(pack, tax, entries, opts);
+    expect(r.usedDays).toBe(10);
+    expect(pace(r)).toBeUndefined();
   });
 
-  it('no line when nothing counted', () => {
-    expect(pace(evaluateCounter(pack, tax, logged(0, 5), opts))).toBeUndefined();
+  it('a mission beyond the cap is out of the pace, as it is out of the count', () => {
+    const entries = run(30, 'third_country', '2026-01-01');
+    const r = evaluateCounter(pack, tax, entries, opts);
+    expect(r.usedDays).toBe(10);
+    expect(pace(r)).toMatchObject({ vars: { used: 10 } });
+  });
+
+  it('on the framework counter, pace is measured against 25% until an A1 is in place', () => {
+    const entries = [...run(15, 'telework', '2026-02-01'), ...run(25, 'onsite', '2026-02-16')];
+    const at = { ...opts, today: '2026-03-12' }; // 37.5% of 40 logged days
+    expect(pace(evaluateCounter(pack, ss, entries, at))).toMatchObject({ key: 'pace_above', vars: { limit: 25 } });
+    const withA1 = evaluateCounter(pack, ss, entries, { ...at, profile: { a1InPlace: true } });
+    expect(pace(withA1)).toMatchObject({ key: 'pace_line', vars: { limit: 50 } });
+    const expired = { a1InPlace: true, a1ValidUntil: '2026-01-01' };
+    expect(pace(evaluateCounter(pack, ss, entries, { ...at, profile: expired }))?.key).toBe('pace_above');
+  });
+
+  it('no line when nothing counted, and none once the year is over', () => {
+    expect(pace(evaluateCounter(pack, tax, run(5, 'onsite', '2026-06-01'), opts))).toBeUndefined();
+    expect(pace(evaluateCounter(pack, tax, run(40, 'telework', '2025-01-01'), { ...opts, year: 2025 }))).toBeUndefined();
+  });
+
+  it.each(['en', 'fr', 'de', 'it', 'nl'] as const)('%s: the wording names its basis and every value', (lang) => {
+    const c = getDict(lang).counters as unknown as Record<string, string>;
+    for (const key of ['pace_line', 'pace_above']) {
+      for (const v of ['{pct}', '{used}', '{expected}', '{from}', '{annual}', '{limit}']) expect(c[key]).toContain(v);
+    }
+    for (const v of ['{from}', '{expected}']) expect(c.pace_early).toContain(v);
+  });
+});
+
+describe('E16: work-trip days inside the CH-FR 40% (accord of 29 Apr 2026 §1.a; ge.ch examples)', () => {
+  const pack = getBorderPack('geneva_fr')!;
+  const tax = counterOf(pack, 'geneva_tax_telework_40');
+  const share = (telework: number, missions: number) =>
+    evaluateCounter(
+      pack,
+      tax,
+      [...run(telework, 'telework', '2026-01-01'), ...run(missions, 'third_country', '2026-06-01')],
+      { year: 2026, annualWorkingDays: 240, today: TODAY },
+    );
+
+  it('the reported 4.5 is right: 3 + a half + 1 trip day', () => {
+    const r = evaluateCounter(
+      pack,
+      tax,
+      [...run(3, 'telework', '2026-10-01'), { date: '2026-10-06', type: 'telework', dayShare: 0.5 }, { date: '2026-10-07', type: 'third_country' }],
+      { year: 2026, annualWorkingDays: 240, today: TODAY },
+    );
+    expect(r.usedDays).toBe(4.5);
+    expect(r.messages.find((m) => m.key === 'ch_fr_share_includes_missions')?.vars).toEqual({ telework: 3.5, counted: 1 });
+  });
+
+  // ge.ch "Règles pour les missions temporaires": telework, missions → rate sent to the AFC.
+  it.each([
+    [72, 0, 30],
+    [91, 8, 40],
+    [84, 24, 39.17],
+    [94, 12, 40],
+    [0, 30, 4.17],
+    [144, 5, 60],
+  ])('ge.ch: %i telework + %i missions gives %f%%', (telework, missions, rate) => {
+    expect(share(telework, missions).percentOfAnnual).toBeCloseTo(rate, 2);
+  });
+
+  it('says nothing about missions when none are inside the share', () => {
+    expect(share(10, 0).messages.some((m) => m.key === 'ch_fr_share_includes_missions')).toBe(false);
+    expect(share(100, 5).messages.some((m) => m.key === 'ch_fr_share_includes_missions')).toBe(false);
+  });
+});
+
+describe('E3: half days stay visible', () => {
+  it('formatDays never rounds, and uses the decimal mark asked for', () => {
+    expect(formatDays(4.5)).toBe('4.5');
+    expect(formatDays(4.5, ',')).toBe('4,5');
+    expect(formatDays(4)).toBe('4');
   });
 });
 

@@ -260,14 +260,14 @@ describe('audit-2 low: compliance', () => {
   });
 
   it('A3-34: Privacy says what an individual plan really keeps on the device', () => {
-    const device = { en: /Notes and the other fields stay on your device/, fr: /autres champs restent sur votre appareil/, de: /übrigen Felder bleiben auf Ihrem Gerät/, it: /altri campi restano sul vostro dispositivo/, nl: /overige velden blijven op uw apparaat/ };
+    const device = { en: /The other fields stay on your device/, fr: /autres champs restent sur votre appareil/, de: /übrigen Felder bleiben auf Ihrem Gerät/, it: /altri campi restano sul vostro dispositivo/, nl: /overige velden blijven op uw apparaat/ };
     for (const [lang, d] of Object.entries(dicts)) {
       expect(d.privacy.s1Body, lang).toMatch(device[lang as keyof typeof device]);
     }
-    // The client never sends a note or a profile field for an individual plan.
+    // The client never sends a profile field for an individual plan. Notes do go to the account (E15).
     const api = readFileSync(resolve(__dirname, '../src/lib/companyApi.ts'), 'utf8');
     const write = api.slice(api.indexOf("from('bd_personal_day_logs')\n        .upsert"));
-    expect(write.slice(0, 400)).not.toMatch(/\bnote\b|employment_percent/);
+    expect(write.slice(0, 400)).not.toMatch(/employment_percent/);
   });
 
   it('A3-30: every locale explains the refused save', () => {

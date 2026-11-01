@@ -351,7 +351,7 @@ export function listDayLogsForEmployee(
   const hr = isHrOrOwner(db, companyId, session.userId);
   if (!self && !hr) throw new RlsError('day log access denied');
   if (!memberOf(db, companyId, session.userId)) throw new RlsError('company isolation');
-  // Strip anything beyond day type + date (note visible to HR as text only — no location)
+  // Same rule as the database: a note goes to the employee who wrote it, never to HR.
   return db.dayLogs
     .filter((d) => d.companyId === companyId && d.employeeUserId === employeeUserId)
     .map((d) => ({
@@ -360,8 +360,7 @@ export function listDayLogsForEmployee(
       employeeUserId: d.employeeUserId,
       workDate: d.workDate,
       dayType: d.dayType,
-      // HR may see optional note (no location); employees see same
-      note: d.note,
+      ...(self ? { note: d.note } : {}),
     }));
 }
 

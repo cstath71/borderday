@@ -1,5 +1,6 @@
 import type { BorderPack, CounterMessage, CounterResult, LimitCounter } from '../borders/types';
 import { t, type Dict } from '../i18n';
+import { formatDays } from '../lib/counting';
 
 function labelFor(d: Dict, key: string): string {
   const c = d.counters as Record<string, string>;
@@ -14,13 +15,19 @@ export function badgeLabel(d: Dict, status: string, statusLabelKey?: string): st
   return labelFor(d, statusLabelKey ?? `status_${status}`);
 }
 
+function displayVars(d: Dict, vars: CounterMessage['vars']): Record<string, string | number> {
+  const shown: Record<string, string | number> = {};
+  for (const [k, v] of Object.entries(vars ?? {})) shown[k] = typeof v === 'number' ? formatDays(v, d.counters.decimalMark) : v;
+  return shown;
+}
+
 /** What the result means for this person. Always visible: a caveat behind a click is not a caveat. */
 export function CounterMessages({ d, messages }: { d: Dict; messages: CounterMessage[] }) {
   return (
     <>
       {messages.map((m) => (
         <p className={`meta counter-message ${m.tone}`} key={m.key}>
-          {t(labelFor(d, m.key), m.vars ?? {})}
+          {t(labelFor(d, m.key), displayVars(d, m.vars))}
         </p>
       ))}
     </>
@@ -71,17 +78,17 @@ export default function CounterCards({
         } else if (result.unit === 'percent_of_working_time') {
           valueText = [
             t(d.counters.usedOfDays, {
-              used: result.usedDays ?? 0,
+              used: formatDays(result.usedDays ?? 0, d.counters.decimalMark),
               allowed: result.allowedDays ?? 0,
             }),
             t(d.counters.percentOfAnnual, {
-              pct: result.percentOfAnnual ?? 0,
+              pct: formatDays(result.percentOfAnnual ?? 0, d.counters.decimalMark),
               annual: result.annualWorkingDays ?? pack.defaultAnnualWorkingDays,
               limit: result.limit ?? 0,
             }),
           ].join(' · ');
         } else {
-          valueText = t(d.counters.usedOf, { used: result.used, limit: result.limit ?? 0 });
+          valueText = t(d.counters.usedOf, { used: formatDays(result.used, d.counters.decimalMark), limit: result.limit ?? 0 });
         }
 
         return (
@@ -106,6 +113,7 @@ export default function CounterCards({
           </div>
         );
       })}
+      <p className="meta">{d.counters.half_day_note}</p>
       <p className="meta">{d.counters.multi_employer_note}</p>
     </div>
   );

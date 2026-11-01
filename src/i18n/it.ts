@@ -109,6 +109,8 @@ const it: Dict = {
       'Accordo del 1983: Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel e Giura. Ginevra e gli altri cantoni seguono un altro regime: scegliete l’altro corridoio Francia–Svizzera. Eccezioni secondo impots.gouv.fr: i cittadini svizzeri impiegati nel settore pubblico, chi risiede nel Cantone durante la settimana e chi trascorre più di 45 notti all’anno in Svizzera sono tassati alla fonte in Svizzera. Basilea Città indica che, per il proprio personale, i cittadini svizzeri non hanno limiti fiscali al telelavoro e che le categorie di personale da essa elencate non hanno limiti di sicurezza sociale (art. 13 par. 4 del regolamento (CE) n. 883/2004).',
   },
   dayTypes: {
+    halfDayPending: "Ora scegliete sopra il tipo di giornata per salvare questa mezza giornata.",
+    halfDayNotApplicable: "Un giorno non lavorativo non può essere una mezza giornata.",
     telework: 'Telelavoro a casa',
     onsite: 'In sede',
     third_country: 'Trasferta / Stato terzo',
@@ -139,6 +141,10 @@ const it: Dict = {
     overnightAwayShort: 'Notte fuori',
   },
   counters: {
+    decimalMark: ",",
+    half_day_note: "Le mezze giornate contano 0,5, quindi un totale può finire con ,5. Contano 1 quando una regola tratta ogni frazione di giorno come un giorno intero, e nei contatori di notti e mancati rientri.",
+    pace_early: "Ritmo attuale: troppo presto per dirlo. Confronta i giorni contati qui con i giorni lavorativi attesi dal primo giorno registrato ({from}) e ne servono circa un mese (finora circa {expected}).",
+    ch_fr_share_includes_missions: "Questa quota comprende {telework} giorni di telelavoro e {counted} giorni di trasferta o in Stato terzo. Secondo le regole franco-svizzere, fino a 10 di questi giorni all’anno (meno a tempo parziale) contano nel 40%, dopo il telelavoro ordinario.",
     tax: 'Fiscale',
     social_security: 'Sicurezza sociale',
     ch_fr_tax_telework_40: 'Quota di telelavoro (max 40% del tempo di lavoro annuo)',
@@ -256,10 +262,8 @@ const it: Dict = {
       'Contatore opzionale per i frontalieri prima del 2012. Spuntate «frontaliere prima del 2012» nelle impostazioni per attivarlo.',
     pending_be_nl_tax:
       'Nessuna tolleranza per il lavoro da casa trovata sulla pagina del fisco olandese; verificate con un consulente.',
-    pace_line:
-      'Ritmo attuale: {pct}% dei giorni lavorativi registrati finora ({days}).',
-    pace_above:
-      'Ritmo attuale: {pct}% dei giorni lavorativi registrati finora ({days}), sopra il {limit}%. Se continua, questa soglia sarà superata.',
+    pace_line: "Ritmo attuale: circa {pct}%, cioè {used} giorni contati su circa {expected} giorni lavorativi attesi dal primo giorno registrato ({from}). I giorni attesi sono i {annual} giorni all’anno distribuiti in modo uniforme sul calendario: è quindi una stima. La soglia da tenere d’occhio è il {limit}%.",
+    pace_above: "Ritmo attuale: circa {pct}%, cioè {used} giorni contati su circa {expected} giorni lavorativi attesi dal primo giorno registrato ({from}), sopra il {limit}%. I giorni attesi sono i {annual} giorni all’anno distribuiti in modo uniforme sul calendario: è quindi una stima. Un anno intero a questo ritmo finirebbe sopra questa soglia.",
     multi_employer_note:
       'Questi contatori coprono solo i giorni registrati qui. Altri impieghi nello stesso anno possono contare.',
     ruleAndConditions: 'Regola e condizioni',
@@ -275,6 +279,12 @@ const it: Dict = {
     status_floor_no_data: 'Nessun giorno registrato',
   },
   app: {
+    noteLabel: "Nota privata",
+    noteHint: "In BorderDay potete vederla solo voi: l’HR e gli export aziendali non la mostrano mai. Viene eliminata con il giorno. Evitate dati sulla salute o altro che non vorreste salvare.",
+    noteNeedsType: "Scegliete prima un tipo di giornata, poi aggiungete una nota.",
+    formerCompanyDays: "Avete lasciato {company}. I {count} giorni registrati lì restano visibili ed esportabili nel vostro account. Cancellare la vostra copia lascia quella del datore di lavoro secondo il suo periodo di conservazione.",
+    daysPerWeek: "Oppure scegliete i giorni a settimana",
+    daysPerWeekHint: "Compila la cifra annuale: {default} × giorni ÷ 5, la stessa proporzione della percentuale d’impiego. È un punto di partenza: usate la cifra del vostro contratto se l’avete.",
     title: 'Il vostro diario dei giorni',
     pickBorder: 'Il vostro corridoio',
     pickBorderHint: 'Residenza → luogo di lavoro',
@@ -333,6 +343,7 @@ const it: Dict = {
       'Questi pulsanti esportano i giorni mostrati qui. L’export completo dell’account si trova nella pagina Account.',
   },
   pricing: {
+    trialOnce: "La prova gratuita è offerta una sola volta per persona e per azienda. Se voi o questa azienda ne avete già avuta una, anche disdetta, il checkout avvia subito il piano e lo addebita in quel momento.",
     title: 'Prezzi',
     subtitle: 'Prima il piano azienda. Abbonamenti via Stripe Managed Payments (venduto tramite Link).',
     individual: 'Individuale (dipendente)',
@@ -362,7 +373,7 @@ const it: Dict = {
       'Protezione dei dati fin dalla progettazione (tipi di giorno per data — niente GPS né posizione del dispositivo)',
     subscribeMonthly: 'Inizia mensile',
     subscribeYearly: 'Inizia annuale',
-    checkoutSuccess: 'Pagamento impostato — la prova è attiva. Aprite l’account per continuare.',
+    checkoutSuccess: "Pagamento impostato — il piano è pronto. Aprite l’account per continuare.",
     checkoutCancel: 'Checkout annullato — nessun addebito. Potete riprovare in qualsiasi momento.',
     goToAccount: 'Vai all’account',
     alreadySubscribed: "Questo piano ha già un abbonamento attivo, in prova o in attesa di pagamento: non è stato avviato alcun nuovo checkout e non è stato addebitato nulla. Per modificarlo o regolarizzarlo, usate il link «{cancel}» di questa pagina, che porta al portale clienti.",
@@ -424,7 +435,7 @@ const it: Dict = {
       'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni).',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: corridoio, tipo e data di ogni giorno e segni di mezza giornata e di notte fuori sono salvati nel vostro account. Le note e gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
+      'Anteprima gratuita, sul vostro dispositivo: corridoio, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: corridoio, tipo e data di ogni giorno segni di mezza giornata e di notte fuori e note sono salvati nel vostro account. Gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note private (salvate con il giorno, mai mostrate all’HR), giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
       'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
@@ -458,7 +469,7 @@ const it: Dict = {
       },
       {
         purpose: 'Piano individuale: il vostro registro e i vostri contatori',
-        data: 'Nel vostro account: corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori. Solo sul vostro dispositivo: note, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012',
+        data: 'Nel vostro account: corridoio, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note. Solo sul vostro dispositivo: giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012',
         basis: 'Contratto (art. 6, par. 1, lett. b)',
         recipients: 'Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
@@ -533,7 +544,7 @@ const it: Dict = {
       'Revoca del consenso: ove applicabile, revocare il consenso senza pregiudicare la liceità del trattamento precedente alla revoca.',
     ],
     rightsHow:
-      'Usate la pagina Account per esportare i registri o chiedere la cancellazione, oppure scrivete a privacy@borderday.com. Il GDPR ci dà un mese per rispondere e la LPD 30 giorni. Per i registri di un account aziendale il titolare è il datore di lavoro, che può dover conservare alcuni documenti.',
+      'Usate la pagina Account per esportare i registri, cancellare la vostra copia dopo aver lasciato un’azienda o chiedere la cancellazione dell’account, oppure scrivete a privacy@borderday.com. Il GDPR ci dà un mese per rispondere e la LPD 30 giorni. Per i registri di un account aziendale il titolare è il datore di lavoro: cancellare la vostra copia non elimina i documenti che conserva secondo il suo periodo di conservazione.',
     complaintBody:
       'Potete presentare reclamo all’Incaricato federale della protezione dei dati e della trasparenza (IFPDT, www.edoeb.admin.ch). Se vivete o lavorate nell’UE/SEE, potete rivolgervi anche alla vostra autorità locale di protezione dei dati.',
     requiredBody:
@@ -560,6 +571,30 @@ const it: Dict = {
     point3: 'Adesione azienda opzionale — vedete ciò che vede l’HR',
   },
   company: {
+    exportDaysCsv: "Esporta i giorni (CSV)",
+    exportDaysNote: "Export dei giorni: data, tipo di giornata, mezza giornata e notte fuori per verificare i conteggi, mai note o posizione. Una mezza giornata conta 0,5, salvo che una regola tratti ogni frazione di giorno come un giorno intero.",
+    signupRouteNote: "Qui serve solo il nome dell’azienda. Il corridoio si sceglie per ogni dipendente, quando si unisce.",
+    inviteNeedsPlan: "Nessun piano o prova attivi: l’invito verrà creato e riceverete un link da condividere, ma non verrà inviato via e-mail. Avviate un piano nella pagina Prezzi per inviare e-mail.",
+    sendingInvite: "Invio in corso…",
+    noPendingInvites: "Nessun invito in sospeso.",
+    copyLink: "Copia il link per {email}",
+    linkCopied: "Link copiato.",
+    resendInvite: "Reinvia l’invito a {email}",
+    inviteResent: "Invito inviato di nuovo via e-mail a {email}, con lo stesso link.",
+    resendNoPlan: "Non inviato: l’invio di inviti via e-mail richiede un piano attivo o una prova. Potete comunque condividere il link.",
+    resendLimit: "Non inviato: questo indirizzo ha già ricevuto un’e-mail nell’ultima ora, oppure è stato raggiunto il limite orario di e-mail di invito. Riprovate più tardi o condividete il link.",
+    resendFailed: "Non è stato possibile inviare l’e-mail. Potete comunque condividere il link.",
+    joinPreviewIntro: "{company} vi invita a registrare i vostri giorni di lavoro con BorderDay.",
+    joinPreviewFor: "Questo invito è per {email}. Usate questo indirizzo per accedere o creare il vostro account.",
+    checkoutDone: "Pagamento impostato. Lo stato del piano si aggiorna qui appena Stripe lo conferma.",
+    planLabel: "Piano",
+    planTrialing: "prova gratuita fino al {date}",
+    planActive: "attivo, il periodo in corso termina il {date}",
+    planActiveNoDate: "attivo",
+    planPastDue: "pagamento scaduto. I dipendenti non possono registrare giorni finché non è saldato.",
+    planCanceled: "disdetto",
+    planNone: "nessun piano attivo",
+    planManage: "Aggiorna il pagamento o disdici",
     signupTitle: 'Create un account azienda',
     signupSubtitle:
       'Accedete con e-mail o Google, poi create l’azienda. Abbonatevi in seguito dalla pagina Prezzi.',
@@ -647,7 +682,7 @@ const it: Dict = {
     profileSaved: 'Salvato.',
     noticeTitle: 'Avviso — cosa può vedere l’HR',
     noticeBody:
-      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, corridoio scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se si tratta di una mezza giornata, se è segnato come notte fuori per lavoro, sul corridoio Francia–Belgio lo status di frontaliere prima del 2012 se inserito, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego, la base di giorni lavorativi, i giorni contrattuali, il vostro A1 e questo status Francia–Belgio. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare o cancellare il registro e chiedere al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
+      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, corridoio scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se si tratta di una mezza giornata, se è segnato come notte fuori per lavoro, sul corridoio Francia–Belgio lo status di frontaliere prima del 2012 se inserito, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego, la base di giorni lavorativi, i giorni contrattuali, il vostro A1 e questo status Francia–Belgio. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare il registro in qualsiasi momento. Dopo aver lasciato l’azienda potete ancora esportare o cancellare la vostra copia da Account; la copia del datore di lavoro resta secondo il suo periodo di conservazione. Chiedete al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 1–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
     noticeAck: 'Ho letto questo avviso',
     noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
     noticePrivacyLink: 'Informativa privacy completa',
@@ -683,7 +718,7 @@ const it: Dict = {
       'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono un corridoio e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Gli obblighi del datore di lavoro possono impedire un uso lecito finché non sono adempiuti: ad esempio la codecisione del consiglio di fabbrica sui sistemi tecnici di controllo (Germania BetrVG § 87 cpv. 1 n. 6), le regole di consultazione dei rappresentanti del personale o dei CCT in Francia, Belgio, Lussemburgo e Svizzera, e ogni norma locale sul monitoraggio dei dipendenti o sulla privacy sul luogo di lavoro. BorderDay non conduce tali consultazioni al posto vostro. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
     s3Title: 'Abbonamenti, prova, rinnovo e disdetta',
     s3Body:
-      'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo di fatturazione iniziato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link. Secondo la causa C-565/22 (Sofatutor), un contratto con periodo gratuito iniziale che si prolunga automaticamente in un periodo a pagamento — se il prezzo è stato comunicato in modo chiaro, comprensibile ed esplicito alla conclusione — è un solo contratto con un solo diritto legale di recesso per l’intero periodo, non un secondo diritto all’inizio dell’addebito.',
+      'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. La prova gratuita è offerta una sola volta per persona e per azienda: se voi o l’azienda ne avete già avuta una, anche disdetta, il piano inizia e viene addebitato al checkout. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta interrompe i rinnovi futuri. Gli importi già riscossi per un periodo di fatturazione iniziato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link. Secondo la causa C-565/22 (Sofatutor), un contratto con periodo gratuito iniziale che si prolunga automaticamente in un periodo a pagamento — se il prezzo è stato comunicato in modo chiaro, comprensibile ed esplicito alla conclusione — è un solo contratto con un solo diritto legale di recesso per l’intero periodo, non un secondo diritto all’inizio dell’addebito.',
     s3YearlyBody:
       'I piani individuali annuali si rinnovano per un ulteriore anno finché non disdite. BorderDay invia un promemoria di rinnovo via e-mail prima di ogni rinnovo annuale. Per i consumatori in Francia, l’Art. L215-1 del Code de la consommation richiede un’informazione scritta tra uno e tre mesi prima del termine per rifiutare il rinnovo tacito, con tale termine in un riquadro evidente; in mancanza, potete risolvere il contratto gratuitamente in qualsiasi momento dopo il rinnovo. Disdire nel primo anno ferma il rinnovo successivo. Dopo il primo anno potete disdire un piano annuale rinnovato in qualsiasi momento; allora cessa, e ogni rimborso della parte non utilizzata si applica secondo il diritto dei consumatori obbligatorio del vostro Paese. Disdite tramite il link Disdire il contratto nel piè di pagina (portale clienti), gli strumenti ordine Link, o via e-mail.',
     s4Title: 'Prezzi, IVA e merchant of record',
@@ -759,11 +794,19 @@ const it: Dict = {
     back: 'Modifica i dati',
   },
   account: {
+    formerTitle: "Giorni delle aziende che avete lasciato",
+    formerBody: "Non siete più membri di queste aziende, ma potete ancora vedere ed esportare i giorni registrati (inclusi nell’export qui sopra). Cancellare la vostra copia li rimuove solo dal vostro account; la copia del datore di lavoro resta secondo il suo periodo di conservazione.",
+    formerSummary: "{company}: {count} giorni, dal {first} al {last}",
+    formerDelete: "Cancella la mia copia di {company}",
+    formerDeleteConfirm: "Cancellare la vostra copia dei {count} giorni registrati presso {company}? Anche le note private vengono rimosse. La copia del datore di lavoro resta secondo il suo periodo di conservazione. L’operazione è irreversibile.",
+    formerDeleted: "La vostra copia dei giorni di {company} è stata cancellata. La copia del datore di lavoro resta secondo il suo periodo di conservazione.",
+    formerError: "Non ha funzionato. Riprovate o scrivete a privacy@borderday.com.",
+    noteColumn: "Nota",
     title: 'Il vostro account',
     signedInAs: 'Accesso effettuato con {email}',
     exportTitle: 'Esportate i registri salvati',
     exportBody:
-      'Scarica ciò che è salvato sui nostri server per il vostro account: il registro del piano individuale, e il vostro registro e le vostre impostazioni in ogni azienda di cui fate parte.',
+      'Scarica ciò che è salvato sui nostri server per il vostro account: il registro del piano individuale, e il vostro registro e le vostre impostazioni in ogni azienda di cui fate parte, le vostre note private e i giorni registrati nelle aziende che avete lasciato.',
     exportError: 'Impossibile preparare l’export. Riprovate.',
     deviceTitle: 'Solo questo dispositivo',
     deviceBody: 'Giorni dell’anteprima gratuita, memorizzati in questo browser e non sui nostri server.',
@@ -813,7 +856,7 @@ const it: Dict = {
       'Questa dichiarazione riguarda il sito pubblico e il prodotto autenticato su borderday.com (inglese, francese, tedesco, italiano e olandese). Il checkout di terzi (Stripe / Link) e i client di posta seguono le proprie pratiche di accessibilità.',
     statusTitle: 'Stato attuale',
     statusBody:
-      'Controlli automatici axe delle pagine pubbliche e della demo non hanno segnalato violazioni nell’ultimo scan interno (1° novembre 2026). Le schermate con accesso non facevano parte dello scan. Il selettore di lingua ora cambia lingua solo quando premete Applica. Alcuni errori di form possono richiedere ancora annunci più chiari. Non è ancora stato completato un passaggio completo con screen reader.',
+      'Controlli automatici axe delle pagine pubbliche e della demo non hanno segnalato violazioni nell’ultimo scan interno (1° novembre 2026). Le schermate con accesso non facevano parte dello scan. Il selettore di lingua cambia lingua non appena scegliete un’altra opzione. Alcuni errori di form possono richiedere ancora annunci più chiari. Non è ancora stato completato un passaggio completo con screen reader.',
     feedbackTitle: 'Feedback',
     feedbackBody:
       'Se trovate una barriera, scrivete a privacy@borderday.com o hello@borderday.com indicando URL della pagina, browser o tecnologia assistiva e cosa stavate cercando di fare. Miriamo a rispondere entro cinque giorni lavorativi.',

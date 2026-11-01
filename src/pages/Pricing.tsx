@@ -228,6 +228,7 @@ export default function Pricing() {
               </div>
             </article>
           </div>
+          <p className="meta" style={{ marginTop: '1rem', fontSize: '0.85rem' }}>{d.pricing.trialOnce}</p>
           <p className="meta" style={{ marginTop: '1rem', fontSize: '0.85rem' }}>{chfNote}</p>
           {note && <p className="meta" role="alert" style={{ marginTop: '1rem' }}>{note}</p>}
         </div>

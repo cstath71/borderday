@@ -1,6 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
-import { ALREADY_SUBSCRIBED_CODE, hasLiveSubscription } from "../_shared/checkoutGuard.ts";
+import {
+  ALREADY_SUBSCRIBED_CODE,
+  checkoutSuccessUrl,
+  hasLiveSubscription,
+  subscriptionTrialFields,
+  trialAlreadyUsed,
+} from "../_shared/checkoutGuard.ts";
 import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
 import { TRIAL_DAYS } from "../_shared/trial.ts";
 import { corsHeaders, GENERIC_ERROR, logFailure } from "../_shared/http.ts";
@@ -60,7 +66,7 @@ Deno.serve(async (req) => {
         .eq("company_id", body.companyId).eq("user_id", user.id).eq("active", true).maybeSingle();
       if (!mem || !["owner", "hr_viewer"].includes(mem.role)) throw new Error("Forbidden");
       const { data: company, error: companyError } = await admin.from("bd_companies")
-        .select("seat_count, subscription_status").eq("id", body.companyId).single();
+        .select("seat_count, subscription_status, trial_ends_at").eq("id", body.companyId).single();
       if (companyError) throw new Error("Could not check the existing subscription");
       recordedStatuses.push(company.subscription_status);
       const seats = company.seat_count ?? 0;
@@ -98,6 +104,31 @@ Deno.serve(async (req) => {
       }), { status: 200, headers: { ...cors, "Content-Type": "application/json" } });
     }
 
+    // E1: one free trial per company and per person, cancelled ones included. Company subscription rows
+    // have no user_id, so "this person" also means the companies they run or ran (never mere employee
+    // memberships). If the history cannot be read, refuse rather than hand out a second trial.
+    const { data: ownSubs, error: ownSubsError } = await admin.from("bd_subscriptions")
+      .select("status, trial_ends_at").eq("user_id", user.id);
+    if (ownSubsError) throw new Error("Could not check the trial history");
+    const { data: ranCompanies, error: ranError } = await admin.from("bd_company_members")
+      .select("company_id").eq("user_id", user.id).in("role", ["owner", "hr_viewer"]);
+    if (ranError) throw new Error("Could not check the trial history");
+    const companyIds = [...new Set([
+      ...(ranCompanies ?? []).map((m) => m.company_id as string),
+      ...(body.plan === "company" ? [body.companyId!] : []),
+    ])];
+    const history = [...(ownSubs ?? [])] as Array<Record<string, string | null>>;
+    if (companyIds.length > 0) {
+      const [companyRows, companySubs] = await Promise.all([
+        admin.from("bd_companies").select("subscription_status, trial_ends_at").in("id", companyIds),
+        admin.from("bd_subscriptions").select("status, trial_ends_at").in("company_id", companyIds),
+      ]);
+      if (companyRows.error || companySubs.error) throw new Error("Could not check the trial history");
+      history.push(...(companyRows.data ?? []), ...(companySubs.data ?? []));
+    }
+    const trialUsed = trialAlreadyUsed(history);
+    metadata.trial_offered = trialUsed ? "0" : "1";
+
     // stripe@18+ understands managed_payments; API version must be 2025-03-31.basil+
     const Stripe = (await import("https://esm.sh/stripe@18.5.0?target=deno")).default;
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-03-31.basil" });
@@ -110,20 +141,17 @@ Deno.serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity }],
-      success_url: `${siteUrl}/${lang}/pricing?checkout=success`,
+      success_url: checkoutSuccessUrl(siteUrl, lang, body.plan, body.companyId),
       cancel_url: `${siteUrl}/${lang}/pricing?checkout=cancel`,
       client_reference_id: body.companyId || user.id,
       metadata,
       managed_payments: { enabled: true },
       subscription_data: {
         metadata,
-        trial_period_days: TRIAL_DAYS,
-        trial_settings: {
-          end_behavior: { missing_payment_method: "cancel" },
-        },
+        ...subscriptionTrialFields(trialUsed, TRIAL_DAYS),
       },
       allow_promotion_codes: true,
-      // Card required up front so trial can convert (or cancel if missing).
+      // Card required up front so a trial can convert (or cancel if missing).
       payment_method_collection: "always",
       customer_email: user.email,
       billing_address_collection: "required",

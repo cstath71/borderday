@@ -79,3 +79,29 @@ export function companyHasPaidAccess(status: string | null | undefined, trialEnd
   if (trialEndsAt && new Date(trialEndsAt).getTime() > Date.now()) return true;
   return false;
 }
+
+export type PlanStatus =
+  | { key: 'planTrialing' | 'planActive'; date: string }
+  | { key: 'planActiveNoDate' | 'planPastDue' | 'planCanceled' | 'planNone' };
+
+/**
+ * The line on the HR dashboard. "Ends on" stays neutral on purpose: BorderDay does not store whether a
+ * plan cancelled in the portal will renew, so it never says "renews on".
+ */
+export function planStatus(
+  company: { subscription_status?: string | null; trial_ends_at?: string | null; current_period_end?: string | null },
+  now = Date.now(),
+): PlanStatus {
+  const status = company.subscription_status;
+  const trialEnd = company.trial_ends_at;
+  if (status === 'past_due') return { key: 'planPastDue' };
+  if (status === 'active') {
+    return company.current_period_end ? { key: 'planActive', date: company.current_period_end } : { key: 'planActiveNoDate' };
+  }
+  // Same rule as companyHasPaidAccess: a trial end in the future gives access whatever the status says.
+  if (trialEnd && new Date(trialEnd).getTime() > now) return { key: 'planTrialing', date: trialEnd };
+  if (status === 'trialing') {
+    return company.current_period_end ? { key: 'planTrialing', date: company.current_period_end } : { key: 'planActiveNoDate' };
+  }
+  return status === 'canceled' ? { key: 'planCanceled' } : { key: 'planNone' };
+}

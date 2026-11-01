@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { CompanyRole, Invitation } from '../../company/types';
 import { LANGS, type Dict, type Lang } from '../../i18n';
+import type { ResendResult } from '../../lib/companyApi';
+import PendingInvites from './PendingInvites';
 
 type Created = { link: string; emailed: boolean; emailBlock?: 'no_access' | 'rate_limited' | null };
 
@@ -15,8 +17,14 @@ export default function InviteView(props: {
   /** Preselected language for the employee's email and link. */
   lang: Lang;
   onCreate: (email: string, role: CompanyRole, lang: Lang) => Promise<Created>;
+  /** False shows, before submitting, that the invite will not be emailed. /demo leaves it out. */
+  canEmail?: boolean;
+  pricingHref?: string;
+  canManage?: (invite: Invitation) => boolean;
+  onResend?: (invite: Invitation) => Promise<ResendResult>;
+  onRevoke?: (inviteId: string) => Promise<void>;
 }) {
-  const { d, invites, canInviteOwner, dashboardHref, joinPath, lang, onCreate } = props;
+  const { d, invites, canInviteOwner, dashboardHref, joinPath, lang, onCreate, canEmail, pricingHref, canManage, onResend, onRevoke } = props;
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<CompanyRole>('employee');
   const [inviteLang, setInviteLang] = useState<Lang>(lang);
@@ -68,8 +76,19 @@ export default function InviteView(props: {
             ))}
           </select>
         </label>
-        <button className="btn btn-primary" type="submit" disabled={busy}>
-          {d.company.sendInvite}
+        {canEmail === false && (
+          <p className="meta" role="note">
+            {d.company.inviteNeedsPlan}
+            {pricingHref && (
+              <>
+                {' '}
+                <Link to={pricingHref}>{d.company.billingCta}</Link>
+              </>
+            )}
+          </p>
+        )}
+        <button className="btn btn-primary" type="submit" disabled={busy} aria-busy={busy}>
+          {busy ? d.company.sendingInvite : d.company.sendInvite}
         </button>
         {error && (
           <p role="alert" style={{ color: 'var(--danger)' }}>
@@ -94,16 +113,7 @@ export default function InviteView(props: {
           </div>
         )}
       </form>
-      <div className="card" style={{ marginTop: '1rem' }}>
-        <h2>{d.company.pendingInvites}</h2>
-        <ul>
-          {invites.map((i) => (
-            <li key={i.id}>
-              {i.email} · {i.role} · <code>{joinPath(i.token)}</code>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <PendingInvites d={d} invites={invites} joinPath={joinPath} canManage={canManage} onResend={onResend} onRevoke={onRevoke} />
     </>
   );
 }

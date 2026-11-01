@@ -14,7 +14,11 @@ Clocks: GDPR one month, FADP 30 days. Withdrawal: confirm receipt by email and h
 
 ## Export
 
-The Account page exports the person's own server data. Requests beyond it (auth logs, mailbox) are answered by hand.
+The Account page exports the person's own server data, private notes included. Requests beyond it (auth logs, mailbox) are answered by hand.
+
+## Someone removed from a company
+
+They keep their own day log: the Account page lists each company they left, with the days and their notes, includes them in the export, and lets them delete them. Deleting also removes those days for the company. Notes are never visible to HR. `bd_my_day_log_companies` names the companies; reads and deletes go through the employee's own RLS.
 
 ## Withdrawal and cancellation requests
 

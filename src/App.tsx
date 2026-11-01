@@ -53,6 +53,7 @@ export default function App() {
         <Route path="company/:companyId/invite" element={<CompanyInvite />} />
         <Route path="company/:companyId/employee/:employeeId" element={<EmployeeHistory />} />
         <Route path="company/dashboard" element={<CompanyDashboard />} />
+        <Route path="join" element={<JoinCompany />} />
         <Route path="join/:token" element={<JoinCompany />} />
         <Route
           path="demo/*"

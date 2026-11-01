@@ -69,6 +69,7 @@ export const NOINDEX_PATHS = [
   'auth/callback',
   'company/dashboard',
   'demo',
+  'join',
 ];
 
 export function esc(s) {

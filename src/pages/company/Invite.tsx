@@ -55,12 +55,12 @@ export default function CompanyInvite() {
     return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(location.pathname)}`} replace />;
   }
 
-  const joinPath = (token: string) => `/${lang}/join/${token}`;
+  const joinPath = (token: string) => `/${lang}/join/?t=${encodeURIComponent(token)}`;
 
   async function onCreate(email: string, role: CompanyRole, inviteLang: Lang) {
     const { invite, emailed, emailBlock } = await api.createInvite(companyId, email, role, inviteLang);
     setState(await load());
-    return { link: `${window.location.origin}/${inviteLang}/join/${invite.token}`, emailed, emailBlock };
+    return { link: `${window.location.origin}/${inviteLang}/join/?t=${encodeURIComponent(invite.token)}`, emailed, emailBlock };
   }
 
   let body: React.ReactNode;

@@ -409,7 +409,7 @@ describe('Invite', () => {
     mocked.listInvites.mockResolvedValue([pending]);
     open('/en/company/c1/invite');
     const link = (await screen.findByLabelText(`${en.company.inviteLinkLabel}: new@acme.test`)) as HTMLInputElement;
-    expect(link.value).toBe(`${window.location.origin}/en/join/tok9`);
+    expect(link.value).toBe(`${window.location.origin}/en/join/?t=tok9`);
     screen.getByRole('button', { name: 'Copy link for new@acme.test' });
     screen.getByRole('button', { name: 'Resend invite to new@acme.test' });
     screen.getByRole('button', { name: 'Revoke invite for new@acme.test' });
@@ -471,7 +471,7 @@ describe('Invite', () => {
     fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
     await screen.findByText(en.company.inviteCreated);
     expect(mocked.createInvite).toHaveBeenCalledWith('c1', 'new@acme.test', 'employee', 'en');
-    expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/tok123');
+    expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/?t=tok123');
   });
 
   it.each([
@@ -484,7 +484,7 @@ describe('Invite', () => {
     fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
     fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
     await screen.findByText(text);
-    expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/tok123');
+    expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/?t=tok123');
   });
 
   it('says so when the email really went out', async () => {
@@ -531,7 +531,7 @@ describe('Join', () => {
       await screen.findByText(/Acme Real SA invites you/);
       screen.getByText(en.company.noticeBody);
       screen.getByText(/This invite is for EMP@acme\.test/);
-      const next = encodeURIComponent('/en/join/tok');
+      const next = encodeURIComponent('/en/join/?t=tok');
       expect(screen.getByRole('link', { name: en.auth.signUp }).getAttribute('href')).toBe(`/en/auth/sign-up?next=${next}`);
       expect(screen.getAllByRole('link', { name: en.auth.signIn }).some((a) => a.getAttribute('href') === `/en/auth/sign-in?next=${next}`)).toBe(true);
       expect(screen.queryByRole('button', { name: en.company.joinButton })).toBeNull();
@@ -553,7 +553,9 @@ describe('Join', () => {
     const alert = await screen.findByRole('alert');
     expect(alert.textContent).toContain('EMP@acme.test');
     expect(alert.textContent).toContain('someone@else.test');
-    fireEvent.click(screen.getByRole('button', { name: en.auth.signOut }));
+    const signOutBtns = screen.getAllByRole('button', { name: en.auth.signOut });
+    expect(signOutBtns.length).toBeGreaterThanOrEqual(1);
+    fireEvent.click(signOutBtns.find((b) => b.className.includes('btn-primary')) ?? signOutBtns[0]);
     expect(auth.value.signOut).toHaveBeenCalled();
     expect(screen.queryByRole('button', { name: en.company.joinButton })).toBeNull();
   });

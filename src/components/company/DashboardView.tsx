@@ -362,7 +362,7 @@ export default function DashboardView(props: {
         <PendingInvites
           d={d}
           invites={invites}
-          joinPath={(token) => `${joinBase}/${token}`}
+          joinPath={(token) => `${joinBase}/?t=${encodeURIComponent(token)}`}
           canManage={canRevokeInvite}
           onResend={onResendInvite}
           onRevoke={onRevokeInvite}

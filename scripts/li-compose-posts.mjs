@@ -1,8 +1,8 @@
 import { chromium } from 'playwright';
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join, extname } from 'node:path';
 import { createServer } from 'node:http';
-import { extname } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const ROOT = '/workspace/borderday';
 const OUT = join(ROOT, 'growth/li-images');
@@ -13,6 +13,14 @@ mkdirSync(STORE, { recursive: true });
 const NAVY = '#0B3D91';
 const BLUE = '#1E6BD6';
 const BG = '#F4F7FC';
+
+const FOOT_TAG = {
+  fr: 'Types de jours uniquement · Sans GPS',
+  de: 'Nur Tagesarten · Ohne GPS',
+  it: 'Solo tipi di giorno · Senza GPS',
+  nl: 'Alleen dagtypes · Geen GPS',
+  en: 'Day types only · No GPS',
+};
 
 const posts = [
   {
@@ -78,59 +86,58 @@ function htmlFor(p) {
   }
   .frame {
     width: 1200px; height: 1200px;
-    padding: 40px 48px 32px;
+    padding: 24px 32px 18px;
     display: flex; flex-direction: column;
     position: relative;
   }
   .frame::before {
     content: '';
     position: absolute; inset: 0;
-    border: 18px solid ${NAVY};
+    border: 14px solid ${NAVY};
     border-bottom-color: ${BLUE};
     pointer-events: none;
   }
   .top {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
-  .logo { height: 56px; width: auto; display: block; }
+  .logo { height: 44px; width: auto; display: block; }
   .badge {
     background: ${BLUE}; color: #fff;
     font-size: 22px; font-weight: 700; letter-spacing: 0.04em;
     padding: 10px 18px; border-radius: 999px;
   }
   h1 {
-    font-size: 40px; line-height: 1.18; font-weight: 800;
+    font-size: 32px; line-height: 1.12; font-weight: 800;
     letter-spacing: -0.02em; color: ${NAVY};
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   h1 .line + .line { margin-top: 4px; }
   .sub {
-    font-size: 20px; color: #4A5B78; font-weight: 500;
-    margin-bottom: 14px;
+    font-size: 18px; color: #4A5B78; font-weight: 500;
+    margin-bottom: 10px;
   }
   .dash-wrap {
     flex: 1; min-height: 0;
     background: #fff;
-    border-radius: 18px;
+    border-radius: 14px;
     border: 2px solid #D5DEEE;
-    box-shadow: 0 18px 40px rgba(11, 61, 145, 0.12);
+    box-shadow: 0 14px 32px rgba(11, 61, 145, 0.12);
     overflow: hidden;
     display: flex; align-items: flex-start; justify-content: center;
-    padding: 8px 8px 0;
+    padding: 6px 6px 4px;
   }
   .dash-wrap img {
-    width: 100%; height: auto; display: block;
-    object-fit: cover; object-position: top center;
-    max-height: 100%;
+    max-width: 100%; max-height: 100%; width: auto; height: auto;
+    display: block; object-fit: contain; object-position: top center;
   }
   .foot {
-    margin-top: 22px;
+    margin-top: 10px;
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 24px; font-weight: 700;
+    font-size: 22px; font-weight: 700;
   }
   .foot .url { color: ${BLUE}; }
-  .foot .tag { color: ${NAVY}; opacity: 0.85; font-weight: 600; font-size: 20px; }
+  .foot .tag { color: ${NAVY}; opacity: 0.85; font-weight: 600; font-size: 18px; }
 </style>
 </head>
 <body>
@@ -146,7 +153,7 @@ function htmlFor(p) {
     </div>
     <div class="foot">
       <span class="url">borderday.com</span>
-      <span class="tag">Day types only · No GPS</span>
+      <span class="tag">${escapeHtml(FOOT_TAG[p.lang] || FOOT_TAG.en)}</span>
     </div>
   </div>
 </body>
@@ -182,14 +189,28 @@ const server = createServer((req, res) => {
 
 await new Promise((r) => server.listen(4191, '127.0.0.1', r));
 const browser = await chromium.launch({ headless: true });
-const page = await browser.newPage({ viewport: { width: 1200, height: 1200 }, deviceScaleFactor: 1 });
+const page = await browser.newPage({ viewport: { width: 1200, height: 1200 }, deviceScaleFactor: 2 });
 
 for (const p of posts) {
   if (!only.includes(p.n)) continue;
   await page.goto(`http://127.0.0.1:4191/card/${p.n}.html`, { waitUntil: 'networkidle' });
   await page.waitForFunction(() => [...document.images].every((i) => i.complete && i.naturalWidth > 0));
+  const raw = `/tmp/li-post-${p.n}-raw.png`;
   const out = join(OUT, `li-post-${p.n}.png`);
-  await page.screenshot({ path: out, type: 'png', clip: { x: 0, y: 0, width: 1200, height: 1200 } });
+  await page.screenshot({ path: raw, type: 'png', clip: { x: 0, y: 0, width: 1200, height: 1200 } });
+  // deviceScaleFactor 2 → 2400×2400; Lanczos down to sharp 1200×1200 via Pillow
+  const py = spawnSync(
+    'python3',
+    [
+      '-c',
+      `from PIL import Image; Image.MAX_IMAGE_PIXELS=None\nim=Image.open(${JSON.stringify(raw)}).convert("RGBA")\nim=im.resize((1200,1200), Image.Resampling.LANCZOS)\nim.save(${JSON.stringify(out)}, "PNG", optimize=True)\n`,
+    ],
+    { encoding: 'utf-8' },
+  );
+  if (py.status !== 0) {
+    console.error(py.stderr || py.stdout);
+    throw new Error('PIL resize failed for ' + p.n);
+  }
   writeFileSync(join(STORE, `li-post-${p.n}.png`), readFileSync(out));
   console.log('WROTE', out);
 }

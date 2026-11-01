@@ -654,6 +654,7 @@ const de: Dict = {
     inviteCreated: 'Einladung erstellt. Link an die Person weitergeben.',
     pendingInvites: 'Offene Einladungen',
     dashboardTitle: 'HR-Dashboard',
+    dashboardYear: 'Kalenderjahr',
     dashboardSubtitle:
       'Steuer- und Sozialversicherungszähler je Mitarbeitenden. Tagesarten, Markierungen auswärtiger Übernachtung und Anzahlen — nie GPS oder Gerätestandort.',
     filterBorder: 'Nach Grenzroute filtern',

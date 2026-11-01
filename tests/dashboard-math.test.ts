@@ -16,6 +16,46 @@ function logs(userId: string, companyId: string, specs: Array<[string, DayLog['d
   }));
 }
 
+describe('A3-15 CSV formula defusing', () => {
+  const rowFor = (displayName: string, email = 'a@x.com') =>
+    summarizeEmployee({
+      userId: 'u1',
+      displayName,
+      email,
+      borderPackId: 'geneva_fr',
+      annualWorkingDays: 240,
+      logs: [],
+      year: 2026,
+    });
+  const firstDataLine = (displayName: string, email?: string) =>
+    rowsToCsv([rowFor(displayName, email)], 2026).split('\n')[2];
+
+  it.each(['=HYPERLINK("http://evil.example","x")', '+1+1', '-2+3', '@SUM(A1)', '\tcmd', '\rcmd'])(
+    'defuses a name starting with %j',
+    (name) => {
+      // The demo column is empty, so the name is the first thing after the comma.
+      expect(firstDataLine(name).startsWith(`,"'${name.replaceAll('"', '""')}",`)).toBe(true);
+    },
+  );
+
+  it('defuses the email column too, and leaves ordinary values alone', () => {
+    const line = firstDataLine('Ana, Maria', '=evil@x.com');
+    expect(line).toContain('"Ana, Maria"');
+    expect(line).toContain(`"'=evil@x.com"`);
+  });
+
+  it('uses the same cell function as the account export', async () => {
+    const { csvCell } = await import('../src/lib/csvCell');
+    expect(csvCell('=1+1')).toBe(`"'=1+1"`);
+    expect(csvCell('say "hi"')).toBe('"say ""hi"""');
+    const { readFileSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    for (const f of ['../src/lib/accountExport.ts', '../src/company/dashboardMath.ts']) {
+      expect(readFileSync(join(__dirname, f), 'utf8')).toContain("import { csvCell } from");
+    }
+  });
+});
+
 describe('HR dashboard status math', () => {
   it('1 telework day at Geneva 240 → ok, 1 of 96', () => {
     const row = summarizeEmployee({

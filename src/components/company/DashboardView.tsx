@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getBorderPack, listBorderPacks } from '../../borders/packs';
 import type { BorderId } from '../../borders/types';
 import type { AggregateStatus, EmployeeDashboardRow } from '../../company/dashboardMath';
-import { filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
+import { clampRetentionMonths, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { t, type Dict } from '../../i18n';
 import { usesContractDays } from '../../lib/counting';
@@ -94,6 +94,9 @@ function EmployeeProfileForm(props: {
 }
 
 
+/** Under this, days earlier in the current calendar year can be purged, and the year's counters drop. */
+const RETENTION_YEAR_FLOOR = 13;
+
 function RetentionForm(props: {
   d: Dict;
   months: number;
@@ -128,7 +131,14 @@ function RetentionForm(props: {
             setState('error');
             return;
           }
-          onSave(n).then(
+          const next = clampRetentionMonths(n);
+          // Lowering deletes at the next daily purge, and the purge has no undo.
+          if (next < months) {
+            const warning = t(d.company.retentionConfirm, { months: next });
+            const message = next < RETENTION_YEAR_FLOOR ? `${warning} ${d.company.retentionConfirmShort}` : warning;
+            if (!window.confirm(message)) return;
+          }
+          onSave(next).then(
             () => setState('saved'),
             () => setState('error'),
           );

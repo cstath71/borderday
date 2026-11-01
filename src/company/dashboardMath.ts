@@ -9,6 +9,7 @@ import type {
   OfficialSource,
 } from '../borders/types';
 import { annualBaseFor, evaluatePack, zurichToday } from '../lib/counting';
+import { csvCell } from '../lib/csvCell';
 import type { DayLog } from './types';
 
 export type AggregateStatus = 'ok' | 'warn' | 'critical' | 'at_limit' | 'over' | 'disabled' | 'mixed';
@@ -195,6 +196,11 @@ export function needsFilingNote(rows: Pick<EmployeeDashboardRow, 'borderPackId'>
   return rows.some((r) => r.borderPackId != null && FILING_NOTE_PACKS.has(r.borderPackId));
 }
 
+/** The range bd_companies.data_retention_months accepts. */
+export function clampRetentionMonths(months: number): number {
+  return Math.min(120, Math.max(1, Math.round(months)));
+}
+
 /** CSV for audit — day types and counts only, never location. Not an AFC filing. */
 export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
   const header = [
@@ -232,8 +238,9 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
       lines.push(
         [
           r.isDemo ? 'DEMO' : '',
-          csv(r.displayName),
-          csv(r.email),
+          // An employee sets their own display name, and HR opens this file.
+          csvCell(r.displayName),
+          csvCell(r.email),
           r.borderPackId ?? '',
           r.annualWorkingDays ?? '',
           r.profile.employmentPercent ?? '',
@@ -254,9 +261,4 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     }
   }
   return lines.join('\n');
-}
-
-function csv(s: string): string {
-  if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
-  return s;
 }

@@ -1,5 +1,6 @@
 import type { BorderId, DayEntry, DayType } from '../borders/types';
 import { listDayLogs, listMyCompanies, listPersonalDayLogs } from './companyApi';
+import { csvCell } from './csvCell';
 
 export interface AccountExport {
   version: 1;
@@ -45,12 +46,6 @@ export async function collectAccountExport(user: { id: string; email?: string | 
     individualPlan: { days: personal },
     companies: perCompany,
   };
-}
-
-/** Quoted, and a leading formula character is defused: company names are free text and CSVs open in spreadsheets. */
-function csvCell(value: string): string {
-  const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
-  return `"${safe.replaceAll('"', '""')}"`;
 }
 
 export function accountExportCsv(data: AccountExport): string {

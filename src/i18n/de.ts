@@ -650,6 +650,10 @@ const de: Dict = {
     noticeAck: 'Ich habe diesen Hinweis gelesen',
     noticeRequired: 'Bestätigen Sie, dass Sie den Hinweis gelesen haben, um fortzufahren.',
     noticePrivacyLink: 'Vollständige Datenschutzerklärung',
+    retentionConfirm:
+      'Aufbewahrung auf {months} Monate senken? Ältere Unternehmens-Tagesprotokolle werden bei der nächsten täglichen Löschung endgültig gelöscht. Das kann nicht rückgängig gemacht werden.',
+    retentionConfirmShort:
+      'Unter 13 Monaten können auch Tage vom Anfang dieses Kalenderjahres gelöscht werden, und die Zähler des Jahres würden sinken.',
     retentionTitle: 'Aufbewahrung der Tagesprotokolle',
     retentionHelp: 'Unternehmens-Tagesprotokolle älter als diese Anzahl Monate werden täglich automatisch gelöscht (1–120). Standard 24. Mitgliedschaft, Abrechnung und ganze Konten werden nicht zeitgesteuert gelöscht.',
     retentionMonths: 'Monate',

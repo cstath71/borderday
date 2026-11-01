@@ -653,6 +653,10 @@ const fr: Dict = {
     noticeAck: 'J’ai lu cet avis',
     noticeRequired: 'Confirmez que vous avez lu l’avis pour continuer.',
     noticePrivacyLink: 'Politique de confidentialité complète',
+    retentionConfirm:
+      'Réduire la conservation à {months} mois ? Les journaux entreprise plus anciens sont supprimés définitivement lors de la prochaine purge quotidienne. Cette action est irréversible.',
+    retentionConfirmShort:
+      'En dessous de 13 mois, des jours du début de cette année civile peuvent aussi être supprimés, et les compteurs de l’année baisseraient.',
     retentionTitle: 'Conservation des journaux de jours',
     retentionHelp: 'Les journaux entreprise plus anciens que ce nombre de mois sont supprimés automatiquement chaque jour (1–120). Défaut 24. L’appartenance, la facturation et les comptes entiers ne sont pas supprimés automatiquement.',
     retentionMonths: 'Mois',

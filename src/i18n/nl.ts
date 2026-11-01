@@ -518,6 +518,8 @@ const nl: Dict = {
     noticeAck: "Ik heb deze kennisgeving gelezen",
     noticeRequired: "Bevestig dat u de kennisgeving hebt gelezen om verder te gaan.",
     noticePrivacyLink: "Volledige privacyverklaring",
+    retentionConfirm: "Bewaring verlagen naar {months} maanden? Oudere bedrijfsdagregistraties worden bij de volgende dagelijkse opschoning definitief gewist. Dit kan niet ongedaan worden gemaakt.",
+    retentionConfirmShort: "Onder 13 maanden kunnen ook dagen van eerder in dit kalenderjaar worden gewist, en de tellers van dit jaar zouden dalen.",
     retentionTitle: "Bewaring dagregistratie",
     retentionHelp: "Bedrijfsdagregistraties ouder dan dit aantal maanden worden elke dag automatisch gewist (1–120). Standaard 24. Lidmaatschap, facturatie en hele accounts worden niet automatisch na een termijn gewist.",
     retentionMonths: "Maanden",

@@ -3,6 +3,7 @@
  * The labelled /demo routes use supabaseMock.ts; nothing else may.
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { clampRetentionMonths } from '../company/dashboardMath';
 import { companyHasPaidAccess, planIsCancellable } from './billing';
 import { supabase } from './supabase';
 import type { Invitation, CompanyRole, InviteStatus } from '../company/types';
@@ -157,7 +158,7 @@ export interface CompanyMemberRow {
 }
 
 export async function updateCompanyRetention(companyId: string, months: number) {
-  const n = Math.min(120, Math.max(1, Math.round(months)));
+  const n = clampRetentionMonths(months);
   const { error } = await client()
     .from('bd_companies')
     .update({ data_retention_months: n })

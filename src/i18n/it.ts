@@ -654,6 +654,10 @@ const it: Dict = {
     noticeAck: 'Ho letto questo avviso',
     noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
     noticePrivacyLink: 'Informativa privacy completa',
+    retentionConfirm:
+      'Ridurre la conservazione a {months} mesi? I registri aziendali più vecchi sono cancellati definitivamente alla prossima pulizia giornaliera. L’operazione è irreversibile.',
+    retentionConfirmShort:
+      'Sotto i 13 mesi possono essere cancellati anche giorni dell’inizio di quest’anno civile, e i contatori dell’anno scenderebbero.',
     retentionTitle: 'Conservazione dei registri dei giorni',
     retentionHelp: 'I registri aziendali più vecchi di questo numero di mesi sono cancellati automaticamente ogni giorno (1–120). Predefinito 24. Adesione, fatturazione e account interi non sono cancellati a tempo.',
     retentionMonths: 'Mesi',

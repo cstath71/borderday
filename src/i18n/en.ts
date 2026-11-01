@@ -644,6 +644,10 @@ const en = {
     noticeAck: 'I have read this notice',
     noticeRequired: 'Confirm that you have read the notice to continue.',
     noticePrivacyLink: 'Full privacy notice',
+    retentionConfirm:
+      'Lower retention to {months} months? Company day logs older than that are permanently deleted at the next daily purge. This cannot be undone.',
+    retentionConfirmShort:
+      'Under 13 months, days from earlier in this calendar year can be deleted too, and this year’s counters would drop.',
     retentionTitle: 'Day-log retention',
     retentionHelp: 'Company day logs older than this many months are deleted automatically each day (1–120). Default 24. Membership, billing and whole accounts are not timed-deleted.',
     retentionMonths: 'Months',

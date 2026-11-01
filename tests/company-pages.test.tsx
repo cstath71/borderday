@@ -24,6 +24,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
     deactivateMember: vi.fn(async () => ({ billingSynced: true })),
     revokeInvite: vi.fn(async () => undefined),
     createCompany: vi.fn(),
+    updateCompanyRetention: vi.fn(async () => undefined),
     listMyCompanies: vi.fn(async () => []),
     getCompany: vi.fn(),
     listMembers: vi.fn(),
@@ -156,6 +157,56 @@ describe('Dashboard', () => {
       annualWorkingDays: 240,
     });
     await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
+  });
+
+  describe('A3-21 retention warning', () => {
+    const setMonths = async (months: string) => {
+      const field = (await screen.findByLabelText(en.company.retentionMonths)) as HTMLInputElement;
+      fireEvent.change(field, { target: { value: months } });
+      fireEvent.click(screen.getByRole('button', { name: en.company.retentionSave }));
+    };
+
+    it('setting 1 month warns of irreversible deletion, and saves nothing if refused', async () => {
+      asHr();
+      const confirm = vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValue(true);
+      open('/en/company/c1/dashboard');
+      await screen.findByText('Real Employee');
+      await setMonths('1');
+      expect(confirm).toHaveBeenCalledTimes(1);
+      const text = confirm.mock.calls[0][0] as string;
+      expect(text).toContain('Lower retention to 1 months?');
+      expect(text).toContain('permanently deleted at the next daily purge');
+      expect(text).toContain('cannot be undone');
+      expect(text).toContain(en.company.retentionConfirmShort);
+      expect(mocked.updateCompanyRetention).not.toHaveBeenCalled();
+      await setMonths('1');
+      await waitFor(() => expect(mocked.updateCompanyRetention).toHaveBeenCalledWith('c1', 1));
+      confirm.mockRestore();
+    });
+
+    it('lowering to 13 months or more warns without the calendar-year line', async () => {
+      asHr();
+      const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+      open('/en/company/c1/dashboard');
+      await screen.findByText('Real Employee');
+      await setMonths('13');
+      expect(confirm.mock.calls[0][0]).not.toContain(en.company.retentionConfirmShort);
+      await waitFor(() => expect(mocked.updateCompanyRetention).toHaveBeenCalledWith('c1', 13));
+      confirm.mockRestore();
+    });
+
+    it('raising or keeping retention deletes nothing, so it does not ask', async () => {
+      asHr();
+      const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+      open('/en/company/c1/dashboard');
+      await screen.findByText('Real Employee');
+      await setMonths('24');
+      await waitFor(() => expect(mocked.updateCompanyRetention).toHaveBeenCalledWith('c1', 24));
+      await setMonths('36');
+      await waitFor(() => expect(mocked.updateCompanyRetention).toHaveBeenCalledWith('c1', 36));
+      expect(confirm).not.toHaveBeenCalled();
+      confirm.mockRestore();
+    });
   });
 
   describe('A3-04 offboarding', () => {

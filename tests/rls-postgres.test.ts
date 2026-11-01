@@ -303,6 +303,41 @@ describe('real Postgres: HR cannot escalate', () => {
     expect(await seats()).toBe(1);
   });
 
+  it('RC-01/F32: deactivate via active-only update stamps removed_at; writing removed_at is denied', async () => {
+    const owner = await newUser('rc01-owner@example.com');
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    // Exact client payload before the fix must fail: authenticated has no UPDATE on removed_at.
+    await expect(
+      as(
+        owner,
+        `update public.bd_company_members set active = false, removed_at = now()
+         where company_id = $1 and user_id = $2 and role <> 'owner'`,
+        [company, emp],
+      ),
+    ).rejects.toThrow(/permission denied|42501/i);
+    // Fixed client payload: only active. Trigger stamps removed_at.
+    const res = await as(
+      owner,
+      `update public.bd_company_members set active = false
+       where company_id = $1 and user_id = $2 and role <> 'owner'
+       returning id, active, removed_at`,
+      [company, emp],
+    );
+    expect(res.rowCount).toBe(1);
+    expect(res.rows[0].active).toBe(false);
+    expect(res.rows[0].removed_at).toBeTruthy();
+    // Reactivate clears the stamp (trigger).
+    const back = await as(
+      owner,
+      `update public.bd_company_members set active = true
+       where company_id = $1 and user_id = $2
+       returning active, removed_at`,
+      [company, emp],
+    );
+    expect(back.rows[0]).toMatchObject({ active: true, removed_at: null });
+  });
+
   it('A3-04: HR cannot deactivate an owner or themselves; an employee cannot deactivate anyone', async () => {
     const owner = await newUser('a304c@example.com');
     const company = await newCompany(owner);

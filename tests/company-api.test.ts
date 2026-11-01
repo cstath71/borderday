@@ -118,7 +118,8 @@ describe('companyApi', () => {
       const [call] = state.calls;
       expect(call.table).toBe('bd_company_members');
       expect(update(call)).toMatchObject({ active: false });
-      expect(typeof (update(call) as { removed_at?: string }).removed_at).toBe('string');
+      // RC-01: client must not write removed_at — authenticated has no column UPDATE grant; trigger stamps it.
+      expect(update(call)).not.toHaveProperty('removed_at');
       expect(op(call, 'eq')).toEqual(expect.arrayContaining([['company_id', 'c1'], ['user_id', 'e1']]));
       expect(op(call, 'neq')).toContainEqual(['role', 'owner']);
       expect(state.invoke).toHaveBeenCalledWith('bd-sync-company-billing', { body: { companyId: 'c1' } });
@@ -487,7 +488,7 @@ describe('companyApi', () => {
     expect(op(call!, 'delete')).toHaveLength(1);
   });
 
-  it('F32: deactivateMember sets active false and removed_at', async () => {
+  it('F32/RC-01: deactivateMember sets active false only; trigger owns removed_at', async () => {
     state.respond = () => ({ data: [{ id: 'm1' }], error: null });
     state.invoke.mockResolvedValueOnce({ data: { available: true }, error: null });
     const result = await api.deactivateMember('c1', 'emp1');
@@ -495,7 +496,7 @@ describe('companyApi', () => {
     const call = state.calls.find((c) => c.table === 'bd_company_members' && c.ops.some(([n]) => n === 'update'));
     const [payload] = op(call!, 'update')[0] as [Record<string, unknown>];
     expect(payload.active).toBe(false);
-    expect(typeof payload.removed_at).toBe('string');
+    expect(payload).not.toHaveProperty('removed_at');
   });
 
   it('listInvites maps bd_invitations rows', async () => {

@@ -686,9 +686,10 @@ PAGES.privacy.nl = {
 PAGES.terms.nl = {
   title: 'BorderDay — Voorwaarden & impressum',
   description:
-    'Voorwaarden, impressum en herroepingsrecht. Abonnementen via Stripe Managed Payments (Link). 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
+    'Voorwaarden, impressum en herroepingsrecht. Abonnementen via Stripe Managed Payments (Link). 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
   h1: 'Voorwaarden & impressum',
-  summary: PAGES.terms.en.summary,
+  summary:
+    'Abonnementen starten met 7 dagen gratis proberen: daarna wordt het abonnement betaald tegen de vermelde prijs, met automatische incasso op dag 8 en verlenging tot u opzegt. Bedrijfsprijzen excl. btw; particulier incl. btw. EU-herroeping en opzegging staan op deze pagina beschreven.',
   crumbs: [
     ['Home', ''],
     ['Voorwaarden', 'terms'],
@@ -723,12 +724,60 @@ PAGES.accessibility.nl = {
   h1: 'Toegankelijkheid',
   summary: 'Korte openbare toegankelijkheidsverklaring voor BorderDay.',
 };
-PAGES[''].nl = { ...PAGES[''].en, title: 'BorderDay — Grensoverschrijdende daglimieten voor HR en medewerkers', h1: 'Eén plek voor elke grens waar uw mensen overheen werken' };
-PAGES.pricing.nl = { ...PAGES.pricing.en, title: 'BorderDay — Prijzen', h1: 'Prijzen' };
-PAGES.faq.nl = { ...PAGES.faq.en, title: 'BorderDay — FAQ', h1: 'FAQ' };
-PAGES['for-individuals'].nl = { ...PAGES['for-individuals'].en, title: 'BorderDay — Voor particulieren', h1: 'Log your own border days' };
-PAGES.cancel.nl = { ...PAGES.cancel.en, title: 'BorderDay — Abonnement opzeggen', h1: 'Abonnement opzeggen' };
-PAGES['company/signup'].nl = { ...PAGES['company/signup'].en, title: 'BorderDay — Bedrijf aanmelden', h1: 'Bedrijf aanmelden' };
+PAGES[''].nl = {
+  title: 'BorderDay — Grensoverschrijdende daglimieten voor HR en medewerkers',
+  description:
+    'Dagtelling voor werkgevers van grensoverschrijdend personeel: socialezekerheidstellers op negen corridors, belastingtellers op zeven. Bedrijf vanaf €5/medewerker/maand (min. €39), excl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+  h1: 'Eén plek voor elke grens waarover uw mensen werken',
+  summary:
+    'BorderDay helpt HR telewerk-, ter-plaatse- en reisdagen per medewerker bij te houden: socialezekerheidstellers op alle negen corridors in vijf regio’s, belastingtellers op zeven daarvan. Bedrijfsabonnement: €5 per actieve medewerker per maand (minimum €39), excl. btw; particulieren €4,99/maand of €49/jaar, incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding. Een registratietool — geen belasting- of juridisch advies.',
+  crumbs: [['Home', '']],
+};
+PAGES.pricing.nl = {
+  title: 'BorderDay — Prijzen',
+  description:
+    'Bedrijf: €5 per actieve medewerker per maand, minimum €39; jaarlijks minimum €390. Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+  h1: 'Prijzen',
+  summary:
+    'Bedrijf / HR: €5 per actieve medewerker per maand, minimum €39/maand (dekt tot 7 actieve medewerkers); jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding. Checkout via Stripe Managed Payments (verkocht via Link).',
+  crumbs: [['Home', ''], ['Prijzen', 'pricing']],
+};
+PAGES.faq.nl = {
+  title: 'BorderDay — FAQ',
+  description:
+    'Veelgestelde vragen over BorderDay: opslag, locatie, corridors, prijzen, betalingen en wat de tool niet dekt.',
+  h1: 'FAQ',
+  summary:
+    'BorderDay is een registratie- en herinneringstool, geen belasting- of juridisch advies. Met abonnement wordt het logboek in het account bewaard, de gratis preview blijft op het apparaat; geen GPS en geen apparaatlocatie. Negen corridors: socialezekerheidstellers op alle, belastingtellers op zeven. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding.',
+  crumbs: [['Home', ''], ['FAQ', 'faq']],
+};
+PAGES['for-individuals'].nl = {
+  title: 'BorderDay — Voor particulieren',
+  description:
+    'Registreer zelf telewerk- en reisdagen. €4,99/maand of €49/jaar incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+  h1: 'Registreer uw eigen grensdagen',
+  summary:
+    'Medewerkers registreren zelf telewerk-, ter-plaatse-, reis- en niet-werkdagen. Socialezekerheidstellers op elke corridor, belastingtellers op zeven. Particulier abonnement: €4,99/maand of €49/jaar (incl. btw). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding. Gebruikt de werkgever BorderDay, aansluiten via de uitnodigingslink: dezelfde tellers als HR.',
+  crumbs: [['Home', ''], ['Particulieren', 'for-individuals']],
+};
+PAGES.cancel.nl = {
+  title: 'BorderDay — Abonnement opzeggen',
+  description:
+    'Zeg uw BorderDay-abonnement op via het klantenportaal, Link of e-mail. Opzegging vóór dag 8 van de proefperiode: niets wordt aangerekend.',
+  h1: 'Abonnement opzeggen',
+  summary:
+    'Opzegging stopt toekomstige verlengingen. Tijdens de proefperiode vóór dag 8 wordt niets aangerekend. Gebruik het klantenportaal, Link-ordertools of e-mail.',
+  crumbs: [['Home', ''], ['Abonnement opzeggen', 'cancel']],
+};
+PAGES['company/signup'].nl = {
+  title: 'BorderDay — Bedrijfsaccount aanmaken',
+  description:
+    'Maak een bedrijfsaccount met e-mail of Google, nodig medewerkers uit, abonneer u onder Prijzen. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw.',
+  h1: 'Bedrijfsaccount aanmaken',
+  summary:
+    'Bedrijfsaccount met e-mail of Google aanmaken, medewerkers uitnodigen, onder Prijzen abonneren. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding.',
+  crumbs: [['Home', ''], ['Bedrijfsaccount', 'company/signup']],
+};
 
 
 /** Corridors with a running tax counter. tests/seo.test.ts holds this equal to the packs. */
@@ -857,7 +906,36 @@ export const FAQ = {
     ],
   ],
 };
-FAQ.nl = FAQ.en;
+FAQ.nl = [
+  [
+    'Is BorderDay belasting- of juridisch advies?',
+    'Nee. Het is een registratie- en herinneringstool voor werkgevers en medewerkers. Drempels komen uit openbare officiële bronnen en kunnen wijzigen. Verifieer altijd bij uw werkgever, een gekwalificeerde adviseur of de bevoegde autoriteit.',
+  ],
+  [
+    'Waar wordt mijn daglogboek bewaard?',
+    'Zonder abonnement alleen op uw apparaat (IndexedDB in de browser). Met een actief abonnement of bedrijfsaccount in uw BorderDay-account. In beide gevallen kunt u JSON of CSV exporteren, of alles wissen.',
+  ],
+  [
+    'Volgt u mijn locatie?',
+    'Nee. U registreert dagen zelf. Geen GPS of apparaatlocatie. HR ziet dagtype (en overnacht elders ja/nee) per datum — landcategorie, nooit coördinaten. Notities zijn privé voor de medewerker.',
+  ],
+  [
+    'Welke grenzen dekt u?',
+    'Negen corridors in vijf regio’s. Socialezekerheidstellers op alle negen. Belastingtellers op zeven: Genève en andere niet-1983-kantons←Frankrijk, 1983-verdragskantons←Frankrijk (40%/10 missies/45 nachten), Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg en Italië→Zwitserland. Nog geen algemene belastingteller: Frankrijk→België en Nederland→België.',
+  ],
+  [
+    'Wat kost BorderDay?',
+    'Bedrijf: €5 per actieve medewerker per maand met een maandelijks minimum van €39; jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij aanmelding.',
+  ],
+  [
+    'Hoe werken betalingen?',
+    'Checkout gebruikt Stripe Managed Payments: Link is de merchant of record en behandelt btw/GST in Checkout. Promocodes worden ondersteund. Zie de Voorwaarden voor opzegging en het herroepingsrecht van 14 dagen voor consumenten in de EU.',
+  ],
+  [
+    'Wat dekt BorderDay niet?',
+    'Zelfstandigen, bijzondere regels voor de openbare sector, personen met werkgevers in meerdere staten, en niet-IT-werk onder het telewerkkader. Niet vermelde corridors, zoals Frankrijk→Duitsland of Nederland→Duitsland. Tellers zien alleen hier geregistreerde dagen, dus andere jobs in het jaar zijn niet inbegrepen. Belastingtellers lopen niet op elke corridor. De CSV-export is een werkdocument, geen officiële aangifte zoals het jaarlijkse telewerkpercentage-rapport dat sommige kantons eisen. Twijfelt u, controleer bij uw autoriteit.',
+  ],
+];
 
 
 export function robotsTxt() {

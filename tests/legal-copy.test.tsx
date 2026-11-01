@@ -27,7 +27,7 @@ const DISCLOSURE: Record<Lang, RegExp[]> = {
   fr: [/8e jour/, /automatiquement|automatique/, /jusqu’à (votre )?résiliation/],
   de: [/8\. Tag/, /automatisch/, /bis zu(r| Ihrer) Kündigung/],
   it: [/8° giorno/, /automaticamente|automatico/, /fino alla disdetta/],
-  nl: [/day 8/, /automatically/, /renewing until you cancel/],
+  nl: [/dag 8/, /automatisch/, /verlengd tot u opzegt/],
 };
 
 function expectDisclosure(lang: Lang, text: string, where: string) {
@@ -185,14 +185,14 @@ describe('C6 withdrawal wording', () => {
       fr: /demandant expressément le démarrage du service/,
       de: /ausdrücklich verlangen, dass der Dienst/,
       it: /chiedete espressamente l’inizio del servizio/,
-      nl: /expressly asking us to start the service/,
+      nl: /uitdrukkelijk vraagt de dienst.*te starten/,
     };
     const voluntary: Record<Lang, RegExp> = {
       en: /voluntary 14-day full-refund guarantee/,
       fr: /garantie volontaire de remboursement intégral de 14 jours/,
       de: /freiwillige 14-tägige Vollrückerstattungsgarantie/,
       it: /garanzia volontaria di rimborso integrale di 14 giorni/,
-      nl: /voluntary 14-day full-refund guarantee/,
+      nl: /vrijwillige restitutiegantie van 14 dagen/,
     };
     for (const [lang, d] of dicts) {
       expect(d.terms.s5EffectsBody, lang).toMatch(express[lang]);

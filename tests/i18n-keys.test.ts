@@ -98,6 +98,7 @@ describe('border-route naming (T56/T59)', () => {
     expect(fr.company.pickBorder).toMatch(/itinéraire/i);
     expect(de.company.pickBorder).toMatch(/Grenzroute/);
     expect(itDict.company.pickBorder).toMatch(/corridoio/i);
+    expect(nl.company.pickBorder).toMatch(/grensroute/i);
   });
 });
 
@@ -155,8 +156,8 @@ describe('terminology decisions (02-translations)', () => {
   });
 });
 
-describe('Phase 2 rule copy, all four languages', () => {
-  const dicts = { en, fr, de, it: itDict };
+describe('Phase 2 rule copy, all five languages', () => {
+  const dicts = { en, fr, de, it: itDict, nl };
   const all = Object.entries(dicts) as Array<[string, typeof en]>;
   const text = (d: typeof en) => d.counters as Record<string, string>;
 
@@ -210,6 +211,7 @@ describe('Phase 2 rule copy, all four languages', () => {
     expect(fr.counters.ss_framework_note).toMatch(/indépendantes/);
     expect(de.counters.ss_framework_note).toMatch(/selbständig/);
     expect(itDict.counters.ss_framework_note).toMatch(/indipendente/);
+    expect(nl.counters.ss_framework_note).toMatch(/zelfstandig/);
   });
 
   it('1983 copy says taxed in France and never the Geneva sentence', () => {
@@ -217,6 +219,7 @@ describe('Phase 2 rule copy, all four languages', () => {
     expect(fr.counters.ch_fr_1983_note).toMatch(/imposés en France/);
     expect(de.counters.ch_fr_1983_note).toMatch(/in Frankreich besteuert/);
     expect(itDict.counters.ch_fr_1983_note).toMatch(/tassati in Francia/);
+    expect(nl.counters.ch_fr_1983_note).toMatch(/belast in Frankrijk/);
     for (const [, d] of all) {
       expect(d.counters.ch_fr_1983_note).toMatch(/45/);
       expect(d.counters.ch_fr_1983_value).toBeTruthy();
@@ -239,7 +242,7 @@ describe('Phase 2 rule copy, all four languages', () => {
   it('marketing no longer promises tax limits on every corridor', () => {
     expect(JSON.stringify(en)).not.toMatch(/five borders|official tax and social-security/);
     for (const [lang, d] of all) {
-      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(seven|sept|sette|sieben)\b/i);
+      for (const s of [d.meta.description, d.home.heroBody, d.home.inShort]) expect(s, lang).toMatch(/\b(seven|sept|sette|sieben|zeven)\b/i);
     }
   });
 
@@ -281,5 +284,104 @@ describe('Phase 2 rule copy, all four languages', () => {
       expect(d.faq.q8, lang).toBeTruthy();
       expect(d.faq.a8.length, lang).toBeGreaterThan(100);
     }
+  });
+});
+
+
+describe('NL locale is fully translated (no EN fallback body)', () => {
+  function flat(obj: unknown, prefix = ''): Record<string, string> {
+    const out: Record<string, string> = {};
+    if (obj === null || typeof obj !== 'object') return out;
+    for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
+      const p = prefix ? `${prefix}.${k}` : k;
+      if (typeof v === 'string') out[p] = v;
+      else if (Array.isArray(v)) {
+        v.forEach((item, i) => {
+          if (typeof item === 'string') out[`${p}.${i}`] = item;
+          else Object.assign(out, flat(item, `${p}.${i}`));
+        });
+      } else if (v && typeof v === 'object') Object.assign(out, flat(v, p));
+    }
+    return out;
+  }
+
+  /** Keys that intentionally stay identical across locales (proper nouns, cognates, templates). */
+  const allowSame = new Set([
+    'meta.siteName',
+    'nav.home',
+    'nav.faq',
+    'nav.privacy',
+    'nav.disclaimer',
+    'nav.account',
+    'nav.menu',
+    'lang.en',
+    'lang.fr',
+    'lang.de',
+    'lang.it',
+    'lang.nl',
+    'dayTypes.halfDayShort',
+    'app.previewBadge',
+    'app.calendarDay',
+    'pricing.approxChf',
+    'faq.title',
+    'company.status',
+    'terms.contact',
+    'disclaimer.title',
+    'accessibility.feedbackTitle',
+    'dpa.contactTitle',
+    'footer.rights',
+    'privacy.tableRows.0.recipients',
+    'privacy.tableRows.2.recipients',
+    'privacy.tableRows.3.recipients',
+  ]);
+
+  it('public body leaves differ from EN except allowlisted cognates', () => {
+    const e = flat(en);
+    const n = flat(nl);
+    const same: string[] = [];
+    for (const k of Object.keys(e)) {
+      if (allowSame.has(k)) continue;
+      if (e[k] === n[k] && e[k].length > 2) same.push(k);
+    }
+    expect(same, same.join(', ')).toEqual([]);
+  });
+
+  it('Belgian tax authority wording uses FOD Financiën where Belgium is named', () => {
+    expect(nl.counters.lu_be_over_34).toMatch(/FOD Financiën/);
+    expect(nl.counters.be_fr_pre2012_over).toMatch(/FOD Financiën/);
+  });
+
+  it('NL SEO pages are not EN clones for home/pricing/faq', () => {
+    expect(PAGES[''].nl.summary).not.toEqual(PAGES[''].en.summary);
+    expect(PAGES.pricing.nl.summary).not.toEqual(PAGES.pricing.en.summary);
+    expect(PAGES.faq.nl.summary).not.toEqual(PAGES.faq.en.summary);
+    expect(PAGES['for-individuals'].nl.h1).not.toMatch(/Log your own/);
+  });
+});
+
+describe('language switcher path rewrite (5×5)', () => {
+  const langs = ['en', 'fr', 'de', 'it', 'nl'] as const;
+  function rewrite(pathname: string, next: string): string {
+    const path = pathname.replace(/^\/(en|fr|de|it|nl)(?=\/|$)/, `/${next}`);
+    return path.startsWith(`/${next}`) ? path : `/${next}/`;
+  }
+
+  it('rewrites every locale path to every other locale', () => {
+    for (const from of langs) {
+      for (const to of langs) {
+        expect(rewrite(`/${from}/`, to)).toBe(`/${to}/`);
+        expect(rewrite(`/${from}/pricing/`, to)).toBe(`/${to}/pricing/`);
+        expect(rewrite(`/${from}/privacy`, to)).toBe(`/${to}/privacy`);
+      }
+    }
+  });
+
+  it('Layout.tsx replace regex includes nl', () => {
+    const src = readFileSync(join(__dirname, '../src/components/Layout.tsx'), 'utf8');
+    expect(src).toContain('(en|fr|de|it|nl)');
+    expect(src).toContain('className="lang-switch"');
+    const navEnd = src.indexOf('</nav>');
+    const formStart = src.indexOf('className="lang-switch"');
+    expect(formStart).toBeGreaterThan(navEnd);
   });
 });

@@ -295,6 +295,7 @@ const en = {
     exportCsv: 'Export CSV',
     deleteAll: 'Delete all days',
     clearDay: 'Clear this day',
+    clearDayConfirm: 'Clear {date}? Your employer keeps a correction record of that day under their retention setting. You can log it again later.',
     plannedDayWarning: 'This is a future day — it is logged as planned and will count once that date arrives.',
     priorYearNote: 'This day is in {year}. It counts toward that year’s counters, not the current year.',
     deleteAllConfirm: 'Delete every day on this device? This cannot be undone.',

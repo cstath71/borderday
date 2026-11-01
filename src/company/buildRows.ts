@@ -23,6 +23,8 @@ export interface RowLog {
   dayType: DayType;
   overnightAway?: boolean;
   dayShare?: 0.5 | 1;
+  /** Soft-voided days stay in the employer record but do not count. */
+  voidedAt?: string | null;
 }
 
 export function buildEmployeeRow(
@@ -61,6 +63,7 @@ export function buildDashboardRows(opts: {
 }): EmployeeDashboardRow[] {
   const byEmployee = new Map<string, RowLog[]>();
   for (const log of opts.logs) {
+    if (log.voidedAt) continue;
     const list = byEmployee.get(log.employeeUserId);
     if (list) list.push(log);
     else byEmployee.set(log.employeeUserId, [log]);
@@ -89,6 +92,7 @@ export function buildFormerDashboardRows(opts: {
 }): EmployeeDashboardRow[] {
   const byEmployee = new Map<string, RowLog[]>();
   for (const log of opts.logs) {
+    if (log.voidedAt) continue;
     const list = byEmployee.get(log.employeeUserId);
     if (list) list.push(log);
     else byEmployee.set(log.employeeUserId, [log]);

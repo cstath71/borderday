@@ -689,7 +689,7 @@ describe('real Postgres: day logs', () => {
       [company, emp],
     );
     const { rows } = await as(hr, `select * from public.bd_list_day_records($1, $2)`, [company, emp]);
-    expect(Object.keys(rows[0]).sort()).toEqual(['day_share', 'day_type', 'employee_user_id', 'overnight_away_for_work', 'work_date']);
+    expect(Object.keys(rows[0]).sort()).toEqual(['corrected_at', 'day_share', 'day_type', 'employee_user_id', 'overnight_away_for_work', 'prior_day_type', 'voided_at', 'work_date']);
     expect(rows[0].overnight_away_for_work).toBe(true);
     expect(JSON.stringify(rows)).not.toContain('Lugano');
     const self = await as(emp, `select * from public.bd_list_day_records($1)`, [company]);
@@ -951,7 +951,7 @@ describe('real Postgres: paid access (C8)', () => {
     await expect(logDay(emp, company, '2026-04-01')).resolves.toMatchObject({ rowCount: 1 });
   });
 
-  it('a lapsed company blocks new logs but keeps the employee able to read and delete their own', async () => {
+  it('a lapsed company blocks new logs but keeps the employee able to read and soft-void their own', async () => {
     const owner = await newUser('o25@example.com');
     const company = await newCompany(owner);
     const emp = await addMember(owner, company);
@@ -959,7 +959,14 @@ describe('real Postgres: paid access (C8)', () => {
     await db.query(`update public.bd_companies set subscription_status = 'canceled' where id = $1`, [company]);
     await expect(logDay(emp, company, '2026-04-03')).rejects.toThrow(/row-level security/);
     expect((await as(emp, `select * from public.bd_list_day_types($1, $2)`, [company, emp])).rowCount).toBe(1);
-    expect((await as(emp, `delete from public.bd_day_logs where employee_user_id = $1`, [emp])).rowCount).toBe(1);
+    // A2-01: hard DELETE is denied; soft-void keeps the employer row.
+    expect((await as(emp, `delete from public.bd_day_logs where employee_user_id = $1`, [emp])).rowCount).toBe(0);
+    await expect(as(emp, `select public.bd_void_my_day_log($1, '2026-04-02'::date)`, [company])).resolves.toMatchObject({ rowCount: 1 });
+    expect((await as(emp, `select * from public.bd_list_day_records($1)`, [company])).rowCount).toBe(0);
+    const hrView = await as(owner, `select voided_at, prior_day_type from public.bd_list_day_records($1, $2)`, [company, emp]);
+    expect(hrView.rowCount).toBe(1);
+    expect(hrView.rows[0].voided_at).toBeTruthy();
+    expect(hrView.rows[0].prior_day_type).toBeTruthy();
   });
 
   it('owner cannot grant themselves a paid status or point at another Stripe customer', async () => {

@@ -479,6 +479,10 @@ export interface DayLogView {
   dayType: DayType;
   overnightAway: boolean;
   dayShare: 0.5 | 1;
+  /** Set when the employee cleared the day; employer row kept (A2-01 / AR3-02). */
+  voidedAt?: string | null;
+  priorDayType?: DayType | null;
+  correctedAt?: string | null;
 }
 
 /**
@@ -533,6 +537,8 @@ export async function upsertDayLog(opts: {
             work_date: opts.workDate,
             day_type: opts.dayType,
             updated_at: new Date().toISOString(),
+            // Re-log after a soft void: clear the void; trigger stamps corrected_at.
+            voided_at: null,
             ...noteColumn(opts.note),
             ...extra,
           },
@@ -549,6 +555,9 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     day_type: DayType;
     overnight_away_for_work?: boolean;
     day_share?: number;
+    voided_at?: string | null;
+    prior_day_type?: DayType | null;
+    corrected_at?: string | null;
   };
   const read = (rpc: 'bd_list_day_records' | 'bd_list_day_types') =>
     allPages<Row>((from, to) =>
@@ -566,6 +575,9 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     dayType: r.day_type,
     overnightAway: !!r.overnight_away_for_work,
     dayShare: r.day_share === 0.5 ? 0.5 : 1,
+    voidedAt: r.voided_at ?? null,
+    priorDayType: r.prior_day_type ?? null,
+    correctedAt: r.corrected_at ?? null,
   }));
 }
 
@@ -628,6 +640,7 @@ export async function listMyDaysIn(companyId: string): Promise<OwnDay[]> {
       .eq('company_id', companyId)
       .eq('employee_user_id', userId)
       .is('employee_cleared_at', null)
+      .is('voided_at', null)
       .order('work_date', { ascending: true })
       .range(from, to),
   );
@@ -640,16 +653,14 @@ export async function listMyDaysIn(companyId: string): Promise<OwnDay[]> {
   }));
 }
 
-/** F26: remove one day from the caller's live company log (active members only). */
+/** F26 / A2-01: soft-void one day in the live company log (employer keeps the row). */
 export async function deleteMyDayLog(companyId: string, workDate: string): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
-  const { error } = await client()
-    .from('bd_day_logs')
-    .delete()
-    .eq('company_id', companyId)
-    .eq('employee_user_id', userId)
-    .eq('work_date', workDate);
+  const { error } = await client().rpc('bd_void_my_day_log', {
+    p_company_id: companyId,
+    p_work_date: workDate,
+  });
   if (error) throw error;
 }
 
@@ -669,7 +680,7 @@ export async function deleteMyDayLogs(companyId: string): Promise<void> {
   const userId = await currentUserId();
   if (!userId) throw new Error('not authenticated');
   // E24: leavers clear only their own copy (notes wiped, company row kept under retention).
-  // Active members still hard-delete when correcting the live log.
+  // A2-01 / AR3-02: active members may not bulk-wipe employer rows.
   const { data: mem, error: memErr } = await client()
     .from('bd_company_members')
     .select('active')
@@ -682,12 +693,7 @@ export async function deleteMyDayLogs(companyId: string): Promise<void> {
     if (error) throw error;
     return;
   }
-  const { error } = await client()
-    .from('bd_day_logs')
-    .delete()
-    .eq('company_id', companyId)
-    .eq('employee_user_id', userId);
-  if (error) throw error;
+  throw new Error('bulk_clear_not_allowed');
 }
 
 // ---- Individual plan -------------------------------------------------------

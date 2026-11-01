@@ -232,6 +232,7 @@ const nl: Dict = {
     exportCsv: "Exporteer CSV",
     deleteAll: "Alle dagen wissen",
     clearDay: 'Deze dag wissen',
+    clearDayConfirm: '{date} wissen? Uw werkgever bewaart een correctierecord van die dag volgens de bewaartermijn. U kunt die later opnieuw registreren.',
     plannedDayWarning: 'Toekomstige dag — vastgelegd als gepland; telt vanaf die datum.',
     priorYearNote: 'Deze dag valt in {year}. Hij telt mee voor de tellers van dat jaar, niet van het lopende jaar.',
     deleteAllConfirm: "Alle dagen op dit apparaat wissen? Dit kan niet ongedaan worden gemaakt.",

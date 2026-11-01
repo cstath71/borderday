@@ -10,15 +10,18 @@ import {
 import type { Session, User } from '@supabase/supabase-js';
 import { authCallbackUrl, supabase, supabaseConfigured } from './supabase';
 
+/** Page language and destination to come back to after an email link or Google. */
+export type AuthReturn = { lang: string; next: string };
+
 type AuthCtx = {
   ready: boolean;
   configured: boolean;
   session: Session | null;
   user: User | null;
-  signUpEmail: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>;
+  signUpEmail: (email: string, password: string, displayName?: string, back?: AuthReturn) => Promise<{ error: string | null }>;
   signInEmail: (email: string, password: string) => Promise<{ error: string | null }>;
-  signInMagicLink: (email: string) => Promise<{ error: string | null }>;
-  signInGoogle: () => Promise<{ error: string | null }>;
+  signInMagicLink: (email: string, back?: AuthReturn) => Promise<{ error: string | null }>;
+  signInGoogle: (back?: AuthReturn) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 };
 
@@ -45,14 +48,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const signUpEmail = useCallback(async (email: string, password: string, displayName?: string) => {
+  const signUpEmail = useCallback(async (email: string, password: string, displayName?: string, back?: AuthReturn) => {
     if (!supabase) return { error: 'Auth not configured' };
+    const name = displayName?.trim();
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: authCallbackUrl(),
-        data: displayName ? { display_name: displayName } : undefined,
+        emailRedirectTo: authCallbackUrl(back?.lang, back?.next),
+        data: name ? { display_name: name } : undefined,
       },
     });
     return { error: error?.message ?? null };
@@ -64,20 +68,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message ?? null };
   }, []);
 
-  const signInMagicLink = useCallback(async (email: string) => {
+  const signInMagicLink = useCallback(async (email: string, back?: AuthReturn) => {
     if (!supabase) return { error: 'Auth not configured' };
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: authCallbackUrl() },
+      options: { emailRedirectTo: authCallbackUrl(back?.lang, back?.next) },
     });
     return { error: error?.message ?? null };
   }, []);
 
-  const signInGoogle = useCallback(async () => {
+  const signInGoogle = useCallback(async (back?: AuthReturn) => {
     if (!supabase) return { error: 'Auth not configured' };
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: authCallbackUrl() },
+      options: { redirectTo: authCallbackUrl(back?.lang, back?.next) },
     });
     return { error: error?.message ?? null };
   }, []);

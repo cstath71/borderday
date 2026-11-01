@@ -7,7 +7,7 @@ import { useLang } from '../components/Layout';
 import { getDict, t, type Dict } from '../i18n';
 import { accountExportCsv, collectAccountExport } from '../lib/accountExport';
 import { useAuth } from '../lib/auth';
-import { deleteMyDayLogs, listFormerCompanies, listMyDaysIn, type FormerCompany, type OwnDay } from '../lib/companyApi';
+import { deleteMyDayLogs, isHrRole, listFormerCompanies, listMyCompanies, listMyDaysIn, type FormerCompany, type OwnDay } from '../lib/companyApi';
 import { download } from '../lib/download';
 import { exportCsv, exportJson } from '../lib/storage';
 
@@ -103,6 +103,22 @@ export default function Account() {
   const [busy, setBusy] = useState(false);
   const [exportFailed, setExportFailed] = useState(false);
   const [deleteConfirmed, setDeleteConfirmed] = useState(false);
+  const [hrCompanies, setHrCompanies] = useState<Array<{ id: string; name: string }>>([]);
+  const userId = auth.user?.id;
+
+  // Sign-in lands here by default, so HR needs a way on to their dashboard.
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    listMyCompanies()
+      .then((list) => {
+        if (!cancelled) setHrCompanies(list.filter((c) => isHrRole(c.role)));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
 
   if (auth.ready && !auth.user) {
     return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/account`)}`} replace />;
@@ -137,6 +153,13 @@ export default function Account() {
         <div className="container" style={{ maxWidth: 640 }}>
           <h1>{a.title}</h1>
           <p className="meta">{t(a.signedInAs, { email: user.email ?? '' })}</p>
+          {hrCompanies.map((c) => (
+            <p key={c.id}>
+              <Link className="btn btn-secondary" to={`/${lang}/company/${c.id}/dashboard`}>
+                {d.nav.hrDashboard}: {c.name}
+              </Link>
+            </p>
+          ))}
 
           <div className="card" style={{ marginBottom: '1rem' }}>
             <h2>{a.exportTitle}</h2>

@@ -46,6 +46,8 @@ vi.mock('../src/lib/companyApi', async (original) => {
     upsertDayLog: vi.fn(),
     isDayLogOtherCompany: actual.isDayLogOtherCompany,
     hasIndividualAccess: vi.fn(async () => false),
+    hasCancellableIndividualPlan: vi.fn(async () => false),
+    getOwnAccountRecords: vi.fn(async () => ({ displayName: null, noticeRecords: [], subscriptions: [] })),
     listPersonalDayLogs: vi.fn(async () => []),
     upsertPersonalDayLog: vi.fn(),
     deleteMyPersonalDayLogs: vi.fn(),
@@ -55,6 +57,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
 
 import App from '../src/App';
 import en from '../src/i18n/en';
+import fr from '../src/i18n/fr';
 import * as api from '../src/lib/companyApi';
 import { CONSENT_VERSION } from '../src/company/types';
 
@@ -626,6 +629,36 @@ describe('History', () => {
   });
 });
 
+describe('E2: sign-in with nothing asked for', () => {
+  it('a Google or email sign-in from the header heads to the account page, with language and next', async () => {
+    const signInGoogle = vi.fn(async () => ({ error: null }));
+    (auth.value as any).signInGoogle = signInGoogle;
+    open('/fr/auth/sign-in');
+    fireEvent.click(await screen.findByRole('button', { name: fr.auth.continueGoogle }));
+    await waitFor(() => expect(signInGoogle).toHaveBeenCalledWith({ lang: 'fr', next: '/fr/account' }));
+  });
+
+  it('a page that asked for sign-in gets that page back', async () => {
+    const signInGoogle = vi.fn(async () => ({ error: null }));
+    (auth.value as any).signInGoogle = signInGoogle;
+    open('/en/auth/sign-in?next=%2Fen%2Fjoin%2Ftok');
+    fireEvent.click(await screen.findByRole('button', { name: en.auth.continueGoogle }));
+    await waitFor(() => expect(signInGoogle).toHaveBeenCalledWith({ lang: 'en', next: '/en/join/tok' }));
+  });
+
+  it('E14: a sign-up passes language and next to the confirmation email', async () => {
+    const signUpEmail = vi.fn(async () => ({ error: null }));
+    (auth.value as any).signUpEmail = signUpEmail;
+    open('/en/auth/sign-up?next=%2Fen%2Fjoin%2Ftok');
+    fireEvent.change(await screen.findByLabelText(en.auth.displayName), { target: { value: 'Ann ' } });
+    fireEvent.change(screen.getByLabelText(en.auth.email), { target: { value: 'a@x.test' } });
+    fireEvent.change(screen.getByLabelText(en.auth.password), { target: { value: 'password1' } });
+    fireEvent.click(screen.getByRole('button', { name: en.auth.createAccount }));
+    await waitFor(() => expect(signUpEmail).toHaveBeenCalledWith('a@x.test', 'password1', 'Ann ', { lang: 'en', next: '/en/join/tok' }));
+    await screen.findByText(en.auth.checkEmail);
+  });
+});
+
 describe('Sign-in', () => {
   it('returns a signed-in visitor to the page that sent them, and only to this site', async () => {
     auth.value.user = EMP;
@@ -634,7 +667,7 @@ describe('Sign-in', () => {
     await screen.findByText(en.company.inviteInvalid);
     cleanup();
     open('/en/auth/sign-in?next=%2F%2Fevil.example');
-    await screen.findByRole('heading', { name: en.company.signupTitle });
+    await screen.findByRole('heading', { name: en.account.title });
   });
 });
 

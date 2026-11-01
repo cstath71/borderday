@@ -4,7 +4,7 @@ import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
 import { useAuth } from '../../lib/auth';
-import { rememberNext, safeNext } from '../../lib/authNext';
+import { defaultAuthDestination, rememberNext, safeNext } from '../../lib/authNext';
 
 export default function SignIn() {
   const lang = useLang();
@@ -12,7 +12,7 @@ export default function SignIn() {
   const nav = useNavigate();
   const [params] = useSearchParams();
   const nextParam = params.get('next');
-  const next = safeNext(nextParam, `/${lang}/company/signup`);
+  const next = safeNext(nextParam, defaultAuthDestination(lang));
   const auth = useAuth();
   const [mode, setMode] = useState<'password' | 'magic'>('password');
   const [email, setEmail] = useState('');
@@ -37,14 +37,14 @@ export default function SignIn() {
     e.preventDefault();
     setBusy(true); setMsg(null);
     rememberNext(next);
-    const { error } = await auth.signInMagicLink(email);
+    const { error } = await auth.signInMagicLink(email, { lang, next });
     setBusy(false);
     if (error) setMsg(error); else setMsg(d.auth.magicSent);
   }
   async function onGoogle() {
     setBusy(true); setMsg(null);
     rememberNext(next);
-    const { error } = await auth.signInGoogle();
+    const { error } = await auth.signInGoogle({ lang, next });
     if (error) { setBusy(false); setMsg(error.includes('provider') ? d.auth.googleNotReady : error); }
   }
 

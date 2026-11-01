@@ -246,6 +246,21 @@ describe('H4 Account page', () => {
   });
 });
 
+describe('E2: account page after sign-in', () => {
+  it('links HR on to their dashboard, and shows employees no such link', async () => {
+    auth.value.user = { id: 'u1', email: 'me@example.test' };
+    mocked.listMyCompanies.mockResolvedValue([company({ role: 'owner' })]);
+    open('/en/account');
+    const link = await screen.findByRole('link', { name: `${en.nav.hrDashboard}: Acme SA` });
+    expect(link.getAttribute('href')).toBe('/en/company/c1/dashboard');
+    cleanup();
+    mocked.listMyCompanies.mockResolvedValue([company({ role: 'employee' })]);
+    open('/en/account');
+    await screen.findByRole('heading', { name: en.account.exportTitle });
+    expect(screen.queryByRole('link', { name: `${en.nav.hrDashboard}: Acme SA` })).toBeNull();
+  });
+});
+
 describe('E24: days from a company the person has left', () => {
   const former = { companyId: 'old', company: 'Old Co', dayCount: 2, firstDate: '2026-10-01', lastDate: '2026-10-02' };
   const days = [

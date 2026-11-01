@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getDict, isLang } from '../../i18n';
-import { safeNext, takeRememberedNext } from '../../lib/authNext';
+import { callbackDestination, forgetRememberedNext, peekRememberedNext } from '../../lib/authNext';
 import { supabase } from '../../lib/supabase';
 
 export default function AuthCallback() {
@@ -26,11 +26,18 @@ export default function AuthCallback() {
       }
       const { data } = await supabase.auth.getSession();
       if (cancelled) return;
-      if (data.session) nav(safeNext(takeRememberedNext(), `/${lang}/company/signup`), { replace: true });
-      else setMsg(d.auth.callbackFailed);
+      if (data.session) {
+        const target = callbackDestination({
+          urlNext: url.searchParams.get('next'),
+          remembered: peekRememberedNext(),
+          lang: isLang(langParam) ? langParam : null,
+        });
+        forgetRememberedNext();
+        nav(target, { replace: true });
+      } else setMsg(d.auth.callbackFailed);
     })();
     return () => { cancelled = true; };
-  }, [lang, nav, d]);
+  }, [lang, langParam, nav, d]);
 
   return (
     <section className="section">

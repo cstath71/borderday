@@ -104,9 +104,7 @@ export default function InviteView(props: {
               {created.reused
                 ? created.emailed
                   ? d.company.inviteReusedEmailed
-                  : created.emailBlock === 'rate_limited'
-                    ? d.company.inviteNotEmailedLimit
-                    : d.company.inviteReused
+                  : d.company.inviteReused
                 : created.emailed
                   ? d.company.inviteEmailed
                   : created.emailBlock === 'no_access'

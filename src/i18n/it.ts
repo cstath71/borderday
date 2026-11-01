@@ -716,8 +716,8 @@ const it: Dict = {
     inviteLanguage: 'Lingua del dipendente',
     inviteFailed: 'Impossibile creare l’invito. Controllate l’indirizzo e riprovate.',
     inviteAlreadyMember: 'Questo indirizzo è già un membro attivo di questa azienda.',
-    inviteReused: 'Esiste già un invito in sospeso per questo indirizzo. Condividi il link sotto (o reinvia più tardi).',
-    inviteReusedEmailed: 'Esiste già un invito in sospeso; l’e-mail è stata reinviata. Puoi anche condividere il link.',
+    inviteReused: 'Esiste già un invito in sospeso per questo indirizzo. Non l’abbiamo reinviato via e-mail perché è stato inviato nell’ultima ora; condividi il link o riprova più tardi.',
+    inviteReusedEmailed: 'Invito già in sospeso; e-mail inviata di nuovo.',
   },
 
   terms: {

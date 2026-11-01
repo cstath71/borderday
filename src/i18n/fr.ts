@@ -715,8 +715,8 @@ const fr: Dict = {
     inviteLanguage: 'Langue du collaborateur',
     inviteFailed: 'Impossible de créer l’invitation. Vérifiez l’adresse et réessayez.',
     inviteAlreadyMember: 'Cette adresse est déjà membre actif de cette entreprise.',
-    inviteReused: 'Une invitation en attente existe déjà pour cette adresse. Partagez le lien ci-dessous (ou renvoyez plus tard).',
-    inviteReusedEmailed: 'Une invitation en attente existe déjà ; l’e-mail a été renvoyé. Vous pouvez aussi partager le lien.',
+    inviteReused: 'Une invitation pour cette adresse est déjà en attente. Nous ne l’avons pas renvoyée par e-mail car elle a été envoyée dans l’heure ; partagez le lien ou réessayez plus tard.',
+    inviteReusedEmailed: 'Invitation déjà en attente ; e-mail renvoyé.',
   },
 
   terms: {

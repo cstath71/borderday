@@ -580,8 +580,8 @@ const nl: Dict = {
     inviteLanguage: "Taal van de medewerker",
     inviteFailed: "Uitnodiging kon niet worden aangemaakt. Controleer het adres en probeer opnieuw.",
     inviteAlreadyMember: 'Dit adres is al een actief lid van dit bedrijf.',
-    inviteReused: 'Er bestaat al een openstaande uitnodiging voor dit adres. Deel de link hieronder (of stuur later opnieuw).',
-    inviteReusedEmailed: 'Er bestaat al een openstaande uitnodiging; de e-mail is opnieuw verzonden. Je kunt de link ook delen.',
+    inviteReused: 'Er staat al een openstaande uitnodiging voor dit adres. We hebben die niet opnieuw gemaild omdat die het afgelopen uur al is gemaild; deel de link of probeer later opnieuw.',
+    inviteReusedEmailed: 'Uitnodiging staat al open; e-mail opnieuw verzonden.',
   },
   terms: {
     title: "Voorwaarden & wettelijke vermeldingen",

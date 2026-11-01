@@ -6,7 +6,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { clampRetentionMonths } from '../company/dashboardMath';
 import { companyHasPaidAccess, planIsCancellable } from './billing';
 import { supabase } from './supabase';
-import type { Invitation, CompanyRole, InviteStatus } from '../company/types';
+import { DPA_VERSION, type Invitation, type CompanyRole, type InviteStatus } from '../company/types';
 import type { BorderId, DayEntry, DayType } from '../borders/types';
 
 /** PostgREST caps responses (default max-rows 1000); longer lists must be paged or counters undercount. */
@@ -100,7 +100,7 @@ export interface MyCompany {
 }
 
 export async function createCompany(name: string): Promise<{ companyId: string }> {
-  const { data, error } = await client().rpc('bd_create_company', { company_name: name });
+  const { data, error } = await client().rpc('bd_create_company_with_dpa', { company_name: name, dpa_version: DPA_VERSION });
   if (error) throw error;
   return { companyId: data as string };
 }

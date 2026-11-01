@@ -394,7 +394,7 @@ const en = {
       'We only show a number when we have confirmed how to count it on an official source. Otherwise the card says why no counter runs and points you to your authority. It never invents a figure.',
     q4: 'Do you track my location?',
     a4:
-      'No. You log days yourself. No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
+      'No. You log days yourself. No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     q5: 'Which borders do you cover?',
     a5:
       'Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter yet: France→Belgium and Netherlands→Belgium.',
@@ -420,10 +420,10 @@ const en = {
       'In a company account, the employer decides why and how its employees’ days are recorded. The employer is therefore the controller of those day logs and of its HR use of them, including the legal basis, and BorderDay processes them for the employer as its processor. Questions about why your employer records these days, or about the records it must keep, go to your employer first; we pass on requests sent to privacy@borderday.com. The public data processing agreement for company accounts is at /dpa/ (linked from Pricing, company sign-up and the Terms).',
     s1Title: 'What we collect',
     s1Body:
-      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether you marked a night away for work, optional notes, contractual working days per year, employment percentage and A1 record if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border route, day types and dates, night-away marks, employment percentage and A1 record if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
+      'Free preview, on your device: border route, each day’s type (telework, on site, work trip / third State, non-working), whether it was a half day, whether you marked a night away for work, optional notes, contractual working days per year, employment percentage, A1 record and pre-2012 France–Belgium status if you enter them. Individual plan: the same data, saved to your account. Company accounts: company name, member emails and names, roles, border route, day types and dates, half-day and night-away marks, working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and the record that the notice on what HR can see was shown to you. Accounts and billing: email, name, sign-in method, subscription status and the Stripe customer reference. We do not receive your full card number.',
     s2Title: 'What we do not collect',
     s2Body:
-      'No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee. HR also sees employment percentage and A1 record if entered, and counts: the same counters the employee sees. No IP address is stored as a work location. No advertising trackers. No sale of personal data.',
+      'No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee. HR also sees working days, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, and counts: the same counters the employee sees. No IP address is stored as a work location. No advertising trackers. No sale of personal data.',
     tableTitle: 'Purposes, legal bases, recipients, transfers and retention',
     tableIntro:
       'Article numbers refer to the GDPR. The Swiss FADP does not list legal bases in the same way; the same purposes, recipients and countries apply.',
@@ -454,7 +454,7 @@ const en = {
       },
       {
         purpose: 'Individual plan: your day log and counters',
-        data: 'Border route, day types and dates, night-away marks, notes, working days, employment percentage, A1 record',
+        data: 'Border route, day types and dates, half-day and night-away marks, notes, working days, contract days, employment percentage, A1 record, pre-2012 France–Belgium status',
         basis: 'Contract (Art. 6(1)(b))',
         recipients: 'Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
@@ -470,7 +470,7 @@ const en = {
       },
       {
         purpose: 'Company account: employee day logs and HR counters (the employer is controller, BorderDay its processor)',
-        data: 'Name, email, border route, working days, employment percentage, A1 record, day type and date, night-away mark, counters. Notes are private to the employee.',
+        data: 'Name, email, border route, working days, contract days, employment percentage, A1 record, pre-2012 France–Belgium status, day type and date, half-day and night-away marks, counters. Notes are private to the employee.',
         basis: 'Decided by the employer as controller, for example a legal obligation or legitimate interests. BorderDay does not rely on employee consent here.',
         recipients: 'The employer’s account owners and HR viewers; Supabase',
         transfer: 'EU hosting (eu-central-1); US-based provider; safeguards below',
@@ -640,10 +640,12 @@ const en = {
     profileSaved: 'Saved.',
     noticeTitle: 'Notice — what HR can see',
     noticeBody:
-      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether you marked it as a night away for work, and the same tax and social-security counters you see. They can also record your employment percentage, working-days base, contract days and A1. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export or delete your day log, and ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. This is a tracking tool, not tax or legal advice.',
+      'This is information, not a request for consent: your employer decides why and on what legal basis it records these days, and is responsible for that. If you join, your employer’s account owners and HR viewers can see: your name, email, chosen border route, contractual working days, employment percentage and A1 record if entered, each logged day’s type and date, whether it was a half day, whether you marked it as a night away for work, on the France–Belgium route whether you were a frontier worker before 2012 if entered, and the same tax and social-security counters you see. They can also record your employment percentage, working-days base, contract days, A1 and that France–Belgium status. They cannot see GPS or device location, because BorderDay does not collect it, and notes are private to you. The day type does show a country category per date. You can export or delete your day log, and ask your employer or privacy@borderday.com about your rights. Retention: 24 months by default (company setting, 1–120 months); company day logs older than that window are deleted automatically each day. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. This is a tracking tool, not tax or legal advice.',
     noticeAck: 'I have read this notice',
     noticeRequired: 'Confirm that you have read the notice to continue.',
     noticePrivacyLink: 'Full privacy notice',
+    dpaVersionNote:
+      'Creating this company account applies our data processing agreement, as that page states (version of 1 Nov 2026). We record the version and the time.',
     retentionConfirm:
       'Lower retention to {months} months? Company day logs older than that are permanently deleted at the next daily purge. This cannot be undone.',
     retentionConfirmShort:
@@ -819,7 +821,7 @@ const en = {
       'For employee day logs, invitations and the HR counters derived from them, the employer is the controller and PrimeLogic Advisory Sàrl is the processor. For the BorderDay website, individual plans, user accounts, company account administration, billing, support and security, PrimeLogic Advisory Sàrl remains controller under the Privacy notice. Stripe and Link act as independent controllers for checkout and payment under their own notices; they are not processors of employee day logs under this DPA.',
     subjectTitle: 'Subject-matter and nature of the processing',
     subjectBody:
-      'Subject-matter: hosting, storage, retrieval, transmission and display of employee membership and day-log data so the employer can run telework and tax day counters. Nature: automated processing in a hosted application (create, read, update, delete; aggregation into counters; invitation email). Purpose: only the purposes instructed by the employer through the BorderDay company features, and as described in the Privacy notice. Categories of data subjects: employees and other natural persons the employer invites to the company account. Categories of personal data: name, email, role, border route, contractual working days, employment percentage and A1 record if entered, day type and date, overnight-away mark, counters, and the record that the “what HR can see” notice was shown. Notes stay private to the employee and are not shown to HR. No GPS or device location is collected.',
+      'Subject-matter: hosting, storage, retrieval, transmission and display of employee membership and day-log data so the employer can run telework and tax day counters. Nature: automated processing in a hosted application (create, read, update, delete; aggregation into counters; invitation email). Purpose: only the purposes instructed by the employer through the BorderDay company features, and as described in the Privacy notice. Categories of data subjects: employees and other natural persons the employer invites to the company account. Categories of personal data: name, email, role, border route, contractual working days, working-days base, contract days, employment percentage, A1 record and pre-2012 France–Belgium status if entered, day type and date, half-day mark, overnight-away mark, counters, and the record that the “what HR can see” notice was shown. Notes stay private to the employee and are not shown to HR. No GPS or device location is collected.',
     durationTitle: 'Duration',
     durationBody:
       'Processing lasts for the life of the company account and membership, and thereafter only as needed to delete or return data under this DPA and the retention periods stated in the Privacy notice (including any company retention setting).',

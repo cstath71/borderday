@@ -81,4 +81,7 @@ export interface TenantDb {
 }
 
 // Proof of which notice text someone acknowledged. Bump it when company.noticeBody changes.
-export const CONSENT_VERSION = '2026-11-01-v4';
+export const CONSENT_VERSION = '2026-11-01-v5';
+
+/** The DPA text in force. Change it with dpa.updated whenever the DPA text changes. */
+export const DPA_VERSION = '2026-11-01';

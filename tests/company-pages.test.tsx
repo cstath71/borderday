@@ -159,6 +159,12 @@ describe('Dashboard', () => {
     await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
   });
 
+  it('A3-13: company sign-up shows which DPA version applies', async () => {
+    mocked.listMyCompanies.mockResolvedValue([]);
+    const { container } = open('/en/company/signup');
+    await waitFor(() => expect(container.textContent).toContain(en.company.dpaVersionNote));
+  });
+
   describe('A3-21 retention warning', () => {
     const setMonths = async (months: string) => {
       const field = (await screen.findByLabelText(en.company.retentionMonths)) as HTMLInputElement;

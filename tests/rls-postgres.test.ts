@@ -555,6 +555,43 @@ describe('real Postgres: contract requests (A3-08)', () => {
   });
 });
 
+describe('real Postgres: DPA version on company creation (A3-13)', () => {
+  it('stores version, server time and creator atomically with the company', async () => {
+    const owner = await newUser('a313@example.com');
+    const before = Date.now();
+    const { rows } = await as(owner, `select public.bd_create_company_with_dpa('Acme', '2026-11-01') as id`);
+    const stored = await db.query(`select dpa_accepted_version, dpa_accepted_at, dpa_accepted_by from public.bd_companies where id = $1`, [rows[0].id]);
+    expect(stored.rows[0].dpa_accepted_version).toBe('2026-11-01');
+    expect(stored.rows[0].dpa_accepted_by).toBe(owner);
+    expect(stored.rows[0].dpa_accepted_at.getTime()).toBeGreaterThan(before - 60_000);
+    const member = await db.query(`select role from public.bd_company_members where company_id = $1 and user_id = $2`, [rows[0].id, owner]);
+    expect(member.rows[0].role).toBe('owner');
+  });
+
+  it('refuses a missing or malformed version, leaving no company behind', async () => {
+    const owner = await newUser('a313b@example.com');
+    const count = async () => (await db.query(`select count(*)::int as n from public.bd_companies where name = 'No version'`)).rows[0].n;
+    await expect(as(owner, `select public.bd_create_company_with_dpa('No version', null)`)).rejects.toThrow(/dpa version required/);
+    await expect(as(owner, `select public.bd_create_company_with_dpa('No version', 'latest')`)).rejects.toThrow(/dpa version required/);
+    expect(await count()).toBe(0);
+  });
+
+  it('anon cannot call it, and clients can neither read nor forge the record', async () => {
+    const owner = await newUser('a313c@example.com');
+    await expect(as(null, `select public.bd_create_company_with_dpa('Anon', '2026-11-01')`)).rejects.toThrow(/permission denied/);
+    const { rows } = await as(owner, `select public.bd_create_company_with_dpa('Mine', '2026-11-01') as id`);
+    await expect(as(owner, `select dpa_accepted_at from public.bd_companies where id = '${rows[0].id}'`)).rejects.toThrow(/permission denied/);
+    await expect(as(owner, `update public.bd_companies set dpa_accepted_version = '2020-01-01' where id = '${rows[0].id}'`)).rejects.toThrow(/permission denied/);
+  });
+
+  it('the old function keeps working during deployment, with an empty record', async () => {
+    const owner = await newUser('a313d@example.com');
+    const { rows } = await as(owner, `select public.bd_create_company('Old path') as id`);
+    const stored = await db.query(`select dpa_accepted_version from public.bd_companies where id = $1`, [rows[0].id]);
+    expect(stored.rows[0].dpa_accepted_version).toBeNull();
+  });
+});
+
 describe('real Postgres: Stripe events (A3-16)', () => {
   it('only the service role can touch them', async () => {
     const insert = `insert into public.bd_stripe_events (event_id, event_type, event_created_at) values ('evt_x', 'invoice.upcoming', now())`;

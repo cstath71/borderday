@@ -145,7 +145,7 @@ describe('C1 Privacy content', () => {
 
   it('H5: says what HR sees, in place of "never location"', () => {
     expect(getDict('en').privacy.s2Body).toContain(
-      'No GPS or device location. HR sees day type (and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
+      'No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     );
     expect(getDict('fr').faq.a4).toMatch(/jamais des coordonnées/);
     expect(getDict('de').faq.a4).toMatch(/nie Koordinaten/);

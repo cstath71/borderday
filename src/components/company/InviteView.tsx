@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import type { CompanyRole, Invitation } from '../../company/types';
 import { LANGS, type Dict, type Lang } from '../../i18n';
 
+type Created = { link: string; emailed: boolean; emailBlock?: 'no_access' | 'rate_limited' | null };
+
 /** Presentational: the real invite page and /demo supply the data and the create action. */
 export default function InviteView(props: {
   d: Dict;
@@ -12,13 +14,13 @@ export default function InviteView(props: {
   joinPath: (token: string) => string;
   /** Preselected language for the employee's email and link. */
   lang: Lang;
-  onCreate: (email: string, role: CompanyRole, lang: Lang) => Promise<{ link: string; emailed: boolean }>;
+  onCreate: (email: string, role: CompanyRole, lang: Lang) => Promise<Created>;
 }) {
   const { d, invites, canInviteOwner, dashboardHref, joinPath, lang, onCreate } = props;
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<CompanyRole>('employee');
   const [inviteLang, setInviteLang] = useState<Lang>(lang);
-  const [created, setCreated] = useState<{ link: string; emailed: boolean } | null>(null);
+  const [created, setCreated] = useState<Created | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -76,7 +78,15 @@ export default function InviteView(props: {
         )}
         {created && (
           <div>
-            <p role="status">{created.emailed ? d.company.inviteEmailed : d.company.inviteCreated}</p>
+            <p role="status">
+              {created.emailed
+                ? d.company.inviteEmailed
+                : created.emailBlock === 'no_access'
+                  ? d.company.inviteNotEmailedNoPlan
+                  : created.emailBlock === 'rate_limited'
+                    ? d.company.inviteNotEmailedLimit
+                    : d.company.inviteCreated}
+            </p>
             <label>
               {d.company.inviteLinkLabel}
               <input readOnly value={created.link} onFocus={(e) => e.target.select()} />

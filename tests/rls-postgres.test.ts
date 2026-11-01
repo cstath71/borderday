@@ -7,6 +7,7 @@ import EmbeddedPostgres from 'embedded-postgres';
 import pg from 'pg';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { LANGS } from '../src/i18n';
+import { companyCanEmailInvites } from '../supabase/functions/_shared/invite';
 
 /**
  * RLS against a real PostgreSQL server, with every file in supabase/migrations applied in
@@ -349,6 +350,41 @@ describe('real Postgres: bd_accept_invite email match (H2)', () => {
     await as(user, `select public.bd_accept_invite($1, 'v1', $2)`, [token, lang]);
     const { rows } = await db.query(`select text_lang from public.bd_consents where user_id = $1`, [user]);
     expect(rows).toEqual([{ text_lang: lang }]);
+  });
+
+  it('A3-03: bd_company_has_access agrees with the helper the send function uses', async () => {
+    const owner = await newUser('o-access@example.com');
+    const company = await newCompany(owner, 'Access', false);
+    const future = new Date(Date.now() + 86_400_000).toISOString();
+    const past = new Date(Date.now() - 86_400_000).toISOString();
+    for (const status of ['none', 'trialing', 'active', 'past_due', 'canceled', 'incomplete']) {
+      for (const trial of [null, future, past]) {
+        await db.query(`update public.bd_companies set subscription_status = $2, trial_ends_at = $3 where id = $1`, [company, status, trial]);
+        const { rows } = await db.query(`select public.bd_company_has_access($1) as ok`, [company]);
+        expect(rows[0].ok, `${status} / ${trial}`).toBe(companyCanEmailInvites(status, trial));
+      }
+    }
+  });
+
+  it('A3-03: clients cannot set email_sent_at to reset the send limit', async () => {
+    const owner = await newUser('o-sent@example.com');
+    const company = await newCompany(owner);
+    await invite(owner, company, 'sent@example.com');
+    await expect(
+      as(owner, `update public.bd_invitations set email_sent_at = null where company_id = $1`, [company]),
+    ).rejects.toThrow(/permission denied/);
+    await expect(
+      as(owner, `insert into public.bd_invitations (company_id, email, invited_by, email_sent_at) values ($1, 'x@example.com', $2, now())`, [company, owner]),
+    ).rejects.toThrow(/permission denied/);
+  });
+
+  it('A3-03: company names are capped at 120 characters on create and rename', async () => {
+    const owner = await newUser('o-name@example.com');
+    const company = await newCompany(owner, 'x'.repeat(120));
+    await expect(newCompany(owner, 'x'.repeat(121))).rejects.toThrow(/bd_companies_name_length/);
+    await expect(as(owner, `update public.bd_companies set name = $2 where id = $1`, [company, 'y'.repeat(121)])).rejects.toThrow(
+      /bd_companies_name_length/,
+    );
   });
 
   it('A3-02: the constraint allows exactly the site languages', async () => {

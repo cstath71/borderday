@@ -605,6 +605,8 @@ const it: Dict = {
     chooseCompany: 'Scegliete un’azienda.',
     billingInactive: 'Questa azienda non ha un abbonamento attivo. I dipendenti possono unirsi, ma potranno registrare i giorni solo dopo la sottoscrizione.',
     billingCta: 'Vedi i piani',
+    inviteNotEmailedNoPlan: "Invito creato, ma non inviato via e-mail: l’invio degli inviti via e-mail richiede un piano attivo o una prova. Condividete il link con il dipendente, oppure avviate un piano nella pagina Prezzi.",
+    inviteNotEmailedLimit: "Invito creato, ma non inviato via e-mail: questo indirizzo ha già ricevuto un’e-mail nell’ultima ora, oppure è stato raggiunto il limite orario di e-mail di invito. Condividete il link con il dipendente, oppure riprovate più tardi.",
     inviteEmailed: 'Invito creato e inviato via e-mail. Potete anche condividere il link.',
     inviteInvalid: 'Invito non trovato o scaduto.',
     joinEmailMismatch:

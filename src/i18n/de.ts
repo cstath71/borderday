@@ -602,6 +602,8 @@ const de: Dict = {
     chooseCompany: 'Wählen Sie ein Unternehmen.',
     billingInactive: 'Dieses Unternehmen hat kein aktives Abo. Mitarbeitende können beitreten, aber erst nach Ihrem Abschluss Tage erfassen.',
     billingCta: 'Tarife ansehen',
+    inviteNotEmailedNoPlan: "Einladung erstellt, aber nicht per E-Mail versendet: Der E-Mail-Versand von Einladungen setzt einen aktiven Plan oder eine Testphase voraus. Teilen Sie den Link mit der Person, oder starten Sie einen Plan auf der Preisseite.",
+    inviteNotEmailedLimit: "Einladung erstellt, aber nicht per E-Mail versendet: Diese Adresse wurde in der letzten Stunde bereits angeschrieben, oder das Stundenlimit für Einladungs-E-Mails ist erreicht. Teilen Sie den Link mit der Person, oder versuchen Sie es später erneut.",
     inviteEmailed: 'Einladung erstellt und per E-Mail versendet. Sie können den Link auch selbst teilen.',
     inviteInvalid: 'Einladung nicht gefunden oder abgelaufen.',
     joinEmailMismatch: 'Diese Einladung ging an {invited}, Sie sind aber als {current} angemeldet. Melden Sie sich ab und mit der eingeladenen Adresse wieder an.',

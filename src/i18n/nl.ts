@@ -474,6 +474,8 @@ const nl: Dict = {
     chooseCompany: "Kies een bedrijf.",
     billingInactive: "Dit bedrijf heeft geen actief abonnement. Medewerkers kunnen aansluiten, maar kunnen geen dagen registreren tot u zich abonneert.",
     billingCta: "Zie abonnementen",
+    inviteNotEmailedNoPlan: "Uitnodiging aangemaakt, maar niet gemaild: uitnodigingen mailen vereist een actief abonnement of proefperiode. Deel de link met de medewerker, of start een abonnement op de pagina Prijzen.",
+    inviteNotEmailedLimit: "Uitnodiging aangemaakt, maar niet gemaild: dit adres kreeg het afgelopen uur al een e-mail, of de uurlimiet voor uitnodigingsmails is bereikt. Deel de link met de medewerker, of probeer het later opnieuw.",
     inviteEmailed: "Uitnodiging aangemaakt en gemaild. U kunt de link ook delen.",
     inviteInvalid: "Uitnodiging niet gevonden of verlopen.",
     joinEmailMismatch: "Deze uitnodiging is verzonden naar {invited}, maar u bent aangemeld als {current}. Meld u af en daarna aan met het uitgenodigde adres.",

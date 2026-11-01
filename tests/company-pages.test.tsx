@@ -213,6 +213,19 @@ describe('Invite', () => {
     expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/tok123');
   });
 
+  it.each([
+    ['no_access', en.company.inviteNotEmailedNoPlan],
+    ['rate_limited', en.company.inviteNotEmailedLimit],
+  ] as const)('says why the email did not go out: %s, and still gives the link', async (emailBlock, text) => {
+    asHr();
+    mocked.createInvite.mockResolvedValue({ invite: { token: 'tok123' } as any, emailed: false, emailBlock });
+    open('/en/company/c1/invite');
+    fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
+    fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
+    await screen.findByText(text);
+    expect((screen.getByLabelText(en.company.inviteLinkLabel) as HTMLInputElement).value).toContain('/en/join/tok123');
+  });
+
   it('says so when the email really went out', async () => {
     asHr();
     mocked.createInvite.mockResolvedValue({ invite: { token: 'tok123' } as any, emailed: true });

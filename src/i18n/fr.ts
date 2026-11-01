@@ -604,6 +604,8 @@ const fr: Dict = {
     chooseCompany: 'Choisissez une entreprise.',
     billingInactive: 'Cette entreprise n’a pas d’abonnement actif. Les collaborateurs peuvent la rejoindre, mais ne pourront saisir leurs jours qu’après votre souscription.',
     billingCta: 'Voir les offres',
+    inviteNotEmailedNoPlan: "Invitation créée, mais non envoyée : l’envoi d’invitations par e-mail nécessite un abonnement actif ou un essai. Partagez le lien avec le collaborateur, ou démarrez un abonnement sur la page Tarifs.",
+    inviteNotEmailedLimit: "Invitation créée, mais non envoyée : cette adresse a déjà reçu un e-mail dans la dernière heure, ou la limite horaire d’e-mails d’invitation est atteinte. Partagez le lien avec le collaborateur, ou réessayez plus tard.",
     inviteEmailed: 'Invitation créée et envoyée par e-mail. Vous pouvez aussi partager le lien.',
     inviteInvalid: 'Invitation introuvable ou expirée.',
     joinEmailMismatch:

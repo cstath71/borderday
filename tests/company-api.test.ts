@@ -272,6 +272,17 @@ describe('companyApi', () => {
     expect((await api.createInvite('c1', 'a@b.com')).emailed).toBe(false);
   });
 
+  it('createInvite says why the function refused to email', async () => {
+    state.respond = () => ({ data: { id: 'i1', token: 't' }, error: null });
+    const refused = (status: number) => Object.assign(new Error('refused'), { context: { status } });
+    state.invoke.mockResolvedValueOnce({ data: null, error: refused(402) });
+    expect(await api.createInvite('c1', 'a@b.com')).toMatchObject({ emailed: false, emailBlock: 'no_access' });
+    state.invoke.mockResolvedValueOnce({ data: null, error: refused(429) });
+    expect(await api.createInvite('c1', 'a@b.com')).toMatchObject({ emailed: false, emailBlock: 'rate_limited' });
+    state.invoke.mockResolvedValueOnce({ data: { sent: true }, error: null });
+    expect(await api.createInvite('c1', 'a@b.com')).toMatchObject({ emailed: true, emailBlock: null });
+  });
+
   it('listInvites maps bd_invitations rows', async () => {
     state.respond = () => ({
       data: [

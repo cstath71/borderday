@@ -265,12 +265,15 @@ function mapInvite(row: any): Invitation {
   };
 }
 
+/** Why bd-send-invite refused to email: no paid or trial access, or a send limit. */
+export type InviteEmailBlock = 'no_access' | 'rate_limited';
+
 export async function createInvite(
   companyId: string,
   email: string,
   role: CompanyRole = 'employee',
   lang = 'en',
-): Promise<{ invite: Invitation; emailed: boolean }> {
+): Promise<{ invite: Invitation; emailed: boolean; emailBlock: InviteEmailBlock | null }> {
   const c = client();
   const { data, error } = await c
     .from('bd_invitations')
@@ -280,7 +283,12 @@ export async function createInvite(
   if (error) throw error;
   // The invite exists either way; HR can always share the link if the email is dry-run or fails.
   const sent = await c.functions.invoke('bd-send-invite', { body: { invitationId: data.id, companyId, lang } });
-  return { invite: mapInvite(data), emailed: !sent.error && sent.data?.sent === true };
+  const status = (sent.error as { context?: { status?: number } } | null)?.context?.status;
+  return {
+    invite: mapInvite(data),
+    emailed: !sent.error && sent.data?.sent === true,
+    emailBlock: status === 402 ? 'no_access' : status === 429 ? 'rate_limited' : null,
+  };
 }
 
 export async function listInvites(companyId: string, status?: InviteStatus): Promise<Invitation[]> {

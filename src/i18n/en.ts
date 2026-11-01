@@ -596,6 +596,8 @@ const en = {
     chooseCompany: 'Choose a company.',
     billingInactive: 'This company has no active subscription. Employees can join, but they cannot log days until you subscribe.',
     billingCta: 'See plans',
+    inviteNotEmailedNoPlan: "Invite created, but not emailed: emailing invites needs an active plan or trial. Share the link with the employee, or start a plan on the Pricing page.",
+    inviteNotEmailedLimit: "Invite created, but not emailed: this address was emailed in the last hour, or the hourly limit for invite emails was reached. Share the link with the employee, or try again later.",
     inviteEmailed: 'Invite created and emailed. You can also share the link.',
     inviteInvalid: 'Invite not found or expired.',
     joinEmailMismatch: 'This invite was sent to {invited}, but you are signed in as {current}. Sign out, then sign in with the invited address.',

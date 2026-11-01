@@ -1,5 +1,5 @@
 // Invitation email in the language HR chose for the employee. Names no controller: that stays on Privacy and Terms.
-import { escapeHtml } from "./invite.ts";
+import { COMPANY_NAME_MAX_LENGTH, escapeHtml } from "./invite.ts";
 
 const COPY = {
   en: {
@@ -60,13 +60,25 @@ export function joinUrlFor(siteUrl: string, lang: InviteLang, token: string): st
   return `${siteUrl}/${lang}/join/${token}`;
 }
 
+/**
+ * Customers choose the company name, and it appears in the subject and body of mail from our domain.
+ * One line, no control or bidi characters, capped: older rows may predate the database limit.
+ */
+export function inviteCompanyName(name: string | null | undefined): string | null {
+  const chars = Array.from((name ?? "").replace(/[\p{Cc}\p{Cf}\u2028\u2029]+/gu, " ").replace(/\s+/g, " ").trim());
+  if (chars.length === 0) return null;
+  if (chars.length <= COMPANY_NAME_MAX_LENGTH) return chars.join("");
+  return `${chars.slice(0, COMPANY_NAME_MAX_LENGTH - 1).join("").trimEnd()}…`;
+}
+
 export function buildInviteEmail(opts: { lang: InviteLang; companyName?: string | null; joinUrl: string; siteUrl: string }) {
   const c = COPY[opts.lang];
-  const company = opts.companyName || c.fallback;
+  const name = inviteCompanyName(opts.companyName);
+  const company = name || c.fallback;
   const privacyUrl = `${opts.siteUrl}/${opts.lang}/privacy/`;
   const safe = escapeHtml(company);
   return {
-    subject: c.subject(opts.companyName || "BorderDay"),
+    subject: c.subject(name || "BorderDay"),
     html:
       `<p>${c.intro(`<strong>${safe}</strong>`)}</p>` +
       `<p>${escapeHtml(c.notice)}</p>` +

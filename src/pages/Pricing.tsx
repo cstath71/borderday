@@ -148,7 +148,7 @@ export default function Pricing() {
               <div className="meta" style={{ color: 'var(--primary)', fontWeight: 700 }}>{d.pricing.recommended}</div>
               <h2>{d.pricing.company}</h2>
               <div className="price">{d.pricing.companyPrice}</div>
-              <div className="meta">{chfLine(5)} <span aria-hidden="true">·</span> {chfLine(39)} min</div>
+              <div className="meta">{chfLine(5)} <span aria-hidden="true">·</span> {chfLine(39)} {d.pricing.chfMinAbbrev}</div>
               <div>{d.pricing.companyMin}</div>
               <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>{d.pricing.companyYearly} ({chfLine(390)})</p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)' }}>{d.pricing.companyTax}</p>

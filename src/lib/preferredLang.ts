@@ -5,7 +5,7 @@ const KEY = 'bd_lang';
 /** Remembered UI language for signed-out visitors (A2-13). */
 export function getPreferredLang(fallback: Lang = 'en'): Lang {
   try {
-    const v = localStorage.getItem(KEY);
+    const v = localStorage.getItem(KEY) ?? undefined;
     if (isLang(v)) return v;
   } catch {
     /* private mode */

@@ -342,6 +342,7 @@ const fr: Dict = {
     savedToAccount: 'Enregistré dans votre compte.',
     savedToCompany:
       'Enregistré dans votre compte {company}. Vos RH voient le type et la date de chaque jour, s’il est marqué comme nuit hors du domicile pour le travail, et vos compteurs.',
+    companyRetentionNote: 'Votre employeur conserve les journaux entreprise pendant {months} mois (son délai de conservation ; minimum 13). Les jours plus anciens sont supprimés automatiquement.',
     dayLogOtherCompany: 'Cette date figure déjà dans votre journal auprès d’une autre entreprise : elle n’a pas été modifiée. BorderDay garde un seul enregistrement par personne et par date.',
     saveError: 'Enregistrement impossible. Réessayez.',
     deleteAllAccountConfirm: 'Supprimer tous les jours enregistrés dans votre compte ? Action irréversible.',
@@ -523,7 +524,7 @@ const fr: Dict = {
         basis: 'Décidée par l’employeur en tant que responsable du traitement, par exemple une obligation légale ou des intérêts légitimes. BorderDay ne se fonde pas ici sur le consentement du collaborateur.',
         recipients: 'Les administrateurs du compte et lecteurs RH de l’employeur ; Supabase',
         transfer: 'Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis ; garanties ci-dessous',
-        retention: '24 mois par défaut (réglage de l’entreprise, 1–120 mois). Un job quotidien supprime les journaux dont la date de travail est plus ancienne que cette fenêtre.',
+        retention: '24 mois par défaut (réglage de l’entreprise, 13–120 mois). Un job quotidien supprime les journaux dont la date de travail est plus ancienne que cette fenêtre.',
       },
       {
         purpose: 'Invitations et preuve de l’avis',
@@ -565,7 +566,7 @@ const fr: Dict = {
       'Le responsable du traitement est en Suisse. Aux termes de la décision 2000/518/CE de la Commission, la Suisse est considérée comme assurant un niveau de protection adéquat des données à caractère personnel transférées depuis l’UE ; le rapport de la Commission du 15 janvier 2024 (COM(2024) 7 final) a confirmé que cette adéquation continue de s’appliquer au titre du RGPD. La Suisse reconnaît à son tour les États de l’UE et de l’EEE comme adéquats. Pour Stripe, GitHub et Google aux États-Unis, nous nous appuyons sur les Data Privacy Frameworks UE–États-Unis et Suisse–États-Unis (Swiss-U.S. Active). Pour Resend et Supabase, nous ne revendiquons pas de certification Swiss–US DPF ; nous nous appuyons sur les clauses contractuelles types (avec adaptations suisses) de leurs conditions publiées de traitement, et Supabase héberge la base dans l’UE (eu-central-1). Demandez une copie de ces garanties à privacy@borderday.com.',
     s6Title: 'Conservation des données',
     s6Body:
-      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (1–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, marque expirées les invitations en attente au-delà de 14 jours, et supprime les invitations jamais acceptées 30 jours après l’expiration du lien. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DEMO et peuvent être réinitialisées à tout moment.',
+      'Journaux de jours entreprise : 24 mois par défaut, ou le réglage de l’entreprise (13–120 mois), sauf si le droit applicable exige plus longtemps. Un job quotidien planifié supprime les journaux entreprise dont la date de travail sort de cette fenêtre, marque expirées les invitations en attente au-delà de 14 jours, supprime les invitations jamais acceptées 30 jours après l’expiration du lien, supprime les demandes de contrat traitées après 36 mois, les événements Stripe après 36 mois, et clôture les comptes entreprise annulés après la fenêtre de conservation suivant la fin de période payée. Les journaux du plan individuel restent jusqu’à ce que vous les supprimiez ou clôturiez le compte. Les comptes entiers, l’appartenance entreprise et les données de facturation ne sont pas supprimés automatiquement : clôturez le compte ou écrivez à privacy@borderday.com. Les données de démo sont marquées DEMO et peuvent être réinitialisées à tout moment.',
     s4Title: 'Vos droits',
     rightsIntro: 'Dans les limites fixées par la loi, vous disposez des droits suivants :',
     rights: [
@@ -626,7 +627,7 @@ const fr: Dict = {
     formerEmployees: 'Anciens employés',
     formerEmployeesHelp: 'Membres retirés (accès coupé). L’historique des jours est conservé jusqu’à la purge de rétention et inclus dans les exports CSV.',
     formerReadOnly: 'Lecture seule — historique des jours conservé',
-    retentionInvalid: 'Indiquez un nombre entier de mois entre 1 et 120.',
+    retentionInvalid: 'Indiquez un nombre entier de mois entre 13 et 120.',
     planTrialing: "essai gratuit jusqu’au {date}",
     planActive: "active, la période en cours se termine le {date}",
     planActiveNoDate: "active",
@@ -725,7 +726,7 @@ const fr: Dict = {
     profileSaved: 'Enregistré.',
     noticeTitle: 'Avis — ce que les RH peuvent voir',
     noticeBody:
-      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, l’itinéraire choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, s’il s’agit d’une demi-journée, sa marque éventuelle de nuit hors du domicile pour le travail, sur l’itinéraire France–Belgique le statut de frontalier avant 2012 s’il est indiqué, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi, votre base de jours de travail, vos jours contractuels, votre A1 et ce statut France–Belgique. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter votre journal à tout moment. Après avoir quitté l’entreprise, vous pouvez encore exporter ou effacer votre propre copie depuis Compte ; la copie de l’employeur reste selon son délai de conservation. Interrogez votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. L’art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Ceci est un outil de suivi, pas un conseil fiscal ou juridique.',
+      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, l’itinéraire choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, s’il s’agit d’une demi-journée, sa marque éventuelle de nuit hors du domicile pour le travail, sur l’itinéraire France–Belgique le statut de frontalier avant 2012 s’il est indiqué, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi, votre base de jours de travail, vos jours contractuels, votre A1 et ce statut France–Belgique. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter votre journal à tout moment. Après avoir quitté l’entreprise, vous pouvez encore exporter ou effacer votre propre copie depuis Compte ; la copie de l’employeur reste selon son délai de conservation. Interrogez votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 13–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. L’art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Ceci est un outil de suivi, pas un conseil fiscal ou juridique.',
     noticeAck: 'J’ai lu cet avis',
     noticeRequired: 'Confirmez que vous avez lu l’avis pour continuer.',
     noticePrivacyLink: 'Politique de confidentialité complète',
@@ -736,7 +737,7 @@ const fr: Dict = {
     retentionConfirmShort:
       'En dessous de 13 mois, des jours du début de cette année civile peuvent aussi être supprimés, et les compteurs de l’année baisseraient.',
     retentionTitle: 'Conservation des journaux de jours',
-    retentionHelp: 'Les journaux entreprise plus anciens que ce nombre de mois sont supprimés automatiquement chaque jour (1–120). Défaut 24. L’appartenance, la facturation et les comptes entiers ne sont pas supprimés automatiquement.',
+    retentionHelp: 'Les journaux entreprise plus anciens que ce nombre de mois sont supprimés automatiquement chaque jour (13–120). Défaut 24. L’appartenance, la facturation et les comptes entiers ne sont pas supprimés automatiquement.',
     retentionMonths: 'Mois',
     retentionSave: 'Enregistrer la conservation',
     retentionSaved: 'Conservation mise à jour.',

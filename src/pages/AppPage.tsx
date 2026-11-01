@@ -397,6 +397,8 @@ export default function AppPage() {
           <p className="meta">
             {t(d.app.savedToCompany, { company: access.company.name })}{' '}
             <Link to={`/${lang}/company/${access.company.id}/employee/${userId}`}>{d.company.viewMyHistory}</Link>
+            {' '}
+            {t(d.app.companyRetentionNote, { months: access.company.dataRetentionMonths })}
           </p>
         )}
         {error && (

@@ -197,9 +197,13 @@ export function needsFilingNote(rows: Pick<EmployeeDashboardRow, 'borderPackId'>
   return rows.some((r) => r.borderPackId != null && FILING_NOTE_PACKS.has(r.borderPackId));
 }
 
+/** Floor so a calendar year of counters cannot be wiped mid-filing season (AR3-19). */
+export const RETENTION_MONTHS_MIN = 13;
+export const RETENTION_MONTHS_MAX = 120;
+
 /** The range bd_companies.data_retention_months accepts. */
 export function clampRetentionMonths(months: number): number {
-  return Math.min(120, Math.max(1, Math.round(months)));
+  return Math.min(RETENTION_MONTHS_MAX, Math.max(RETENTION_MONTHS_MIN, Math.round(months)));
 }
 
 /** CSV for audit — day types and counts only, never location. Not an AFC filing. */

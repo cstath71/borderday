@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { buildDashboardRows, buildFormerDashboardRows, type RowMember } from '../src/company/buildRows';
+import { buildDashboardRows, buildDetachedDashboardRows, buildFormerDashboardRows, type RowMember } from '../src/company/buildRows';
 import { dayStoreFor } from '../src/lib/dayStore';
 import {
   authEmailLang,
@@ -57,6 +57,23 @@ describe('F32 buildFormerDashboardRows', () => {
     const former = buildFormerDashboardRows({ members, logs, year: 2026 });
     const all = [...active, ...former];
     expect(all.map((r) => r.userId).sort()).toEqual(['a', 'gone']);
+  });
+});
+
+
+describe('AR3-03 buildDetachedDashboardRows', () => {
+  it('groups null-employee logs by kept label and skips voided', () => {
+    const logs = [
+      { employeeUserId: null, employeeLabel: 'Ada', workDate: '2026-03-01', dayType: 'telework' as const },
+      { employeeUserId: null, employeeLabel: 'Ada', workDate: '2026-03-02', dayType: 'onsite' as const },
+      { employeeUserId: null, employeeLabel: 'Bob', workDate: '2026-03-01', dayType: 'telework' as const },
+      { employeeUserId: null, employeeLabel: 'Voided', workDate: '2026-03-01', dayType: 'telework' as const, voidedAt: '2026-03-02T00:00:00Z' },
+      { employeeUserId: 'alive', employeeLabel: null, workDate: '2026-03-01', dayType: 'onsite' as const },
+    ];
+    const rows = buildDetachedDashboardRows({ logs, year: 2026 });
+    expect(rows.map((r) => r.displayName)).toEqual(['Ada', 'Bob']);
+    expect(rows.every((r) => r.userId.startsWith('detached:'))).toBe(true);
+    expect(rows[0].isDemo).toBe(false);
   });
 });
 

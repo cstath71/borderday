@@ -25,6 +25,8 @@ export interface RowLog {
   dayShare?: 0.5 | 1;
   /** Soft-voided days stay in the employer record but do not count. */
   voidedAt?: string | null;
+  /** Present after the employee account was deleted (AR3-03). */
+  employeeLabel?: string | null;
 }
 
 export function buildEmployeeRow(
@@ -100,4 +102,39 @@ export function buildFormerDashboardRows(opts: {
   return opts.members
     .filter((m) => m.role === 'employee' && m.active === false)
     .map((m) => buildEmployeeRow(m, byEmployee.get(m.userId) ?? [], opts.year, opts.isDemo));
+}
+
+/** Day logs left after the employee account was deleted (AR3-03). Grouped by kept label. */
+export function buildDetachedDashboardRows(opts: {
+  logs: RowLog[];
+  year: number;
+  isDemo?: boolean;
+}): EmployeeDashboardRow[] {
+  const byLabel = new Map<string, RowLog[]>();
+  for (const log of opts.logs) {
+    if (log.employeeUserId) continue;
+    if (log.voidedAt) continue;
+    const label = (log.employeeLabel || '').trim() || 'Deleted account';
+    const list = byLabel.get(label);
+    if (list) list.push(log);
+    else byLabel.set(label, [log]);
+  }
+  return [...byLabel.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([label, logs], i) =>
+      buildEmployeeRow(
+        {
+          userId: `detached:${i}:${label}`,
+          role: 'employee',
+          active: false,
+          displayName: label,
+          email: '',
+          borderPackId: null,
+          annualWorkingDays: null,
+        },
+        logs,
+        opts.year,
+        opts.isDemo,
+      ),
+    );
 }

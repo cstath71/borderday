@@ -104,7 +104,7 @@ describe('companyApi', () => {
     expect(state.calls[0].args).toEqual({ cid: 'c1', employee: 'e1' });
     expect(op(state.calls[1], 'range')[0]).toEqual([1000, 1999]);
     expect(logs).toHaveLength(1001);
-    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null });
+    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null, employeeLabel: null });
     expect(JSON.stringify(logs)).not.toContain('secret');
   });
 
@@ -178,7 +178,7 @@ describe('companyApi', () => {
           : { data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'telework' }], error: null };
       const logs = await api.listDayLogs('c1');
       expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_records', 'bd_list_day_types']);
-      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null }]);
+      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null, employeeLabel: null }]);
     });
 
     it('listDayLogs still throws on a real error', async () => {

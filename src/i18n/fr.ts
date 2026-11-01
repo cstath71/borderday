@@ -550,7 +550,7 @@ const fr: Dict = {
       'Retrait du consentement : le cas échéant, retirer votre consentement sans affecter la licéité du traitement effectué avant le retrait.',
     ],
     rightsHow:
-      'Utilisez la page Compte pour exporter vos journaux, effacer votre propre copie après avoir quitté une entreprise, ou demander la suppression du compte, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement : effacer votre copie ne supprime pas les documents qu’il conserve selon son délai.',
+      'Utilisez la page Compte pour exporter vos journaux, effacer votre propre copie après avoir quitté une entreprise, ou demander la suppression du compte, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement : effacer votre copie ne supprime pas les documents qu’il conserve selon son délai. La fermeture du compte laisse aussi ces journaux et preuves de notification chez l’employeur jusqu’à la fin de la conservation.',
     complaintBody:
       'Vous pouvez saisir le Préposé fédéral à la protection des données et à la transparence (PFPDT, www.edoeb.admin.ch). Si vous vivez ou travaillez dans l’UE/EEE, vous pouvez aussi saisir votre autorité locale de protection des données.',
     requiredBody:
@@ -830,7 +830,7 @@ const fr: Dict = {
     deviceBody: 'Jours de l’aperçu gratuit, stockés dans ce navigateur et non sur nos serveurs.',
     deleteTitle: 'Demander la suppression du compte',
     deleteBody:
-      'La suppression d’un compte est traitée par nos soins, pas automatiquement. Envoyez la demande ci-dessous : nous supprimons votre compte et votre journal personnel et répondons dans un délai d’un mois. Pour les journaux d’un compte entreprise, votre employeur est responsable du traitement et peut devoir conserver certains documents : nous vous le signalons le cas échéant. Résiliez d’abord toute offre payante.',
+      'La suppression d’un compte est traitée par nos soins, pas automatiquement. Envoyez la demande ci-dessous : nous supprimons votre compte et votre journal personnel et répondons dans un délai d’un mois. Les journaux et preuves de notification d’un compte entreprise restent chez votre employeur (détachés de votre connexion) jusqu’à la fin de leur durée de conservation — il reste responsable de ce traitement. Résiliez d’abord toute offre payante.',
     deleteConfirm: 'Je souhaite demander la suppression de mon compte',
     deleteSend: 'Ouvrir la demande de suppression dans ma messagerie',
     deleteHint: 'La demande est effectuée lorsque vous envoyez l’e-mail à {to}.',

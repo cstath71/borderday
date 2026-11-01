@@ -4,7 +4,7 @@ import DashboardView, { type TeamMember } from '../../components/company/Dashboa
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
-import { buildDashboardRows, buildFormerDashboardRows } from '../../company/buildRows';
+import { buildDashboardRows, buildDetachedDashboardRows, buildFormerDashboardRows } from '../../company/buildRows';
 import type { EmployeeDashboardRow } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { getDict, t } from '../../i18n';
@@ -113,7 +113,10 @@ export default function CompanyDashboard() {
           paid: companyHasPaidAccess(company.subscription_status, company.trial_ends_at),
           plan: planStatus(company),
           rows: buildDashboardRows({ members, logs, year }),
-          formerRows: buildFormerDashboardRows({ members, logs, year }),
+          formerRows: [
+            ...buildFormerDashboardRows({ members, logs, year }),
+            ...buildDetachedDashboardRows({ logs, year }),
+          ],
           dayLogs: logs,
           invites,
           retentionMonths: company.data_retention_months ?? 24,

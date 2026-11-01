@@ -220,4 +220,61 @@ describe('audit-2 translation findings', () => {
     }
     expect(de.withdrawal.title).toBe('Vertrag widerrufen');
   });
+
+
+  it('A2-25: IT voi / NL u / DE Swiss ss / EN removed-members wording on PR #4 strings', () => {
+    expect(itDict.company.nameRequired).toMatch(/vostro|Indicate/);
+    expect(itDict.company.nameRequired).not.toMatch(/\btuo\b|\btu\b/i);
+    expect(itDict.company.deactivateConfirm).toMatch(/Potrete/);
+    expect(itDict.company.deactivateConfirm).not.toMatch(/Potrai/);
+    expect(nl.company.nameRequired).toMatch(/\buw\b/i);
+    expect(nl.company.nameRequired).not.toMatch(/\bje\b/);
+    expect(JSON.stringify(de)).not.toMatch(/gemäß/);
+    expect(JSON.stringify(de.company)).not.toMatch(/Taghistorie/);
+    expect(de.home.ctaIndividualSignup).not.toMatch(/Einzelne Anmeldung/);
+    expect(en.company.formerEmployeesHelp).toMatch(/Removed members \(no access\)/);
+    expect(en.company.formerEmployeesHelp).not.toMatch(/Soft-removed/);
+    expect(fr.company.formerEmployeesHelp).toMatch(/conservation/);
+    expect(fr.company.formerEmployeesHelp).not.toMatch(/rétention/);
+    expect(fr.company.formerEmployees).toMatch(/collaborateurs/);
+  });
+
+  it('A2-21/26/31: unpaid-company CTA, filter empty state, CHF min abbrev', () => {
+    for (const d of Object.values(dicts)) {
+      expect(d.app.previewAskEmployer.length).toBeGreaterThan(8);
+      expect(d.company.noFilterMatches.length).toBeGreaterThan(8);
+      expect(d.pricing.chfMinAbbrev).toMatch(/min/i);
+    }
+    const app = readFileSync(join(__dirname, '../src/pages/AppPage.tsx'), 'utf8');
+    expect(app).toMatch(/previewAskEmployer/);
+    expect(app).toMatch(/unpaidCompany \?/);
+    const dash = readFileSync(join(__dirname, '../src/components/company/DashboardView.tsx'), 'utf8');
+    expect(dash).toMatch(/noFilterMatches/);
+    const pricing = readFileSync(join(__dirname, '../src/pages/Pricing.tsx'), 'utf8');
+    expect(pricing).toMatch(/chfMinAbbrev/);
+    expect(pricing).not.toMatch(/\{chfLine\(39\)\} min</);
+  });
+
+  it('A2-32: footer separators use spaced middots', () => {
+    const layout = readFileSync(join(__dirname, '../src/components/Layout.tsx'), 'utf8');
+    expect(layout).not.toMatch(/disclaimer\}<\/Link>\s*<span aria-hidden="true">·<\/span>/);
+    expect(layout).toMatch(/disclaimer\}<\/Link>\s*\{\s*' · '\s*\}/);
+  });
+
+  it('AR3-16/27: FAQ and llms-full match leaver retention and MoR/half-day/one-trial', () => {
+    for (const d of Object.values(dicts)) {
+      expect(d.faq.a2).not.toMatch(/delete everything|tout supprimer|alles löschen|eliminare tutt|alles wissen/i);
+      expect(d.faq.a2).toMatch(/retention|conservation|Aufbewahrung|conservazione|bewaartermijn/i);
+    }
+    const full = llmsFullTxt();
+    expect(full).not.toMatch(/delete everything/);
+    expect(full).toMatch(/half day/i);
+    expect(full).toMatch(/once per person/i);
+    expect(full).toMatch(/provides merchant-of-record functions/i);
+    expect(full).not.toMatch(/Stripe is the merchant of record/i);
+    for (const [, a] of FAQ.en) {
+      if (a.includes('IndexedDB')) expect(a).not.toMatch(/delete everything/);
+    }
+  });
+
 });

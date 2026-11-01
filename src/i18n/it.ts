@@ -338,6 +338,7 @@ const it: Dict = {
     previewCompanyBody:
       '{company} non ha ancora un abbonamento attivo, quindi state usando l’anteprima gratuita. I giorni restano in questo browser su questo dispositivo e si può registrare solo il mese corrente.',
     previewCta: 'Vedi i piani',
+    previewAskEmployer: 'Chiedete al vostro datore di lavoro di avviare il piano.',
     previewMonthOnly: 'L’anteprima consente di registrare solo il mese corrente.',
     savedToAccount: 'Salvato nel vostro account.',
     savedToCompany:
@@ -387,6 +388,7 @@ const it: Dict = {
     yearlyNote: 'Circa due mesi gratis rispetto al mensile.',
     companyPrice: '5 € / dipendente attivo / mese',
     companyMin: 'Minimo 39 € / mese (il minimo copre fino a 7 dipendenti attivi; oltre, fatturazione per dipendente attivo)',
+    chfMinAbbrev: 'min.',
     companyYearly: 'Fatturazione annuale: 2 mesi gratis (minimo 390 € / anno)',
     billingCompany: 'Fatturazione a: {company}',
     pickBillingCompany: 'Azienda da fatturare',
@@ -438,8 +440,7 @@ const it: Dict = {
     a1:
       'No. È uno strumento di registrazione e promemoria per datori di lavoro e dipendenti. Le soglie provengono da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con il datore di lavoro, un consulente qualificato o l’autorità competente.',
     q2: 'Dove è memorizzato il vostro diario dei giorni?',
-    a2:
-      'Senza abbonamento, solo sul vostro dispositivo (IndexedDB nel browser). Con un abbonamento attivo o un account aziendale, nel vostro account BorderDay. In ogni caso potete esportare JSON o CSV, o eliminare tutto.',
+    a2: 'Senza un piano, solo sul vostro dispositivo (IndexedDB nel browser). Con un piano attivo o un account aziendale, nel vostro account BorderDay. Potete esportare JSON o CSV in qualsiasi momento. Con un piano gratuito o individuale potete cancellare il diario; in un account aziendale, cancellare la vostra copia lascia i documenti del datore di lavoro secondo la sua conservazione.',
     q3: 'Perché alcuni contatori sono disattivati?',
     a3:
       'Mostriamo un numero solo se il metodo di conteggio è confermato da una fonte ufficiale. Altrimenti la scheda spiega perché nessun contatore è attivo e vi rimanda alla vostra autorità. Non inventa mai una cifra.',
@@ -668,6 +669,7 @@ const it: Dict = {
     exportCsvNote: 'Solo documento di lavoro. Non è l’attestazione annuale del tasso di telelavoro che tutti i datori di lavoro svizzeri di residenti fiscali in Francia devono trasmettere all’inizio dell’anno successivo all’autorità fiscale cantonale — anche allo 0 %. Prima trasmissione: inizio 2027 per il 2026. Ginevra e Vaud hanno un proprio modulo (Ginevra AFC / ge.ch); altrimenti modulo federale o ELM/portale cantonale. Calcolate e presentate quel tasso all’autorità competente.',
     employees: 'Dipendenti',
     noEmployees: 'Nessun dipendente. Create un link di invito.',
+    noFilterMatches: 'Nessun dipendente corrisponde a questi filtri.',
     viewHistory: 'Cronologia giorni',
     historyTitle: 'Cronologia giorni del dipendente',
     historySubtitle:
@@ -678,7 +680,7 @@ const it: Dict = {
       'Accettate l’invito, leggete l’avviso su ciò che può vedere l’HR e scegliete il corridoio.',
     joinButton: 'Unisciti all’azienda',
     joining: 'Adesione…',
-    nameRequired: 'Indica il tuo nome.',
+    nameRequired: 'Indicate il vostro nome.',
     joinSuccess: 'Fatto: ora fate parte dell’azienda. Aprite l’app dipendente per registrare i giorni.',
     pickBorder: 'Il vostro corridoio',
     demoDataBadge: 'DATI DEMO',
@@ -711,7 +713,7 @@ const it: Dict = {
     workingDaysBaseHint: 'Usata per le percentuali di questa persona. Attualmente {annual} giorni. Lasciate vuoto per seguire la percentuale d’impiego.',
     filingNote: 'Tutti i datori di lavoro svizzeri di residenti fiscali in Francia attestano un tasso di telelavoro all’inizio dell’anno successivo presso l’autorità fiscale cantonale, anche allo 0 %. Prima: inizio 2027 per il 2026. Ginevra e Vaud hanno un proprio modulo (Ginevra AFC / ge.ch); gli altri Cantoni usano il modulo federale o ELM/portale cantonale. Giura: attestazione entro il 31 gennaio successivo al periodo fiscale, dal periodo fiscale 2026 (jura.ch). Questa dashboard e il suo CSV sono un documento di lavoro, non una dichiarazione.',
     deactivateMember: 'Rimuovi {name}',
-    deactivateConfirm: 'Rimuovere {name} da questa azienda? L’accesso termina subito. I giorni restano in archivio (Ex dipendenti) secondo la conservazione. Il posto non è più fatturato. Potrai reinvitarli più tardi.',
+    deactivateConfirm: 'Rimuovere {name} da questa azienda? L’accesso termina subito. I giorni restano in archivio (Ex dipendenti) secondo la conservazione. Il posto non è più fatturato. Potrete reinvitarli più tardi.',
     deactivated: '{name} è stato/a rimosso/a.',
     deactivatedBillingPending: '{name} è stato/a rimosso/a, ma non abbiamo potuto confermare l’aggiornamento dell’abbonamento. Scrivete a hello@borderday.com per correggere il numero di posti.',
     deactivateFailed: 'Impossibile rimuovere questa persona. Riprovate.',

@@ -338,6 +338,7 @@ const fr: Dict = {
     previewBody: 'Aperçu gratuit : les jours restent dans ce navigateur, sur cet appareil, et seul le mois en cours peut être saisi. Un abonnement débloque tous les mois et enregistre votre journal dans votre compte.',
     previewCompanyBody: '{company} n’a pas encore d’abonnement actif : vous utilisez donc l’aperçu gratuit. Les jours restent dans ce navigateur, sur cet appareil, et seul le mois en cours peut être saisi.',
     previewCta: 'Voir les offres',
+    previewAskEmployer: 'Demandez à votre employeur de démarrer l’abonnement.',
     previewMonthOnly: 'L’aperçu ne permet de saisir que le mois en cours.',
     savedToAccount: 'Enregistré dans votre compte.',
     savedToCompany:
@@ -387,6 +388,7 @@ const fr: Dict = {
     yearlyNote: 'Environ deux mois offerts vs mensuel.',
     companyPrice: '5 € / collaborateur actif / mois',
     companyMin: 'Minimum 39 € / mois (le minimum couvre jusqu’à 7 collaborateurs actifs ; au-delà, facturation par collaborateur actif)',
+    chfMinAbbrev: 'min.',
     companyYearly: 'Facturation annuelle : 2 mois offerts (minimum 390 € / an)',
     activeEmployeeDef:
       'Collaborateur actif : membre de l\'entreprise ayant le rôle de collaborateur, ayant accepté l\'invitation et non désactivé. Les administrateurs du compte et les comptes RH ne sont pas comptés. La facturation utilise l\'effectif actif courant chaque période (minimum 39 € / mois).',
@@ -438,7 +440,7 @@ const fr: Dict = {
     a1:
       'Non. C’est un outil de suivi et de rappel pour employeurs et collaborateurs. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès de votre employeur, d’un conseiller qualifié ou de l’autorité compétente.',
     q2: 'Où est stocké mon journal de jours ?',
-    a2: 'Sans abonnement, uniquement sur votre appareil (IndexedDB dans le navigateur). Avec un abonnement actif ou un compte entreprise, dans votre compte BorderDay. Dans tous les cas, vous pouvez exporter en JSON ou CSV, ou tout supprimer.',
+    a2: 'Sans abonnement, uniquement sur votre appareil (IndexedDB dans le navigateur). Avec un abonnement actif ou un compte entreprise, dans votre compte BorderDay. Vous pouvez exporter en JSON ou CSV à tout moment. Sur un plan gratuit ou individuel, vous pouvez supprimer votre journal ; dans un compte entreprise, effacer votre copie laisse les dossiers de l’employeur selon sa durée de conservation.',
     q3: 'Pourquoi certains compteurs sont-ils désactivés ?',
     a3:
       'Nous n’affichons un chiffre que si sa méthode de calcul est confirmée par une source officielle. Sinon, la carte explique pourquoi aucun compteur ne fonctionne et vous renvoie à votre autorité. Elle n’invente jamais de chiffre.',
@@ -624,8 +626,8 @@ const fr: Dict = {
     checkoutDone: "Paiement configuré. Le statut de l’offre se met à jour ici dès que Stripe le confirme.",
     planLabel: "Offre",
     seatsLine: '{active} collaborateurs actifs · {seats} places',
-    formerEmployees: 'Anciens employés',
-    formerEmployeesHelp: 'Membres retirés (accès coupé). L’historique des jours est conservé jusqu’à la purge de rétention et inclus dans les exports CSV.',
+    formerEmployees: 'Anciens collaborateurs',
+    formerEmployeesHelp: 'Membres retirés (accès coupé). L’historique des jours est conservé jusqu’à la purge de conservation et inclus dans les exports CSV.',
     formerReadOnly: 'Lecture seule — historique des jours conservé',
     retentionInvalid: 'Indiquez un nombre entier de mois entre 13 et 120.',
     planTrialing: "essai gratuit jusqu’au {date}",
@@ -667,6 +669,7 @@ const fr: Dict = {
     exportCsvNote: 'Document de travail uniquement. Ce n’est pas l’attestation annuelle du taux de télétravail que tous les employeurs suisses de résidents fiscaux français doivent transmettre en début d’année suivante à l’autorité fiscale cantonale — y compris à 0 %. Première transmission : début 2027 pour 2026. Genève et Vaud ont leur propre formulaire (Genève AFC / ge.ch) ; sinon formulaire fédéral ou ELM/portail cantonal. Calculez et déclarez ce taux auprès de votre autorité.',
     employees: 'Collaborateurs',
     noEmployees: 'Aucun collaborateur. Créez un lien d’invitation.',
+    noFilterMatches: 'Aucun collaborateur ne correspond à ces filtres.',
     viewHistory: 'Historique des jours',
     historyTitle: 'Historique des jours du collaborateur',
     historySubtitle:
@@ -711,7 +714,7 @@ const fr: Dict = {
     workingDaysBaseHint: 'Sert aux pourcentages de cet employé. Actuellement {annual} jours. Laissez vide pour suivre le taux d’emploi.',
     filingNote: 'Tous les employeurs suisses de résidents fiscaux français attestent un taux de télétravail en début d’année suivante auprès de l’autorité fiscale cantonale, y compris à 0 %. Première transmission : début 2027 pour 2026. Genève et Vaud ont leur propre formulaire (Genève AFC / ge.ch) ; les autres cantons utilisent le formulaire fédéral ou ELM/portail cantonal. Jura : attestation au 31 janvier suivant la période fiscale, dès la période fiscale 2026 (jura.ch). Ce tableau de bord et son CSV sont un document de travail, pas une déclaration.',
     deactivateMember: 'Retirer {name}',
-    deactivateConfirm: 'Retirer {name} de cette entreprise ? L’accès est coupé immédiatement. Les jours restent sur le dossier (Anciens employés) selon la rétention. La place n’est plus facturée. Vous pourrez réinviter plus tard.',
+    deactivateConfirm: 'Retirer {name} de cette entreprise ? L’accès est coupé immédiatement. Les jours restent sur le dossier (Anciens collaborateurs) selon la conservation. La place n’est plus facturée. Vous pourrez réinviter plus tard.',
     deactivated: '{name} a été retiré·e.',
     deactivatedBillingPending: '{name} a été retiré·e, mais nous n’avons pas pu confirmer la mise à jour de l’abonnement. Écrivez à hello@borderday.com pour corriger le nombre de places.',
     deactivateFailed: 'Impossible de retirer cette personne. Réessayez.',

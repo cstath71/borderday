@@ -46,6 +46,15 @@ export default function CounterTable({ d, counters }: { d: Dict; counters: Emplo
                         allowed: c.allowedDays ?? 0,
                       })
                     : (text[c.pendingValueKey ?? ''] ?? '—')}
+                  {c.enabled && c.unit === 'percent_of_working_time' && (
+                    <div className="meta">
+                      {t(d.counters.percentOfAnnual, {
+                        pct: c.percentOfAnnual ?? 0,
+                        annual: c.annualWorkingDays ?? 0,
+                        limit: c.limit ?? 0,
+                      })}
+                    </div>
+                  )}
                 </td>
                 <td>
                   <span className={`badge ${c.status}`}>{badgeLabel(d, c.status, c.statusLabelKey)}</span>

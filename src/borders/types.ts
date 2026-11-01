@@ -33,6 +33,11 @@ export interface LimitCounter {
   period?: 'calendar_year' | 'month';
   /** Day limit reduced for part-time and part-year; rounding differs by rule. */
   prorate?: 'floor' | 'ceil';
+  /**
+   * KonsVerCHEV §9(2) style: for staff working only on certain days, the limit is cut in proportion
+   * to contract days against this many full-time days. Never derived from employmentPercent.
+   */
+  contractDayBase?: number;
   /** Days flagged overnightAway (on-site or trip days) count even if the day type does not. */
   countsOvernight?: boolean;
   /** FR–LU style: any logged fraction of a matching day counts as one whole day. */
@@ -75,7 +80,7 @@ export interface BorderPack {
   workCountries: string[];
   regionNoteKey?: string;
   counters: LimitCounter[];
-  /** Default annual working days for % calculations when user has not set a custom value. */
+  /** Full-time annual working days. Unset base: this × employment % (see annualBaseFor). */
   defaultAnnualWorkingDays: number;
   /** i18n keys under dayTypes.* replacing the shared hint for a day type on this corridor. */
   dayHintKeys?: Partial<Record<DayType, string>>;
@@ -97,6 +102,8 @@ export interface DayEntry {
 export interface EmploymentProfile {
   /** 1–100, part-time and part-year combined. */
   employmentPercent?: number | null;
+  /** Working days per year in the contract: only for rules with LimitCounter.contractDayBase. */
+  contractDaysPerYear?: number | null;
   a1InPlace?: boolean | null;
   a1ValidUntil?: string | null; // YYYY-MM-DD
   /** FR→BE legacy: frontier worker before 1 Jan 2012 (30-day border-zone rule until 2033). */

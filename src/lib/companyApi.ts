@@ -45,10 +45,26 @@ export function isSchemaLag(error: unknown): boolean {
 }
 
 const MEMBER_PROFILE_COLUMNS =
-  'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012';
+  'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012, contract_days_per_year';
+const PROFILE_WITHOUT_CONTRACT_DAYS = 'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012';
+const PROFILE_WITHOUT_FRONTIER = 'employment_percent, a1_in_place, a1_valid_until';
+
+/** Newest columns first, so the site keeps working while a migration is still to run. */
+async function selectWithProfileFallback(
+  base: string,
+  query: (columns: string) => PromiseLike<{ data: unknown; error: unknown }>,
+): Promise<any> {
+  let { data, error } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_CONTRACT_DAYS}`));
+  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
+  if (isSchemaLag(error)) ({ data, error } = await query(base));
+  if (error) throw error;
+  return data;
+}
 
 export interface MemberProfile {
   employmentPercent: number | null;
+  contractDaysPerYear?: number | null;
   a1InPlace: boolean;
   a1ValidUntil: string | null;
   frontierBefore2012?: boolean;
@@ -57,6 +73,7 @@ export interface MemberProfile {
 function mapProfile(m: any): MemberProfile {
   return {
     employmentPercent: m.employment_percent ?? null,
+    contractDaysPerYear: m.contract_days_per_year ?? null,
     a1InPlace: m.a1_in_place ?? false,
     a1ValidUntil: m.a1_valid_until ?? null,
     frontierBefore2012: m.frontier_before_2012 ?? false,
@@ -96,11 +113,7 @@ export async function listMyCompanies(): Promise<MyCompany[]> {
   // HR can read every member row of their company, so filter to the caller's own.
   const query = (columns: string) =>
     supabase!.from('bd_company_members').select(columns).eq('user_id', userId).eq('active', true);
-  const PROFILE_WITHOUT_FRONTIER = 'employment_percent, a1_in_place, a1_valid_until';
-  let { data, error }: { data: any; error: unknown } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
-  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
-  if (isSchemaLag(error)) ({ data, error } = await query(base));
-  if (error) throw error;
+  const data = await selectWithProfileFallback(base, query);
   return (data || []).map((m: any) => ({
     id: m.bd_companies.id,
     name: m.bd_companies.name,
@@ -140,6 +153,7 @@ export interface CompanyMemberRow {
   a1InPlace: boolean;
   a1ValidUntil: string | null;
   frontierBefore2012: boolean;
+  contractDaysPerYear?: number | null;
 }
 
 export async function updateCompanyRetention(companyId: string, months: number) {
@@ -155,11 +169,7 @@ export async function updateCompanyRetention(companyId: string, months: number) 
 export async function listMembers(companyId: string): Promise<CompanyMemberRow[]> {
   const base = 'id, role, border_pack_id, annual_working_days, active, user_id, joined_at, bd_profiles(email, display_name)';
   const query = (columns: string) => client().from('bd_company_members').select(columns).eq('company_id', companyId);
-  const PROFILE_WITHOUT_FRONTIER = 'employment_percent, a1_in_place, a1_valid_until';
-  let { data, error }: { data: any; error: unknown } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
-  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
-  if (isSchemaLag(error)) ({ data, error } = await query(base));
-  if (error) throw error;
+  const data = await selectWithProfileFallback(base, query);
   return (data || []).map((m: any) => ({
     id: m.id,
     userId: m.user_id,
@@ -218,25 +228,43 @@ export async function updateMyProfile(companyId: string, profile: MemberProfile)
     p_frontier_before_2012: !!profile.frontierBefore2012,
   });
   if (error) throw error;
+  if (profile.contractDaysPerYear === undefined) return;
+  // Its own additive RPC, so the profile RPC above keeps its signature while the site deploys.
+  const { error: daysError } = await client().rpc('bd_update_member_contract_days', {
+    p_company_id: companyId,
+    p_contract_days_per_year: profile.contractDaysPerYear,
+  });
+  // Clearing a value the database cannot hold yet is harmless; setting one must fail visibly.
+  if (daysError && !(isSchemaLag(daysError) && profile.contractDaysPerYear === null)) throw daysError;
 }
 
-/** HR recording an employee's employment % and A1. RLS and column grants decide who may. */
+/**
+ * HR recording an employee's employment %, A1 and working-days base. RLS and column grants decide
+ * who may. annualWorkingDays null means "follow employment %"; undefined leaves it unchanged.
+ */
 export async function updateEmployeeProfile(
   companyId: string,
   employeeUserId: string,
-  profile: MemberProfile,
+  profile: MemberProfile & { annualWorkingDays?: number | null },
 ): Promise<void> {
-  const { data, error } = await client()
-    .from('bd_company_members')
-    .update({
-      employment_percent: profile.employmentPercent,
-      a1_in_place: profile.a1InPlace,
-      a1_valid_until: profile.a1ValidUntil,
-      frontier_before_2012: !!profile.frontierBefore2012,
-    })
-    .eq('company_id', companyId)
-    .eq('user_id', employeeUserId)
-    .select('id');
+  const fields = {
+    employment_percent: profile.employmentPercent,
+    a1_in_place: profile.a1InPlace,
+    a1_valid_until: profile.a1ValidUntil,
+    frontier_before_2012: !!profile.frontierBefore2012,
+    ...(profile.annualWorkingDays === undefined ? {} : { annual_working_days: profile.annualWorkingDays }),
+  };
+  const run = (extra: { contract_days_per_year?: number | null }) =>
+    client()
+      .from('bd_company_members')
+      .update({ ...fields, ...extra })
+      .eq('company_id', companyId)
+      .eq('user_id', employeeUserId)
+      .select('id');
+  const contractDays = profile.contractDaysPerYear;
+  let { data, error } = await run(contractDays === undefined ? {} : { contract_days_per_year: contractDays });
+  // Clearing a value the database cannot hold yet is harmless; setting one must fail visibly.
+  if (isSchemaLag(error) && contractDays == null) ({ data, error } = await run({}));
   if (error) throw error;
   // RLS hides a forbidden row instead of raising, so "nothing updated" is the refusal.
   if (!data?.length) throw new Error('profile update denied');

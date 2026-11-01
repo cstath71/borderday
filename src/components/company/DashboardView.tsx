@@ -1,25 +1,31 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { listBorderPacks } from '../../borders/packs';
+import { getBorderPack, listBorderPacks } from '../../borders/packs';
 import type { BorderId } from '../../borders/types';
 import type { AggregateStatus, EmployeeDashboardRow } from '../../company/dashboardMath';
-import { filterRows, rowsToCsv } from '../../company/dashboardMath';
+import { filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
-import type { Dict } from '../../i18n';
+import { t, type Dict } from '../../i18n';
+import { usesContractDays } from '../../lib/counting';
 import ProfileFields, { type ProfileValues } from '../ProfileFields';
 import CounterTable, { statusLabel } from './CounterTable';
 
 const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'at_limit', 'over', 'disabled'];
 
+export type EmployeeProfileValues = ProfileValues & { annualWorkingDays?: number | null };
+
 /** HR records what an employee's limits depend on. Status shows only after a real save. */
 function EmployeeProfileForm(props: {
   d: Dict;
   row: EmployeeDashboardRow;
-  onSave: (userId: string, profile: ProfileValues) => Promise<void>;
+  onSave: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
 }) {
   const { d, row, onSave } = props;
+  const pack = row.borderPackId ? getBorderPack(row.borderPackId) : undefined;
+  const [base, setBase] = useState<number | null>(row.storedAnnualWorkingDays);
   const [value, setValue] = useState<ProfileValues>({
     employmentPercent: row.profile.employmentPercent ?? null,
+    contractDaysPerYear: row.profile.contractDaysPerYear ?? null,
     a1InPlace: !!row.profile.a1InPlace,
     a1ValidUntil: row.profile.a1ValidUntil ?? null,
     frontierBefore2012: !!row.profile.frontierBefore2012,
@@ -37,13 +43,36 @@ function EmployeeProfileForm(props: {
           setState('idle');
         }}
         showFrontierBefore2012={row.borderPackId === 'belgium_fr'}
+        showContractDays={!!pack && usesContractDays(pack)}
       />
+      {pack && (
+        <>
+          <label style={{ display: 'block', marginTop: '0.75rem' }} htmlFor={`profile-${row.userId}-base`}>
+            <strong>{d.company.workingDaysBase}</strong>
+            <div className="meta">{t(d.company.workingDaysBaseHint, { annual: row.annualWorkingDays ?? pack.defaultAnnualWorkingDays })}</div>
+          </label>
+          <input
+            id={`profile-${row.userId}-base`}
+            className="num"
+            type="number"
+            min={1}
+            max={366}
+            style={{ marginTop: '0.35rem' }}
+            value={base ?? ''}
+            onChange={(e) => {
+              const v = Math.trunc(Number(e.target.value));
+              setBase(v >= 1 && v <= 366 ? v : null);
+              setState('idle');
+            }}
+          />
+        </>
+      )}
       <p style={{ marginTop: '0.5rem' }}>
         <button
           type="button"
           className="btn btn-secondary"
           onClick={() =>
-            onSave(row.userId, value).then(
+            onSave(row.userId, { ...value, annualWorkingDays: base }).then(
               () => setState('saved'),
               () => setState('error'),
             )
@@ -122,7 +151,7 @@ export default function DashboardView(props: {
   retentionMonths?: number;
   canEditRetention?: boolean;
   onRefresh: () => void;
-  onSaveProfile: (userId: string, profile: ProfileValues) => Promise<void>;
+  onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
 }) {
   const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, onRefresh, onSaveProfile, onSaveRetention } = props;
@@ -179,6 +208,11 @@ export default function DashboardView(props: {
           </p>
         </div>
       </div>
+      {needsFilingNote(rows) && (
+        <p className="meta" role="note">
+          {d.company.filingNote}
+        </p>
+      )}
 
       <div className="filters">
         <label>

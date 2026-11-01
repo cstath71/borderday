@@ -61,6 +61,7 @@ function toRowMember({ member, profile }: { member: CompanyMember; profile: Prof
     borderPackId: member.borderPackId,
     annualWorkingDays: member.annualWorkingDays,
     employmentPercent: member.employmentPercent,
+    contractDaysPerYear: member.contractDaysPerYear,
     a1InPlace: member.a1InPlace,
     a1ValidUntil: member.a1ValidUntil,
   };

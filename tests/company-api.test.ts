@@ -129,6 +129,22 @@ describe('companyApi', () => {
       expect(state.calls).toHaveLength(1);
     });
 
+    it('a set contract-days figure fails visibly before the migration; clearing it does not', async () => {
+      const profile = { employmentPercent: 40, a1InPlace: false, a1ValidUntil: null };
+      state.respond = (call) => (call.rpc === 'bd_update_member_contract_days' ? missingFn : { data: null, error: null });
+      await expect(api.updateMyProfile('c1', { ...profile, contractDaysPerYear: 100 })).rejects.toMatchObject({ code: 'PGRST202' });
+      await expect(api.updateMyProfile('c1', { ...profile, contractDaysPerYear: null })).resolves.toBeUndefined();
+    });
+
+    it('HR saving a cleared contract-days figure retries without the column; a set one fails visibly', async () => {
+      const profile = { employmentPercent: 40, a1InPlace: false, a1ValidUntil: null };
+      const update = (call: Call) => op(call, 'update')[0]?.[0] as Record<string, unknown>;
+      state.respond = (call) =>
+        'contract_days_per_year' in update(call) ? missingWriteCol : { data: [{ id: 'm1' }], error: null };
+      await expect(api.updateEmployeeProfile('c1', 'e1', { ...profile, contractDaysPerYear: null })).resolves.toBeUndefined();
+      await expect(api.updateEmployeeProfile('c1', 'e1', { ...profile, contractDaysPerYear: 100 })).rejects.toMatchObject({ code: 'PGRST204' });
+    });
+
     it('listMembers and listMyCompanies retry without the new columns', async () => {
       const selected = (call: Call) => String(op(call, 'select')[0]?.[0]);
       state.respond = (call) =>
@@ -152,7 +168,7 @@ describe('companyApi', () => {
       const [member] = await api.listMembers('c1');
       expect(member).toMatchObject({ userId: 'e1', employmentPercent: null, a1InPlace: false, a1ValidUntil: null });
       const [mine] = await api.listMyCompanies();
-      expect(mine.profile).toEqual({ employmentPercent: null, a1InPlace: false, a1ValidUntil: null, frontierBefore2012: false });
+      expect(mine.profile).toEqual({ employmentPercent: null, contractDaysPerYear: null, a1InPlace: false, a1ValidUntil: null, frontierBefore2012: false });
     });
 
     it('logging a plain day still works: the unset flag is dropped', async () => {

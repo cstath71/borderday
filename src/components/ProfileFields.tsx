@@ -2,6 +2,7 @@ import type { Dict } from '../i18n';
 
 export interface ProfileValues {
   employmentPercent: number | null;
+  contractDaysPerYear?: number | null;
   a1InPlace: boolean;
   a1ValidUntil: string | null;
   frontierBefore2012?: boolean;
@@ -15,6 +16,7 @@ export default function ProfileFields({
   onChange,
   onCommit,
   showFrontierBefore2012 = false,
+  showContractDays = false,
 }: {
   d: Dict;
   idPrefix: string;
@@ -24,6 +26,8 @@ export default function ProfileFields({
   onCommit?: (next: ProfileValues) => void;
   /** FR→BE only: tick opens the optional pre-2012 30-day counter. */
   showFrontierBefore2012?: boolean;
+  /** Germany–Switzerland only: contract days per year cut the 60-day limit (KonsVerCHEV §9(2)). */
+  showContractDays?: boolean;
 }) {
   return (
     <>
@@ -45,6 +49,28 @@ export default function ProfileFields({
         }}
         onBlur={() => onCommit?.(value)}
       />
+      {showContractDays && (
+        <>
+          <label style={{ display: 'block', marginTop: '0.75rem' }} htmlFor={`${idPrefix}-contract-days`}>
+            <strong>{d.app.contractDaysPerYear}</strong>
+            <div className="meta">{d.app.contractDaysPerYearHint}</div>
+          </label>
+          <input
+            id={`${idPrefix}-contract-days`}
+            className="num"
+            type="number"
+            min={1}
+            max={366}
+            style={{ marginTop: '0.35rem' }}
+            value={value.contractDaysPerYear ?? ''}
+            onChange={(e) => {
+              const v = Math.trunc(Number(e.target.value));
+              onChange({ ...value, contractDaysPerYear: v >= 1 && v <= 366 ? v : null });
+            }}
+            onBlur={() => onCommit?.(value)}
+          />
+        </>
+      )}
       <label style={{ display: 'block', marginTop: '0.75rem' }}>
         <input
           type="checkbox"

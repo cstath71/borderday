@@ -9,7 +9,7 @@ import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
 import { resolveAppAccess, updateMemberSelf, updateMyProfile, type AppAccess } from '../lib/companyApi';
-import { evaluatePack, zurichToday } from '../lib/counting';
+import { annualBaseFor, evaluatePack, usesContractDays, zurichToday } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import { download } from '../lib/download';
 import {
@@ -116,25 +116,27 @@ export default function AppPage() {
 
   const borderId = meta?.borderId ?? null;
   const pack = borderId ? getBorderPack(borderId) : undefined;
-  const annual = meta?.annualWorkingDays ?? pack?.defaultAnnualWorkingDays;
+  const storedAnnual = meta?.annualWorkingDays ?? null;
 
   const profile: ProfileValues = {
     employmentPercent: meta?.employmentPercent ?? null,
+    contractDaysPerYear: meta?.contractDaysPerYear ?? null,
     a1InPlace: !!meta?.a1InPlace,
     a1ValidUntil: meta?.a1ValidUntil ?? null,
     frontierBefore2012: !!meta?.frontierBefore2012,
   };
-  const { employmentPercent, a1InPlace, a1ValidUntil, frontierBefore2012 } = profile;
+  const { employmentPercent, contractDaysPerYear, a1InPlace, a1ValidUntil, frontierBefore2012 } = profile;
+  const annual = pack && annualBaseFor(pack, storedAnnual, { employmentPercent });
 
   const results = useMemo(() => {
     if (!pack) return [];
     return evaluatePack(pack, days, {
       year: viewYear,
-      annualWorkingDays: annual,
+      annualWorkingDays: storedAnnual,
       referenceMonth: `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}`,
-      profile: { employmentPercent, a1InPlace, a1ValidUntil, frontierBefore2012 },
+      profile: { employmentPercent, contractDaysPerYear, a1InPlace, a1ValidUntil, frontierBefore2012 },
     });
-  }, [pack, days, viewYear, viewMonth, annual, employmentPercent, a1InPlace, a1ValidUntil, frontierBefore2012]);
+  }, [pack, days, viewYear, viewMonth, storedAnnual, employmentPercent, contractDaysPerYear, a1InPlace, a1ValidUntil, frontierBefore2012]);
 
   const selectedEntry = days.find((e) => e.date === selectedDate);
   const byDate = useMemo(() => {
@@ -338,6 +340,7 @@ export default function AppPage() {
               onChange={(next) => setMetaState({ ...meta, ...next })}
               onCommit={(next) => void saveProfile(next)}
               showFrontierBefore2012={borderId === 'belgium_fr'}
+              showContractDays={usesContractDays(pack)}
             />
           )}
         </div>

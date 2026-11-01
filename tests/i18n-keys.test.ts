@@ -250,7 +250,9 @@ describe('Phase 2 rule copy, all five languages', () => {
     for (const [lang, d] of all) {
       const blob = JSON.stringify(d);
       expect(blob, lang).not.toMatch(/Sit inside|that expression|Ausdrucksweise|cette expression|tale espressione/i);
-      expect(blob, lang).not.toMatch(/30-minute|30 minutes|30-Minuten|30 minuti/);
+      // Sourced for Germany–Luxembourg only (Circular 71; BMF 11 Jan 2024): nowhere else.
+      const withoutNote = blob.replace(JSON.stringify(text(d).lu_de_tax_note).slice(1, -1), '');
+      expect(withoutNote, lang).not.toMatch(/30-minute|30 minutes|30-Minuten|30 minuti/);
       expect(blob, lang).not.toMatch(/INAMI/);
       expect(blob, lang).not.toMatch(/UE\/EWR/);
       expect(blob, lang).not.toMatch(/\((?:DFI|EDI)|DFI \(|EDI \(/);

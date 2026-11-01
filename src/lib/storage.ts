@@ -11,6 +11,7 @@ export interface UserMeta {
   warnAt: number[]; // 0-1
   language: string;
   employmentPercent?: number | null;
+  contractDaysPerYear?: number | null;
   a1InPlace?: boolean;
   a1ValidUntil?: string | null;
   frontierBefore2012?: boolean;

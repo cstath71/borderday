@@ -540,6 +540,27 @@ describe('real Postgres: day logs', () => {
     await expect(as(null, `select public.bd_update_member_profile($1, 80, false, null)`, [company])).rejects.toThrow();
   });
 
+  it('H3: employees set contract days through the RPC only; HR can record them; range is enforced', async () => {
+    const owner = await newUser('h3a@example.com');
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    const days = async () =>
+      (await db.query(`select contract_days_per_year as d from public.bd_company_members where company_id = $1 and user_id = $2`, [company, emp]))
+        .rows[0].d;
+
+    await as(emp, `select public.bd_update_member_contract_days($1, 100)`, [company]);
+    expect(await days()).toBe(100);
+    const direct = await as(emp, `update public.bd_company_members set contract_days_per_year = 5 where company_id = $1 and user_id = $2`, [company, emp]);
+    expect(direct.rowCount).toBe(0);
+    await expect(as(emp, `select public.bd_update_member_contract_days($1, 400)`, [company])).rejects.toThrow(/check/);
+    const stranger = await newUser('h3b@example.com');
+    await expect(as(stranger, `select public.bd_update_member_contract_days($1, 100)`, [company])).rejects.toThrow(/not a member/);
+    await expect(as(null, `select public.bd_update_member_contract_days($1, 100)`, [company])).rejects.toThrow();
+
+    await as(owner, `update public.bd_company_members set contract_days_per_year = 120, annual_working_days = 120 where company_id = $1 and user_id = $2`, [company, emp]);
+    expect(await days()).toBe(120);
+  });
+
   it('Phase 2: HR records an employee A1, but HR of another company cannot', async () => {
     const owner = await newUser('p2f@example.com');
     const company = await newCompany(owner);

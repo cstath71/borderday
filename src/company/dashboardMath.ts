@@ -8,7 +8,7 @@ import type {
   EmploymentProfile,
   OfficialSource,
 } from '../borders/types';
-import { evaluatePack, zurichToday } from '../lib/counting';
+import { annualBaseFor, evaluatePack, zurichToday } from '../lib/counting';
 import type { DayLog } from './types';
 
 export type AggregateStatus = 'ok' | 'warn' | 'critical' | 'at_limit' | 'over' | 'disabled' | 'mixed';
@@ -21,6 +21,7 @@ export interface EmployeeCounterSummary {
   usedDays: number | null;
   allowedDays: number | null;
   percentOfAnnual: number | null;
+  annualWorkingDays: number | null;
   status: CounterResult['status'];
   unit: CounterResult['unit'];
   used: number;
@@ -38,7 +39,10 @@ export interface EmployeeDashboardRow {
   displayName: string;
   email: string;
   borderPackId: BorderId | null;
+  /** The base the counters use: the stored figure, or the default scaled by employment %. */
   annualWorkingDays: number | null;
+  /** What is stored for this member. Null means the base follows employment %. */
+  storedAnnualWorkingDays: number | null;
   profile: EmploymentProfile;
   counters: EmployeeCounterSummary[];
   /** Worst non-disabled status across enabled counters. */
@@ -85,6 +89,7 @@ export function summarizeEmployee(opts: {
       email: opts.email,
       borderPackId: null,
       annualWorkingDays: opts.annualWorkingDays,
+      storedAnnualWorkingDays: opts.annualWorkingDays,
       profile,
       counters: [],
       worstStatus: 'disabled',
@@ -99,17 +104,18 @@ export function summarizeEmployee(opts: {
       email: opts.email,
       borderPackId: opts.borderPackId,
       annualWorkingDays: opts.annualWorkingDays,
+      storedAnnualWorkingDays: opts.annualWorkingDays,
       profile,
       counters: [],
       worstStatus: 'disabled',
       isDemo,
     };
   }
-  const annual = opts.annualWorkingDays ?? pack.defaultAnnualWorkingDays;
+  const annual = annualBaseFor(pack, opts.annualWorkingDays, profile);
   const today = zurichToday();
   const results = evaluatePack(pack, dayLogsToEntries(opts.logs), {
     year: opts.year,
-    annualWorkingDays: annual,
+    annualWorkingDays: opts.annualWorkingDays,
     profile,
     // Same calendar month as the employee view (Europe/Zurich), not UTC.
     referenceMonth: today.slice(0, 7),
@@ -125,6 +131,7 @@ export function summarizeEmployee(opts: {
       usedDays: r.usedDays,
       allowedDays: r.allowedDays,
       percentOfAnnual: r.percentOfAnnual,
+      annualWorkingDays: r.annualWorkingDays,
       status: r.status,
       unit: r.unit,
       used: r.used,
@@ -149,6 +156,7 @@ export function summarizeEmployee(opts: {
     email: opts.email,
     borderPackId: opts.borderPackId,
     annualWorkingDays: annual,
+    storedAnnualWorkingDays: opts.annualWorkingDays,
     profile,
     counters,
     worstStatus: worst,
@@ -167,6 +175,16 @@ export function filterRows(
   });
 }
 
+/**
+ * Corridors with an employer telework-rate filing we could verify: Geneva (ge.ch) under geneva_fr,
+ * Jura (jura.ch) under basel_fr. Other cantons in these corridors were not verified.
+ */
+const FILING_NOTE_PACKS: ReadonlySet<BorderId> = new Set<BorderId>(['geneva_fr', 'basel_fr']);
+
+export function needsFilingNote(rows: Pick<EmployeeDashboardRow, 'borderPackId'>[]): boolean {
+  return rows.some((r) => r.borderPackId != null && FILING_NOTE_PACKS.has(r.borderPackId));
+}
+
 /** CSV for audit — day types and counts only, never location. Not an AFC filing. */
 export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
   const header = [
@@ -176,6 +194,7 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     'border_pack',
     'annual_working_days',
     'employment_percent',
+    'contract_days_per_year',
     'a1_in_place',
     'a1_valid_until',
     'frontier_before_2012',
@@ -190,7 +209,9 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
   ];
   const disclaimer =
     '# BorderDay working export — day types and counts only, never location. Not the annual telework-rate filing some cantons (e.g. AFC) require. Compute and submit that rate with your authority.';
-  const lines = [disclaimer, header.join(',')];
+  const filing =
+    ' Dates we could verify: Geneva, first transmission to the AFC in January 2027 for 2026 data; Jura, attestation by 31 January following the fiscal period, from fiscal period 2026. Other cantons not verified.';
+  const lines = [needsFilingNote(rows) ? disclaimer + filing : disclaimer, header.join(',')];
   for (const r of rows) {
     // Working calc of telework % for this employee (not an AFC filing figure).
     const teleworkRate =
@@ -206,6 +227,7 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
           r.borderPackId ?? '',
           r.annualWorkingDays ?? '',
           r.profile.employmentPercent ?? '',
+          r.profile.contractDaysPerYear ?? '',
           r.profile.a1InPlace ? 'yes' : 'no',
           r.profile.a1ValidUntil ?? '',
           r.profile.frontierBefore2012 ? 'yes' : 'no',

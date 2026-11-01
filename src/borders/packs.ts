@@ -11,6 +11,11 @@ const SRC = {
     url: 'https://www.ge.ch/actualite/teletravail-personnes-frontalieres-entree-vigueur-avenant-convention-franco-suisse-29-07-2025',
     checked: CHECKED,
   },
+  geEmployer: {
+    title: 'ge.ch — obligations de l’employeur en matière de télétravail (première transmission janvier 2027)',
+    url: 'https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres/obligations-employeur-matiere-teletravail',
+    checked: '2026-11-01',
+  },
   geCalc: {
     title: 'ge.ch — calculer le taux de télétravail',
     url: 'https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres/comment-calculer-taux-teletravail',
@@ -92,14 +97,14 @@ const SRC = {
     checked: CHECKED,
   },
   jura: {
-    title: 'Canton du Jura — frontaliers (45 nuits, 4,5 %)',
+    title: 'Canton du Jura — frontaliers (45 nuits, 4,5 %, attestation au 31 janvier dès 2026)',
     url: 'https://www.jura.ch/fr/Autorites/Administration/DFI/CTR/Impots-speciaux/Frontaliers/Frontaliers.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   konsVerCHEV: {
-    title: 'KonsVerCHEV §§ 8–9 — Nichtrückkehrtage (§ 7 is geringfügig only; gesetze-im-internet.de)',
+    title: 'KonsVerCHEV §§ 8–10 — Nichtrückkehrtage, Kürzung der 60 Tage (gesetze-im-internet.de)',
     url: 'https://www.gesetze-im-internet.de/konsverchev/BJNR218700010.html',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
   aargau: {
     title: 'Kanton Aargau — Merkblatt Grenzgänger (Stand 1. Januar 2026)',
@@ -154,7 +159,7 @@ const SRC = {
   frBeBofip: {
     title: 'BOFiP — régime frontalier France–Belgique',
     url: 'https://bofip.impots.gouv.fr/bofip/5518-PGP.html/identifiant=BOI-INT-CVB-BEL-10-60-20170306',
-    checked: CHECKED,
+    checked: '2026-11-01',
   },
 
   estvDeCh2022: {
@@ -193,7 +198,7 @@ const WARN = [0.75, 0.9, 1];
 
 /**
  * Shared EU framework social-security counter.
- * Three bands: under 25% no A1 on telework grounds, 25% to under 50% A1 required, 50% or more
+ * Three bands: under 25% the framework does not apply, 25% to under 50% A1 required, 50% or more
  * residence state. 25%: explanatory memorandum. "Less than 50%": framework agreement Art. 3.
  * Strict at 50%, so not `inclusive`. Trip days stay out of the percentage (they are not telework);
  * the engine warns on them instead because they can break eligibility (Art. 2(3)).
@@ -253,7 +258,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.geAvenant, SRC.geCalc, SRC.ge40, SRC.estvAi, SRC.impots10],
+        sources: [SRC.geAvenant, SRC.geCalc, SRC.ge40, SRC.geEmployer, SRC.estvAi, SRC.impots10],
         notesKey: 'ch_fr_tax_note',
         overKey: 'ch_fr_over_40',
       },
@@ -383,6 +388,9 @@ export const BORDER_PACKS: BorderPack[] = [
         limit: 60,
         inclusive: true, // status lost "bei mehr als 60 Nichtrückkehrtagen"
         countsOvernight: true,
+        // KonsVerCHEV §9(2): 250 for a 5-day week (300 for 6 days; the note says so). Not employmentPercent:
+        // it covers day-based part-time only. §10(2) part-year cut has no formula, so none is applied.
+        contractDayBase: 250,
         unit: 'days_per_year',
         countsAs: {
           telework: 'none',
@@ -492,7 +500,8 @@ export const BORDER_PACKS: BorderPack[] = [
     counters: [
       {
         // BMF Konsultationsvereinbarung 11 Jan 2024: 34 days; part-time/part-year NOT reduced.
-        // Activity under 30 minutes does not count — BorderDay has no minute entry, so note that.
+        // 30 minutes or more counts as a day; BorderDay has no minute entry, so the note says so.
+        // Circular 71 §2.2.3 ex. 2 / BMF §III.6: paid on-call at home counts with no call-out.
         id: 'lu_de_tax_34',
         kind: 'tax',
         labelKey: 'lu_tax_tolerance_34',
@@ -545,6 +554,7 @@ export const BORDER_PACKS: BorderPack[] = [
         limit: 30,
         inclusive: true,
         requiresProfileFlag: 'frontierBefore2012',
+        fractionCountsAsFull: true, // BOFiP §120: "toute sortie de zone, même de courte durée"
         unit: 'days_per_year',
         countsAs: {
           // Minister, 28 May 2024: the tolerance is what makes telework possible for these workers;

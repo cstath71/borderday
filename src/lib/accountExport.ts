@@ -12,6 +12,7 @@ export interface AccountExport {
     borderPackId: BorderId | null;
     annualWorkingDays: number | null;
     employmentPercent: number | null;
+    contractDaysPerYear: number | null;
     a1InPlace: boolean;
     a1ValidUntil: string | null;
     days: Array<{ date: string; type: DayType; overnightAway: boolean; dayShare?: 0.5 | 1 }>;
@@ -30,6 +31,7 @@ export async function collectAccountExport(user: { id: string; email?: string | 
         borderPackId: c.borderPackId,
         annualWorkingDays: c.annualWorkingDays,
         employmentPercent: c.profile?.employmentPercent ?? null,
+        contractDaysPerYear: c.profile?.contractDaysPerYear ?? null,
         a1InPlace: !!c.profile?.a1InPlace,
         a1ValidUntil: c.profile?.a1ValidUntil ?? null,
         days: logs.map((l) => ({ date: l.workDate, type: l.dayType, overnightAway: l.overnightAway, dayShare: l.dayShare })),

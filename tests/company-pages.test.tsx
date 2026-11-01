@@ -146,9 +146,11 @@ describe('Dashboard', () => {
     await screen.findByText(en.company.profileSaved);
     expect(mocked.updateEmployeeProfile).toHaveBeenCalledWith('c1', 'emp1', {
       employmentPercent: null,
+      contractDaysPerYear: null,
       a1InPlace: true,
       a1ValidUntil: null,
       frontierBefore2012: false,
+      annualWorkingDays: 240,
     });
     await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
   });

@@ -11,7 +11,8 @@ import type {
 
 export interface EvaluateOptions {
   year: number;
-  annualWorkingDays?: number;
+  /** The base the person set. Unset (undefined or null): see annualBaseFor. */
+  annualWorkingDays?: number | null;
   referenceMonth?: string; // YYYY-MM
   profile?: EmploymentProfile;
   /** YYYY-MM-DD. Defaults to today in Europe/Zurich. */
@@ -86,6 +87,55 @@ export function proratedLimit(limit: number, rounding: 'floor' | 'ceil', employm
 export function validEmploymentPercent(p: EmploymentProfile | undefined): number | null {
   const v = p?.employmentPercent;
   return typeof v === 'number' && v >= 1 && v <= 100 ? v : null;
+}
+
+/**
+ * Annual base for percentage rules: the person's own figure, else the full-time default scaled by
+ * employment %. ge.ch gives its 240 only "pour une activité à temps plein".
+ */
+export function annualBaseFor(
+  pack: Pick<BorderPack, 'defaultAnnualWorkingDays'>,
+  stored: number | null | undefined,
+  profile: EmploymentProfile | undefined,
+): number {
+  if (stored != null) return stored;
+  const percent = validEmploymentPercent(profile);
+  if (percent == null) return pack.defaultAnnualWorkingDays;
+  return Math.max(1, Math.round((pack.defaultAnnualWorkingDays * percent) / 100));
+}
+
+/** Says which base a part-timer's percentages use, and warns if it is still the full-time figure. */
+function baseMessage(
+  pack: BorderPack,
+  stored: number | null | undefined,
+  profile: EmploymentProfile | undefined,
+): CounterMessage | null {
+  const percent = validEmploymentPercent(profile);
+  if (percent == null || percent >= 100) return null;
+  const full = pack.defaultAnnualWorkingDays;
+  if (stored == null) {
+    return { key: 'base_scaled', tone: 'info', vars: { annual: annualBaseFor(pack, null, profile), full, pct: percent } };
+  }
+  if (stored !== full) return null;
+  return { key: 'base_full_time', tone: 'warn', vars: { annual: full, pct: percent, scaled: annualBaseFor(pack, null, profile) } };
+}
+
+export function validContractDays(p: EmploymentProfile | undefined): number | null {
+  const v = p?.contractDaysPerYear;
+  return typeof v === 'number' && v >= 1 && v <= 366 ? v : null;
+}
+
+/**
+ * Proportional limit under KonsVerCHEV §9(2). The ordinance gives no rounding rule, so this rounds
+ * down (at worst an early warning), and the card labels the result an estimate.
+ */
+export function contractDaysLimit(limit: number, contractDays: number, base: number): number {
+  if (contractDays >= base) return limit;
+  return Math.max(1, Math.floor((limit * contractDays) / base));
+}
+
+export function usesContractDays(pack: BorderPack): boolean {
+  return pack.counters.some((c) => c.enabled && c.contractDayBase != null);
 }
 
 /**
@@ -204,7 +254,9 @@ function a1InPlace(profile: EmploymentProfile | undefined, today: string): boole
 /**
  * Framework bands (explanatory memorandum: change of legislation "as soon as the telework in the
  * state of residence amounts to a share of 25%"; Art. 3: "less than 50%"):
- * under 25% no A1 on telework grounds, 25% to under 50% A1 required, 50% or more residence state.
+ * under 25% the framework does not apply, 25% to under 50% A1 required, 50% or more residence state.
+ * Under 25% the copy says who decides and who must be told, and does not say an A1 is or is not
+ * required: no source read settles that (Reg. 987/2009 Art. 16; audit-2 H2, U4).
  */
 function applyA1Bands(
   counter: LimitCounter,
@@ -298,7 +350,7 @@ export function evaluateCounter(
     return evaluateFloor(counter, entries, opts.referenceMonth ?? monthOf(today), today);
   }
 
-  const annualWorkingDays = opts.annualWorkingDays ?? pack.defaultAnnualWorkingDays;
+  const annualWorkingDays = annualBaseFor(pack, opts.annualWorkingDays, opts.profile);
   const employmentPercent = validEmploymentPercent(opts.profile);
   const yearEntries = entries.filter((e) => yearOf(e.date) === opts.year);
 
@@ -340,6 +392,8 @@ export function evaluateCounter(
     let status = statusFor(ratio, counter);
     let statusLabelKey = capStatusLabel(status);
     const messages: CounterMessage[] = [];
+    const base = baseMessage(pack, opts.annualWorkingDays, opts.profile);
+    if (base) messages.push(base);
     if (counter.a1FromPercent != null) {
       const band = applyA1Bands(counter, usedDays, annualWorkingDays, ratio, opts.profile, today);
       status = band.status;
@@ -411,6 +465,20 @@ export function evaluateCounter(
       if (employmentPercent < 100) {
         messages.push({ key: 'prorate_applied', tone: 'info', vars: { pct: employmentPercent, limit } });
       }
+    }
+  }
+
+  if (counter.contractDayBase != null) {
+    const contractDays = validContractDays(opts.profile);
+    if (contractDays != null && contractDays < counter.contractDayBase) {
+      limit = contractDaysLimit(limit, contractDays, counter.contractDayBase);
+      messages.push({
+        key: 'contract_days_estimate',
+        tone: 'info',
+        vars: { days: contractDays, base: counter.contractDayBase, limit, full: counter.limit },
+      });
+    } else if (contractDays == null && employmentPercent != null && employmentPercent < 100) {
+      messages.push({ key: 'contract_days_missing', tone: 'warn', vars: { limit } });
     }
   }
 

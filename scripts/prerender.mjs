@@ -16,6 +16,7 @@ import {
   INDEXNOW_KEY,
   LANGS,
   NOINDEX_PATHS,
+  PAGE_FAQS,
   PAGES,
   PUBLIC_PATHS,
   absUrl,
@@ -79,30 +80,35 @@ function headBlock({ lang, path, title, description, noindex }) {
     ${verify ? verify + '\n    ' : ''}`.trimEnd();
 }
 
-function faqHtml(lang) {
-  const pairs = FAQ[lang] || FAQ.en;
+function faqHtml(lang, pairs) {
+  const list = pairs || FAQ[lang] || FAQ.en;
   return (
     `<section class="faq" id="faq"><h2>FAQ</h2>` +
-    pairs.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('') +
+    list.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('') +
     `</section>`
   );
 }
 
 function prerenderBody(lang, path, page) {
-  const showFaq = path === '' || path === 'faq';
+  const pageFaq = PAGE_FAQS[path]?.[lang] || PAGE_FAQS[path]?.en;
+  const showFaq = path === '' || path === 'faq' || !!pageFaq;
   const crumbs = (page.crumbs || [])
     .map(([name, p], i, arr) => {
       if (i === arr.length - 1) return `<li aria-current="page">${esc(name)}</li>`;
       return `<li><a href="${esc(absUrl(lang, p))}">${esc(name)}</a></li>`;
     })
     .join('');
+  const cta =
+    path.startsWith('employers/')
+      ? ` · <a href="${esc(absUrl(lang, 'company/signup'))}">Company sign-up</a>`
+      : '';
   return `
     <article class="bd-prerender" data-bd-prerender="1">
       <nav class="crumbs" aria-label="Breadcrumb"><ol>${crumbs}</ol></nav>
       <h1>${esc(page.h1)}</h1>
       <p id="summary"><strong>${esc(IN_SHORT_LABEL[lang] || 'In short')}:</strong> ${esc(page.summary)}</p>
-      ${showFaq ? faqHtml(lang) : ''}
-      <p><a href="${esc(absUrl(lang, path))}">${esc(BRAND)}</a> · <a href="${esc(absUrl(lang, 'pricing'))}">Pricing</a></p>
+      ${showFaq ? faqHtml(lang, pageFaq) : ''}
+      <p><a href="${esc(absUrl(lang, path))}">${esc(BRAND)}</a> · <a href="${esc(absUrl(lang, 'pricing'))}">Pricing</a>${cta}</p>
     </article>`;
 }
 
@@ -111,6 +117,8 @@ function graphFor(lang, path) {
   const page = PAGES[path]?.[lang];
   if (page?.crumbs?.length) graph.push(breadcrumbLd(lang, page.crumbs));
   if (path === '' || path === 'faq') graph.push(faqLd(lang));
+  const pageFaq = PAGE_FAQS[path]?.[lang] || PAGE_FAQS[path]?.en;
+  if (pageFaq) graph.push(faqLd(lang, pageFaq));
   return graph;
 }
 

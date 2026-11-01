@@ -1013,6 +1013,92 @@ const de: Dict = {
     signUpTerms:
       'Das Anlegen eines Kontos ist kostenlos. Ein kostenpflichtiger Plan beginnt erst im Checkout: 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Bitte lesen:',
   },
+
+  employersGeneva: {
+    metaTitle: 'Arbeitgeber Genf — Telearbeitstage (FR→CH) — BorderDay',
+    metaDescription:
+      'Für HR in Genf: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Frankreich erfassen. Steuerzähler 40% / 10 temporäre Einsatztage und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+    heroTitle: 'Arbeitgeber in Genf: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich',
+    inShort:
+      'BorderDay hilft Genfer Arbeitgebern, Telearbeit, Vor-Ort- und Reisetage für Personen zu erfassen, die in Frankreich wohnen und in der Schweiz arbeiten. Steuer: bis 40% Telearbeit und 10 temporäre Einsatztage (ge.ch / ESTV). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Arbeitgeberpflicht: erste AFC-Übermittlung der Telearbeitsquote laut ge.ch für Januar 2027 (Daten 2026). Keine Steuer- oder Rechtsberatung.',
+    thresholdsTitle: 'Was das Pack geneva_fr heute zählt',
+    thresholdTax40:
+      'Steuer — Telearbeitsanteil: bis 40% der Arbeitszeit im Wohnstaat (inklusive). Darüber kann die Besteuerung in Frankreich ab dem ersten Tag greifen (ge.ch).',
+    thresholdMissions10:
+      'Steuer — temporäre Einsätze im Ausland: Jahreslimit 10 Tage (inklusive), gemäss Verständigungsvereinbarung ESTV zur Verknüpfung mit den 40%.',
+    thresholdSs50:
+      'Sozialversicherung — EU/EWR/CH-Rahmen: unter 25% gilt der Rahmen nicht; von 25% bis unter 50% ist in der Regel ein A1 nötig; ab 50% Wohnstaat-Affiliation. Getrennt von der Steuer.',
+    thresholdEmployerDuty:
+      'Arbeitgeberpflicht (Genf): jährliche Bescheinigung der Telearbeitsquote — ge.ch nennt derzeit die erste Übermittlung im Januar 2027 für das Kalenderjahr 2026.',
+    howTitle: 'Wie BorderDay HR hilft',
+    howBody:
+      'Mitarbeitende einladen; jede Person wählt die Route Genf←Frankreich und erfasst nur Tagesarten. HR sieht dieselben Steuer- und Sozialversicherungszähler, Warnungen und CSV-Export. Kein GPS. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; 7 Tage Test, Karte erforderlich.',
+    sourcesTitle: 'Offizielle Quellen (wie im Produkt-Pack)',
+    disclaimer:
+      'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit einer Fachperson oder der zuständigen Behörde prüfen.',
+    ctaPrimary: 'Unternehmenskonto erstellen',
+    ctaPricing: 'Preise ansehen',
+    faqTitle: 'FAQ für Genfer Arbeitgeber',
+    faq1q: 'Ersetzt BorderDay die AFC-Meldung der Telearbeitsquote?',
+    faq1a:
+      'Nein. Es führt ein Arbeitstagebuch zur Vorbereitung. Die jährliche Bescheinigung bleibt die Meldung des Arbeitgebers nach ge.ch.',
+    faq2q: 'Welche Route für Mitarbeitende mit Wohnsitz in Frankreich?',
+    faq2a:
+      'Das Pack Genf / Nicht-1983-Kantone←Frankreich (geneva_fr): 40% Telearbeit, 10 temporäre Einsatztage und der Sozialversicherungszähler des Rahmens.',
+    faq3q: 'Erfasst ihr den Standort der Mitarbeitenden?',
+    faq3a: 'Nein. Nur Tagesart und optional Übernachtung auswärts ja/nein. Nie GPS.',
+    faq4q: 'Was bedeutet der Sozialversicherungszähler bei 50%?',
+    faq4a:
+      'Laut Rahmen führt Telearbeit im Wohnstaat von 50% oder mehr der Arbeitszeit in der Regel zur Wohnsitz-Affiliation; zwischen 25% und unter 50% ist in der Regel ein A1 nötig. BorderDay zeigt diese Bänder getrennt von der Steuer.',
+    faq5q: 'Ist das Steuer- oder Rechtsberatung?',
+    faq5a:
+      'Nein. Es ist ein Erfassungstool mit Zählern auf Basis öffentlicher Quellen, die hier und in der App verlinkt sind. Mit Berater oder Behörde bestätigen.',
+  },
+  employersLuxembourg: {
+    metaTitle: 'Arbeitgeber Luxemburg — Telearbeit FR/BE/DE — BorderDay',
+    metaDescription:
+      'Eine Arbeitgeberseite für Frankreich→LU, Belgien→LU und Deutschland→LU: steuerliche 34-Tage-Toleranz und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+    heroTitle: 'Arbeitgeber in Luxemburg: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich, Belgien oder Deutschland',
+    inShort:
+      'BorderDay deckt alle drei Wohnsitzrouten nach Luxemburg in einem Unternehmenskonto ab: Frankreich→LU, Belgien→LU und Deutschland→LU. Jede hat einen Steuerzähler mit 34-Tage-Toleranz (packspezifische Teilzeitregeln) plus den Sozialversicherungsrahmen unter 50%. Nur Tagesarten. Keine Steuer- oder Rechtsberatung.',
+    routesTitle: 'Drei Routen, ein HR-Dashboard',
+    routeFr:
+      'Frankreich→Luxemburg (luxembourg_fr): 34-Tage-Steuertoleranz; Teilzeit/Teiljahr mit offizieller Reduktion (Abrunden) laut FR–LU-Abkommen.',
+    routeBe:
+      'Belgien→Luxemburg (luxembourg_be): 34-Tage-Toleranz; offizielle LU-Hinweise: keine Reduktion für Teilzeit oder Teiljahr; jeder Tagesbruchteil zählt als ganzer Tag.',
+    routeDe:
+      'Deutschland→Luxemburg (luxembourg_de): 34-Tage-Toleranz (ab 2024); keine Reduktion für Teilzeit/Teiljahr; Rundschreiben 71 / BMF-Konsultationsvereinbarung (kurze Arbeit ausserhalb Luxemburgs kann schon als Tag zählen — siehe In-App-Hinweis und ACD/BMF-Quellen).',
+    thresholdsTitle: 'Steuer 34 Tage + Sozialversicherung ~50%',
+    thresholdTax34:
+      'Steuer: alle drei Packs zählen Telearbeit und Drittstaaten-/Reisetage auf eine jährliche 34-Tage-Toleranz (inklusive). Vor-Ort-Tage in Luxemburg zählen nicht in diesen Steuerzähler.',
+    thresholdPartTime:
+      'Teilzeit: Frankreich→LU reduziert die 34 Tage (floor). Belgien→LU und Deutschland→LU reduzieren die 34 Tage nicht — entsprechend den LU-Hinweisen und dem DE–LU-Abkommen.',
+    thresholdSs50:
+      'Sozialversicherung: derselbe EU/EWR/CH-Rahmen auf allen drei Packs — unter 25% / 25%–unter 50% (A1) / 50% oder mehr — mit CCSS Luxemburg und FPS-Verwahrer-Quellen im Produkt.',
+    howTitle: 'Wie BorderDay LU-Arbeitgebern hilft',
+    howBody:
+      'Ein Unternehmenskonto für Mitarbeitende mit Wohnsitz in FR, BE oder DE. Jede Person wählt ihren Korridor und erfasst Tagesarten; HR verfolgt das 34-Tage-Tempo und die Sozialversicherungsbänder, mit CSV-Export. Kein GPS. Unternehmen: 5 € je aktive Person/Monat (Minimum 39 €), zzgl. MWST; 7-Tage-Test, Karte erforderlich.',
+    sourcesTitle: 'Offizielle Quellen (Packs luxembourg_fr / _be / _de)',
+    disclaimer:
+      'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit einer Fachperson oder der zuständigen Behörde prüfen.',
+    ctaPrimary: 'Unternehmenskonto erstellen',
+    ctaPricing: 'Preise ansehen',
+    faqTitle: 'FAQ für Arbeitgeber in Luxemburg',
+    faq1q: 'Kann ein Konto Mitarbeitende aus FR, BE und DE abdecken?',
+    faq1a:
+      'Ja. Jede Person wählt Frankreich→LU, Belgien→LU oder Deutschland→LU. HR sieht alle drei im selben Dashboard.',
+    faq2q: 'Sind die 34 Tage auf jeder Route gleich?',
+    faq2a:
+      'Die Toleranz beträgt auf allen dreien 34 Tage. Die Teilzeitreduktion gilt nur Frankreich→LU; BE→LU und DE→LU behalten 34 Tage ohne diese Reduktion laut zitierten amtlichen Hinweisen.',
+    faq3q: 'Sozialversicherung versus Steuer?',
+    faq3a:
+      'Getrennte Zähler. Die Steuer nutzt die 34-Tage-Toleranz; die Sozialversicherung die Prozentbänder des Rahmens (25% / unter 50% / 50%+), einschliesslich CCSS-Hinweisen für Arbeitgeber.',
+    faq4q: 'Nutzt ihr GPS?',
+    faq4a: 'Nein. Nur Tagesarten und optional Übernachtung auswärts. Nie Gerätekoordinaten.',
+    faq5q: 'Ist BorderDay Rechts- oder Steuerberatung?',
+    faq5a:
+      'Nein. Es trackt Tage gegen öffentliche Schwellen, die hier und in der App verlinkt sind. Meldungen mit Berater oder zuständiger Verwaltung bestätigen.',
+  },
 };
 
 export default de;

@@ -1002,6 +1002,92 @@ const en = {
     signUpTerms:
       'Creating an account is free. A paid plan starts only through checkout: 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel. Read:',
   },
+
+  employersGeneva: {
+    metaTitle: 'Geneva employers — telework day tracking (FR→CH) — BorderDay',
+    metaDescription:
+      'For Geneva HR: track telework days for staff living in France. Tax counters for the 40% telework share and 10 mission days, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+    heroTitle: 'Geneva employers: telework days for staff living in France',
+    inShort:
+      'BorderDay helps Geneva employers log telework, on-site and trip days for people who live in France and work in Switzerland. Tax: up to 40% telework and 10 temporary mission days (ge.ch / ESTV). Social security: framework bands under 25%, 25% to under 50% (A1), and 50% or more. Employer telework-rate duty: first AFC transmission planned for January 2027 for 2026 data. Not tax or legal advice.',
+    thresholdsTitle: 'What the geneva_fr pack counts today',
+    thresholdTax40:
+      'Tax — telework share: up to 40% of working time in the residence state (inclusive). Beyond that, French taxation can apply from the first day (ge.ch).',
+    thresholdMissions10:
+      'Tax — temporary missions abroad: annual limit of 10 days (inclusive), with the ESTV amicable agreement rules on how mission days interact with the 40% share.',
+    thresholdSs50:
+      'Social security — EU/EEA/CH framework: under 25% the framework does not apply; from 25% to under 50% an A1 is normally required; at 50% or more residence-state affiliation. Separate from tax.',
+    thresholdEmployerDuty:
+      'Employer duty (Geneva): annual telework-rate attestation — ge.ch currently indicates the first transmission in January 2027 for calendar year 2026.',
+    howTitle: 'How BorderDay helps HR',
+    howBody:
+      'Invite employees, each picks the Geneva←France route, and logs day types only (telework / on site / trip / non-working). HR sees the same tax and social-security counters, warnings as limits approach, and can export CSV. No GPS or device location. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; 7-day free trial, card required.',
+    sourcesTitle: 'Official sources (same as the product pack)',
+    disclaimer:
+      'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',
+    ctaPrimary: 'Create company account',
+    ctaPricing: 'See pricing',
+    faqTitle: 'FAQ for Geneva employers',
+    faq1q: 'Does BorderDay replace the AFC telework-rate filing?',
+    faq1a:
+      'No. It keeps a working day log so HR can prepare figures. The annual attestation remains the employer’s filing under ge.ch rules.',
+    faq2q: 'Which border route should Geneva staff living in France pick?',
+    faq2a:
+      'The Geneva / non-1983 cantons←France pack (geneva_fr): 40% telework, 10 mission days, and the shared social-security framework counter.',
+    faq3q: 'Do you track employee location?',
+    faq3a: 'No. Employees log a day type and optional overnight-away yes/no. HR never sees GPS or device coordinates.',
+    faq4q: 'What does the social-security 50% counter mean?',
+    faq4a:
+      'Under the framework agreement, telework in the residence state of 50% or more of working time generally means residence-state social security; between 25% and under 50% an A1 is normally needed. BorderDay shows those bands separately from tax.',
+    faq5q: 'Is this tax or legal advice?',
+    faq5a:
+      'No. It is a tracking tool with counters based on public sources linked on this page and in the app. Confirm with your adviser or authority.',
+  },
+  employersLuxembourg: {
+    metaTitle: 'Luxembourg employers — FR/BE/DE telework days — BorderDay',
+    metaDescription:
+      'One employer page for France→LU, Belgium→LU and Germany→LU: 34-day tax tolerance and the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+    heroTitle: 'Luxembourg employers: telework days for staff living in France, Belgium or Germany',
+    inShort:
+      'BorderDay covers all three Luxembourg residence routes in one company account: France→LU, Belgium→LU and Germany→LU. Each has a 34-day tax tolerance counter (with pack-specific part-time rules) plus the shared social-security framework under 50%. Day types only — no location tracking. Not tax or legal advice.',
+    routesTitle: 'Three routes, one employer dashboard',
+    routeFr:
+      'France→Luxembourg (luxembourg_fr): 34-day tax tolerance; part-time/part-year uses the official reduction (floor to whole days) per the FR–LU agreement.',
+    routeBe:
+      'Belgium→Luxembourg (luxembourg_be): 34-day tax tolerance; official LU notes: not reduced for part-time or part-year; a fraction of a day counts as a full day.',
+    routeDe:
+      'Germany→Luxembourg (luxembourg_de): 34-day tax tolerance (from 2024); not reduced for part-time/part-year; circular 71 / BMF consultation agreement (even a short spell of work outside Luxembourg can count as a day — see the in-app note and ACD/BMF sources).',
+    thresholdsTitle: 'Tax 34 days + social security ~50%',
+    thresholdTax34:
+      'Tax: each of the three packs counts telework and third-state/trip days toward a 34-day annual tolerance (inclusive). On-site days in Luxembourg do not count toward that tax counter.',
+    thresholdPartTime:
+      'Part-time: France→LU reduces the 34 days (floor). Belgium→LU and Germany→LU do not reduce the 34 days for part-time or part-year — matching the official LU notes and DE–LU consultation agreement.',
+    thresholdSs50:
+      'Social security: same EU/EEA/CH framework on all three packs — under 25% / 25%–under 50% (A1) / 50% or more — with CCSS Luxembourg and FPS depositary sources linked in the product.',
+    howTitle: 'How BorderDay helps LU employers',
+    howBody:
+      'One company account for staff on FR, BE and DE residence routes. Employees pick their corridor and log day types; HR watches 34-day tax pace and social-security bands, with CSV export. No GPS. Company: €5 per active employee/month (€39 minimum), excl. VAT; 7-day trial, card required.',
+    sourcesTitle: 'Official sources (same as luxembourg_fr / _be / _de packs)',
+    disclaimer:
+      'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',
+    ctaPrimary: 'Create company account',
+    ctaPricing: 'See pricing',
+    faqTitle: 'FAQ for Luxembourg employers',
+    faq1q: 'Can one company account cover staff from France, Belgium and Germany?',
+    faq1a:
+      'Yes. Each employee picks France→LU, Belgium→LU or Germany→LU. HR sees all three on the same dashboard.',
+    faq2q: 'Is the 34-day limit the same on every route?',
+    faq2a:
+      'The headline tolerance is 34 days on all three. Part-time reduction applies on France→LU only; Belgium→LU and Germany→LU keep 34 days without that reduction, per the cited official notes.',
+    faq3q: 'What about social security versus tax?',
+    faq3a:
+      'They are separate counters. Tax uses the 34-day tolerance; social security uses the framework percentage bands (25% / under 50% / 50%+), including CCSS Luxembourg guidance for employers.',
+    faq4q: 'Do you use GPS?',
+    faq4a: 'No. Only day types and an optional overnight-away mark. Never device coordinates.',
+    faq5q: 'Is BorderDay legal or tax advice?',
+    faq5a:
+      'No. It tracks days against public thresholds linked here and in the app. Confirm filings with your adviser or the competent administration.',
+  },
 };
 
 type DeepString<T> = {

@@ -11,6 +11,7 @@ import {
   LANGS,
   LASTMOD,
   NOINDEX_PATHS,
+  PAGE_FAQS,
   PAGES,
   PUBLIC_PATHS,
   TAX_COUNTER_CORRIDORS,
@@ -118,7 +119,7 @@ describe('SEO generators', () => {
     expect(site.publisher['@id']).toBe(org['@id']);
   });
 
-  it('every PUBLIC_PATH has copy in all 4 languages with unique titles', () => {
+  it('every PUBLIC_PATH has copy in all languages with unique titles', () => {
     const titles = new Set<string>();
     for (const path of PUBLIC_PATHS) {
       expect(PAGES[path]).toBeTruthy();
@@ -176,6 +177,51 @@ describe('honest coverage in SEO copy', () => {
 
   it('FAQ has an out-of-scope answer in every language', () => {
     for (const lang of LANGS) expect(FAQ[lang].some(([, a]: string[]) => a.includes('CSV'))).toBe(true);
+  });
+});
+
+
+describe('employer SEO landing pages', () => {
+  it('exposes Geneva and Luxembourg employer paths in PUBLIC_PATHS and PAGES', () => {
+    expect(PUBLIC_PATHS).toEqual(expect.arrayContaining(['employers/geneva', 'employers/luxembourg']));
+    for (const path of ['employers/geneva', 'employers/luxembourg']) {
+      expect(PAGES[path]).toBeTruthy();
+      for (const lang of LANGS) {
+        const page = PAGES[path][lang];
+        expect(page.title).not.toMatch(SLOGAN);
+        expect(page.summary).not.toMatch(SLOGAN);
+        expect(page.summary).not.toMatch(OWNER);
+      }
+    }
+  });
+
+  it('Luxembourg employer copy covers FR, BE and DE routes with 34-day tax and 50% SS', () => {
+    for (const lang of LANGS) {
+      const blob = `${PAGES['employers/luxembourg'][lang].title} ${PAGES['employers/luxembourg'][lang].description} ${PAGES['employers/luxembourg'][lang].h1} ${PAGES['employers/luxembourg'][lang].summary}`;
+      expect(blob).toMatch(/34/);
+      expect(blob).toMatch(/50%/);
+      expect(blob.toLowerCase()).toMatch(/france|frankreich|francia|frankrijk/);
+      expect(blob.toLowerCase()).toMatch(/belgium|belgien|belgio|belgië|belgique/);
+      expect(blob.toLowerCase()).toMatch(/germany|deutschland|germania|duitsland|allemagne/);
+    }
+  });
+
+  it('PAGE_FAQS provide five Q&A pairs per employer page and language', () => {
+    for (const path of ['employers/geneva', 'employers/luxembourg']) {
+      expect(PAGE_FAQS[path]).toBeTruthy();
+      for (const lang of LANGS) {
+        const pairs = PAGE_FAQS[path][lang];
+        expect(pairs).toHaveLength(5);
+        const ld = faqLd(lang, pairs);
+        expect(ld.mainEntity).toHaveLength(5);
+      }
+    }
+  });
+
+  it('llms.txt lists the employer landing URLs', () => {
+    const short = llmsTxt();
+    expect(short).toContain(`${BASE}/en/employers/geneva/`);
+    expect(short).toContain(`${BASE}/en/employers/luxembourg/`);
   });
 });
 

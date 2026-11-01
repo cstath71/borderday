@@ -23,6 +23,7 @@ export const PAGES: Record<
   Record<string, { title: string; description: string; h1: string; summary: string; crumbs: [string, string][] }>
 >;
 export const FAQ: Record<string, [string, string][]>;
+export const PAGE_FAQS: Record<string, Record<string, [string, string][]>>;
 export function esc(s: string): string;
 export function absUrl(lang: string, path: string): string;
 export function pageFile(lang: string, path: string): string;
@@ -38,7 +39,7 @@ export function breadcrumbLd(
   lang: string,
   crumbs: [string, string][],
 ): { itemListElement: { item: string }[] };
-export function faqLd(lang: string): { '@type': string; mainEntity: unknown[] };
+export function faqLd(lang: string, pairs?: [string, string][]): { '@type': string; mainEntity: unknown[] };
 export function ldScript(graph: unknown[]): string;
 export function llmsTxt(): string;
 export function llmsFullTxt(): string;

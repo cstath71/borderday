@@ -9,6 +9,8 @@ import Accessibility from './pages/Accessibility';
 import Disclaimer from './pages/Disclaimer';
 import Faq from './pages/Faq';
 import ForIndividuals from './pages/ForIndividuals';
+import EmployersGeneva from './pages/employers/Geneva';
+import EmployersLuxembourg from './pages/employers/Luxembourg';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
@@ -40,6 +42,8 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="app" element={<AppPage />} />
         <Route path="for-individuals" element={<ForIndividuals />} />
+        <Route path="employers/geneva" element={<EmployersGeneva />} />
+        <Route path="employers/luxembourg" element={<EmployersLuxembourg />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />

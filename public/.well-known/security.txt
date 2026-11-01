@@ -1,0 +1,4 @@
+Contact: mailto:hello@borderday.com
+Expires: 2027-11-01T00:00:00.000Z
+Preferred-Languages: en, fr, de, it, nl
+Canonical: https://borderday.com/.well-known/security.txt

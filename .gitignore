@@ -11,3 +11,4 @@ supabase/.temp/
 
 # Controller drafts kept on file; not for GitHub Pages or public clone
 legal-drafts/
+LEGAL_REVIEW*.md

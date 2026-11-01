@@ -1,3 +1,17 @@
+-- DO NOT APPLY THIS FILE TO A DATABASE THAT HAS BORDERDAY TABLES (audit-2 A3-32).
+-- This is the old non-prefixed schema, never deployed. The live schema starts at 20261031140000 (bd_*).
+-- A later `supabase db push` would add unused tables and a policy exposing every pending invite.
+-- The guard below stops that with a rollback. Mark it as applied instead:
+--   supabase migration repair --status applied 20261031120000
+-- Fresh local databases still run it, so the migration chain and the tests are unchanged.
+do $guard$
+begin
+  if to_regclass('public.bd_companies') is not null then
+    raise exception 'Legacy migration 20261031120000 must not run here. Run: supabase migration repair --status applied 20261031120000';
+  end if;
+end
+$guard$;
+
 -- BorderDay employer-first schema (GDPR / Swiss nLPD oriented)
 -- Designed for Supabase EU. Apply with: supabase db reset (local) or db push (approved cloud only).
 -- No GPS / location columns by design. Day types + dates + counts only.

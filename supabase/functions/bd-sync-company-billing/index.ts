@@ -1,18 +1,15 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
+import { corsHeaders, GENERIC_ERROR, logFailure } from "../_shared/http.ts";
 
 /**
  * Align a company's Stripe subscription item with current active seat_count.
  * Call after members join/leave (or from HR dashboard). Switches between
  * flat minimum (≤7 seats) and per-seat (≥8) prices.
  */
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
-
 Deno.serve(async (req) => {
+  const cors = corsHeaders(req.headers.get("Origin"), Deno.env.get("BD_SITE_URL"));
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
   const priceCompanyMonth = Deno.env.get("STRIPE_PRICE_COMPANY_MONTH");
@@ -121,7 +118,8 @@ Deno.serve(async (req) => {
       priceId: targetPriceId,
     }), { headers: { ...cors, "Content-Type": "application/json" } });
   } catch (e) {
-    return new Response(JSON.stringify({ available: false, message: e instanceof Error ? e.message : "error" }), {
+    logFailure("bd-sync-company-billing", e);
+    return new Response(JSON.stringify({ available: false, message: GENERIC_ERROR }), {
       status: 200, headers: { ...cors, "Content-Type": "application/json" },
     });
   }

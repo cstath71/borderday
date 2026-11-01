@@ -409,7 +409,8 @@ describe('real Postgres: bd_accept_invite email match (H2)', () => {
     for (const status of ['none', 'trialing', 'active', 'past_due', 'canceled', 'incomplete']) {
       for (const trial of [null, future, past]) {
         await db.query(`update public.bd_companies set subscription_status = $2, trial_ends_at = $3 where id = $1`, [company, status, trial]);
-        const { rows } = await db.query(`select public.bd_company_has_access($1) as ok`, [company]);
+        // As a member: A3-28 answers false to anyone else.
+        const { rows } = await as(owner, `select public.bd_company_has_access($1) as ok`, [company]);
         expect(rows[0].ok, `${status} / ${trial}`).toBe(companyCanEmailInvites(status, trial));
       }
     }
@@ -815,7 +816,7 @@ describe('real Postgres: day logs', () => {
     await logDay(e1, company, '2026-03-07');
     await expect(
       as(e1, `update public.bd_day_logs set company_id = $1 where employee_user_id = $2`, [elsewhere, e1]),
-    ).rejects.toThrow(/row-level security/);
+    ).rejects.toThrow(/another company/); // A3-30: the trigger refuses before RLS is checked.
   });
 });
 
@@ -905,5 +906,200 @@ describe('real Postgres: paid access (C8)', () => {
       emp,
     ]);
     expect(await seats()).toBe(1);
+  });
+});
+
+describe('real Postgres: audit-2 low hardening', () => {
+  const tables = [
+    'bd_profiles', 'bd_companies', 'bd_company_members', 'bd_invitations', 'bd_day_logs',
+    'bd_consents', 'bd_personal_day_logs', 'bd_subscriptions', 'bd_contract_requests', 'bd_stripe_events',
+  ];
+
+  it('A3-23: anon holds no privilege on any bd_ table', async () => {
+    const { rows } = await db.query(
+      `select tablename from pg_tables where schemaname = 'public' and tablename like 'bd\\_%'`,
+    );
+    // A new table must be added to the migration, not missed silently.
+    expect(rows.map((r) => r.tablename).sort()).toEqual([...tables].sort());
+    for (const table of tables) {
+      const grants = await db.query(
+        `select privilege_type from information_schema.role_table_grants
+         where grantee = 'anon' and table_schema = 'public' and table_name = $1`,
+        [table],
+      );
+      expect(grants.rows, table).toEqual([]);
+    }
+    await expect(as(null, `select id from public.bd_day_logs limit 1`)).rejects.toMatchObject({ code: '42501' });
+  });
+
+  it('A3-23: the invite lookup still works signed out', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const token = await invite(owner, company, `${randomUUID()}@example.com`);
+    const { rows } = await as(null, `select company_id from public.bd_get_invite_by_token($1)`, [token]);
+    expect(rows[0].company_id).toBe(company);
+  });
+
+  it('A3-23: a member still reads and writes through RLS', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const employee = await addMember(owner, company);
+    await logDay(employee, company, '2026-03-02');
+    expect((await as(employee, `select id from public.bd_day_logs where employee_user_id = $1`, [employee])).rowCount).toBe(1);
+    expect((await as(owner, `select id from public.bd_companies where id = $1`, [company])).rowCount).toBe(1);
+  });
+
+  it('A3-26: the last active owner cannot be removed, deactivated or demoted', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const del = `delete from public.bd_company_members where company_id = $1 and user_id = $2`;
+    const code = { code: 'BD002' };
+    await expect(as(owner, del, [company, owner])).rejects.toMatchObject(code);
+    await expect(
+      as(owner, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [company, owner]),
+    ).rejects.toMatchObject(code);
+    await expect(
+      as(owner, `update public.bd_company_members set role = 'employee' where company_id = $1 and user_id = $2`, [company, owner]),
+    ).rejects.toMatchObject(code);
+    expect(await roleOf(company, owner)).toBe('owner');
+  });
+
+  it('A3-26: an owner can go once a second active owner exists, and other rows are unaffected', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const second = await addMember(owner, company, 'owner');
+    const employee = await addMember(owner, company);
+    await as(owner, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [company, employee]);
+    await as(owner, `update public.bd_company_members set active = true where company_id = $1 and user_id = $2`, [company, employee]);
+    await as(owner, `delete from public.bd_company_members where company_id = $1 and user_id = $2`, [company, second]);
+    expect(await roleOf(company, second)).toBeUndefined();
+    // Back to one owner, so the rule applies again.
+    await expect(
+      as(owner, `delete from public.bd_company_members where company_id = $1 and user_id = $2`, [company, owner]),
+    ).rejects.toMatchObject({ code: 'BD002' });
+  });
+
+  it('A3-26: deleting the company or the person still cascades', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    await db.query(`delete from public.bd_companies where id = $1`, [company]);
+    expect(await roleOf(company, owner)).toBeUndefined();
+    const leaver = await newUser(`${randomUUID()}@example.com`);
+    const other = await newCompany(leaver);
+    await db.query(`delete from public.bd_profiles where id = $1`, [leaver]);
+    expect(await roleOf(other, leaver)).toBeUndefined();
+  });
+
+  it('A3-27: an employee cannot insert a notice record directly', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const employee = await addMember(owner, company);
+    await expect(
+      as(
+        employee,
+        `insert into public.bd_consents (user_id, company_id, consent_version, text_lang, accepted_at)
+         values ($1, $2, 'backdated', 'en', '2000-01-01')`,
+        [employee, company],
+      ),
+    ).rejects.toMatchObject({ code: '42501' });
+    const { rows } = await db.query(`select consent_version from public.bd_consents where user_id = $1`, [employee]);
+    expect(rows.map((r) => r.consent_version)).toEqual(['v1']);
+  });
+
+  it('A3-27: the server sets log timestamps, whatever the client sends', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const employee = await addMember(owner, company);
+    await as(
+      employee,
+      `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type, created_at, updated_at)
+       values ($1, $2, '2026-03-03', 'onsite', '2000-01-01', '2000-01-01')`,
+      [company, employee],
+    );
+    const read = () =>
+      db.query(`select created_at, updated_at from public.bd_day_logs where employee_user_id = $1`, [employee]);
+    const first = (await read()).rows[0];
+    expect(new Date(first.created_at).getFullYear()).toBeGreaterThan(2000);
+    expect(new Date(first.updated_at).getFullYear()).toBeGreaterThan(2000);
+    await as(
+      employee,
+      `update public.bd_day_logs set created_at = '2000-01-01', updated_at = '2000-01-01', day_type = 'telework'
+       where employee_user_id = $1`,
+      [employee],
+    );
+    const second = (await read()).rows[0];
+    expect(second.created_at).toEqual(first.created_at);
+    expect(new Date(second.updated_at).getFullYear()).toBeGreaterThan(2000);
+  });
+
+  it('A3-28: a stranger learns nothing about another company’s access, a member still can log', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const stranger = await newUser(`${randomUUID()}@example.com`);
+    const ask = `select public.bd_company_has_access($1) as ok`;
+    expect((await as(stranger, ask, [company])).rows[0].ok).toBe(false);
+    expect((await as(owner, ask, [company])).rows[0].ok).toBe(true);
+    await logDay(owner, company, '2026-03-04');
+  });
+
+  it('A3-29: the profile email follows the auth email, and no profile is created for other users', async () => {
+    const email = `${randomUUID()}@example.com`;
+    const user = await newUser(email);
+    const company = await newCompany(user);
+    expect(company).toBeTruthy();
+    const moved = `${randomUUID()}@example.com`;
+    await db.query(`update auth.users set email = $1 where id = $2`, [moved, user]);
+    const { rows } = await db.query(`select email from public.bd_profiles where id = $1`, [user]);
+    expect(rows[0].email).toBe(moved);
+    const other = await newUser(`${randomUUID()}@example.com`);
+    await db.query(`delete from public.bd_profiles where id = $1`, [other]);
+    await db.query(`update auth.users set email = $1 where id = $2`, [`${randomUUID()}@example.com`, other]);
+    expect((await db.query(`select 1 from public.bd_profiles where id = $1`, [other])).rowCount).toBe(0);
+  });
+
+  it('A3-30: logging a date held by another company fails clearly and leaves the first record', async () => {
+    const ownerA = await newUser(`${randomUUID()}@example.com`);
+    const ownerB = await newUser(`${randomUUID()}@example.com`);
+    const a = await newCompany(ownerA, 'A');
+    const b = await newCompany(ownerB, 'B');
+    const email = `${randomUUID()}@example.com`;
+    const person = await newUser(email);
+    await accept(person, await invite(ownerA, a, email));
+    await accept(person, await invite(ownerB, b, email));
+    await logDay(person, a, '2026-03-05');
+    // The client's upsert, as PostgREST runs it.
+    await expect(
+      as(
+        person,
+        `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type)
+         values ($1, $2, '2026-03-05', 'onsite')
+         on conflict (employee_user_id, work_date)
+         do update set company_id = excluded.company_id, day_type = excluded.day_type`,
+        [b, person],
+      ),
+    ).rejects.toMatchObject({ code: 'BD001' });
+    const { rows } = await db.query(
+      `select company_id, day_type from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-03-05'`,
+      [person],
+    );
+    expect(rows[0]).toEqual({ company_id: a, day_type: 'telework' });
+    // The same company can still change its own day.
+    await as(
+      person,
+      `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type)
+       values ($1, $2, '2026-03-05', 'onsite')
+       on conflict (employee_user_id, work_date)
+       do update set company_id = excluded.company_id, day_type = excluded.day_type`,
+      [a, person],
+    );
+    // A different date under the second company is fine.
+    await logDay(person, b, '2026-03-06');
+  });
+
+  it('A3-32: the legacy migration refuses to run once the bd_ schema exists', async () => {
+    const legacy = readFileSync(join(migrationsDir, '20261031120000_employer_first.sql'), 'utf8');
+    // The harness has already applied it to the empty database, so its tables exist: test the guard alone.
+    const guard = legacy.slice(0, legacy.indexOf('$guard$;') + '$guard$;'.length);
+    await expect(db.query(guard)).rejects.toThrow(/migration repair --status applied 20261031120000/);
   });
 });

@@ -3,13 +3,12 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { ALREADY_SUBSCRIBED_CODE, hasLiveSubscription } from "../_shared/checkoutGuard.ts";
 import { resolveCompanyBilling } from "../_shared/companyPricing.ts";
 import { TRIAL_DAYS } from "../_shared/trial.ts";
+import { corsHeaders, GENERIC_ERROR, logFailure } from "../_shared/http.ts";
 
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+const CHECKOUT_LOCALES = ["en", "fr", "de", "it", "nl"];
 
 Deno.serve(async (req) => {
+  const cors = corsHeaders(req.headers.get("Origin"), Deno.env.get("BD_SITE_URL"));
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
   const priceCompanyMonth = Deno.env.get("STRIPE_PRICE_COMPANY_MONTH");
@@ -128,13 +127,16 @@ Deno.serve(async (req) => {
       payment_method_collection: "always",
       customer_email: user.email,
       billing_address_collection: "required",
+      // Otherwise the page follows the browser. Not on the Managed Payments unsupported list.
+      ...(CHECKOUT_LOCALES.includes(lang) ? { locale: lang } : {}),
     } as any);
 
     return new Response(JSON.stringify({ available: true, url: session.url, id: session.id }), {
       headers: { ...cors, "Content-Type": "application/json" },
     });
   } catch (e) {
-    return new Response(JSON.stringify({ available: false, message: e instanceof Error ? e.message : "error" }), {
+    logFailure("bd-create-checkout", e);
+    return new Response(JSON.stringify({ available: false, message: GENERIC_ERROR }), {
       status: 200, headers: { ...cors, "Content-Type": "application/json" },
     });
   }

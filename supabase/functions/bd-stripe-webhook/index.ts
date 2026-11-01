@@ -25,7 +25,7 @@ Deno.serve(async (req) => {
     // Deno SubtleCrypto requires the async verifier (sync constructEvent → 400).
     event = await stripe.webhooks.constructEventAsync(raw, sig!, webhookSecret);
   } catch (e) {
-    return new Response(`Webhook Error: ${e instanceof Error ? e.message : "bad sig"}`, { status: 400 });
+    return new Response("Webhook signature verification failed", { status: 400 });
   }
   const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 

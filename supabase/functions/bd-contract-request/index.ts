@@ -1,20 +1,16 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { handleContractRequest } from "../_shared/contractRequest.ts";
+import { corsHeaders } from "../_shared/http.ts";
 
 /**
  * Stores a withdrawal or cancellation request and returns its time of receipt (A3-08). Public on
  * purpose: both forms work signed out. Logs carry no name, address or order reference.
  */
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
-
-const json = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
-
 Deno.serve(async (req) => {
+  const cors = corsHeaders(req.headers.get("Origin"), Deno.env.get("BD_SITE_URL"));
+  const json = (status: number, body: unknown) =>
+    new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json(405, { recorded: false, code: "invalid" });
   try {

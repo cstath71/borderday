@@ -10,13 +10,10 @@ import {
   MAX_INVITE_EMAILS_PER_HOUR,
 } from "../_shared/invite.ts";
 import { buildInviteEmail, inviteLang, joinUrlFor } from "../_shared/inviteEmail.ts";
-
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders, GENERIC_ERROR, logFailure } from "../_shared/http.ts";
 
 Deno.serve(async (req) => {
+  const cors = corsHeaders(req.headers.get("Origin"), Deno.env.get("BD_SITE_URL"));
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   try {
     const authHeader = req.headers.get("Authorization");
@@ -109,9 +106,9 @@ Deno.serve(async (req) => {
         }),
       });
       accepted = r.ok;
-      const result = await r.json();
+      await r.body?.cancel();
       console.log("[bd-send-invite]", { invitationId: inv.id, dryRun: false, ok: r.ok });
-      return new Response(JSON.stringify({ sent: r.ok, dryRun: false, result, joinUrl }), {
+      return new Response(JSON.stringify({ sent: r.ok, dryRun: false, joinUrl }), {
         status: r.ok ? 200 : 502, headers: { ...cors, "Content-Type": "application/json" },
       });
     } finally {
@@ -119,7 +116,8 @@ Deno.serve(async (req) => {
       if (!accepted) await admin.from("bd_invitations").update({ email_sent_at: inv.email_sent_at ?? null }).eq("id", inv.id);
     }
   } catch (e) {
-    return new Response(JSON.stringify({ sent: false, error: e instanceof Error ? e.message : "error" }), {
+    logFailure("bd-send-invite", e);
+    return new Response(JSON.stringify({ sent: false, error: GENERIC_ERROR }), {
       status: 200, headers: { ...cors, "Content-Type": "application/json" },
     });
   }

@@ -1,12 +1,9 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
-
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders, GENERIC_ERROR, logFailure } from "../_shared/http.ts";
 
 Deno.serve(async (req) => {
+  const cors = corsHeaders(req.headers.get("Origin"), Deno.env.get("BD_SITE_URL"));
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
   const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
@@ -24,7 +21,7 @@ Deno.serve(async (req) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("Unauthorized");
     const body = await req.json().catch(() => ({})) as { companyId?: string; lang?: string };
-    const lang = body.lang === "fr" || body.lang === "de" || body.lang === "it" ? body.lang : "en";
+    const lang = body.lang === "fr" || body.lang === "de" || body.lang === "it" || body.lang === "nl" ? body.lang : "en";
     if (body.companyId) {
       // Checked with the caller's JWT, before the service-role client reads billing data.
       const { data: mem } = await supabase.from("bd_company_members").select("role")
@@ -57,7 +54,8 @@ Deno.serve(async (req) => {
       headers: { ...cors, "Content-Type": "application/json" },
     });
   } catch (e) {
-    return new Response(JSON.stringify({ available: false, message: e instanceof Error ? e.message : "error" }), {
+    logFailure("bd-customer-portal", e);
+    return new Response(JSON.stringify({ available: false, message: GENERIC_ERROR }), {
       status: 200, headers: { ...cors, "Content-Type": "application/json" },
     });
   }

@@ -153,6 +153,19 @@ export default function Account() {
         <div className="container" style={{ maxWidth: 640 }}>
           <h1>{a.title}</h1>
           <p className="meta">{t(a.signedInAs, { email: user.email ?? '' })}</p>
+          <p>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => {
+                void auth.signOut().then(() => {
+                  window.location.assign(`/${lang}/`);
+                });
+              }}
+            >
+              {d.auth.signOut}
+            </button>
+          </p>
           {hrCompanies.map((c) => (
             <p key={c.id}>
               <Link className="btn btn-secondary" to={`/${lang}/company/${c.id}/dashboard`}>

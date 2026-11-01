@@ -73,7 +73,7 @@ describe('controller identity surface', () => {
     expect(itDict.privacy.controllerBody).toMatch(/IDI CHE-312\.418\.158/);
   });
 
-  it('the legal notice is an imprint with commercial-register particulars, without inventing a phone or named natural person (M1)', () => {
+  it('the legal notice is an imprint with commercial-register particulars, the published support phone, and no named natural person (M1 / A3-19)', () => {
     expect(en.terms.providerBody).toMatch(/Geneva commercial register/i);
     expect(fr.terms.providerBody).toMatch(/registre du commerce de Genève/i);
     expect(de.terms.providerBody).toMatch(/Handelsregister Genf/);
@@ -81,8 +81,10 @@ describe('controller identity surface', () => {
     for (const d of [en, fr, de, itDict]) {
       const blob = d.terms.providerBody + d.terms.legalNoticeNote;
       expect(blob).toMatch(/hello@borderday\.com/);
-      // No phone; no 4-part IDE; no personal name until Gus supplies the registered directors.
-      expect(blob).not.toMatch(/\+\d{2}|CHE-\d{3}\.\d{3}\.\d{3}\.\d|Stathopoulos/i);
+      // A3-19: same number as Stripe Account support_phone (no invented digits).
+      expect(blob).toMatch(/\+41 22 510 27 00/);
+      // No 4-part IDE; no personal name until Gus supplies the registered directors.
+      expect(blob).not.toMatch(/CHE-\d{3}\.\d{3}\.\d{3}\.\d|Stathopoulos/i);
       expect(blob).not.toMatch(/Constantinos|Kostas|Gus /i);
     }
   });

@@ -396,9 +396,9 @@ describe('language switcher path rewrite (5×5)', () => {
 });
 
 describe('A3-18 accessibility statement', () => {
-  it('names the scan date and scope, and the Apply label as rendered', () => {
+  it('names the scan date and scope, and instant language switching', () => {
     for (const d of [en, fr, de, itDict, nl]) {
-      expect(d.accessibility.statusBody).toContain(d.lang.apply);
+      expect(d.accessibility.statusBody).not.toContain(d.lang.apply);
       expect(d.accessibility.statusBody).toMatch(/axe/);
       expect(d.accessibility.statusBody).toMatch(/2026/);
       expect(JSON.stringify(d.accessibility)).not.toMatch(/\b31\.? (October|octobre|Oktober|ottobre|oktober)/);
@@ -425,19 +425,19 @@ describe('header sizing (no wrap)', () => {
     expect(layout).toMatch(/width=\{232\}\s+height=\{68\}/);
   });
 
-  it('keeps the language control compact, with an Apply step, and collapses below 1140px', () => {
+  it('keeps the language control compact, switches instantly on change, and collapses below 1140px', () => {
     expect(css).toMatch(/@media \(max-width:\s*1139px\)/);
     expect(css).toMatch(/\.nav:not\(\.open\)\s*\{\s*display:\s*none/);
     expect(css).toMatch(/\.brand img\s*\{\s*height:\s*46px/);
     expect(css).toMatch(/\.site-header \.container\s*\{\s*width:\s*min\(1440px/);
     expect(css).toMatch(/\.lang-switch select\s*\{[^}]*max-width:\s*4\.25rem/);
     expect(css).toMatch(/\.nav a\s*\{[^}]*font-size:\s*0\.95rem/);
-    // WCAG 3.2.2 (A3-18): changing the select does not navigate; the submit button does.
-    expect(layout).toContain('className="lang-apply"');
+    // Instant language switch: select onChange rewrites the locale path (no Apply button).
+    expect(layout).not.toContain('className="lang-apply"');
     expect(layout).toContain('l.toUpperCase()');
-    expect(layout).not.toContain('requestSubmit');
-    expect(css).toMatch(/\.lang-apply\s*\{/);
-    expect(css).not.toMatch(/\.lang-apply\s*\{\s*display:\s*none/);
+    expect(layout).toContain('window.location.assign');
+    expect(layout).toContain('onChange={(e) =>');
+    expect(css).not.toMatch(/\.lang-apply\s*\{/);
     expect(layout).toContain('{!auth.user && (');
   });
 });

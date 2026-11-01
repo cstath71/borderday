@@ -109,13 +109,22 @@ describe('no backend-mode text for customers (L3)', () => {
 });
 
 describe('no HR path selects the note column', () => {
-  it('companyApi reads company day logs only through the RPC', () => {
-    const api = readFileSync(API, 'utf8');
+  const api = readFileSync(API, 'utf8');
+  const code = api.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+
+  it('HR reads company day logs only through the RPC, whose rows have no note', () => {
     expect(api).toContain("'bd_list_day_records'");
     expect(api).toContain("'bd_list_day_types'");
     expect(api).toContain('.rpc(rpc,');
-    expect(api).not.toMatch(/from\('bd_day_logs'\)\s*\.select/);
-    const code = api.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
-    expect(code).not.toMatch(/\bnote\b/);
+    const hrRead = code.slice(code.indexOf('export async function listDayLogs'), code.indexOf('export async function listMyDayNotes'));
+    expect(hrRead).not.toMatch(/\bnote\b/);
+    const view = code.slice(code.indexOf('export interface DayLogView'), code.indexOf('async function upsertWithDayAttrs'));
+    expect(view).not.toMatch(/\bnote\b/);
+  });
+
+  it('E15: every direct read of bd_day_logs is limited to the caller, in the code as well as by RLS', () => {
+    const reads = [...code.matchAll(/from\('bd_day_logs'\)\s*\.select\([^)]*\)([\s\S]*?)\.range\(/g)];
+    expect(reads.length).toBe(2);
+    for (const [, chain] of reads) expect(chain).toContain(".eq('employee_user_id', userId)");
   });
 });

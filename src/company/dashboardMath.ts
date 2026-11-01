@@ -5,6 +5,7 @@ import type {
   CounterMessage,
   CounterResult,
   DayEntry,
+  DayType,
   EmploymentProfile,
   OfficialSource,
 } from '../borders/types';
@@ -207,7 +208,7 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     'demo',
     'employee_name',
     'employee_email',
-    'border_pack',
+    'route',
     'annual_working_days',
     'employment_percent',
     'contract_days_per_year',
@@ -237,9 +238,9 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
     for (const c of r.counters) {
       lines.push(
         [
-          r.isDemo ? 'DEMO' : '',
+          r.isDemo ? 'yes' : 'no',
           // An employee sets their own display name, and HR opens this file.
-          csvCell(r.displayName),
+          csvCell(r.displayName.trim()),
           csvCell(r.email),
           r.borderPackId ?? '',
           r.annualWorkingDays ?? '',
@@ -259,6 +260,40 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
         ].join(','),
       );
     }
+  }
+  return lines.join('\n');
+}
+
+/**
+ * Optional day-level CSV, so HR can check a count against its days. Date, day type and the two marks only:
+ * DayLogView carries no note, and the log has no location. Only the employees and year given are included.
+ */
+export function dayRowsToCsv(
+  rows: Pick<EmployeeDashboardRow, 'userId' | 'displayName' | 'email' | 'borderPackId' | 'isDemo'>[],
+  logs: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>,
+  year: number,
+): string {
+  const note =
+    '# BorderDay day-level working export — dates, day types, half-day and night-away marks only, never location or notes. A half day counts as 0.5 in used_days, except where a rule counts any part of a day as a whole day and on the night and non-return counters. Not an official filing.';
+  const lines = [note, 'demo,employee_name,employee_email,route,date,day_type,half_day,night_away'];
+  const byUser = new Map(rows.map((r) => [r.userId, r]));
+  const inYear = logs
+    .filter((l) => byUser.has(l.employeeUserId) && Number(l.workDate.slice(0, 4)) === year)
+    .sort((a, b) => a.employeeUserId.localeCompare(b.employeeUserId) || a.workDate.localeCompare(b.workDate));
+  for (const l of inYear) {
+    const r = byUser.get(l.employeeUserId)!;
+    lines.push(
+      [
+        r.isDemo ? 'yes' : 'no',
+        csvCell(r.displayName.trim()),
+        csvCell(r.email),
+        r.borderPackId ?? '',
+        l.workDate,
+        l.dayType,
+        l.dayShare === 0.5 ? 'yes' : 'no',
+        l.overnightAway ? 'yes' : 'no',
+      ].join(','),
+    );
   }
   return lines.join('\n');
 }

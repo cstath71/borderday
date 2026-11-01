@@ -23,6 +23,11 @@ export function siteOrigin(): string {
   return 'https://borderday.com';
 }
 
-export function authCallbackUrl(): string {
-  return `${siteOrigin()}/auth/callback`;
+/**
+ * Where Supabase sends the person back. Carrying locale and next in the URL makes a confirmation link
+ * work on another device too. Needs `<site>/**` in the Supabase redirect allow list (docs/GOOGLE_OAUTH.md).
+ */
+export function authCallbackUrl(lang?: string, next?: string | null): string {
+  const query = next ? `?next=${encodeURIComponent(next)}` : '';
+  return `${siteOrigin()}${lang ? `/${lang}` : ''}/auth/callback${query}`;
 }

@@ -23,6 +23,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
     canDeactivateMember: actual.canDeactivateMember,
     deactivateMember: vi.fn(async () => ({ billingSynced: true })),
     revokeInvite: vi.fn(async () => undefined),
+    resendInvite: vi.fn(async () => ({ emailed: true, emailBlock: null })),
     createCompany: vi.fn(),
     updateCompanyRetention: vi.fn(async () => undefined),
     listMyCompanies: vi.fn(async () => []),
@@ -38,10 +39,15 @@ vi.mock('../src/lib/companyApi', async (original) => {
     updateEmployeeProfile: vi.fn(async () => undefined),
     updateMyDisplayName: vi.fn(),
     listDayLogs: vi.fn(async () => []),
+    listMyDayNotes: vi.fn(async () => new Map()),
+    listMyDaysIn: vi.fn(async () => []),
+    listFormerCompanies: vi.fn(async () => []),
+    deleteMyDayLogs: vi.fn(async () => undefined),
     upsertDayLog: vi.fn(),
     isDayLogOtherCompany: actual.isDayLogOtherCompany,
-    deleteMyDayLogs: vi.fn(),
     hasIndividualAccess: vi.fn(async () => false),
+    hasCancellableIndividualPlan: vi.fn(async () => false),
+    getOwnAccountRecords: vi.fn(async () => ({ displayName: null, noticeRecords: [], subscriptions: [] })),
     listPersonalDayLogs: vi.fn(async () => []),
     upsertPersonalDayLog: vi.fn(),
     deleteMyPersonalDayLogs: vi.fn(),
@@ -51,6 +57,7 @@ vi.mock('../src/lib/companyApi', async (original) => {
 
 import App from '../src/App';
 import en from '../src/i18n/en';
+import fr from '../src/i18n/fr';
 import * as api from '../src/lib/companyApi';
 import { CONSENT_VERSION } from '../src/company/types';
 
@@ -297,6 +304,43 @@ describe('Dashboard', () => {
     expect((await screen.findByRole('alert')).textContent).toBe(en.app.saveError);
   });
 
+  describe('E9: subscription status line', () => {
+    const company = (fields: object) =>
+      mocked.getCompany.mockResolvedValue({ id: 'c1', name: 'Acme Real SA', seat_count: 1, data_retention_months: 24, trial_ends_at: null, current_period_end: null, ...fields } as any);
+    it.each([
+      [{ subscription_status: 'trialing', trial_ends_at: '2999-03-04T12:00:00Z' }, 'Plan: free trial until 4 March 2999'],
+      [{ subscription_status: 'active', current_period_end: '2999-05-06T12:00:00Z' }, 'Plan: active, current period ends on 6 May 2999'],
+      [{ subscription_status: 'past_due' }, `Plan: ${en.company.planPastDue}`],
+      [{ subscription_status: 'canceled' }, 'Plan: cancelled'],
+      [{ subscription_status: 'none' }, 'Plan: no active plan'],
+    ])('%j', async (fields, text) => {
+      asHr();
+      company(fields);
+      open('/en/company/c1/dashboard');
+      await screen.findByText('Real Employee');
+      expect(screen.getByTestId('plan-status').textContent).toContain(text);
+    });
+  });
+
+  describe('E8: back from company checkout', () => {
+    it('confirms, and rechecks rather than claiming no subscription while the webhook is on its way', async () => {
+      asHr(false);
+      open('/en/company/c1/dashboard?checkout=success');
+      await screen.findByText(en.company.checkoutDone);
+      expect(screen.queryByText(en.company.billingInactive, { exact: false })).toBeNull();
+      mocked.getCompany.mockResolvedValue({ id: 'c1', name: 'Acme Real SA', subscription_status: 'trialing', trial_ends_at: '2999-01-01T00:00:00Z', seat_count: 1, data_retention_months: 24 } as any);
+      await waitFor(() => expect(screen.getByTestId('plan-status').textContent).toContain('free trial'), { timeout: 3500 });
+      expect(screen.queryByText(en.company.billingInactive, { exact: false })).toBeNull();
+    });
+
+    it('a normal visit to an unpaid company still says so', async () => {
+      asHr(false);
+      open('/en/company/c1/dashboard');
+      await screen.findByText(en.company.billingInactive, { exact: false });
+      expect(screen.queryByText(en.company.checkoutDone)).toBeNull();
+    });
+  });
+
   it('points an unpaid company at pricing', async () => {
     asHr(false);
     open('/en/company/c1/dashboard');
@@ -337,6 +381,88 @@ describe('Dashboard', () => {
 });
 
 describe('Invite', () => {
+  const pending = { id: 'inv1', companyId: 'c1', email: 'new@acme.test', role: 'employee', token: 'tok9', status: 'pending', invitedBy: null, createdAt: '2026-10-01', expiresAt: '2999-01-01' } as any;
+
+  it('E7: warns before submitting when no plan or trial would allow the email', async () => {
+    asHr(false);
+    open('/en/company/c1/invite');
+    await screen.findByText(en.company.inviteNeedsPlan, { exact: false });
+  });
+
+  it('E7: no warning with an active plan, and the button says it is working while it sends', async () => {
+    asHr();
+    let finish!: (v: any) => void;
+    mocked.createInvite.mockReturnValue(new Promise((r) => { finish = r; }));
+    open('/en/company/c1/invite');
+    fireEvent.change(await screen.findByLabelText(en.company.inviteEmail), { target: { value: 'new@acme.test' } });
+    expect(screen.queryByText(en.company.inviteNeedsPlan, { exact: false })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: en.company.sendInvite }));
+    const sending = (await screen.findByRole('button', { name: en.company.sendingInvite })) as HTMLButtonElement;
+    expect(sending.disabled).toBe(true);
+    finish({ invite: { token: 'tok123' }, emailed: true, emailBlock: null });
+    await screen.findByText(en.company.inviteEmailed);
+    screen.getByRole('button', { name: en.company.sendInvite });
+  });
+
+  it('E12: lists pending invites on load, with a full link and the same actions as the dashboard', async () => {
+    asHr();
+    mocked.listInvites.mockResolvedValue([pending]);
+    open('/en/company/c1/invite');
+    const link = (await screen.findByLabelText(`${en.company.inviteLinkLabel}: new@acme.test`)) as HTMLInputElement;
+    expect(link.value).toBe(`${window.location.origin}/en/join/tok9`);
+    screen.getByRole('button', { name: 'Copy link for new@acme.test' });
+    screen.getByRole('button', { name: 'Resend invite to new@acme.test' });
+    screen.getByRole('button', { name: 'Revoke invite for new@acme.test' });
+  });
+
+  it('E12: says so when nothing is pending', async () => {
+    asHr();
+    open('/en/company/c1/invite');
+    await screen.findByText(en.company.noPendingInvites);
+  });
+
+  it('E11: revoking asks first; declining does nothing, confirming revokes and reloads', async () => {
+    asHr();
+    mocked.listInvites.mockResolvedValue([pending]);
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    open('/en/company/c1/invite');
+    fireEvent.click(await screen.findByRole('button', { name: 'Revoke invite for new@acme.test' }));
+    expect(confirm).toHaveBeenCalled();
+    expect(mocked.revokeInvite).not.toHaveBeenCalled();
+    confirm.mockReturnValue(true);
+    mocked.listInvites.mockResolvedValue([]);
+    fireEvent.click(screen.getByRole('button', { name: 'Revoke invite for new@acme.test' }));
+    await screen.findByText(en.company.noPendingInvites);
+    expect(mocked.revokeInvite).toHaveBeenCalledWith('c1', 'inv1');
+    confirm.mockRestore();
+  });
+
+  it.each([
+    [{ emailed: true, emailBlock: null }, 'Invite emailed again to new@acme.test, with the same link.'],
+    [{ emailed: false, emailBlock: 'no_access' }, en.company.resendNoPlan],
+    [{ emailed: false, emailBlock: 'rate_limited' }, en.company.resendLimit],
+    [{ emailed: false, emailBlock: null }, en.company.resendFailed],
+  ] as const)('E10: resend keeps the token and reports %j', async (result, text) => {
+    asHr();
+    mocked.listInvites.mockResolvedValue([pending]);
+    mocked.resendInvite.mockResolvedValue(result as any);
+    open('/en/company/c1/dashboard');
+    fireEvent.click(await screen.findByRole('button', { name: 'Resend invite to new@acme.test' }));
+    await screen.findByText(text);
+    expect(mocked.resendInvite).toHaveBeenCalledWith('c1', 'inv1', 'en');
+    expect(mocked.createInvite).not.toHaveBeenCalled();
+  });
+
+  it('E10: an HR viewer cannot resend or revoke an owner invite', async () => {
+    asHr();
+    mocked.myMembership.mockResolvedValue({ role: 'hr_viewer', borderPackId: null, annualWorkingDays: null });
+    mocked.listInvites.mockResolvedValue([{ ...pending, role: 'owner' }]);
+    open('/en/company/c1/invite');
+    await screen.findByRole('button', { name: 'Copy link for new@acme.test' });
+    expect(screen.queryByRole('button', { name: 'Resend invite to new@acme.test' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Revoke invite for new@acme.test' })).toBeNull();
+  });
+
   it('creates through companyApi and shows the link', async () => {
     asHr();
     mocked.createInvite.mockResolvedValue({ invite: { token: 'tok123' } as any, emailed: false });
@@ -398,10 +524,26 @@ describe('Join', () => {
     expiresAt: '2999-01-01T00:00:00Z',
   };
 
-  it('requires sign-in', async () => {
-    open('/en/join/tok');
-    await screen.findByRole('heading', { name: en.auth.signInTitle });
-    expect(mocked.acceptInvite).not.toHaveBeenCalled();
+  describe('E13: signed out', () => {
+    it('shows who invites them and what HR sees, with sign-in and sign-up that come back here', async () => {
+      mocked.getInviteByToken.mockResolvedValue(invite);
+      open('/en/join/tok');
+      await screen.findByText(/Acme Real SA invites you/);
+      screen.getByText(en.company.noticeBody);
+      screen.getByText(/This invite is for EMP@acme\.test/);
+      const next = encodeURIComponent('/en/join/tok');
+      expect(screen.getByRole('link', { name: en.auth.signUp }).getAttribute('href')).toBe(`/en/auth/sign-up?next=${next}`);
+      expect(screen.getAllByRole('link', { name: en.auth.signIn }).some((a) => a.getAttribute('href') === `/en/auth/sign-in?next=${next}`)).toBe(true);
+      expect(screen.queryByRole('button', { name: en.company.joinButton })).toBeNull();
+      expect(mocked.acceptInvite).not.toHaveBeenCalled();
+    });
+
+    it('says so when the link is dead, instead of asking for an account first', async () => {
+      mocked.getInviteByToken.mockResolvedValue({ ...invite, status: 'revoked' });
+      open('/en/join/tok');
+      await screen.findByText(en.company.inviteInvalid);
+      expect(screen.queryByRole('heading', { name: en.auth.signInTitle })).toBeNull();
+    });
   });
 
   it('blocks a different signed-in email and offers sign-out', async () => {
@@ -487,6 +629,36 @@ describe('History', () => {
   });
 });
 
+describe('E2: sign-in with nothing asked for', () => {
+  it('a Google or email sign-in from the header heads to the account page, with language and next', async () => {
+    const signInGoogle = vi.fn(async () => ({ error: null }));
+    (auth.value as any).signInGoogle = signInGoogle;
+    open('/fr/auth/sign-in');
+    fireEvent.click(await screen.findByRole('button', { name: fr.auth.continueGoogle }));
+    await waitFor(() => expect(signInGoogle).toHaveBeenCalledWith({ lang: 'fr', next: '/fr/account' }));
+  });
+
+  it('a page that asked for sign-in gets that page back', async () => {
+    const signInGoogle = vi.fn(async () => ({ error: null }));
+    (auth.value as any).signInGoogle = signInGoogle;
+    open('/en/auth/sign-in?next=%2Fen%2Fjoin%2Ftok');
+    fireEvent.click(await screen.findByRole('button', { name: en.auth.continueGoogle }));
+    await waitFor(() => expect(signInGoogle).toHaveBeenCalledWith({ lang: 'en', next: '/en/join/tok' }));
+  });
+
+  it('E14: a sign-up passes language and next to the confirmation email', async () => {
+    const signUpEmail = vi.fn(async () => ({ error: null }));
+    (auth.value as any).signUpEmail = signUpEmail;
+    open('/en/auth/sign-up?next=%2Fen%2Fjoin%2Ftok');
+    fireEvent.change(await screen.findByLabelText(en.auth.displayName), { target: { value: 'Ann ' } });
+    fireEvent.change(screen.getByLabelText(en.auth.email), { target: { value: 'a@x.test' } });
+    fireEvent.change(screen.getByLabelText(en.auth.password), { target: { value: 'password1' } });
+    fireEvent.click(screen.getByRole('button', { name: en.auth.createAccount }));
+    await waitFor(() => expect(signUpEmail).toHaveBeenCalledWith('a@x.test', 'password1', 'Ann ', { lang: 'en', next: '/en/join/tok' }));
+    await screen.findByText(en.auth.checkEmail);
+  });
+});
+
 describe('Sign-in', () => {
   it('returns a signed-in visitor to the page that sent them, and only to this site', async () => {
     auth.value.user = EMP;
@@ -495,7 +667,7 @@ describe('Sign-in', () => {
     await screen.findByText(en.company.inviteInvalid);
     cleanup();
     open('/en/auth/sign-in?next=%2F%2Fevil.example');
-    await screen.findByRole('heading', { name: en.company.signupTitle });
+    await screen.findByRole('heading', { name: en.account.title });
   });
 });
 
@@ -505,6 +677,22 @@ describe('Company sign-up', () => {
     const link = await screen.findByRole('link', { name: en.company.loadDemo });
     expect(link.getAttribute('href')).toBe('/en/demo');
     expect(container.textContent).not.toMatch(/Backend|local-mock/);
+  });
+});
+
+describe('E23: day-level export on the dashboard', () => {
+  it('offers the button and explains it, with no note in the data it uses', async () => {
+    asHr();
+    open('/en/company/c1/dashboard');
+    await screen.findByRole('button', { name: en.company.exportDaysCsv });
+    screen.getByText(en.company.exportDaysNote, { exact: false });
+  });
+});
+
+describe('E6: company signup', () => {
+  it('says the route is chosen per employee', async () => {
+    open('/en/company/signup');
+    await screen.findByText(en.company.signupRouteNote);
   });
 });
 
@@ -552,6 +740,127 @@ describe('/app gate', () => {
     open('/en/app');
     await screen.findByText(en.app.previewBody, { exact: false });
     await screen.findByText(en.company.loadError);
+  });
+
+  describe('E5, E17, E18, E19, E20: logging a day', () => {
+    const paid = () => {
+      auth.value.user = EMP;
+      mocked.resolveAppAccess.mockResolvedValue({ mode: 'company', company });
+    };
+    const iso = (day: number) => {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    };
+    const otherDay = () => (new Date().getDate() === 15 ? 14 : 15);
+    const cell = (day: number) =>
+      screen.getByRole('button', { name: new RegExp(`\\b${day}\\b.*\\d{4}: `) });
+    const log = (workDate: string, dayType: string, dayShare: 0.5 | 1 = 1) =>
+      ({ employeeUserId: EMP.id, workDate, dayType, overnightAway: false, dayShare }) as any;
+
+    it('E20: while loading, a placeholder rather than a bare line', async () => {
+      auth.value.user = EMP;
+      mocked.resolveAppAccess.mockReturnValue(new Promise(() => {}));
+      const { container } = open('/en/app');
+      expect(screen.getByRole('status').textContent).toBe(en.app.loading);
+      expect(container.querySelectorAll('.skeleton-card').length).toBeGreaterThan(0);
+    });
+
+    it('E17: "Today" names only today; another day shows its own date', async () => {
+      paid();
+      const { container } = open('/en/app');
+      await screen.findByText(en.app.calendar);
+      const headingOf = () => [...container.querySelectorAll('strong')].find((el) => /\d{4}/.test(el.textContent ?? ''))!.textContent!;
+      expect(headingOf().startsWith(`${en.app.today}: `)).toBe(true);
+      fireEvent.click(cell(otherDay()));
+      expect(headingOf()).not.toContain(en.app.today);
+      expect(headingOf()).toContain(String(otherDay()));
+    });
+
+    it('E5: the box shows before a type is picked, is kept per date, and is used when the type is picked', async () => {
+      paid();
+      open('/en/app');
+      await screen.findByText(en.app.calendar);
+      const box = () => screen.getByRole('checkbox', { name: new RegExp(en.dayTypes.halfDay) }) as HTMLInputElement;
+      expect(box().checked).toBe(false);
+      fireEvent.click(cell(otherDay()));
+      fireEvent.click(box());
+      expect(box().checked).toBe(true);
+      screen.getByText(en.dayTypes.halfDayPending);
+      const first = otherDay() === 15 ? 14 : 15;
+      fireEvent.click(cell(first));
+      expect(box().checked).toBe(false);
+      fireEvent.click(cell(otherDay()));
+      expect(box().checked).toBe(true);
+      fireEvent.click(screen.getByText(en.dayTypes.telework).closest('button')!);
+      await waitFor(() =>
+        expect(mocked.upsertDayLog).toHaveBeenCalledWith(
+          expect.objectContaining({ workDate: iso(otherDay()), dayType: 'telework', dayShare: 0.5 }),
+        ),
+      );
+    });
+
+    it('E5: a logged half day keeps its value on return, and a non-working day cannot be half', async () => {
+      paid();
+      mocked.listDayLogs.mockResolvedValue([log(iso(10), 'telework', 0.5), log(iso(11), 'non_working'), log(iso(12), 'onsite')]);
+      open('/en/app');
+      await screen.findByRole('button', { name: new RegExp(`: ${en.dayTypes.telework}, ${en.dayTypes.halfDay}$`) });
+      const box = () => screen.getByRole('checkbox', { name: new RegExp(en.dayTypes.halfDay) }) as HTMLInputElement;
+      fireEvent.click(cell(12));
+      expect(box().checked).toBe(false);
+      fireEvent.click(cell(10));
+      expect(box().checked).toBe(true);
+      fireEvent.click(cell(11));
+      expect(box().disabled).toBe(true);
+      screen.getByText(en.dayTypes.halfDayNotApplicable);
+    });
+
+    it('E18: a half day is marked on the calendar by class, mark and label', async () => {
+      paid();
+      mocked.listDayLogs.mockResolvedValue([log(iso(10), 'telework', 0.5), log(iso(12), 'telework')]);
+      open('/en/app');
+      const half = await screen.findByRole('button', { name: new RegExp(`: ${en.dayTypes.telework}, ${en.dayTypes.halfDay}$`) });
+      expect(half.className).toContain('half');
+      expect(half.textContent).toContain('½');
+      const whole = screen.getByRole('button', { name: new RegExp(`\\b12\\b.*: ${en.dayTypes.telework}$`) });
+      expect(whole.className).not.toContain('half');
+      expect(whole.textContent).not.toContain('½');
+    });
+
+    it('E15: a note saves with its day, stays when the type changes, and needs a day type first', async () => {
+      paid();
+      mocked.listDayLogs.mockResolvedValue([log(iso(10), 'telework')]);
+      mocked.listMyDayNotes.mockResolvedValue(new Map([[iso(10), 'saved note']]));
+      open('/en/app');
+      await screen.findByRole('button', { name: new RegExp(`\\b10\\b.*: ${en.dayTypes.telework}$`) });
+      const area = () => screen.getByRole('textbox', { name: new RegExp(en.app.noteLabel) }) as HTMLTextAreaElement;
+      fireEvent.click(cell(new Date().getDate() === 12 ? 13 : 12));
+      expect(area().disabled).toBe(true);
+      screen.getByText(en.app.noteNeedsType);
+      fireEvent.click(cell(10));
+      expect(area().value).toBe('saved note');
+      fireEvent.click(screen.getByText(en.dayTypes.onsite).closest('button')!);
+      await waitFor(() =>
+        expect(mocked.upsertDayLog).toHaveBeenCalledWith(expect.objectContaining({ workDate: iso(10), dayType: 'onsite', note: 'saved note' })),
+      );
+      mocked.upsertDayLog.mockClear();
+      await waitFor(() => expect(area().disabled).toBe(false));
+      fireEvent.change(area(), { target: { value: '  changed  ' } });
+      fireEvent.blur(area());
+      await waitFor(() =>
+        expect(mocked.upsertDayLog).toHaveBeenCalledWith(expect.objectContaining({ workDate: iso(10), note: 'changed' })),
+      );
+    });
+
+    it('E19: picking days a week fills in the yearly figure and saves it', async () => {
+      paid();
+      open('/en/app');
+      const select = (await screen.findByRole('combobox', { name: new RegExp(en.app.daysPerWeek) })) as HTMLSelectElement;
+      fireEvent.change(select, { target: { value: '4' } });
+      await waitFor(() =>
+        expect(mocked.updateMemberSelf).toHaveBeenCalledWith(company.id, expect.objectContaining({ annualWorkingDays: 192 })),
+      );
+      expect(select.value).toBe('4');
+    });
   });
 
   it('paid company member logs to the company through companyApi', async () => {

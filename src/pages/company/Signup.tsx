@@ -44,6 +44,7 @@ export default function CompanySignup() {
         <div className="container" style={{ maxWidth: 560 }}>
           <h1>{d.company.signupTitle}</h1>
           <p>{d.company.signupSubtitle}</p>
+          <p className="meta">{d.company.signupRouteNote}</p>
           <LegalLinks d={d} lang={lang} intro={d.auth.signUpTerms} />
           {auth.user && <p className="meta">{auth.user.email}</p>}
           {!auth.user && (

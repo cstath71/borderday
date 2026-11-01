@@ -1,5 +1,13 @@
-import type { BorderId, DayEntry, DayType } from '../borders/types';
-import { getOwnAccountRecords, listDayLogs, listMyCompanies, listPersonalDayLogs, type OwnAccountRecords } from './companyApi';
+import type { BorderId, DayEntry } from '../borders/types';
+import {
+  getOwnAccountRecords,
+  listFormerCompanies,
+  listMyCompanies,
+  listMyDaysIn,
+  listPersonalDayLogs,
+  type OwnAccountRecords,
+  type OwnDay,
+} from './companyApi';
 import { csvCell } from './csvCell';
 
 export interface AccountExport {
@@ -18,16 +26,23 @@ export interface AccountExport {
     contractDaysPerYear: number | null;
     a1InPlace: boolean;
     a1ValidUntil: string | null;
-    days: Array<{ date: string; type: DayType; overnightAway: boolean; dayShare?: 0.5 | 1 }>;
+    days: OwnDay[];
   }>;
+  /** Companies the person has left: they keep sight of the days they logged there (E24). */
+  formerCompanies: Array<{ company: string; days: OwnDay[] }>;
 }
 
 /** Everything the server holds about the caller's own days. Other members' days are never included. */
 export async function collectAccountExport(user: { id: string; email?: string | null }): Promise<AccountExport> {
-  const [personal, companies, own] = await Promise.all([listPersonalDayLogs(), listMyCompanies(), getOwnAccountRecords(user.id)]);
+  const [personal, companies, own, former] = await Promise.all([
+    listPersonalDayLogs(),
+    listMyCompanies(),
+    getOwnAccountRecords(user.id),
+    listFormerCompanies(),
+  ]);
   const perCompany = await Promise.all(
     companies.map(async (c) => {
-      const logs = await listDayLogs(c.id, user.id);
+      const days = await listMyDaysIn(c.id);
       return {
         company: c.name,
         role: c.role,
@@ -37,7 +52,7 @@ export async function collectAccountExport(user: { id: string; email?: string | 
         contractDaysPerYear: c.profile?.contractDaysPerYear ?? null,
         a1InPlace: !!c.profile?.a1InPlace,
         a1ValidUntil: c.profile?.a1ValidUntil ?? null,
-        days: logs.map((l) => ({ date: l.workDate, type: l.dayType, overnightAway: l.overnightAway, dayShare: l.dayShare })),
+        days,
       };
     }),
   );
@@ -52,18 +67,19 @@ export async function collectAccountExport(user: { id: string; email?: string | 
     subscriptions: own.subscriptions,
     individualPlan: { days: personal },
     companies: perCompany,
+    formerCompanies: await Promise.all(former.map(async (c) => ({ company: c.company, days: await listMyDaysIn(c.companyId) }))),
   };
 }
 
+type CsvDay = Pick<OwnDay, 'date' | 'type' | 'overnightAway' | 'dayShare' | 'note'>;
+
 export function accountExportCsv(data: AccountExport): string {
-  const lines = ['source,date,type,overnight_away_for_work,day_share'];
-  for (const d of data.individualPlan.days) {
-    lines.push(`${csvCell('individual plan')},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},${d.dayShare === 0.5 ? '0.5' : '1'}`);
-  }
-  for (const c of data.companies) {
-    for (const d of c.days) {
-      lines.push(`${csvCell(c.company)},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},${d.dayShare === 0.5 ? '0.5' : '1'}`);
-    }
+  const line = (source: string, d: CsvDay) =>
+    `${csvCell(source)},${d.date},${d.type},${d.overnightAway ? 'yes' : 'no'},${d.dayShare === 0.5 ? '0.5' : '1'},${csvCell(d.note ?? '')}`;
+  const lines = ['source,date,type,overnight_away_for_work,day_share,note'];
+  for (const d of data.individualPlan.days) lines.push(line('individual plan', d as CsvDay));
+  for (const c of [...data.companies, ...(data.formerCompanies ?? [])]) {
+    for (const d of c.days) lines.push(line(c.company, d));
   }
   return `${lines.join('\n')}\n`;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import HistoryView from '../../components/company/HistoryView';
+import LoadingSkeleton from '../../components/LoadingSkeleton';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { buildEmployeeRow } from '../../company/buildRows';
@@ -58,7 +59,7 @@ export default function EmployeeHistory() {
 
   let body: React.ReactNode;
   if (state.status === 'loading') {
-    body = <p role="status">{d.company.loading}</p>;
+    body = <LoadingSkeleton label={d.company.loading} />;
   } else if (state.status === 'error') {
     body = <p role="alert">{d.company.loadError}</p>;
   } else if (state.status === 'denied') {

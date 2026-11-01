@@ -110,6 +110,8 @@ const fr: Dict = {
       'Accord de 1983 : Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel et Jura. Genève et les autres cantons suivent un autre régime : choisissez l’autre itinéraire France–Suisse. Exceptions selon impots.gouv.fr : les personnes de nationalité suisse employées dans le secteur public, celles qui résident dans le canton pendant la semaine et celles qui passent plus de 45 nuits par an en Suisse sont imposées à la source en Suisse. Bâle-Ville indique que, pour son propre personnel, les personnes de nationalité suisse n’ont pas de limite fiscale au télétravail et que les catégories de personnel qu’il énumère n’ont pas de limite de sécurité sociale (art. 13 par. 4 du règlement (CE) n° 883/2004).',
   },
   dayTypes: {
+    halfDayPending: "Choisissez maintenant le type de journée ci-dessus pour enregistrer cette demi-journée.",
+    halfDayNotApplicable: "Un jour non travaillé ne peut pas être une demi-journée.",
     telework: 'Télétravail à domicile',
     onsite: 'Sur le lieu de travail',
     third_country: 'Déplacement professionnel / État tiers',
@@ -140,6 +142,10 @@ const fr: Dict = {
     overnightAwayShort: 'Nuit hors domicile',
   },
   counters: {
+    decimalMark: ",",
+    half_day_note: "Les demi-journées comptent pour 0,5 : un total peut donc finir par ,5. Elles comptent pour 1 lorsqu’une règle traite toute fraction de jour comme un jour entier, et sur les compteurs de nuits et de non-retours.",
+    pace_early: "Rythme actuel : trop tôt pour le dire. Il compare les jours comptés ici aux jours de travail attendus depuis le premier jour consigné ({from}) et il lui faut environ un mois de ces jours (environ {expected} à ce stade).",
+    ch_fr_share_includes_missions: "Cette part comprend {telework} jours de télétravail et {counted} jours de déplacement professionnel ou en État tiers. Selon les règles franco-suisses, jusqu’à 10 de ces jours par an (moins à temps partiel) comptent dans les 40 %, après le télétravail ordinaire.",
     tax: 'Fiscalité',
     social_security: 'Sécurité sociale',
     ch_fr_tax_telework_40: 'Part de télétravail (max. 40 % du temps de travail annuel)',
@@ -258,10 +264,8 @@ const fr: Dict = {
       'Compteur optionnel pour les frontaliers avant 2012. Cochez « frontalier avant 2012 » dans les réglages pour l’activer.',
     pending_be_nl_tax:
       'Aucune tolérance pour le travail à domicile trouvée sur la page de l’administration fiscale néerlandaise ; vérifiez auprès d’un conseiller.',
-    pace_line:
-      'Rythme actuel : {pct} % des jours travaillés consignés ({days}).',
-    pace_above:
-      'Rythme actuel : {pct} % des jours travaillés consignés ({days}), au-dessus de {limit} %. S’il se maintient, ce seuil sera franchi.',
+    pace_line: "Rythme actuel : environ {pct} %, soit {used} jours comptés sur environ {expected} jours de travail attendus depuis le premier jour consigné ({from}). Les jours attendus sont les {annual} jours par an répartis également sur le calendrier : c’est donc une estimation. Le seuil à surveiller est {limit} %.",
+    pace_above: "Rythme actuel : environ {pct} %, soit {used} jours comptés sur environ {expected} jours de travail attendus depuis le premier jour consigné ({from}), au-dessus de {limit} %. Les jours attendus sont les {annual} jours par an répartis également sur le calendrier : c’est donc une estimation. Une année entière à ce rythme finirait au-dessus de ce seuil.",
     multi_employer_note:
       'Ces compteurs ne couvrent que les jours consignés ici. D’autres emplois dans la même année peuvent aussi compter.',
     ruleAndConditions: 'Règle et conditions',
@@ -277,6 +281,12 @@ const fr: Dict = {
     status_floor_no_data: 'Aucun jour consigné',
   },
   app: {
+    noteLabel: "Note privée",
+    noteHint: "Dans BorderDay, vous seul pouvez la voir : les RH et les exports de l’entreprise ne l’affichent jamais. Elle est supprimée avec le jour. Évitez les données de santé ou tout ce que vous ne voudriez pas voir enregistré.",
+    noteNeedsType: "Choisissez d’abord un type de journée, puis ajoutez une note.",
+    formerCompanyDays: "Vous avez quitté {company}. Les {count} jours que vous y avez consignés restent visibles et exportables dans votre compte. Effacer votre copie laisse celle de l’employeur selon son délai de conservation.",
+    daysPerWeek: "Ou choisissez des jours par semaine",
+    daysPerWeekHint: "Remplit le chiffre annuel : {default} × jours ÷ 5, la même mise à l’échelle que le taux d’emploi. C’est un point de départ : utilisez le chiffre de votre contrat si vous l’avez.",
     title: 'Votre journal de jours',
     pickBorder: 'Votre itinéraire',
     pickBorderHint: 'Résidence → lieu de travail',
@@ -333,6 +343,7 @@ const fr: Dict = {
       'Ces boutons exportent les jours affichés ici. L’export complet de votre compte se trouve sur la page Compte.',
   },
   pricing: {
+    trialOnce: "L’essai gratuit est proposé une seule fois par personne et par entreprise. Si vous ou cette entreprise en avez déjà eu un, même résilié, le paiement démarre l’offre immédiatement et la débite alors.",
     title: 'Tarifs',
     subtitle: 'Offre entreprise en premier. Abonnements via Stripe Managed Payments (vendu via Link).',
     individual: 'Individuel (collaborateur)',
@@ -362,7 +373,7 @@ const fr: Dict = {
       'Protection des données dès la conception (types de jours par date — ni GPS ni localisation de l’appareil)',
     subscribeMonthly: 'Commencer au mois',
     subscribeYearly: 'Commencer à l\'année',
-    checkoutSuccess: 'Paiement configuré — votre essai est actif. Ouvrez votre compte pour continuer.',
+    checkoutSuccess: "Paiement configuré — votre offre est prête. Ouvrez votre compte pour continuer.",
     checkoutCancel: 'Paiement annulé — aucun débit. Vous pouvez réessayer à tout moment.',
     goToAccount: 'Aller au compte',
     alreadySubscribed: "Cette offre a déjà un abonnement actif, en essai ou en attente de paiement : aucun nouveau paiement n’a été lancé et rien n’a été débité. Pour le modifier ou le régulariser, utilisez le lien « {cancel} » de cette page, qui mène au portail client.",
@@ -423,7 +434,7 @@ const fr: Dict = {
       'Dans un compte entreprise, l’employeur décide pourquoi et comment les jours de ses collaborateurs sont enregistrés. L’employeur est donc responsable du traitement de ces journaux et de leur usage par les RH, y compris la base légale, et BorderDay les traite pour lui en tant que sous-traitant. Les questions sur les raisons de cet enregistrement ou sur les documents que l’employeur doit conserver s’adressent d’abord à lui ; nous transmettons les demandes envoyées à privacy@borderday.com. L’accord public de traitement des données pour les comptes entreprise est disponible à /dpa/ (lié depuis Tarifs, l’inscription entreprise et les Conditions).',
     s1Title: 'Ce que nous collectons',
     s1Body:
-      'Aperçu gratuit, sur votre appareil : itinéraire, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), demi-journée éventuelle, marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si vous les indiquez. Offre individuelle : l’itinéraire, le type et la date de chaque jour et les marques de demi-journée et de nuit hors du domicile sont enregistrés dans votre compte. Les notes et les autres champs restent sur votre appareil. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, jours de travail, jours contractuels, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
+      'Aperçu gratuit, sur votre appareil : itinéraire, type de chaque jour (télétravail, sur site, déplacement / État tiers, non travaillé), demi-journée éventuelle, marque de nuit hors du domicile pour le travail, notes facultatives, jours de travail contractuels par an, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si vous les indiquez. Offre individuelle : l’itinéraire, le type et la date de chaque jour les marques de demi-journée et de nuit hors du domicile et les notes sont enregistrés dans votre compte. Les autres champs restent sur votre appareil. Comptes entreprise : nom de l’entreprise, e-mails et noms des membres, rôles, itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, notes privées (enregistrées avec le jour, jamais montrées aux RH), jours de travail, jours contractuels, taux d’emploi, A1 et statut France–Belgique d’avant 2012 si indiqués, et la preuve que l’avis sur ce que voient les RH vous a été présenté. Comptes et facturation : e-mail, nom, mode de connexion, statut d’abonnement et référence client Stripe. Nous ne recevons pas votre numéro de carte complet.',
     s2Title: 'Ce que nous ne collectons pas',
     s2Body:
       'Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur. Les RH voient aussi les jours de travail, les jours contractuels, le taux d’emploi, l’A1 et le statut France–Belgique d’avant 2012 s’ils sont indiqués, et les totaux : les mêmes compteurs que le collaborateur. Aucune adresse IP n’est stockée comme lieu de travail. Pas de traceurs publicitaires. Pas de vente de données personnelles.',
@@ -457,7 +468,7 @@ const fr: Dict = {
       },
       {
         purpose: 'Offre individuelle : votre journal et vos compteurs',
-        data: 'Dans votre compte : itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile. Sur votre appareil uniquement : notes, jours de travail, jours contractuels, taux d’emploi, A1, statut France–Belgique d’avant 2012',
+        data: 'Dans votre compte : itinéraire, types et dates de jours, marques de demi-journée et de nuit hors du domicile, notes. Sur votre appareil uniquement : jours de travail, jours contractuels, taux d’emploi, A1, statut France–Belgique d’avant 2012',
         basis: 'Contrat (art. 6, par. 1, let. b)',
         recipients: 'Supabase',
         transfer: 'Hébergement UE (eu-central-1) ; prestataire basé aux États-Unis ; garanties ci-dessous',
@@ -532,7 +543,7 @@ const fr: Dict = {
       'Retrait du consentement : le cas échéant, retirer votre consentement sans affecter la licéité du traitement effectué avant le retrait.',
     ],
     rightsHow:
-      'Utilisez la page Compte pour exporter vos journaux ou demander la suppression, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement et peut devoir conserver certains documents.',
+      'Utilisez la page Compte pour exporter vos journaux, effacer votre propre copie après avoir quitté une entreprise, ou demander la suppression du compte, ou écrivez à privacy@borderday.com. Le RGPD nous donne un mois pour répondre et la LPD 30 jours. Pour les journaux d’un compte entreprise, l’employeur est responsable du traitement : effacer votre copie ne supprime pas les documents qu’il conserve selon son délai.',
     complaintBody:
       'Vous pouvez saisir le Préposé fédéral à la protection des données et à la transparence (PFPDT, www.edoeb.admin.ch). Si vous vivez ou travaillez dans l’UE/EEE, vous pouvez aussi saisir votre autorité locale de protection des données.',
     requiredBody:
@@ -559,6 +570,30 @@ const fr: Dict = {
     point3: 'Adhésion entreprise optionnelle — vous voyez ce que voient les RH',
   },
   company: {
+    exportDaysCsv: "Exporter les jours (CSV)",
+    exportDaysNote: "Export des jours : date, type de jour, demi-journée et nuit hors du domicile pour vérifier les comptes, jamais de notes ni de localisation. Une demi-journée compte pour 0,5, sauf si une règle traite toute fraction de jour comme un jour entier.",
+    signupRouteNote: "Seul le nom de l’entreprise est nécessaire ici. L’itinéraire se choisit pour chaque collaborateur, lorsqu’il rejoint l’entreprise.",
+    inviteNeedsPlan: "Aucune offre ni aucun essai actif : l’invitation sera créée et vous obtiendrez un lien à partager, mais elle ne sera pas envoyée par e-mail. Démarrez une offre sur la page Tarifs pour envoyer des e-mails.",
+    sendingInvite: "Envoi en cours…",
+    noPendingInvites: "Aucune invitation en attente.",
+    copyLink: "Copier le lien pour {email}",
+    linkCopied: "Lien copié.",
+    resendInvite: "Renvoyer l’invitation à {email}",
+    inviteResent: "Invitation renvoyée par e-mail à {email}, avec le même lien.",
+    resendNoPlan: "Non envoyée : l’envoi d’invitations par e-mail nécessite une offre active ou un essai. Vous pouvez toujours partager le lien.",
+    resendLimit: "Non envoyée : cette adresse a déjà reçu un e-mail dans la dernière heure, ou la limite horaire d’e-mails d’invitation est atteinte. Réessayez plus tard ou partagez le lien.",
+    resendFailed: "L’e-mail n’a pas pu être envoyé. Vous pouvez toujours partager le lien.",
+    joinPreviewIntro: "{company} vous invite à consigner vos jours de travail avec BorderDay.",
+    joinPreviewFor: "Cette invitation est destinée à {email}. Utilisez cette adresse pour vous connecter ou créer votre compte.",
+    checkoutDone: "Paiement configuré. Le statut de l’offre se met à jour ici dès que Stripe le confirme.",
+    planLabel: "Offre",
+    planTrialing: "essai gratuit jusqu’au {date}",
+    planActive: "active, la période en cours se termine le {date}",
+    planActiveNoDate: "active",
+    planPastDue: "paiement en retard. Les collaborateurs ne peuvent pas consigner de jours tant qu’il n’est pas réglé.",
+    planCanceled: "résiliée",
+    planNone: "aucune offre active",
+    planManage: "Mettre à jour le paiement ou résilier",
     signupTitle: 'Créer un compte entreprise',
     signupSubtitle:
       'Connectez-vous par e-mail ou Google, puis créez votre entreprise. Abonnez-vous ensuite sur la page Tarifs.',
@@ -646,7 +681,7 @@ const fr: Dict = {
     profileSaved: 'Enregistré.',
     noticeTitle: 'Avis — ce que les RH peuvent voir',
     noticeBody:
-      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, l’itinéraire choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, s’il s’agit d’une demi-journée, sa marque éventuelle de nuit hors du domicile pour le travail, sur l’itinéraire France–Belgique le statut de frontalier avant 2012 s’il est indiqué, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi, votre base de jours de travail, vos jours contractuels, votre A1 et ce statut France–Belgique. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter ou supprimer votre journal et interroger votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. L’art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Ceci est un outil de suivi, pas un conseil fiscal ou juridique.',
+      'Ceci est une information, pas une demande de consentement : votre employeur décide pourquoi et sur quelle base légale il enregistre ces jours, et il en est responsable. Si vous rejoignez l’entreprise, les administrateurs du compte et les lecteurs RH de votre employeur peuvent voir : votre nom, votre e-mail, l’itinéraire choisi, les jours de travail contractuels, le taux d’emploi et l’A1 s’ils sont indiqués, le type et la date de chaque jour enregistré, s’il s’agit d’une demi-journée, sa marque éventuelle de nuit hors du domicile pour le travail, sur l’itinéraire France–Belgique le statut de frontalier avant 2012 s’il est indiqué, et les mêmes compteurs fiscaux et de sécurité sociale que vous. Ils peuvent aussi indiquer votre taux d’emploi, votre base de jours de travail, vos jours contractuels, votre A1 et ce statut France–Belgique. Ils ne voient ni GPS ni localisation de l’appareil, car BorderDay ne les collecte pas, et vos notes restent privées. Le type de jour indique bien une catégorie de pays par date. Vous pouvez exporter votre journal à tout moment. Après avoir quitté l’entreprise, vous pouvez encore exporter ou effacer votre propre copie depuis Compte ; la copie de l’employeur reste selon son délai de conservation. Interrogez votre employeur ou privacy@borderday.com sur vos droits. Conservation : 24 mois par défaut (réglage de l’entreprise, 1–120 mois) ; les journaux entreprise plus anciens que cette fenêtre sont supprimés automatiquement chaque jour. L’art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Ceci est un outil de suivi, pas un conseil fiscal ou juridique.',
     noticeAck: 'J’ai lu cet avis',
     noticeRequired: 'Confirmez que vous avez lu l’avis pour continuer.',
     noticePrivacyLink: 'Politique de confidentialité complète',
@@ -682,7 +717,7 @@ const fr: Dict = {
       'Vous devez fournir des informations de compte exactes. Les administrateurs du compte entreprise invitent les collaborateurs ; ceux-ci choisissent un itinéraire et enregistrent uniquement le type de jour (ni GPS ni localisation de l’appareil). Les RH voient les mêmes compteurs que le collaborateur. Dans un compte entreprise, l’employeur décide pourquoi et comment les jours sont enregistrés : il est responsable du traitement de ces journaux, de la base légale, de l’information des collaborateurs et de toute consultation exigée par son droit, et le prestataire agit comme son sous-traitant. L’Art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Les obligations côté employeur peuvent empêcher un usage licite tant qu’elles ne sont pas remplies : par exemple la co-détermination du comité d’entreprise sur les systèmes techniques de contrôle (Allemagne BetrVG § 87 al. 1 n° 6), les règles de consultation des représentants du personnel ou de conventions collectives de travail en France, en Belgique, au Luxembourg et en Suisse, et toute règle locale sur la surveillance des salariés ou la vie privée au travail. BorderDay ne conduit pas ces consultations à votre place. Le prestataire est responsable du traitement des comptes, de la facturation et de la sécurité. L’accord de traitement des données pour les journaux de jours des collaborateurs est publié à /dpa/. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
     s3Title: 'Abonnements, essai, renouvellement et résiliation',
     s3Body:
-      'Les offres payantes sont des abonnements. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. Après 7 jours, l’offre devient payante au prix indiqué : votre carte est débitée automatiquement le 8e jour et l’abonnement se renouvelle ensuite chaque mois ou chaque année jusqu’à votre résiliation. Si vous résiliez avant le 8e jour, rien n’est débité. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier à tout moment via le lien « Résilier votre contrat » en bas de chaque page, qui mène au portail client, aux outils de commande Link ou à une demande par e-mail. La résiliation arrête les renouvellements futurs. Les montants déjà encaissés pour une période de facturation commencée ne sont pas remboursés au prorata, sauf obligation légale ou conditions de remboursement de Link. Selon l’arrêt C-565/22 (Sofatutor), lorsqu’un essai gratuit se prolonge automatiquement en période payante et que le prix a été clairement, de façon compréhensible et explicite, communiqué lors de la conclusion, il s’agit d’un seul contrat avec un seul droit légal de rétractation pour toute la période — pas d’un second droit au début du prélèvement.',
+      'Les offres payantes sont des abonnements. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte de paiement est requise à l’inscription. L’essai gratuit est proposé une seule fois par personne et par entreprise : si vous ou l’entreprise en avez déjà eu un, même résilié, l’offre démarre et est débitée au moment du paiement. Après 7 jours, l’offre devient payante au prix indiqué : votre carte est débitée automatiquement le 8e jour et l’abonnement se renouvelle ensuite chaque mois ou chaque année jusqu’à votre résiliation. Si vous résiliez avant le 8e jour, rien n’est débité. Sans moyen de paiement valide à la fin de l’essai, l’abonnement est résilié. Vous pouvez résilier à tout moment via le lien « Résilier votre contrat » en bas de chaque page, qui mène au portail client, aux outils de commande Link ou à une demande par e-mail. La résiliation arrête les renouvellements futurs. Les montants déjà encaissés pour une période de facturation commencée ne sont pas remboursés au prorata, sauf obligation légale ou conditions de remboursement de Link. Selon l’arrêt C-565/22 (Sofatutor), lorsqu’un essai gratuit se prolonge automatiquement en période payante et que le prix a été clairement, de façon compréhensible et explicite, communiqué lors de la conclusion, il s’agit d’un seul contrat avec un seul droit légal de rétractation pour toute la période — pas d’un second droit au début du prélèvement.',
     s3YearlyBody:
       'Les offres individuelles annuelles se renouvellent pour une année supplémentaire jusqu’à votre résiliation. BorderDay envoie un rappel de renouvellement par e-mail avant chaque reconduction annuelle. Pour les consommateurs en France, l’Art. L215-1 du Code de la consommation exige une information écrite entre un et trois mois avant la date limite de refus de reconduction tacite, avec cette date limite dans un encadré apparent ; à défaut, vous pouvez mettre fin au contrat gratuitement à tout moment après la reconduction. Résilier pendant la première année empêche la reconduction suivante. Après la première année, vous pouvez résilier une offre annuelle renouvelée à tout moment ; elle prend alors fin, et tout remboursement de la partie non utilisée s’applique selon le droit de la consommation obligatoire de votre pays. Résiliez via le lien Résilier votre contrat du pied de page (portail client), vos outils de commande Link, ou par e-mail.',
     s4Title: 'Tarifs, TVA et marchand officiel',
@@ -759,11 +794,19 @@ const fr: Dict = {
     back: 'Modifier les informations',
   },
   account: {
+    formerTitle: "Jours des entreprises que vous avez quittées",
+    formerBody: "Vous n’êtes plus membre de ces entreprises, mais vous pouvez encore consulter et exporter les jours consignés (inclus dans l’export ci-dessus). Effacer votre copie ne les retire que de votre compte ; la copie de l’employeur reste selon son délai de conservation.",
+    formerSummary: "{company} : {count} jours, du {first} au {last}",
+    formerDelete: "Effacer ma copie chez {company}",
+    formerDeleteConfirm: "Effacer votre copie des {count} jours consignés chez {company} ? Vos notes privées partent aussi. La copie de l’employeur reste selon son délai de conservation. Irréversible.",
+    formerDeleted: "Votre copie des jours de {company} est effacée. La copie de l’employeur reste selon son délai de conservation.",
+    formerError: "Cela n’a pas fonctionné. Réessayez ou écrivez à privacy@borderday.com.",
+    noteColumn: "Note",
     title: 'Votre compte',
     signedInAs: 'Connecté avec {email}',
     exportTitle: 'Exporter vos journaux enregistrés',
     exportBody:
-      'Télécharge ce qui est enregistré sur nos serveurs pour votre compte : le journal de votre offre individuelle, ainsi que votre propre journal et vos réglages dans chaque entreprise dont vous faites partie.',
+      'Télécharge ce qui est enregistré sur nos serveurs pour votre compte : le journal de votre offre individuelle, ainsi que votre propre journal et vos réglages dans chaque entreprise dont vous faites partie, vos notes privées, et les jours consignés dans les entreprises que vous avez quittées.',
     exportError: 'Impossible de préparer l’export. Réessayez.',
     deviceTitle: 'Cet appareil uniquement',
     deviceBody: 'Jours de l’aperçu gratuit, stockés dans ce navigateur et non sur nos serveurs.',
@@ -812,7 +855,7 @@ const fr: Dict = {
       'Cette déclaration porte sur le site public et le produit connecté sur borderday.com (anglais, français, allemand, italien et néerlandais). Le checkout tiers (Stripe / Link) et les clients de messagerie suivent leurs propres pratiques d’accessibilité.',
     statusTitle: 'État actuel',
     statusBody:
-      'Des contrôles automatiques axe des pages publiques et de la démo n’ont signalé aucune violation lors du dernier scan interne (1er novembre 2026). Les écrans connectés n’en faisaient pas partie. Le sélecteur de langue ne change désormais la langue que lorsque vous appuyez sur Appliquer. Certaines erreurs de formulaire peuvent encore devoir être mieux annoncées. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
+      'Des contrôles automatiques axe des pages publiques et de la démo n’ont signalé aucune violation lors du dernier scan interne (1er novembre 2026). Les écrans connectés n’en faisaient pas partie. Le sélecteur de langue change la langue dès que vous choisissez une autre option. Certaines erreurs de formulaire peuvent encore devoir être mieux annoncées. Un passage complet avec lecteur d’écran n’a pas encore été achevé.',
     feedbackTitle: 'Retour',
     feedbackBody:
       'Si vous rencontrez une barrière, écrivez à privacy@borderday.com ou hello@borderday.com en indiquant l’URL de la page, votre navigateur ou technologie d’assistance, et ce que vous essayiez de faire. Nous visons une réponse sous cinq jours ouvrés.',

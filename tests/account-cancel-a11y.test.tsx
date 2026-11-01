@@ -29,6 +29,10 @@ vi.mock('../src/lib/companyApi', async (original) => {
     listPersonalDayLogs: vi.fn(async () => []),
     getOwnAccountRecords: vi.fn(async () => ({ displayName: null, noticeRecords: [], subscriptions: [] })),
     listDayLogs: vi.fn(async () => []),
+    listMyDayNotes: vi.fn(async () => new Map()),
+    listMyDaysIn: vi.fn(async () => []),
+    listFormerCompanies: vi.fn(async () => []),
+    deleteMyDayLogs: vi.fn(async () => undefined),
     resolveAppAccess: vi.fn(async () => ({ mode: 'preview', unpaidCompany: null })),
   };
 });
@@ -197,21 +201,21 @@ describe('H4 Account page', () => {
   it('exports the caller’s own logs from every company, and only asks for those', async () => {
     mocked.listPersonalDayLogs.mockResolvedValue([{ date: '2026-01-02', type: 'telework', borderPackId: null, overnightAway: false }]);
     mocked.listMyCompanies.mockResolvedValue([company({ profile: { employmentPercent: 80, a1InPlace: true, a1ValidUntil: '2027-01-01' } })]);
-    mocked.listDayLogs.mockResolvedValue([{ employeeUserId: 'u1', workDate: '2026-02-03', dayType: 'onsite', overnightAway: true }]);
+    mocked.listMyDaysIn.mockResolvedValue([{ date: '2026-02-03', type: 'onsite', overnightAway: true, dayShare: 1, note: 'own, "note"' }]);
     mocked.getOwnAccountRecords.mockResolvedValue({
       displayName: 'Me',
       noticeRecords: [{ companyId: 'c1', version: 'v5', language: 'fr', acceptedAt: '2026-01-01T00:00:00Z' }],
       subscriptions: [{ planKind: 'individual', status: 'active', currentPeriodEnd: null, trialEndsAt: null, stripeCustomerId: 'cus_1', stripeSubscriptionId: 'sub_1' }],
     });
     const data = await collectAccountExport({ id: 'u1', email: 'me@example.test' });
-    expect(mocked.listDayLogs).toHaveBeenCalledWith('c1', 'u1');
+    expect(mocked.listMyDaysIn).toHaveBeenCalledWith('c1');
     expect(mocked.getOwnAccountRecords).toHaveBeenCalledWith('u1');
     expect(data.account).toEqual({ email: 'me@example.test', displayName: 'Me' });
     expect(data.noticeRecords[0]).toMatchObject({ company: 'Acme SA', version: 'v5', language: 'fr' });
     expect(data.subscriptions[0]).toMatchObject({ planKind: 'individual', status: 'active' });
     expect(data.individualPlan.days).toHaveLength(1);
     expect(data.companies[0]).toMatchObject({ company: 'Acme SA', employmentPercent: 80, a1InPlace: true });
-    expect(data.companies[0].days[0]).toEqual({ date: '2026-02-03', type: 'onsite', overnightAway: true });
+    expect(data.companies[0].days[0]).toEqual({ date: '2026-02-03', type: 'onsite', overnightAway: true, dayShare: 1, note: 'own, "note"' });
     const csv = accountExportCsv(data);
     expect(csv).toContain('"individual plan",2026-01-02,telework,no');
     expect(csv).toContain('"Acme SA",2026-02-03,onsite,yes');
@@ -239,6 +243,76 @@ describe('H4 Account page', () => {
       ],
     };
     expect(accountExportCsv(data)).toContain(`"'=HYPERLINK(""x"")"`);
+  });
+});
+
+describe('E2: account page after sign-in', () => {
+  it('links HR on to their dashboard, and shows employees no such link', async () => {
+    auth.value.user = { id: 'u1', email: 'me@example.test' };
+    mocked.listMyCompanies.mockResolvedValue([company({ role: 'owner' })]);
+    open('/en/account');
+    const link = await screen.findByRole('link', { name: `${en.nav.hrDashboard}: Acme SA` });
+    expect(link.getAttribute('href')).toBe('/en/company/c1/dashboard');
+    cleanup();
+    mocked.listMyCompanies.mockResolvedValue([company({ role: 'employee' })]);
+    open('/en/account');
+    await screen.findByRole('heading', { name: en.account.exportTitle });
+    expect(screen.queryByRole('link', { name: `${en.nav.hrDashboard}: Acme SA` })).toBeNull();
+  });
+});
+
+describe('E24: days from a company the person has left', () => {
+  const former = { companyId: 'old', company: 'Old Co', dayCount: 2, firstDate: '2026-10-01', lastDate: '2026-10-02' };
+  const days = [
+    { date: '2026-10-01', type: 'telework' as const, overnightAway: false, dayShare: 0.5 as const, note: 'my note' },
+    { date: '2026-10-02', type: 'onsite' as const, overnightAway: true, dayShare: 1 as const },
+  ];
+  beforeEach(() => {
+    auth.value.user = { id: 'u1', email: 'me@example.test' };
+    mocked.listFormerCompanies.mockResolvedValue([former]);
+    mocked.listMyDaysIn.mockResolvedValue(days);
+  });
+
+  it('Account lists them with the days, half-day mark and own note', async () => {
+    open('/en/account');
+    await screen.findByRole('heading', { name: en.account.formerTitle });
+    screen.getByText('Old Co: 2 days, 2026-10-01 to 2026-10-02');
+    screen.getByText('my note');
+    screen.getByText('½');
+  });
+
+  it('nothing shows for someone who has left no company', async () => {
+    mocked.listFormerCompanies.mockResolvedValue([]);
+    open('/en/account');
+    await screen.findByRole('heading', { name: en.account.exportTitle });
+    expect(screen.queryByRole('heading', { name: en.account.formerTitle })).toBeNull();
+  });
+
+  it('clear asks first, and a refusal changes nothing', async () => {
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    open('/en/account');
+    const button = await screen.findByRole('button', { name: 'Clear my copy from Old Co' });
+    fireEvent.click(button);
+    expect(mocked.deleteMyDayLogs).not.toHaveBeenCalled();
+    confirm.mockReturnValue(true);
+    fireEvent.click(button);
+    await screen.findByText(/Your copy of the days from Old Co is cleared/);
+    expect(mocked.deleteMyDayLogs).toHaveBeenCalledWith('old');
+    expect(screen.queryByRole('button', { name: 'Clear my copy from Old Co' })).toBeNull();
+    confirm.mockRestore();
+  });
+
+  it('the export includes them, in JSON and CSV', async () => {
+    const data = await collectAccountExport({ id: 'u1', email: 'me@example.test' });
+    expect(data.formerCompanies).toEqual([{ company: 'Old Co', days }]);
+    const csv = accountExportCsv(data);
+    expect(csv.split('\n')[0]).toBe('source,date,type,overnight_away_for_work,day_share,note');
+    expect(csv).toContain('"Old Co",2026-10-01,telework,no,0.5,"my note"');
+  });
+
+  it('the app says the days are not gone, and links to Account', async () => {
+    open('/en/app');
+    await screen.findByText(/You have left Old Co\. The 2 days/);
   });
 });
 

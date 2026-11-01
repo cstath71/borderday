@@ -65,37 +65,27 @@ export default function Layout() {
               </NavLink>
             )}
           </nav>
-          <form
-            className="lang-switch"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const next = new FormData(e.currentTarget).get('lang') as Lang;
-              if (!isLang(next) || next === lang) return;
-              const path = window.location.pathname.replace(/^\/(en|fr|de|it|nl)(?=\/|$)/, `/${next}`);
-              window.location.assign(path.startsWith(`/${next}`) ? path : `/${next}/`);
-            }}
-          >
-            <label>
-              <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>
-                {d.lang.label}
-              </span>
-              <select
-                name="lang"
-                aria-label={d.lang.label}
-                defaultValue={lang}
-              >
-                {LANGS.map((l) => (
-                  <option key={l} value={l}>
-                    {l.toUpperCase()}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {/* WCAG 3.2.2: changing the control alone must not navigate. */}
-            <button type="submit" className="lang-apply" aria-label={`${d.lang.apply}: ${d.lang.label}`}>
-              {d.lang.apply}
-            </button>
-          </form>
+          <label className="lang-switch">
+            <span className="visually-hidden" style={{ position: 'absolute', left: -9999 }}>
+              {d.lang.label}
+            </span>
+            <select
+              aria-label={d.lang.label}
+              value={lang}
+              onChange={(e) => {
+                const next = e.target.value as Lang;
+                if (!isLang(next) || next === lang) return;
+                const path = window.location.pathname.replace(/^\/(en|fr|de|it|nl)(?=\/|$)/, `/${next}`);
+                window.location.assign(path.startsWith(`/${next}`) ? path : `/${next}/`);
+              }}
+            >
+              {LANGS.map((l) => (
+                <option key={l} value={l}>
+                  {l.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
       </header>
       <main id="main" tabIndex={-1}>

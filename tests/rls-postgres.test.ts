@@ -820,6 +820,92 @@ describe('real Postgres: day logs', () => {
   });
 });
 
+describe('real Postgres: E15 private notes', () => {
+  it('the employee reads and clears their own note; HR gets it through no route', async () => {
+    const owner = await newUser('n1o@example.com');
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const emp = await addMember(owner, company);
+    await logDay(emp, company, '2026-05-04', 'secret');
+    const own = await as(emp, `select note from public.bd_day_logs where employee_user_id = $1`, [emp]);
+    expect(own.rows[0].note).toBe('secret');
+
+    for (const reader of [owner, hr]) {
+      expect((await as(reader, `select note from public.bd_day_logs where company_id = $1`, [company])).rowCount).toBe(0);
+      const records = await as(reader, `select * from public.bd_list_day_records($1, $2)`, [company, emp]);
+      expect(records.rowCount).toBe(1);
+      expect(records.rows[0]).not.toHaveProperty('note');
+      expect(JSON.stringify(records.rows[0])).not.toContain('secret');
+      const types = await as(reader, `select * from public.bd_list_day_types($1, $2)`, [company, emp]);
+      expect(JSON.stringify(types.rows[0])).not.toContain('secret');
+      // No write route either: HR cannot blank or overwrite it.
+      expect((await as(reader, `update public.bd_day_logs set note = 'x' where company_id = $1`, [company])).rowCount).toBe(0);
+    }
+    await as(emp, `update public.bd_day_logs set note = null where employee_user_id = $1`, [emp]);
+    expect((await as(emp, `select note from public.bd_day_logs where employee_user_id = $1`, [emp])).rows[0].note).toBeNull();
+  });
+
+  it('notes are capped at 500 characters on both tables', async () => {
+    const owner = await newUser('n2o@example.com');
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    await logDay(emp, company, '2026-05-05', 'x'.repeat(500));
+    await expect(logDay(emp, company, '2026-05-06', 'x'.repeat(501))).rejects.toThrow(/bd_day_logs_note_length/);
+    await db.query(`insert into public.bd_subscriptions (user_id, plan_kind, status) values ($1, 'individual', 'active')`, [emp]);
+    await expect(
+      as(emp, `insert into public.bd_personal_day_logs (user_id, work_date, day_type, note) values ($1, '2026-05-07', 'telework', $2)`, [emp, 'x'.repeat(501)]),
+    ).rejects.toThrow(/bd_personal_day_logs_note_length/);
+  });
+});
+
+describe('real Postgres: E24 removed member keeps their own days', () => {
+  it('sees the company name and their days, with the note; can clear own copy; cannot add more', async () => {
+    const owner = await newUser('r1o@example.com');
+    const company = await newCompany(owner, 'Left Co');
+    const emp = await addMember(owner, company);
+    await logDay(emp, company, '2026-10-01', 'mine');
+    await logDay(emp, company, '2026-10-02');
+    const before = await as(emp, `select * from public.bd_my_day_log_companies()`);
+    expect(before.rows[0]).toMatchObject({ company_id: company, company_name: 'Left Co', active: true });
+    await as(owner, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [company, emp]);
+
+    const { rows } = await as(emp, `select * from public.bd_my_day_log_companies()`);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ company_id: company, company_name: 'Left Co', active: false });
+    expect(Number(rows[0].day_count)).toBe(2);
+    expect((await as(emp, `select id from public.bd_companies where id = $1`, [company])).rowCount).toBe(0);
+    const own = await as(emp, `select note from public.bd_day_logs where company_id = $1 and employee_user_id = $2 order by work_date`, [company, emp]);
+    expect(own.rows.map((r) => r.note)).toEqual(['mine', null]);
+
+    await expect(logDay(emp, company, '2026-10-03')).rejects.toThrow(/row-level security/);
+    await expect(as(emp, `update public.bd_day_logs set note = 'x' where employee_user_id = $1`, [emp])).rejects.toThrow(/row-level security/);
+    // Inactive leavers cannot hard-delete; soft-clear hides their copy and wipes notes. Company rows remain.
+    expect((await as(emp, `delete from public.bd_day_logs where company_id = $1 and employee_user_id = $2`, [company, emp])).rowCount).toBe(0);
+    await as(emp, `select public.bd_clear_my_day_log_copy($1)`, [company]);
+    expect((await as(emp, `select * from public.bd_my_day_log_companies()`)).rowCount).toBe(0);
+    // HR cannot SELECT the table; company retention is verified as postgres (bypass RLS).
+    const kept = await db.query(
+      `select note, employee_cleared_at is not null as cleared from public.bd_day_logs where company_id = $1 order by work_date`,
+      [company],
+    );
+    expect(kept.rowCount).toBe(2);
+    expect(kept.rows.every((r) => r.cleared && r.note === null)).toBe(true);
+    const hr = await as(owner, `select * from public.bd_list_day_records($1)`, [company]);
+    expect(hr.rowCount).toBe(2);
+  });
+
+  it('shows a stranger nothing, and anon cannot call it', async () => {
+    const owner = await newUser('r2o@example.com');
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    await logDay(emp, company, '2026-10-01');
+    const stranger = await newUser('r2s@example.com');
+    expect((await as(stranger, `select * from public.bd_my_day_log_companies()`)).rowCount).toBe(0);
+    expect((await as(owner, `select * from public.bd_my_day_log_companies()`)).rowCount).toBe(0);
+    await expect(as(null, `select * from public.bd_my_day_log_companies()`)).rejects.toThrow(/permission denied/);
+  });
+});
+
 describe('real Postgres: paid access (C8)', () => {
   it('employee of an unpaid company cannot log, and can once it subscribes', async () => {
     const owner = await newUser('o24@example.com');

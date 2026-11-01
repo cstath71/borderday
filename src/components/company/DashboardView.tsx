@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getBorderPack, listBorderPacks } from '../../borders/packs';
-import type { BorderId } from '../../borders/types';
+import type { BorderId, DayType } from '../../borders/types';
 import type { AggregateStatus, EmployeeDashboardRow } from '../../company/dashboardMath';
-import { clampRetentionMonths, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
+import { clampRetentionMonths, dayRowsToCsv, filterRows, needsFilingNote, rowsToCsv } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { t, type Dict } from '../../i18n';
+import { download } from '../../lib/download';
 import { usesContractDays } from '../../lib/counting';
 import ProfileFields, { type ProfileValues } from '../ProfileFields';
+import type { ResendResult } from '../../lib/companyApi';
 import CounterTable, { statusLabel } from './CounterTable';
+import PendingInvites from './PendingInvites';
 
 const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'at_limit', 'over', 'disabled'];
 
@@ -157,6 +160,8 @@ export default function DashboardView(props: {
   d: Dict;
   companyName: string;
   rows: EmployeeDashboardRow[];
+  /** What the optional day-level CSV is built from. It has no note field. */
+  dayLogs?: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>;
   invites: Invitation[];
   year: number;
   isDemo?: boolean;
@@ -173,10 +178,11 @@ export default function DashboardView(props: {
   /** Absent under /demo, which then shows no remove or revoke controls. */
   onDeactivateMember?: (userId: string) => Promise<{ billingSynced: boolean }>;
   onRevokeInvite?: (inviteId: string) => Promise<void>;
+  onResendInvite?: (invite: Invitation) => Promise<ResendResult>;
   onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
 }) {
-  const { d, companyName, rows, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onSaveProfile, onSaveRetention } = props;
+  const { d, companyName, rows, dayLogs, invites, year, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [busy, setBusy] = useState(false);
@@ -198,21 +204,6 @@ export default function DashboardView(props: {
     }
   }
 
-  async function revoke(invite: Invitation) {
-    if (!onRevokeInvite) return;
-    if (!window.confirm(t(d.company.revokeConfirm, { email: invite.email }))) return;
-    setBusy(true);
-    setNotice(null);
-    try {
-      await onRevokeInvite(invite.id);
-      setNotice({ tone: 'status', text: t(d.company.inviteRevoked, { email: invite.email }) });
-    } catch {
-      setNotice({ tone: 'alert', text: d.company.revokeFailed });
-    } finally {
-      setBusy(false);
-    }
-  }
-
   const filtered = filterRows(rows, {
     borderPackId: (borderFilter || null) as BorderId | null,
     status: (statusFilter as AggregateStatus) || null,
@@ -220,14 +211,11 @@ export default function DashboardView(props: {
   const packs = listBorderPacks();
 
   function exportCsv() {
-    const csv = rowsToCsv(filtered, year);
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `borderday-export-${year}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    download(`borderday-export-${year}.csv`, rowsToCsv(filtered, year), 'text/csv;charset=utf-8');
+  }
+
+  function exportDaysCsv() {
+    download(`borderday-days-${year}.csv`, dayRowsToCsv(filtered, dayLogs ?? [], year), 'text/csv;charset=utf-8');
   }
 
   function borderLabel(id: string | null): string {
@@ -258,8 +246,13 @@ export default function DashboardView(props: {
           <button type="button" className="btn btn-primary" onClick={exportCsv}>
             {d.company.exportCsv}
           </button>
+          {dayLogs && (
+            <button type="button" className="btn btn-secondary" onClick={exportDaysCsv}>
+              {d.company.exportDaysCsv}
+            </button>
+          )}
           <p className="meta" role="note" style={{ maxWidth: '16rem', margin: 0 }}>
-            {d.company.exportCsvNote}
+            {d.company.exportCsvNote} {dayLogs && d.company.exportDaysNote}
           </p>
         </div>
       </div>
@@ -366,24 +359,14 @@ export default function DashboardView(props: {
       )}
 
       {invites.length > 0 && (
-        <div className="card" style={{ marginTop: '1.5rem' }}>
-          <h2>{d.company.pendingInvites}</h2>
-          <ul>
-            {invites.map((i) => (
-              <li key={i.id}>
-                {i.email} · {i.role} · <Link to={`${joinBase}/${i.token}`}>{d.company.inviteLinkLabel}</Link>
-                {onRevokeInvite && (canRevokeInvite?.(i) ?? true) && (
-                  <>
-                    {' '}
-                    <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => void revoke(i)}>
-                      {t(d.company.revokeInvite, { email: i.email })}
-                    </button>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <PendingInvites
+          d={d}
+          invites={invites}
+          joinPath={(token) => `${joinBase}/${token}`}
+          canManage={canRevokeInvite}
+          onResend={onResendInvite}
+          onRevoke={onRevokeInvite}
+        />
       )}
     </>
   );

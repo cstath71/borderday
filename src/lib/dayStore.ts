@@ -3,6 +3,7 @@ import {
   deleteMyDayLogs,
   deleteMyPersonalDayLogs,
   listDayLogs,
+  listMyDayNotes,
   listPersonalDayLogs,
   upsertDayLog,
   upsertPersonalDayLog,
@@ -28,12 +29,16 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
     const companyId = access.company.id;
     return {
       list: async () => {
-        const logs = await listDayLogs(companyId, userId);
+        const [logs, notes] = await Promise.all([listDayLogs(companyId, userId), listMyDayNotes(companyId)]);
         return logs
-          .map((l) => ({ date: l.workDate, type: l.dayType, overnightAway: l.overnightAway, dayShare: l.dayShare }))
+          .map((l) => {
+            const note = notes.get(l.workDate);
+            return { date: l.workDate, type: l.dayType, overnightAway: l.overnightAway, dayShare: l.dayShare, ...(note ? { note } : {}) };
+          })
           .sort((a, b) => a.date.localeCompare(b.date));
       },
-      put: (entry) => upsertDayLog({ companyId, workDate: entry.date, dayType: entry.type, overnightAway: entry.overnightAway, dayShare: entry.dayShare }),
+      put: (entry) =>
+        upsertDayLog({ companyId, workDate: entry.date, dayType: entry.type, overnightAway: entry.overnightAway, dayShare: entry.dayShare, note: entry.note }),
       clear: () => deleteMyDayLogs(companyId),
     };
   }
@@ -47,6 +52,7 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
           borderPackId: borderId,
           overnightAway: entry.overnightAway,
           dayShare: entry.dayShare,
+          note: entry.note,
         }),
       clear: deleteMyPersonalDayLogs,
     };

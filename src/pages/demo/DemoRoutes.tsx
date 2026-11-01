@@ -88,7 +88,7 @@ function DemoDashboard() {
   const d = getDict(lang);
   const [tick, setTick] = useState(0);
   const year = new Date().getFullYear();
-  const { companyId, company, rows, invites } = useMemo(() => {
+  const { companyId, company, rows, dayLogs, invites } = useMemo(() => {
     void tick;
     const { companyId: id } = seedDemoCompany();
     const members = listAllMembers(id).map(toRowMember);
@@ -97,6 +97,7 @@ function DemoDashboard() {
       companyId: id,
       company: getCompany(id),
       rows: buildDashboardRows({ members, logs, year, isDemo: true }),
+      dayLogs: logs,
       invites: listInvitations(id).filter((i) => i.status === 'pending'),
     };
   }, [tick, year]);
@@ -106,6 +107,7 @@ function DemoDashboard() {
       d={d}
       companyName={company?.name ?? ''}
       rows={rows}
+      dayLogs={dayLogs}
       invites={invites}
       year={year}
       isDemo

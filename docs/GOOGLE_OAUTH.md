@@ -49,6 +49,6 @@ After that, Sign in with Google and magic-link/password email work end-to-end.
 
 ## 3. What the app already does
 
-- `signInWithOAuth({ provider: 'google', options: { redirectTo: origin + '/auth/callback' } })`
+- `signInWithOAuth({ provider: 'google', options: { redirectTo: origin + '/<lang>/auth/callback?next=<page>' } })`, and the same URL as `emailRedirectTo` on sign-up and magic links. The `/**` entries above must be in the allow list: otherwise Supabase ignores this URL and returns to the Site URL.
 - PKCE flow; `/auth/callback` route exchanges the code for a session
 - Until Google is enabled, the UI shows a “Google not ready” hint (no crash)

@@ -142,11 +142,11 @@ describe('bd-create-checkout Managed Payments + trial', () => {
   });
   it('requires a payment method and cancels trial if missing', () => {
     expect(src).toContain('payment_method_collection: "always"');
-    expect(src).toContain('missing_payment_method: "cancel"');
+    expect(readFileSync(resolve(root, 'supabase/functions/_shared/checkoutGuard.ts'), 'utf8')).toContain('missing_payment_method: "cancel"');
   });
   it('uses shared TRIAL_DAYS = 7', () => {
     expect(trialSrc).toMatch(/export const TRIAL_DAYS = 7/);
-    expect(src).toContain('trial_period_days: TRIAL_DAYS');
+    expect(src).toContain('subscriptionTrialFields(trialUsed, TRIAL_DAYS)');
     expect(src).not.toMatch(/trial_period_days:\s*14/);
   });
   it('requires expressStartAcknowledged before creating a Managed Payments session', () => {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getBorderPack, listBorderPacks, tracksOvernight } from '../borders/packs';
 import type { BorderId, DayEntry, DayType } from '../borders/types';
 import CounterCards from '../components/CounterCards';
+import LoadingSkeleton from '../components/LoadingSkeleton';
 import ProfileFields, { type ProfileValues } from '../components/ProfileFields';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
@@ -36,6 +37,13 @@ function canBeOvernight(type: DayType): boolean {
   return type === 'onsite' || type === 'third_country';
 }
 
+const DAYS_PER_WEEK = [1, 2, 3, 4, 5];
+
+/** The full-time base assumes a 5-day week; rounds like annualBaseFor scaling by employment %. */
+export function annualForDaysPerWeek(fullTimeBase: number, daysPerWeek: number): number {
+  return Math.max(1, Math.round((fullTimeBase * daysPerWeek) / 5));
+}
+
 function monthMatrix(year: number, month0: number): (Date | null)[] {
   const first = new Date(year, month0, 1);
   const startPad = (first.getDay() + 6) % 7; // Monday-first
@@ -63,6 +71,8 @@ export default function AppPage() {
   const [viewYear, setViewYear] = useState(() => Number(zurichToday().slice(0, 4)));
   const [viewMonth, setViewMonth] = useState(() => Number(zurichToday().slice(5, 7)) - 1);
   const [busy, setBusy] = useState(false);
+  /** Half day ticked on a date with no day type yet. A logged day keeps its own value in the entry. */
+  const [halfBeforeType, setHalfBeforeType] = useState<Record<string, boolean>>({});
 
   // Fail closed: if access cannot be resolved, the visitor stays on the on-device preview.
   useEffect(() => {
@@ -146,6 +156,11 @@ export default function AppPage() {
   }, [days]);
 
   const canLogSelected = !isPreview || selectedDate.startsWith(todayIso().slice(0, 7));
+  const selectedIsHalf = selectedEntry ? selectedEntry.dayShare === 0.5 : !!halfBeforeType[selectedDate];
+  const halfDayApplies = !selectedEntry || canBeHalfDay(selectedEntry.type);
+  const locale = ({ en: 'en-CH', fr: 'fr-CH', de: 'de-CH', it: 'it-CH', nl: 'nl-BE' } as const)[lang] ?? 'en-CH';
+  const longDate = (dt: Date) => dt.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const selectedLabel = longDate(new Date(`${selectedDate}T12:00:00`));
 
   async function saveSettings(next: UserMeta) {
     setMetaState(next);
@@ -224,7 +239,7 @@ export default function AppPage() {
   if (!access) {
     return (
       <div className="container app-shell">
-        <p role="status">{d.app.loading}</p>
+        <LoadingSkeleton label={d.app.loading} />
       </div>
     );
   }
@@ -333,6 +348,30 @@ export default function AppPage() {
             </label>
           )}
           {pack && meta && (
+            <label style={{ display: 'block', marginTop: '0.75rem' }}>
+              <strong>{d.app.daysPerWeek}</strong>
+              <div className="meta" style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
+                {t(d.app.daysPerWeekHint, { default: pack.defaultAnnualWorkingDays })}
+              </div>
+              <select
+                style={{ marginTop: '0.35rem' }}
+                value={DAYS_PER_WEEK.find((n) => annualForDaysPerWeek(pack.defaultAnnualWorkingDays, n) === annual) ?? ''}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    void saveSettings({ ...meta, annualWorkingDays: annualForDaysPerWeek(pack.defaultAnnualWorkingDays, Number(e.target.value)) });
+                  }
+                }}
+              >
+                <option value="">—</option>
+                {DAYS_PER_WEEK.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          {pack && meta && (
             <ProfileFields
               d={d}
               idPrefix="my-profile"
@@ -347,10 +386,17 @@ export default function AppPage() {
 
         <div className="card" style={{ marginBottom: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
-            <strong>
-              {d.app.today}: {selectedDate}
-            </strong>
-            <button className="btn btn-ghost" type="button" onClick={() => setSelectedDate(todayIso())}>
+            <strong>{selectedDate === todayIso() ? `${d.app.today}: ${selectedLabel}` : selectedLabel}</strong>
+            <button
+              className="btn btn-ghost"
+              type="button"
+              onClick={() => {
+                const today = todayIso();
+                setSelectedDate(today);
+                setViewYear(Number(today.slice(0, 4)));
+                setViewMonth(Number(today.slice(5, 7)) - 1);
+              }}
+            >
               {d.app.today}
             </button>
           </div>
@@ -370,7 +416,7 @@ export default function AppPage() {
                   void logDay(
                     type,
                     canBeOvernight(type) && !!selectedEntry?.overnightAway,
-                    canBeHalfDay(type) && selectedEntry?.dayShare === 0.5 ? 0.5 : 1,
+                    canBeHalfDay(type) && selectedIsHalf ? 0.5 : 1,
                   )
                 }
               >
@@ -397,24 +443,32 @@ export default function AppPage() {
               <div className="meta">{d.dayTypes.overnightAwayHint}</div>
             </label>
           )}
-          {selectedEntry && canBeHalfDay(selectedEntry.type) && (
-            <label style={{ display: 'block', marginTop: '0.75rem' }}>
-              <input
-                type="checkbox"
-                checked={selectedEntry.dayShare === 0.5}
-                disabled={busy || !canLogSelected}
-                onChange={(e) =>
+          <label style={{ display: 'block', marginTop: '0.75rem' }}>
+            <input
+              type="checkbox"
+              checked={halfDayApplies && selectedIsHalf}
+              disabled={busy || !canLogSelected || !halfDayApplies}
+              onChange={(e) => {
+                if (selectedEntry) {
                   void logDay(
                     selectedEntry.type,
                     canBeOvernight(selectedEntry.type) && !!selectedEntry.overnightAway,
                     e.target.checked ? 0.5 : 1,
-                  )
+                  );
+                } else {
+                  setHalfBeforeType((prev) => ({ ...prev, [selectedDate]: e.target.checked }));
                 }
-              />{' '}
-              <strong>{d.dayTypes.halfDay}</strong>
-              <div className="meta">{d.dayTypes.halfDayHint}</div>
-            </label>
-          )}
+              }}
+            />{' '}
+            <strong>{d.dayTypes.halfDay}</strong>
+            <div className="meta">
+              {!halfDayApplies
+                ? d.dayTypes.halfDayNotApplicable
+                : !selectedEntry && selectedIsHalf
+                  ? d.dayTypes.halfDayPending
+                  : d.dayTypes.halfDayHint}
+            </div>
+          </label>
         </div>
 
         <div className="card" style={{ marginBottom: '1rem' }}>
@@ -464,14 +518,16 @@ export default function AppPage() {
               if (!dt) return <div key={`e-${i}`} className="cal-cell muted" />;
               const iso = todayIso(dt);
               const entry = byDate.get(iso);
-              const dayLabel = entry ? (d.dayTypes as Record<string, string>)[entry.type] : d.app.notLogged;
+              const isHalf = entry?.dayShare === 0.5 && canBeHalfDay(entry.type);
+              const typeLabel = entry ? (d.dayTypes as Record<string, string>)[entry.type] : d.app.notLogged;
+              const dayLabel = isHalf ? `${typeLabel}, ${d.dayTypes.halfDay}` : typeLabel;
               return (
                 <button
                   type="button"
                   key={iso}
-                  className={`cal-cell ${entry?.type ?? ''} ${iso === selectedDate ? 'selected' : ''}`}
+                  className={`cal-cell ${entry?.type ?? ''} ${isHalf ? 'half' : ''} ${iso === selectedDate ? 'selected' : ''}`}
                   aria-label={t(d.app.calendarDay, {
-                    date: dt.toLocaleDateString(({en:'en-CH',fr:'fr-CH',de:'de-CH',it:'it-CH',nl:'nl-BE'} as const)[lang] ?? 'en-CH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+                    date: longDate(dt),
                     type: dayLabel,
                   })}
                   aria-pressed={iso === selectedDate}
@@ -479,7 +535,13 @@ export default function AppPage() {
                   onClick={() => setSelectedDate(iso)}
                 >
                   <span>{dt.getDate()}</span>
-                  {entry && <span aria-hidden="true"> {DAY_MARKS[entry.type]}</span>}
+                  {entry && (
+                    <span aria-hidden="true">
+                      {' '}
+                      {DAY_MARKS[entry.type]}
+                      {isHalf && ' ½'}
+                    </span>
+                  )}
                 </button>
               );
             })}

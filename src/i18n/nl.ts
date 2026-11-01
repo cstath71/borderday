@@ -93,6 +93,8 @@ const nl: Dict = {
     ch_fr_1983_region: "1983-akkoord: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Wallis, Neuchâtel en Jura. Genève en andere kantons volgen een ander regime: kies de andere Frankrijk–Zwitserland-grensroute. Uitzonderingen volgens impots.gouv.fr: Zwitserse staatsburgers in de publieke sector, wie tijdens de week in het kanton verblijft en wie meer dan 45 nachten per jaar in Zwitserland doorbrengt, worden in Zwitserland aan de bron belast. Basel-Stadt meldt dat voor het eigen personeel Zwitserse staatsburgers geen fiscale limiet op thuiswerk hebben en dat de personeelscategorieën die het opsomt geen socialezekerheidslimiet hebben (art. 13 lid 4 Verordening (EG) nr. 883/2004).",
   },
   dayTypes: {
+    halfDayPending: "Kies nu hierboven het soort dag om deze halve dag op te slaan.",
+    halfDayNotApplicable: "Een niet-gewerkte dag kan geen halve dag zijn.",
     telework: "Telewerk thuis",
     onsite: "Ter plaatse op de werkplek",
     third_country: "Werkreis / derde staat",
@@ -211,6 +213,8 @@ const nl: Dict = {
     status_floor_no_data: "Geen dagen geregistreerd",
   },
   app: {
+    daysPerWeek: "Of kies dagen per week",
+    daysPerWeekHint: "Vult het jaarcijfer in: {default} × dagen ÷ 5, dezelfde schaal als het tewerkstellingspercentage. Dit is een startpunt: gebruik het cijfer uit uw contract als u het hebt.",
     title: "Uw dagregistratie",
     pickBorder: "Uw grensroute",
     pickBorderHint: "Woonplaats → werkplek",

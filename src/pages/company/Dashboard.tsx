@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import DashboardView, { type TeamMember } from '../../components/company/DashboardView';
+import LoadingSkeleton from '../../components/LoadingSkeleton';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { buildDashboardRows } from '../../company/buildRows';
@@ -132,7 +133,7 @@ export default function CompanyDashboard() {
       </>
     );
   } else if (state.status === 'loading') {
-    body = <p role="status">{d.company.loading}</p>;
+    body = <LoadingSkeleton label={d.company.loading} />;
   } else if (state.status === 'error') {
     body = <p role="alert">{d.company.loadError}</p>;
   } else if (state.status === 'denied') {

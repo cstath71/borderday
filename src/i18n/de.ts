@@ -111,6 +111,8 @@ const de: Dict = {
       'Abkommen von 1983: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Waadt, Wallis, Neuenburg und Jura. Genf und andere Kantone folgen einem anderen Regime: Wählen Sie die andere Grenzroute Frankreich–Schweiz. Ausnahmen laut impots.gouv.fr: Schweizer Staatsangehörige im öffentlichen Dienst, Personen, die unter der Woche im Kanton wohnen, und Personen mit mehr als 45 Übernachtungen pro Jahr in der Schweiz werden in der Schweiz an der Quelle besteuert. Basel-Stadt gibt an, dass für sein eigenes Personal bei Schweizer Staatsangehörigen keine steuerliche Limitierung des Homeoffice gilt und bei den von ihm genannten Personalkategorien keine sozialversicherungsrechtliche (Art. 13 Abs. 4 Verordnung (EG) Nr. 883/2004).',
   },
   dayTypes: {
+    halfDayPending: "Wählen Sie jetzt oben die Tagesart, um diesen halben Tag zu speichern.",
+    halfDayNotApplicable: "Ein arbeitsfreier Tag kann kein halber Tag sein.",
     telework: 'Telearbeit zu Hause',
     onsite: 'Vor Ort am Arbeitsplatz',
     third_country: 'Dienstreise / Drittstaat',
@@ -280,6 +282,8 @@ const de: Dict = {
     status_floor_no_data: 'Keine Tage erfasst',
   },
   app: {
+    daysPerWeek: "Oder Tage pro Woche wählen",
+    daysPerWeekHint: "Füllt die Jahreszahl aus: {default} × Tage ÷ 5, gleich skaliert wie der Beschäftigungsgrad. Das ist ein Ausgangswert: Verwenden Sie die Zahl aus Ihrem Vertrag, wenn Sie sie haben.",
     title: 'Ihr Tagesprotokoll',
     pickBorder: 'Ihre Grenzroute',
     pickBorderHint: 'Wohnsitz → Arbeitsort',

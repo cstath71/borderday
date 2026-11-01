@@ -110,6 +110,8 @@ const fr: Dict = {
       'Accord de 1983 : Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel et Jura. Genève et les autres cantons suivent un autre régime : choisissez l’autre itinéraire France–Suisse. Exceptions selon impots.gouv.fr : les personnes de nationalité suisse employées dans le secteur public, celles qui résident dans le canton pendant la semaine et celles qui passent plus de 45 nuits par an en Suisse sont imposées à la source en Suisse. Bâle-Ville indique que, pour son propre personnel, les personnes de nationalité suisse n’ont pas de limite fiscale au télétravail et que les catégories de personnel qu’il énumère n’ont pas de limite de sécurité sociale (art. 13 par. 4 du règlement (CE) n° 883/2004).',
   },
   dayTypes: {
+    halfDayPending: "Choisissez maintenant le type de journée ci-dessus pour enregistrer cette demi-journée.",
+    halfDayNotApplicable: "Un jour non travaillé ne peut pas être une demi-journée.",
     telework: 'Télétravail à domicile',
     onsite: 'Sur le lieu de travail',
     third_country: 'Déplacement professionnel / État tiers',
@@ -279,6 +281,8 @@ const fr: Dict = {
     status_floor_no_data: 'Aucun jour consigné',
   },
   app: {
+    daysPerWeek: "Ou choisissez des jours par semaine",
+    daysPerWeekHint: "Remplit le chiffre annuel : {default} × jours ÷ 5, la même mise à l’échelle que le taux d’emploi. C’est un point de départ : utilisez le chiffre de votre contrat si vous l’avez.",
     title: 'Votre journal de jours',
     pickBorder: 'Votre itinéraire',
     pickBorderHint: 'Résidence → lieu de travail',

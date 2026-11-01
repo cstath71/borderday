@@ -554,6 +554,102 @@ describe('/app gate', () => {
     await screen.findByText(en.company.loadError);
   });
 
+  describe('E5, E17, E18, E19, E20: logging a day', () => {
+    const paid = () => {
+      auth.value.user = EMP;
+      mocked.resolveAppAccess.mockResolvedValue({ mode: 'company', company });
+    };
+    const iso = (day: number) => {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    };
+    const otherDay = () => (new Date().getDate() === 15 ? 14 : 15);
+    const cell = (day: number) =>
+      screen.getByRole('button', { name: new RegExp(`\\b${day}\\b.*\\d{4}: `) });
+    const log = (workDate: string, dayType: string, dayShare: 0.5 | 1 = 1) =>
+      ({ employeeUserId: EMP.id, workDate, dayType, overnightAway: false, dayShare }) as any;
+
+    it('E20: while loading, a placeholder rather than a bare line', async () => {
+      auth.value.user = EMP;
+      mocked.resolveAppAccess.mockReturnValue(new Promise(() => {}));
+      const { container } = open('/en/app');
+      expect(screen.getByRole('status').textContent).toBe(en.app.loading);
+      expect(container.querySelectorAll('.skeleton-card').length).toBeGreaterThan(0);
+    });
+
+    it('E17: "Today" names only today; another day shows its own date', async () => {
+      paid();
+      const { container } = open('/en/app');
+      await screen.findByText(en.app.calendar);
+      const headingOf = () => [...container.querySelectorAll('strong')].find((el) => /\d{4}/.test(el.textContent ?? ''))!.textContent!;
+      expect(headingOf().startsWith(`${en.app.today}: `)).toBe(true);
+      fireEvent.click(cell(otherDay()));
+      expect(headingOf()).not.toContain(en.app.today);
+      expect(headingOf()).toContain(String(otherDay()));
+    });
+
+    it('E5: the box shows before a type is picked, is kept per date, and is used when the type is picked', async () => {
+      paid();
+      open('/en/app');
+      await screen.findByText(en.app.calendar);
+      const box = () => screen.getByRole('checkbox', { name: new RegExp(en.dayTypes.halfDay) }) as HTMLInputElement;
+      expect(box().checked).toBe(false);
+      fireEvent.click(cell(otherDay()));
+      fireEvent.click(box());
+      expect(box().checked).toBe(true);
+      screen.getByText(en.dayTypes.halfDayPending);
+      const first = otherDay() === 15 ? 14 : 15;
+      fireEvent.click(cell(first));
+      expect(box().checked).toBe(false);
+      fireEvent.click(cell(otherDay()));
+      expect(box().checked).toBe(true);
+      fireEvent.click(screen.getByText(en.dayTypes.telework).closest('button')!);
+      await waitFor(() =>
+        expect(mocked.upsertDayLog).toHaveBeenCalledWith(
+          expect.objectContaining({ workDate: iso(otherDay()), dayType: 'telework', dayShare: 0.5 }),
+        ),
+      );
+    });
+
+    it('E5: a logged half day keeps its value on return, and a non-working day cannot be half', async () => {
+      paid();
+      mocked.listDayLogs.mockResolvedValue([log(iso(10), 'telework', 0.5), log(iso(11), 'non_working'), log(iso(12), 'onsite')]);
+      open('/en/app');
+      await screen.findByRole('button', { name: new RegExp(`: ${en.dayTypes.telework}, ${en.dayTypes.halfDay}$`) });
+      const box = () => screen.getByRole('checkbox', { name: new RegExp(en.dayTypes.halfDay) }) as HTMLInputElement;
+      fireEvent.click(cell(12));
+      expect(box().checked).toBe(false);
+      fireEvent.click(cell(10));
+      expect(box().checked).toBe(true);
+      fireEvent.click(cell(11));
+      expect(box().disabled).toBe(true);
+      screen.getByText(en.dayTypes.halfDayNotApplicable);
+    });
+
+    it('E18: a half day is marked on the calendar by class, mark and label', async () => {
+      paid();
+      mocked.listDayLogs.mockResolvedValue([log(iso(10), 'telework', 0.5), log(iso(12), 'telework')]);
+      open('/en/app');
+      const half = await screen.findByRole('button', { name: new RegExp(`: ${en.dayTypes.telework}, ${en.dayTypes.halfDay}$`) });
+      expect(half.className).toContain('half');
+      expect(half.textContent).toContain('½');
+      const whole = screen.getByRole('button', { name: new RegExp(`\\b12\\b.*: ${en.dayTypes.telework}$`) });
+      expect(whole.className).not.toContain('half');
+      expect(whole.textContent).not.toContain('½');
+    });
+
+    it('E19: picking days a week fills in the yearly figure and saves it', async () => {
+      paid();
+      open('/en/app');
+      const select = (await screen.findByRole('combobox', { name: new RegExp(en.app.daysPerWeek) })) as HTMLSelectElement;
+      fireEvent.change(select, { target: { value: '4' } });
+      await waitFor(() =>
+        expect(mocked.updateMemberSelf).toHaveBeenCalledWith(company.id, expect.objectContaining({ annualWorkingDays: 192 })),
+      );
+      expect(select.value).toBe('4');
+    });
+  });
+
   it('paid company member logs to the company through companyApi', async () => {
     auth.value.user = EMP;
     mocked.resolveAppAccess.mockResolvedValue({ mode: 'company', company });

@@ -109,6 +109,8 @@ const it: Dict = {
       'Accordo del 1983: Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel e Giura. Ginevra e gli altri cantoni seguono un altro regime: scegliete l’altro corridoio Francia–Svizzera. Eccezioni secondo impots.gouv.fr: i cittadini svizzeri impiegati nel settore pubblico, chi risiede nel Cantone durante la settimana e chi trascorre più di 45 notti all’anno in Svizzera sono tassati alla fonte in Svizzera. Basilea Città indica che, per il proprio personale, i cittadini svizzeri non hanno limiti fiscali al telelavoro e che le categorie di personale da essa elencate non hanno limiti di sicurezza sociale (art. 13 par. 4 del regolamento (CE) n. 883/2004).',
   },
   dayTypes: {
+    halfDayPending: "Ora scegliete sopra il tipo di giornata per salvare questa mezza giornata.",
+    halfDayNotApplicable: "Un giorno non lavorativo non può essere una mezza giornata.",
     telework: 'Telelavoro a casa',
     onsite: 'In sede',
     third_country: 'Trasferta / Stato terzo',
@@ -277,6 +279,8 @@ const it: Dict = {
     status_floor_no_data: 'Nessun giorno registrato',
   },
   app: {
+    daysPerWeek: "Oppure scegliete i giorni a settimana",
+    daysPerWeekHint: "Compila la cifra annuale: {default} × giorni ÷ 5, la stessa proporzione della percentuale d’impiego. È un punto di partenza: usate la cifra del vostro contratto se l’avete.",
     title: 'Il vostro diario dei giorni',
     pickBorder: 'Il vostro corridoio',
     pickBorderHint: 'Residenza → luogo di lavoro',

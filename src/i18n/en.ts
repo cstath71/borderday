@@ -106,6 +106,8 @@ const en = {
       '1983 agreement: Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel and Jura. Geneva and other cantons follow a different regime: choose the other France–Switzerland border route. Exceptions per impots.gouv.fr: Swiss nationals employed in the public sector, people who stay in the canton during the week, and people with more than 45 overnight stays in Switzerland a year are taxed at source in Switzerland. Basel-Stadt says that for its own staff, Swiss nationals have no tax limit on home office, and the staff categories it lists have no social-security limit (Art. 13(4) Regulation (EC) No 883/2004).',
   },
   dayTypes: {
+    halfDayPending: "Now pick the day type above to save this half day.",
+    halfDayNotApplicable: "A non-working day cannot be a half day.",
     telework: 'Telework at home',
     onsite: 'On site at workplace',
     third_country: 'Work trip / third State',
@@ -274,6 +276,8 @@ const en = {
     status_floor_no_data: 'No days logged',
   },
   app: {
+    daysPerWeek: "Or pick days a week",
+    daysPerWeekHint: "Fills in the yearly figure: {default} × days ÷ 5, the same scaling as the employment percentage. It is a starting point: use the figure from your contract if you have it.",
     title: 'Your day log',
     pickBorder: 'Your border route',
     pickBorderHint: 'Residence → workplace',

@@ -1,6 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { companyBillingFromSubscriptions } from "../_shared/checkoutGuard.ts";
 import { isCompanyFlatMinimumPrice, resolveCompanyBilling } from "../_shared/companyPricing.ts";
+import { buildConsumerReminder, ReminderSendError } from "../_shared/consumerReminder.ts";
 import { inviteLang } from "../_shared/inviteEmail.ts";
 import { beginEvent, checkWrite, finishEvent, WebhookWriteError } from "../_shared/stripeEvents.ts";
 import { invoiceSubscriptionId } from "../_shared/stripeInvoice.ts";
@@ -121,12 +123,27 @@ Deno.serve(async (req) => {
         sub = await syncCompanySubscriptionItem(sub, dbSeats);
       }
 
+      // AR3-05: company status from all live subscriptions, not only this event's sub.
+      const otherSubs = await admin.from("bd_subscriptions")
+        .select("status, stripe_subscription_id, current_period_end, trial_ends_at")
+        .eq("company_id", companyId);
+      checkWrite(otherSubs, "read company subscriptions");
+      const billing = companyBillingFromSubscriptions([
+        {
+          status,
+          stripe_subscription_id: sub.id,
+          current_period_end: periodEnd,
+          trial_ends_at: trialEnd,
+        },
+        ...((otherSubs.data ?? []).filter((row) => row.stripe_subscription_id !== sub.id)),
+      ]);
+
       checkWrite(await admin.from("bd_companies").update({
         stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
-        subscription_status: status,
+        subscription_status: billing.status,
         ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
-        current_period_end: periodEnd,
-        trial_ends_at: trialEnd,
+        current_period_end: billing.current_period_end,
+        trial_ends_at: billing.trial_ends_at,
         plan_kind: "company",
       }).eq("id", companyId), "update company");
     }
@@ -178,7 +195,7 @@ async function sendConsumerReminder(opts: {
     to: string;
     subscriptionId: string;
     renewOnIso: string | null;
-    /** Checkout language from subscription metadata. Text is English until translated templates exist; the link follows it. */
+    /** Checkout language from subscription metadata. */
     lang: unknown;
   }) {
     const from = Deno.env.get("RESEND_FROM") || "BorderDay <hello@borderday.com>";
@@ -187,17 +204,14 @@ async function sendConsumerReminder(opts: {
     const live = (Deno.env.get("RESEND_LIVE") ?? "1") === "1";
     const siteUrl = Deno.env.get("BD_SITE_URL") || "https://borderday.com";
     const cancelUrl = `${siteUrl}/${inviteLang(opts.lang)}/cancel`;
-    const renewOn = opts.renewOnIso
-      ? new Date(opts.renewOnIso).toLocaleDateString("en-GB", { timeZone: "Europe/Zurich" })
-      : "the renewal date";
-    const subject = opts.kind === "yearly_renewal"
-      ? "BorderDay: your yearly plan renews soon"
-      : "BorderDay: your free trial ends soon";
-    const text = opts.kind === "yearly_renewal"
-      ? `Your BorderDay individual yearly plan (€49 incl. VAT) renews on ${renewOn} unless you cancel.\n\nCancel anytime: ${cancelUrl}\n(or use Cancel subscription in the footer / your Link order tools).\n\nAfter the first year you can cancel a renewed plan at any time; unused-period refunds apply where mandatory consumer law requires them.\n\n— BorderDay`
-      : `Your BorderDay free trial ends on ${renewOn}. After that, the plan you chose is charged automatically and renews until you cancel.\n\nCancel before the trial ends and nothing is charged: ${cancelUrl}\n\n— BorderDay`;
+    const built = buildConsumerReminder({
+      kind: opts.kind,
+      lang: opts.lang,
+      renewOnIso: opts.renewOnIso,
+      cancelUrl,
+    });
     if (!live || !apiKey) {
-      console.log("[bd-stripe-webhook] reminder dry-run", { kind: opts.kind, subscriptionId: opts.subscriptionId });
+      console.log("[bd-stripe-webhook] reminder dry-run", { kind: opts.kind, subscriptionId: opts.subscriptionId, lang: built.lang });
       return;
     }
     const r = await fetch("https://api.resend.com/emails", {
@@ -206,11 +220,14 @@ async function sendConsumerReminder(opts: {
       body: JSON.stringify({
         from,
         to: [opts.to],
-        subject,
-        text,
+        subject: built.subject,
+        text: built.text,
+        html: built.html,
       }),
     });
-    console.log("[bd-stripe-webhook] reminder", { kind: opts.kind, subscriptionId: opts.subscriptionId, ok: r.ok });
+    console.log("[bd-stripe-webhook] reminder", { kind: opts.kind, subscriptionId: opts.subscriptionId, lang: built.lang, ok: r.ok, status: r.status });
+    // AR3-09: surface failure so Stripe retries instead of silently dropping the L215-1 notice.
+    if (!r.ok) throw new ReminderSendError(r.status);
   }
 
   async function customerEmail(customerRef: string | { id?: string } | null): Promise<string | null> {
@@ -283,7 +300,11 @@ async function sendConsumerReminder(opts: {
     await finishEvent(admin, event);
   } catch (e) {
     // Non-200 makes Stripe retry. Log which write failed, never the error text: it can hold row values.
-    const what = e instanceof WebhookWriteError ? e.what : "handler error";
+    const what = e instanceof WebhookWriteError
+      ? e.what
+      : e instanceof ReminderSendError
+      ? "send reminder"
+      : "handler error";
     console.error("[bd-stripe-webhook] failed", { eventId: event.id, type: event.type, what });
     return new Response(JSON.stringify({ received: false }), { status: 500, headers: { "Content-Type": "application/json" } });
   }

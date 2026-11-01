@@ -152,7 +152,7 @@ describe('bd-stripe-webhook wiring', () => {
     for (const line of logs) {
       expect(line).not.toMatch(/\bto\b|email|token|e\.message/);
     }
-    expect(src).toMatch(/subscriptionId: opts\.subscriptionId, ok: r\.ok/);
+    expect(src).toMatch(/subscriptionId: opts\.subscriptionId, lang: built\.lang, ok: r\.ok/);
   });
 
   it('A3-16: every database write is checked, and a failure returns 500', () => {

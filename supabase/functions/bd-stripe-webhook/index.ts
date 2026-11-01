@@ -81,7 +81,7 @@ Deno.serve(async (req) => {
       unpaid: "past_due", incomplete: "incomplete", incomplete_expired: "canceled",
     };
     const status = statusMap[sub.status] || "none";
-    const companyId = meta.company_id as string | undefined;
+    let companyId = meta.company_id as string | undefined;
     const userId = meta.user_id as string | undefined;
     const plan = (meta.plan as string) || (companyId ? "company" : "individual");
     const priceId = sub.items?.data?.[0]?.price?.id as string | undefined;
@@ -96,26 +96,31 @@ Deno.serve(async (req) => {
         .select("seat_count, stripe_customer_id")
         .eq("id", companyId).maybeSingle();
       checkWrite(companyRead, "read company");
-      const dbSeats = companyRead.data?.seat_count ?? 0;
-      let seatCountToStore = dbSeats;
-      if (!opts?.preferDbSeats && !onFlat && Number.isFinite(stripeQty) && stripeQty > 0) {
-        seatCountToStore = stripeQty;
-      } else if (Number.isFinite(metaSeats) && metaSeats >= 0 && dbSeats === 0) {
-        seatCountToStore = metaSeats;
-      }
+      if (!companyRead.data) {
+        // Company deleted (cleanup / churn): keep the Stripe row without a dead FK.
+        companyId = undefined;
+      } else {
+        const dbSeats = companyRead.data.seat_count ?? 0;
+        let seatCountToStore = dbSeats;
+        if (!opts?.preferDbSeats && !onFlat && Number.isFinite(stripeQty) && stripeQty > 0) {
+          seatCountToStore = stripeQty;
+        } else if (Number.isFinite(metaSeats) && metaSeats >= 0 && dbSeats === 0) {
+          seatCountToStore = metaSeats;
+        }
 
-      if ((status === "active" || status === "trialing") && typeof dbSeats === "number") {
-        sub = await syncCompanySubscriptionItem(sub, dbSeats);
-      }
+        if ((status === "active" || status === "trialing") && typeof dbSeats === "number") {
+          sub = await syncCompanySubscriptionItem(sub, dbSeats);
+        }
 
-      checkWrite(await admin.from("bd_companies").update({
-        stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
-        subscription_status: status,
-        ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
-        current_period_end: periodEnd,
-        trial_ends_at: trialEnd,
-        plan_kind: "company",
-      }).eq("id", companyId), "update company");
+        checkWrite(await admin.from("bd_companies").update({
+          stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id,
+          subscription_status: status,
+          ...(onFlat || opts?.preferDbSeats ? {} : { seat_count: seatCountToStore }),
+          current_period_end: periodEnd,
+          trial_ends_at: trialEnd,
+          plan_kind: "company",
+        }).eq("id", companyId), "update company");
+      }
     }
 
     const billedQty = sub.items?.data?.[0]?.quantity ?? stripeQty;

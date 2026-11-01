@@ -225,6 +225,8 @@ const en = {
       'Approaching {from}%: from there, an A1 is required to stay in the employer’s state.',
     ss_band_a1_required:
       '25% to under 50%: A1 required. Without one, the residence state normally becomes competent. Record it here once your employer has it.',
+    ss_band_pace_a1:
+      'On track for {from}%+: an A1 is needed now. Pace so far is about {pct}% of working time. Under the telework framework an A1 can reach back at most three months, so apply early. Reg. 987/2009 Art. 14(10): institutions look at the next 12 months.',
     ss_band_a1_recorded:
       'A1 recorded, valid until {until}. BorderDay does not check the certificate.',
     ss_band_a1_recorded_nodate:
@@ -288,6 +290,7 @@ const en = {
     status_at_limit: 'At limit',
     status_ss_under: 'Under 25%',
     status_a1_required: 'A1 required',
+    status_a1_pace: 'On track for 25%+: A1 needed',
     status_a1_recorded: 'A1 recorded',
     status_ss_residence: '50%+: residence state',
     status_floor_met: 'Minimum met',

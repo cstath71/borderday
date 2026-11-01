@@ -586,6 +586,31 @@ export function evaluateCounter(
     const paceLimit =
       counter.a1FromPercent != null && !a1InPlace(opts.profile, today) ? counter.a1FromPercent : limit;
     const pace = paceMessage(yearEntries, counted, annualWorkingDays, paceLimit, opts.year, today);
+    // A3-R5: Reg. 987/2009 Art. 14(10) is prospective. When projected pace is already above the
+    // A1 threshold, raise the band even if days-so-far are still under 25%, and drop the
+    // "framework does not apply" copy. An A1 under the framework reaches back at most 3 months.
+    if (
+      counter.a1FromPercent != null &&
+      pace?.key === 'pace_above' &&
+      !a1InPlace(opts.profile, today) &&
+      percentOfAnnual < counter.a1FromPercent &&
+      (status === 'ok' || statusLabelKey === 'status_ss_under' || statusLabelKey === 'status_approaching')
+    ) {
+      const from = counter.a1FromPercent;
+      const pct = Number(pace.vars?.pct ?? 0);
+      status = pct >= from * 1.5 ? 'critical' : 'warn';
+      statusLabelKey = 'status_a1_pace';
+      for (let i = messages.length - 1; i >= 0; i--) {
+        if (messages[i].key === 'ss_band_under' || messages[i].key === 'ss_band_approaching') {
+          messages.splice(i, 1);
+        }
+      }
+      messages.unshift({
+        key: 'ss_band_pace_a1',
+        tone: 'warn',
+        vars: { from, pct },
+      });
+    }
     if (pace) messages.push(pace);
 
     return {

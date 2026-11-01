@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('../src/lib/auth', () => ({
-  useAuth: () => ({ ready: true, configured: true, user: null, signOut: vi.fn() }),
+  useAuth: () => ({ ready: true, configured: true, user: null, signingOut: false, signOut: vi.fn(), signOutAndGo: vi.fn() }),
   AuthProvider: ({ children }: any) => children,
 }));
 

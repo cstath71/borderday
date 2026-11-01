@@ -51,6 +51,9 @@ export default function CompanyInvite() {
     };
   }, [userId, load]);
 
+  if (auth.signingOut) {
+    return <Navigate to={`/${lang}/`} replace />;
+  }
   if (auth.ready && !auth.user) {
     return <Navigate to={`/${lang}/auth/sign-in?next=${encodeURIComponent(location.pathname)}`} replace />;
   }

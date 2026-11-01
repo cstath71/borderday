@@ -69,9 +69,7 @@ export default function Layout() {
                 type="button"
                 className="btn btn-ghost"
                 onClick={() => {
-                  void auth.signOut().then(() => {
-                    window.location.assign(`/${lang}/`);
-                  });
+                  void auth.signOutAndGo(lang);
                 }}
               >
                 {d.auth.signOut}

@@ -230,6 +230,8 @@ const fr: Dict = {
       'Vous approchez de {from} % : dès ce seuil, une A1 est requise pour rester dans l’État de l’employeur.',
     ss_band_a1_required:
       'De 25 % à moins de 50 % : A1 requise. Sans elle, l’État de résidence devient normalement compétent. Indiquez-la ici dès que votre employeur l’a obtenue.',
+    ss_band_pace_a1:
+      'En trajectoire vers {from}%+: une A1 est nécessaire dès maintenant. Pace actuelle d’environ {pct}% du temps de travail. Sous l’accord-cadre télétravail, une A1 ne peut remonter que de trois mois au plus — demandez-la tôt. Règl. 987/2009 art. 14 §10: les institutions regardent les 12 mois à venir.',
     ss_band_a1_recorded:
       'A1 enregistrée, valable jusqu’au {until}. BorderDay ne vérifie pas l’attestation.',
     ss_band_a1_recorded_nodate:
@@ -293,6 +295,7 @@ const fr: Dict = {
     status_at_limit: 'À la limite',
     status_ss_under: 'Moins de 25 %',
     status_a1_required: 'A1 requise',
+    status_a1_pace: 'En trajectoire vers 25%+: A1 nécessaire',
     status_a1_recorded: 'A1 enregistrée',
     status_ss_residence: '50 % et plus : État de résidence',
     status_floor_met: 'Minimum atteint',

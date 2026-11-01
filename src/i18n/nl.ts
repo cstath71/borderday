@@ -177,6 +177,8 @@ const nl: Dict = {
     ss_band_under: "Onder {from}%: het kaderakkoord is niet van toepassing. De staat van de werkgever blijft normaal bevoegd. Regelmatig werk in twee staten moet worden gemeld aan de instelling van de woonstaat, die de toepasselijke wetgeving bepaalt.",
     ss_band_approaching: "Naderen van {from}%: vanaf daar is een A1 vereist om in de staat van de werkgever te blijven.",
     ss_band_a1_required: "25% tot onder 50%: A1 vereist. Zonder A1 wordt de woonstaat normaal bevoegd. Noteer die hier zodra uw werkgever die heeft.",
+    ss_band_pace_a1:
+      "Op koers naar {from}%+: nu een A1 nodig. Pace tot nu toe ongeveer {pct}% van de werktijd. Onder het telewerk-kaderakkoord mag een A1 hoogstens drie maanden terugwerken — vraag hem vroeg aan. Verord. 987/2009 art. 14 lid 10: instellingen kijken naar de komende 12 maanden.",
     ss_band_a1_recorded: "A1 genoteerd, geldig tot {until}. BorderDay controleert het certificaat niet.",
     ss_band_a1_recorded_nodate: "A1 genoteerd, geen einddatum opgegeven. Een kader-A1 duurt tot 3 jaar — voeg de einddatum toe. BorderDay controleert het certificaat niet.",
     ss_band_a1_expired: "De A1 die u noteerde eindigde op {until}. Bij 25% of meer is een nieuwe vereist.",
@@ -225,6 +227,7 @@ const nl: Dict = {
     status_at_limit: "Op limiet",
     status_ss_under: "Onder 25%",
     status_a1_required: "A1 vereist",
+    status_a1_pace: "Op koers naar 25%+: A1 nodig",
     status_a1_recorded: "A1 genoteerd",
     status_ss_residence: "50%+: woonstaat",
     status_floor_met: "Minimum gehaald",

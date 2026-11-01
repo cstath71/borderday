@@ -86,8 +86,14 @@ export default function Layout() {
               onChange={(e) => {
                 const next = e.target.value as Lang;
                 if (!isLang(next) || next === lang) return;
+                // F28: keep selected calendar day across instant language remount.
+                try {
+                  const d = sessionStorage.getItem('bd_selected_date');
+                  if (d) sessionStorage.setItem('bd_selected_date_keep', d);
+                } catch { /* private mode */ }
                 const path = window.location.pathname.replace(/^\/(en|fr|de|it|nl)(?=\/|$)/, `/${next}`);
-                window.location.assign(path.startsWith(`/${next}`) ? path : `/${next}/`);
+                const qs = window.location.search || '';
+                window.location.assign((path.startsWith(`/${next}`) ? path : `/${next}/`) + qs);
               }}
             >
               {LANGS.map((l) => (

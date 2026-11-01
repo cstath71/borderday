@@ -4,7 +4,7 @@ import DashboardView, { type TeamMember } from '../../components/company/Dashboa
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
-import { buildDashboardRows } from '../../company/buildRows';
+import { buildDashboardRows, buildFormerDashboardRows } from '../../company/buildRows';
 import type { EmployeeDashboardRow } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { getDict, t } from '../../i18n';
@@ -21,11 +21,14 @@ type Loaded = {
   paid: boolean;
   plan: PlanStatus;
   rows: EmployeeDashboardRow[];
+  formerRows: EmployeeDashboardRow[];
   dayLogs: api.DayLogView[];
   invites: Invitation[];
   retentionMonths: number;
   isOwner: boolean;
   hrViewers: TeamMember[];
+  activeEmployeeCount: number;
+  seatCount: number | null;
 };
 
 type State =
@@ -102,6 +105,7 @@ export default function CompanyDashboard() {
         setState({ status: 'denied' });
         return;
       }
+      const activeEmployees = members.filter((m) => m.role === 'employee' && m.active !== false);
       setState({
         status: 'ready',
         data: {
@@ -109,6 +113,7 @@ export default function CompanyDashboard() {
           paid: companyHasPaidAccess(company.subscription_status, company.trial_ends_at),
           plan: planStatus(company),
           rows: buildDashboardRows({ members, logs, year }),
+          formerRows: buildFormerDashboardRows({ members, logs, year }),
           dayLogs: logs,
           invites,
           retentionMonths: company.data_retention_months ?? 24,
@@ -116,6 +121,8 @@ export default function CompanyDashboard() {
           hrViewers: members
             .filter((m) => m.active && api.canDeactivateMember({ userId: userId!, role: membership!.role }, m) && m.role === 'hr_viewer')
             .map((m) => ({ userId: m.userId, displayName: m.displayName, email: m.email })),
+          activeEmployeeCount: activeEmployees.length,
+          seatCount: typeof company.seat_count === 'number' ? company.seat_count : null,
         },
       });
     })().catch(() => {
@@ -199,11 +206,17 @@ export default function CompanyDashboard() {
         )}
         {!data.paid && !awaitingWebhook && (
           <div className="demo-banner" role="status">
-            {d.company.billingInactive} <Link to={`/${lang}/pricing`}>{d.company.billingCta}</Link>
+            {d.company.billingInactive}{" "}
+            <Link to={`/${lang}/pricing?companyId=${encodeURIComponent(companyId!)}`}>{d.company.billingCta}</Link>
           </div>
         )}
         <p className="meta" data-testid="plan-status">
           {d.company.planLabel}: {t(planText, { date: planDate })}
+          {' · '}
+          {t(d.company.seatsLine, {
+            active: data.activeEmployeeCount,
+            seats: data.seatCount ?? data.activeEmployeeCount,
+          })}
           {plan.key !== 'planNone' && plan.key !== 'planCanceled' && (
             <>
               {' · '}
@@ -215,6 +228,7 @@ export default function CompanyDashboard() {
           d={d}
           companyName={data.name}
           rows={data.rows}
+          formerRows={data.formerRows}
           dayLogs={data.dayLogs}
           invites={data.invites}
           year={year}

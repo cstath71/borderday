@@ -1,0 +1,25 @@
+{{ if eq .Data.lang "en" }}
+<h2>You've been invited</h2>
+<p>Follow the link below to accept and create your BorderDay account.</p>
+<p><a href="{{ .ConfirmationURL }}">Accept invitation</a></p>
+{{ else if eq .Data.lang "fr" }}
+<h2>Vous avez été invité</h2>
+<p>Suivez le lien ci-dessous pour accepter et créer votre compte BorderDay.</p>
+<p><a href="{{ .ConfirmationURL }}">Accepter l'invitation</a></p>
+{{ else if eq .Data.lang "de" }}
+<h2>Sie wurden eingeladen</h2>
+<p>Folgen Sie dem Link unten, um anzunehmen und Ihr BorderDay-Konto zu erstellen.</p>
+<p><a href="{{ .ConfirmationURL }}">Einladung annehmen</a></p>
+{{ else if eq .Data.lang "it" }}
+<h2>Sei stato invitato</h2>
+<p>Segui il link sotto per accettare e creare il tuo account BorderDay.</p>
+<p><a href="{{ .ConfirmationURL }}">Accetta l'invito</a></p>
+{{ else if eq .Data.lang "nl" }}
+<h2>Je bent uitgenodigd</h2>
+<p>Volg de link hieronder om te accepteren en je BorderDay-account aan te maken.</p>
+<p><a href="{{ .ConfirmationURL }}">Uitnodiging accepteren</a></p>
+{{ else }}
+<h2>You've been invited</h2>
+<p>Follow the link below to accept and create your BorderDay account.</p>
+<p><a href="{{ .ConfirmationURL }}">Accept invitation</a></p>
+{{ end }}

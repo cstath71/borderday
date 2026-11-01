@@ -1,6 +1,8 @@
 import type { BorderId, DayEntry } from '../borders/types';
 import {
+  deleteMyDayLog,
   deleteMyDayLogs,
+  deleteMyPersonalDayLog,
   deleteMyPersonalDayLogs,
   listDayLogs,
   listMyDayNotes,
@@ -9,18 +11,21 @@ import {
   upsertPersonalDayLog,
   type AppAccess,
 } from './companyApi';
-import { deleteAllDays, listDays, upsertDay } from './storage';
+import { deleteAllDays, deleteDay, listDays, upsertDay } from './storage';
 
 /** Where /app reads and writes days. Picked from the caller's access; only preview stays on-device. */
 export interface DayStore {
   list(): Promise<DayEntry[]>;
   put(entry: DayEntry, borderId: BorderId | null): Promise<void>;
+  /** F26: remove one day. */
+  remove(workDate: string): Promise<void>;
   clear(): Promise<void>;
 }
 
 const localStore: DayStore = {
   list: listDays,
   put: (entry) => upsertDay(entry),
+  remove: (workDate) => deleteDay(workDate),
   clear: deleteAllDays,
 };
 
@@ -39,6 +44,7 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
       },
       put: (entry) =>
         upsertDayLog({ companyId, workDate: entry.date, dayType: entry.type, overnightAway: entry.overnightAway, dayShare: entry.dayShare, note: entry.note }),
+      remove: (workDate) => deleteMyDayLog(companyId, workDate),
       clear: () => deleteMyDayLogs(companyId),
     };
   }
@@ -54,6 +60,7 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
           dayShare: entry.dayShare,
           note: entry.note,
         }),
+      remove: (workDate) => deleteMyPersonalDayLog(workDate),
       clear: deleteMyPersonalDayLogs,
     };
   }

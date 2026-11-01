@@ -1,0 +1,1 @@
+{{ if eq .Data.lang "fr" }}Confirmez votre nouvel e-mail BorderDay{{ else if eq .Data.lang "de" }}Neue BorderDay-E-Mail bestätigen{{ else if eq .Data.lang "it" }}Conferma la nuova e-mail BorderDay{{ else if eq .Data.lang "nl" }}Bevestig je nieuwe BorderDay-e-mail{{ else }}Confirm your new BorderDay email{{ end }}

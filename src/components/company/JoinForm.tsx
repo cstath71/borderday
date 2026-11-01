@@ -10,14 +10,16 @@ export default function JoinForm(props: {
   companyName: string;
   email: string;
   role: string;
+  /** Prefill from the signed-in profile (F25). */
+  initialDisplayName?: string;
   error: string | null;
   busy?: boolean;
   privacyHref: string;
   onSubmit: (values: { displayName: string; borderPackId: BorderId }) => void;
 }) {
-  const { d, companyName, email, role, error, busy, privacyHref, onSubmit } = props;
+  const { d, companyName, email, role, initialDisplayName = '', error, busy, privacyHref, onSubmit } = props;
   const packs = listBorderPacks();
-  const [displayName, setDisplayName] = useState('');
+  const [displayName, setDisplayName] = useState(initialDisplayName);
   const [border, setBorder] = useState<BorderId | ''>('');
   const [noticeRead, setNoticeRead] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -28,15 +30,22 @@ export default function JoinForm(props: {
       setLocalError(d.company.noticeRequired);
       return;
     }
+    const name = displayName.trim();
+    if (!name) {
+      setLocalError(d.company.nameRequired);
+      return;
+    }
     setLocalError(null);
-    if (border) onSubmit({ displayName, borderPackId: border });
+    if (border) onSubmit({ displayName: name, borderPackId: border });
   }
 
   const shownError = localError ?? error;
+  const roleLabel =
+    role === 'owner' ? d.company.roleOwner : role === 'hr_viewer' ? d.company.roleHr : d.company.roleEmployee;
   return (
     <form className="card stack-form" onSubmit={submit}>
       <p>
-        <strong>{companyName}</strong> → {email} ({role})
+        <strong>{companyName}</strong> → {email} ({roleLabel})
       </p>
       <label>
         {d.company.yourName}
@@ -64,8 +73,8 @@ export default function JoinForm(props: {
           {d.company.noticeAck}
         </label>
       </fieldset>
-      <button className="btn btn-primary" type="submit" disabled={busy}>
-        {d.company.joinButton}
+      <button className="btn btn-primary" type="submit" disabled={busy} aria-busy={!!busy}>
+        {busy ? d.company.joining : d.company.joinButton}
       </button>
       {shownError && (
         <p role="alert" style={{ color: 'var(--danger)' }}>

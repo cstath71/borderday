@@ -1,0 +1,31 @@
+{{ if eq .Data.lang "en" }}
+<h2>Reset your password</h2>
+<p>We received a request to reset your password. Follow the link below to choose a new one.</p>
+<p><a href="{{ .ConfirmationURL }}">Reset password</a></p>
+<p>If you did not request this, you can safely ignore this email.</p>
+{{ else if eq .Data.lang "fr" }}
+<h2>Réinitialisez votre mot de passe</h2>
+<p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Suivez le lien ci-dessous pour en choisir un nouveau.</p>
+<p><a href="{{ .ConfirmationURL }}">Réinitialiser le mot de passe</a></p>
+<p>Si vous n'avez pas fait cette demande, vous pouvez ignorer cet e-mail.</p>
+{{ else if eq .Data.lang "de" }}
+<h2>Passwort zurücksetzen</h2>
+<p>Wir haben eine Anfrage zum Zurücksetzen Ihres Passworts erhalten. Folgen Sie dem Link unten, um ein neues zu wählen.</p>
+<p><a href="{{ .ConfirmationURL }}">Passwort zurücksetzen</a></p>
+<p>Wenn Sie das nicht angefordert haben, können Sie diese E-Mail ignorieren.</p>
+{{ else if eq .Data.lang "it" }}
+<h2>Reimposta la password</h2>
+<p>Abbiamo ricevuto una richiesta di reimpostazione della password. Segui il link sotto per sceglierne una nuova.</p>
+<p><a href="{{ .ConfirmationURL }}">Reimposta password</a></p>
+<p>Se non hai fatto questa richiesta, puoi ignorare questa e-mail.</p>
+{{ else if eq .Data.lang "nl" }}
+<h2>Wachtwoord resetten</h2>
+<p>We ontvingen een verzoek om je wachtwoord te resetten. Volg de link hieronder om een nieuw wachtwoord te kiezen.</p>
+<p><a href="{{ .ConfirmationURL }}">Wachtwoord resetten</a></p>
+<p>Als je dit niet hebt gevraagd, kun je deze e-mail negeren.</p>
+{{ else }}
+<h2>Reset your password</h2>
+<p>We received a request to reset your password. Follow the link below to choose a new one.</p>
+<p><a href="{{ .ConfirmationURL }}">Reset password</a></p>
+<p>If you did not request this, you can safely ignore this email.</p>
+{{ end }}

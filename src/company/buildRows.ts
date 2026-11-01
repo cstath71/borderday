@@ -56,6 +56,8 @@ export function buildDashboardRows(opts: {
   logs: RowLog[];
   year: number;
   isDemo?: boolean;
+  /** When true, include soft-deactivated employees (F32 former employees). Default active-only. */
+  includeInactive?: boolean;
 }): EmployeeDashboardRow[] {
   const byEmployee = new Map<string, RowLog[]>();
   for (const log of opts.logs) {
@@ -64,6 +66,34 @@ export function buildDashboardRows(opts: {
     else byEmployee.set(log.employeeUserId, [log]);
   }
   return opts.members
-    .filter((m) => m.role === 'employee' && m.active !== false)
+    .filter((m) => m.role === 'employee' && (opts.includeInactive ? true : m.active !== false))
+    .map((m) => buildEmployeeRow(m, byEmployee.get(m.userId) ?? [], opts.year, opts.isDemo));
+}
+
+/** Active employees only (default dashboard list). */
+export function buildActiveDashboardRows(opts: {
+  members: RowMember[];
+  logs: RowLog[];
+  year: number;
+  isDemo?: boolean;
+}): EmployeeDashboardRow[] {
+  return buildDashboardRows(opts);
+}
+
+/** Soft-deactivated employees with retained day history (F32). */
+export function buildFormerDashboardRows(opts: {
+  members: RowMember[];
+  logs: RowLog[];
+  year: number;
+  isDemo?: boolean;
+}): EmployeeDashboardRow[] {
+  const byEmployee = new Map<string, RowLog[]>();
+  for (const log of opts.logs) {
+    const list = byEmployee.get(log.employeeUserId);
+    if (list) list.push(log);
+    else byEmployee.set(log.employeeUserId, [log]);
+  }
+  return opts.members
+    .filter((m) => m.role === 'employee' && m.active === false)
     .map((m) => buildEmployeeRow(m, byEmployee.get(m.userId) ?? [], opts.year, opts.isDemo));
 }

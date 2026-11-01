@@ -15,3 +15,7 @@ major_version = 15
 [functions.bd-contract-request]
 # The withdrawal and cancellation forms work signed out; the function validates and rate-limits itself.
 verify_jwt = false
+
+[functions.bd-auth-send-email]
+# Auth Send Email Hook verifies with SEND_EMAIL_HOOK_SECRET (Standard Webhooks), not a user JWT.
+verify_jwt = false

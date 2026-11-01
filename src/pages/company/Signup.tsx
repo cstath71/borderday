@@ -25,16 +25,23 @@ export default function CompanySignup() {
 
   async function onCreate(e: React.FormEvent) {
     e.preventDefault();
-    if (!auth.user) { nav(`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/company/signup`)}`); return; }
-    setBusy(true); setMsg(null);
+    if (!auth.user) {
+      nav(`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/company/signup`)}`);
+      return;
+    }
+    if (companyId || busy) return;
+    setBusy(true);
+    setMsg(null);
     try {
       const { companyId: id } = await api.createCompany(name);
       setCompanyId(id);
       setMsg(d.company.created);
       setCompanies(await api.listMyCompanies());
-    } catch (err) {
+    } catch {
       setMsg(d.company.loadError);
-    } finally { setBusy(false); }
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -49,25 +56,66 @@ export default function CompanySignup() {
           {auth.user && <p className="meta">{auth.user.email}</p>}
           {!auth.user && (
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-              <Link className="btn btn-primary" to={`/${lang}/auth/sign-up?next=${encodeURIComponent(`/${lang}/company/signup`)}`}>{d.auth.signUp}</Link>
-              <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/company/signup`)}`}>{d.auth.signIn}</Link>
+              <Link className="btn btn-primary" to={`/${lang}/auth/sign-up?next=${encodeURIComponent(`/${lang}/company/signup`)}`}>
+                {d.auth.signUp}
+              </Link>
+              <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/company/signup`)}`}>
+                {d.auth.signIn}
+              </Link>
             </div>
           )}
-          {auth.user && (
-            <button type="button" className="btn btn-secondary" style={{ marginBottom: '1rem' }} onClick={() => auth.signOut()}>{d.auth.signOut}</button>
+          {/* F5: DEMO / sign-out stay off the create stack once the form is the focus. */}
+          {auth.user && !companyId && (
+            <p className="meta" style={{ marginBottom: '1rem' }}>
+              <button type="button" className="btn btn-ghost" onClick={() => void auth.signOutAndGo(lang)}>
+                {d.auth.signOut}
+              </button>
+              {' · '}
+              <Link to={`/${lang}/demo`}>{d.company.loadDemo}</Link>
+            </p>
           )}
-          <Link className="btn btn-secondary" to={`/${lang}/demo`} style={{ marginBottom: '1rem' }}>{d.company.loadDemo}</Link>
-          <form className="card stack-form" onSubmit={onCreate}>
-            <label>{d.company.companyName}<input value={name} onChange={(e) => setName(e.target.value)} required maxLength={120} disabled={!auth.user} /></label>
-            <p className="meta">{d.company.dpaVersionNote}</p>
-            <button className="btn btn-primary" type="submit" disabled={busy || !auth.user}>{d.company.createButton}</button>
-            {msg && <p className="meta" role={companyId ? 'status' : 'alert'}>{msg}</p>}
-            {companyId && <Link className="btn btn-secondary" to={`/${lang}/company/${companyId}/dashboard`}>{d.company.openDashboard}</Link>}
-          </form>
+          {!auth.user && (
+            <p className="meta" style={{ marginBottom: '1rem' }}>
+              <Link to={`/${lang}/demo`}>{d.company.loadDemo}</Link>
+            </p>
+          )}
+          {companyId ? (
+            <div className="card stack-form">
+              <p role="status">{msg}</p>
+              <Link className="btn btn-primary" to={`/${lang}/company/${companyId}/dashboard`}>
+                {d.company.openDashboard}
+              </Link>
+              <Link className="btn btn-secondary" to={`/${lang}/pricing?companyId=${encodeURIComponent(companyId)}`}>
+                {d.company.billingCta}
+              </Link>
+            </div>
+          ) : (
+            <form className="card stack-form" onSubmit={onCreate}>
+              <label>
+                {d.company.companyName}
+                <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={120} disabled={!auth.user || busy} />
+              </label>
+              <p className="meta">{d.company.dpaVersionNote}</p>
+              <button className="btn btn-primary" type="submit" disabled={busy || !auth.user} aria-busy={busy}>
+                {busy ? d.company.creating : d.company.createButton}
+              </button>
+              {msg && (
+                <p className="meta" role="alert">
+                  {msg}
+                </p>
+              )}
+            </form>
+          )}
           {companies.length > 0 && (
             <div style={{ marginTop: '1.5rem' }}>
               <h2>{d.nav.hrDashboard}</h2>
-              <ul>{companies.map((c) => <li key={c.id}><Link to={`/${lang}/company/${c.id}/dashboard`}>{c.name}</Link></li>)}</ul>
+              <ul>
+                {companies.map((c) => (
+                  <li key={c.id}>
+                    <Link to={`/${lang}/company/${c.id}/dashboard`}>{c.name}</Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </div>

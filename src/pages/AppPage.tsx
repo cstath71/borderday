@@ -34,7 +34,7 @@ import {
 
 const DAY_TYPES: DayType[] = ['telework', 'onsite', 'third_country', 'non_working'];
 /** Colour is not the only cue: each logged cell also shows a shape. The aria-label carries the words. */
-const DAY_MARKS: Record<DayType, string> = { telework: '⌂', onsite: '▣', third_country: '✈', non_working: '–' };
+const DAY_MARKS: Record<DayType, string> = { telework: '⌂', onsite: '▣', third_country: '✈', non_working: '○' };
 
 function canBeHalfDay(type: DayType): boolean {
   return type === 'telework' || type === 'onsite' || type === 'third_country';
@@ -77,14 +77,41 @@ export default function AppPage() {
   const [localOnly, setLocalOnly] = useState<DayEntry[]>([]);
   const [meta, setMetaState] = useState<UserMeta | null>(null);
   const [days, setDays] = useState<DayEntry[]>([]);
-  const [selectedDate, setSelectedDate] = useState(todayIso());
-  const [viewYear, setViewYear] = useState(() => Number(zurichToday().slice(0, 4)));
-  const [viewMonth, setViewMonth] = useState(() => Number(zurichToday().slice(5, 7)) - 1);
+  const [selectedDate, setSelectedDate] = useState(() => {
+    try {
+      const keep = sessionStorage.getItem('bd_selected_date_keep') || sessionStorage.getItem('bd_selected_date');
+      if (keep && /^\d{4}-\d{2}-\d{2}$/.test(keep)) {
+        sessionStorage.removeItem('bd_selected_date_keep');
+        return keep;
+      }
+    } catch { /* private mode */ }
+    return todayIso();
+  });
+  const [viewYear, setViewYear] = useState(() => {
+    try {
+      const keep = sessionStorage.getItem('bd_selected_date') || sessionStorage.getItem('bd_selected_date_keep');
+      if (keep && /^\d{4}-\d{2}-\d{2}$/.test(keep)) return Number(keep.slice(0, 4));
+    } catch { /* */ }
+    return Number(zurichToday().slice(0, 4));
+  });
+  const [viewMonth, setViewMonth] = useState(() => {
+    try {
+      const keep = sessionStorage.getItem('bd_selected_date') || sessionStorage.getItem('bd_selected_date_keep');
+      if (keep && /^\d{4}-\d{2}-\d{2}$/.test(keep)) return Number(keep.slice(5, 7)) - 1;
+    } catch { /* */ }
+    return Number(zurichToday().slice(5, 7)) - 1;
+  });
   const [busy, setBusy] = useState(false);
   /** Half day ticked on a date with no day type yet. A logged day keeps its own value in the entry. */
   const [halfBeforeType, setHalfBeforeType] = useState<Record<string, boolean>>({});
   const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
   const [former, setFormer] = useState<FormerCompany[]>([]);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem('bd_selected_date', selectedDate);
+    } catch { /* private mode */ }
+  }, [selectedDate]);
 
   // Fail closed: if access cannot be resolved, the visitor stays on the on-device preview.
   useEffect(() => {
@@ -184,7 +211,12 @@ export default function AppPage() {
     return m;
   }, [days]);
 
-  const canLogSelected = !isPreview || selectedDate.startsWith(todayIso().slice(0, 7));
+  const today = todayIso();
+  const selectedIsFuture = selectedDate > today;
+  const selectedYear = Number(selectedDate.slice(0, 4));
+  const currentYear = Number(today.slice(0, 4));
+  const selectedIsPriorYear = selectedYear < currentYear;
+  const canLogSelected = !isPreview || selectedDate.startsWith(today.slice(0, 7));
   const selectedIsHalf = selectedEntry ? selectedEntry.dayShare === 0.5 : !!halfBeforeType[selectedDate];
   const halfDayApplies = !selectedEntry || canBeHalfDay(selectedEntry.type);
   const locale = ({ en: 'en-CH', fr: 'fr-CH', de: 'de-CH', it: 'it-CH', nl: 'nl-BE' } as const)[lang] ?? 'en-CH';
@@ -222,13 +254,44 @@ export default function AppPage() {
 
   async function logDay(type: DayType, overnightAway: boolean, dayShare: 0.5 | 1) {
     if (!store || !canLogSelected) return;
+    const nextEntry: DayEntry = {
+      date: selectedDate,
+      type,
+      overnightAway,
+      dayShare,
+      note: selectedEntry?.note,
+    };
+    // F30: optimistic UI, then reconcile from the store.
+    setDays((prev) => {
+      const others = prev.filter((e) => e.date !== selectedDate);
+      return [...others, nextEntry].sort((a, b) => a.date.localeCompare(b.date));
+    });
     setBusy(true);
     setError(null);
     try {
-      await store.put({ date: selectedDate, type, overnightAway, dayShare, note: selectedEntry?.note }, borderId);
+      await store.put(nextEntry, borderId);
       await refresh();
     } catch (e) {
       setError(isDayLogOtherCompany(e) ? d.app.dayLogOtherCompany : d.app.saveError);
+      await refresh().catch(() => {});
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  /** F26: Clear button removes just the selected day's log. Re-tapping the type does not clear. */
+  async function clearSelectedDay() {
+    if (!store || !selectedEntry || !canLogSelected) return;
+    const date = selectedDate;
+    setDays((prev) => prev.filter((e) => e.date !== date));
+    setBusy(true);
+    setError(null);
+    try {
+      await store.remove(date);
+      await refresh();
+    } catch {
+      setError(d.app.saveError);
+      await refresh().catch(() => {});
     } finally {
       setBusy(false);
     }
@@ -452,6 +515,16 @@ export default function AppPage() {
           <p style={{ fontSize: '0.9rem', color: 'var(--ink-muted)' }}>
             {canLogSelected ? d.app.logDay : d.app.previewMonthOnly}
           </p>
+          {selectedIsFuture && canLogSelected && (
+            <p className="meta" role="status" data-testid="planned-day-warning">
+              {d.app.plannedDayWarning}
+            </p>
+          )}
+          {selectedIsPriorYear && canLogSelected && (
+            <p className="meta" role="note" data-testid="prior-year-note">
+              {t(d.app.priorYearNote, { year: selectedYear })}
+            </p>
+          )}
           {pack?.logHintKey && <p className="meta">{(d.dayTypes as Record<string, string>)[pack.logHintKey]}</p>}
           <div className="day-type-grid">
             {DAY_TYPES.map((type) => (
@@ -533,6 +606,19 @@ export default function AppPage() {
               }}
             />
           </label>
+          {selectedEntry && canLogSelected && (
+            <p style={{ marginTop: '0.75rem' }}>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                disabled={busy}
+                data-testid="clear-day"
+                onClick={() => void clearSelectedDay()}
+              >
+                {d.app.clearDay}
+              </button>
+            </p>
+          )}
         </div>
 
         <div className="card" style={{ marginBottom: '1rem' }}>

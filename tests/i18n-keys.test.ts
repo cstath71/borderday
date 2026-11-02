@@ -100,7 +100,7 @@ describe('border-route naming (T56/T59)', () => {
     expect(en.company.pickBorder).toMatch(/route/i);
     expect(fr.company.pickBorder).toMatch(/itinéraire/i);
     expect(de.company.pickBorder).toMatch(/Grenzroute/);
-    expect(itDict.company.pickBorder).toMatch(/corridoio/i);
+    expect(itDict.company.pickBorder).toMatch(/situazione/i);
     expect(nl.company.pickBorder).toMatch(/grensroute/i);
   });
 });

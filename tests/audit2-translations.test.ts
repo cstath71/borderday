@@ -24,9 +24,9 @@ describe('audit-2 translation findings', () => {
     expect(de.dpa.subjectBody).toMatch(/Rolle, Grenzroute,/);
   });
 
-  it('#10: Italian route is corridoio', () => {
-    expect(itDict.pricing.include1).toBe('Tutti i corridoi del piano');
-    expect(itDict.individuals.point2).toMatch(/^Stessi corridoi/);
+  it('#10: Italian route is situazione di frontiera', () => {
+    expect(itDict.pricing.include1).toBe('Tutte le situazioni di frontiera del piano');
+    expect(itDict.individuals.point2).toMatch(/^Stesse situazioni di frontiera/);
   });
 
   it('#11-#13: Ticino notes mirror the Fedlex wording', () => {

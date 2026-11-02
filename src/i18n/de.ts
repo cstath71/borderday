@@ -6,7 +6,7 @@ const de: Dict = {
     tagline:
       'Grenzüberschreitende Tagesgrenzen für HR und Mitarbeitende — bevor Überraschungen bei Sozialversicherung oder Steuer entstehen.',
     description:
-      'BorderDay hilft HR und Mitarbeitenden, Telearbeit, Vor-Ort- und Reisetage zu erfassen. Sozialversicherungszähler auf allen neun Korridoren; Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983, Kantone des Abkommens von 1983←Frankreich, Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Erfassungstool — keine Steuer- oder Rechtsberatung.',
+      'BorderDay hilft HR und Mitarbeitenden, Telearbeit, Vor-Ort- und Reisetage zu erfassen. Sozialversicherungszähler auf allen neun Grenzrouten; Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983, Kantone des Abkommens von 1983←Frankreich, Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Erfassungstool — keine Steuer- oder Rechtsberatung.',
   },
   nav: {
     home: 'Start',
@@ -44,7 +44,7 @@ const de: Dict = {
   home: {
     heroTitle: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
     heroBody:
-      'Für HR und Finanzverantwortliche in Genf, in Basel, im Tessin, in Luxemburg und in Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Korridoren, Steuerzähler auf sieben, und jeder Korridor zeigt, was er abdeckt. Fünf Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
+      'Für HR und Finanzverantwortliche in Genf, in Basel, im Tessin, in Luxemburg und in Belgien: Tageszähler je Mitarbeitenden, bevor ein Wechsel der Sozialversicherung eintritt oder eine Steuergrenze überschritten wird. Sozialversicherungszähler auf allen neun Grenzrouten, Steuerzähler auf sieben, und jedie Grenzroute zeigt, was er abdeckt. Fünf Sprachen, Steuer und Sozialversicherung getrennt erfasst.',
     ctaPrimary: 'Unternehmenskonto erstellen',
     ctaSecondary: 'Unternehmenspreise ansehen',
     ctaIndividuals: 'Ich bin einzelne Mitarbeiterin / einzelner Mitarbeiter',
@@ -55,7 +55,7 @@ const de: Dict = {
       'Nach dem EU/EWR/CH-Rahmenübereinkommen verlagert Telearbeit im Wohnstaat ab 25 % der Arbeitszeit die Sozialversicherung normalerweise dorthin, sofern keine A1-Bescheinigung beantragt wird. Ab 50 % steht das Übereinkommen nicht mehr zur Verfügung. BorderDay zeigt die drei Bereiche getrennt von der Steuer: unter 25 %, 25 % bis unter 50 % (A1 erforderlich) und 50 % oder mehr.',
     risk2Title: 'Steuerliche Tagesgrenzen',
     risk2Body:
-      'Steuerzähler laufen heute auf sieben Korridoren: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Nächte, in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage + 20 % regelmässige Rückkehr), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
+      'Steuerzähler laufen heute auf sieben Grenzrouten: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Nächte, in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage + 20 % regelmässige Rückkehr), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
     risk3Title: 'Teams über mehrere Grenzen',
     risk3Body:
       'Ein Unternehmens-Dashboard für Mitarbeitende mit unterschiedlichen Grenzen. Filter nach Grenze oder Status. CSV-Export. Mitarbeitende sehen bei ihren eigenen Tagen dieselben Zähler, die HR für sie sieht.',
@@ -68,9 +68,9 @@ const de: Dict = {
     feature3Title: 'Datenschutz durch Technikgestaltung',
     feature3Body:
       'An DSGVO und schweizerischem DSG ausgerichtet: Mandantentrennung, Export und Löschung, klarer Hinweis darauf, was HR sieht, Aufbewahrungshinweis. Kein GPS und kein Gerätestandort.',
-    bordersTitle: 'In Version 1 abgedeckte Korridore',
+    bordersTitle: 'In Version 1 abgedeckte Grenzrouten',
     bordersIntro:
-      'Jeder Korridor zeigt, was er heute zählt. Wenn noch keine Steuerregel gezählt werden kann, steht das dort, und es erscheint keine Zahl.',
+      'Jedie Grenzroute zeigt, was er heute zählt. Wenn noch keine Steuerregel gezählt werden kann, steht das dort, und es erscheint keine Zahl.',
     howTitle: 'So nutzen Unternehmen BorderDay',
     how1: 'Unternehmenskonto anlegen und Mitarbeitende per E-Mail-Link einladen.',
     how2: 'Jede Person wählt ihre Grenzroute und erfasst Telearbeit / vor Ort / Reise / nicht gearbeitet.',
@@ -85,7 +85,7 @@ const de: Dict = {
       'BorderDay ist ein Erfassungs- und Erinnerungstool für Tagesklassifikationen. Keine Steuer- oder Rechtsberatung. Immer bei der zuständigen Behörde oder einer Fachperson prüfen.',
     demoBanner: 'Screenshots und das vorgeladene Unternehmen nutzen klar gekennzeichnete DEMO-Daten — keine echten Mitarbeitenden.',
     inShort:
-      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Korridoren in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
+      'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Grenzrouten in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
     inShortLabel: 'Kurz gesagt',
     chipTaxYes: 'Steuer: ja',
     chipTaxNo: 'Steuer: kein Zähler',
@@ -330,7 +330,7 @@ const de: Dict = {
     deleted: 'Alle Tage gelöscht.',
     annualWorkingDays: 'Vertragliche Arbeitstage / Jahr',
     annualWorkingDaysHint:
-      'Dient zur Umrechnung der Tage in einen Prozentsatz. Standardwerte: 240 ist die offizielle vereinfachte Vollzeitbasis nur für Frankreich–Schweiz (ge.ch). 220 für Luxemburg/Belgien-Korridore und 240 für Italien–Schweiz und Deutschland–Schweiz sind Annahmen ohne gefundene offizielle Tagesbasis — setzen Sie Ihren eigenen Wert. Bleibt das Feld leer, wird der Standardwert mit Ihrem Beschäftigungsgrad skaliert.',
+      'Dient zur Umrechnung der Tage in einen Prozentsatz. Standardwerte: 240 ist die offizielle vereinfachte Vollzeitbasis nur für Frankreich–Schweiz (ge.ch). 220 für Luxemburg/Belgien-Grenzrouten und 240 für Italien–Schweiz und Deutschland–Schweiz sind Annahmen ohne gefundene offizielle Tagesbasis — setzen Sie Ihren eigenen Wert. Bleibt das Feld leer, wird der Standardwert mit Ihrem Beschäftigungsgrad skaliert.',
     installHint: 'Fügen Sie BorderDay zum Startbildschirm hinzu für eine App mit einem Tippen.',
     emptyMonth: 'Diesen Monat noch keine Tage erfasst.',
     weekdays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
@@ -400,7 +400,7 @@ const de: Dict = {
     includes: 'Enthalten',
     include1: 'Alle Grenzrouten Ihres Plans',
     include2:
-      'Steuerzähler, wo verfügbar, Sozialversicherungszähler auf jedem Korridor',
+      'Steuerzähler, wo verfügbar, Sozialversicherungszähler auf jeder Grenzroute',
     include3: 'Warnungen bei Annäherung an die Schwellen',
     include4: 'Daten jederzeit exportieren und löschen',
     include5: 'Englisch, Französisch, Deutsch, Italienisch, Niederländisch',
@@ -450,7 +450,7 @@ const de: Dict = {
       'Nein. Sie erfassen die Tage selbst. Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und halber Tag und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat.',
     q5: 'Welche Grenzen decken Sie ab?',
     a5:
-      'Neun Korridore in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
+      'Neun Grenzrouten in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
     q6: 'Und der App Store?',
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
@@ -458,7 +458,7 @@ const de: Dict = {
       'Checkout nutzt Stripe Managed Payments: Stripe übernimmt Merchant-of-Record-Funktionen und MWST/GST im Checkout; der Kunde kann Link als Merchant of Record sehen. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; eine Karte ist bei der Anmeldung nötig. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig (Einzelperson 4,99 €/Monat oder 49 €/Jahr inkl. MWST; Unternehmen 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €/Monat, oder mindestens 390 €/Jahr, zzgl. MWST), mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Aktionscodes werden akzeptiert. Siehe Nutzungsbedingungen zu Kündigung und dem 14-tägigen Widerrufsrecht (EU-Verbraucher).',
     q8: 'Was deckt BorderDay nicht ab?',
     a8:
-      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Korridore wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jedem Korridor. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die jährliche Telearbeitsquoten-Bescheinigung, die alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen einreichen müssen (auch bei 0 %). Im Zweifel fragen Sie Ihre Behörde.',
+      'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Grenzrouten wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jeder Grenzroute. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die jährliche Telearbeitsquoten-Bescheinigung, die alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen einreichen müssen (auch bei 0 %). Im Zweifel fragen Sie Ihre Behörde.',
   },
   privacy: {
     title: 'Datenschutz',
@@ -599,7 +599,7 @@ const de: Dict = {
     title: 'BorderDay für Einzelpersonen',
     heroTitle: 'Eigene Arbeitstage über die Grenze erfassen',
     heroBody:
-      'Mitarbeitende und Einzelpersonen können Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage selbst erfassen: Sozialversicherungszähler auf jedem Korridor, Steuerzähler dort, wo die Regel heute zählbar ist. Nutzt Ihr Arbeitgeber BorderDay, treten Sie über den Einladungslink bei und teilen dieselben Zähler mit HR.',
+      'Mitarbeitende und Einzelpersonen können Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage selbst erfassen: Sozialversicherungszähler auf jeder Grenzroute, Steuerzähler dort, wo die Regel heute zählbar ist. Nutzt Ihr Arbeitgeber BorderDay, treten Sie über den Einladungslink bei und teilen dieselben Zähler mit HR.',
     ctaApp: 'Mitarbeiter-App öffnen',
     ctaPricing: 'Einzelpreis',
     ctaCompanies: 'Mein Arbeitgeber braucht den Unternehmensplan',
@@ -759,7 +759,7 @@ const de: Dict = {
     legalNoticeNote: 'Dieser Abschnitt ist der rechtliche Hinweis / das Impressum. Wir veröffentlichen diese Anbieterkennzeichnung vollständig auf freiwilliger Basis (einschliesslich der Angaben, die Art. XII.6 des belgischen Code de droit économique für Dienste der Informationsgesellschaft auflistet). Ein Handelsregisterauszug und weitere Angaben sind auf Anfrage unter hello@borderday.com erhältlich.',
     s1Title: 'Dienst',
     s1Body:
-      'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzkorridoren. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, eine qualifizierte Beratung oder eine zuständige Behörde. Siehe Rechtlicher Hinweis.',
+      'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzrouten. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, eine qualifizierte Beratung oder eine zuständige Behörde. Siehe Rechtlicher Hinweis.',
     s2Title: 'Konten und Unternehmensnutzung',
     s2Body:
       'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen eine Grenzroute und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Arbeitgeberseitige Pflichten können die rechtmässige Nutzung blockieren, solange sie nicht erfüllt sind: beispielsweise die Mitbestimmung des Betriebsrats bei technischen Einrichtungen zur Überwachung (Deutschland BetrVG § 87 Abs. 1 Nr. 6), Anhörungs- oder Gesamtarbeitsvertragsregeln in Frankreich, Belgien, Luxemburg und der Schweiz sowie örtliche Regeln zur Mitarbeiterüberwachung oder zum Persönlichkeitsschutz am Arbeitsplatz. BorderDay führt diese Konsultationen nicht für Sie durch. Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist.',
@@ -1126,7 +1126,7 @@ const de: Dict = {
       'Sozialversicherung: derselbe EU/EWR/CH-Rahmen auf allen drei Packs — unter 25% / 25%–unter 50% (A1) / 50% oder mehr — mit CCSS Luxemburg und FPS-Verwahrer-Quellen im Produkt.',
     howTitle: 'Wie BorderDay LU-Arbeitgebern hilft',
     howBody:
-      'Ein Unternehmenskonto für Mitarbeitende mit Wohnsitz in FR, BE oder DE. Jede Person wählt ihren Korridor und erfasst Tagesarten; HR verfolgt das 34-Tage-Tempo und die Sozialversicherungsbänder, mit CSV-Export. Kein GPS. Unternehmen: 5 € je aktive Person/Monat (Minimum 39 €), zzgl. MWST; 7-Tage-Test, Karte erforderlich.',
+      'Ein Unternehmenskonto für Mitarbeitende mit Wohnsitz in FR, BE oder DE. Jede Person wählt ihre Grenzroute und erfasst Tagesarten; HR verfolgt das 34-Tage-Tempo und die Sozialversicherungsbänder, mit CSV-Export. Kein GPS. Unternehmen: 5 € je aktive Person/Monat (Minimum 39 €), zzgl. MWST; 7-Tage-Test, Karte erforderlich.',
     sourcesTitle: 'Offizielle Quellen (Packs luxembourg_fr / _be / _de)',
     disclaimer:
       'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit einer Fachperson oder der zuständigen Behörde prüfen.',

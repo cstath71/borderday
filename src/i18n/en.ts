@@ -3,7 +3,7 @@ const en = {
     siteName: 'BorderDay',
     tagline: 'Cross-border day limits for HR and employees — before affiliation or tax surprises.',
     description:
-      'BorderDay helps HR and employees log telework, on-site and travel days. Social-security telework counters on all nine corridors; tax counters on seven: Geneva and other non-1983 cantons, 1983-agreement cantons←France, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. A tracking tool — not tax or legal advice.',
+      'BorderDay helps HR and employees log telework, on-site and travel days. Social-security telework counters on all nine border routes; tax counters on seven: Geneva and other non-1983 cantons, 1983-agreement cantons←France, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. A tracking tool — not tax or legal advice.',
   },
   nav: {
     home: 'Home',
@@ -41,7 +41,7 @@ const en = {
   home: {
     heroTitle: 'One place for every border your people work across',
     heroBody:
-      'For HR and finance managers in Geneva, Basel, Ticino, Luxembourg and Belgium: see day counters per employee before a social-security switch or a tax limit is crossed. Social-security counters on all nine corridors, tax counters on seven, and every corridor says which it has. Five languages, tax and social security tracked separately.',
+      'For HR and finance managers in Geneva, Basel, Ticino, Luxembourg and Belgium: see day counters per employee before a social-security switch or a tax limit is crossed. Social-security counters on all nine border routes, tax counters on seven, and every border route says which it has. Five languages, tax and social security tracked separately.',
     ctaPrimary: 'Create company account',
     ctaSecondary: 'See company pricing',
     ctaIndividuals: 'I am an individual employee',
@@ -52,7 +52,7 @@ const en = {
       'Under the EU/EEA/CH framework agreement, telework in the residence state of 25% or more of working time normally moves social security there unless an A1 is requested. At 50% or more the framework is no longer available. BorderDay shows the three bands: under 25%, 25% to under 50% (A1 required) and 50% or more, separately from tax.',
     risk2Title: 'Tax day thresholds',
     risk2Body:
-      'Tax counters run today on seven corridors: Geneva and other non-1983 cantons (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). France→Belgium and Netherlands→Belgium say plainly that no general tax counter runs. We never invent a number.',
+      'Tax counters run today on seven border routes: Geneva and other non-1983 cantons (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). France→Belgium and Netherlands→Belgium say plainly that no general tax counter runs. We never invent a number.',
     risk3Title: 'Multi-border teams',
     risk3Body:
       'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see the same counters for their own days that HR sees for them.',
@@ -64,9 +64,9 @@ const en = {
     feature3Title: 'Data protection by design',
     feature3Body:
       'GDPR and Swiss FADP oriented: company isolation, export and delete, a clear notice of what HR can see, and a retention note. No GPS or device location.',
-    bordersTitle: 'Corridors covered in version 1',
+    bordersTitle: 'Border routes covered in version 1',
     bordersIntro:
-      'Each corridor shows what it counts today. Where no tax rule can be counted yet, it says so and shows no number.',
+      'Each border route shows what it counts today. Where no tax rule can be counted yet, it says so and shows no number.',
     howTitle: 'How companies use BorderDay',
     how1: 'Create a company account and invite employees by email link.',
     how2: 'Each employee picks their border route and logs telework / on-site / trip / non-working days.',
@@ -81,7 +81,7 @@ const en = {
       'BorderDay is a tracking and reminder tool for day classifications. It is not tax advice or legal advice. Always verify with the competent authority or a qualified adviser.',
     demoBanner: 'Screenshots and the seeded company use clearly labeled DEMO data — not real employees.',
     inShort:
-      'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine corridors in five regions, tax counters on seven of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
+      'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine border routes in five regions, tax counters on seven of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
     inShortLabel: 'In short',
     chipTaxYes: 'Tax: yes',
     chipTaxNo: 'Tax: no counter',
@@ -324,7 +324,7 @@ const en = {
     deleted: 'All days deleted.',
     annualWorkingDays: 'Contractual working days / year',
     annualWorkingDaysHint:
-      'Used when converting day counts to a percentage. Defaults: 240 is the official simplified full-time base for France–Switzerland only (ge.ch). 220 for Luxembourg/Belgium corridors and 240 for Italy–Switzerland and Germany–Switzerland are assumptions with no official day-base found — set your own figure. Left empty, the default is scaled by your employment percentage.',
+      'Used when converting day counts to a percentage. Defaults: 240 is the official simplified full-time base for France–Switzerland only (ge.ch). 220 for Luxembourg/Belgium border routes and 240 for Italy–Switzerland and Germany–Switzerland are assumptions with no official day-base found — set your own figure. Left empty, the default is scaled by your employment percentage.',
     installHint: 'Add BorderDay to your home screen for a one-tap app.',
     emptyMonth: 'No days logged this month yet.',
     weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -394,7 +394,7 @@ const en = {
     includes: 'Includes',
     include1: 'All border routes available in your plan',
     include2:
-      'Tax counters where available, social-security counters on every corridor',
+      'Tax counters where available, social-security counters on every border route',
     include3: 'Warnings as limits approach',
     include4: 'Export and delete your data anytime',
     include5: 'English, French, German, Italian, Dutch',
@@ -443,7 +443,7 @@ const en = {
       'No. You log days yourself. No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     q5: 'Which borders do you cover?',
     a5:
-      'Nine corridors in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
+      'Nine border routes in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',
@@ -451,7 +451,7 @@ const en = {
       'Checkout uses Stripe Managed Payments: Stripe provides merchant-of-record functions and handles VAT/GST in Checkout; the customer may see Link as the merchant of record. Company and individual plans start with a 7-day free trial, and a card is required at signup. After 7 days the plan becomes paid at the stated price (individual €4.99/month or €49/year incl. VAT; company €5 per active employee per month, minimum €39/month, or minimum €390/year, excl. VAT), charged automatically on day 8 and renewing until you cancel. Promo codes are supported at checkout. See the Terms for cancellation and the 14-day EU withdrawal right for consumers.',
     q8: 'What does BorderDay not cover?',
     a8:
-      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Corridors not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every corridor. The CSV export is a working record, not an official filing such as the annual telework-rate attestation all Swiss employers of France residents must file (including at 0%). When in doubt, check with your authority.',
+      'The self-employed, public-sector special rules, people with employers in several states, and non-IT work under the telework framework. Border routes not listed, such as France→Germany or Netherlands→Germany. Counters only see days logged here, so other jobs in the year are not included. Tax counters do not run on every border route. The CSV export is a working record, not an official filing such as the annual telework-rate attestation all Swiss employers of France residents must file (including at 0%). When in doubt, check with your authority.',
   },
   privacy: {
     title: 'Privacy',
@@ -593,7 +593,7 @@ const en = {
     title: 'BorderDay for individuals',
     heroTitle: 'Log your own border days',
     heroBody:
-      'Employees and individual users can log telework, on-site, trip and non-working days: social-security counters on every corridor, tax counters where the rule can be counted today. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
+      'Employees and individual users can log telework, on-site, trip and non-working days: social-security counters on every border route, tax counters where the rule can be counted today. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
     ctaApp: 'Open employee app',
     ctaPricing: 'Individual pricing',
     ctaCompanies: 'My employer needs the company plan',
@@ -752,7 +752,7 @@ const en = {
     legalNoticeNote: 'This section is the legal notice / imprint. We publish these provider-identification particulars in full on a voluntary basis (including the information Belgian Code de droit économique Art. XII.6 lists for information-society services). A commercial-register extract and further particulars are available on request at hello@borderday.com.',
     s1Title: 'Service',
     s1Body:
-      'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border corridors. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',
+      'BorderDay is a day-classification tracking and reminder tool for employers and employees on selected cross-border routes. It is not tax advice, legal advice, or a substitute for your employer, a qualified adviser, or a competent authority. See the Disclaimer.',
     s2Title: 'Accounts and company use',
     s2Body:
       'You must provide accurate account details. Company account owners invite employees; employees choose a border route and log day types only (no GPS or device location). HR sees the same counters the employee sees. In a company account the employer decides why and how employee days are recorded: the employer is the controller of those day logs and is responsible for the legal basis, for informing employees and for any consultation its law requires, and the provider acts as its processor. Swiss CO Art. 328b limits employer processing of employee data to what concerns suitability for the employment relationship or is needed to perform the employment contract. Employer-side duties can block lawful use until completed: for example works-council co-determination on technical monitoring systems (Germany BetrVG § 87(1) No. 6), staff-representative or CCT consultation rules in France, Belgium, Luxembourg and Switzerland, and any local employee-monitoring or workplace-privacy rules. BorderDay does not run those consultations for you. The provider is the controller of accounts, billing and security. The data processing agreement for employee day logs is published at /dpa/. You are responsible for the accuracy of the days you log.',
@@ -1116,7 +1116,7 @@ const en = {
       'Social security: same EU/EEA/CH framework on all three packs — under 25% / 25%–under 50% (A1) / 50% or more — with CCSS Luxembourg and FPS depositary sources linked in the product.',
     howTitle: 'How BorderDay helps LU employers',
     howBody:
-      'One company account for staff on FR, BE and DE residence routes. Employees pick their corridor and log day types; HR watches 34-day tax pace and social-security bands, with CSV export. No GPS. Company: €5 per active employee/month (€39 minimum), excl. VAT; 7-day trial, card required.',
+      'One company account for staff on FR, BE and DE residence routes. Employees pick their border route and log day types; HR watches 34-day tax pace and social-security bands, with CSV export. No GPS. Company: €5 per active employee/month (€39 minimum), excl. VAT; 7-day trial, card required.',
     sourcesTitle: 'Official sources (same as luxembourg_fr / _be / _de packs)',
     disclaimer:
       'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',

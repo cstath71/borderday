@@ -1,6 +1,6 @@
 # BorderDay
 
-Multilingual PWA for HR and employees to track telework / on-site / third-country / non-working days against published limits: social-security counters on nine corridors (Geneva, Basel, Luxembourg, Belgium, Ticino), tax counters on four. See the FAQ for which.
+Multilingual PWA for HR and employees to track telework / on-site / third-country / non-working days against published limits: social-security counters on nine border routes (Geneva, Basel, Luxembourg, Belgium, Ticino), tax counters on four. See the FAQ for which.
 
 ## Stack
 

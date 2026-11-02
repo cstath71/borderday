@@ -19,7 +19,7 @@ const dicts = { en, fr, de, it: itDict, nl };
 const TERMS: Record<string, Record<keyof typeof dicts, RegExp>> = {
   employee_name: { en: /name/i, fr: /nom/i, de: /Name/, it: /nome/i, nl: /naam/i },
   employee_email: { en: /email/i, fr: /e-mail/i, de: /E-Mail/, it: /e-mail/i, nl: /e-mail/i },
-  route: { en: /border route/i, fr: /itinéraire/i, de: /Grenzroute/, it: /corridoio/i, nl: /grensroute/i },
+  route: { en: /border route/i, fr: /itinéraire/i, de: /Grenzroute/, it: /situazione( di frontiera)?/i, nl: /grensroute/i },
   annual_working_days: { en: /working[- ]days/i, fr: /jours de travail/i, de: /Arbeitstage/, it: /giorni lavorativi/i, nl: /werkdagen/i },
   employment_percent: { en: /employment percentage/i, fr: /taux d[’']emploi/i, de: /Beschäftigungsgrad/, it: /percentuale d[’']impiego/i, nl: /tewerkstellingspercentage/i },
   contract_days_per_year: { en: /contract(ual)? (working )?days/i, fr: /jours (de travail )?contractuels/i, de: /vertragliche\w* Arbeitstage/, it: /giorni (lavorativi )?contrattuali/i, nl: /contractuele (werk)?dagen/i },

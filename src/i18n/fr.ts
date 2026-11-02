@@ -6,7 +6,7 @@ const fr: Dict = {
     tagline:
       'Seuils de jours fiscaux et sociaux pour les RH et les collaborateurs — avant les mauvaises surprises.',
     description:
-      'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf corridors ; compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983, cantons de l’accord de 1983←France, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
+      'BorderDay aide les RH et les collaborateurs à consigner télétravail, jours sur site et déplacements. Compteurs de sécurité sociale sur les neuf situations frontalières ; compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983, cantons de l’accord de 1983←France, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Outil de suivi — pas un conseil fiscal ou juridique.',
   },
   nav: {
     home: 'Accueil',
@@ -44,7 +44,7 @@ const fr: Dict = {
   home: {
     heroTitle: 'Un seul outil pour toutes les frontières de vos équipes',
     heroBody:
-      'Pour les RH et responsables finance à Genève, à Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf corridors, compteurs fiscaux sur sept, et chaque corridor indique ce qu’il couvre. Cinq langues, fiscalité et sécurité sociale suivies séparément.',
+      'Pour les RH et responsables finance à Genève, à Bâle, au Tessin, au Luxembourg et en Belgique : des compteurs de jours par collaborateur, avant un changement d’affiliation ou le dépassement d’un seuil fiscal. Compteurs de sécurité sociale sur les neuf situations frontalières, compteurs fiscaux sur sept, et chaque situation frontalière indique ce qu’il couvre. Cinq langues, fiscalité et sécurité sociale suivies séparément.',
     ctaPrimary: 'Créer un compte entreprise',
     ctaSecondary: 'Voir les tarifs entreprise',
     ctaIndividuals: 'Je suis un collaborateur individuel',
@@ -55,7 +55,7 @@ const fr: Dict = {
       'Selon l’accord-cadre UE/EEE/CH, un télétravail dans l’État de résidence de 25 % ou plus du temps de travail y transfère normalement la sécurité sociale, sauf demande d’attestation A1. À partir de 50 %, l’accord-cadre n’est plus disponible. BorderDay affiche les trois tranches, séparément de la fiscalité : moins de 25 %, de 25 % à moins de 50 % (A1 requise) et 50 % ou plus.',
     risk2Title: 'Seuils fiscaux de jours',
     risk2Body:
-      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept corridors : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits, imposés en France), Allemagne→Suisse (60 jours de non-retour + 20 % de retour régulier), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
+      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept situations frontalières : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits, imposés en France), Allemagne→Suisse (60 jours de non-retour + 20 % de retour régulier), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
     risk3Title: 'Équipes multi-frontières',
     risk3Body:
       'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient, pour leurs propres jours, les mêmes compteurs que les RH voient pour eux.',
@@ -68,9 +68,9 @@ const fr: Dict = {
     feature3Title: 'Protection des données dès la conception',
     feature3Body:
       'Orienté RGPD et LPD suisse : isolation par entreprise, export et suppression, avis clair sur ce que voient les RH, note de conservation. Ni GPS ni localisation de l’appareil.',
-    bordersTitle: 'Corridors couverts en version 1',
+    bordersTitle: 'Situations frontalières couvertes en version 1',
     bordersIntro:
-      'Chaque corridor indique ce qu’il compte aujourd’hui. Si aucune règle fiscale ne peut encore être comptée, il le dit et n’affiche aucun chiffre.',
+      'Chaque situation frontalière indique ce qu’il compte aujourd’hui. Si aucune règle fiscale ne peut encore être comptée, il le dit et n’affiche aucun chiffre.',
     howTitle: 'Comment les entreprises utilisent BorderDay',
     how1: 'Créez un compte entreprise et invitez les collaborateurs par lien e-mail.',
     how2: 'Chaque collaborateur choisit son itinéraire et enregistre télétravail / sur site / déplacement / non travaillé.',
@@ -85,7 +85,7 @@ const fr: Dict = {
       'BorderDay est un outil de suivi et de rappel des classifications de jours. Ce n’est pas un conseil fiscal ou juridique. Vérifiez toujours auprès de l’autorité compétente ou d’un conseiller qualifié.',
     demoBanner: 'Les captures et l’entreprise préchargée utilisent des données DEMO clairement étiquetées — pas de vrais collaborateurs.',
     inShort:
-      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf corridors de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
+      'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf situations frontalières de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
     inShortLabel: 'En bref',
     chipTaxYes: 'Fiscalité : oui',
     chipTaxNo: 'Fiscalité : pas de compteur',
@@ -329,7 +329,7 @@ const fr: Dict = {
     deleted: 'Tous les jours ont été supprimés.',
     annualWorkingDays: 'Jours de travail contractuels / an',
     annualWorkingDaysHint:
-      'Sert à convertir les jours en pourcentage. Valeurs par défaut : 240 est la base simplifiée officielle à temps plein pour la France–Suisse uniquement (ge.ch). 220 pour les corridors Luxembourg/Belgique et 240 pour l’Italie–Suisse et l’Allemagne–Suisse sont des hypothèses sans base officielle trouvée — indiquez votre propre chiffre. Laissé vide, le chiffre par défaut est ajusté selon votre taux d’emploi.',
+      'Sert à convertir les jours en pourcentage. Valeurs par défaut : 240 est la base simplifiée officielle à temps plein pour la France–Suisse uniquement (ge.ch). 220 pour les situations frontalières Luxembourg/Belgique et 240 pour l’Italie–Suisse et l’Allemagne–Suisse sont des hypothèses sans base officielle trouvée — indiquez votre propre chiffre. Laissé vide, le chiffre par défaut est ajusté selon votre taux d’emploi.',
     installHint: 'Ajoutez BorderDay à l’écran d’accueil pour une application en un geste.',
     emptyMonth: 'Aucun jour enregistré ce mois-ci.',
     weekdays: ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'],
@@ -397,7 +397,7 @@ const fr: Dict = {
     includes: 'Inclus',
     include1: 'Tous les itinéraires de votre offre',
     include2:
-      'Compteurs fiscaux lorsqu’ils existent, compteurs de sécurité sociale sur chaque corridor',
+      'Compteurs fiscaux lorsqu’ils existent, compteurs de sécurité sociale sur chaque situation frontalière',
     include3: 'Alertes à l’approche des seuils',
     include4: 'Export et suppression de vos données à tout moment',
     include5: 'Anglais, français, allemand, italien, néerlandais',
@@ -449,7 +449,7 @@ const fr: Dict = {
       'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
     q5: 'Quelles frontières couvrez-vous ?',
     a5:
-      'Neuf corridors dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
+      'Neuf situations frontalières dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',
@@ -457,7 +457,7 @@ const fr: Dict = {
       'Le paiement utilise Stripe Managed Payments : Stripe assure les fonctions de marchand officiel (merchant of record) et gère la TVA/GST au checkout ; le client peut voir Link comme marchand officiel. Les offres entreprise et individuelle commencent par un essai gratuit de 7 jours ; une carte est requise à l’inscription. Après 7 jours, l’offre devient payante au prix indiqué (individuel 4,99 €/mois ou 49 €/an TVA incluse ; entreprise 5 € par collaborateur actif et par mois, minimum 39 €/mois, ou minimum 390 €/an, hors TVA), débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation. Les codes promo sont acceptés. Voir les CGU pour la résiliation et le droit de rétractation de 14 jours (consommateurs UE).',
     q8: 'Que ne couvre pas BorderDay ?',
     a8:
-      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les corridors non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur tous les corridors. L’export CSV est un document de travail, pas une déclaration officielle comme l’attestation annuelle du taux de télétravail que tous les employeurs suisses de résidents fiscaux français doivent transmettre (y compris à 0 %). En cas de doute, vérifiez auprès de votre autorité.',
+      'Les indépendants, les règles propres au secteur public, les personnes ayant des employeurs dans plusieurs États et le travail sans lien informatique au sens de l’accord-cadre. Les situations frontalières non listés, comme France→Allemagne ou Pays-Bas→Allemagne. Les compteurs ne voient que les jours consignés ici : les autres emplois de l’année ne sont pas inclus. Les compteurs fiscaux n’existent pas sur toutes les situations frontalières. L’export CSV est un document de travail, pas une déclaration officielle comme l’attestation annuelle du taux de télétravail que tous les employeurs suisses de résidents fiscaux français doivent transmettre (y compris à 0 %). En cas de doute, vérifiez auprès de votre autorité.',
   },
   privacy: {
     title: 'Confidentialité',
@@ -598,7 +598,7 @@ const fr: Dict = {
     title: 'BorderDay pour les particuliers',
     heroTitle: 'Enregistrez vos propres jours de travail',
     heroBody:
-      'Salariés et particuliers peuvent consigner télétravail, jours sur site, déplacements et jours non travaillés : compteurs de sécurité sociale sur chaque corridor, compteurs fiscaux là où la règle peut être comptée aujourd’hui. Si votre employeur utilise BorderDay, rejoignez-le via son lien d’invitation pour partager les mêmes compteurs avec les RH.',
+      'Salariés et particuliers peuvent consigner télétravail, jours sur site, déplacements et jours non travaillés : compteurs de sécurité sociale sur chaque situation frontalière, compteurs fiscaux là où la règle peut être comptée aujourd’hui. Si votre employeur utilise BorderDay, rejoignez-le via son lien d’invitation pour partager les mêmes compteurs avec les RH.',
     ctaApp: 'Ouvrir l’app collaborateur',
     ctaPricing: 'Tarif individuel',
     ctaCompanies: 'Mon employeur a besoin de l’offre entreprise',
@@ -761,7 +761,7 @@ const fr: Dict = {
     legalNoticeNote: 'Cette section constitue les mentions légales. Nous publions ces informations d’identification du prestataire en entier, sur une base volontaire (y compris les informations listées à l’Art. XII.6 du Code de droit économique belge pour les services de la société de l’information). Un extrait du registre du commerce et d’autres précisions sont disponibles sur demande à hello@borderday.com.',
     s1Title: 'Service',
     s1Body:
-      'BorderDay est un outil de suivi et de rappel des classifications de jours pour employeurs et collaborateurs sur certains corridors transfrontaliers. Ce n’est pas un conseil fiscal ou juridique, ni un substitut à votre employeur, à un conseiller qualifié ou à une autorité compétente. Voir l’Avertissement.',
+      'BorderDay est un outil de suivi et de rappel des classifications de jours pour employeurs et collaborateurs sur certains situations frontalières transfrontaliers. Ce n’est pas un conseil fiscal ou juridique, ni un substitut à votre employeur, à un conseiller qualifié ou à une autorité compétente. Voir l’Avertissement.',
     s2Title: 'Comptes et usage entreprise',
     s2Body:
       'Vous devez fournir des informations de compte exactes. Les administrateurs du compte entreprise invitent les collaborateurs ; ceux-ci choisissent un itinéraire et enregistrent uniquement le type de jour (ni GPS ni localisation de l’appareil). Les RH voient les mêmes compteurs que le collaborateur. Dans un compte entreprise, l’employeur décide pourquoi et comment les jours sont enregistrés : il est responsable du traitement de ces journaux, de la base légale, de l’information des collaborateurs et de toute consultation exigée par son droit, et le prestataire agit comme son sous-traitant. L’Art. 328b CO limite le traitement par l’employeur des données des salariés à ce qui concerne l’aptitude à la relation de travail ou est nécessaire à l’exécution du contrat de travail. Les obligations côté employeur peuvent empêcher un usage licite tant qu’elles ne sont pas remplies : par exemple la co-détermination du comité d’entreprise sur les systèmes techniques de contrôle (Allemagne BetrVG § 87 al. 1 n° 6), les règles de consultation des représentants du personnel ou de conventions collectives de travail en France, en Belgique, au Luxembourg et en Suisse, et toute règle locale sur la surveillance des salariés ou la vie privée au travail. BorderDay ne conduit pas ces consultations à votre place. Le prestataire est responsable du traitement des comptes, de la facturation et de la sécurité. L’accord de traitement des données pour les journaux de jours des collaborateurs est publié à /dpa/. Vous êtes responsable de l’exactitude des jours que vous enregistrez.',
@@ -1042,14 +1042,14 @@ const fr: Dict = {
       'Obligations employeur: conserver des registres de jours cohérents avec les compteurs ci-dessus. Cette page n’indique pas de date de transmission annuelle du taux de télétravail spécifique au Tessin comparable à la première transmission AFC de Genève (janvier 2027) — confirmez dépôts et obligations A1 auprès des autorités suisses/italiennes compétentes.',
     howTitle: 'Comment BorderDay aide les RH',
     howBody:
-      'Invitez les collaborateurs; chacun choisit le corridor Tessin←Italie et enregistre uniquement des types de jours (télétravail / sur site / déplacement / non travaillé) plus la nuit hors domicile si pertinent. Les RH voient la part fiscale de 25%, le compteur de 45 jours de non-retour et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
+      'Invitez les collaborateurs; chacun choisit la situation frontalière Tessin←Italie et enregistre uniquement des types de jours (télétravail / sur site / déplacement / non travaillé) plus la nuit hors domicile si pertinent. Les RH voient la part fiscale de 25%, le compteur de 45 jours de non-retour et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
     sourcesTitle: 'Sources officielles (identiques au pack ticino_it)',
     disclaimer:
       'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
     ctaPrimary: 'Créer un compte entreprise',
     ctaPricing: 'Voir les tarifs',
     faqTitle: 'FAQ employeurs Tessin',
-    faq1q: 'Quel corridor choisir pour un collaborateur au Tessin résidant en Italie?',
+    faq1q: 'Quelle situation frontalière choisir pour un collaborateur au Tessin résidant en Italie?',
     faq1a:
       'Le pack Tessin ← Italie (ticino_it): 25% de télétravail au domicile, 45 jours de non-retour et le compteur de sécurité sociale partagé — lorsque les zones et conditions de l’Accordo Art. 2 sont remplies.',
     faq2q: 'La règle des 45 jours compte-t-elle les déplacements d’une journée?',
@@ -1083,7 +1083,7 @@ const fr: Dict = {
       'Obligation employeur (Genève): attestation annuelle du taux de télétravail — ge.ch indique actuellement la première transmission en janvier 2027 pour l’année 2026.',
     howTitle: 'Comment BorderDay aide les RH',
     howBody:
-      'Invitez les collaborateurs; chacun choisit le corridor Genève←France et enregistre uniquement des types de jours. Les RH voient les mêmes compteurs fiscaux et sociaux, des alertes à l’approche des seuils, et peuvent exporter en CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
+      'Invitez les collaborateurs; chacun choisit la situation frontalière Genève←France et enregistre uniquement des types de jours. Les RH voient les mêmes compteurs fiscaux et sociaux, des alertes à l’approche des seuils, et peuvent exporter en CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
     sourcesTitle: 'Sources officielles (identiques au pack produit)',
     disclaimer:
       'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
@@ -1093,7 +1093,7 @@ const fr: Dict = {
     faq1q: 'BorderDay remplace-t-il la déclaration de taux AFC?',
     faq1a:
       'Non. Il tient un journal de jours pour préparer les chiffres. L’attestation annuelle reste le dépôt de l’employeur selon ge.ch.',
-    faq2q: 'Quel corridor choisir pour un collaborateur résidant en France?',
+    faq2q: 'Quelle situation frontalière choisir pour un collaborateur résidant en France?',
     faq2a:
       'Le pack Genève / cantons hors accord 1983←France (geneva_fr): 40% télétravail, 10 jours de mission, et le compteur de sécurité sociale du cadre.',
     faq3q: 'Suivez-vous la localisation des collaborateurs?',
@@ -1111,8 +1111,8 @@ const fr: Dict = {
       'Une page employeur pour France→LU, Belgique→LU et Allemagne→LU: tolérance fiscale de 34 jours et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
     heroTitle: 'Employeurs au Luxembourg: jours de télétravail pour le personnel résidant en France, Belgique ou Allemagne',
     inShort:
-      'BorderDay couvre les trois corridors de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de tolérance de 34 jours (avec règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique.',
-    routesTitle: 'Trois corridors, un tableau de bord RH',
+      'BorderDay couvre les trois situations frontalières de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de tolérance de 34 jours (avec règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique.',
+    routesTitle: 'Trois situations frontalières, un tableau de bord RH',
     routeFr:
       'France→Luxembourg (luxembourg_fr): tolérance fiscale de 34 jours; le temps partiel / année partielle utilise la réduction officielle (arrondi vers le bas) selon l’accord FR–LU.',
     routeBe:
@@ -1128,7 +1128,7 @@ const fr: Dict = {
       'Sécurité sociale: même cadre UE/EEE/CH sur les trois packs — sous 25% / 25%–moins de 50% (A1) / 50% ou plus — avec sources CCSS Luxembourg et dépositaire FPS liées dans le produit.',
     howTitle: 'Comment BorderDay aide les employeurs LU',
     howBody:
-      'Un compte entreprise pour le personnel résidant en FR, BE ou DE. Chaque personne choisit son corridor et enregistre des types de jours; les RH suivent le rythme des 34 jours et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Entreprise: 5 € par collaborateur actif/mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
+      'Un compte entreprise pour le personnel résidant en FR, BE ou DE. Chaque personne choisit sa situation frontalière et enregistre des types de jours; les RH suivent le rythme des 34 jours et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Entreprise: 5 € par collaborateur actif/mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
     sourcesTitle: 'Sources officielles (packs luxembourg_fr / _be / _de)',
     disclaimer:
       'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
@@ -1138,7 +1138,7 @@ const fr: Dict = {
     faq1q: 'Un seul compte peut-il couvrir FR, BE et DE?',
     faq1a:
       'Oui. Chaque collaborateur choisit France→LU, Belgique→LU ou Allemagne→LU. Les RH voient les trois sur le même tableau de bord.',
-    faq2q: 'Les 34 jours sont-ils identiques sur chaque corridor?',
+    faq2q: 'Les 34 jours sont-ils identiques sur chaque situation frontalière?',
     faq2a:
       'La tolérance affichée est de 34 jours sur les trois. La réduction pour temps partiel s’applique seulement France→LU; BE→LU et DE→LU gardent 34 jours sans cette réduction, selon les notes officielles citées.',
     faq3q: 'Sécurité sociale versus fiscalité?',

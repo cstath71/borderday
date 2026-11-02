@@ -34,7 +34,7 @@ const COPY = {
     fallback: "un'azienda",
     intro: (company: string) => `Siete stati invitati a unirvi a ${company} su BorderDay.`,
     notice:
-      "Se entrate, il team HR del datore di lavoro può vedere nome, e-mail, corridoio e, se inseriti, giorni lavorativi, giorni contrattuali, percentuale d'impiego, A1 e status Francia–Belgio prima del 2012 e, per ogni data, il tipo di giorno, la mezza giornata e la notte fuori sì/no, oltre ai vostri contatori. Niente GPS né posizione del dispositivo. Le note restano private.",
+      "Se entrate, il team HR del datore di lavoro può vedere nome, e-mail, situazione di frontiera e, se inseriti, giorni lavorativi, giorni contrattuali, percentuale d'impiego, A1 e status Francia–Belgio prima del 2012 e, per ogni data, il tipo di giorno, la mezza giornata e la notte fuori sì/no, oltre ai vostri contatori. Niente GPS né posizione del dispositivo. Le note restano private.",
     accept: "Accetta l'invito",
     privacy: "Informativa privacy",
   },

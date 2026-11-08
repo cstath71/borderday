@@ -3,6 +3,11 @@ import { getDict, LANGS, type Lang } from '../i18n';
 
 const BASE = 'https://borderday.com';
 
+interface Crumb {
+  name: string;
+  path: string;
+}
+
 interface Props {
   lang: Lang;
   title: string;
@@ -11,6 +16,12 @@ interface Props {
   /** When true, emit FAQPage JSON-LD from pairs. */
   faq?: readonly (readonly [string, string])[];
   noindex?: boolean;
+  /** Languages that really exist for this path. Omit to advertise every site language. */
+  alternates?: readonly Lang[];
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  breadcrumb?: readonly Crumb[];
+  extraGraph?: readonly object[];
 }
 
 function setMeta(name: string, content: string, prop = false) {
@@ -22,6 +33,11 @@ function setMeta(name: string, content: string, prop = false) {
     document.head.appendChild(el);
   }
   el.content = content;
+}
+
+function removeMeta(name: string, prop = false) {
+  const attr = prop ? 'property' : 'name';
+  document.head.querySelector(`meta[${attr}="${name}"]`)?.remove();
 }
 
 function setLink(rel: string, href: string, attrs: Record<string, string> = {}) {
@@ -99,7 +115,19 @@ function softwareGraph() {
   };
 }
 
-export default function Seo({ lang, title, description, path, faq, noindex }: Props) {
+export default function Seo({
+  lang,
+  title,
+  description,
+  path,
+  faq,
+  noindex,
+  alternates,
+  ogType,
+  publishedTime,
+  breadcrumb,
+  extraGraph,
+}: Props) {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.title = title;
@@ -107,30 +135,39 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
     setMeta('robots', noindex ? 'noindex, nofollow' : 'index, follow');
     setMeta('og:title', title, true);
     setMeta('og:description', description, true);
-    setMeta('og:type', 'website', true);
+    setMeta('og:type', ogType ?? 'website', true);
     setMeta('og:image', `${BASE}/og.png`, true);
     setMeta('twitter:card', 'summary_large_image');
     setMeta('twitter:title', title);
     setMeta('twitter:description', description);
     setMeta('twitter:image', `${BASE}/og.png`);
+    if (publishedTime) {
+      setMeta('article:published_time', publishedTime, true);
+      setMeta('article:modified_time', publishedTime, true);
+    } else {
+      removeMeta('article:published_time', true);
+      removeMeta('article:modified_time', true);
+    }
 
     const canonical = path ? `${BASE}/${lang}/${path}/` : `${BASE}/${lang}/`;
     setLink('canonical', canonical);
     setMeta('og:url', canonical, true);
 
+    const localeList = alternates ?? LANGS;
+    const singleLocale = Boolean(alternates && alternates.length === 1);
     document.head.querySelectorAll('link[data-hreflang]').forEach((n) => n.remove());
-    for (const l of LANGS) {
+    for (const l of localeList) {
       const link = document.createElement('link');
       link.rel = 'alternate';
       link.hreflang = l;
-      link.href = path ? `${BASE}/${l}/${path}/` : `${BASE}/${l}/`;
+      link.href = singleLocale ? canonical : path ? `${BASE}/${l}/${path}/` : `${BASE}/${l}/`;
       link.setAttribute('data-hreflang', l);
       document.head.appendChild(link);
     }
     const xd = document.createElement('link');
     xd.rel = 'alternate';
     xd.hreflang = 'x-default';
-    xd.href = path ? `${BASE}/en/${path}/` : `${BASE}/en/`;
+    xd.href = singleLocale ? canonical : path ? `${BASE}/en/${path}/` : `${BASE}/en/`;
     xd.setAttribute('data-hreflang', 'x-default');
     document.head.appendChild(xd);
 
@@ -155,8 +192,17 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
         })),
       });
     }
-    // Breadcrumb for non-home
-    if (path) {
+    if (breadcrumb && breadcrumb.length) {
+      graph.push({
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumb.map((crumb, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crumb.name,
+          item: crumb.path ? `${BASE}/${lang}/${crumb.path}/` : `${BASE}/${lang}/`,
+        })),
+      });
+    } else if (path) {
       const name = title.split('—')[0]?.trim() || path;
       graph.push({
         '@type': 'BreadcrumbList',
@@ -166,6 +212,7 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
         ],
       });
     }
+    if (extraGraph?.length) graph.push(...extraGraph);
 
     let ld = document.getElementById('bd-jsonld');
     if (!ld) {
@@ -175,7 +222,7 @@ export default function Seo({ lang, title, description, path, faq, noindex }: Pr
       document.head.appendChild(ld);
     }
     ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
-  }, [lang, title, description, path, faq, noindex]);
+  }, [lang, title, description, path, faq, noindex, alternates, ogType, publishedTime, breadcrumb, extraGraph]);
 
   return null;
 }

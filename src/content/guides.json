@@ -1,0 +1,18 @@
+[
+  {
+    "id": "luxembourg",
+    "path": "guides/france-luxembourg-compter-jours-teletravail",
+    "file": "fr-luxembourg.md",
+    "description": "Le seuil fiscal publié est de 34 jours par période imposable passés physiquement en France et/ou dans un État tiers pour y exercer l’emploi. La sécurité sociale suit un autre compteur, en pourcentage du temps de travail, avec un accord-cadre possible entre 25 % et moins de 50 %. Ces deux seuils ne se compensent pas.",
+    "datePublished": "2026-11-08",
+    "fallbackPath": "employers/luxembourg"
+  },
+  {
+    "id": "geneva",
+    "path": "guides/france-geneve-compter-jours-teletravail",
+    "file": "fr-geneve.md",
+    "description": "Pour un salarié résidant en France et travaillant à Genève, le télétravail effectué en France peut rester imposé en Suisse jusqu’à 40 % du temps d’activité par année civile.",
+    "datePublished": "2026-11-08",
+    "fallbackPath": "employers/geneva"
+  }
+]

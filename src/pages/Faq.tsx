@@ -1,3 +1,4 @@
+import FrenchGuideLinks from '../components/FrenchGuideLinks';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
@@ -31,6 +32,7 @@ export default function Faq() {
             </div>
           ))}
           </div>
+          <FrenchGuideLinks />
         </div>
       </section>
     </>

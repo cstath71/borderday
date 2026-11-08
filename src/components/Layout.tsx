@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getDict, isLang, LANGS, type Lang } from '../i18n';
 import { useAuth } from '../lib/auth';
+import { untranslatedLocalePath } from '../lib/localeSwitch';
 import { setPreferredLang } from '../lib/preferredLang';
 
 export function useLang(): Lang {
@@ -96,7 +97,9 @@ export default function Layout() {
                   const d = sessionStorage.getItem('bd_selected_date');
                   if (d) sessionStorage.setItem('bd_selected_date_keep', d);
                 } catch { /* private mode */ }
-                const path = window.location.pathname.replace(/^\/(en|fr|de|it|nl)(?=\/|$)/, `/${next}`);
+                const path =
+                  untranslatedLocalePath(window.location.pathname, next) ??
+                  window.location.pathname.replace(/^\/(en|fr|de|it|nl)(?=\/|$)/, `/${next}`);
                 const qs = window.location.search || '';
                 window.location.assign((path.startsWith(`/${next}`) ? path : `/${next}/`) + qs);
               }}

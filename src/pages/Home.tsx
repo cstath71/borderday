@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { hasSocialSecurityCounter, hasTaxCounter, listBorderPacks } from '../borders/packs';
+import FrenchGuideLinks from '../components/FrenchGuideLinks';
 import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
@@ -104,6 +105,14 @@ export default function Home() {
           </ol>
         </div>
       </section>
+
+      {lang === 'fr' && (
+        <section className="section">
+          <div className="container">
+            <FrenchGuideLinks />
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container card" id="get-started">

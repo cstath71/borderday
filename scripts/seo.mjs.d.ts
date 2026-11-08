@@ -16,6 +16,14 @@ export const LANGS: string[];
 export const LASTMOD: string;
 export const AI_BOTS: string[];
 export const PUBLIC_PATHS: string[];
+export const FRENCH_GUIDES: {
+  id: string;
+  path: string;
+  file: string;
+  description: string;
+  datePublished: string;
+  fallbackPath: string;
+}[];
 export const NOINDEX_PATHS: string[];
 export const IN_SHORT_LABEL: Record<string, string>;
 export const PAGES: Record<

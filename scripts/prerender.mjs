@@ -6,12 +6,15 @@
  */
 import { mkdirSync, readFileSync, writeFileSync, cpSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { articleJsonLd } from '../src/content/articleSchema.mjs';
+import { markdownToArticle } from '../src/content/articleMarkdown.mjs';
 import {
   BASE,
   BRAND,
   CFG,
   FAQ,
+  FRENCH_GUIDES,
   IN_SHORT_LABEL,
   INDEXNOW_KEY,
   LANGS,
@@ -56,7 +59,14 @@ function writeBoth(rel, content) {
   writeFileSync(pubPath, content);
 }
 
-function hreflangLinks(path) {
+function hreflangLinks(path, singleLang) {
+  if (singleLang) {
+    const href = absUrl(singleLang, path);
+    return [
+      `<link rel="alternate" hreflang="${singleLang}" href="${esc(href)}">`,
+      `<link rel="alternate" hreflang="x-default" href="${esc(href)}">`,
+    ].join('\n    ');
+  }
   const lines = [];
   for (const l of LANGS) {
     lines.push(`<link rel="alternate" hreflang="${l}" href="${esc(absUrl(l, path))}">`);
@@ -65,26 +75,29 @@ function hreflangLinks(path) {
   return lines.join('\n    ');
 }
 
-function headBlock({ lang, path, title, description, noindex }) {
+function headBlock({ lang, path, title, description, noindex, singleLang, ogType, publishedTime }) {
   const canonical = absUrl(lang, path);
   const robots = noindex ? 'noindex, nofollow' : 'index, follow';
   const verify = verificationMetas();
+  const published = publishedTime
+    ? `\n    <meta property="article:published_time" content="${esc(publishedTime)}">\n    <meta property="article:modified_time" content="${esc(publishedTime)}">`
+    : '';
   return `
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}">
     <meta name="robots" content="${robots}">
     <link rel="canonical" href="${esc(canonical)}">
-    ${hreflangLinks(path)}
+    ${hreflangLinks(path, singleLang)}
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="${esc(ogType || 'website')}">
     <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:image" content="${esc(BASE + CFG.og_image)}">
     <meta property="og:locale" content="${lang === 'en' ? 'en_US' : lang === 'fr' ? 'fr_FR' : lang === 'de' ? 'de_DE' : lang === 'nl' ? 'nl_BE' : 'it_IT'}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${esc(title)}">
     <meta name="twitter:description" content="${esc(description)}">
-    <meta name="twitter:image" content="${esc(BASE + CFG.og_image)}">
+    <meta name="twitter:image" content="${esc(BASE + CFG.og_image)}">${published}
     ${verify ? verify + '\n    ' : ''}`.trimEnd();
 }
 
@@ -132,12 +145,80 @@ function graphFor(lang, path) {
   return graph;
 }
 
-function injectHtml(template, { lang, path, title, description, noindex, bodyHtml, graph }) {
+const FRENCH_MONTHS = [
+  'janvier',
+  'février',
+  'mars',
+  'avril',
+  'mai',
+  'juin',
+  'juillet',
+  'août',
+  'septembre',
+  'octobre',
+  'novembre',
+  'décembre',
+];
+
+function frenchLongDate(iso) {
+  const [year, month, day] = String(iso).split('-');
+  return `${Number(day)} ${FRENCH_MONTHS[Number(month) - 1]} ${year}`;
+}
+
+export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
+  const title = `${h1} — BorderDay`;
+  const head = headBlock({
+    lang: 'fr',
+    path: guide.path,
+    title,
+    description: guide.description,
+    noindex: false,
+    singleLang: 'fr',
+    ogType: 'article',
+    publishedTime: guide.datePublished,
+  });
+  const crumbs = [
+    ['Accueil', ''],
+    ['Particuliers', 'for-individuals'],
+    [h1, guide.path],
+  ];
+  const crumbHtml = crumbs
+    .map(([name, p], index, arr) => {
+      if (index === arr.length - 1) return `<li aria-current="page">${esc(name)}</li>`;
+      return `<li><a href="${esc(absUrl('fr', p))}">${esc(name)}</a></li>`;
+    })
+    .join('');
+  const body = `
+    <article class="bd-prerender guide-article" data-bd-prerender="1">
+      <header class="hero article-hero">
+        <div class="container article-wrap">
+          <nav class="crumbs" aria-label="${esc(PRERENDER_UI.fr.breadcrumb)}"><ol>${crumbHtml}</ol></nav>
+          <p class="article-kicker"><time datetime="${esc(guide.datePublished)}">${esc(frenchLongDate(guide.datePublished))}</time></p>
+          <h1>${esc(h1)}</h1>
+        </div>
+      </header>
+      <div class="section article-section">
+        <div class="container article-wrap article-prose">
+          ${bodyHtml}
+        </div>
+      </div>
+    </article>`;
+  const graph = [
+    organizationLd(),
+    websiteLd(),
+    softwareApplicationLd(),
+    breadcrumbLd('fr', crumbs),
+    articleJsonLd(BASE, guide, h1),
+  ];
+  return { title, head, body, graph };
+}
+
+function injectHtml(template, { lang, path, title, description, noindex, bodyHtml, graph, singleLang, ogType, publishedTime }) {
   let html = template;
   html = html.replace(/<html\s+lang="[^"]*"/, `<html lang="${lang}"`);
   // Drop the stock <title>…</title>; we inject a full SEO head block.
   html = html.replace(/<title>[^<]*<\/title>\s*/i, '');
-  const head = headBlock({ lang, path, title, description, noindex });
+  const head = headBlock({ lang, path, title, description, noindex, singleLang, ogType, publishedTime });
   const ld = noindex ? '' : ldScript(graph);
   html = html.replace('</head>', `    ${head}\n    ${ld}\n  </head>`);
   if (bodyHtml) {
@@ -236,9 +317,31 @@ function main() {
     );
   }
 
+  for (const guide of FRENCH_GUIDES) {
+    const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
+    const { h1, bodyHtml } = markdownToArticle(markdown);
+    const parts = frenchGuideDocumentParts(guide, h1, bodyHtml);
+    const html = injectHtml(template, {
+      lang: 'fr',
+      path: guide.path,
+      title: parts.title,
+      description: guide.description,
+      noindex: false,
+      bodyHtml: parts.body,
+      graph: parts.graph,
+      singleLang: 'fr',
+      ogType: 'article',
+      publishedTime: guide.datePublished,
+    });
+    const out = join(DIST, pageFile('fr', guide.path));
+    mkdirSync(dirname(out), { recursive: true });
+    writeFileSync(out, html);
+  }
+
   console.log(
-    `prerender: ${PUBLIC_PATHS.length * LANGS.length} public + ${NOINDEX_PATHS.length * LANGS.length} noindex shells, robots/sitemap/llms/IndexNow key`,
+    `prerender: ${PUBLIC_PATHS.length * LANGS.length} public + ${FRENCH_GUIDES.length} french guides + ${NOINDEX_PATHS.length * LANGS.length} noindex shells, robots/sitemap/llms/IndexNow key`,
   );
 }
 
-main();
+const isMain = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isMain) main();

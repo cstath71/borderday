@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import FrenchGuideLinks from '../../components/FrenchGuideLinks';
 import Seo from '../../components/Seo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
@@ -103,6 +104,7 @@ export default function EmployersLuxembourg() {
             ))}
           </ul>
           <p className="muted">{p.disclaimer}</p>
+          <FrenchGuideLinks ids={['luxembourg']} heading="Pour les salariés qui résident en France" />
           <div className="hero-cta" style={{ marginTop: '1.5rem' }}>
             <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
               {p.ctaPrimary}

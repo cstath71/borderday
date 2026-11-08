@@ -13,6 +13,7 @@ export const BRAND = CFG.brand;
 export const INDEXNOW_KEY = CFG.indexnow_key;
 export const LANGS = ['en', 'fr', 'de', 'it', 'nl'];
 export const LASTMOD = CFG.lastmod;
+export const FRENCH_GUIDES = JSON.parse(readFileSync(join(ROOT, 'src/content/guides.json'), 'utf8'));
 
 export const IN_SHORT_LABEL = {
   en: 'In short',
@@ -1171,6 +1172,15 @@ export function sitemapXml() {
       out += '  </url>\n';
     }
   }
+  for (const guide of FRENCH_GUIDES) {
+    const loc = absUrl('fr', guide.path);
+    out += '  <url>\n';
+    out += `    <loc>${esc(loc)}</loc>\n`;
+    out += `    <lastmod>${esc(guide.datePublished)}</lastmod>\n`;
+    out += `    <xhtml:link rel="alternate" hreflang="fr" href="${esc(loc)}"/>\n`;
+    out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(loc)}"/>\n`;
+    out += '  </url>\n';
+  }
   out += '</urlset>\n';
   return out;
 }
@@ -1448,6 +1458,8 @@ export function llmsTxt() {
 - ${BASE}/en/terms/ — Terms and legal notice
 - ${BASE}/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - ${BASE}/en/cancel/ — Cancel subscription
+- ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'luxembourg').path)} — French only, no translated version: how a France resident employed in Luxembourg counts telework days
+- ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'geneva').path)} — French only, no translated version: how a France resident employed in Geneva counts telework and temporary missions
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

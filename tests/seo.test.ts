@@ -7,6 +7,7 @@ import {
   BRAND,
   CFG,
   FAQ,
+  FRENCH_GUIDES,
   INDEXNOW_KEY,
   LANGS,
   LASTMOD,
@@ -55,7 +56,7 @@ describe('SEO generators', () => {
     expect(xml).toContain('xmlns:xhtml');
     expect(xml).toContain(`<lastmod>${LASTMOD}</lastmod>`);
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-    expect(locs).toHaveLength(PUBLIC_PATHS.length * LANGS.length);
+    expect(locs).toHaveLength(PUBLIC_PATHS.length * LANGS.length + FRENCH_GUIDES.length);
     for (const path of PUBLIC_PATHS) {
       for (const lang of LANGS) {
         const loc = absUrl(lang, path);

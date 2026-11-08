@@ -751,4 +751,16 @@
     <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/employers/luxembourg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/employers/luxembourg/"/>
   </url>
+  <url>
+    <loc>https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/"/>
+  </url>
 </urlset>

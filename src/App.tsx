@@ -55,6 +55,9 @@ export default function App() {
         <Route path="guides" element={<GuidesHub />} />
         <Route path="guides/france-luxembourg-compter-jours-teletravail" element={<FrenchGuide id="luxembourg" />} />
         <Route path="guides/france-geneve-compter-jours-teletravail" element={<FrenchGuide id="geneva" />} />
+        <Route path="guides/france-bale-compter-jours-teletravail" element={<FrenchGuide id="bale" />} />
+        <Route path="guides/deutschland-schweiz-grenzgaenger-tage-zaehlen" element={<FrenchGuide id="deCh" />} />
+        <Route path="guides/italia-ticino-contare-giorni-telelavoro" element={<FrenchGuide id="ticinoIt" />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />

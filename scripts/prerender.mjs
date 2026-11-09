@@ -9,13 +9,14 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { articleJsonLd } from '../src/content/articleSchema.mjs';
 import { markdownToArticle } from '../src/content/articleMarkdown.mjs';
 import { GUIDE_FAQ } from '../src/content/guideFaq.mjs';
-import { FRENCH_HUB } from '../src/content/guideHub.mjs';
+import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
 import {
   BASE,
   BRAND,
   CFG,
   FAQ,
-  FRENCH_GUIDES,
+  ALL_GUIDES,
+  GUIDE_HUB_LANGS,
   IN_SHORT_LABEL,
   INDEXNOW_KEY,
   LANGS,
@@ -145,57 +146,58 @@ function graphFor(lang, path, extras = []) {
   return graph;
 }
 
-const FRENCH_MONTHS = [
-  'janvier',
-  'février',
-  'mars',
-  'avril',
-  'mai',
-  'juin',
-  'juillet',
-  'août',
-  'septembre',
-  'octobre',
-  'novembre',
-  'décembre',
-];
+const GUIDE_MONTHS = {
+  fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+  de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+  it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
+};
 
-function frenchLongDate(iso) {
+const GUIDE_UI = {
+  fr: { home: 'Accueil', guides: 'Guides' },
+  de: { home: 'Start', guides: 'Leitfäden' },
+  it: { home: 'Home', guides: 'Guide' },
+};
+
+function guideLongDate(lang, iso) {
   const [year, month, day] = String(iso).split('-');
-  return `${Number(day)} ${FRENCH_MONTHS[Number(month) - 1]} ${year}`;
+  const name = GUIDE_MONTHS[lang][Number(month) - 1];
+  if (lang === 'de') return `${Number(day)}. ${name} ${year}`;
+  return `${Number(day)} ${name} ${year}`;
 }
 
 export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
+  const lang = guide.lang || 'fr';
+  const ui = GUIDE_UI[lang];
   const title = guide.title || `${h1} — BorderDay`;
   const head = headBlock({
-    lang: 'fr',
+    lang,
     path: guide.path,
     title,
     description: guide.description,
     noindex: false,
-    singleLang: 'fr',
+    singleLang: lang,
     ogType: 'article',
     publishedTime: guide.datePublished,
     modifiedTime: guide.dateModified || guide.datePublished,
     ogImage: guide.ogImage,
   });
   const crumbs = [
-    ['Accueil', ''],
-    ['Guides', 'guides'],
+    [ui.home, ''],
+    [ui.guides, 'guides'],
     [h1, guide.path],
   ];
   const crumbHtml = crumbs
     .map(([name, p], index, arr) => {
       if (index === arr.length - 1) return `<li aria-current="page">${esc(name)}</li>`;
-      return `<li><a href="${esc(absUrl('fr', p))}">${esc(name)}</a></li>`;
+      return `<li><a href="${esc(absUrl(lang, p))}">${esc(name)}</a></li>`;
     })
     .join('');
   const body = `
     <article class="bd-prerender guide-article" data-bd-prerender="1">
       <header class="hero article-hero">
         <div class="container article-wrap">
-          <nav class="crumbs" aria-label="${esc(PRERENDER_UI.fr.breadcrumb)}"><ol>${crumbHtml}</ol></nav>
-          <p class="article-kicker"><time datetime="${esc(guide.datePublished)}">${esc(frenchLongDate(guide.datePublished))}</time></p>
+          <nav class="crumbs" aria-label="${esc(PRERENDER_UI[lang].breadcrumb)}"><ol>${crumbHtml}</ol></nav>
+          <p class="article-kicker"><time datetime="${esc(guide.datePublished)}">${esc(guideLongDate(lang, guide.datePublished))}</time></p>
           <h1>${esc(h1)}</h1>
         </div>
       </header>
@@ -208,11 +210,11 @@ export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
   const faq = GUIDE_FAQ[guide.id];
   const graph = [
     organizationLd(),
-    websiteLd('fr'),
-    softwareApplicationLd('fr'),
-    breadcrumbLd('fr', crumbs),
+    websiteLd(lang),
+    softwareApplicationLd(lang),
+    breadcrumbLd(lang, crumbs),
     articleJsonLd(BASE, { ...guide, markdown: guide.markdown }, h1),
-    ...(faq ? [faqLd('fr', faq)] : []),
+    ...(faq ? [faqLd(lang, faq)] : []),
   ];
   return { title, head, body, graph };
 }
@@ -350,80 +352,84 @@ async function main() {
     );
   }
 
-  {
-    const hubUrl = `/fr/${FRENCH_HUB.path}/`;
+  for (const lang of GUIDE_HUB_LANGS) {
+    const hub = HUB_BY_LANG[lang];
+    const ui = GUIDE_UI[lang];
+    const guides = ALL_GUIDES.filter((guide) => (guide.lang || 'fr') === lang);
+    const hubUrl = `/${lang}/${hub.path}/`;
     const itemList = {
       '@type': 'ItemList',
-      itemListElement: FRENCH_GUIDES.map((guide, index) => {
+      itemListElement: guides.map((guide, index) => {
         const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
         const { h1 } = markdownToArticle(markdown);
-        const brief = (markdown.match(/\*\*En bref\s*:\*\*\s*(.+)/) || [])[1]?.replace(/\*\*/g, '').trim() || '';
+        const brief = (markdown.match(hub.briefRe) || [])[1]?.replace(/\*\*/g, '').trim() || '';
         return {
           '@type': 'ListItem',
           position: index + 1,
           name: h1,
-          url: absUrl('fr', guide.path),
+          url: absUrl(lang, guide.path),
           description: brief,
         };
       }),
     };
     const html = injectHtml(template, {
-      lang: 'fr',
-      path: FRENCH_HUB.path,
-      title: FRENCH_HUB.title,
-      description: FRENCH_HUB.description,
+      lang,
+      path: hub.path,
+      title: hub.title,
+      description: hub.description,
       noindex: false,
       bodyHtml: renderedBody(renderRoute, hubUrl),
-      graph: graphFor('fr', FRENCH_HUB.path, [
-        breadcrumbLd('fr', [
-          ['Accueil', ''],
-          ['Guides', 'guides'],
+      graph: graphFor(lang, hub.path, [
+        breadcrumbLd(lang, [
+          [ui.home, ''],
+          [ui.guides, 'guides'],
         ]),
         {
           '@type': 'CollectionPage',
-          '@id': `${BASE}/fr/guides/#collection`,
-          name: FRENCH_HUB.h1,
-          description: FRENCH_HUB.description,
-          inLanguage: 'fr',
-          url: `${BASE}/fr/guides/`,
+          '@id': `${BASE}/${lang}/guides/#collection`,
+          name: hub.h1,
+          description: hub.description,
+          inLanguage: lang,
+          url: `${BASE}/${lang}/guides/`,
           mainEntity: itemList,
         },
         itemList,
       ]),
-      singleLang: 'fr',
+      singleLang: lang,
     });
-    const out = join(DIST, pageFile('fr', FRENCH_HUB.path));
+    const out = join(DIST, pageFile(lang, hub.path));
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);
   }
 
-  for (const guide of FRENCH_GUIDES) {
+  for (const guide of ALL_GUIDES) {
+    const lang = guide.lang || 'fr';
     const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
     const { h1 } = markdownToArticle(markdown);
     const withMarkdown = { ...guide, markdown, h1 };
     const parts = frenchGuideDocumentParts(withMarkdown, h1, '');
     const html = injectHtml(template, {
-      lang: 'fr',
+      lang,
       path: guide.path,
       title: parts.title,
       description: guide.description,
       noindex: false,
-      bodyHtml: renderedBody(renderRoute, `/fr/${guide.path}/`),
+      bodyHtml: renderedBody(renderRoute, `/${lang}/${guide.path}/`),
       graph: parts.graph,
-      singleLang: 'fr',
+      singleLang: lang,
       ogType: 'article',
       publishedTime: guide.datePublished,
       modifiedTime: guide.dateModified || guide.datePublished,
       ogImage: guide.ogImage,
     });
-    const out = join(DIST, pageFile('fr', guide.path));
+    const out = join(DIST, pageFile(lang, guide.path));
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);
-    writeBoth(pageFile('fr', guide.path).replace(/index\.html$/, 'index.md'), markdown.endsWith('\n') ? markdown : `${markdown}\n`);
+    writeBoth(pageFile(lang, guide.path).replace(/index\.html$/, 'index.md'), markdown.endsWith('\n') ? markdown : `${markdown}\n`);
   }
 
   console.log(
-    `prerender: ${PUBLIC_PATHS.length * LANGS.length} public + 1 french hub + ${FRENCH_GUIDES.length} french guides + ${NOINDEX_PATHS.length * LANGS.length} noindex shells, robots/sitemap/llms/IndexNow key`,
+    `prerender: ${PUBLIC_PATHS.length * LANGS.length} public + ${GUIDE_HUB_LANGS.length} guide hubs + ${ALL_GUIDES.length} guides + ${NOINDEX_PATHS.length * LANGS.length} noindex shells, robots/sitemap/llms/IndexNow key`,
   );
 }
 

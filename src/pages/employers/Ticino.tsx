@@ -4,6 +4,7 @@ import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
 import { publicPath } from '../../lib/publicPath';
 import { employerFaqPairs } from '../../seo/visibleFaq';
+import { ResidentGuideLink } from '../../components/FrenchGuideLinks';
 import EmployerRelatedLinks from './RelatedLinks';
 
 /** Titles match pack SRC entries in src/borders/packs.ts (ticino_it). */
@@ -17,8 +18,8 @@ const SOURCES = [
     url: 'https://www.fedlex.admin.ch/eli/oc/2026/104/it',
   },
   {
-    title: 'FSIO (BSV/OFAS/UFAS) — release of 13 Feb 2026: Switzerland–Italy home office rules in force',
-    url: 'https://www.bsv.admin.ch/en/newnsb/KIyFJwwqspqaOcHDaT7u0',
+    title: 'SIF / EFD — release of 13 Feb 2026: Switzerland–Italy home office rules in force',
+    url: 'https://www.efd.admin.ch/en/newnsb/KIyFJwwqspqaOcHDaT7u0',
   },
   {
     title: 'Belgian FPS — framework agreement, explanatory memorandum (25% and 50%)',
@@ -79,6 +80,7 @@ export default function EmployersTicino() {
             ))}
           </ul>
           <p className="muted">{p.disclaimer}</p>
+          <ResidentGuideLink id="ticinoIt" heading="Per chi vive in Italia" />
           <div className="hero-cta" style={{ marginTop: '1.5rem' }}>
             <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}

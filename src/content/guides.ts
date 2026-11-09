@@ -1,15 +1,21 @@
 import ge from './articles/fr-geneve.md?raw';
 import lu from './articles/fr-luxembourg.md?raw';
+import bale from './articles/fr-bale.md?raw';
+import deCh from './articles/de-basel.md?raw';
+import ticinoIt from './articles/it-ticino.md?raw';
 import { markdownToArticle } from './articleMarkdown.mjs';
 import { articleJsonLd } from './articleSchema.mjs';
 import meta from './guides.json';
 
 export const SITE = 'https://borderday.com';
 
-export type GuideId = 'luxembourg' | 'geneva';
+export type GuideLang = 'fr' | 'de' | 'it';
+
+export type GuideId = 'luxembourg' | 'geneva' | 'bale' | 'deCh' | 'ticinoIt';
 
 export interface GuideMeta {
   id: GuideId;
+  lang: GuideLang;
   path: string;
   file: string;
   title: string;
@@ -25,6 +31,9 @@ export interface GuideMeta {
 const RAW: Record<GuideId, string> = {
   luxembourg: lu,
   geneva: ge,
+  bale,
+  deCh,
+  ticinoIt,
 };
 
 export interface Guide extends GuideMeta {
@@ -39,6 +48,10 @@ export const GUIDES: Guide[] = (meta as GuideMeta[]).map((guide) => {
   return { ...guide, ...parsed, markdown };
 });
 
+export function guidesFor(lang: string): Guide[] {
+  return GUIDES.filter((guide) => guide.lang === lang);
+}
+
 export function guideById(id: GuideId): Guide {
   const guide = GUIDES.find((item) => item.id === id);
   if (!guide) throw new Error(`Unknown guide ${id}`);
@@ -49,24 +62,59 @@ export function articleLd(guide: Guide) {
   return articleJsonLd(SITE, guide, guide.h1);
 }
 
-const MONTHS = [
-  'janvier',
-  'février',
-  'mars',
-  'avril',
-  'mai',
-  'juin',
-  'juillet',
-  'août',
-  'septembre',
-  'octobre',
-  'novembre',
-  'décembre',
-];
+const MONTHS: Record<GuideLang, string[]> = {
+  fr: [
+    'janvier',
+    'février',
+    'mars',
+    'avril',
+    'mai',
+    'juin',
+    'juillet',
+    'août',
+    'septembre',
+    'octobre',
+    'novembre',
+    'décembre',
+  ],
+  de: [
+    'Januar',
+    'Februar',
+    'März',
+    'April',
+    'Mai',
+    'Juni',
+    'Juli',
+    'August',
+    'September',
+    'Oktober',
+    'November',
+    'Dezember',
+  ],
+  it: [
+    'gennaio',
+    'febbraio',
+    'marzo',
+    'aprile',
+    'maggio',
+    'giugno',
+    'luglio',
+    'agosto',
+    'settembre',
+    'ottobre',
+    'novembre',
+    'dicembre',
+  ],
+};
+
+export function guideLongDate(lang: string, iso: string): string {
+  const [year, month, day] = iso.split('-');
+  const name = MONTHS[lang as GuideLang]?.[Number(month) - 1];
+  if (!name || !day || !year) return iso;
+  if (lang === 'de') return `${Number(day)}. ${name} ${year}`;
+  return `${Number(day)} ${name} ${year}`;
+}
 
 export function frenchLongDate(iso: string): string {
-  const [year, month, day] = iso.split('-');
-  const name = MONTHS[Number(month) - 1];
-  if (!name || !day || !year) return iso;
-  return `${Number(day)} ${name} ${year}`;
+  return guideLongDate('fr', iso);
 }

@@ -10,7 +10,7 @@ import {
   FRENCH_GUIDES,
   INDEXNOW_KEY,
   LANGS,
-  LASTMOD,
+  SITEMAP_PATHS,
   NOINDEX_PATHS,
   PAGE_FAQS,
   PAGES,
@@ -51,20 +51,25 @@ describe('SEO generators', () => {
     expect(t).not.toMatch(OWNER);
   });
 
-  it('sitemap lists every public localized URL with hreflang and lastmod', () => {
+  it('sitemap lists marketing, employer, pricing, FAQ, individuals and guides', () => {
     const xml = sitemapXml();
     expect(xml).toContain('xmlns:xhtml');
-    expect(xml).toContain(`<lastmod>${LASTMOD}</lastmod>`);
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-    expect(locs).toHaveLength(PUBLIC_PATHS.length * LANGS.length + FRENCH_GUIDES.length);
-    for (const path of PUBLIC_PATHS) {
+    expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + 1 + FRENCH_GUIDES.length);
+    for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
         const loc = absUrl(lang, path);
         expect(locs).toContain(loc);
         expect(xml).toContain(`hreflang="${lang}" href="${loc}"`);
+        const block = xml.split('<url>').find((part) => part.includes(`<loc>${loc}</loc>`));
+        expect(block).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
       }
       expect(xml).toContain(`hreflang="x-default" href="${absUrl('en', path)}"`);
     }
+    expect(locs).toContain(`${BASE}/fr/guides/`);
+    expect(xml).not.toContain(`${BASE}/en/privacy/`);
+    expect(xml).not.toContain(`${BASE}/fr/company/signup/`);
+    expect(xml).not.toContain(`${BASE}/en/terms/`);
     expect(xml).not.toMatch(OWNER);
   });
 
@@ -285,7 +290,8 @@ describe('SEO artifacts on disk', () => {
         expect(html).toContain('application/ld+json');
         expect(html).toContain('id="summary"');
         expect(html).toContain('/og.png');
-        expect(html).not.toMatch(/PrimeLogic|Stathopoulos/i);
+        const legal = ['privacy', 'terms', 'dpa'].includes(path);
+        if (!legal) expect(html).not.toMatch(/PrimeLogic|Stathopoulos/i);
         const ld = html.match(/application\/ld\+json">([^<]+)</)?.[1];
         expect(ld).toBeTruthy();
         const parsed = JSON.parse(ld!);

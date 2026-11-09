@@ -1,25 +1,18 @@
 import FrenchGuideLinks from '../components/FrenchGuideLinks';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
+import RoutesCovered from '../components/RoutesCovered';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
+import { faqPagePairs } from '../seo/visibleFaq';
 
 export default function Faq() {
   const lang = useLang();
   const d = getDict(lang);
-  const items = [
-    [d.faq.q1, d.faq.a1],
-    [d.faq.q2, d.faq.a2],
-    [d.faq.q3, d.faq.a3],
-    [d.faq.q4, d.faq.a4],
-    [d.faq.q5, d.faq.a5],
-    [d.faq.q6, d.faq.a6],
-    [d.faq.q7, d.faq.a7],
-    [d.faq.q8, d.faq.a8],
-  ] as const;
+  const items = faqPagePairs(lang);
 
   return (
     <>
-      <Seo lang={lang} title={`${d.faq.title} — BorderDay`} description={d.meta.description} path="faq" faq={items} />
+      <PublicSeo path="faq" faq={items} />
       <section className="section">
         <div className="container prose">
           <h1>{d.faq.title}</h1>
@@ -35,6 +28,7 @@ export default function Faq() {
           <FrenchGuideLinks />
         </div>
       </section>
+      <RoutesCovered />
     </>
   );
 }

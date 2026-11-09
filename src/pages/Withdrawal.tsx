@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import RequestForm from '../components/RequestForm';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
+import { publicPath } from '../lib/publicPath';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
@@ -18,11 +19,11 @@ export default function Withdrawal() {
 
   return (
     <>
-      <Seo lang={lang} title={`${w.title} — BorderDay`} description={w.intro} path="withdrawal" />
+      <PublicSeo path="withdrawal" />
       <section className="section">
         <div className="container" style={{ maxWidth: 640 }}>
           <h1>{w.title}</h1>
-          <p>{w.intro}</p>
+          <p id="summary">{w.intro}</p>
           <RequestForm
             d={d}
             lang={lang}
@@ -47,7 +48,7 @@ export default function Withdrawal() {
           <p>{w.how}</p>
           <p>{w.linkNote}</p>
           <p>
-            {w.scopeNote} <Link to={`/${lang}/terms`}>{d.nav.terms}</Link>
+            {w.scopeNote} <Link to={publicPath(lang, 'terms')}>{d.nav.terms}</Link>
           </p>
         </div>
       </section>

@@ -13,6 +13,7 @@ const de: Dict = {
     app: 'App',
     pricing: 'Preise',
     faq: 'FAQ',
+    guides: 'Leitfäden',
     privacy: 'Datenschutz',
     disclaimer: 'Rechtlicher Hinweis',
     terms: 'Nutzungsbedingungen & Impressum',
@@ -91,6 +92,10 @@ const de: Dict = {
     chipTaxNo: 'Steuer: kein Zähler',
     chipTaxNoDayLimit: 'Steuer: keine Tagesgrenze',
     chipSsYes: 'Sozialversicherung: ja',
+    routesCoveredTitle: 'Abgedeckte Grenzrouten',
+    routesRoute: 'Route',
+    routesTax: 'Steuerzähler',
+    routesSs: 'Sozialversicherungszähler',
   },
   borders: {
     geneva_fr:
@@ -1016,6 +1021,9 @@ const de: Dict = {
 
   employersHub: {
     title: 'Arbeitgeberseiten',
+    byRegionTitle: 'Arbeitgeber nach Region',
+    frenchGuideNote: 'Ein französischer Leitfaden für Personal mit Wohnsitz in Frankreich ist verfügbar.',
+    frenchGuideLink: 'Französischer Leitfaden',
     linkTicino: 'Arbeitgeber Tessin (IT→CH)',
     linkGeneva: 'Arbeitgeber Genf (FR→CH)',
     linkLuxembourg: 'Arbeitgeber Luxemburg (FR/BE/DE→LU)',
@@ -1030,7 +1038,7 @@ const de: Dict = {
     agreementTitle: 'Abkommen Italien–Schweiz (2020 / Protokoll 2023)',
     agreementBody:
       'Das Abkommen Italien–Schweiz vom 23. Dezember 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) erfasst definierte Grenzzonen (CH: Graubünden, Tessin, Wallis; IT: Lombardei, Piemont, Aostatal, Provinz Bozen) mit Wohnsitz- und Arbeitsortbedingungen in Art. 2(b). Das Telearbeits-Protokoll ist als Fedlex RU 2026 104 veröffentlicht; das BSV nennt Inkrafttreten am 9. Februar 2026 mit Anwendung ab 1. Januar 2024, auch für Übergangsregime. Passung mit Berater oder Behörde prüfen, bevor Sie sich auf diese Zähler stützen.',
-    thresholdsTitle: 'Was das Pack ticino_it heute zählt',
+    thresholdsTitle: 'Was BorderDay für Personal mit Wohnsitz in Italien zählt',
     thresholdTax25:
       'Steuer — Telearbeit am Wohnsitz: höchstens 25% der unselbständigen Tätigkeit als Telearbeit zu Hause in Italien im Kalenderjahr, ohne Änderung des betroffene Personstatus für diese Telearbeit (Protokoll / Accordo). Co-Working ist im Protokollwortlaut nicht bestätigt — bei der Behörde nachfragen.',
     thresholdNonreturn45:
@@ -1042,7 +1050,7 @@ const de: Dict = {
     howTitle: 'Wie BorderDay HR hilft',
     howBody:
       'Mitarbeitende einladen; jede Person wählt die Route Tessin←Italien und erfasst nur Tagesarten (Telearbeit / vor Ort / Reise / arbeitsfrei) plus Übernachtung auswärts wenn relevant. HR sieht die 25%-Steuerquote, den 45-Tage-Nicht-Rückkehrzähler und Sozialversicherungsbänder, mit CSV-Export. Kein GPS. Unternehmen: 5 € je aktive mitarbeitende Person/Monat (Minimum 39 €), zzgl. MWST; 7-Tage-Test, Karte erforderlich.',
-    sourcesTitle: 'Offizielle Quellen (wie Pack ticino_it)',
+    sourcesTitle: 'Amtliche Quellen, die BorderDay verwendet',
     disclaimer:
       'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit qualifiziertem Berater oder zuständiger Behörde prüfen.',
     ctaPrimary: 'Unternehmenskonto erstellen',
@@ -1070,7 +1078,7 @@ const de: Dict = {
     heroTitle: 'Arbeitgeber in Genf: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich',
     inShort:
       'BorderDay hilft Genfer Arbeitgebern, Telearbeit, Vor-Ort- und Reisetage für Personen zu erfassen, die in Frankreich wohnen und in der Schweiz arbeiten. Steuer: bis 40% Telearbeit und 10 temporäre Einsatztage (ge.ch / ESTV). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Arbeitgeberpflicht: erste AFC-Übermittlung der Telearbeitsquote laut ge.ch für Januar 2027 (Daten 2026). Keine Steuer- oder Rechtsberatung.',
-    thresholdsTitle: 'Was das Pack geneva_fr heute zählt',
+    thresholdsTitle: 'Was BorderDay für Personal mit Wohnsitz in Frankreich zählt',
     thresholdTax40:
       'Steuer — Telearbeitsanteil: bis 40% der Arbeitszeit im Wohnstaat (inklusive). Darüber kann die Besteuerung in Frankreich ab dem ersten Tag greifen (ge.ch).',
     thresholdMissions10:
@@ -1082,7 +1090,7 @@ const de: Dict = {
     howTitle: 'Wie BorderDay HR hilft',
     howBody:
       'Mitarbeitende einladen; jede Person wählt die Route Genf←Frankreich und erfasst nur Tagesarten. HR sieht dieselben Steuer- und Sozialversicherungszähler, Warnungen und CSV-Export. Kein GPS. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; 7 Tage Test, Karte erforderlich.',
-    sourcesTitle: 'Offizielle Quellen (wie im Produkt-Pack)',
+    sourcesTitle: 'Amtliche Quellen, die BorderDay verwendet',
     disclaimer:
       'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit einer Fachperson oder der zuständigen Behörde prüfen.',
     ctaPrimary: 'Unternehmenskonto erstellen',
@@ -1127,7 +1135,7 @@ const de: Dict = {
     howTitle: 'Wie BorderDay LU-Arbeitgebern hilft',
     howBody:
       'Ein Unternehmenskonto für Mitarbeitende mit Wohnsitz in FR, BE oder DE. Jede Person wählt ihre Grenzroute und erfasst Tagesarten; HR verfolgt das 34-Tage-Tempo und die Sozialversicherungsbänder, mit CSV-Export. Kein GPS. Unternehmen: 5 € je aktive Person/Monat (Minimum 39 €), zzgl. MWST; 7-Tage-Test, Karte erforderlich.',
-    sourcesTitle: 'Offizielle Quellen (Packs luxembourg_fr / _be / _de)',
+    sourcesTitle: 'Amtliche Quellen, die BorderDay verwendet',
     disclaimer:
       'BorderDay ist ein Erfassungs- und Erinnerungstool. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Immer mit einer Fachperson oder der zuständigen Behörde prüfen.',
     ctaPrimary: 'Unternehmenskonto erstellen',

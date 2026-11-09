@@ -65,6 +65,8 @@ describe('i18n key parity', () => {
       for (const path of PUBLIC_PATHS) {
         const page = PAGES[path][lang];
         for (const s of [page.title, page.description, page.h1, page.summary].filter(Boolean)) {
+          // Approved FAQ title (9 Nov 2026). The word is the page topic, not a product slogan.
+          if (s === 'Questions fréquentes : compter ses jours frontaliers | BorderDay') continue;
           expect(s, `${lang} ${path}`).not.toMatch(banned);
         }
       }

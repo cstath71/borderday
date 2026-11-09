@@ -11,6 +11,7 @@ const nl: Dict = {
     app: "App",
     pricing: "Prijzen",
     faq: "FAQ",
+    guides: "Gidsen",
     privacy: "Privacy",
     disclaimer: "Disclaimer",
     terms: "Voorwaarden & wettelijke vermeldingen",
@@ -77,6 +78,10 @@ const nl: Dict = {
     chipTaxNo: "Belasting: geen teller",
     chipTaxNoDayLimit: "Belasting: geen daglimiet",
     chipSsYes: "Sociale zekerheid: ja",
+    routesCoveredTitle: "Gedekte routes",
+    routesRoute: "Grensroute",
+    routesTax: "Belastingteller",
+    routesSs: "Socialezekerheidsteller",
   },
   borders: {
     geneva_fr: "Genève en andere niet-1983-kantons ← Frankrijk",
@@ -822,6 +827,9 @@ const nl: Dict = {
 
   employersHub: {
     title: 'Werkgeverspagina’s',
+    byRegionTitle: 'Werkgevers per regio',
+    frenchGuideNote: 'Er is een Franse gids voor personeel dat in Frankrijk woont.',
+    frenchGuideLink: 'Franse gids',
     linkTicino: 'Werkgevers Ticino (IT→CH)',
     linkGeneva: 'Werkgevers Genève (FR→CH)',
     linkLuxembourg: 'Werkgevers Luxemburg (FR/BE/DE→LU)',
@@ -836,7 +844,7 @@ const nl: Dict = {
     agreementTitle: 'Akkoord Italië–Zwitserland (2020 / protocol 2023)',
     agreementBody:
       'Het akkoord Italië–Zwitserland van 23 december 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) dekt vastgelegde grenszones (CH: Graubünden, Ticino, Wallis; IT: Lombardije, Piëmont, Valle d’Aosta, provincie Bolzano), met woon- en werkplaatsvoorwaarden in Art. 2(b). Het telewerkprotocol is gepubliceerd als Fedlex RU 2026 104; FSIO noemt inwerkingtreding op 9 februari 2026 met toepassing vanaf 1 januari 2024, ook voor overgangsregime. Controleer passendheid met adviseur of autoriteit voordat u op deze tellers steunt.',
-    thresholdsTitle: 'Wat pack ticino_it vandaag telt',
+    thresholdsTitle: 'Wat BorderDay telt voor personeel dat in Italië woont',
     thresholdTax25:
       'Fiscaliteit — telewerk aan de woonplaats: hoogstens 25% van de loondienstactiviteit als telewerk thuis in Italië in een kalenderjaar, zonder wijziging van grenswerkersstatus voor dat telewerk (protocol / Accordo). Co-working is in de protocoltekst niet bevestigd — vraag het na bij uw autoriteit.',
     thresholdNonreturn45:
@@ -848,7 +856,7 @@ const nl: Dict = {
     howTitle: 'Hoe BorderDay HR helpt',
     howBody:
       'Nodig medewerkers uit; ieder kiest de route Ticino←Italië en registreert alleen dagtypes (telewerk / ter plaatse / reis / niet-werkend) plus overnachting elders wanneer relevant. HR ziet de fiscale 25%-quote, de 45-dagen-niet-terugkeerteller en socialezekerheidsbanden, met CSV-export. Geen GPS. Bedrijfsplan: €5 per actieve medewerker per maand (minimum €39), excl. btw; 7 dagen proef, kaart verplicht.',
-    sourcesTitle: 'Officiële bronnen (zelfde als pack ticino_it)',
+    sourcesTitle: 'Officiële bronnen die BorderDay gebruikt',
     disclaimer:
       'BorderDay is een registratie- en herinneringstool. Drempels komen uit openbare officiële bronnen en kunnen wijzigen. Controleer altijd bij een gekwalificeerde adviseur of de bevoegde autoriteit.',
     ctaPrimary: 'Bedrijfsaccount aanmaken',
@@ -876,7 +884,7 @@ const nl: Dict = {
     heroTitle: 'Werkgevers in Genève: telewerkdagen voor medewerkers die in Frankrijk wonen',
     inShort:
       'BorderDay helpt Geneefse werkgevers telewerk-, ter-plaatse- en reisdagen te registreren voor mensen die in Frankrijk wonen en in Zwitserland werken. Fiscaal: tot 40% telewerk en 10 tijdelijke missiedagen (ge.ch / ESTV). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Werkgeversplicht: eerste AFC-indiening van het telewerkpercentage volgens ge.ch in januari 2027 voor 2026. Geen belasting- of juridisch advies.',
-    thresholdsTitle: 'Wat pack geneva_fr vandaag telt',
+    thresholdsTitle: 'Wat BorderDay telt voor personeel dat in Frankrijk woont',
     thresholdTax40:
       'Fiscaal — telewerkaandeel: tot 40% van de werktijd in de woonstaat (inclusief). Daarboven kan Franse belasting vanaf de eerste dag gelden (ge.ch).',
     thresholdMissions10:
@@ -888,7 +896,7 @@ const nl: Dict = {
     howTitle: 'Hoe BorderDay HR helpt',
     howBody:
       'Nodig medewerkers uit; iedereen kiest de route Genève←Frankrijk en registreert alleen dagtypes. HR ziet dezelfde fiscale en socialezekerheidstellers, waarschuwingen en CSV-export. Geen GPS. Bedrijfsplan: €5 per actieve medewerker per maand (minimum €39), excl. btw; 7 dagen proef, kaart vereist.',
-    sourcesTitle: 'Officiële bronnen (zelfde als het productpack)',
+    sourcesTitle: 'Officiële bronnen die BorderDay gebruikt',
     disclaimer:
       'BorderDay is een registratie- en herinneringstool. Drempels komen uit openbare officiële bronnen en kunnen wijzigen. Controleer altijd bij een gekwalificeerde adviseur of de bevoegde autoriteit.',
     ctaPrimary: 'Bedrijfsaccount aanmaken',
@@ -933,7 +941,7 @@ const nl: Dict = {
     howTitle: 'Hoe BorderDay LU-werkgevers helpt',
     howBody:
       'Eén bedrijfsaccount voor medewerkers die in FR, BE of DE wonen. Iedereen kiest zijn grensroute en registreert dagtypes; HR volgt het 34-dagen-tempo en de socialezekerheidsbanden, met CSV-export. Geen GPS. Bedrijf: €5 per actieve medewerker/maand (minimum €39), excl. btw; 7 dagen proef, kaart vereist.',
-    sourcesTitle: 'Officiële bronnen (packs luxembourg_fr / _be / _de)',
+    sourcesTitle: 'Officiële bronnen die BorderDay gebruikt',
     disclaimer:
       'BorderDay is een registratie- en herinneringstool. Drempels komen uit openbare officiële bronnen en kunnen wijzigen. Controleer altijd bij een gekwalificeerde adviseur of de bevoegde autoriteit.',
     ctaPrimary: 'Bedrijfsaccount aanmaken',

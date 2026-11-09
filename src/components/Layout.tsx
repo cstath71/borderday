@@ -4,6 +4,7 @@ import { getDict, isLang, LANGS, type Lang } from '../i18n';
 import { useAuth } from '../lib/auth';
 import { untranslatedLocalePath } from '../lib/localeSwitch';
 import { setPreferredLang } from '../lib/preferredLang';
+import { publicPath } from '../lib/publicPath';
 
 export function useLang(): Lang {
   const { lang } = useParams();
@@ -30,7 +31,7 @@ export default function Layout() {
       </a>
       <header className="site-header">
         <div className="container inner">
-          <Link to={`/${lang}/`} className="brand" aria-label={d.nav.homeLabel}>
+          <Link to={publicPath(lang)} className="brand" aria-label={d.nav.homeLabel}>
             <img src="/logo-header.png" alt="BorderDay" width={232} height={68} />
           </Link>
           <button
@@ -43,25 +44,30 @@ export default function Layout() {
             {d.nav.menu}
           </button>
           <nav id="main-nav" className={`nav ${menuOpen ? 'open' : ''}`} aria-label={d.nav.mainLabel}>
-            <NavLink to={`/${lang}/`} end>
+            <NavLink to={publicPath(lang)} end>
               {d.nav.home}
             </NavLink>
-            <NavLink to={`/${lang}/company/signup`} className="hide-sm">
+            <NavLink to={publicPath(lang, 'company/signup')} className="hide-sm">
               {d.nav.forCompanies}
             </NavLink>
-            <NavLink to={`/${lang}/for-individuals`} className="hide-sm">
+            <NavLink to={publicPath(lang, 'for-individuals')} className="hide-sm">
               {d.nav.forIndividuals}
             </NavLink>
             <NavLink to={`/${lang}/app`}>{d.nav.app}</NavLink>
-            <NavLink to={`/${lang}/pricing`} className="hide-sm">
+            <NavLink to={publicPath(lang, 'pricing')} className="hide-sm">
               {d.nav.pricing}
             </NavLink>
+            {lang === 'fr' && (
+              <NavLink to={publicPath('fr', 'guides')} className="hide-sm">
+                {d.nav.guides}
+              </NavLink>
+            )}
             {!auth.user && (
               <NavLink to={`/${lang}/auth/sign-in`} className="hide-sm">
                 {d.nav.joinWaitlist}
               </NavLink>
             )}
-            <NavLink to={`/${lang}/faq`} className="hide-sm">
+            <NavLink to={publicPath(lang, 'faq')} className="hide-sm">
               {d.nav.faq}
             </NavLink>
             {auth.user && (
@@ -123,25 +129,37 @@ export default function Layout() {
             <p>{d.footer.tagline}</p>
           </div>
           <div>
-            <Link to={`/${lang}/privacy`}>{d.nav.privacy}</Link>
+            <Link to={publicPath(lang, 'employers/ticino')}>{d.employersHub.linkTicino}</Link>
             {' · '}
-            <Link to={`/${lang}/dpa`}>{d.nav.dpa}</Link>
+            <Link to={publicPath(lang, 'employers/geneva')}>{d.employersHub.linkGeneva}</Link>
             {' · '}
-            <Link to={`/${lang}/terms`}>{d.nav.terms}</Link>
+            <Link to={publicPath(lang, 'employers/luxembourg')}>{d.employersHub.linkLuxembourg}</Link>
+            {lang === 'fr' && (
+              <>
+                {' · '}
+                <Link to={publicPath('fr', 'guides')}>{d.nav.guides}</Link>
+              </>
+            )}
             {' · '}
-            <Link to={`/${lang}/withdrawal`}>{d.nav.withdraw}</Link>
+            <Link to={publicPath(lang, 'privacy')}>{d.nav.privacy}</Link>
             {' · '}
-            <Link to={`/${lang}/cancel`}>{d.nav.cancel}</Link>
+            <Link to={publicPath(lang, 'dpa')}>{d.nav.dpa}</Link>
+            {' · '}
+            <Link to={publicPath(lang, 'terms')}>{d.nav.terms}</Link>
+            {' · '}
+            <Link to={publicPath(lang, 'withdrawal')}>{d.nav.withdraw}</Link>
+            {' · '}
+            <Link to={publicPath(lang, 'cancel')}>{d.nav.cancel}</Link>
             {' · '}
             <Link to={`/${lang}/account`}>{d.nav.account}</Link>
             {' · '}
-            <Link to={`/${lang}/disclaimer`}>{d.nav.disclaimer}</Link>
+            <Link to={publicPath(lang, 'disclaimer')}>{d.nav.disclaimer}</Link>
             {' · '}
-            <Link to={`/${lang}/accessibility`}>{d.nav.accessibility}</Link>
+            <Link to={publicPath(lang, 'accessibility')}>{d.nav.accessibility}</Link>
             {' · '}
-            <Link to={`/${lang}/pricing`}>{d.nav.pricing}</Link>
+            <Link to={publicPath(lang, 'pricing')}>{d.nav.pricing}</Link>
             {' · '}
-            <Link to={`/${lang}/for-individuals`}>{d.nav.forIndividuals}</Link>
+            <Link to={publicPath(lang, 'for-individuals')}>{d.nav.forIndividuals}</Link>
             <p>{d.footer.rights.replace('{year}', String(year))}</p>
           </div>
         </div>

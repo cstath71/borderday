@@ -1,4 +1,4 @@
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
 
@@ -9,12 +9,12 @@ export default function Accessibility() {
 
   return (
     <>
-      <Seo lang={lang} title={`${a.title} — BorderDay`} description={a.intro} path="accessibility" />
+      <PublicSeo path="accessibility" />
       <section className="section">
         <div className="container prose">
           <h1>{a.title}</h1>
           <p className="meta">{a.updated}</p>
-          <p>{a.intro}</p>
+          <p id="summary">{a.intro}</p>
           <h2>{a.scopeTitle}</h2>
           <p>{a.scopeBody}</p>
           <h2>{a.statusTitle}</h2>

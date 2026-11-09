@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import FrenchGuideLinks from '../components/FrenchGuideLinks';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
+import { publicPath } from '../lib/publicPath';
 
 export default function ForIndividuals() {
   const lang = useLang();
@@ -10,21 +11,16 @@ export default function ForIndividuals() {
 
   return (
     <>
-      <Seo
-        lang={lang}
-        title={`${d.individuals.title} — BorderDay`}
-        description={d.individuals.heroBody}
-        path="for-individuals"
-      />
+      <PublicSeo path="for-individuals" />
       <section className="hero">
         <div className="container">
           <h1>{d.individuals.heroTitle}</h1>
-          <p className="lead">{d.individuals.heroBody}</p>
+          <p id="summary" className="lead">{d.individuals.heroBody}</p>
           <div className="hero-cta">
             <Link className="btn btn-primary" to={`/${lang}/app`}>
               {d.individuals.ctaApp}
             </Link>
-            <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
               {d.individuals.ctaPricing}
             </Link>
           </div>
@@ -48,7 +44,7 @@ export default function ForIndividuals() {
           </div>
         )}
         <div className="container" style={{ marginTop: '1.5rem' }}>
-          <Link className="btn btn-ghost" to={`/${lang}/company/signup`}>
+          <Link className="btn btn-ghost" to={publicPath(lang, 'company/signup')}>
             {d.individuals.ctaCompanies}
           </Link>
         </div>

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Post-vite build: write robots/sitemap/llms/IndexNow key + per-route HTML shells
  * with unique title, description, canonical, hreflang, OG, JSON-LD and answer-first body
@@ -9,6 +8,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { articleJsonLd } from '../src/content/articleSchema.mjs';
 import { markdownToArticle } from '../src/content/articleMarkdown.mjs';
+import { GUIDE_FAQ } from '../src/content/guideFaq.mjs';
+import { FRENCH_HUB } from '../src/content/guideHub.mjs';
 import {
   BASE,
   BRAND,
@@ -75,12 +76,13 @@ function hreflangLinks(path, singleLang) {
   return lines.join('\n    ');
 }
 
-function headBlock({ lang, path, title, description, noindex, singleLang, ogType, publishedTime }) {
+function headBlock({ lang, path, title, description, noindex, singleLang, ogType, publishedTime, modifiedTime, ogImage }) {
   const canonical = absUrl(lang, path);
   const robots = noindex ? 'noindex, nofollow' : 'index, follow';
   const verify = verificationMetas();
+  const image = `${BASE}${ogImage || CFG.og_image}`;
   const published = publishedTime
-    ? `\n    <meta property="article:published_time" content="${esc(publishedTime)}">\n    <meta property="article:modified_time" content="${esc(publishedTime)}">`
+    ? `\n    <meta property="article:published_time" content="${esc(publishedTime)}">\n    <meta property="article:modified_time" content="${esc(modifiedTime || publishedTime)}">`
     : '';
   return `
     <title>${esc(title)}</title>
@@ -92,12 +94,12 @@ function headBlock({ lang, path, title, description, noindex, singleLang, ogType
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:type" content="${esc(ogType || 'website')}">
     <meta property="og:url" content="${esc(canonical)}">
-    <meta property="og:image" content="${esc(BASE + CFG.og_image)}">
+    <meta property="og:image" content="${esc(image)}">
     <meta property="og:locale" content="${lang === 'en' ? 'en_US' : lang === 'fr' ? 'fr_FR' : lang === 'de' ? 'de_DE' : lang === 'nl' ? 'nl_BE' : 'it_IT'}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${esc(title)}">
     <meta name="twitter:description" content="${esc(description)}">
-    <meta name="twitter:image" content="${esc(BASE + CFG.og_image)}">${published}
+    <meta name="twitter:image" content="${esc(image)}">${published}
     ${verify ? verify + '\n    ' : ''}`.trimEnd();
 }
 
@@ -135,13 +137,11 @@ function prerenderBody(lang, path, page) {
     </article>`;
 }
 
-function graphFor(lang, path) {
-  const graph = [organizationLd(), websiteLd(), softwareApplicationLd()];
+function graphFor(lang, path, extras = []) {
+  const graph = [organizationLd(), websiteLd(lang), softwareApplicationLd(lang)];
   const page = PAGES[path]?.[lang];
   if (page?.crumbs?.length) graph.push(breadcrumbLd(lang, page.crumbs));
-  if (path === '' || path === 'faq') graph.push(faqLd(lang));
-  const pageFaq = PAGE_FAQS[path]?.[lang] || PAGE_FAQS[path]?.en;
-  if (pageFaq) graph.push(faqLd(lang, pageFaq));
+  for (const node of extras) graph.push(node);
   return graph;
 }
 
@@ -166,7 +166,7 @@ function frenchLongDate(iso) {
 }
 
 export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
-  const title = `${h1} — BorderDay`;
+  const title = guide.title || `${h1} — BorderDay`;
   const head = headBlock({
     lang: 'fr',
     path: guide.path,
@@ -176,10 +176,12 @@ export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
     singleLang: 'fr',
     ogType: 'article',
     publishedTime: guide.datePublished,
+    modifiedTime: guide.dateModified || guide.datePublished,
+    ogImage: guide.ogImage,
   });
   const crumbs = [
     ['Accueil', ''],
-    ['Particuliers', 'for-individuals'],
+    ['Guides', 'guides'],
     [h1, guide.path],
   ];
   const crumbHtml = crumbs
@@ -203,22 +205,24 @@ export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
         </div>
       </div>
     </article>`;
+  const faq = GUIDE_FAQ[guide.id];
   const graph = [
     organizationLd(),
-    websiteLd(),
-    softwareApplicationLd(),
+    websiteLd('fr'),
+    softwareApplicationLd('fr'),
     breadcrumbLd('fr', crumbs),
-    articleJsonLd(BASE, guide, h1),
+    articleJsonLd(BASE, { ...guide, markdown: guide.markdown }, h1),
+    ...(faq ? [faqLd('fr', faq)] : []),
   ];
   return { title, head, body, graph };
 }
 
-function injectHtml(template, { lang, path, title, description, noindex, bodyHtml, graph, singleLang, ogType, publishedTime }) {
+function injectHtml(template, { lang, path, title, description, noindex, bodyHtml, graph, singleLang, ogType, publishedTime, modifiedTime, ogImage }) {
   let html = template;
   html = html.replace(/<html\s+lang="[^"]*"/, `<html lang="${lang}"`);
   // Drop the stock <title>…</title>; we inject a full SEO head block.
   html = html.replace(/<title>[^<]*<\/title>\s*/i, '');
-  const head = headBlock({ lang, path, title, description, noindex, singleLang, ogType, publishedTime });
+  const head = headBlock({ lang, path, title, description, noindex, singleLang, ogType, publishedTime, modifiedTime, ogImage });
   const ld = noindex ? '' : ldScript(graph);
   html = html.replace('</head>', `    ${head}\n    ${ld}\n  </head>`);
   if (bodyHtml) {
@@ -230,12 +234,39 @@ function injectHtml(template, { lang, path, title, description, noindex, bodyHtm
   return html;
 }
 
-function main() {
+async function loadRenderer() {
+  const bundle = join(ROOT, 'dist-ssr/entry.js');
+  if (!existsSync(bundle)) {
+    console.error('dist-ssr/entry.js missing — run vite build --ssr src/prerender/entry.tsx --outDir dist-ssr');
+    process.exit(1);
+  }
+  const entry = await import(pathToFileURL(bundle).href);
+  return { renderRoute: entry.renderRoute, faqPagePairs: entry.faqPagePairs, employerFaqPairs: entry.employerFaqPairs };
+}
+
+function renderedBody(renderRoute, url) {
+  const slash = url.endsWith('/') ? url : `${url}/`;
+  let html = renderRoute(slash);
+  if (!html.includes('<footer')) html = renderRoute(slash.replace(/\/$/, '') || '/');
+  if (!html.includes('<footer')) throw new Error(`Prerender produced no page footer for ${url}`);
+  return html;
+}
+
+function visibleFaqNode(lang, path, faqPagePairs, employerFaqPairs) {
+  if (path === 'faq') return faqLd(lang, faqPagePairs(lang));
+  if (path === 'employers/ticino') return faqLd(lang, employerFaqPairs(lang, 'ticino'));
+  if (path === 'employers/geneva') return faqLd(lang, employerFaqPairs(lang, 'geneva'));
+  if (path === 'employers/luxembourg') return faqLd(lang, employerFaqPairs(lang, 'luxembourg'));
+  return null;
+}
+
+async function main() {
   if (!existsSync(join(DIST, 'index.html'))) {
     console.error('dist/index.html missing — run vite build first');
     process.exit(1);
   }
   const template = readFileSync(join(DIST, 'index.html'), 'utf8');
+  const { renderRoute, faqPagePairs, employerFaqPairs } = await loadRenderer();
 
   writeBoth('robots.txt', robotsTxt());
   writeBoth('sitemap.xml', sitemapXml());
@@ -258,8 +289,8 @@ function main() {
       title: enHome.title,
       description: enHome.description,
       noindex: false,
-      bodyHtml: prerenderBody('en', '', enHome),
-      graph: graphFor('en', ''),
+      bodyHtml: renderedBody(renderRoute, '/en/'),
+      graph: graphFor('en', '', [visibleFaqNode('en', '', faqPagePairs, employerFaqPairs)].filter(Boolean)),
     }),
   );
 
@@ -267,14 +298,16 @@ function main() {
     for (const path of PUBLIC_PATHS) {
       const page = PAGES[path][lang];
       const rel = pageFile(lang, path);
+      const url = path ? `/${lang}/${path}/` : `/${lang}/`;
+      const faqNode = visibleFaqNode(lang, path, faqPagePairs, employerFaqPairs);
       const html = injectHtml(template, {
         lang,
         path,
         title: page.title,
         description: page.description,
         noindex: false,
-        bodyHtml: prerenderBody(lang, path, page),
-        graph: graphFor(lang, path),
+        bodyHtml: renderedBody(renderRoute, url),
+        graph: graphFor(lang, path, faqNode ? [faqNode] : []),
       });
       const out = join(DIST, rel);
       mkdirSync(dirname(out), { recursive: true });
@@ -317,31 +350,87 @@ function main() {
     );
   }
 
+  {
+    const hubUrl = `/fr/${FRENCH_HUB.path}/`;
+    const itemList = {
+      '@type': 'ItemList',
+      itemListElement: FRENCH_GUIDES.map((guide, index) => {
+        const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
+        const { h1 } = markdownToArticle(markdown);
+        const brief = (markdown.match(/\*\*En bref\s*:\*\*\s*(.+)/) || [])[1]?.replace(/\*\*/g, '').trim() || '';
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: h1,
+          url: absUrl('fr', guide.path),
+          description: brief,
+        };
+      }),
+    };
+    const html = injectHtml(template, {
+      lang: 'fr',
+      path: FRENCH_HUB.path,
+      title: FRENCH_HUB.title,
+      description: FRENCH_HUB.description,
+      noindex: false,
+      bodyHtml: renderedBody(renderRoute, hubUrl),
+      graph: graphFor('fr', FRENCH_HUB.path, [
+        breadcrumbLd('fr', [
+          ['Accueil', ''],
+          ['Guides', 'guides'],
+        ]),
+        {
+          '@type': 'CollectionPage',
+          '@id': `${BASE}/fr/guides/#collection`,
+          name: FRENCH_HUB.h1,
+          description: FRENCH_HUB.description,
+          inLanguage: 'fr',
+          url: `${BASE}/fr/guides/`,
+          mainEntity: itemList,
+        },
+        itemList,
+      ]),
+      singleLang: 'fr',
+    });
+    const out = join(DIST, pageFile('fr', FRENCH_HUB.path));
+    mkdirSync(dirname(out), { recursive: true });
+    writeFileSync(out, html);
+  }
+
   for (const guide of FRENCH_GUIDES) {
     const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
-    const { h1, bodyHtml } = markdownToArticle(markdown);
-    const parts = frenchGuideDocumentParts(guide, h1, bodyHtml);
+    const { h1 } = markdownToArticle(markdown);
+    const withMarkdown = { ...guide, markdown, h1 };
+    const parts = frenchGuideDocumentParts(withMarkdown, h1, '');
     const html = injectHtml(template, {
       lang: 'fr',
       path: guide.path,
       title: parts.title,
       description: guide.description,
       noindex: false,
-      bodyHtml: parts.body,
+      bodyHtml: renderedBody(renderRoute, `/fr/${guide.path}/`),
       graph: parts.graph,
       singleLang: 'fr',
       ogType: 'article',
       publishedTime: guide.datePublished,
+      modifiedTime: guide.dateModified || guide.datePublished,
+      ogImage: guide.ogImage,
     });
     const out = join(DIST, pageFile('fr', guide.path));
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);
+    writeBoth(pageFile('fr', guide.path).replace(/index\.html$/, 'index.md'), markdown.endsWith('\n') ? markdown : `${markdown}\n`);
   }
 
   console.log(
-    `prerender: ${PUBLIC_PATHS.length * LANGS.length} public + ${FRENCH_GUIDES.length} french guides + ${NOINDEX_PATHS.length * LANGS.length} noindex shells, robots/sitemap/llms/IndexNow key`,
+    `prerender: ${PUBLIC_PATHS.length * LANGS.length} public + 1 french hub + ${FRENCH_GUIDES.length} french guides + ${NOINDEX_PATHS.length * LANGS.length} noindex shells, robots/sitemap/llms/IndexNow key`,
   );
 }
 
 const isMain = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
-if (isMain) main();
+if (isMain) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

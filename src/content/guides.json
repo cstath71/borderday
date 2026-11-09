@@ -3,16 +3,26 @@
     "id": "luxembourg",
     "path": "guides/france-luxembourg-compter-jours-teletravail",
     "file": "fr-luxembourg.md",
-    "description": "Le seuil fiscal publié est de 34 jours par période imposable passés physiquement en France et/ou dans un État tiers pour y exercer l’emploi. La sécurité sociale suit un autre compteur, en pourcentage du temps de travail, avec un accord-cadre possible entre 25 % et moins de 50 %. Ces deux seuils ne se compensent pas.",
+    "title": "France-Luxembourg : compter ses 34 jours de télétravail (frontaliers) | BorderDay",
+    "description": "Seuil fiscal de 34 jours par an, compteur sécurité sociale séparé (25 % à moins de 50 % avec accord-cadre). Ce qui compte, ce qui ne compte pas, sources officielles.",
     "datePublished": "2026-11-08",
+    "dateModified": "2026-11-08",
+    "ogImage": "/og-guide-luxembourg.png",
+    "about": ["télétravail transfrontalier", "Luxembourg", "France"],
+    "audience": "Personnes résidant en France et travaillant au Luxembourg",
     "fallbackPath": "employers/luxembourg"
   },
   {
     "id": "geneva",
     "path": "guides/france-geneve-compter-jours-teletravail",
     "file": "fr-geneve.md",
-    "description": "Pour un salarié résidant en France et travaillant à Genève, le télétravail effectué en France peut rester imposé en Suisse jusqu’à 40 % du temps d’activité par année civile.",
+    "title": "Genève : 40 % de télétravail et 10 jours de missions, comment compter | BorderDay",
+    "description": "Pour un salarié résidant en France et travaillant à Genève, le télétravail effectué en France peut rester imposé en Suisse jusqu’à 40 % du temps d’activité par année civile. Sources officielles : ge.ch et AFC.",
     "datePublished": "2026-11-08",
+    "dateModified": "2026-11-08",
+    "ogImage": "/og-guide-geneva.png",
+    "about": ["télétravail transfrontalier", "Genève", "France"],
+    "audience": "Personnes résidant en France et travaillant à Genève",
     "fallbackPath": "employers/geneva"
   }
 ]

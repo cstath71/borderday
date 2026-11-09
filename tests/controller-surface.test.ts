@@ -121,13 +121,12 @@ describe('controller identity surface', () => {
       const text = readFileSync(join(ROOT, 'dist', rel), 'utf8');
       expect(text).not.toMatch(OWNER_BANNED);
     }
-    // Privacy/terms prerendered shells use marketing summaries only (full legal body is client-rendered)
+    // Legal pages keep the published controller copy. Marketing pages above must not.
     for (const rel of ['en/privacy/index.html', 'en/terms/index.html', 'en/dpa/index.html']) {
       const file = join(ROOT, 'dist', rel);
       if (!existsSync(file)) continue;
       const text = readFileSync(file, 'utf8');
-      // prerender summary must not leak controller; live React page still has it in i18n only
-      expect(text).not.toMatch(OWNER_BANNED);
+      expect(text).toMatch(/PrimeLogic Advisory/);
     }
   });
 });

@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import LegalLinks from '../components/LegalLinks';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
+import { publicPath } from '../lib/publicPath';
 import { startCheckout } from '../lib/billing';
 import { useAuth } from '../lib/auth';
 import { listMyCompanies } from '../lib/companyApi';
@@ -112,12 +113,17 @@ export default function Pricing() {
 
   return (
     <>
-      <Seo lang={lang} title={`${d.pricing.title} — BorderDay`} description={d.pricing.subtitle} path="pricing" />
+      <PublicSeo path="pricing" />
       <section className="section">
         <div className="container">
           <h1>{d.pricing.title}</h1>
           <p id="summary"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
           <p>{d.pricing.subtitle}</p>
+          {lang === 'fr' && (
+            <p>
+              <Link to={publicPath('fr', 'guides')}>{d.nav.guides}</Link>
+            </p>
+          )}
           {bannerText && (
             <p
               className="meta"
@@ -141,7 +147,7 @@ export default function Pricing() {
             </p>
           )}
           <p style={{ fontSize: '0.9rem' }}>
-            <Link to={`/${lang}/cancel`}>{d.nav.cancel}</Link>
+            <Link to={publicPath(lang, 'cancel')}>{d.nav.cancel}</Link>
           </p>
           <div className="price-grid" style={{ marginTop: '1.5rem' }}>
             <article className="card price-card" style={{ borderColor: 'var(--primary)', borderWidth: 2 }}>
@@ -190,7 +196,7 @@ export default function Pricing() {
                 </div>
               )}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <Link className="btn btn-secondary" to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
+                <Link className="btn btn-secondary" to={publicPath(lang, 'company/signup')}>{d.nav.companySignup}</Link>
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -276,7 +282,7 @@ export default function Pricing() {
           <p className="meta" style={{ marginTop: '1rem', fontSize: '0.85rem' }}>{chfNote}</p>
           {signInNeeded && (
             <p className="meta" role="alert" style={{ marginTop: '1rem' }}>
-              <Link to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/pricing`)}`}>
+              <Link to={`/${lang}/auth/sign-in?next=${encodeURIComponent(publicPath(lang, 'pricing'))}`}>
                 {d.auth.signInTitle}
               </Link>
             </p>

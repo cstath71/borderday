@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
-import Seo from '../../components/Seo';
+import PublicSeo from '../../components/PublicSeo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
+import { publicPath } from '../../lib/publicPath';
+import { employerFaqPairs } from '../../seo/visibleFaq';
 import EmployerRelatedLinks from './RelatedLinks';
 
 /** Titles match pack SRC entries in src/borders/packs.ts (ticino_it). */
@@ -32,34 +34,22 @@ export default function EmployersTicino() {
   const lang = useLang();
   const d = getDict(lang);
   const p = d.employersTicino;
-  const faq = [
-    [p.faq1q, p.faq1a],
-    [p.faq2q, p.faq2a],
-    [p.faq3q, p.faq3a],
-    [p.faq4q, p.faq4a],
-    [p.faq5q, p.faq5a],
-  ] as const;
+  const faq = employerFaqPairs(lang, 'ticino');
 
   return (
     <>
-      <Seo
-        lang={lang}
-        title={p.metaTitle}
-        description={p.metaDescription}
-        path="employers/ticino"
-        faq={faq}
-      />
+      <PublicSeo path="employers/ticino" faq={faq} />
       <section className="hero">
         <div className="container">
           <h1>{p.heroTitle}</h1>
-          <p className="lead">
+          <p id="summary" className="lead">
             <strong>{d.home.inShortLabel}:</strong> {p.inShort}
           </p>
           <div className="hero-cta">
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}
             </Link>
-            <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
               {p.ctaPricing}
             </Link>
           </div>
@@ -90,7 +80,7 @@ export default function EmployersTicino() {
           </ul>
           <p className="muted">{p.disclaimer}</p>
           <div className="hero-cta" style={{ marginTop: '1.5rem' }}>
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}
             </Link>
           </div>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LegalLinks from '../../components/LegalLinks';
-import Seo from '../../components/Seo';
+import PublicSeo from '../../components/PublicSeo';
+import { publicPath } from '../../lib/publicPath';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
 import { useAuth } from '../../lib/auth';
@@ -26,7 +27,7 @@ export default function CompanySignup() {
   async function onCreate(e: React.FormEvent) {
     e.preventDefault();
     if (!auth.user) {
-      nav(`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/company/signup`)}`);
+      nav(`/${lang}/auth/sign-in?next=${encodeURIComponent(publicPath(lang, 'company/signup'))}`);
       return;
     }
     if (companyId || busy) return;
@@ -46,20 +47,20 @@ export default function CompanySignup() {
 
   return (
     <>
-      <Seo lang={lang} title={`${d.company.signupTitle} — BorderDay`} description={d.company.signupSubtitle} path="company/signup" />
+      <PublicSeo path="company/signup" />
       <section className="section">
         <div className="container" style={{ maxWidth: 560 }}>
           <h1>{d.company.signupTitle}</h1>
-          <p>{d.company.signupSubtitle}</p>
+          <p id="summary">{d.company.signupSubtitle}</p>
           <p className="meta">{d.company.signupRouteNote}</p>
           <LegalLinks d={d} lang={lang} intro={d.auth.signUpTerms} />
           {auth.user && <p className="meta">{auth.user.email}</p>}
           {!auth.user && (
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-              <Link className="btn btn-primary" to={`/${lang}/auth/sign-up?next=${encodeURIComponent(`/${lang}/company/signup`)}`}>
+              <Link className="btn btn-primary" to={`/${lang}/auth/sign-up?next=${encodeURIComponent(publicPath(lang, 'company/signup'))}`}>
                 {d.auth.signUp}
               </Link>
-              <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/company/signup`)}`}>
+              <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(publicPath(lang, 'company/signup'))}`}>
                 {d.auth.signIn}
               </Link>
             </div>
@@ -85,7 +86,7 @@ export default function CompanySignup() {
               <Link className="btn btn-primary" to={`/${lang}/company/${companyId}/dashboard`}>
                 {d.company.openDashboard}
               </Link>
-              <Link className="btn btn-secondary" to={`/${lang}/pricing?companyId=${encodeURIComponent(companyId)}`}>
+              <Link className="btn btn-secondary" to={`${publicPath(lang, 'pricing')}?companyId=${encodeURIComponent(companyId)}`}>
                 {d.company.billingCta}
               </Link>
             </div>

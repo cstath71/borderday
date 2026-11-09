@@ -12,8 +12,13 @@ export interface GuideMeta {
   id: GuideId;
   path: string;
   file: string;
+  title: string;
   description: string;
   datePublished: string;
+  dateModified?: string;
+  ogImage?: string;
+  about?: string[];
+  audience?: string;
   fallbackPath: string;
 }
 

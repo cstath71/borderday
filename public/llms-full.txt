@@ -4,6 +4,7 @@
 
 - Site: https://borderday.com
 - Languages: English, French, German, Italian, Dutch
+- Routes covered: Geneva and other non-1983 cantons←France (tax and social security), 1983-agreement cantons←France (tax and social security), Germany→Switzerland (tax and social security), France→Luxembourg (tax and social security), Belgium→Luxembourg (tax and social security), Germany→Luxembourg (tax and social security), Italy→Switzerland (tax and social security), France→Belgium (social security; no day limit for tax), Netherlands→Belgium (social security; no tax tolerance found).
 - Border routes covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine border routes (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
 - Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return; part-year 5×months+1×weeks; part-time base 240/280), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
@@ -36,8 +37,12 @@
 - https://borderday.com/en/terms/ — Terms and legal notice
 - https://borderday.com/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - https://borderday.com/en/cancel/ — Cancel subscription
+- https://borderday.com/fr/guides/ — French only, no translated version: guide hub for the two France-resident guides
 - https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/ — French only, no translated version: how a France resident employed in Luxembourg counts telework days
+- En bref (France–Luxembourg): si vous résidez fiscalement en France et êtes employé au Luxembourg, le télétravail et les jours travaillés hors du Luxembourg ne relèvent pas d’un seul plafond. Le seuil fiscal publié est de 34 jours par période imposable passés physiquement en France et/ou dans un État tiers pour y exercer l’emploi. La sécurité sociale suit un autre compteur, en pourcentage du temps de travail, avec un accord-cadre possible entre 25 % et moins de 50 %. Ces deux seuils ne se compensent pas. Un tableur, un calendrier ou un export n’est pas, à lui seul, une preuve de votre présence physique.
 - https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/ — French only, no translated version: how a France resident employed in Geneva counts telework and temporary missions
+- En bref (Genève): pour un salarié résidant en France et travaillant à Genève, le télétravail effectué en France peut rester imposé en Suisse jusqu’à 40 % du temps d’activité par année civile. Depuis le 1er janvier 2026, cette règle relève de l’avenant à la convention fiscale franco-suisse, avec un suivi des jours par l’employeur. Cette limite inclut jusqu’à 10 jours de missions temporaires en France ou dans un État tiers. Au-delà de 40 %, la part de salaire liée au télétravail est imposable en France dès le premier jour de télétravail, et non seulement pour l’excédent. La sécurité sociale est un autre compteur, en pourcentage du temps de travail (accord-cadre possible entre 25 % et moins de 50 %). Ces règles genevoises de suivi ne doivent pas être transposées telles quelles à toute la Suisse, ni au régime frontalier de 1983 applicable dans d’autres cantons.
+- Plain-text mirrors: https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/index.md and https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/index.md
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
+import { publicPath } from '../lib/publicPath';
 
 export default function Terms() {
   const lang = useLang();
@@ -10,7 +11,7 @@ export default function Terms() {
 
   return (
     <>
-      <Seo lang={lang} title={`${t.title} — BorderDay`} description={t.s1Body} path="terms" />
+      <PublicSeo path="terms" />
       <section className="section">
         <div className="container prose">
           <h1>{t.title}</h1>
@@ -19,11 +20,11 @@ export default function Terms() {
           <p>{t.providerBody}</p>
           <p>{t.legalNoticeNote}</p>
           <h2>{t.s1Title}</h2>
-          <p>{t.s1Body}</p>
+          <p id="summary">{t.s1Body}</p>
           <h2>{t.s2Title}</h2>
           <p>{t.s2Body}</p>
           <p>
-            <Link to={`/${lang}/dpa`}>{d.nav.dpa}</Link>
+            <Link to={publicPath(lang, 'dpa')}>{d.nav.dpa}</Link>
           </p>
           <h2>{t.s3Title}</h2>
           <p>{t.s3Body}</p>
@@ -33,7 +34,7 @@ export default function Terms() {
           <h2 id="withdrawal">{t.s5Title}</h2>
           <p>{t.s5Body}</p>
           <p>
-            <Link to={`/${lang}/withdrawal`}>{d.nav.withdraw}</Link>
+            <Link to={publicPath(lang, 'withdrawal')}>{d.nav.withdraw}</Link>
           </p>
           <p>{t.s5EffectsBody}</p>
           <p>{t.s5BusinessBody}</p>

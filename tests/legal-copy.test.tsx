@@ -379,8 +379,8 @@ describe('H13 / M1 links before buying', () => {
     for (const button of buttons) {
       const card = button.closest('article')!;
       const links = within(card).getAllByRole('link').map((a) => a.getAttribute('href'));
-      expect(links).toContain('/en/terms');
-      expect(links).toContain('/en/privacy');
+      expect(links).toContain('/en/terms/');
+      expect(links).toContain('/en/privacy/');
       const terms = within(card).getByRole('link', { name: d.nav.terms });
       expect(terms.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
@@ -416,7 +416,7 @@ describe('C5 Withdrawal page', () => {
     open(`/${lang}/withdrawal`);
     const d = getDict(lang);
     await screen.findByRole('heading', { level: 1, name: d.withdrawal.title });
-    expect(within(document.querySelector('footer')!).getByRole('link', { name: d.nav.withdraw }).getAttribute('href')).toBe(`/${lang}/withdrawal`);
+    expect(within(document.querySelector('footer')!).getByRole('link', { name: d.nav.withdraw }).getAttribute('href')).toBe(`/${lang}/withdrawal/`);
     expect(document.body.textContent).not.toMatch(/PrimeLogic|CHE-312/);
     expect(d.withdrawal.linkNote.length).toBeGreaterThan(40);
   });

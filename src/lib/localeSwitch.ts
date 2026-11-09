@@ -8,6 +8,7 @@ type GuidePath = { path: string; fallbackPath: string };
  */
 export function untranslatedLocalePath(pathname: string, next: string): string | null {
   if (next === 'fr') return null;
+  if (pathname === '/fr/guides' || pathname === '/fr/guides/') return `/${next}/`;
   for (const guide of meta as GuidePath[]) {
     const base = `/fr/${guide.path}`;
     if (pathname === base || pathname === `${base}/`) {

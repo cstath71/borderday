@@ -81,8 +81,8 @@ describe('H11 permanent cancellation route', () => {
     open(`/${lang}/faq`);
     const d = getDict(lang);
     const footer = document.querySelector('footer')!;
-    expect(within(footer).getByRole('link', { name: d.nav.cancel }).getAttribute('href')).toBe(`/${lang}/cancel`);
-    expect(within(footer).getByRole('link', { name: d.nav.withdraw }).getAttribute('href')).toBe(`/${lang}/withdrawal`);
+    expect(within(footer).getByRole('link', { name: d.nav.cancel }).getAttribute('href')).toBe(`/${lang}/cancel/`);
+    expect(within(footer).getByRole('link', { name: d.nav.withdraw }).getAttribute('href')).toBe(`/${lang}/withdrawal/`);
   });
 
   it('owner opens the portal for their company in their language; HR does not get a company cancel button', async () => {

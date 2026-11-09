@@ -13,6 +13,7 @@ const fr: Dict = {
     app: 'App',
     pricing: 'Tarifs',
     faq: 'FAQ',
+    guides: 'Guides',
     privacy: 'Confidentialité',
     disclaimer: 'Avertissement',
     terms: 'CGU et mentions légales',
@@ -91,6 +92,10 @@ const fr: Dict = {
     chipTaxNo: 'Fiscalité : pas de compteur',
     chipTaxNoDayLimit: 'Fiscalité : pas de limite en jours',
     chipSsYes: 'Sécurité sociale : oui',
+    routesCoveredTitle: 'Situations couvertes',
+    routesRoute: 'Situation',
+    routesTax: 'Compteur fiscal',
+    routesSs: 'Compteur de sécurité sociale',
   },
   borders: {
     geneva_fr: 'Genève et autres cantons hors accord de 1983 ← France',
@@ -1017,6 +1022,9 @@ const fr: Dict = {
 
   employersHub: {
     title: 'Pages employeurs',
+    byRegionTitle: 'Employeurs par région',
+    frenchGuideNote: 'Un guide en français pour le personnel résidant en France est disponible.',
+    frenchGuideLink: 'Guide en français',
     linkTicino: 'Employeurs Tessin (IT→CH)',
     linkGeneva: 'Employeurs Genève (FR→CH)',
     linkLuxembourg: 'Employeurs Luxembourg (FR/BE/DE→LU)',
@@ -1031,7 +1039,7 @@ const fr: Dict = {
     agreementTitle: 'Accord Italie–Suisse (2020 / protocole 2023)',
     agreementBody:
       'L’accord Italie–Suisse du 23 décembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) couvre des zones frontalières définies (CH: Grisons, Tessin, Valais; IT: Lombardie, Piémont, Vallée d’Aoste, province de Bolzano), avec des conditions de résidence et de lieu de travail à l’Art. 2(b). Le protocole télétravail est publié comme Fedlex RU 2026 104; l’OFAS indique l’entrée en vigueur le 9 février 2026 avec application dès le 1er janvier 2024, y compris pour les travailleurs en régime transitoire. Vérifiez l’adéquation avec votre conseiller ou l’autorité avant de vous fier à ces compteurs.',
-    thresholdsTitle: 'Ce que compte le pack ticino_it aujourd’hui',
+    thresholdsTitle: 'Ce que BorderDay compte pour le personnel résidant en Italie',
     thresholdTax25:
       'Fiscalité — télétravail au domicile: au maximum 25% de l’activité salariée en télétravail au domicile en Italie sur une année civile, sans modifier le statut fiscal de résidence pour ce télétravail (protocole / Accordo). Le co-working n’est pas confirmé dans le texte du protocole — demandez à votre autorité.',
     thresholdNonreturn45:
@@ -1043,7 +1051,7 @@ const fr: Dict = {
     howTitle: 'Comment BorderDay aide les RH',
     howBody:
       'Invitez les collaborateurs; chacun choisit la situation frontalière Tessin←Italie et enregistre uniquement des types de jours (télétravail / sur site / déplacement / non travaillé) plus la nuit hors domicile si pertinent. Les RH voient la part fiscale de 25%, le compteur de 45 jours de non-retour et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
-    sourcesTitle: 'Sources officielles (identiques au pack ticino_it)',
+    sourcesTitle: 'Sources officielles utilisées par BorderDay',
     disclaimer:
       'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
     ctaPrimary: 'Créer un compte entreprise',
@@ -1072,7 +1080,7 @@ const fr: Dict = {
     heroTitle: 'Employeurs à Genève: jours de télétravail pour le personnel résidant en France',
     inShort:
       'BorderDay aide les employeurs genevois à enregistrer télétravail, jours sur site et déplacements pour les personnes qui résident en France et travaillent en Suisse. Fiscalité: jusqu’à 40% de télétravail et 10 jours de missions temporaires (ge.ch / AFC). Sécurité sociale: bandes du cadre sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Obligation employeur: première transmission AFC du taux prévue en janvier 2027 pour 2026. Pas un conseil fiscal ou juridique.',
-    thresholdsTitle: 'Ce que compte le pack geneva_fr aujourd’hui',
+    thresholdsTitle: 'Ce que BorderDay compte pour le personnel résidant en France',
     thresholdTax40:
       'Fiscalité — part de télétravail: jusqu’à 40% du temps de travail dans l’État de résidence (inclus). Au-delà, l’imposition en France peut s’appliquer dès le premier jour (ge.ch).',
     thresholdMissions10:
@@ -1084,7 +1092,7 @@ const fr: Dict = {
     howTitle: 'Comment BorderDay aide les RH',
     howBody:
       'Invitez les collaborateurs; chacun choisit la situation frontalière Genève←France et enregistre uniquement des types de jours. Les RH voient les mêmes compteurs fiscaux et sociaux, des alertes à l’approche des seuils, et peuvent exporter en CSV. Pas de GPS. Offre entreprise: 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
-    sourcesTitle: 'Sources officielles (identiques au pack produit)',
+    sourcesTitle: 'Sources officielles utilisées par BorderDay',
     disclaimer:
       'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
     ctaPrimary: 'Créer un compte entreprise',
@@ -1129,7 +1137,7 @@ const fr: Dict = {
     howTitle: 'Comment BorderDay aide les employeurs LU',
     howBody:
       'Un compte entreprise pour le personnel résidant en FR, BE ou DE. Chaque personne choisit sa situation frontalière et enregistre des types de jours; les RH suivent le rythme des 34 jours et les bandes de sécurité sociale, avec export CSV. Pas de GPS. Entreprise: 5 € par collaborateur actif/mois (minimum 39 €), hors TVA; essai 7 jours, carte requise.',
-    sourcesTitle: 'Sources officielles (packs luxembourg_fr / _be / _de)',
+    sourcesTitle: 'Sources officielles utilisées par BorderDay',
     disclaimer:
       'BorderDay est un outil de suivi et de rappel. Les seuils proviennent de sources officielles publiques et peuvent évoluer. Vérifiez toujours auprès d’un conseiller qualifié ou de l’autorité compétente.',
     ctaPrimary: 'Créer un compte entreprise',

@@ -9,6 +9,7 @@ import Seo from '../components/Seo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
+import { publicPath } from '../lib/publicPath';
 import {
   isDayLogOtherCompany,
   listFormerCompanies,
@@ -370,7 +371,7 @@ export default function AppPage() {
               {access.unpaidCompany ? (
                 <p style={{ margin: 0 }}>{d.app.previewAskEmployer}</p>
               ) : (
-                <Link className="btn btn-primary" to={`/${lang}/pricing`}>
+                <Link className="btn btn-primary" to={publicPath(lang, 'pricing')}>
                   {d.app.previewCta}
                 </Link>
               )}

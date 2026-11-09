@@ -7,27 +7,33 @@ import { useLang } from './Layout';
 export default function FrenchGuideLinks({
   ids,
   except,
-  heading = 'Guides en français',
+  heading,
 }: {
   ids?: readonly GuideId[];
   except?: GuideId;
   heading?: string;
 }) {
   const lang = useLang();
-  if (lang !== 'fr') return null;
+  const defaults: Record<string, string> = {
+    fr: 'Guides en français',
+    de: 'Leitfäden auf Deutsch',
+    it: 'Guide in italiano',
+  };
+  const label = heading ?? defaults[lang] ?? 'Guides';
   const items = GUIDES.filter((guide) => {
+    if (guide.lang !== lang) return false;
     if (except && guide.id === except) return false;
     if (ids && !ids.includes(guide.id)) return false;
     return true;
   });
   if (!items.length) return null;
   return (
-    <nav className="french-guides" aria-label={heading}>
-      <h2>{heading}</h2>
+    <nav className="french-guides" aria-label={label}>
+      <h2>{label}</h2>
       <ul>
         {items.map((guide) => (
           <li key={guide.id}>
-            <Link className="guide-card" to={publicPath('fr', guide.path)}>
+            <Link className="guide-card" to={publicPath(guide.lang, guide.path)}>
               {guide.h1}
             </Link>
           </li>
@@ -37,16 +43,23 @@ export default function FrenchGuideLinks({
   );
 }
 
-/** French guide link. On other languages, one labeled line points at the French URL only. */
-export function FrenchGuideForResidents({ id, frHeading }: { id: GuideId; frHeading: string }) {
+/** Guide written in one language. On other languages, one labeled line points at that URL only. */
+export function ResidentGuideLink({ id, heading }: { id: GuideId; heading: string }) {
   const lang = useLang();
-  if (lang === 'fr') return <FrenchGuideLinks ids={[id]} heading={frHeading} />;
-  const d = getDict(lang);
   const guide = guideById(id);
+  if (lang === guide.lang) return <FrenchGuideLinks ids={[id]} heading={heading} />;
+  const d = getDict(lang);
+  const note = guide.lang === 'it' ? d.employersHub.italianGuideNote : d.employersHub.frenchGuideNote;
+  const link = guide.lang === 'it' ? d.employersHub.italianGuideLink : d.employersHub.frenchGuideLink;
   return (
     <p>
-      {d.employersHub.frenchGuideNote}{' '}
-      <Link to={publicPath('fr', guide.path)}>{d.employersHub.frenchGuideLink}</Link>
+      {note}{' '}
+      <Link to={publicPath(guide.lang, guide.path)}>{link}</Link>
     </p>
   );
+}
+
+/** French guide link. On other languages, one labeled line points at the French URL only. */
+export function FrenchGuideForResidents({ id, frHeading }: { id: GuideId; frHeading: string }) {
+  return <ResidentGuideLink id={id} heading={frHeading} />;
 }

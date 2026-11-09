@@ -42,7 +42,7 @@ export default function Home() {
         </div>
       </section>
 
-      {lang === 'fr' && (
+      {(lang === 'fr' || lang === 'de' || lang === 'it') && (
         <section className="section">
           <div className="container">
             <FrenchGuideLinks />

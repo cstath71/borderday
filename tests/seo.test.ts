@@ -7,7 +7,7 @@ import {
   BRAND,
   CFG,
   FAQ,
-  FRENCH_GUIDES,
+  ALL_GUIDES,
   INDEXNOW_KEY,
   LANGS,
   SITEMAP_PATHS,
@@ -55,7 +55,7 @@ describe('SEO generators', () => {
     const xml = sitemapXml();
     expect(xml).toContain('xmlns:xhtml');
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-    expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + 1 + FRENCH_GUIDES.length);
+    expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + 3 + ALL_GUIDES.length);
     for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
         const loc = absUrl(lang, path);
@@ -67,6 +67,13 @@ describe('SEO generators', () => {
       expect(xml).toContain(`hreflang="x-default" href="${absUrl('en', path)}"`);
     }
     expect(locs).toContain(`${BASE}/fr/guides/`);
+    expect(locs).toContain(`${BASE}/de/guides/`);
+    expect(locs).toContain(`${BASE}/it/guides/`);
+    expect(locs).toContain(`${BASE}/fr/guides/france-bale-compter-jours-teletravail/`);
+    expect(locs).toContain(`${BASE}/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/`);
+    expect(locs).toContain(`${BASE}/it/guides/italia-ticino-contare-giorni-telelavoro/`);
+    expect(xml).not.toContain(`${BASE}/en/guides/`);
+    expect(xml).not.toContain(`${BASE}/nl/guides/`);
     expect(xml).not.toContain(`${BASE}/en/privacy/`);
     expect(xml).not.toContain(`${BASE}/fr/company/signup/`);
     expect(xml).not.toContain(`${BASE}/en/terms/`);
@@ -167,7 +174,11 @@ describe('honest coverage in SEO copy', () => {
   it('llms names which corridors have tax counters and which do not', () => {
     const short = llmsTxt();
     expect(short).toMatch(/Tax counters running: Geneva and other non-1983 cantons/);
-    expect(short).toMatch(/1983-agreement cantons←France \(40% \/ 10 mission days \/ 45 work nights/);
+    expect(short).toMatch(/1983-agreement cantons←France \(40% \/ 10 mission days \/ 45 overnight stays away from the residence state/);
+    expect(short).toMatch(/at most one Swiss night per working week/);
+    expect(short).toMatch(/extra third-state mission days beyond the 10 and the 40% also count/);
+    expect(short).not.toMatch(/45 work nights/);
+    expect(short).not.toMatch(/normal rules of the agreement apply/);
     expect(short).toMatch(/Belgium→Luxembourg/);
     expect(short).toMatch(/Germany→Luxembourg/);
     expect(short).toMatch(/No general tax counter:.*France→Belgium \(no day limit\), Netherlands→Belgium/s);

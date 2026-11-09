@@ -1,44 +1,52 @@
 import { Link, Navigate } from 'react-router-dom';
 import { useLang } from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { FRENCH_HUB } from '../../content/guideHub.mjs';
-import { GUIDES } from '../../content/guides';
+import { HUB_BY_LANG } from '../../content/guideHub.mjs';
+import { guidesFor } from '../../content/guides';
 import { getDict } from '../../i18n';
 import { publicPath } from '../../lib/publicPath';
 
-const FR_ONLY = ['fr'] as const;
 const BASE = 'https://borderday.com';
 
-function enBrefText(markdown: string): string {
-  const match = markdown.match(/\*\*En bref\s*:\*\*\s*(.+)/);
+const CRUMBS: Record<string, string> = {
+  fr: "Fil d'Ariane",
+  de: 'Brotkrumen',
+  it: 'Percorso',
+};
+
+function briefText(markdown: string, pattern: RegExp): string {
+  const match = markdown.match(pattern);
   if (!match) return '';
   return match[1].replace(/\*\*/g, '').trim();
 }
 
 export default function GuidesHub() {
   const lang = useLang();
-  const d = getDict('fr');
-  if (lang !== 'fr') {
+  const hub = HUB_BY_LANG[lang as 'fr' | 'de' | 'it'];
+  if (!hub) {
     return <Navigate to={publicPath(lang)} replace />;
   }
+  const d = getDict(lang);
+  const guides = guidesFor(lang);
+  const only = [lang] as ['fr'] | ['de'] | ['it'];
   const itemList = {
     '@type': 'ItemList',
-    itemListElement: GUIDES.map((guide, index) => ({
+    itemListElement: guides.map((guide, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: guide.h1,
-      url: `${BASE}/fr/${guide.path}/`,
-      description: enBrefText(guide.markdown),
+      url: `${BASE}/${lang}/${guide.path}/`,
+      description: briefText(guide.markdown, hub.briefRe),
     })),
   };
   return (
     <>
       <Seo
-        lang="fr"
-        title={FRENCH_HUB.title}
-        description={FRENCH_HUB.description}
-        path={FRENCH_HUB.path}
-        alternates={FR_ONLY}
+        lang={lang}
+        title={hub.title}
+        description={hub.description}
+        path={hub.path}
+        alternates={only}
         breadcrumb={[
           { name: d.nav.home, path: '' },
           { name: d.nav.guides, path: 'guides' },
@@ -46,11 +54,11 @@ export default function GuidesHub() {
         extraGraph={[
           {
             '@type': 'CollectionPage',
-            '@id': `${BASE}/fr/guides/#collection`,
-            name: FRENCH_HUB.h1,
-            description: FRENCH_HUB.description,
-            inLanguage: 'fr',
-            url: `${BASE}/fr/guides/`,
+            '@id': `${BASE}/${lang}/guides/#collection`,
+            name: hub.h1,
+            description: hub.description,
+            inLanguage: lang,
+            url: `${BASE}/${lang}/guides/`,
             mainEntity: itemList,
           },
           itemList,
@@ -58,28 +66,28 @@ export default function GuidesHub() {
       />
       <section className="hero">
         <div className="container">
-          <nav className="crumbs" aria-label="Fil d'Ariane">
+          <nav className="crumbs" aria-label={CRUMBS[lang]}>
             <ol>
               <li>
-                <Link to={publicPath('fr')}>{d.nav.home}</Link>
+                <Link to={publicPath(lang)}>{d.nav.home}</Link>
               </li>
               <li aria-current="page">{d.nav.guides}</li>
             </ol>
           </nav>
-          <h1>{FRENCH_HUB.h1}</h1>
+          <h1>{hub.h1}</h1>
           <p id="summary" className="lead">
-            {FRENCH_HUB.intro}
+            {hub.intro}
           </p>
         </div>
       </section>
       <section className="section">
         <div className="container">
           <ul>
-            {GUIDES.map((guide) => (
+            {guides.map((guide) => (
               <li key={guide.id}>
-                <Link to={publicPath('fr', guide.path)}>{guide.h1}</Link>
+                <Link to={publicPath(lang, guide.path)}>{guide.h1}</Link>
                 <p>
-                  <strong>En bref :</strong> {enBrefText(guide.markdown)}
+                  <strong>{hub.briefLabel} :</strong> {briefText(guide.markdown, hub.briefRe)}
                 </p>
               </li>
             ))}

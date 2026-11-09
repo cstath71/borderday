@@ -56,7 +56,7 @@ const de: Dict = {
       'Nach dem EU/EWR/CH-Rahmenübereinkommen verlagert Telearbeit im Wohnstaat ab 25 % der Arbeitszeit die Sozialversicherung normalerweise dorthin, sofern keine A1-Bescheinigung beantragt wird. Ab 50 % steht das Übereinkommen nicht mehr zur Verfügung. BorderDay zeigt die drei Bereiche getrennt von der Steuer: unter 25 %, 25 % bis unter 50 % (A1 erforderlich) und 50 % oder mehr.',
     risk2Title: 'Steuerliche Tagesgrenzen',
     risk2Body:
-      'Steuerzähler laufen heute auf sieben Grenzrouten: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Nächte, in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage + 20 % regelmässige Rückkehr), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
+      'Steuerzähler laufen heute auf sieben Grenzrouten: Genf und weitere Kantone ausserhalb des Abkommens von 1983 (40 % / 10 Einsatztage), Kantone des Abkommens von 1983←Frankreich (40 % / 10 Einsätze / 45 Übernachtungen ausserhalb des Wohnstaats: höchstens eine Nacht in der Schweiz pro Arbeitswoche; gelegentliche Dienstreisen in Drittstaaten zählen; Teilzeit anteilig, abgerundet; unterjährig 20 % der Arbeitstage; zusätzliche Einsatztage in einem Drittstaat über die 10 und die 40 % hinaus zählen ebenfalls zu den 45; in Frankreich besteuert), Deutschland→Schweiz (60 Nichtrückkehrtage + 20 % regelmässige Rückkehr), Frankreich→Luxemburg (34 Tage, bei Teilzeit gekürzt), Belgien→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt), Deutschland→Luxemburg (34 Tage, bei Teilzeit nicht gekürzt) und Italien→Schweiz (25 % / 45 Tage ohne Rückkehr). Frankreich→Belgien und Niederlande→Belgien sagen klar, dass kein allgemeiner Steuerzähler läuft. Wir erfinden nie eine Zahl.',
     risk3Title: 'Teams über mehrere Grenzen',
     risk3Body:
       'Ein Unternehmens-Dashboard für Mitarbeitende mit unterschiedlichen Grenzen. Filter nach Grenze oder Status. CSV-Export. Mitarbeitende sehen bei ihren eigenen Tagen dieselben Zähler, die HR für sie sieht.',
@@ -173,9 +173,9 @@ const de: Dict = {
     ch_it_tax_telework_25: 'Telearbeit zu Hause (max. 25 % der unselbstständigen Erwerbstätigkeit)',
     ch_it_tax_nonreturn_45: 'Tage ohne Rückkehr nach Hause aus beruflichen Gründen (max. 45/Jahr)',
     ch_it_tax_note:
-      'Nach dem Protokoll zur Änderung des Grenzgängerabkommens Italien–Schweiz (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, veröffentlicht; in Kraft am 9. Feb. 2026 durch Notenaustausch, anwendbar ab 1. Jan. 2024, einschliesslich Übergangsregime): höchstens 25 % der unselbstständigen Erwerbstätigkeit in Form von Telearbeit zu Hause im Ansässigkeitsstaat im Kalenderjahr, ohne Änderung des Status oder der steuerlichen Behandlung dieser Telearbeit. Accordo Art. 2 definiert die Grenzzonen (CH: Graubünden, Tessin, Wallis; IT: Lombardei, Piemont, Aostatal, Provinz Bozen). Oberhalb dieser Grenze gelten die normalen Regeln des Abkommens. Quellen: Fedlex Accordo Art. 2; Fedlex AS 2026 104; Mitteilung des BSV vom 13. Feb. 2026.',
+      'Nach dem Protokoll zur Änderung des Grenzgängerabkommens Italien–Schweiz (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, veröffentlicht; in Kraft am 9. Feb. 2026 durch Notenaustausch, anwendbar ab 1. Jan. 2024, einschliesslich Übergangsregime): höchstens 25 % der unselbstständigen Erwerbstätigkeit in Form von Telearbeit zu Hause im Ansässigkeitsstaat im Kalenderjahr, ohne Änderung des Status oder der steuerlichen Behandlung dieser Telearbeit. Accordo Art. 2 definiert die Grenzzonen (CH: Graubünden, Tessin, Wallis; IT: Lombardei, Piemont, Aostatal, Provinz Bozen). Quellen: Fedlex Accordo Art. 2; Fedlex AS 2026 104; Mitteilung des SIF / EFD vom 13. Feb. 2026.',
     ch_it_nonreturn_note:
-      'Grundsätzlich und sofern die Behörden nichts anderes entscheiden: bis zu 45 Tage im Kalenderjahr ohne tägliche Heimkehr zur Arbeit (Protokoll zur Änderung des Abkommens Italien–Schweiz, Fedlex AS 2026 104). Ferien- und Krankheitstage zählen nicht. BorderDay zählt nur Tage, die Sie als «Beruflich auswärts übernachtet» markieren; eine Hin- und Rückfahrt am selben Tag zählt nicht. Oberhalb dieser Grenze gelten die normalen Regeln des Abkommens. Quellen: Fedlex Accordo / AS 2026 104.',
+      'Grundsätzlich und sofern die Behörden nichts anderes entscheiden: bis zu 45 Tage im Kalenderjahr ohne tägliche Heimkehr zur Arbeit (Protokoll zur Änderung des Abkommens Italien–Schweiz, Fedlex AS 2026 104). Ferien- und Krankheitstage zählen nicht. BorderDay zählt nur Tage, die Sie als «Beruflich auswärts übernachtet» markieren; eine Hin- und Rückfahrt am selben Tag zählt nicht. Quellen: Fedlex Accordo / AS 2026 104.',
     basel_de_employer_commute:
       'Personalregel Basel-Stadt: Vor-Ort-Tage diesen Monat (mindestens 5 oder 1 pro Woche)',
     basel_de_employer_note:
@@ -196,7 +196,7 @@ const de: Dict = {
       'Von Ihren Einsatztagen zählen {counted} innerhalb der 40 % und {excess} nicht: Diese sind in Frankreich steuerbar, vorbehaltlich eines Abkommens mit einem Drittstaat.',
     ch_fr_1983_telework_40: 'Telearbeitsanteil (max. 40 % der jährlichen Arbeitszeit, Regime 1983)',
     ch_fr_1983_missions_10: 'Temporäre Einsätze ausserhalb der Schweiz (max. 10 Tage/Jahr, 1983)',
-    ch_fr_1983_nights_45: 'Arbeitsnächte auswärts (max. 45/Jahr, 1983)',
+    ch_fr_1983_nights_45: 'Übernachtungen ausserhalb des Wohnstaats (max. 45/Jahr, 1983)',
     ch_fr_1983_tax_note:
       'Grenzgängerabkommen von 1983 (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Waadt, Wallis, Neuenburg, Jura): Personen mit Wohnsitz in Frankreich werden in Frankreich besteuert; Frankreich überweist 4,5 % des Bruttolohns an die Schweiz. Telearbeit aus Frankreich bis 40 % der jährlichen Arbeitszeit bleibt in diesem Regime. Bis zu 10 Einsatztage pro Jahr zählen innerhalb der 40 %, nur soweit sie nach der gewöhnlichen Telearbeit noch Platz haben. Bereitschaftsdienst zählt nur bei tatsächlichem Einsatz. Quellen: Verständigungsvereinbarung vom 30. Juni 2023 (impots.gouv.fr); ESTV-Merkblatt; Kanton Jura. Zählmethode: Der Kanton Jura gibt an, dass der Arbeitgeber Tage, Halbtage oder Stunden wählt und dies einheitlich auf das ganze Personal anwenden muss. ge.ch nennt für Genf Schwellen: ein Tag bei mehr als 4 Stunden Telearbeit; ein Halbtag bei 2 bis 4 Stunden, nichts unter 2 Stunden; oder jede effektive Stunde. Die ganzen und halben Tage von BorderDay sind eine Art, diese Aufzeichnung zu führen; eine Stundenmethode gibt es nicht: Zählt Ihr Arbeitgeber in Stunden, gelten seine Zahlen.',
     ch_fr_1983_missions_note:
@@ -208,7 +208,7 @@ const de: Dict = {
     ch_fr_1983_over_mission:
       'Einsatztage über der 10-Tage-Grenze (und über dem, was noch unter 40 % Platz hat): jeder solche Tag in Frankreich beendet das Regime von 1983, und jeder solche Tag in einem Drittstaat zählt zu den 45. BorderDay unterscheidet Frankreich nicht von einem Drittstaat. Fragen Sie Ihre Steuerbehörde.',
     ch_fr_1983_over_45:
-      'Über {limit} Arbeitsnächte auswärts, überschüssige Einsatztage in einem Drittstaat mitgezählt: das Grenzgängerregime von 1983 entfällt. Fragen Sie Ihre Steuerbehörde.',
+      'Über {limit} Übernachtungen ausserhalb des Wohnstaats, überschüssige Einsatztage in einem Drittstaat mitgezählt: das Grenzgängerregime von 1983 entfällt. Fragen Sie Ihre Steuerbehörde.',
     ch_fr_1983_nights_excess:
       'Diese Zahl enthält {excess} Einsatztage über die Grenzen von 10 Tagen und 40 % hinaus. Überschüssige Tage in einem Drittstaat zählen zu dieser Grenze, mit oder ohne auswärtige Nacht. BorderDay unterscheidet Frankreich nicht von einem Drittstaat.',
     ch_fr_1983_mission_excess:
@@ -249,7 +249,7 @@ const de: Dict = {
     ss_third_country:
       'Dieses Jahr erfasste Reisetage: {days}. Wiederkehrende Arbeit ausserhalb des Arbeitgeberstaats kann aus dem Rahmenübereinkommen fallen: Fragen Sie Ihre Sozialversicherungsstelle.',
     ch_it_over:
-      'Grenze überschritten. Oberhalb der Grenze gelten die normalen Regeln des Abkommens.',
+      'Grenze überschritten. Klären Sie das mit Ihrem Arbeitgeber oder der Steuerbehörde.',
     basel_de_regular_return_20: 'Regelmässige Rückkehr an den Arbeitsort (mindestens 20 % der vereinbarten Tage)',
     basel_de_regular_return_note:
       'Deutschland–Schweiz-Protokoll (AS 2025 791, Ziff. 5(b), ab 1. Jan. 2026): Eine regelmässige Rückkehr liegt vor, wenn sich die Person an mindestens 20 Prozent der vereinbarten Arbeitstage im Kalenderjahr vom Wohnsitz an den Arbeitsort und zurück begibt. BorderDay zählt Vor-Ort-Tage für diese Untergrenze, bezogen auf Ihre Vertragstage, sonst die Jahresbasis (240 bei üblicher 5-Tage-Woche). Fehlt die regelmässige Rückkehr, entfällt die Grenzgängereigenschaft nach Art. 15a. Quellen: Fedlex AS 2025 791; Merkblatt Kanton Bern 2026.',
@@ -455,7 +455,7 @@ const de: Dict = {
       'Nein. Sie erfassen die Tage selbst. Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und halber Tag und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat.',
     q5: 'Welche Grenzen decken Sie ab?',
     a5:
-      'Neun Grenzrouten in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
+      'Neun Grenzrouten in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Übernachtungen ausserhalb des Wohnstaats: höchstens eine Nacht in der Schweiz pro Arbeitswoche; gelegentliche Dienstreisen in Drittstaaten zählen; Teilzeit anteilig, abgerundet; unterjährig 20 % der Arbeitstage; zusätzliche Einsatztage in einem Drittstaat über die 10 und die 40 % hinaus zählen ebenfalls zu den 45), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
     q6: 'Und der App Store?',
     a6: 'Version 1 ist eine installierbare Progressive Web App (Startbildschirm). Eine native iOS-App kann später folgen.',
     q7: 'Wie funktionieren Zahlungen?',
@@ -1024,6 +1024,8 @@ const de: Dict = {
     byRegionTitle: 'Arbeitgeber nach Region',
     frenchGuideNote: 'Ein französischer Leitfaden für Personal mit Wohnsitz in Frankreich ist verfügbar.',
     frenchGuideLink: 'Französischer Leitfaden',
+    italianGuideNote: 'Ein italienischer Leitfaden für Personal mit Wohnsitz in Italien ist verfügbar.',
+    italianGuideLink: 'Italienischer Leitfaden',
     linkTicino: 'Arbeitgeber Tessin (IT→CH)',
     linkGeneva: 'Arbeitgeber Genf (FR→CH)',
     linkLuxembourg: 'Arbeitgeber Luxemburg (FR/BE/DE→LU)',
@@ -1037,7 +1039,7 @@ const de: Dict = {
       'BorderDay hilft Tessiner Arbeitgebern, Telearbeit, Vor-Ort-Tage und Übernachtungen auswärts für Personen zu erfassen, die in Italien wohnen und in der Schweiz arbeiten — gemäss dem Abkommen Italien–Schweiz (Accordo Art. 2, geändert für Telearbeit). Steuer: höchstens 25% Telearbeit am Wohnsitz und bis 45 Nicht-Rückkehrtage pro Jahr (Protokoll Fedlex RU 2026 104; in Kraft 9. Feb 2026, anwendbar ab 1. Jan 2024). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Keine Steuer- oder Rechtsberatung.',
     agreementTitle: 'Abkommen Italien–Schweiz (2020 / Protokoll 2023)',
     agreementBody:
-      'Das Abkommen Italien–Schweiz vom 23. Dezember 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) erfasst definierte Grenzzonen (CH: Graubünden, Tessin, Wallis; IT: Lombardei, Piemont, Aostatal, Provinz Bozen) mit Wohnsitz- und Arbeitsortbedingungen in Art. 2(b). Das Telearbeits-Protokoll ist als Fedlex RU 2026 104 veröffentlicht; das BSV nennt Inkrafttreten am 9. Februar 2026 mit Anwendung ab 1. Januar 2024, auch für Übergangsregime. Passung mit Berater oder Behörde prüfen, bevor Sie sich auf diese Zähler stützen.',
+      'Das Abkommen Italien–Schweiz vom 23. Dezember 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) erfasst definierte Grenzzonen (CH: Graubünden, Tessin, Wallis; IT: Lombardei, Piemont, Aostatal, Provinz Bozen) mit Wohnsitz- und Arbeitsortbedingungen in Art. 2(b). Das Telearbeits-Protokoll ist als Fedlex RU 2026 104 veröffentlicht; das SIF / EFD nennt Inkrafttreten am 9. Februar 2026 mit Anwendung ab 1. Januar 2024, auch für Übergangsregime. Passung mit Berater oder Behörde prüfen, bevor Sie sich auf diese Zähler stützen.',
     thresholdsTitle: 'Was BorderDay für Personal mit Wohnsitz in Italien zählt',
     thresholdTax25:
       'Steuer — Telearbeit am Wohnsitz: höchstens 25% der unselbständigen Tätigkeit als Telearbeit zu Hause in Italien im Kalenderjahr, ohne Änderung des betroffene Personstatus für diese Telearbeit (Protokoll / Accordo). Co-Working ist im Protokollwortlaut nicht bestätigt — bei der Behörde nachfragen.',

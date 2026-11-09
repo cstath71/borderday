@@ -137,25 +137,27 @@ describe('M2, M4, M8: sources', () => {
     expect(allSources.some((s) => s.url.includes('/legi24/'))).toBe(false);
   });
 
-  it('M4: the release is titled for who published it and leaves the 45-day counter', () => {
-    const isRelease = (url: string) => url.includes('bsv.admin.ch');
+  it('M4: the 13 Feb 2026 release is SIF / EFD and leaves the 45-day counter', () => {
+    const isRelease = (url: string) => url.includes('efd.admin.ch');
     const release = counter('ticino_it', 'ticino_tax_telework_25').counter.sources.find((s) => isRelease(s.url))!;
-    expect(release.title).toMatch(/FSIO/);
-    expect(release.title).not.toMatch(/\bSIF\b/);
+    expect(release.title).toMatch(/SIF \/ EFD/);
+    expect(release.title).not.toMatch(/FSIO/);
+    expect(release.url).toBe('https://www.efd.admin.ch/en/newnsb/KIyFJwwqspqaOcHDaT7u0');
     expect(counter('ticino_it', 'ticino_tax_nonreturn_45').counter.sources.some((s) => isRelease(s.url))).toBe(false);
   });
 
-  it('M4/#14: no locale names SIF, SFI, EFD or DFF as a Ticino source', () => {
+  it('Italy–Switzerland copy names SIF / EFD for 13 Feb 2026 and drops the unsourced limit sentence', () => {
+    expect(en.counters.ch_it_tax_note).toMatch(/SIF \/ EFD/);
+    expect(fr.counters.ch_it_tax_note).toMatch(/SFI \/ DFF/);
+    expect(de.counters.ch_it_tax_note).toMatch(/SIF \/ EFD/);
+    expect(itDict.counters.ch_it_tax_note).toMatch(/SFI \/ DFF/);
+    expect(nl.counters.ch_it_tax_note).toMatch(/SIF \/ EFD/);
     for (const [lang, d] of Object.entries(dicts)) {
-      for (const s of [d.counters.ch_it_tax_note, d.counters.ch_it_nonreturn_note]) {
-        expect(s, lang).not.toMatch(/\b(SIF|SFI|EFD|DFF)\b/);
+      for (const s of [d.counters.ch_it_tax_note, d.counters.ch_it_nonreturn_note, d.counters.ch_it_over]) {
+        expect(s, lang).not.toMatch(/FSIO|OFAS|UFAS|\bBSV\b/);
+        expect(s, lang).not.toMatch(/normal rules of the agreement|règles normales de l’accord|normalen Regeln des Abkommens|regole normali dell’accordo|normale regels van het akkoord/);
       }
     }
-    expect(en.counters.ch_it_tax_note).toMatch(/FSIO/);
-    expect(fr.counters.ch_it_tax_note).toMatch(/OFAS/);
-    expect(de.counters.ch_it_tax_note).toMatch(/BSV/);
-    expect(itDict.counters.ch_it_tax_note).toMatch(/UFAS/);
-    expect(nl.counters.ch_it_tax_note).toMatch(/BSV/);
   });
 
   it('M8: the DE–CH instrument carries its signature dates, not the filename date', () => {

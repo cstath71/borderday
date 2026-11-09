@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Typographic Open Graph images for the two French guides. No new figures."""
+"""Typographic Open Graph images for the written guides. No new figures."""
 from PIL import Image, ImageDraw, ImageFont
 import os
 
@@ -20,6 +20,21 @@ CARDS = [
         "og-guide-geneva.png",
         "Genève",
         "40 % de télétravail et 10 jours de missions",
+    ),
+    (
+        "og-guide-bale.png",
+        "Bâle",
+        "40 %, 10 missions et 45 nuitées",
+    ),
+    (
+        "og-guide-de-ch.png",
+        "Deutschland–Schweiz",
+        "Nichtrückkehr- und Pendeltage zählen",
+    ),
+    (
+        "og-guide-ticino.png",
+        "Italia–Ticino",
+        "Telelavoro e giorni di mancato rientro",
     ),
 ]
 

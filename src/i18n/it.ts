@@ -55,7 +55,7 @@ const it: Dict = {
       'Secondo l’accordo quadro UE/SEE/CH, il telelavoro nello Stato di residenza pari o superiore al 25% del tempo di lavoro vi trasferisce di norma la sicurezza sociale, salvo richiesta di un certificato A1. Dal 50% l’accordo quadro non è più disponibile. BorderDay mostra le tre fasce, separate dal fisco: sotto il 25%, dal 25% a meno del 50% (A1 richiesto) e 50% o più.',
     risk2Title: 'Soglie fiscali di giorni',
     risk2Body:
-      'Oggi i contatori fiscali funzionano su sette situazioni di frontiera: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), cantoni dell’accordo del 1983←Francia (40% / 10 impieghi temporanei / 45 notti, tassati in Francia), Germania→Svizzera (60 giorni di mancato rientro + 20% rientro regolare), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale), Belgio→Lussemburgo (34 giorni, non ridotti per il tempo parziale), Germania→Lussemburgo (34 giorni, non ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Francia→Belgio e Paesi Bassi→Belgio dichiarano chiaramente che nessun contatore fiscale generale è attivo. Non inventiamo mai un numero.',
+      'Oggi i contatori fiscali funzionano su sette situazioni di frontiera: Ginevra e altri cantoni fuori dall’accordo del 1983 (40% / 10 giorni di impiego temporaneo), cantoni dell’accordo del 1983←Francia (40% / 10 impieghi temporanei / 45 pernottamenti fuori dallo Stato di residenza: al massimo una notte in Svizzera per settimana lavorativa; i viaggi di lavoro occasionali in Stati terzi contano; tempo parziale in proporzione, arrotondato per difetto; anno parziale: 20% dei giorni di lavoro; i giorni di impiego temporaneo in uno Stato terzo oltre i 10 e il 40% contano anch’essi nei 45; tassati in Francia), Germania→Svizzera (60 giorni di mancato rientro + 20% rientro regolare), Francia→Lussemburgo (34 giorni, ridotti per il tempo parziale), Belgio→Lussemburgo (34 giorni, non ridotti per il tempo parziale), Germania→Lussemburgo (34 giorni, non ridotti per il tempo parziale) e Italia→Svizzera (25% / 45 giorni di mancato rientro). Francia→Belgio e Paesi Bassi→Belgio dichiarano chiaramente che nessun contatore fiscale generale è attivo. Non inventiamo mai un numero.',
     risk3Title: 'Team multi-situazione',
     risk3Body:
       'Una dashboard aziendale per dipendenti su confini diversi. Filtri per confine o situazione. Export CSV. I dipendenti vedono, per i propri giorni, gli stessi contatori che l’HR vede per loro.',
@@ -170,9 +170,9 @@ const it: Dict = {
     ch_it_tax_telework_25: 'Telelavoro al domicilio (max 25% dell’attività di lavoro dipendente)',
     ch_it_tax_nonreturn_45: 'Giorni senza rientro a domicilio per lavoro (max 45/anno)',
     ch_it_tax_note:
-      'Secondo il protocollo che modifica l’accordo frontaliero Italia–Svizzera (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, pubblicato; in vigore il 9 feb 2026 mediante scambio di note, applicabile dal 1° gen 2024, compresi i lavoratori del regime transitorio): al massimo il 25 per cento della sua attività di lavoro dipendente in modalità di telelavoro presso il proprio domicilio nello Stato di residenza in un anno civile, senza modificare lo status né il trattamento fiscale di quel telelavoro. L’Accordo Art. 2 definisce le zone di frontiera (CH: Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano). Oltre tale limite si applicano le regole normali dell’accordo. Fonti: Fedlex Accordo Art. 2; Fedlex RU 2026 104; comunicato dell’UFAS del 13 feb. 2026.',
+      'Secondo il protocollo che modifica l’accordo frontaliero Italia–Svizzera (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, pubblicato; in vigore il 9 feb 2026 mediante scambio di note, applicabile dal 1° gen 2024, compresi i lavoratori del regime transitorio): al massimo il 25 per cento della sua attività di lavoro dipendente in modalità di telelavoro presso il proprio domicilio nello Stato di residenza in un anno civile, senza modificare lo status né il trattamento fiscale di quel telelavoro. L’Accordo Art. 2 definisce le zone di frontiera (CH: Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano). Fonti: Fedlex Accordo Art. 2; Fedlex RU 2026 104; comunicato della SFI / DFF del 13 feb. 2026.',
     ch_it_nonreturn_note:
-      'In linea di principio, e salvo diversa decisione delle autorità, fino a 45 giorni in un anno civile senza rientro quotidiano a domicilio per lavoro (protocollo che modifica l’accordo Italia–Svizzera, Fedlex RU 2026 104). I giorni di ferie e di malattia non contano. BorderDay conta solo i giorni contrassegnati «Notte fuori per lavoro»; un viaggio di andata e ritorno lo stesso giorno non conta. Oltre tale limite si applicano le regole normali dell’accordo. Fonti: Fedlex Accordo / RU 2026 104.',
+      'In linea di principio, e salvo diversa decisione delle autorità, fino a 45 giorni in un anno civile senza rientro quotidiano a domicilio per lavoro (protocollo che modifica l’accordo Italia–Svizzera, Fedlex RU 2026 104). I giorni di ferie e di malattia non contano. BorderDay conta solo i giorni contrassegnati «Notte fuori per lavoro»; un viaggio di andata e ritorno lo stesso giorno non conta. Fonti: Fedlex Accordo / RU 2026 104.',
     basel_de_employer_commute:
       'Regola del personale di Basilea Città: giorni in sede questo mese (minimo 5, o 1 a settimana)',
     basel_de_employer_note:
@@ -193,7 +193,7 @@ const it: Dict = {
       'Dei vostri giorni di impiego temporaneo, {counted} contano nel 40% e {excess} no: questi sono imponibili in Francia, fatta salva una convenzione con uno Stato terzo.',
     ch_fr_1983_telework_40: 'Quota di telelavoro (max 40% del tempo di lavoro annuo, regime 1983)',
     ch_fr_1983_missions_10: 'Impieghi temporanei fuori dalla Svizzera (max 10 giorni/anno, 1983)',
-    ch_fr_1983_nights_45: 'Notti di lavoro fuori casa (max 45/anno, 1983)',
+    ch_fr_1983_nights_45: 'Pernottamenti fuori dallo Stato di residenza (max 45/anno, 1983)',
     ch_fr_1983_tax_note:
       'Accordo frontaliero del 1983 (Berna, Soletta, Basilea Città, Basilea Campagna, Vaud, Vallese, Neuchâtel, Giura): i residenti in Francia sono tassati in Francia; la Francia versa il 4,5% del salario lordo alla Svizzera. Il telelavoro dalla Francia fino al 40% del tempo di lavoro annuo resta in quel regime. Fino a 10 giorni di impiego temporaneo all’anno contano nel 40%, solo nella misura in cui rientrano dopo il telelavoro ordinario. La reperibilità conta solo in caso di intervento effettivo. Fonti: accordo amichevole del 30 giugno 2023 (impots.gouv.fr); scheda AFC; Cantone del Giura. Metodo di calcolo: il Cantone del Giura indica che il datore di lavoro sceglie giornate, mezze giornate od ore e deve applicare la scelta in modo uniforme a tutto il personale. ge.ch indica soglie per Ginevra: una giornata se il telelavoro dura più di 4 ore; una mezza giornata da 2 a 4 ore, nulla sotto le 2 ore; oppure ogni ora effettiva. Le giornate e mezze giornate di BorderDay sono un modo di tenere questo registro; non ha un metodo orario: se il datore di lavoro conta in ore, valgono le sue cifre.',
     ch_fr_1983_missions_note:
@@ -205,7 +205,7 @@ const it: Dict = {
     ch_fr_1983_over_mission:
       'Giorni di impiego temporaneo oltre il tetto di 10 (e oltre quanto ancora rientra sotto il 40%): qualsiasi giorno di quel tipo effettuato in Francia fa cessare il regime del 1983, e qualsiasi giorno effettuato in uno Stato terzo conta nei 45. BorderDay non distingue la Francia da uno Stato terzo. Verificate con la vostra autorità fiscale.',
     ch_fr_1983_over_45:
-      'Oltre {limit} notti di lavoro fuori casa, contando i giorni di impiego temporaneo in eccesso in uno Stato terzo: il regime frontaliero del 1983 viene meno. Verificate con la vostra autorità fiscale.',
+      'Oltre {limit} pernottamenti fuori dallo Stato di residenza, contando i giorni di impiego temporaneo in eccesso in uno Stato terzo: il regime frontaliero del 1983 viene meno. Verificate con la vostra autorità fiscale.',
     ch_fr_1983_nights_excess:
       'Questo totale include {excess} giorni di impiego temporaneo oltre i limiti di 10 giorni e del 40%. I giorni in eccesso in uno Stato terzo contano in questo limite, con o senza notte fuori casa. BorderDay non distingue la Francia da uno Stato terzo.',
     ch_fr_1983_mission_excess:
@@ -246,7 +246,7 @@ const it: Dict = {
     ss_third_country:
       'Giorni di trasferta registrati quest’anno: {days}. Un lavoro ricorrente fuori dallo Stato del datore di lavoro può uscire dall’accordo quadro: verificate con il vostro istituto di sicurezza sociale.',
     ch_it_over:
-      'Limite superato. Oltre il limite si applicano le regole normali dell’accordo.',
+      'Limite superato. Verificate con il datore di lavoro o l’autorità fiscale.',
     basel_de_regular_return_20: 'Rientro regolare sul luogo di lavoro (almeno il 20% dei giorni convenuti)',
     basel_de_regular_return_note:
       'Protocollo Germania–Svizzera (AS 2025 791, punto 5(b), dal 1° gen. 2026): il rientro regolare significa che la persona si reca dal domicilio al luogo di lavoro e ritorno per almeno il 20% dei giorni di lavoro convenuti nell’anno civile. BorderDay conta i giorni in sede per questo minimo, rispetto ai giorni contrattuali se impostati, altrimenti la base annuale (240 per una settimana abituale di 5 giorni). Senza rientro regolare lo status di frontaliere ai sensi dell’art. 15a è a rischio. Fonti: Fedlex AS 2025 791; foglio del Cantone Berna 2026.',
@@ -454,7 +454,7 @@ const it: Dict = {
       'No. Registrate voi i giorni. Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente.',
     q5: 'Quali confini coprite?',
     a5:
-      'Nove situazioni di frontiera in cinque regioni. Contatori di sicurezza sociale su tutte e nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale: Francia→Belgio non ha un limite di giorni, e per Paesi Bassi→Belgio non è stata trovata alcuna tolleranza.',
+      'Nove situazioni di frontiera in cinque regioni. Contatori di sicurezza sociale su tutte e nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 pernottamenti fuori dallo Stato di residenza: al massimo una notte in Svizzera per settimana lavorativa; i viaggi di lavoro occasionali in Stati terzi contano; tempo parziale in proporzione, arrotondato per difetto; anno parziale: 20% dei giorni di lavoro; i giorni di impiego temporaneo in uno Stato terzo oltre i 10 e il 40% contano anch’essi nei 45), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale: Francia→Belgio non ha un limite di giorni, e per Paesi Bassi→Belgio non è stata trovata alcuna tolleranza.',
     q6: 'E l’App Store?',
     a6: 'La versione 1 è una progressive web app installabile (schermata Home). Un’app iOS nativa potrà arrivare più avanti.',
     q7: 'Come funzionano i pagamenti?',
@@ -1023,6 +1023,8 @@ const it: Dict = {
     byRegionTitle: 'Datori di lavoro per regione',
     frenchGuideNote: 'È disponibile una guida in francese per il personale residente in Francia.',
     frenchGuideLink: 'Guida in francese',
+    italianGuideNote: 'È disponibile una guida in italiano per chi risiede in Italia.',
+    italianGuideLink: 'Guida in italiano',
     linkTicino: 'Datori di lavoro Ticino (IT→CH)',
     linkGeneva: 'Datori di lavoro Ginevra (FR→CH)',
     linkLuxembourg: 'Datori di lavoro Lussemburgo (FR/BE/DE→LU)',
@@ -1036,7 +1038,7 @@ const it: Dict = {
       'BorderDay aiuta i datori di lavoro in Ticino a registrare telelavoro, giorni in sede e notti fuori casa per chi risiede in Italia e lavora in Svizzera secondo l’accordo Italia–Svizzera (Accordo Art. 2, come modificato per il telelavoro). Fisco: al massimo il 25% di telelavoro al domicilio e fino a 45 giorni di non rientro all’anno (protocollo Fedlex RU 2026 104; in vigore dal 9 febbraio 2026, con effetto dal 1° gennaio 2024). Previdenza: fasce del quadro UE/SEE/CH sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Non è consulenza fiscale o legale.',
     agreementTitle: 'Accordo Italia–Svizzera (2020 / protocollo 2023)',
     agreementBody:
-      'L’accordo Italia–Svizzera del 23 dicembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) riguarda zone di frontiera definite (CH: Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano), con condizioni di residenza e luogo di lavoro all’Art. 2(b). Il protocollo sul telelavoro è pubblicato come Fedlex RU 2026 104; l’UFAS indica l’entrata in vigore il 9 febbraio 2026 con applicazione dal 1° gennaio 2024, anche per i lavoratori in regime transitorio. Verificate l’idoneità con il consulente o l’autorità prima di basarvi su questi contatori.',
+      'L’accordo Italia–Svizzera del 23 dicembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) riguarda zone di frontiera definite (CH: Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano), con condizioni di residenza e luogo di lavoro all’Art. 2(b). Il protocollo sul telelavoro è pubblicato come Fedlex RU 2026 104; la SFI / DFF indica l’entrata in vigore il 9 febbraio 2026 con applicazione dal 1° gennaio 2024, anche per i lavoratori in regime transitorio. Verificate l’idoneità con il consulente o l’autorità prima di basarvi su questi contatori.',
     thresholdsTitle: 'Cosa conta BorderDay per il personale residente in Italia',
     thresholdTax25:
       'Fisco — telelavoro al domicilio: al massimo il 25% dell’attività lavorativa subordinata come telelavoro a casa in Italia in un anno civile, senza modificare lo status fiscale di residenza per quel telelavoro (protocollo / Accordo). Il co-working non è confermato dal testo del protocollo — chiedete all’autorità.',

@@ -39,4 +39,58 @@ export const GUIDE_FAQ = {
       'Non. Ce guide décrit le régime de Genève, hors accord frontalier du 11 avril 1983. Cet accord de 1983 concerne d’autres cantons (Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel et Jura) et ne se transpose pas tel quel au télétravail genevois.',
     ],
   ],
+  bale: [
+    [
+      'Les 45 nuitées, ce sont seulement les nuits passées en Suisse ?',
+      'Non. Selon le BOI 14 A-5-05, le plafond comprend les nuitées passées en Suisse (au plus une par semaine de travail) et celles des déplacements professionnels occasionnels dans un État tiers. Les jours de mission dans un État tiers au-delà des limites de 10 jours et de 40 % s’y ajoutent.',
+    ],
+    [
+      'Le plafond de 45 est-il le même à temps partiel ?',
+      'Non. Il est réduit proportionnellement et arrondi à l’inférieur (80 % donne 36, 70 % donne 31). Pour une activité sur une partie de l’année, la limite est de 20 % des jours de travail.',
+    ],
+    [
+      'Les règles de Genève s’appliquent-elles à Bâle ?',
+      'Non. Genève ne fait pas partie de l’accord de 1983. Ses formulaires, ses seuils horaires et ses échéances ne valent pas pour Bâle-Ville ou Bâle-Campagne.',
+    ],
+    [
+      'Mon employeur doit-il déclarer un taux si je ne télétravaille pas ?',
+      'Oui, selon l’AFC / ESTV : l’attestation est due même lorsque le taux est de 0 %. Calendrier et formulaire dépendent du canton.',
+    ],
+  ],
+  deCh: [
+    [
+      'Zählt ein Homeoffice-Tag als Nichtrückkehrtag?',
+      'Nein. Volle Arbeitstage im Homeoffice sind keine Nichtrückkehrtage (Konsultationsvereinbarung 2022). Sie zählen aber auch nicht als Pendeltage für die 20 %-Regel.',
+    ],
+    [
+      'Gilt die Regel nur für Basel?',
+      'Nein. Art. 15a gilt für alle Kantone. Basel hat eigene Formulare und Verfahren, aber keine eigene Grenzgängerregel.',
+    ],
+    [
+      'Werden die 60 Tage bei Teilzeit immer gekürzt?',
+      'Nein. Bei stundenweiser Teilzeit an jedem betriebsüblichen Arbeitstag bleibt es bei 60. Gekürzt wird nur bei Teilzeit an einzelnen Tagen, im Verhältnis der Arbeitstage.',
+    ],
+    [
+      'Zählt eine eintägige Geschäftsreise?',
+      'Innerhalb der Schweiz oder Deutschlands nicht. In einem Drittstaat zählt sie stets als Nichtrückkehrtag.',
+    ],
+  ],
+  ticinoIt: [
+    [
+      'Le regole valgono solo per il Ticino?',
+      'No. L’area di frontiera svizzera comprende Ticino, Grigioni e Vallese. Serve inoltre la residenza fiscale in un Comune italiano nella fascia di 20 km dal confine.',
+    ],
+    [
+      'Il telelavoro in coworking conta nel 25 %?',
+      'Il Protocollo parla di telelavoro «presso il proprio domicilio». Non abbiamo trovato una conferma ufficiale per il coworking: chiedete all’autorità competente.',
+    ],
+    [
+      'Ferie e malattia contano nei 45 giorni?',
+      'No. Il Protocollo le esclude espressamente.',
+    ],
+    [
+      'Chi ha annunciato l’entrata in vigore?',
+      'La Segreteria di Stato per le questioni finanziarie internazionali (SFI), con un comunicato del 13 febbraio 2026.',
+    ],
+  ],
 };

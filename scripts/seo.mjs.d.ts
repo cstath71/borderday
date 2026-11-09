@@ -16,6 +16,16 @@ export const LANGS: string[];
 export const LASTMOD: string;
 export const AI_BOTS: string[];
 export const PUBLIC_PATHS: string[];
+export const ALL_GUIDES: {
+  id: string;
+  lang?: string;
+  path: string;
+  file: string;
+  description: string;
+  datePublished: string;
+  fallbackPath: string;
+}[];
+export const GUIDE_HUB_LANGS: string[];
 export const FRENCH_GUIDES: {
   id: string;
   path: string;

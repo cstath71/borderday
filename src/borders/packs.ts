@@ -53,10 +53,10 @@ const SRC = {
     checked: '2026-11-01',
   },
   // Supports the 25%, the 9 Feb 2026 entry into force and the 1 Jan 2024 start. It does not mention the 45 days.
-  fsioIt: {
-    title: 'FSIO (BSV/OFAS/UFAS) — release of 13 Feb 2026: Switzerland–Italy home office rules in force',
-    url: 'https://www.bsv.admin.ch/en/newnsb/KIyFJwwqspqaOcHDaT7u0',
-    checked: '2026-11-01',
+  sifEfdIt: {
+    title: 'SIF / EFD — release of 13 Feb 2026: Switzerland–Italy home office rules in force',
+    url: 'https://www.efd.admin.ch/en/newnsb/KIyFJwwqspqaOcHDaT7u0',
+    checked: '2026-11-09',
   },
   fedlex: {
     title: 'Fedlex RU 2026 104 — protocollo CH–IT (published)',
@@ -673,7 +673,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.fedlex, SRC.accordo2020, SRC.fsioIt],
+        sources: [SRC.fedlex, SRC.accordo2020, SRC.sifEfdIt],
         notesKey: 'ch_it_tax_note',
         overKey: 'ch_it_over',
       },

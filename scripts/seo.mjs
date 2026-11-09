@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { FRENCH_HUB } from '../src/content/guideHub.mjs';
+import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
 import { ORG_SAME_AS, offersFor } from '../src/seo/offers.mjs';
 import { ROUTES_COVERED_PROSE } from '../src/seo/routesCovered.mjs';
 
@@ -17,7 +17,9 @@ export const BRAND = CFG.brand;
 export const INDEXNOW_KEY = CFG.indexnow_key;
 export const LANGS = ['en', 'fr', 'de', 'it', 'nl'];
 export const LASTMOD = CFG.lastmod;
-export const FRENCH_GUIDES = JSON.parse(readFileSync(join(ROOT, 'src/content/guides.json'), 'utf8'));
+export const ALL_GUIDES = JSON.parse(readFileSync(join(ROOT, 'src/content/guides.json'), 'utf8'));
+export const FRENCH_GUIDES = ALL_GUIDES.filter((guide) => (guide.lang || 'fr') === 'fr');
+export const GUIDE_HUB_LANGS = ['fr', 'de', 'it'];
 
 export const IN_SHORT_LABEL = {
   en: 'In short',
@@ -1010,7 +1012,7 @@ export const FAQ = {
     ],
     [
       'Which borders do you cover?',
-      'Nine border routes in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
+      'Nine border routes in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 overnight stays away from the residence state: at most one Swiss night per working week; occasional third-country business trips count; part-time pro rata rounded down; part-year 20% of working days; extra third-state mission days beyond the 10 and the 40% also count), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
     ],
     [
       'How much does BorderDay cost?',
@@ -1040,7 +1042,7 @@ export const FAQ = {
     ],
     [
       'Quelles frontières couvrez-vous ?',
-      'Neuf situations frontalières dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
+      'Neuf situations frontalières dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuitées hors de l’État de résidence : au plus une nuitée en Suisse par semaine de travail ; déplacements professionnels occasionnels dans un État tiers compris ; temps partiel au prorata arrondi à l’inférieur ; année partielle : 20 % des jours de travail ; jours de mission dans un État tiers au-delà des 10 et des 40 % également comptés dans les 45), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
     ],
     [
       'Combien coûte BorderDay ?',
@@ -1070,7 +1072,7 @@ export const FAQ = {
     ],
     [
       'Welche Grenzen decken Sie ab?',
-      'Neun Grenzrouten in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Nächte), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
+      'Neun Grenzrouten in fünf Regionen. Sozialversicherungszähler auf allen neun. Steuerzähler auf sieben: Genf und weitere Kantone ausserhalb des Abkommens von 1983←Frankreich, Kantone des Abkommens von 1983←Frankreich (40 %/10 Einsätze/45 Übernachtungen ausserhalb des Wohnstaats: höchstens eine Nacht in der Schweiz pro Arbeitswoche; gelegentliche Dienstreisen in Drittstaaten zählen; Teilzeit anteilig, abgerundet; unterjährig 20 % der Arbeitstage; zusätzliche Einsatztage in einem Drittstaat über die 10 und die 40 % hinaus zählen ebenfalls zu den 45), Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg und Italien→Schweiz. Kein allgemeiner Steuerzähler: Frankreich→Belgien hat keine Tagesgrenze, und für Niederlande→Belgien wurde keine Toleranz gefunden.',
     ],
     [
       'Was kostet BorderDay?',
@@ -1100,7 +1102,7 @@ export const FAQ = {
     ],
     [
       'Quali confini coprite?',
-      'Nove situazioni di frontiera in cinque regioni. Contatori di sicurezza sociale su tutte e nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 notti), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale: Francia→Belgio non ha un limite di giorni, e per Paesi Bassi→Belgio non è stata trovata alcuna tolleranza.',
+      'Nove situazioni di frontiera in cinque regioni. Contatori di sicurezza sociale su tutte e nove. Contatori fiscali su sette: Ginevra e altri cantoni fuori dall’accordo del 1983←Francia, cantoni dell’accordo del 1983←Francia (40%/10 impieghi temporanei/45 pernottamenti fuori dallo Stato di residenza: al massimo una notte in Svizzera per settimana lavorativa; i viaggi di lavoro occasionali in Stati terzi contano; tempo parziale in proporzione, arrotondato per difetto; anno parziale: 20% dei giorni di lavoro; i giorni di impiego temporaneo in uno Stato terzo oltre i 10 e il 40% contano anch’essi nei 45), Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo e Italia→Svizzera. Nessun contatore fiscale generale: Francia→Belgio non ha un limite di giorni, e per Paesi Bassi→Belgio non è stata trovata alcuna tolleranza.',
     ],
     [
       'Quanto costa BorderDay?',
@@ -1131,7 +1133,7 @@ FAQ.nl = [
   ],
   [
     'Welke grenzen dekt u?',
-    'Negen grensroutes in vijf regio’s. Socialezekerheidstellers op alle negen. Belastingtellers op zeven: Genève en andere niet-1983-kantons←Frankrijk, 1983-verdragskantons←Frankrijk (40%/10 missies/45 nachten), Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg en Italië→Zwitserland. Geen algemene belastingteller: Frankrijk→België heeft geen daglimiet, en voor Nederland→België is geen tolerantie gevonden.',
+    'Negen grensroutes in vijf regio’s. Socialezekerheidstellers op alle negen. Belastingtellers op zeven: Genève en andere niet-1983-kantons←Frankrijk, 1983-verdragskantons←Frankrijk (40%/10 missies/45 overnachtingen buiten de woonstaat: hoogstens één Zwitserse nacht per werkweek; incidentele dienstreizen naar derde landen tellen mee; deeltijd evenredig naar beneden afgerond; deeljaar 20% van de werkdagen; extra missiedagen in een derde staat boven de 10 en de 40% tellen ook mee voor de 45), Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg en Italië→Zwitserland. Geen algemene belastingteller: Frankrijk→België heeft geen daglimiet, en voor Nederland→België is geen tolerantie gevonden.',
   ],
   [
     'Wat kost BorderDay?',
@@ -1232,7 +1234,14 @@ export function lastmodFor(lang, path) {
 }
 
 export function hubLastmod() {
-  return latestGitDay(['src/pages/guides/Hub.tsx', 'src/content/guideHub.mjs', 'src/i18n/fr.ts', 'scripts/seo.mjs']);
+  return latestGitDay([
+    'src/pages/guides/Hub.tsx',
+    'src/content/guideHub.mjs',
+    'src/i18n/fr.ts',
+    'src/i18n/de.ts',
+    'src/i18n/it.ts',
+    'scripts/seo.mjs',
+  ]);
 }
 
 export function sitemapXml() {
@@ -1253,21 +1262,23 @@ export function sitemapXml() {
       out += '  </url>\n';
     }
   }
-  {
-    const loc = absUrl('fr', FRENCH_HUB.path);
+  for (const lang of GUIDE_HUB_LANGS) {
+    const hub = HUB_BY_LANG[lang];
+    const loc = absUrl(lang, hub.path);
     out += '  <url>\n';
     out += `    <loc>${esc(loc)}</loc>\n`;
     out += `    <lastmod>${esc(hubLastmod())}</lastmod>\n`;
-    out += `    <xhtml:link rel="alternate" hreflang="fr" href="${esc(loc)}"/>\n`;
+    out += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${esc(loc)}"/>\n`;
     out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(loc)}"/>\n`;
     out += '  </url>\n';
   }
-  for (const guide of FRENCH_GUIDES) {
-    const loc = absUrl('fr', guide.path);
+  for (const guide of ALL_GUIDES) {
+    const lang = guide.lang || 'fr';
+    const loc = absUrl(lang, guide.path);
     out += '  <url>\n';
     out += `    <loc>${esc(loc)}</loc>\n`;
     out += `    <lastmod>${esc(guide.datePublished)}</lastmod>\n`;
-    out += `    <xhtml:link rel="alternate" hreflang="fr" href="${esc(loc)}"/>\n`;
+    out += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${esc(loc)}"/>\n`;
     out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(loc)}"/>\n`;
     out += '  </url>\n';
   }
@@ -1462,12 +1473,17 @@ export function ldScript(graph) {
   );
 }
 
-function enBref(id) {
-  const guide = FRENCH_GUIDES.find((item) => item.id === id);
+function guideBrief(guide) {
+  const hub = HUB_BY_LANG[guide.lang || 'fr'];
   const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
-  const match = markdown.match(/\*\*En bref\s*:\*\*\s*(.+)/);
+  const match = hub ? markdown.match(hub.briefRe) : null;
   if (!match) return guide.description;
   return match[1].replace(/\*\*/g, '').trim();
+}
+
+function enBref(id) {
+  const guide = ALL_GUIDES.find((item) => item.id === id);
+  return guideBrief(guide);
 }
 
 export function llmsTxt() {
@@ -1480,7 +1496,7 @@ export function llmsTxt() {
 - ${ROUTES_COVERED_PROSE}
 - Border routes covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine border routes (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
-- Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return; part-year 5×months+1×weeks; part-time base 240/280), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
+- Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 overnight stays away from the residence state: at most one Swiss night per working week; occasional third-country business trips count; part-time pro rata rounded down; part-year 20% of working days; extra third-state mission days beyond the 10 and the 40% also count; taxed in France), Germany→Switzerland (60 non-return days + 20% regular return; part-year 5×months+1×weeks; part-time base 240/280), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
 - No general tax counter: France→Belgium (no day limit), Netherlands→Belgium (no tolerance found). Do not describe BorderDay as tracking tax limits on these border routes.
 - Day log: the free preview stays on the device; with a plan or company account it is saved to the account. No GPS or device location.
 - Company accounts: invite by email, HR dashboard with the same counters employees see
@@ -1510,12 +1526,20 @@ export function llmsTxt() {
 - ${BASE}/en/terms/ — Terms and legal notice
 - ${BASE}/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - ${BASE}/en/cancel/ — Cancel subscription
-- ${BASE}/fr/guides/ — French only, no translated version: guide hub for the two France-resident guides
+- ${BASE}/fr/guides/ — French only, no translated version: guide hub for the France-resident guides (Luxembourg, Geneva, Basel)
 - ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'luxembourg').path)} — French only, no translated version: how a France resident employed in Luxembourg counts telework days
 - En bref (France–Luxembourg): ${enBref('luxembourg')}
 - ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'geneva').path)} — French only, no translated version: how a France resident employed in Geneva counts telework and temporary missions
 - En bref (Genève): ${enBref('geneva')}
-- Plain-text mirrors: ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'luxembourg').path)}index.md and ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'geneva').path)}index.md
+- ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'bale').path)} — French only, no translated version: how a France resident employed in Basel under the 1983 agreement counts telework, missions and overnight stays
+- En bref (Bâle): ${enBref('bale')}
+- ${BASE}/de/guides/ — German only, no translated version: guide hub for the Germany–Switzerland day-count guide
+- ${absUrl('de', ALL_GUIDES.find((g) => g.id === 'deCh').path)} — German only, no translated version: how a Germany resident working in Switzerland counts non-return days, commute days and home office
+- Kurz gesagt (Deutschland–Schweiz): ${enBref('deCh')}
+- ${BASE}/it/guides/ — Italian only, no translated version: guide hub for the Italy–Ticino day-count guide
+- ${absUrl('it', ALL_GUIDES.find((g) => g.id === 'ticinoIt').path)} — Italian only, no translated version: how an Italy resident working in Ticino counts telework and non-return days
+- In breve (Italia–Ticino): ${enBref('ticinoIt')}
+- Plain-text mirrors: ${ALL_GUIDES.map((g) => `${absUrl(g.lang || 'fr', g.path)}index.md`).join(', ')}
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

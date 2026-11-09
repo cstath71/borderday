@@ -56,7 +56,7 @@ const fr: Dict = {
       'Selon l’accord-cadre UE/EEE/CH, un télétravail dans l’État de résidence de 25 % ou plus du temps de travail y transfère normalement la sécurité sociale, sauf demande d’attestation A1. À partir de 50 %, l’accord-cadre n’est plus disponible. BorderDay affiche les trois tranches, séparément de la fiscalité : moins de 25 %, de 25 % à moins de 50 % (A1 requise) et 50 % ou plus.',
     risk2Title: 'Seuils fiscaux de jours',
     risk2Body:
-      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept situations frontalières : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits, imposés en France), Allemagne→Suisse (60 jours de non-retour + 20 % de retour régulier), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
+      'Des compteurs fiscaux fonctionnent aujourd’hui sur sept situations frontalières : Genève et autres cantons hors accord de 1983 (40 % / 10 jours de mission), cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuitées hors de l’État de résidence : au plus une nuitée en Suisse par semaine de travail ; déplacements professionnels occasionnels dans un État tiers compris ; temps partiel au prorata arrondi à l’inférieur ; année partielle : 20 % des jours de travail ; jours de mission dans un État tiers au-delà des 10 et des 40 % également comptés dans les 45 ; imposés en France), Allemagne→Suisse (60 jours de non-retour + 20 % de retour régulier), France→Luxembourg (34 jours, réduits en cas de temps partiel), Belgique→Luxembourg (34 jours, non réduits en cas de temps partiel), Allemagne→Luxembourg (34 jours, non réduits en cas de temps partiel) et Italie→Suisse (25 % / 45 jours de non-retour). France→Belgique et Pays-Bas→Belgique indiquent clairement qu’aucun compteur fiscal général ne fonctionne. Nous n’inventons jamais de chiffre.',
     risk3Title: 'Équipes multi-frontières',
     risk3Body:
       'Un tableau de bord pour des collaborateurs sur des frontières différentes. Filtres par frontière ou statut. Export CSV. Les collaborateurs voient, pour leurs propres jours, les mêmes compteurs que les RH voient pour eux.',
@@ -172,9 +172,9 @@ const fr: Dict = {
     ch_it_tax_telework_25: 'Télétravail au domicile (max. 25 % de l’activité lucrative dépendante)',
     ch_it_tax_nonreturn_45: 'Jours sans retour à domicile pour le travail (max. 45/an)',
     ch_it_tax_note:
-      'Selon le protocole modifiant l’accord frontalier Italie–Suisse (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, publié ; en vigueur le 9 févr. 2026 par échange de notes, applicable dès le 1er janv. 2024, y compris les travailleurs du régime transitoire) : au plus 25 % de l’activité lucrative dépendante en télétravail à domicile dans l’État de résidence sur une année civile, sans changer le statut ni le traitement fiscal de ce télétravail. L’Accordo Art. 2 définit les zones frontalières (CH : Grisons, Tessin, Valais ; IT : Lombardie, Piémont, Vallée d’Aoste, province de Bolzano). Au-delà de cette limite, les règles normales de l’accord s’appliquent. Sources : Fedlex Accordo Art. 2 ; Fedlex RO 2026 104 ; communiqué de l’OFAS du 13 févr. 2026.',
+      'Selon le protocole modifiant l’accord frontalier Italie–Suisse (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, publié ; en vigueur le 9 févr. 2026 par échange de notes, applicable dès le 1er janv. 2024, y compris les travailleurs du régime transitoire) : au plus 25 % de l’activité lucrative dépendante en télétravail à domicile dans l’État de résidence sur une année civile, sans changer le statut ni le traitement fiscal de ce télétravail. L’Accordo Art. 2 définit les zones frontalières (CH : Grisons, Tessin, Valais ; IT : Lombardie, Piémont, Vallée d’Aoste, province de Bolzano). Sources : Fedlex Accordo Art. 2 ; Fedlex RO 2026 104 ; communiqué du SFI / DFF du 13 févr. 2026.',
     ch_it_nonreturn_note:
-      'En principe, et sauf décision contraire des autorités, jusqu’à 45 jours par année civile sans retour quotidien à domicile pour le travail (protocole modifiant l’accord Italie–Suisse, Fedlex RO 2026 104). Les jours de vacances ou de maladie ne comptent pas. BorderDay ne compte que les jours marqués « Nuit hors du domicile pour le travail » ; un déplacement aller-retour le même jour ne compte pas. Au-delà de cette limite, les règles normales de l’accord s’appliquent. Sources : Fedlex Accordo / RO 2026 104.',
+      'En principe, et sauf décision contraire des autorités, jusqu’à 45 jours par année civile sans retour quotidien à domicile pour le travail (protocole modifiant l’accord Italie–Suisse, Fedlex RO 2026 104). Les jours de vacances ou de maladie ne comptent pas. BorderDay ne compte que les jours marqués « Nuit hors du domicile pour le travail » ; un déplacement aller-retour le même jour ne compte pas. Sources : Fedlex Accordo / RO 2026 104.',
     basel_de_employer_commute:
       'Règle du personnel de Bâle-Ville : jours sur site ce mois-ci (minimum 5, ou 1 par semaine)',
     basel_de_employer_note:
@@ -195,7 +195,7 @@ const fr: Dict = {
       'Parmi vos jours de mission, {counted} comptent dans les 40 % et {excess} non : ceux-ci sont imposables en France, sous réserve d’une convention avec un État tiers.',
     ch_fr_1983_telework_40: 'Part de télétravail (max 40 % du temps de travail annuel, régime 1983)',
     ch_fr_1983_missions_10: 'Missions temporaires hors de Suisse (max 10 jours/an, 1983)',
-    ch_fr_1983_nights_45: 'Nuits de travail hors du domicile (max 45/an, 1983)',
+    ch_fr_1983_nights_45: 'Nuitées hors de l’État de résidence (max. 45/an, 1983)',
     ch_fr_1983_tax_note:
       'Accord frontalier de 1983 (Berne, Soleure, Bâle-Ville, Bâle-Campagne, Vaud, Valais, Neuchâtel, Jura) : les résidents de France sont imposés en France ; la France reverse 4,5 % du salaire brut à la Suisse. Le télétravail depuis la France jusqu’à 40 % du temps de travail annuel reste dans ce régime. Jusqu’à 10 jours de mission par an comptent dans les 40 %, seulement dans la mesure où ils rentrent après le télétravail ordinaire. L’astreinte ne compte qu’en cas d’intervention effective. Sources : accord amiable du 30 juin 2023 (impots.gouv.fr) ; fiche AFC ; Canton du Jura. Méthode de décompte : le Canton du Jura indique que l’employeur choisit les journées, les demi-journées ou les heures et doit appliquer ce choix uniformément à tout le personnel. ge.ch donne des seuils pour Genève : une journée si le télétravail dure plus de 4 heures ; une demi-journée de 2 à 4 heures, rien en dessous de 2 heures ; ou chaque heure effective. Les journées et demi-journées de BorderDay sont une façon de tenir ce relevé ; il n’a pas de méthode horaire : si votre employeur décompte en heures, ses chiffres priment.',
     ch_fr_1983_missions_note:
@@ -207,7 +207,7 @@ const fr: Dict = {
     ch_fr_1983_over_mission:
       'Jours de mission au-delà du plafond de 10 (et de ce qui rentre encore sous 40 %) : tout jour de ce type effectué en France met fin au régime de 1983, et tout jour effectué dans un État tiers compte dans les 45. BorderDay ne distingue pas la France d’un État tiers. Vérifiez auprès de votre autorité fiscale.',
     ch_fr_1983_over_45:
-      'Au-delà de {limit} nuits de travail hors du domicile, jours de mission en excès dans un État tiers compris : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
+      'Au-delà de {limit} nuitées hors de l’État de résidence, jours de mission en excès dans un État tiers compris : le régime frontalier de 1983 est perdu. Vérifiez auprès de votre autorité fiscale.',
     ch_fr_1983_nights_excess:
       'Ce total inclut {excess} jours de mission au-delà des limites de 10 jours et de 40 %. Les jours en excès dans un État tiers comptent dans cette limite, avec ou sans nuit hors du domicile. BorderDay ne distingue pas la France d’un État tiers.',
     ch_fr_1983_mission_excess:
@@ -248,7 +248,7 @@ const fr: Dict = {
     ss_third_country:
       'Jours de déplacement consignés cette année : {days}. Un travail récurrent hors de l’État de l’employeur peut sortir de l’accord-cadre : vérifiez auprès de votre institution de sécurité sociale.',
     ch_it_over:
-      'Seuil dépassé. Au-delà de la limite, les règles normales de l’accord s’appliquent.',
+      'Seuil dépassé. Vérifiez auprès de votre employeur ou de l’autorité fiscale.',
     basel_de_regular_return_20: 'Retour régulier sur le lieu de travail (au moins 20 % des jours convenus)',
     basel_de_regular_return_note:
       'Protocole Allemagne–Suisse (AS 2025 791, point 5(b), dès le 1er janv. 2026) : un retour régulier signifie que la personne se rend du domicile au lieu de travail et retour sur au moins 20 % des jours de travail convenus dans l’année civile. BorderDay compte les jours sur site pour ce plancher, par rapport à vos jours contractuels s’ils sont saisis, sinon la base annuelle (240 pour une semaine habituelle de 5 jours). Sans retour régulier, le statut frontalier au sens de l’art. 15a est remis en cause. Sources : Fedlex AS 2025 791 ; notice du canton de Berne 2026.',
@@ -454,7 +454,7 @@ const fr: Dict = {
       'Non. Vous enregistrez les jours vous-même. Ni GPS ni localisation de l’appareil. Les RH voient par date le type de jour (et la demi-journée et la nuit hors du domicile, oui ou non) : une catégorie de pays, jamais des coordonnées. Les notes restent privées pour le collaborateur.',
     q5: 'Quelles frontières couvrez-vous ?',
     a5:
-      'Neuf situations frontalières dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuits), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
+      'Neuf situations frontalières dans cinq régions. Compteurs de sécurité sociale sur les neuf. Compteurs fiscaux sur sept : Genève et autres cantons hors accord de 1983←France, cantons de l’accord de 1983←France (40 % / 10 missions / 45 nuitées hors de l’État de résidence : au plus une nuitée en Suisse par semaine de travail ; déplacements professionnels occasionnels dans un État tiers compris ; temps partiel au prorata arrondi à l’inférieur ; année partielle : 20 % des jours de travail ; jours de mission dans un État tiers au-delà des 10 et des 40 % également comptés dans les 45), Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg et Italie→Suisse. Pas de compteur fiscal général : France→Belgique n’a pas de limite en jours, et aucune tolérance n’a été trouvée pour Pays-Bas→Belgique.',
     q6: 'Et l’App Store ?',
     a6: 'La version 1 est une progressive web app installable (écran d’accueil). Une application iOS native pourra venir plus tard.',
     q7: 'Comment fonctionnent les paiements ?',
@@ -1025,6 +1025,8 @@ const fr: Dict = {
     byRegionTitle: 'Employeurs par région',
     frenchGuideNote: 'Un guide en français pour le personnel résidant en France est disponible.',
     frenchGuideLink: 'Guide en français',
+    italianGuideNote: 'Un guide en italien pour le personnel résidant en Italie est disponible.',
+    italianGuideLink: 'Guide en italien',
     linkTicino: 'Employeurs Tessin (IT→CH)',
     linkGeneva: 'Employeurs Genève (FR→CH)',
     linkLuxembourg: 'Employeurs Luxembourg (FR/BE/DE→LU)',
@@ -1038,7 +1040,7 @@ const fr: Dict = {
       'BorderDay aide les employeurs tessinois à enregistrer télétravail, jours sur site et nuits hors domicile pour les personnes qui résident en Italie et travaillent en Suisse selon l’accord Italie–Suisse  (Accordo Art. 2, tel que modifié pour le télétravail). Fiscalité: au plus 25% de télétravail au domicile et jusqu’à 45 jours de non-retour par an (protocole Fedlex RU 2026 104; en vigueur le 9 février 2026, applicable dès le 1er janvier 2024). Sécurité sociale: bandes du cadre UE/EEE/CH sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Pas un conseil fiscal ou juridique.',
     agreementTitle: 'Accord Italie–Suisse (2020 / protocole 2023)',
     agreementBody:
-      'L’accord Italie–Suisse du 23 décembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) couvre des zones frontalières définies (CH: Grisons, Tessin, Valais; IT: Lombardie, Piémont, Vallée d’Aoste, province de Bolzano), avec des conditions de résidence et de lieu de travail à l’Art. 2(b). Le protocole télétravail est publié comme Fedlex RU 2026 104; l’OFAS indique l’entrée en vigueur le 9 février 2026 avec application dès le 1er janvier 2024, y compris pour les travailleurs en régime transitoire. Vérifiez l’adéquation avec votre conseiller ou l’autorité avant de vous fier à ces compteurs.',
+      'L’accord Italie–Suisse du 23 décembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) couvre des zones frontalières définies (CH: Grisons, Tessin, Valais; IT: Lombardie, Piémont, Vallée d’Aoste, province de Bolzano), avec des conditions de résidence et de lieu de travail à l’Art. 2(b). Le protocole télétravail est publié comme Fedlex RU 2026 104; le SFI / DFF indique l’entrée en vigueur le 9 février 2026 avec application dès le 1er janvier 2024, y compris pour les travailleurs en régime transitoire. Vérifiez l’adéquation avec votre conseiller ou l’autorité avant de vous fier à ces compteurs.',
     thresholdsTitle: 'Ce que BorderDay compte pour le personnel résidant en Italie',
     thresholdTax25:
       'Fiscalité — télétravail au domicile: au maximum 25% de l’activité salariée en télétravail au domicile en Italie sur une année civile, sans modifier le statut fiscal de résidence pour ce télétravail (protocole / Accordo). Le co-working n’est pas confirmé dans le texte du protocole — demandez à votre autorité.',

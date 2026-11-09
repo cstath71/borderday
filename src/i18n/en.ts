@@ -53,7 +53,7 @@ const en = {
       'Under the EU/EEA/CH framework agreement, telework in the residence state of 25% or more of working time normally moves social security there unless an A1 is requested. At 50% or more the framework is no longer available. BorderDay shows the three bands: under 25%, 25% to under 50% (A1 required) and 50% or more, separately from tax.',
     risk2Title: 'Tax day thresholds',
     risk2Body:
-      'Tax counters run today on seven border routes: Geneva and other non-1983 cantons (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). France→Belgium and Netherlands→Belgium say plainly that no general tax counter runs. We never invent a number.',
+      'Tax counters run today on seven border routes: Geneva and other non-1983 cantons (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 overnight stays away from the residence state: at most one Swiss night per working week; occasional third-country business trips count; part-time pro rata rounded down; part-year 20% of working days; extra third-state mission days beyond the 10 and the 40% also count; taxed in France), Germany→Switzerland (60 non-return days + 20% regular return), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time) and Italy→Switzerland (25% / 45 non-return days). France→Belgium and Netherlands→Belgium say plainly that no general tax counter runs. We never invent a number.',
     risk3Title: 'Multi-border teams',
     risk3Body:
       'One company dashboard for employees on different borders. Filter by border or status. Export CSV. Employees see the same counters for their own days that HR sees for them.',
@@ -167,9 +167,9 @@ const en = {
     ch_it_tax_telework_25: 'Telework at domicile (max 25% of employed activity)',
     ch_it_tax_nonreturn_45: 'Days without returning home for work (max 45/year)',
     ch_it_tax_note:
-      'Under the protocol amending the Italy–Switzerland frontier-worker agreement (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, published; in force 9 Feb 2026 by exchange of notes, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. Accordo Art. 2 defines the frontier zones (CH: Grisons, Ticino, Valais; IT: Lombardy, Piedmont, Aosta Valley, Province of Bolzano). Above that limit, the normal rules of the agreement apply. Sources: Fedlex Accordo Art. 2; Fedlex AS 2026 104; FSIO release of 13 Feb 2026.',
+      'Under the protocol amending the Italy–Switzerland frontier-worker agreement (Fedlex RU 2026 104 / AS 2026 104 / RO 2026 104, published; in force 9 Feb 2026 by exchange of notes, applying from 1 Jan 2024, including transitional-regime workers): at most 25% of employed activity as telework at your home in the residence state in a calendar year, without changing status or the tax treatment of that telework. Accordo Art. 2 defines the frontier zones (CH: Grisons, Ticino, Valais; IT: Lombardy, Piedmont, Aosta Valley, Province of Bolzano). Sources: Fedlex Accordo Art. 2; Fedlex AS 2026 104; SIF / EFD release of 13 Feb 2026.',
     ch_it_nonreturn_note:
-      'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work (protocol amending the Italy–Switzerland agreement, Fedlex AS 2026 104). Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. Above that limit, the normal rules of the agreement apply. Sources: Fedlex Accordo / AS 2026 104.',
+      'In principle, and unless the authorities decide otherwise, up to 45 days in a calendar year without returning home daily for work (protocol amending the Italy–Switzerland agreement, Fedlex AS 2026 104). Leave and sickness do not count. BorderDay counts only the days you mark “stayed away overnight for work”; a same-day trip does not count. Sources: Fedlex Accordo / AS 2026 104.',
     basel_de_employer_commute:
       'Basel-Stadt staff rule: on-site days this month (minimum 5, or 1 a week)',
     basel_de_employer_note:
@@ -190,7 +190,7 @@ const en = {
       'Of your mission days, {counted} count inside the 40% and {excess} do not: those are taxable in France, subject to any treaty with a third state.',
     ch_fr_1983_telework_40: 'Telework share (max 40% of annual working time, 1983 regime)',
     ch_fr_1983_missions_10: 'Temporary missions outside Switzerland (max 10 days/year, 1983)',
-    ch_fr_1983_nights_45: 'Work nights away from home (max 45/year, 1983)',
+    ch_fr_1983_nights_45: 'Overnight stays away from the residence state (max 45/year, 1983)',
     ch_fr_1983_tax_note:
       '1983 frontier agreement (Bern, Solothurn, Basel-Stadt, Basel-Landschaft, Vaud, Valais, Neuchâtel, Jura): residents of France are taxed in France; France remits 4.5% of gross salary to Switzerland. Telework from France up to 40% of annual working time stays in that regime. Up to 10 mission days a year count inside the 40%, only as far as they fit after ordinary telework. On-call time counts only if you actually intervened. Sources: amicable agreement of 30 June 2023 (impots.gouv.fr); FTA practical sheet; Canton of Jura. Counting method: the Canton of Jura says the employer chooses days, half days or hours and must apply the choice uniformly to all staff. ge.ch gives thresholds for Geneva: a day if telework lasts over 4 hours; a half day for 2 to 4 hours, nothing under 2 hours; or every actual hour. BorderDay’s whole and half days are one way of keeping this record; it has no hourly method, so if your employer counts in hours, its figures prevail.',
     ch_fr_1983_missions_note:
@@ -202,7 +202,7 @@ const en = {
     ch_fr_1983_over_mission:
       'Mission days over the 10-day cap (and over what still fits under 40%): any of those days that took place in France ends the 1983 regime, and any in a third state counts toward the 45. BorderDay cannot tell France from a third state. Check with your tax authority.',
     ch_fr_1983_over_45:
-      'Above {limit} work nights away, counting excess third-state mission days: the 1983 frontier regime is lost. Check with your tax authority.',
+      'Above {limit} overnight stays away from the residence state, counting excess third-state mission days: the 1983 frontier regime is lost. Check with your tax authority.',
     ch_fr_1983_nights_excess:
       'This count includes {excess} mission days beyond the 10-day and 40% limits. Excess days in a third state count toward this limit, with or without a night away. BorderDay cannot tell France from a third state.',
     ch_fr_1983_mission_excess:
@@ -243,7 +243,7 @@ const en = {
     ss_third_country:
       'Trip days logged this year: {days}. Recurring work outside the employer’s state may fall outside the framework: check with your social-security institution.',
     ch_it_over:
-      'Limit exceeded. Above the limit, the normal rules of the agreement apply.',
+      'Limit exceeded. Check with your employer or tax authority.',
     basel_de_regular_return_20: 'Regular return to the workplace (at least 20% of agreed days)',
     basel_de_regular_return_note:
       'Germany–Switzerland protocol (AS 2025 791, point 5(b), from 1 Jan 2026): regular return means the employee travels from the place of residence to the place of work and back on at least 20% of the agreed working days in the calendar year. BorderDay counts on-site days toward that floor, against your contract days when set, otherwise the annual working-days base (240 for a usual 5-day week). Losing regular return ends cross-border status under Art. 15a. Sources: Fedlex AS 2025 791; Canton Bern 2026 leaflet.',
@@ -448,7 +448,7 @@ const en = {
       'No. You log days yourself. No GPS or device location. HR sees day type (and half day and overnight-away yes/no) per date — country category, never coordinates. Notes are private to the employee.',
     q5: 'Which borders do you cover?',
     a5:
-      'Nine border routes in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 nights), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
+      'Nine border routes in five regions. Social-security counters on all nine. Tax counters on seven: Geneva and other non-1983 cantons←France, 1983-agreement cantons←France (40%/10 missions/45 overnight stays away from the residence state: at most one Swiss night per working week; occasional third-country business trips count; part-time pro rata rounded down; part-year 20% of working days; extra third-state mission days beyond the 10 and the 40% also count), Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg and Italy→Switzerland. No general tax counter: France→Belgium has no day limit, and no tolerance was found for Netherlands→Belgium.',
     q6: 'What about the App Store?',
     a6: 'Version 1 is an installable progressive web app (home screen). A native iOS app may come later.',
     q7: 'How do payments work?',
@@ -1013,6 +1013,8 @@ const en = {
     byRegionTitle: 'Employers by region',
     frenchGuideNote: 'A French guide for staff living in France is available.',
     frenchGuideLink: 'French guide',
+    italianGuideNote: 'An Italian guide for staff living in Italy is available.',
+    italianGuideLink: 'Italian guide',
     linkTicino: 'Ticino employers (IT→CH)',
     linkGeneva: 'Geneva employers (FR→CH)',
     linkLuxembourg: 'Luxembourg employers (FR/BE/DE→LU)',
@@ -1026,7 +1028,7 @@ const en = {
       'BorderDay helps Ticino employers log telework, on-site and overnight-away days for people who live in Italy and work in Switzerland under the Italy–Switzerland Italy–Switzerland agreement (Accordo Art. 2 zones, as amended for telework). Tax: at most 25% telework at domicile and up to 45 non-return days per year (protocol Fedlex RU 2026 104; in force 9 Feb 2026, applying from 1 Jan 2024). Social security: EU/EEA/CH framework bands under 25%, 25% to under 50% (A1), and 50% or more. Not tax or legal advice.',
     agreementTitle: 'Italy–Switzerland agreement (2020 / 2023 protocol)',
     agreementBody:
-      'The Italy–Switzerland agreement of 23 December 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) covers defined frontier zones (CH: Grisons, Ticino, Valais; IT: Lombardy, Piedmont, Aosta Valley, Province of Bolzano), with residence and workplace conditions in Art. 2(b). The telework amending protocol is published as Fedlex RU 2026 104; FSIO notes it entered into force on 9 February 2026 and applies from 1 January 2024, including transitional-regime workers. Confirm fit with your adviser or authority before relying on these counters.',
+      'The Italy–Switzerland agreement of 23 December 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) covers defined frontier zones (CH: Grisons, Ticino, Valais; IT: Lombardy, Piedmont, Aosta Valley, Province of Bolzano), with residence and workplace conditions in Art. 2(b). The telework amending protocol is published as Fedlex RU 2026 104; SIF / EFD notes it entered into force on 9 February 2026 and applies from 1 January 2024, including transitional-regime workers. Confirm fit with your adviser or authority before relying on these counters.',
     thresholdsTitle: 'What BorderDay counts for staff living in Italy',
     thresholdTax25:
       'Tax — telework at domicile: at most 25% of employed activity as telework at home in Italy in a calendar year (“al massimo il 25 per cento”), without changing tax-residence status for that telework (protocol / Accordo). Co-working is not confirmed in the protocol wording — check with your authority.',

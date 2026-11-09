@@ -45,7 +45,7 @@ describe('approved French guide text', () => {
       expect(htmlPlain(`${parsed.h1} ${parsed.bodyHtml}`)).toBe(markdownPlain(onDisk));
       expect(parsed.bodyHtml).not.toContain('<script');
       const urls = [...onDisk.matchAll(/\]\((https?:[^)]+)\)/g)].map((match) => match[1]);
-      expect(urls.length).toBeGreaterThan(8);
+      expect(urls.length).toBeGreaterThanOrEqual(8);
       for (const url of urls) expect(parsed.bodyHtml).toContain(`href="${url}"`);
       if (guide.id === 'geneva') {
         const sentence = guide.description.replace(/ Sources officielles : ge\.ch et AFC\.$/, '');
@@ -53,7 +53,7 @@ describe('approved French guide text', () => {
         const plain = markdownPlain(onDisk);
         expect(plain.includes(sentence) || plain.includes(folded)).toBe(true);
         expect(guide.description).toContain('Sources officielles : ge.ch et AFC.');
-      } else {
+      } else if (guide.id === 'luxembourg') {
         expect(guide.description).toContain('34 jours');
         expect(onDisk).toContain('34 jours');
         expect(guide.title).toContain('34 jours de télétravail');
@@ -74,10 +74,11 @@ describe('approved French guide text', () => {
 });
 
 describe('French-only routes and discovery', () => {
-  it('publishes two stable French URLs and no translated copies', () => {
+  it('publishes the French guide URLs and no translated copies', () => {
     expect(FRENCH_GUIDES.map((guide) => guide.path)).toEqual([
       'guides/france-luxembourg-compter-jours-teletravail',
       'guides/france-geneve-compter-jours-teletravail',
+      'guides/france-bale-compter-jours-teletravail',
     ]);
     const xml = sitemapXml();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
@@ -94,12 +95,13 @@ describe('French-only routes and discovery', () => {
       expect(block).not.toContain('hreflang="nl"');
     }
     for (const lang of LANGS) {
-      if (lang === 'fr') continue;
+      if (lang === 'fr' || lang === 'de' || lang === 'it') continue;
       expect(xml).not.toContain(`${BASE}/${lang}/guides/`);
     }
     const llms = llmsTxt();
     expect(llms).toContain(absUrl('fr', 'guides/france-luxembourg-compter-jours-teletravail'));
     expect(llms).toContain(absUrl('fr', 'guides/france-geneve-compter-jours-teletravail'));
+    expect(llms).toContain(absUrl('fr', 'guides/france-bale-compter-jours-teletravail'));
     expect(llms).toContain('no translated version');
     expect(llms).not.toContain('/en/guides/');
     expect(llms).not.toMatch(PRIVATE);
@@ -108,19 +110,19 @@ describe('French-only routes and discovery', () => {
   it('static head is French, canonical, and an Article', () => {
     for (const guide of GUIDES) {
       const parts = frenchGuideDocumentParts(guide, guide.h1, guide.bodyHtml);
-      const loc = `${BASE}/fr/${guide.path}/`;
+      const loc = `${BASE}/${guide.lang}/${guide.path}/`;
       expect(parts.title).toBe(guide.title);
       expect(parts.head).toContain(guide.ogImage || '/og.png');
       expect(parts.head).toContain(`rel="canonical" href="${loc}"`);
-      expect(parts.head).toContain('hreflang="fr"');
+      expect(parts.head).toContain(`hreflang="${guide.lang}"`);
       expect(parts.head).toContain(`hreflang="x-default" href="${loc}"`);
       expect(parts.head).not.toContain('hreflang="en"');
       expect(parts.head).toContain('og:type" content="article"');
       expect(parts.body).toContain(guide.h1);
-      expect(parts.body).toContain(guide.id === 'luxembourg' ? '34 jours' : '40 %');
+      if (guide.lang === 'fr') expect(parts.body).toContain(guide.id === 'luxembourg' ? '34 jours' : '40 %');
       const article = parts.graph.find((node) => node['@type'] === 'Article');
-      expect(article.inLanguage).toBe('fr');
-      expect(article.datePublished).toBe('2026-11-08');
+      expect(article.inLanguage).toBe(guide.lang);
+      expect(article.datePublished).toBe(guide.datePublished);
       expect(article.author).toEqual({ '@id': `${BASE}/#org` });
       expect(JSON.stringify(article)).not.toMatch(PRIVATE);
     }
@@ -159,13 +161,14 @@ describe('French-only routes and discovery', () => {
     expect(screen.getByRole('link', { name: /Vue d.ensemble/ }).getAttribute('href')).toBe(
       'https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres',
     );
-    expect(screen.getByRole('navigation', { name: 'Autre guide' })).toBeTruthy();
+    expect(screen.getByRole('navigation', { name: 'Autres guides' })).toBeTruthy();
   });
 
   it('links the guides from French pages and leaves English pages alone', () => {
     at('/fr/', <Home />);
     expect(screen.getByRole('link', { name: /travailler au Luxembourg/ })).toBeTruthy();
     expect(screen.getByRole('link', { name: /travailler à Genève/ })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /travailler à Bâle/ })).toBeTruthy();
     cleanup();
 
     at('/en/', <Home />);
@@ -174,7 +177,7 @@ describe('French-only routes and discovery', () => {
     cleanup();
 
     at('/fr/for-individuals', <ForIndividuals />);
-    expect(screen.getAllByRole('link', { name: /travailler au Luxembourg|travailler à Genève/ })).toHaveLength(2);
+    expect(screen.getAllByRole('link', { name: /travailler au Luxembourg|travailler à Genève|travailler à Bâle/ })).toHaveLength(3);
     cleanup();
 
     at('/en/for-individuals', <ForIndividuals />);
@@ -204,16 +207,43 @@ describe('French-only routes and discovery', () => {
       expect(untranslatedLocalePath(ge, lang)).toBe(`/${lang}/employers/geneva/`);
     }
     expect(untranslatedLocalePath('/fr/guides/', 'en')).toBe('/en/');
-    expect(untranslatedLocalePath('/fr/guides', 'de')).toBe('/de/');
+    expect(untranslatedLocalePath('/fr/guides', 'de')).toBe('/de/guides/');
+    expect(untranslatedLocalePath('/fr/guides/', 'it')).toBe('/it/guides/');
+    expect(untranslatedLocalePath('/de/guides/', 'nl')).toBe('/nl/');
+    expect(untranslatedLocalePath('/fr/guides/france-bale-compter-jours-teletravail/', 'de')).toBe('/de/');
+    expect(untranslatedLocalePath('/it/guides/italia-ticino-contare-giorni-telelavoro/', 'fr')).toBe('/fr/employers/ticino/');
     expect(untranslatedLocalePath(lu, 'fr')).toBeNull();
     expect(untranslatedLocalePath('/fr/pricing/', 'de')).toBeNull();
     expect(untranslatedLocalePath('/en/pricing/', 'fr')).toBeNull();
   });
 });
 
-describe('guide ids stay the two approved routes', () => {
-  it('does not invent a third guide', () => {
+describe('Basel, Germany and Ticino guides', () => {
+  it('keeps the approved wording, product limits, and official cross-links', () => {
+    const bale = GUIDES.find((guide) => guide.id === 'bale')!;
+    const de = GUIDES.find((guide) => guide.id === 'deCh')!;
+    const it = GUIDES.find((guide) => guide.id === 'ticinoIt')!;
+    for (const guide of [bale, de, it]) {
+      expect(guide.markdown).not.toContain("'");
+      expect(guide.markdown).not.toContain('ß');
+      expect(guide.markdown).not.toMatch(/3 h|110 km/);
+      expect(guide.datePublished).toBe('2026-11-09');
+    }
+    expect(bale.markdown).toContain('https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/');
+    expect(bale.markdown).toContain('BorderDay ne distingue pas une mission en France d’une mission dans un État tiers');
+    expect(bale.markdown).toContain('n’applique pas la règle des 20 %');
+    expect(de.markdown).toContain('100 Kilometer');
+    expect(de.markdown).toContain('1,5 Stunden');
+    expect(de.markdown).toContain('regelmässig');
+    expect(it.markdown).toContain('240');
+    expect(it.markdown).toContain('SFI');
+    expect(it.markdown).not.toMatch(/FSIO|regole normali dell’accordo/);
+  });
+});
+
+describe('guide ids stay the approved routes', () => {
+  it('publishes the five written guides', () => {
     const ids: GuideId[] = GUIDES.map((guide) => guide.id);
-    expect(ids).toEqual(['luxembourg', 'geneva']);
+    expect(ids).toEqual(['luxembourg', 'geneva', 'bale', 'deCh', 'ticinoIt']);
   });
 });

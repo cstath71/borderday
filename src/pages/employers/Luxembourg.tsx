@@ -1,14 +1,20 @@
 import { Link } from 'react-router-dom';
-import FrenchGuideLinks from '../../components/FrenchGuideLinks';
-import Seo from '../../components/Seo';
+import { FrenchGuideForResidents } from '../../components/FrenchGuideLinks';
+import PublicSeo from '../../components/PublicSeo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
+import { publicPath } from '../../lib/publicPath';
+import { employerFaqPairs } from '../../seo/visibleFaq';
 import EmployerRelatedLinks from './RelatedLinks';
 
 const SOURCES = [
   {
     title: 'impots.gouv.fr — FR–LU seuil 34 jours',
     url: 'https://www.impots.gouv.fr/sites/default/files/media/10_conventions/luxembourg/nid_13587_accord_avec_le_luxembourg_sur_les_modalites_d_application_du_seuil_des_34_jours.pdf',
+  },
+  {
+    title: 'ACD Luxembourg — Circulaire L.G. Conv. D.I. n° 61 du 24 juin 2026',
+    url: 'https://impotsdirects.public.lu/dam-assets/fr/legislation/circulaires/circulaire-du-directeur-des-contributions-lg-conv-di-n-61-du-24-juin-2026.pdf',
   },
   {
     title: 'gouvernement.lu — avenant FR–LU du 7 novembre 2022 (34 jours)',
@@ -44,34 +50,22 @@ export default function EmployersLuxembourg() {
   const lang = useLang();
   const d = getDict(lang);
   const p = d.employersLuxembourg;
-  const faq = [
-    [p.faq1q, p.faq1a],
-    [p.faq2q, p.faq2a],
-    [p.faq3q, p.faq3a],
-    [p.faq4q, p.faq4a],
-    [p.faq5q, p.faq5a],
-  ] as const;
+  const faq = employerFaqPairs(lang, 'luxembourg');
 
   return (
     <>
-      <Seo
-        lang={lang}
-        title={p.metaTitle}
-        description={p.metaDescription}
-        path="employers/luxembourg"
-        faq={faq}
-      />
+      <PublicSeo path="employers/luxembourg" faq={faq} />
       <section className="hero">
         <div className="container">
           <h1>{p.heroTitle}</h1>
-          <p className="lead">
+          <p id="summary" className="lead">
             <strong>{d.home.inShortLabel}:</strong> {p.inShort}
           </p>
           <div className="hero-cta">
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}
             </Link>
-            <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
               {p.ctaPricing}
             </Link>
           </div>
@@ -104,9 +98,9 @@ export default function EmployersLuxembourg() {
             ))}
           </ul>
           <p className="muted">{p.disclaimer}</p>
-          <FrenchGuideLinks ids={['luxembourg']} heading="Pour les salariés qui résident en France" />
+          <FrenchGuideForResidents id="luxembourg" frHeading="Pour les salariés qui résident en France" />
           <div className="hero-cta" style={{ marginTop: '1.5rem' }}>
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}
             </Link>
           </div>

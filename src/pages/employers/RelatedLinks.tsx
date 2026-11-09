@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
+import { publicPath } from '../../lib/publicPath';
 
 const ORDER = ['ticino', 'geneva', 'luxembourg'] as const;
 
@@ -20,7 +21,7 @@ export default function EmployerRelatedLinks({ current }: { current: Id }) {
       <ul>
         {ORDER.filter((id) => id !== current).map((id) => (
           <li key={id}>
-            <Link to={`/${lang}/employers/${id}`}>{labels[id]}</Link>
+            <Link to={publicPath(lang, `employers/${id}`)}>{labels[id]}</Link>
           </li>
         ))}
       </ul>

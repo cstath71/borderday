@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { getDict, LANGS, type Lang } from '../i18n';
+import heads from '../seo/heads.json';
+import { ORG_SAME_AS, offersFor } from '../seo/offers.mjs';
 
 const BASE = 'https://borderday.com';
 
@@ -20,6 +22,9 @@ interface Props {
   alternates?: readonly Lang[];
   ogType?: 'website' | 'article';
   publishedTime?: string;
+  modifiedTime?: string;
+  /** Path under the site origin, e.g. /og.png or /og-guide-luxembourg.png. */
+  ogImage?: string;
   breadcrumb?: readonly Crumb[];
   extraGraph?: readonly object[];
 }
@@ -62,10 +67,12 @@ function orgGraph() {
     url: `${BASE}/`,
     logo: `${BASE}/icons/icon-512.png`,
     email: 'hello@borderday.com',
+    sameAs: ORG_SAME_AS,
   };
 }
 
-function softwareGraph() {
+function softwareGraph(lang: Lang) {
+  const home = heads[''][lang];
   return {
     '@type': 'SoftwareApplication',
     '@id': `${BASE}/#app`,
@@ -73,44 +80,9 @@ function softwareGraph() {
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
     url: `${BASE}/`,
-    offers: [
-      {
-        '@type': 'Offer',
-        name: 'Company monthly (per active employee)',
-        price: '5.00',
-        priceCurrency: 'EUR',
-        description: 'Minimum €39 / month. Prices exclude VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-      {
-        '@type': 'Offer',
-        name: 'Company yearly minimum',
-        price: '390.00',
-        priceCurrency: 'EUR',
-        description: 'Yearly company billing: 2 months free (€390 / year minimum). Prices exclude VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-      {
-        '@type': 'Offer',
-        name: 'Individual monthly',
-        price: '4.99',
-        priceCurrency: 'EUR',
-        description: 'Includes VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-      {
-        '@type': 'Offer',
-        name: 'Individual yearly',
-        price: '49.00',
-        priceCurrency: 'EUR',
-        description: 'Includes VAT. About two months free vs monthly. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-    ],
+    description: home.summary,
+    inLanguage: lang,
+    offers: offersFor(lang, `${BASE}/${lang}/pricing/`),
     publisher: { '@id': `${BASE}/#org` },
   };
 }
@@ -125,10 +97,13 @@ export default function Seo({
   alternates,
   ogType,
   publishedTime,
+  modifiedTime,
+  ogImage,
   breadcrumb,
   extraGraph,
 }: Props) {
   useEffect(() => {
+    const image = `${BASE}${ogImage || '/og.png'}`;
     document.documentElement.lang = lang;
     document.title = title;
     setMeta('description', description);
@@ -136,14 +111,14 @@ export default function Seo({
     setMeta('og:title', title, true);
     setMeta('og:description', description, true);
     setMeta('og:type', ogType ?? 'website', true);
-    setMeta('og:image', `${BASE}/og.png`, true);
+    setMeta('og:image', image, true);
     setMeta('twitter:card', 'summary_large_image');
     setMeta('twitter:title', title);
     setMeta('twitter:description', description);
-    setMeta('twitter:image', `${BASE}/og.png`);
+    setMeta('twitter:image', image);
     if (publishedTime) {
       setMeta('article:published_time', publishedTime, true);
-      setMeta('article:modified_time', publishedTime, true);
+      setMeta('article:modified_time', modifiedTime || publishedTime, true);
     } else {
       removeMeta('article:published_time', true);
       removeMeta('article:modified_time', true);
@@ -155,7 +130,8 @@ export default function Seo({
 
     const localeList = alternates ?? LANGS;
     const singleLocale = Boolean(alternates && alternates.length === 1);
-    document.head.querySelectorAll('link[data-hreflang]').forEach((n) => n.remove());
+    // Replace every alternate, including tags the static HTML already wrote, so hydration does not duplicate them.
+    document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((n) => n.remove());
     for (const l of localeList) {
       const link = document.createElement('link');
       link.rel = 'alternate';
@@ -171,6 +147,7 @@ export default function Seo({
     xd.setAttribute('data-hreflang', 'x-default');
     document.head.appendChild(xd);
 
+    const home = heads[''][lang];
     const graph: object[] = [
       orgGraph(),
       {
@@ -178,9 +155,11 @@ export default function Seo({
         '@id': `${BASE}/#website`,
         name: 'BorderDay',
         url: `${BASE}/`,
+        description: home.description,
+        inLanguage: lang,
         publisher: { '@id': `${BASE}/#org` },
       },
-      softwareGraph(),
+      softwareGraph(lang),
     ];
     if (faq && faq.length) {
       graph.push({
@@ -222,7 +201,7 @@ export default function Seo({
       document.head.appendChild(ld);
     }
     ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
-  }, [lang, title, description, path, faq, noindex, alternates, ogType, publishedTime, breadcrumb, extraGraph]);
+  }, [lang, title, description, path, faq, noindex, alternates, ogType, publishedTime, modifiedTime, ogImage, breadcrumb, extraGraph]);
 
   return null;
 }

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { hasSocialSecurityCounter, hasTaxCounter, listBorderPacks } from '../borders/packs';
 import FrenchGuideLinks from '../components/FrenchGuideLinks';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
+import RoutesCovered from '../components/RoutesCovered';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
+import { publicPath } from '../lib/publicPath';
 
 export default function Home() {
   const lang = useLang();
@@ -12,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <Seo lang={lang} title={`${d.meta.siteName} — ${d.meta.tagline}`} description={d.meta.description} path="" />
+      <PublicSeo path="" />
       <section className="hero">
         <div className="container">
           <p className="meta" style={{ color: 'var(--warn)', fontWeight: 600 }}>
@@ -22,12 +24,12 @@ export default function Home() {
           <p id="summary" className="lead"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
           <p className="lead">{d.home.heroBody}</p>
           <div className="hero-cta">
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>{d.home.ctaPrimary}
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>{d.home.ctaPrimary}
             </Link>
-            <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
               {d.home.ctaSecondary}
             </Link>
-            <Link className="btn btn-ghost" to={`/${lang}/for-individuals`}>
+            <Link className="btn btn-ghost" to={publicPath(lang, 'for-individuals')}>
               {d.home.ctaIndividuals}
             </Link>
             <Link className="btn btn-ghost" to={`/${lang}/auth/sign-up`}>
@@ -39,6 +41,14 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {lang === 'fr' && (
+        <section className="section">
+          <div className="container">
+            <FrenchGuideLinks />
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container">
@@ -97,6 +107,25 @@ export default function Home() {
 
       <section className="section" style={{ background: 'var(--surface)' }}>
         <div className="container">
+          <h2>{d.employersHub.byRegionTitle}</h2>
+          <ul>
+            <li>
+              <Link to={publicPath(lang, 'employers/ticino')}>{d.employersHub.linkTicino}</Link>
+            </li>
+            <li>
+              <Link to={publicPath(lang, 'employers/geneva')}>{d.employersHub.linkGeneva}</Link>
+            </li>
+            <li>
+              <Link to={publicPath(lang, 'employers/luxembourg')}>{d.employersHub.linkLuxembourg}</Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <RoutesCovered />
+
+      <section className="section" style={{ background: 'var(--surface)' }}>
+        <div className="container">
           <h2>{d.home.howTitle}</h2>
           <ol>
             <li>{d.home.how1}</li>
@@ -106,14 +135,6 @@ export default function Home() {
         </div>
       </section>
 
-      {lang === 'fr' && (
-        <section className="section">
-          <div className="container">
-            <FrenchGuideLinks />
-          </div>
-        </section>
-      )}
-
       <section className="section">
         <div className="container card" id="get-started">
           <h2>{d.home.waitlistTitle}</h2>
@@ -121,7 +142,7 @@ export default function Home() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.75rem' }}>
             <Link className="btn btn-primary" to={`/${lang}/auth/sign-up`}>{d.home.waitlistButton}</Link>
             <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in`}>{d.nav.joinWaitlist}</Link>
-            <Link className="btn btn-secondary" to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'company/signup')}>{d.nav.companySignup}</Link>
           </div>
           <p className="meta" style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
             {d.home.waitlistNote}

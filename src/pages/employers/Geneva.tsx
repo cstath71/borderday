@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import FrenchGuideLinks from '../../components/FrenchGuideLinks';
-import Seo from '../../components/Seo';
+import { FrenchGuideForResidents } from '../../components/FrenchGuideLinks';
+import PublicSeo from '../../components/PublicSeo';
 import { useLang } from '../../components/Layout';
 import { getDict } from '../../i18n';
+import { publicPath } from '../../lib/publicPath';
+import { employerFaqPairs } from '../../seo/visibleFaq';
 import EmployerRelatedLinks from './RelatedLinks';
 
 const SOURCES = [
@@ -40,34 +42,22 @@ export default function EmployersGeneva() {
   const lang = useLang();
   const d = getDict(lang);
   const p = d.employersGeneva;
-  const faq = [
-    [p.faq1q, p.faq1a],
-    [p.faq2q, p.faq2a],
-    [p.faq3q, p.faq3a],
-    [p.faq4q, p.faq4a],
-    [p.faq5q, p.faq5a],
-  ] as const;
+  const faq = employerFaqPairs(lang, 'geneva');
 
   return (
     <>
-      <Seo
-        lang={lang}
-        title={p.metaTitle}
-        description={p.metaDescription}
-        path="employers/geneva"
-        faq={faq}
-      />
+      <PublicSeo path="employers/geneva" faq={faq} />
       <section className="hero">
         <div className="container">
           <h1>{p.heroTitle}</h1>
-          <p className="lead">
+          <p id="summary" className="lead">
             <strong>{d.home.inShortLabel}:</strong> {p.inShort}
           </p>
           <div className="hero-cta">
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}
             </Link>
-            <Link className="btn btn-secondary" to={`/${lang}/pricing`}>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
               {p.ctaPricing}
             </Link>
           </div>
@@ -95,9 +85,9 @@ export default function EmployersGeneva() {
             ))}
           </ul>
           <p className="muted">{p.disclaimer}</p>
-          <FrenchGuideLinks ids={['geneva']} heading="Pour les salariés qui résident en France" />
+          <FrenchGuideForResidents id="geneva" frHeading="Pour les salariés qui résident en France" />
           <div className="hero-cta" style={{ marginTop: '1.5rem' }}>
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {p.ctaPrimary}
             </Link>
           </div>

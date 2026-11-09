@@ -343,7 +343,7 @@ describe('Dashboard', () => {
     open('/en/company/c1/dashboard');
     await screen.findByText('Real Employee');
     expect(screen.getByText(en.company.billingInactive, { exact: false })).toBeTruthy();
-    expect(screen.getByRole('link', { name: en.company.billingCta }).getAttribute('href')).toBe('/en/pricing?companyId=c1');
+    expect(screen.getByRole('link', { name: en.company.billingCta }).getAttribute('href')).toBe('/en/pricing/?companyId=c1');
   });
 
   it('denies an employee and loads no company data', async () => {
@@ -742,7 +742,7 @@ describe('/app gate', () => {
   it('signed out: labelled preview with pricing CTA and no account claim', async () => {
     const { container } = open('/en/app');
     await screen.findByText(en.app.previewBody, { exact: false });
-    expect(screen.getByRole('link', { name: en.app.previewCta }).getAttribute('href')).toBe('/en/pricing');
+    expect(screen.getByRole('link', { name: en.app.previewCta }).getAttribute('href')).toBe('/en/pricing/');
     expect(screen.getAllByText(en.app.previewBadge).length).toBeGreaterThan(0);
     expect(container.textContent).not.toContain(en.app.savedToAccount);
     expect(mocked.resolveAppAccess).not.toHaveBeenCalled();

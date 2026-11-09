@@ -10,6 +10,7 @@ const en = {
     app: 'App',
     pricing: 'Pricing',
     faq: 'FAQ',
+    guides: 'Guides',
     privacy: 'Privacy',
     disclaimer: 'Disclaimer',
     terms: 'Terms & legal notice',
@@ -87,6 +88,10 @@ const en = {
     chipTaxNo: 'Tax: no counter',
     chipTaxNoDayLimit: 'Tax: no day limit',
     chipSsYes: 'Social security: yes',
+    routesCoveredTitle: 'Routes covered',
+    routesRoute: 'Route',
+    routesTax: 'Tax counter',
+    routesSs: 'Social-security counter',
   },
   borders: {
     geneva_fr: 'Geneva and other non-1983 cantons ← France',
@@ -1005,6 +1010,9 @@ const en = {
 
   employersHub: {
     title: 'Employer pages',
+    byRegionTitle: 'Employers by region',
+    frenchGuideNote: 'A French guide for staff living in France is available.',
+    frenchGuideLink: 'French guide',
     linkTicino: 'Ticino employers (IT→CH)',
     linkGeneva: 'Geneva employers (FR→CH)',
     linkLuxembourg: 'Luxembourg employers (FR/BE/DE→LU)',
@@ -1019,7 +1027,7 @@ const en = {
     agreementTitle: 'Italy–Switzerland agreement (2020 / 2023 protocol)',
     agreementBody:
       'The Italy–Switzerland agreement of 23 December 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) covers defined frontier zones (CH: Grisons, Ticino, Valais; IT: Lombardy, Piedmont, Aosta Valley, Province of Bolzano), with residence and workplace conditions in Art. 2(b). The telework amending protocol is published as Fedlex RU 2026 104; FSIO notes it entered into force on 9 February 2026 and applies from 1 January 2024, including transitional-regime workers. Confirm fit with your adviser or authority before relying on these counters.',
-    thresholdsTitle: 'What the ticino_it pack counts today',
+    thresholdsTitle: 'What BorderDay counts for staff living in Italy',
     thresholdTax25:
       'Tax — telework at domicile: at most 25% of employed activity as telework at home in Italy in a calendar year (“al massimo il 25 per cento”), without changing tax-residence status for that telework (protocol / Accordo). Co-working is not confirmed in the protocol wording — check with your authority.',
     thresholdNonreturn45:
@@ -1031,7 +1039,7 @@ const en = {
     howTitle: 'How BorderDay helps HR',
     howBody:
       'Invite employees; each picks the Ticino←Italy route and logs day types only (telework / on site / trip / non-working) plus overnight-away when relevant. HR sees the 25% tax share, the 45-day non-return counter and social-security bands, with CSV export. No GPS. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; 7-day free trial, card required.',
-    sourcesTitle: 'Official sources (same as the ticino_it pack)',
+    sourcesTitle: 'Official sources used by BorderDay',
     disclaimer:
       'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',
     ctaPrimary: 'Create company account',
@@ -1060,7 +1068,7 @@ const en = {
     heroTitle: 'Geneva employers: telework days for staff living in France',
     inShort:
       'BorderDay helps Geneva employers log telework, on-site and trip days for people who live in France and work in Switzerland. Tax: up to 40% telework and 10 temporary mission days (ge.ch / ESTV). Social security: framework bands under 25%, 25% to under 50% (A1), and 50% or more. Employer telework-rate duty: first AFC transmission planned for January 2027 for 2026 data. Not tax or legal advice.',
-    thresholdsTitle: 'What the geneva_fr pack counts today',
+    thresholdsTitle: 'What BorderDay counts for staff living in France',
     thresholdTax40:
       'Tax — telework share: up to 40% of working time in the residence state (inclusive). Beyond that, French taxation can apply from the first day (ge.ch).',
     thresholdMissions10:
@@ -1072,7 +1080,7 @@ const en = {
     howTitle: 'How BorderDay helps HR',
     howBody:
       'Invite employees, each picks the Geneva←France route, and logs day types only (telework / on site / trip / non-working). HR sees the same tax and social-security counters, warnings as limits approach, and can export CSV. No GPS or device location. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; 7-day free trial, card required.',
-    sourcesTitle: 'Official sources (same as the product pack)',
+    sourcesTitle: 'Official sources used by BorderDay',
     disclaimer:
       'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',
     ctaPrimary: 'Create company account',
@@ -1117,7 +1125,7 @@ const en = {
     howTitle: 'How BorderDay helps LU employers',
     howBody:
       'One company account for staff on FR, BE and DE residence routes. Employees pick their border route and log day types; HR watches 34-day tax pace and social-security bands, with CSV export. No GPS. Company: €5 per active employee/month (€39 minimum), excl. VAT; 7-day trial, card required.',
-    sourcesTitle: 'Official sources (same as luxembourg_fr / _be / _de packs)',
+    sourcesTitle: 'Official sources used by BorderDay',
     disclaimer:
       'BorderDay is a record-keeping and reminder tool. Thresholds come from public official sources and may change. Always verify with a qualified adviser or the competent authority.',
     ctaPrimary: 'Create company account',

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getDict, t, type Lang } from '../i18n';
 import { useAuth } from '../lib/auth';
 import { openCustomerPortal, planIsCancellable } from '../lib/billing';
+import { publicPath } from '../lib/publicPath';
 import { hasCancellableIndividualPlan, listMyCompanies } from '../lib/companyApi';
 
 type Plans = { companies: Array<{ id: string; name: string }>; individual: boolean };
@@ -56,7 +57,7 @@ export default function CancelPanel({ lang }: { lang: Lang }) {
   if (!auth.user) {
     return (
       <p>
-        <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(`/${lang}/cancel`)}`}>
+        <Link className="btn btn-secondary" to={`/${lang}/auth/sign-in?next=${encodeURIComponent(publicPath(lang, 'cancel'))}`}>
           {c.signIn}
         </Link>
       </p>

@@ -8,6 +8,7 @@ import type { BorderId } from '../../borders/types';
 import { CONSENT_VERSION } from '../../company/types';
 import { getDict, t } from '../../i18n';
 import { useAuth } from '../../lib/auth';
+import { publicPath } from '../../lib/publicPath';
 import * as api from '../../lib/companyApi';
 
 type Peek =
@@ -107,7 +108,7 @@ export default function JoinCompany() {
         <h2>{d.company.noticeTitle}</h2>
         <p>{d.company.noticeBody}</p>
         <p>
-          <Link to={`/${lang}/privacy`}>{d.company.noticePrivacyLink}</Link>
+          <Link to={publicPath(lang, 'privacy')}>{d.company.noticePrivacyLink}</Link>
         </p>
         <div className="toolbar">
           <Link
@@ -147,7 +148,7 @@ export default function JoinCompany() {
         }
         error={error}
         busy={busy}
-        privacyHref={`/${lang}/privacy`}
+        privacyHref={publicPath(lang, 'privacy')}
         onSubmit={(values) => void onJoin(values)}
       />
     );

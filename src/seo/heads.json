@@ -1,0 +1,407 @@
+{
+  "": {
+    "en": {
+      "title": "BorderDay — Cross-border day limits for HR and employees",
+      "description": "Employer-first day counting for cross-border staff: social-security counters on nine border routes, tax counters on seven. Company from €5/employee/month (min €39), excl. VAT. 7-day free trial (card required), then charged automatically on day 8 and renewing until you cancel.",
+      "summary": "BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine border routes in five regions, tax counters on seven of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice."
+    },
+    "fr": {
+      "title": "BorderDay — Seuils de jours fiscaux et sociaux pour les RH",
+      "description": "Comptage des jours pour les équipes qui travaillent par-delà les frontières : sécurité sociale sur neuf situations frontalières, fiscalité sur sept. Entreprise dès 5 €/collaborateur actif/mois (min. 39 €), hors TVA. Essai gratuit de 7 jours (carte requise), puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.",
+      "summary": "BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf situations frontalières de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique."
+    },
+    "de": {
+      "title": "BorderDay — Grenzüberschreitende Tagesgrenzen für HR",
+      "description": "Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Grenzrouten, Steuer auf sieben. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen (Karte erforderlich), danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.",
+      "summary": "BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Grenzrouten in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung."
+    },
+    "it": {
+      "title": "BorderDay — Soglie di giorni fiscali e previdenziali per HR",
+      "description": "Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove situazioni di frontiera, fisco su sette. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni (carta richiesta), poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.",
+      "summary": "BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per dipendente: contatori di sicurezza sociale su tutte le nove situazioni di frontiera in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per dipendente attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale."
+    },
+    "nl": {
+      "title": "BorderDay — Grensoverschrijdende daglimieten voor HR en medewerkers",
+      "description": "Dagtelling voor werkgevers van grensoverschrijdend personeel: socialezekerheidstellers op negen grensroutes, belastingtellers op zeven. Bedrijf vanaf €5/medewerker/maand (min. €39), excl. btw. 7 dagen gratis proberen (kaart vereist), daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.",
+      "summary": "BorderDay helpt HR telewerk-, ter-plaatse- en reisdagen per medewerker bij te houden: socialezekerheidstellers op alle negen grensroutes in vijf regio’s, belastingtellers op zeven daarvan. Bedrijfsabonnement: €5 per actieve medewerker per maand (minimum €39), excl. btw; particulieren €4,99/maand of €49/jaar, incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Een registratietool — geen belasting- of juridisch advies."
+    }
+  },
+  "pricing": {
+    "en": {
+      "title": "Pricing — BorderDay",
+      "description": "Company: €5 per active employee per month, €39 minimum, yearly minimum €390, excl. VAT. Individual: €4.99/month or €49/year incl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.",
+      "summary": "Company / HR: €5 per active employee per month with a €39 monthly minimum (covers up to 7 active employees); yearly billing is €390 minimum (2 months free). Individual: €4.99 per month or €49 per year (about two months free). Company prices exclude VAT; individual prices include VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. Checkout via Stripe Managed Payments (sold through Link)."
+    },
+    "fr": {
+      "title": "Tarifs — BorderDay",
+      "description": "Entreprise : 5 € / collaborateur actif / mois, minimum 39 €, annuel minimum 390 €, hors TVA. Particulier : 4,99 €/mois ou 49 €/an TVA incluse. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.",
+      "summary": "Entreprise / RH : 5 € par collaborateur actif et par mois, minimum 39 € / mois (couvre jusqu’à 7 collaborateurs actifs) ; annuel minimum 390 € (2 mois offerts). Particulier : 4,99 € / mois ou 49 € / an. Prix entreprise hors TVA ; prix particulier TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Paiement via Stripe Managed Payments (vendu via Link)."
+    },
+    "de": {
+      "title": "Preise — BorderDay",
+      "description": "Unternehmen: 5 € je aktive mitarbeitende Person / Monat, Minimum 39 €, jährlich mindestens 390 €, zzgl. MWST Einzelperson: 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.",
+      "summary": "Unternehmen / HR: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab); jährlich mindestens 390 € (2 Monate gratis). Einzelperson: 4,99 € / Monat oder 49 € / Jahr. Unternehmenspreise zzgl. MWST; Einzelpreise inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Checkout über Stripe Managed Payments (verkauft über Link)."
+    },
+    "it": {
+      "title": "Prezzi — BorderDay",
+      "description": "Azienda: 5 € per dipendente attivo / mese, minimo 39 €, annuale minimo 390 €, IVA esclusa. Individuale: 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.",
+      "summary": "Azienda / HR: 5 € per dipendente attivo al mese, minimo 39 € / mese (copre fino a 7 dipendenti attivi); annuale minimo 390 € (2 mesi gratis). Individuale: 4,99 € / mese o 49 € / anno. Prezzi azienda IVA esclusa; individuali IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Checkout tramite Stripe Managed Payments (venduto tramite Link)."
+    },
+    "nl": {
+      "title": "BorderDay — Prijzen",
+      "description": "Bedrijf: €5 per actieve medewerker per maand, minimum €39; jaarlijks minimum €390. Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.",
+      "summary": "Bedrijf / HR: €5 per actieve medewerker per maand, minimum €39/maand (dekt tot 7 actieve medewerkers); jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Checkout via Stripe Managed Payments (verkocht via Link)."
+    }
+  },
+  "faq": {
+    "en": {
+      "title": "FAQ: counting cross-border work days | BorderDay",
+      "description": "Is BorderDay tax advice? Where is the day log stored? Which borders are covered? How do payments and the 7-day trial work?",
+      "summary": "BorderDay is a record-keeping and reminder tool, not tax or legal advice. Paid day logs are saved to your account, the free preview stays on the device; no GPS or device location. Nine border routes: social-security counters on all, tax counters on seven (Geneva and other non-1983 cantons, 1983-agreement cantons, Germany→Switzerland, France→Luxembourg, Belgium→Luxembourg, Germany→Luxembourg, Italy→Switzerland). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup."
+    },
+    "fr": {
+      "title": "Questions fréquentes : compter ses jours frontaliers | BorderDay",
+      "description": "BorderDay est-il un conseil fiscal ? Où est le journal ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?",
+      "summary": "BorderDay est un outil de suivi et de rappel, pas un conseil fiscal ou juridique. Avec un abonnement, le journal est enregistré dans votre compte ; l’aperçu gratuit reste sur l’appareil ; ni GPS ni localisation de l’appareil. Neuf situations frontalières : compteurs de sécurité sociale sur tous, compteurs fiscaux sur sept (Genève et autres cantons hors accord de 1983, cantons de l’accord de 1983, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg, Italie→Suisse). Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription."
+    },
+    "de": {
+      "title": "Häufige Fragen: grenzüberschreitende Arbeitstage zählen | BorderDay",
+      "description": "Ist BorderDay Steuerberatung? Wo liegt das Tagesprotokoll? Welche Grenzen? Wie funktionieren Zahlung und die 7-tägige Testphase?",
+      "summary": "BorderDay ist ein Erfassungs- und Erinnerungstool, keine Steuer- oder Rechtsberatung. Mit Abo wird das Protokoll im Konto gespeichert, die Gratisvorschau bleibt auf dem Gerät; kein GPS und kein Gerätestandort. Neun Grenzrouten: Sozialversicherungszähler auf allen, Steuerzähler auf sieben (Genf und weitere Kantone ausserhalb des Abkommens von 1983, Kantone des Abkommens von 1983, Deutschland→Schweiz, Frankreich→Luxemburg, Belgien→Luxemburg, Deutschland→Luxemburg, Italien→Schweiz). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich."
+    },
+    "it": {
+      "title": "Domande frequenti: contare i giorni di lavoro oltre confine | BorderDay",
+      "description": "BorderDay è consulenza fiscale? Dove si trova il diario? Quali confini? Come funzionano pagamenti e prova di 7 giorni?",
+      "summary": "BorderDay è uno strumento di registrazione e promemoria, non consulenza fiscale o legale. Con un piano il registro è salvato nell’account, l’anteprima gratuita resta sul dispositivo; niente GPS né posizione del dispositivo. Nove situazioni di frontiera: contatori di sicurezza sociale su tutti, contatori fiscali su sette (Ginevra e altri cantoni fuori dall’accordo del 1983, cantoni dell’accordo del 1983, Germania→Svizzera, Francia→Lussemburgo, Belgio→Lussemburgo, Germania→Lussemburgo, Italia→Svizzera). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione."
+    },
+    "nl": {
+      "title": "Veelgestelde vragen: grensoverschrijdende werkdagen tellen | BorderDay",
+      "description": "Veelgestelde vragen over BorderDay: opslag, locatie, grensroutes, prijzen, betalingen en wat de tool niet dekt.",
+      "summary": "BorderDay is een registratie- en herinneringstool, geen belasting- of juridisch advies. Met abonnement wordt het logboek in het account bewaard, de gratis preview blijft op het apparaat; geen GPS en geen apparaatlocatie. Negen grensroutes: socialezekerheidstellers op alle, belastingtellers op zeven (Genève en andere niet-1983-kantons, 1983-verdragskantons, Duitsland→Zwitserland, Frankrijk→Luxemburg, België→Luxemburg, Duitsland→Luxemburg, Italië→Zwitserland). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie."
+    }
+  },
+  "for-individuals": {
+    "en": {
+      "title": "For individuals — BorderDay",
+      "description": "Log your own telework and border days: social-security counters on every border route, tax counters where the rule can be counted today. €4.99/month or €49/year incl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.",
+      "summary": "Employees and individual users can log telework, on-site, trip and non-working days. Social-security counters run on every border route; tax counters run on seven. Individual plan: €4.99/month or €49/year (incl. VAT). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. If your employer uses BorderDay, join via their invite link to share the same counters with HR."
+    },
+    "fr": {
+      "title": "Pour les particuliers — BorderDay",
+      "description": "Enregistrez vos jours de télétravail et de déplacement. 4,99 €/mois ou 49 €/an TVA incluse. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.",
+      "summary": "Salariés et utilisateurs individuels peuvent enregistrer télétravail, jours sur site, déplacements et jours non travaillés. Compteurs de sécurité sociale sur chaque situation frontalière, compteurs fiscaux sur sept. Offre individuelle : 4,99 €/mois ou 49 €/an (TVA incluse). Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Si votre employeur utilise BorderDay, rejoignez-le via son lien d’invitation pour partager les mêmes compteurs avec les RH."
+    },
+    "de": {
+      "title": "Für Einzelpersonen — BorderDay",
+      "description": "Eigene Telearbeits- und Reisetage erfassen. 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.",
+      "summary": "Mitarbeitende erfassen Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage selbst. Sozialversicherungszähler auf jeder Grenzroute, Steuerzähler auf sieben. Einzelplan: 4,99 €/Monat oder 49 €/Jahr (inkl. MWST). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Nutzt der Arbeitgeber BorderDay, Beitritt über den Einladungslink: dieselben Zähler wie HR."
+    },
+    "it": {
+      "title": "Per i privati — BorderDay",
+      "description": "Registrate telelavoro e giorni sulla situazione di frontiera. 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.",
+      "summary": "Dipendenti e utenti individuali possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati. Contatori di sicurezza sociale su ogni situazione di frontiera, contatori fiscali su sette. Piano individuale: 4,99 €/mese o 49 €/anno (IVA inclusa). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR."
+    },
+    "nl": {
+      "title": "BorderDay — Voor particulieren",
+      "description": "Registreer zelf telewerk- en reisdagen. €4,99/maand of €49/jaar incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.",
+      "summary": "Medewerkers registreren zelf telewerk-, ter-plaatse-, reis- en niet-werkdagen. Socialezekerheidstellers op elke grensroute, belastingtellers op zeven. Particulier abonnement: €4,99/maand of €49/jaar (incl. btw). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Gebruikt de werkgever BorderDay, aansluiten via de uitnodigingslink: dezelfde tellers als HR."
+    }
+  },
+  "privacy": {
+    "en": {
+      "title": "Privacy: how BorderDay handles personal data | BorderDay",
+      "description": "How BorderDay handles personal data: purposes, legal bases, recipients, transfers, retention and your rights under the GDPR and Swiss FADP. No GPS or device location.",
+      "summary": "No GPS or device location: HR sees the day type and overnight-away yes/no per date, a country category, never coordinates. The employer is controller of employee day logs. Recipients: Supabase (EU hosting), Resend, GitHub Pages, Zoho, Google if chosen, and Stripe/Link as independent controllers. Contact privacy@borderday.com."
+    },
+    "fr": {
+      "title": "Confidentialité : données personnelles et droits | BorderDay",
+      "description": "Comment BorderDay traite les données personnelles : finalités, bases légales, destinataires, transferts, conservation et vos droits (RGPD et LPD suisse). Ni GPS ni localisation de l’appareil.",
+      "summary": "Ni GPS ni localisation de l’appareil : les RH voient par date le type de jour et la nuit hors du domicile (oui ou non), une catégorie de pays, jamais des coordonnées. L’employeur est responsable du traitement des journaux des collaborateurs. Destinataires : Supabase (hébergement UE), Resend, GitHub Pages, Zoho, Google si choisi, et Stripe/Link en tant que responsables indépendants. Contact privacy@borderday.com."
+    },
+    "de": {
+      "title": "Datenschutz: wie BorderDay Personendaten bearbeitet | BorderDay",
+      "description": "Wie BorderDay Personendaten bearbeitet: Zwecke, Rechtsgrundlagen, Empfänger, Übermittlungen, Aufbewahrung und Ihre Rechte (DSGVO und Schweizer DSG). Kein GPS und kein Gerätestandort.",
+      "summary": "Kein GPS und kein Gerätestandort: HR sieht je Datum die Tagesart, halber Tag und auswärtige Übernachtung ja/nein, eine Länderkategorie, nie Koordinaten. Der Arbeitgeber ist Verantwortlicher für die Tagesprotokolle der Mitarbeitenden. Empfänger: Supabase (Hosting in der EU), Resend, GitHub Pages, Zoho, Google falls gewählt, sowie Stripe/Link als unabhängige Verantwortliche. Kontakt privacy@borderday.com."
+    },
+    "it": {
+      "title": "Privacy: come BorderDay tratta i dati personali | BorderDay",
+      "description": "Come BorderDay tratta i dati personali: finalità, basi giuridiche, destinatari, trasferimenti, conservazione e vostri diritti (GDPR e LPD svizzera). Nessuna localizzazione GPS né posizione del dispositivo.",
+      "summary": "Nessuna localizzazione GPS né posizione del dispositivo: l’HR vede per data il tipo di giorno, la mezza giornata e la notte fuori sì/no, una categoria di paese, mai coordinate. Il datore di lavoro è titolare dei registri dei dipendenti. Destinatari: Supabase (hosting UE), Resend, GitHub Pages, Zoho, Google se scelto, e Stripe/Link come titolari autonomi. Contatto privacy@borderday.com."
+    },
+    "nl": {
+      "title": "Privacyverklaring: persoonsgegevens en rechten | BorderDay",
+      "description": "Wat BorderDay verwerkt, waarom, wie ontvangt, waar gegevens naartoe gaan en hoe lang ze worden bewaard. AVG en Zwitserse DSG. Geen GPS of apparaatlocatie.",
+      "summary": "Geen GPS of apparaatlocatie: HR ziet per datum het dagtype, halve dag en overnachting elders ja/nee, een landcategorie, nooit coördinaten. De werkgever is verwerkingsverantwoordelijke voor de dagregistraties van medewerkers. Contact privacy@borderday.com."
+    }
+  },
+  "dpa": {
+    "en": {
+      "title": "Data processing agreement — BorderDay",
+      "description": "Public data processing agreement for BorderDay company accounts under GDPR Art. 28 and the Swiss FADP: roles, security, sub-processors and transfers.",
+      "summary": "When an employer uses a BorderDay company account, BorderDay processes employee day logs as a processor under GDPR Art. 28 and the Swiss FADP. This page is the public DPA for that processing. Sub-processors include Supabase (eu-central-1), Resend, GitHub Pages and optional Google sign-in; Stripe/Link are independent controllers for payment."
+    },
+    "fr": {
+      "title": "Accord de traitement des données — BorderDay",
+      "description": "Accord public de traitement des données pour les comptes entreprise BorderDay (art. 28 RGPD et LPD suisse) : rôles, sécurité, sous-traitants et transferts.",
+      "summary": "Lorsqu’un employeur utilise un compte entreprise BorderDay, BorderDay traite les journaux de jours des collaborateurs en tant que sous-traitant (art. 28 RGPD et LPD). Cette page est l’ATD public pour ce traitement. Sous-traitants : Supabase (eu-central-1), Resend, GitHub Pages et Google optionnel ; Stripe/Link sont responsables indépendants pour le paiement."
+    },
+    "de": {
+      "title": "Auftragsverarbeitungsvertrag — BorderDay",
+      "description": "Öffentlicher Auftragsverarbeitungsvertrag für BorderDay-Unternehmenskonten (Art. 28 DSGVO und schweizerisches DSG): Rollen, Sicherheit, Unterauftragsbearbeiter und Übermittlungen.",
+      "summary": "Nutzt ein Arbeitgeber ein BorderDay-Unternehmenskonto, verarbeitet BorderDay Tagesprotokolle der Mitarbeitenden als Auftragsbearbeiter nach Art. 28 DSGVO und dem DSG. Diese Seite ist der öffentliche AVV. Unterauftragsbearbeiter: Supabase (eu-central-1), Resend, GitHub Pages und optionales Google; Stripe/Link sind unabhängige Verantwortliche für die Zahlung."
+    },
+    "it": {
+      "title": "Accordo sul trattamento dei dati — BorderDay",
+      "description": "Accordo pubblico sul trattamento dei dati per gli account aziendali BorderDay (art. 28 GDPR e LPD svizzera): ruoli, sicurezza, sub-responsabili e trasferimenti.",
+      "summary": "Quando un datore di lavoro usa un account aziendale BorderDay, BorderDay tratta i registri dei giorni dei dipendenti come responsabile del trattamento ai sensi dell’art. 28 GDPR e della LPD. Questa pagina è l’ATD pubblico. Sub-responsabili: Supabase (eu-central-1), Resend, GitHub Pages e Google opzionale; Stripe/Link sono titolari indipendenti per il pagamento."
+    },
+    "nl": {
+      "title": "BorderDay — Verwerkersovereenkomst",
+      "description": "Verwerkersovereenkomst (art. 28 AVG / Zwitserse DSG) voor BorderDay-bedrijfsaccounts. Rollen werkgever/verwerker voor medewerker-dagregistraties.",
+      "summary": "DPA voor medewerker-dagregistraties wanneer de werkgever een bedrijfsaccount gebruikt."
+    }
+  },
+  "disclaimer": {
+    "en": {
+      "title": "Disclaimer: a tracking tool, not tax or legal advice | BorderDay",
+      "description": "BorderDay is a tracking and reminder tool. It is not tax advice, legal advice, or a substitute for your employer or a qualified adviser.",
+      "summary": "BorderDay classifies and counts days you or your company log. Thresholds come from public official sources and may change. Always verify with the competent authority or a qualified adviser."
+    },
+    "fr": {
+      "title": "Avertissement : outil de suivi, pas un conseil fiscal | BorderDay",
+      "description": "BorderDay est un outil de suivi et de rappel. Ce n’est pas un conseil fiscal ou juridique.",
+      "summary": "BorderDay classe et compte les jours que vous ou votre entreprise enregistrez. Les seuils proviennent de sources officielles publiques et peuvent changer. Vérifiez toujours auprès de l’autorité compétente ou d’un conseiller qualifié."
+    },
+    "de": {
+      "title": "Rechtlicher Hinweis: Erfassungstool, keine Steuerberatung | BorderDay",
+      "description": "BorderDay ist ein Erfassungs- und Erinnerungstool. Keine Steuer- oder Rechtsberatung und kein Ersatz für Arbeitgeber oder Fachperson.",
+      "summary": "BorderDay klassifiziert und zählt von Ihnen oder Ihrem Unternehmen erfasste Tage. Schwellen stammen aus öffentlichen amtlichen Quellen und können sich ändern. Stets bei der zuständigen Behörde oder einer Fachperson prüfen."
+    },
+    "it": {
+      "title": "Avvertenza: strumento di registrazione, non consulenza fiscale | BorderDay",
+      "description": "BorderDay è uno strumento di registrazione e promemoria. Non è consulenza fiscale o legale né sostituisce il datore di lavoro o un consulente.",
+      "summary": "BorderDay classifica e conta i giorni registrati da voi o dalla vostra azienda. Le soglie provengono da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con l’autorità competente o un consulente qualificato."
+    },
+    "nl": {
+      "title": "Disclaimer: registratietool, geen belastingadvies | BorderDay",
+      "description": "BorderDay is een registratie- en herinneringstool — geen belasting- of juridisch advies.",
+      "summary": "Geen belasting- of juridisch advies; drempels uit openbare bronnen."
+    }
+  },
+  "accessibility": {
+    "en": {
+      "title": "Accessibility — BorderDay",
+      "description": "BorderDay accessibility statement: scope, current status and how to report barriers. Feedback: hello@borderday.com.",
+      "summary": "We aim for WCAG 2.1 Level AA. Automated axe scans of the public pages and the demo reported no violations on 1 November 2026; manual gaps remain and are listed on this page."
+    },
+    "fr": {
+      "title": "Accessibilité — BorderDay",
+      "description": "Déclaration d’accessibilité BorderDay : périmètre, état actuel et comment signaler un obstacle. Contact : hello@borderday.com.",
+      "summary": "Nous visons le niveau AA des WCAG 2.1. Les scans axe des pages publiques et de la démo n’ont signalé aucune violation le 1er novembre 2026 ; des écarts manuels restent listés sur cette page."
+    },
+    "de": {
+      "title": "Barrierefreiheit — BorderDay",
+      "description": "BorderDay-Erklärung zur Barrierefreiheit: Geltungsbereich, aktueller Stand und Rückmeldung. Kontakt: hello@borderday.com.",
+      "summary": "Wir orientieren uns an WCAG 2.1 Stufe AA. Automatisierte axe-Scans der öffentlichen Seiten und der Demo meldeten am 1. November 2026 keine Verstösse; manuelle Lücken stehen auf dieser Seite."
+    },
+    "it": {
+      "title": "Accessibilità — BorderDay",
+      "description": "Dichiarazione di accessibilità BorderDay: ambito, stato attuale e come segnalare una barriera. Contatto: hello@borderday.com.",
+      "summary": "Miriamo al livello AA delle WCAG 2.1. Gli scan axe delle pagine pubbliche e della demo non hanno segnalato violazioni il 1° novembre 2026; le lacune manuali sono elencate in questa pagina."
+    },
+    "nl": {
+      "title": "BorderDay — Toegankelijkheid",
+      "description": "Toegankelijkheidsverklaring voor borderday.com (richting WCAG 2.1 AA).",
+      "summary": "Korte openbare toegankelijkheidsverklaring voor BorderDay."
+    }
+  },
+  "terms": {
+    "en": {
+      "title": "Terms & legal notice — BorderDay",
+      "description": "BorderDay terms and legal notice: trial and automatic renewal, cancellation, VAT, EU 14-day withdrawal for consumers, and service scope.",
+      "summary": "Subscriptions start with a 7-day free trial: the plan then becomes paid at the stated price, charged automatically on day 8 and renewing until you cancel. Company prices exclude VAT; individual prices include VAT. EU consumer withdrawal rights and cancellation are described on this page."
+    },
+    "fr": {
+      "title": "Conditions d’utilisation et mentions légales — BorderDay",
+      "description": "CGU et mentions légales BorderDay : essai et renouvellement automatique, résiliation, TVA, rétractation UE de 14 jours pour les consommateurs.",
+      "summary": "Les abonnements commencent par un essai gratuit de 7 jours : l’offre devient ensuite payante au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation. Prix entreprise hors TVA ; prix particulier TVA incluse. Droit de rétractation UE et résiliation sont décrits sur cette page."
+    },
+    "de": {
+      "title": "Nutzungsbedingungen & Impressum — BorderDay",
+      "description": "Nutzungsbedingungen und Impressum von BorderDay: Testphase und automatische Verlängerung, Kündigung, MWST, 14-tägiges EU-Widerrufsrecht für Verbraucher.",
+      "summary": "Abos beginnen mit einer 7-tägigen kostenlosen Testphase: Danach wird der Plan zum angegebenen Preis kostenpflichtig, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung. Unternehmenspreise zzgl. MWST; Einzelpreise inkl. MWST EU-Widerruf und Kündigung sind auf dieser Seite beschrieben."
+    },
+    "it": {
+      "title": "Condizioni di servizio e note legali — BorderDay",
+      "description": "Condizioni e note legali BorderDay: prova e rinnovo automatico, disdetta, IVA, recesso UE di 14 giorni per i consumatori.",
+      "summary": "Gli abbonamenti iniziano con una prova gratuita di 7 giorni: il piano diventa poi a pagamento al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta. Prezzi azienda IVA esclusa; individuali IVA inclusa. Recesso UE e disdetta sono descritti in questa pagina."
+    },
+    "nl": {
+      "title": "BorderDay — Voorwaarden & wettelijke vermeldingen",
+      "description": "Voorwaarden, wettelijke vermeldingen en herroepingsrecht. Abonnementen via Stripe Managed Payments (Link). 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.",
+      "summary": "Abonnementen starten met 7 dagen gratis proberen: daarna wordt het abonnement betaald tegen de vermelde prijs, met automatische incasso op dag 8 en verlenging tot u opzegt. Bedrijfsprijzen excl. btw; particulier incl. btw. EU-herroeping en opzegging staan op deze pagina beschreven."
+    }
+  },
+  "withdrawal": {
+    "en": {
+      "title": "Withdraw from contract — BorderDay",
+      "description": "How EU/EEA consumers withdraw from a BorderDay individual plan within 14 days of receiving access, without giving a reason.",
+      "summary": "EU/EEA consumers who bought an individual plan can withdraw within 14 days of receiving access, without giving a reason. This page records the withdrawal and shows the time of receipt; privacy@borderday.com and Link support can also be contacted for the Order."
+    },
+    "fr": {
+      "title": "Se rétracter du contrat — BorderDay",
+      "description": "Comment les consommateurs UE/EEE se rétractent d’une offre individuelle BorderDay dans les 14 jours suivant la réception de l’accès, sans motif.",
+      "summary": "Les consommateurs UE/EEE ayant acheté une offre individuelle peuvent se rétracter dans les 14 jours suivant la réception de l’accès, sans motif. Cette page enregistre la rétractation et affiche l’heure de réception ; privacy@borderday.com et le support Link peuvent aussi être contactés pour la commande."
+    },
+    "de": {
+      "title": "Vertrag widerrufen — BorderDay",
+      "description": "So widerrufen Verbraucher in der EU/im EWR einen BorderDay-Einzelplan innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen.",
+      "summary": "Verbraucher in der EU/im EWR mit Einzelplan können innerhalb von 14 Tagen ab Erhalt des Zugangs ohne Angabe von Gründen widerrufen. Diese Seite erfasst den Widerruf und zeigt die Uhrzeit des Eingangs an; auch privacy@borderday.com und der Link-Support können zur Bestellung kontaktiert werden."
+    },
+    "it": {
+      "title": "Recedere dal contratto — BorderDay",
+      "description": "Come i consumatori UE/SEE recedono da un piano individuale BorderDay entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo.",
+      "summary": "I consumatori UE/SEE con un piano individuale possono recedere entro 14 giorni dalla ricezione dell’accesso, senza indicare il motivo. Questa pagina registra il recesso e mostra l’ora di ricezione; si possono anche contattare privacy@borderday.com e il supporto Link per l’ordine."
+    },
+    "nl": {
+      "title": "BorderDay — Herroeping",
+      "description": "Herroepingsrecht van 14 dagen voor consumenten in de EU/EER op individuele abonnementen.",
+      "summary": "EU/EER-consumentenherroeping voor individuele BorderDay-abonnementen."
+    }
+  },
+  "cancel": {
+    "en": {
+      "title": "Cancel subscription — BorderDay",
+      "description": "Cancel a BorderDay subscription: from your account, through Link, or with the form without signing in. Cancellation stops future renewals.",
+      "summary": "Cancel your BorderDay subscription here. Cancellation stops future renewals. If you cancel before day 8 of your trial, nothing is charged."
+    },
+    "fr": {
+      "title": "Résilier votre contrat — BorderDay",
+      "description": "Résilier un abonnement BorderDay : depuis votre compte, via Link, ou avec le formulaire sans vous connecter. La résiliation arrête les renouvellements futurs.",
+      "summary": "Résiliez ici votre abonnement BorderDay. La résiliation arrête les renouvellements futurs. Si vous résiliez avant le 8e jour de l’essai, rien n’est débité."
+    },
+    "de": {
+      "title": "Verträge hier kündigen — BorderDay",
+      "description": "BorderDay-Abo kündigen: aus Ihrem Konto, über Link oder mit dem Formular ohne Anmeldung. Die Kündigung stoppt künftige Verlängerungen.",
+      "summary": "Kündigen Sie hier Ihr BorderDay-Abo. Die Kündigung stoppt künftige Verlängerungen. Kündigen Sie vor dem 8. Tag der Testphase, wird nichts abgebucht."
+    },
+    "it": {
+      "title": "Disdire il contratto — BorderDay",
+      "description": "Disdire un abbonamento BorderDay: dall’account, tramite Link o con il modulo senza accedere. La disdetta interrompe i rinnovi futuri.",
+      "summary": "Disdite qui il vostro abbonamento BorderDay. La disdetta interrompe i rinnovi futuri. Con la disdetta prima dell’8° giorno di prova non viene addebitato nulla."
+    },
+    "nl": {
+      "title": "BorderDay — Abonnement opzeggen",
+      "description": "Zeg uw BorderDay-abonnement op via het klantenportaal, Link of het formulier. Opzegging vóór dag 8 van de proefperiode: niets wordt aangerekend.",
+      "summary": "Opzegging stopt toekomstige verlengingen. Tijdens de proefperiode vóór dag 8 wordt niets aangerekend. Gebruik het klantenportaal, Link-ordertools of het formulier."
+    }
+  },
+  "company/signup": {
+    "en": {
+      "title": "Company sign-up — BorderDay",
+      "description": "Create a BorderDay company account for HR day counting across nine border routes. Then subscribe on Pricing (€5/active employee/month, min €39, excl. VAT).",
+      "summary": "Create a company account with email or Google, invite employees, and subscribe on the Pricing page. Company plan: €5 per active employee per month, €39 minimum, excl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup."
+    },
+    "fr": {
+      "title": "Inscription entreprise — BorderDay",
+      "description": "Créez un compte entreprise BorderDay pour le suivi RH sur neuf situations frontalières. Puis abonnez-vous (5 €/collaborateur actif/mois, min. 39 €, hors TVA).",
+      "summary": "Créez un compte entreprise avec e-mail ou Google, invitez vos collaborateurs, puis abonnez-vous sur Tarifs. Offre entreprise : 5 € par collaborateur actif et par mois, minimum 39 €, hors TVA. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription."
+    },
+    "de": {
+      "title": "Unternehmensregistrierung — BorderDay",
+      "description": "BorderDay-Unternehmenskonto für HR-Tageszählung auf neun Grenzrouten. Danach Abo unter Preise (5 € je aktive mitarbeitende Person/Monat, min. 39 €, zzgl. MWST).",
+      "summary": "Unternehmenskonto mit E-Mail oder Google anlegen, Mitarbeitende einladen, unter Preise abonnieren. Plan: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 €, zzgl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich."
+    },
+    "it": {
+      "title": "Registrazione azienda — BorderDay",
+      "description": "Create un account aziendale BorderDay per il conteggio HR su nove situazioni di frontiera. Poi abbonatevi (5 €/dipendente attivo/mese, min. 39 €, IVA esclusa).",
+      "summary": "Create un account aziendale con e-mail o Google, invitate i dipendenti e abbonatevi in Prezzi. Piano: 5 € per dipendente attivo al mese, minimo 39 €, IVA esclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione."
+    },
+    "nl": {
+      "title": "BorderDay — Bedrijfsaccount aanmaken",
+      "description": "Maak een bedrijfsaccount met e-mail of Google, nodig medewerkers uit, abonneer u onder Prijzen. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw.",
+      "summary": "Bedrijfsaccount met e-mail of Google aanmaken, medewerkers uitnodigen, onder Prijzen abonneren. Abonnement: €5 per actieve medewerker per maand, minimum €39, excl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie."
+    }
+  },
+  "employers/ticino": {
+    "en": {
+      "title": "Ticino employers — telework day tracking (IT→CH) — BorderDay",
+      "description": "For Ticino HR: track telework days for staff living in Italy. Tax counters for the 25% telework share and 45 non-return days under the Italy–Switzerland agreement, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).",
+      "summary": "BorderDay helps Ticino employers log telework, on-site and overnight-away days for people who live in Italy and work in Switzerland under the Italy–Switzerland frontier-worker agreement (Accordo Art. 2 zones, as amended for telework). Tax: at most 25% telework at domicile and up to 45 non-return days per year (protocol Fedlex RU 2026 104; in force 9 Feb 2026, applying from 1 Jan 2024). Social security: EU/EEA/CH framework bands under 25%, 25% to under 50% (A1), and 50% or more. Not tax or legal advice."
+    },
+    "fr": {
+      "title": "Employeurs Tessin — suivi télétravail (IT→CH) — BorderDay",
+      "description": "Pour les RH tessinoises: suivre les jours de télétravail du personnel résidant en Italie. Compteurs fiscaux 25% télétravail et 45 jours de non-retour selon l’accord Italie–Suisse, plus le cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).",
+      "summary": "BorderDay aide les employeurs tessinois à enregistrer télétravail, jours sur site et nuits hors domicile pour les personnes qui résident en Italie et travaillent en Suisse selon l’accord Italie–Suisse (Accordo Art. 2, tel que modifié pour le télétravail). Fiscalité: au plus 25% de télétravail au domicile et jusqu’à 45 jours de non-retour par an (protocole Fedlex RU 2026 104; en vigueur le 9 février 2026, applicable dès le 1er janvier 2024). Sécurité sociale: bandes du cadre UE/EEE/CH sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Pas un conseil fiscal ou juridique."
+    },
+    "de": {
+      "title": "Arbeitgeber Tessin — Telearbeitstage (IT→CH) — BorderDay",
+      "description": "Für HR im Tessin: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Italien erfassen. Steuerzähler 25% Telearbeit und 45 Nicht-Rückkehrtage laut Abkommen Italien–Schweiz, plus EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).",
+      "summary": "BorderDay hilft Tessiner Arbeitgebern, Telearbeit, Vor-Ort-Tage und Übernachtungen auswärts für Personen zu erfassen, die in Italien wohnen und in der Schweiz arbeiten — gemäss dem Abkommen Italien–Schweiz (Accordo Art. 2, geändert für Telearbeit). Steuer: höchstens 25% Telearbeit am Wohnsitz und bis 45 Nicht-Rückkehrtage pro Jahr (Protokoll Fedlex RU 2026 104; in Kraft 9. Feb 2026, anwendbar ab 1. Jan 2024). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Keine Steuer- oder Rechtsberatung."
+    },
+    "it": {
+      "title": "Datori di lavoro Ticino — giorni di telelavoro (IT→CH) — BorderDay",
+      "description": "Per le HR in Ticino: registrare i giorni di telelavoro del personale residente in Italia. Contatori fiscali 25% telelavoro e 45 giorni di non rientro dell’accordo Italia–Svizzera, più il quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).",
+      "summary": "BorderDay aiuta i datori di lavoro in Ticino a registrare telelavoro, giorni in sede e notti fuori casa per chi risiede in Italia e lavora in Svizzera secondo l’accordo Italia–Svizzera (Accordo Art. 2, come modificato per il telelavoro). Fisco: al massimo il 25% di telelavoro al domicilio e fino a 45 giorni di non rientro all’anno (protocollo Fedlex RU 2026 104; in vigore dal 9 febbraio 2026, con effetto dal 1° gennaio 2024). Previdenza: fasce del quadro UE/SEE/CH sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Non è consulenza fiscale o legale."
+    },
+    "nl": {
+      "title": "Werkgevers Ticino — telewerkdagen (IT→CH) — BorderDay",
+      "description": "Voor HR in Ticino: telewerkdagen bijhouden van medewerkers die in Italië wonen. Belastingstellers 25% telewerk en 45 niet-terugkeerdagen volgens het akkoord Italië–Zwitserland, plus EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).",
+      "summary": "BorderDay helpt Ticinese werkgevers telewerk-, ter-plaatse- en overnachtingsdagen elders te registreren voor mensen die in Italië wonen en in Zwitserland werken volgens het grenswerkersakkoord Italië–Zwitserland (Accordo Art. 2, gewijzigd voor telewerk). Fiscaal: hoogstens 25% telewerk aan de woonplaats en tot 45 niet-terugkeerdagen per jaar (protocol Fedlex RU 2026 104; in werking 9 feb 2026, toepasselijk vanaf 1 jan 2024). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Geen belasting- of juridisch advies."
+    }
+  },
+  "employers/geneva": {
+    "en": {
+      "title": "Geneva employers — telework day tracking (FR→CH) — BorderDay",
+      "description": "For Geneva HR: track telework days for staff living in France. Tax counters for the 40% telework share and 10 mission days, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).",
+      "summary": "BorderDay helps Geneva employers log telework, on-site and trip days for people who live in France and work in Switzerland. Tax: up to 40% telework and 10 temporary mission days (ge.ch / ESTV). Social security: framework bands under 25%, 25% to under 50% (A1), and 50% or more. Employer telework-rate duty: first AFC transmission planned for January 2027 for 2026 data. Not tax or legal advice."
+    },
+    "fr": {
+      "title": "Employeurs Genève — suivi télétravail (FR→CH) — BorderDay",
+      "description": "Pour les RH genevoises: suivre les jours de télétravail du personnel résidant en France. Compteurs fiscaux 40% / 10 jours de mission et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).",
+      "summary": "BorderDay aide les employeurs genevois à enregistrer télétravail, jours sur site et déplacements pour les personnes qui résident en France et travaillent en Suisse. Fiscalité: jusqu’à 40% de télétravail et 10 jours de missions (ge.ch / AFC). Sécurité sociale: bandes sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Obligation employeur: première transmission AFC prévue en janvier 2027 pour 2026. Pas un conseil fiscal ou juridique."
+    },
+    "de": {
+      "title": "Arbeitgeber Genf — Telearbeitstage (FR→CH) — BorderDay",
+      "description": "Für HR in Genf: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Frankreich erfassen. Steuerzähler 40% / 10 temporäre Einsatztage und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).",
+      "summary": "BorderDay hilft Genfer Arbeitgebern, Telearbeit, Vor-Ort- und Reisetage für Personen zu erfassen, die in Frankreich wohnen und in der Schweiz arbeiten. Steuer: bis 40% Telearbeit und 10 temporäre Einsatztage (ge.ch / ESTV). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Arbeitgeberpflicht: erste AFC-Übermittlung laut ge.ch für Januar 2027 (Daten 2026). Keine Steuer- oder Rechtsberatung."
+    },
+    "it": {
+      "title": "Datori di lavoro Ginevra — giorni di telelavoro (FR→CH) — BorderDay",
+      "description": "Per HR a Ginevra: registrare i giorni di telelavoro del personale residente in Francia. Contatori fiscali 40% / 10 giorni di impiego temporaneo e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).",
+      "summary": "BorderDay aiuta i datori di lavoro ginevrini a registrare telelavoro, giorni in sede e trasferte per chi risiede in Francia e lavora in Svizzera. Fisco: fino al 40% di telelavoro e 10 giorni di missioni (ge.ch / AFC). Previdenza: fasce sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Obbligo del datore di lavoro: prima trasmissione AFC a gennaio 2027 per il 2026. Non è consulenza fiscale o legale."
+    },
+    "nl": {
+      "title": "Werkgevers Genève — telewerkdagen (FR→CH) — BorderDay",
+      "description": "Voor HR in Genève: telewerkdagen bijhouden van medewerkers die in Frankrijk wonen. Belastingstellers 40% / 10 missiedagen en EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).",
+      "summary": "BorderDay helpt Geneefse werkgevers telewerk-, ter-plaatse- en reisdagen te registreren voor mensen die in Frankrijk wonen en in Zwitserland werken. Fiscaal: tot 40% telewerk en 10 missiedagen (ge.ch / ESTV). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Werkgeversplicht: eerste AFC-indiening in januari 2027 voor 2026. Geen belasting- of juridisch advies."
+    }
+  },
+  "employers/luxembourg": {
+    "en": {
+      "title": "Luxembourg employers — FR/BE/DE telework days — BorderDay",
+      "description": "One employer page for France→LU, Belgium→LU and Germany→LU: 34-day tax tolerance and the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).",
+      "summary": "BorderDay covers all three Luxembourg residence routes in one company account: France→LU, Belgium→LU and Germany→LU. Each has a 34-day tax tolerance counter (with pack-specific part-time rules) plus the shared social-security framework under 50%. Day types only — no location tracking. Not tax or legal advice."
+    },
+    "fr": {
+      "title": "Employeurs Luxembourg — télétravail FR/BE/DE — BorderDay",
+      "description": "Une page employeur pour France→LU, Belgique→LU et Allemagne→LU: tolérance fiscale de 34 jours et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).",
+      "summary": "BorderDay couvre les trois situations frontalières de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de 34 jours (règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique."
+    },
+    "de": {
+      "title": "Arbeitgeber Luxemburg — Telearbeit FR/BE/DE — BorderDay",
+      "description": "Eine Arbeitgeberseite für Frankreich→LU, Belgien→LU und Deutschland→LU: steuerliche 34-Tage-Toleranz und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).",
+      "summary": "BorderDay deckt alle drei Wohnsitzrouten nach Luxemburg in einem Unternehmenskonto ab: Frankreich→LU, Belgien→LU und Deutschland→LU. Jede hat einen 34-Tage-Steuerzähler (packspezifische Teilzeitregeln) plus den Sozialversicherungsrahmen unter 50%. Nur Tagesarten. Keine Steuer- oder Rechtsberatung."
+    },
+    "it": {
+      "title": "Datori di lavoro Lussemburgo — telelavoro FR/BE/DE — BorderDay",
+      "description": "Una pagina datore di lavoro per Francia→LU, Belgio→LU e Germania→LU: tolleranza fiscale di 34 giorni e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).",
+      "summary": "BorderDay copre le tre situazioni di frontiera di residenza verso il Lussemburgo in un unico account aziendale: Francia→LU, Belgio→LU e Germania→LU. Ognuno ha un contatore fiscale di 34 giorni (regole part-time del pack) e il quadro previdenziale sotto il 50%. Solo tipologie di giorno. Non è consulenza fiscale o legale."
+    },
+    "nl": {
+      "title": "Werkgevers Luxemburg — telewerk FR/BE/DE — BorderDay",
+      "description": "Eén werkgevers pagina voor Frankrijk→LU, België→LU en Duitsland→LU: fiscale tolerantie van 34 dagen en EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).",
+      "summary": "BorderDay dekt alle drie de woonroutes naar Luxemburg in één bedrijfsaccount: Frankrijk→LU, België→LU en Duitsland→LU. Elk heeft een fiscale 34-dagen-teller (pack-specifieke deeltijdregels) plus het socialezekerheidskader onder 50%. Alleen dagtypes. Geen belasting- of juridisch advies."
+    }
+  }
+}

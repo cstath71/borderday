@@ -170,6 +170,11 @@ const SRC = {
     url: 'https://gouvernement.lu/fr/actualites/toutes_actualites/communiques/2022/11-novembre/07-signature-luxembourg-france.html',
     checked: '2026-11-01',
   },
+  luCirc61: {
+    title: 'ACD Luxembourg — Circulaire L.G. Conv. D.I. n° 61 du 24 juin 2026',
+    url: 'https://impotsdirects.public.lu/dam-assets/fr/legislation/circulaires/circulaire-du-directeur-des-contributions-lg-conv-di-n-61-du-24-juin-2026.pdf',
+    checked: '2026-11-08',
+  },
   frBeAnswer: {
     title: 'Assemblée nationale — réponse ministérielle du 28 mai 2024 (FR–BE, art. 11)',
     url: 'https://questions.assemblee-nationale.fr/q16/16-12971QE.htm',
@@ -499,7 +504,7 @@ export const BORDER_PACKS: BorderPack[] = [
           non_working: 'none',
         },
         warningAt: WARN,
-        sources: [SRC.impots34, SRC.luFrAvenant],
+        sources: [SRC.impots34, SRC.luFrAvenant, SRC.luCirc61],
         notesKey: 'lu_fr_tax_note',
         overKey: 'lu_over_34',
       },

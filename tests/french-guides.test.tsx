@@ -47,8 +47,17 @@ describe('approved French guide text', () => {
       const urls = [...onDisk.matchAll(/\]\((https?:[^)]+)\)/g)].map((match) => match[1]);
       expect(urls.length).toBeGreaterThan(8);
       for (const url of urls) expect(parsed.bodyHtml).toContain(`href="${url}"`);
-      const folded = guide.description[0].toLowerCase() + guide.description.slice(1);
-      expect(markdownPlain(onDisk).includes(guide.description) || markdownPlain(onDisk).includes(folded)).toBe(true);
+      if (guide.id === 'geneva') {
+        const sentence = guide.description.replace(/ Sources officielles : ge\.ch et AFC\.$/, '');
+        const folded = sentence[0].toLowerCase() + sentence.slice(1);
+        const plain = markdownPlain(onDisk);
+        expect(plain.includes(sentence) || plain.includes(folded)).toBe(true);
+        expect(guide.description).toContain('Sources officielles : ge.ch et AFC.');
+      } else {
+        expect(guide.description).toContain('34 jours');
+        expect(onDisk).toContain('34 jours');
+        expect(guide.title).toContain('34 jours de télétravail');
+      }
     }
   });
 
@@ -100,7 +109,8 @@ describe('French-only routes and discovery', () => {
     for (const guide of GUIDES) {
       const parts = frenchGuideDocumentParts(guide, guide.h1, guide.bodyHtml);
       const loc = `${BASE}/fr/${guide.path}/`;
-      expect(parts.title).toBe(`${guide.h1} — BorderDay`);
+      expect(parts.title).toBe(guide.title);
+      expect(parts.head).toContain(guide.ogImage || '/og.png');
       expect(parts.head).toContain(`rel="canonical" href="${loc}"`);
       expect(parts.head).toContain('hreflang="fr"');
       expect(parts.head).toContain(`hreflang="x-default" href="${loc}"`);
@@ -193,6 +203,8 @@ describe('French-only routes and discovery', () => {
       expect(untranslatedLocalePath(lu, lang)).toBe(`/${lang}/employers/luxembourg/`);
       expect(untranslatedLocalePath(ge, lang)).toBe(`/${lang}/employers/geneva/`);
     }
+    expect(untranslatedLocalePath('/fr/guides/', 'en')).toBe('/en/');
+    expect(untranslatedLocalePath('/fr/guides', 'de')).toBe('/de/');
     expect(untranslatedLocalePath(lu, 'fr')).toBeNull();
     expect(untranslatedLocalePath('/fr/pricing/', 'de')).toBeNull();
     expect(untranslatedLocalePath('/en/pricing/', 'fr')).toBeNull();

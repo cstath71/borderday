@@ -6,6 +6,7 @@ import { useLang } from '../../components/Layout';
 import type { CompanyRole, Invitation } from '../../company/types';
 import { getDict, type Lang } from '../../i18n';
 import { useAuth } from '../../lib/auth';
+import { publicPath } from '../../lib/publicPath';
 import { companyHasPaidAccess } from '../../lib/billing';
 import * as api from '../../lib/companyApi';
 
@@ -80,7 +81,7 @@ export default function CompanyInvite() {
     body = (
       <>
         <p>{d.company.accessDenied}</p>
-        <Link to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
+        <Link to={publicPath(lang, 'company/signup')}>{d.nav.companySignup}</Link>
       </>
     );
   } else {
@@ -94,7 +95,7 @@ export default function CompanyInvite() {
         lang={lang}
         onCreate={onCreate}
         canEmail={state.canEmail}
-        pricingHref={`/${lang}/pricing`}
+        pricingHref={publicPath(lang, 'pricing')}
         canManage={(invite) => state.role === 'owner' || invite.role !== 'owner'}
         onResend={(invite) => api.resendInvite(companyId, invite.id, invite.lang || lang)}
         onRevoke={async (inviteId) => {

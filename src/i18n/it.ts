@@ -12,6 +12,7 @@ const it: Dict = {
     app: 'App',
     pricing: 'Prezzi',
     faq: 'FAQ',
+    guides: 'Guide',
     privacy: 'Privacy',
     disclaimer: 'Avvertenza',
     terms: 'Condizioni e note legali',
@@ -90,6 +91,10 @@ const it: Dict = {
     chipTaxNo: 'Fisco: nessun contatore',
     chipTaxNoDayLimit: 'Fisco: nessun limite di giorni',
     chipSsYes: 'Sicurezza sociale: sì',
+    routesCoveredTitle: 'Situazioni coperte',
+    routesRoute: 'Situazione',
+    routesTax: 'Contatore fiscale',
+    routesSs: 'Contatore previdenziale',
   },
   borders: {
     geneva_fr: 'Ginevra e altri cantoni fuori dall’accordo del 1983 ← Francia',
@@ -1015,6 +1020,9 @@ const it: Dict = {
 
   employersHub: {
     title: 'Pagine per datori di lavoro',
+    byRegionTitle: 'Datori di lavoro per regione',
+    frenchGuideNote: 'È disponibile una guida in francese per il personale residente in Francia.',
+    frenchGuideLink: 'Guida in francese',
     linkTicino: 'Datori di lavoro Ticino (IT→CH)',
     linkGeneva: 'Datori di lavoro Ginevra (FR→CH)',
     linkLuxembourg: 'Datori di lavoro Lussemburgo (FR/BE/DE→LU)',
@@ -1029,7 +1037,7 @@ const it: Dict = {
     agreementTitle: 'Accordo Italia–Svizzera (2020 / protocollo 2023)',
     agreementBody:
       'L’accordo Italia–Svizzera del 23 dicembre 2020 (Fedlex SR 0.642.045.43 / Accordo Art. 2) riguarda zone di frontiera definite (CH: Grigioni, Ticino, Vallese; IT: Lombardia, Piemonte, Valle d’Aosta, Provincia di Bolzano), con condizioni di residenza e luogo di lavoro all’Art. 2(b). Il protocollo sul telelavoro è pubblicato come Fedlex RU 2026 104; l’UFAS indica l’entrata in vigore il 9 febbraio 2026 con applicazione dal 1° gennaio 2024, anche per i lavoratori in regime transitorio. Verificate l’idoneità con il consulente o l’autorità prima di basarvi su questi contatori.',
-    thresholdsTitle: 'Cosa conta oggi il pack ticino_it',
+    thresholdsTitle: 'Cosa conta BorderDay per il personale residente in Italia',
     thresholdTax25:
       'Fisco — telelavoro al domicilio: al massimo il 25% dell’attività lavorativa subordinata come telelavoro a casa in Italia in un anno civile, senza modificare lo status fiscale di residenza per quel telelavoro (protocollo / Accordo). Il co-working non è confermato dal testo del protocollo — chiedete all’autorità.',
     thresholdNonreturn45:
@@ -1041,7 +1049,7 @@ const it: Dict = {
     howTitle: 'Come BorderDay aiuta le HR',
     howBody:
       'Invitate i collaboratori; ciascuno sceglie la situazione di frontiera Ticino←Italia e registra solo tipologie di giorno (telelavoro / in sede / trasferta / non lavorativo) più la notte fuori casa quando rilevante. Le HR vedono la quota fiscale del 25%, il contatore dei 45 giorni di non rientro e le fasce previdenziali, con export CSV. Niente GPS. Piano aziendale: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',
-    sourcesTitle: 'Fonti ufficiali (come nel pack ticino_it)',
+    sourcesTitle: 'Fonti ufficiali usate da BorderDay',
     disclaimer:
       'BorderDay è uno strumento di registrazione e di richiamo. Le soglie provengono da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con un consulente qualificato o l’autorità competente.',
     ctaPrimary: 'Crea account aziendale',
@@ -1070,7 +1078,7 @@ const it: Dict = {
     heroTitle: 'Datori di lavoro a Ginevra: giorni di telelavoro per il personale residente in Francia',
     inShort:
       'BorderDay aiuta i datori di lavoro ginevrini a registrare telelavoro, giorni in sede e trasferte per chi risiede in Francia e lavora in Svizzera. Fisco: fino al 40% di telelavoro e 10 giorni di impiego temporaneo (ge.ch / AFC). Previdenza: fasce del quadro sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Obbligo del datore di lavoro: prima trasmissione AFC del tasso prevista a gennaio 2027 per il 2026. Non è consulenza fiscale o legale.',
-    thresholdsTitle: 'Cosa conta oggi il pack geneva_fr',
+    thresholdsTitle: 'Cosa conta BorderDay per il personale residente in Francia',
     thresholdTax40:
       'Fisco — quota di telelavoro: fino al 40% del tempo di lavoro nello Stato di residenza (incluso). Oltre, l’imposizione in Francia può applicarsi dal primo giorno (ge.ch).',
     thresholdMissions10:
@@ -1082,7 +1090,7 @@ const it: Dict = {
     howTitle: 'Come BorderDay aiuta le HR',
     howBody:
       'Invitate i collaboratori; ciascuno sceglie la situazione di frontiera Ginevra←Francia e registra solo tipologie di giorno. Le HR vedono gli stessi contatori fiscali e previdenziali, avvisi e export CSV. Niente GPS. Piano azienda: 5 € per collaboratore attivo al mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',
-    sourcesTitle: 'Fonti ufficiali (come nel pack prodotto)',
+    sourcesTitle: 'Fonti ufficiali usate da BorderDay',
     disclaimer:
       'BorderDay è uno strumento di registrazione e promemoria. Le soglie derivano da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con un consulente qualificato o l’autorità competente.',
     ctaPrimary: 'Crea account aziendale',
@@ -1127,7 +1135,7 @@ const it: Dict = {
     howTitle: 'Come BorderDay aiuta i datori di lavoro LU',
     howBody:
       'Un account aziendale per personale residente in FR, BE o DE. Ciascuno sceglie la situazione di frontiera e registra tipologie di giorno; le HR seguono il ritmo dei 34 giorni e le fasce previdenziali, con export CSV. Niente GPS. Azienda: 5 € per collaboratore attivo/mese (minimo 39 €), IVA esclusa; prova 7 giorni, carta richiesta.',
-    sourcesTitle: 'Fonti ufficiali (pack luxembourg_fr / _be / _de)',
+    sourcesTitle: 'Fonti ufficiali usate da BorderDay',
     disclaimer:
       'BorderDay è uno strumento di registrazione e promemoria. Le soglie derivano da fonti ufficiali pubbliche e possono cambiare. Verificate sempre con un consulente qualificato o l’autorità competente.',
     ctaPrimary: 'Crea account aziendale',

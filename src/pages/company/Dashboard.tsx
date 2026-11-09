@@ -9,6 +9,7 @@ import type { EmployeeDashboardRow } from '../../company/dashboardMath';
 import type { Invitation } from '../../company/types';
 import { getDict, t } from '../../i18n';
 import { useAuth } from '../../lib/auth';
+import { publicPath } from '../../lib/publicPath';
 import { companyHasPaidAccess, planStatus, type PlanStatus } from '../../lib/billing';
 import * as api from '../../lib/companyApi';
 
@@ -155,7 +156,7 @@ export default function CompanyDashboard() {
         {companies.length === 0 ? (
           <>
             <p>{d.company.noCompany}</p>
-            <Link className="btn btn-primary" to={`/${lang}/company/signup`}>
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
               {d.nav.companySignup}
             </Link>
           </>
@@ -210,7 +211,7 @@ export default function CompanyDashboard() {
         {!data.paid && !awaitingWebhook && (
           <div className="demo-banner" role="status">
             {d.company.billingInactive}{" "}
-            <Link to={`/${lang}/pricing?companyId=${encodeURIComponent(companyId!)}`}>{d.company.billingCta}</Link>
+            <Link to={`${publicPath(lang, 'pricing')}?companyId=${encodeURIComponent(companyId!)}`}>{d.company.billingCta}</Link>
           </div>
         )}
         <p className="meta" data-testid="plan-status">
@@ -223,7 +224,7 @@ export default function CompanyDashboard() {
           {plan.key !== 'planNone' && plan.key !== 'planCanceled' && (
             <>
               {' · '}
-              <Link to={`/${lang}/cancel`}>{d.company.planManage}</Link>
+              <Link to={publicPath(lang, 'cancel')}>{d.company.planManage}</Link>
             </>
           )}
         </p>

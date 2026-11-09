@@ -1,4 +1,4 @@
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
 
@@ -9,12 +9,12 @@ export default function Dpa() {
 
   return (
     <>
-      <Seo lang={lang} title={`${p.title} — BorderDay`} description={p.intro} path="dpa" />
+      <PublicSeo path="dpa" />
       <section className="section">
         <div className="container prose">
           <h1>{p.title}</h1>
           <p className="meta">{p.updated}</p>
-          <p>{p.intro}</p>
+          <p id="summary">{p.intro}</p>
           <h2>{p.partiesTitle}</h2>
           <p>{p.partiesBody}</p>
           <h2>{p.rolesTitle}</h2>

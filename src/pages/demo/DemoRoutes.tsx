@@ -9,6 +9,7 @@ import { useLang } from '../../components/Layout';
 import { buildDashboardRows, buildEmployeeRow, type RowMember } from '../../company/buildRows';
 import type { CompanyMember, Profile } from '../../company/types';
 import { getDict } from '../../i18n';
+import { publicPath } from '../../lib/publicPath';
 import {
   acceptInvitation,
   createInvitation,
@@ -43,7 +44,7 @@ function DemoShell() {
         <div className="container">
           <div className="demo-banner" role="status">
             <strong>{d.company.demoDataBadge}</strong> — {d.company.demoBanner}{' '}
-            <Link to={`/${lang}/company/signup`}>{d.nav.companySignup}</Link>
+            <Link to={publicPath(lang, 'company/signup')}>{d.nav.companySignup}</Link>
           </div>
           <Outlet />
         </div>
@@ -205,7 +206,7 @@ function DemoJoin() {
         </div>
       ) : (
         <JoinForm
-          privacyHref={`/${lang}/privacy`}
+          privacyHref={publicPath(lang, 'privacy')}
           d={d}
           companyName={peek.companyName}
           email={peek.email}

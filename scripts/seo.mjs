@@ -2,9 +2,13 @@
  * SEO + AEO helpers for BorderDay (same pattern as CoachBadge / ShopBot Index).
  * Public IndexNow key is served at /<key>.txt by design.
  */
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { FRENCH_HUB } from '../src/content/guideHub.mjs';
+import { ORG_SAME_AS, offersFor } from '../src/seo/offers.mjs';
+import { ROUTES_COVERED_PROSE } from '../src/seo/routesCovered.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const CFG = JSON.parse(readFileSync(join(ROOT, 'config/site.json'), 'utf8'));
@@ -59,6 +63,20 @@ export const PUBLIC_PATHS = [
   'withdrawal',
   'cancel',
   'company/signup',
+  'employers/ticino',
+  'employers/geneva',
+  'employers/luxembourg',
+];
+
+/**
+ * Sitemap lists marketing, employer, pricing, FAQ, for-individuals and guides.
+ * Legal pages and company sign-up stay indexable and in the footer, but out of the sitemap.
+ */
+export const SITEMAP_PATHS = [
+  '',
+  'pricing',
+  'faq',
+  'for-individuals',
   'employers/ticino',
   'employers/geneva',
   'employers/luxembourg',
@@ -187,7 +205,7 @@ export const PAGES = {
   },
   faq: {
     en: {
-      title: 'FAQ — BorderDay',
+      title: 'FAQ: counting cross-border work days | BorderDay',
       description:
         'Is BorderDay tax advice? Where is the day log stored? Which borders are covered? How do payments and the 7-day trial work?',
       h1: 'FAQ',
@@ -199,7 +217,7 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'FAQ — BorderDay',
+      title: 'Questions fréquentes : compter ses jours frontaliers | BorderDay',
       description:
         'BorderDay est-il un conseil fiscal ? Où est le journal ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?',
       h1: 'FAQ',
@@ -211,7 +229,7 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'FAQ — BorderDay',
+      title: 'Häufige Fragen: grenzüberschreitende Arbeitstage zählen | BorderDay',
       description:
         'Ist BorderDay Steuerberatung? Wo liegt das Tagesprotokoll? Welche Grenzen? Wie funktionieren Zahlung und die 7-tägige Testphase?',
       h1: 'FAQ',
@@ -223,7 +241,7 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'FAQ — BorderDay',
+      title: 'Domande frequenti: contare i giorni di lavoro oltre confine | BorderDay',
       description:
         'BorderDay è consulenza fiscale? Dove si trova il diario? Quali confini? Come funzionano pagamenti e prova di 7 giorni?',
       h1: 'FAQ',
@@ -287,7 +305,7 @@ export const PAGES = {
   },
   privacy: {
     en: {
-      title: 'Privacy — BorderDay',
+      title: 'Privacy: how BorderDay handles personal data | BorderDay',
       description:
         'How BorderDay handles personal data: purposes, legal bases, recipients, transfers, retention and your rights under the GDPR and Swiss FADP. No GPS or device location.',
       h1: 'Privacy',
@@ -299,7 +317,7 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Confidentialité — BorderDay',
+      title: 'Confidentialité : données personnelles et droits | BorderDay',
       description:
         'Comment BorderDay traite les données personnelles : finalités, bases légales, destinataires, transferts, conservation et vos droits (RGPD et LPD suisse). Ni GPS ni localisation de l’appareil.',
       h1: 'Confidentialité',
@@ -311,7 +329,7 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'Datenschutz — BorderDay',
+      title: 'Datenschutz: wie BorderDay Personendaten bearbeitet | BorderDay',
       description:
         'Wie BorderDay Personendaten bearbeitet: Zwecke, Rechtsgrundlagen, Empfänger, Übermittlungen, Aufbewahrung und Ihre Rechte (DSGVO und Schweizer DSG). Kein GPS und kein Gerätestandort.',
       h1: 'Datenschutz',
@@ -323,7 +341,7 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Privacy — BorderDay',
+      title: 'Privacy: come BorderDay tratta i dati personali | BorderDay',
       description:
         'Come BorderDay tratta i dati personali: finalità, basi giuridiche, destinatari, trasferimenti, conservazione e vostri diritti (GDPR e LPD svizzera). Nessuna localizzazione GPS né posizione del dispositivo.',
       h1: 'Privacy',
@@ -337,7 +355,7 @@ export const PAGES = {
   },
   disclaimer: {
     en: {
-      title: 'Disclaimer — BorderDay',
+      title: 'Disclaimer: a tracking tool, not tax or legal advice | BorderDay',
       description:
         'BorderDay is a tracking and reminder tool. It is not tax advice, legal advice, or a substitute for your employer or a qualified adviser.',
       h1: 'Disclaimer',
@@ -349,7 +367,7 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Avertissement — BorderDay',
+      title: 'Avertissement : outil de suivi, pas un conseil fiscal | BorderDay',
       description:
         'BorderDay est un outil de suivi et de rappel. Ce n’est pas un conseil fiscal ou juridique.',
       h1: 'Avertissement',
@@ -361,7 +379,7 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'Rechtlicher Hinweis — BorderDay',
+      title: 'Rechtlicher Hinweis: Erfassungstool, keine Steuerberatung | BorderDay',
       description:
         'BorderDay ist ein Erfassungs- und Erinnerungstool. Keine Steuer- oder Rechtsberatung und kein Ersatz für Arbeitgeber oder Fachperson.',
       h1: 'Rechtlicher Hinweis',
@@ -373,7 +391,7 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Avvertenza — BorderDay',
+      title: 'Avvertenza: strumento di registrazione, non consulenza fiscale | BorderDay',
       description:
         'BorderDay è uno strumento di registrazione e promemoria. Non è consulenza fiscale o legale né sostituisce il datore di lavoro o un consulente.',
       h1: 'Avvertenza',
@@ -865,7 +883,7 @@ for (const path of Object.keys(PAGES)) {
   if (!PAGES[path].nl) PAGES[path].nl = { ...PAGES[path].en };
 }
 PAGES.privacy.nl = {
-  title: 'BorderDay — Privacyverklaring',
+  title: 'Privacyverklaring: persoonsgegevens en rechten | BorderDay',
   description:
     'Wat BorderDay verwerkt, waarom, wie ontvangt, waar gegevens naartoe gaan en hoe lang ze worden bewaard. AVG en Zwitserse DSG. Geen GPS of apparaatlocatie.',
   h1: 'Privacyverklaring',
@@ -899,7 +917,7 @@ PAGES.dpa.nl = {
   ],
 };
 PAGES.disclaimer.nl = {
-  title: 'BorderDay — Disclaimer',
+  title: 'Disclaimer: registratietool, geen belastingadvies | BorderDay',
   description: 'BorderDay is een registratie- en herinneringstool — geen belasting- of juridisch advies.',
   h1: 'Disclaimer',
   summary: 'Geen belasting- of juridisch advies; drempels uit openbare bronnen.',
@@ -935,7 +953,7 @@ PAGES.pricing.nl = {
   crumbs: [['Home', ''], ['Prijzen', 'pricing']],
 };
 PAGES.faq.nl = {
-  title: 'BorderDay — FAQ',
+  title: 'Veelgestelde vragen: grensoverschrijdende werkdagen tellen | BorderDay',
   description:
     'Veelgestelde vragen over BorderDay: opslag, locatie, grensroutes, prijzen, betalingen en wat de tool niet dekt.',
   h1: 'FAQ',
@@ -1154,23 +1172,95 @@ export function robotsTxt() {
   return out;
 }
 
+const gitDayCache = new Map();
+
+function gitDay(file) {
+  if (gitDayCache.has(file)) return gitDayCache.get(file);
+  let day = '';
+  try {
+    day = execFileSync('git', ['log', '-1', '--format=%cs', '--', file], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch {
+    day = '';
+  }
+  gitDayCache.set(file, day);
+  return day;
+}
+
+/** Files whose content is rendered into each public path. i18n is per locale. */
+const PAGE_SOURCES = {
+  '': ['src/pages/Home.tsx', 'src/components/RoutesCovered.tsx', 'src/components/FrenchGuideLinks.tsx'],
+  pricing: ['src/pages/Pricing.tsx'],
+  faq: ['src/pages/Faq.tsx', 'src/components/RoutesCovered.tsx', 'src/seo/visibleFaq.ts'],
+  'for-individuals': ['src/pages/ForIndividuals.tsx', 'src/components/FrenchGuideLinks.tsx'],
+  privacy: ['src/pages/Privacy.tsx'],
+  dpa: ['src/pages/Dpa.tsx'],
+  disclaimer: ['src/pages/Disclaimer.tsx'],
+  accessibility: ['src/pages/Accessibility.tsx'],
+  terms: ['src/pages/Terms.tsx'],
+  withdrawal: ['src/pages/Withdrawal.tsx'],
+  cancel: ['src/pages/Cancel.tsx'],
+  'company/signup': ['src/pages/company/Signup.tsx'],
+  'employers/ticino': ['src/pages/employers/Ticino.tsx', 'src/pages/employers/RelatedLinks.tsx'],
+  'employers/geneva': ['src/pages/employers/Geneva.tsx', 'src/pages/employers/RelatedLinks.tsx', 'src/components/FrenchGuideLinks.tsx'],
+  'employers/luxembourg': [
+    'src/pages/employers/Luxembourg.tsx',
+    'src/pages/employers/RelatedLinks.tsx',
+    'src/borders/packs.ts',
+    'src/components/FrenchGuideLinks.tsx',
+  ],
+};
+
+function latestGitDay(files) {
+  const days = files.map(gitDay).filter(Boolean);
+  if (!days.length) return new Date().toISOString().slice(0, 10);
+  return days.sort().at(-1);
+}
+
+/** Sitemap lastmod: newest git day of the files that build the URL, else the build date. */
+export function lastmodFor(lang, path) {
+  return latestGitDay([
+    ...(PAGE_SOURCES[path] || []),
+    `src/i18n/${lang}.ts`,
+    'src/components/Layout.tsx',
+    'src/components/Seo.tsx',
+    'scripts/seo.mjs',
+  ]);
+}
+
+export function hubLastmod() {
+  return latestGitDay(['src/pages/guides/Hub.tsx', 'src/content/guideHub.mjs', 'src/i18n/fr.ts', 'scripts/seo.mjs']);
+}
+
 export function sitemapXml() {
   let out =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n' +
     '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
-  for (const path of PUBLIC_PATHS) {
+  for (const path of SITEMAP_PATHS) {
     for (const lang of LANGS) {
       const loc = absUrl(lang, path);
       out += '  <url>\n';
       out += `    <loc>${esc(loc)}</loc>\n`;
-      out += `    <lastmod>${LASTMOD}</lastmod>\n`;
+      out += `    <lastmod>${esc(lastmodFor(lang, path))}</lastmod>\n`;
       for (const l of LANGS) {
         out += `    <xhtml:link rel="alternate" hreflang="${l}" href="${esc(absUrl(l, path))}"/>\n`;
       }
       out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(absUrl('en', path))}"/>\n`;
       out += '  </url>\n';
     }
+  }
+  {
+    const loc = absUrl('fr', FRENCH_HUB.path);
+    out += '  <url>\n';
+    out += `    <loc>${esc(loc)}</loc>\n`;
+    out += `    <lastmod>${esc(hubLastmod())}</lastmod>\n`;
+    out += `    <xhtml:link rel="alternate" hreflang="fr" href="${esc(loc)}"/>\n`;
+    out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(loc)}"/>\n`;
+    out += '  </url>\n';
   }
   for (const guide of FRENCH_GUIDES) {
     const loc = absUrl('fr', guide.path);
@@ -1193,22 +1283,23 @@ export function organizationLd() {
     url: `${BASE}/`,
     logo: `${BASE}${CFG.logo}`,
     email: CFG.contact_email,
+    sameAs: ORG_SAME_AS,
   };
 }
 
-export function websiteLd() {
+export function websiteLd(lang = 'en') {
   return {
     '@type': 'WebSite',
     '@id': `${BASE}/#website`,
     name: BRAND,
     url: `${BASE}/`,
-    description: PAGES[''].en.description,
-    inLanguage: LANGS,
+    description: PAGES[''][lang].description,
+    inLanguage: lang,
     publisher: { '@id': `${BASE}/#org` },
   };
 }
 
-export function softwareApplicationLd() {
+export function softwareApplicationLd(lang = 'en') {
   return {
     '@type': 'SoftwareApplication',
     '@id': `${BASE}/#app`,
@@ -1216,57 +1307,9 @@ export function softwareApplicationLd() {
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
     url: `${BASE}/`,
-    description: PAGES[''].en.summary,
-    inLanguage: LANGS,
-    offers: [
-      {
-        '@type': 'Offer',
-        name: 'Company monthly (per active employee)',
-        price: '5.00',
-        priceCurrency: 'EUR',
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          price: '5.00',
-          priceCurrency: 'EUR',
-          unitText: 'active employee / month',
-          referenceQuantity: {
-            '@type': 'QuantitativeValue',
-            value: 1,
-            unitText: 'employee',
-          },
-        },
-        description: 'Minimum €39 / month. Prices exclude VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-      {
-        '@type': 'Offer',
-        name: 'Company yearly minimum',
-        price: '390.00',
-        priceCurrency: 'EUR',
-        description: 'Yearly company billing: 2 months free (€390 / year minimum). Prices exclude VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-      {
-        '@type': 'Offer',
-        name: 'Individual monthly',
-        price: '4.99',
-        priceCurrency: 'EUR',
-        description: 'Includes VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-      {
-        '@type': 'Offer',
-        name: 'Individual yearly',
-        price: '49.00',
-        priceCurrency: 'EUR',
-        description: 'Includes VAT. About two months free vs monthly. 7-day free trial, then charged automatically on day 8 and renewing until you cancel; card required.',
-        availability: 'https://schema.org/InStock',
-        url: `${BASE}/en/pricing/`,
-      },
-    ],
+    description: PAGES[''][lang].summary,
+    inLanguage: lang,
+    offers: offersFor(lang, `${BASE}/${lang}/pricing/`),
     publisher: { '@id': `${BASE}/#org` },
   };
 }
@@ -1419,6 +1462,14 @@ export function ldScript(graph) {
   );
 }
 
+function enBref(id) {
+  const guide = FRENCH_GUIDES.find((item) => item.id === id);
+  const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
+  const match = markdown.match(/\*\*En bref\s*:\*\*\s*(.+)/);
+  if (!match) return guide.description;
+  return match[1].replace(/\*\*/g, '').trim();
+}
+
 export function llmsTxt() {
   return `# BorderDay
 
@@ -1426,6 +1477,7 @@ export function llmsTxt() {
 
 - Site: ${BASE}
 - Languages: English, French, German, Italian, Dutch
+- ${ROUTES_COVERED_PROSE}
 - Border routes covered (v1): nine, in five regions (Geneva, Basel, Ticino, Luxembourg, Belgium)
 - Social-security counters: all nine border routes (EU/EEA/CH framework: under 25%, 25% to under 50% with A1, 50% or more)
 - Tax counters running: Geneva and other non-1983 cantons←France (40% / 10 mission days), 1983-agreement cantons←France (40% / 10 mission days / 45 work nights, taxed in France), Germany→Switzerland (60 non-return days + 20% regular return; part-year 5×months+1×weeks; part-time base 240/280), France→Luxembourg (34 days, reduced for part-time), Belgium→Luxembourg (34 days, not reduced for part-time), Germany→Luxembourg (34 days, not reduced for part-time), Italy→Switzerland (25% / 45 non-return days)
@@ -1458,8 +1510,12 @@ export function llmsTxt() {
 - ${BASE}/en/terms/ — Terms and legal notice
 - ${BASE}/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - ${BASE}/en/cancel/ — Cancel subscription
+- ${BASE}/fr/guides/ — French only, no translated version: guide hub for the two France-resident guides
 - ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'luxembourg').path)} — French only, no translated version: how a France resident employed in Luxembourg counts telework days
+- En bref (France–Luxembourg): ${enBref('luxembourg')}
 - ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'geneva').path)} — French only, no translated version: how a France resident employed in Geneva counts telework and temporary missions
+- En bref (Genève): ${enBref('geneva')}
+- Plain-text mirrors: ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'luxembourg').path)}index.md and ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'geneva').path)}index.md
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note

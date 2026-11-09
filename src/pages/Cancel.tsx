@@ -1,6 +1,6 @@
 import CancelPanel from '../components/CancelPanel';
 import RequestForm from '../components/RequestForm';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
@@ -14,11 +14,11 @@ export default function Cancel() {
 
   return (
     <>
-      <Seo lang={lang} title={`${c.title} — BorderDay`} description={c.intro} path="cancel" />
+      <PublicSeo path="cancel" />
       <section className="section">
         <div className="container" style={{ maxWidth: 640 }}>
           <h1>{c.title}</h1>
-          <p>{c.intro}</p>
+          <p id="summary">{c.intro}</p>
           <h2>{c.accountTitle}</h2>
           <CancelPanel lang={lang} />
           <h2>{c.linkTitle}</h2>

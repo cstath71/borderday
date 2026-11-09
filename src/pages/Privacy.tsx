@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import Seo from '../components/Seo';
+import PublicSeo from '../components/PublicSeo';
 import { useLang } from '../components/Layout';
 import { getDict } from '../i18n';
+import { publicPath } from '../lib/publicPath';
 
 const COLUMNS = ['purpose', 'data', 'basis', 'recipients', 'transfer', 'retention'] as const;
 
@@ -15,18 +16,18 @@ export default function Privacy() {
   // H3: daily pg_cron job bd_purge_expired_data deletes company day logs past data_retention_months.
   return (
     <>
-      <Seo lang={lang} title={`${p.title} — BorderDay`} description={p.intro} path="privacy" />
+      <PublicSeo path="privacy" />
       <section className="section">
         <div className="container prose">
           <h1>{p.title}</h1>
           <p>{p.updated}</p>
-          <p>{p.intro}</p>
+          <p id="summary">{p.intro}</p>
           <h2>{p.controllerTitle}</h2>
           <p>{p.controllerBody}</p>
           <h2>{p.rolesTitle}</h2>
           <p>{p.rolesBody}</p>
           <p>
-            <Link to={`/${lang}/dpa`}>{d.nav.dpa}</Link>
+            <Link to={publicPath(lang, 'dpa')}>{d.nav.dpa}</Link>
           </p>
           <h2>{p.s1Title}</h2>
           <p>{p.s1Body}</p>

@@ -7,6 +7,7 @@ import { useLang } from '../components/Layout';
 import { getDict, t, type Dict } from '../i18n';
 import { accountExportCsv, collectAccountExport } from '../lib/accountExport';
 import { useAuth } from '../lib/auth';
+import { publicPath } from '../lib/publicPath';
 import { supabase } from '../lib/supabase';
 import { deleteMyDayLogs, isHrRole, listFormerCompanies, listMyCompanies, listMyDaysIn, type FormerCompany, type OwnDay } from '../lib/companyApi';
 import { download } from '../lib/download';
@@ -236,7 +237,7 @@ export default function Account() {
             <h2 id="cancel">{d.nav.cancel}</h2>
             <CancelPanel lang={lang} />
             <p>
-              <Link to={`/${lang}/cancel`}>{d.cancel.linkTitle}</Link>
+              <Link to={publicPath(lang, 'cancel')}>{d.cancel.linkTitle}</Link>
             </p>
           </div>
 
@@ -260,7 +261,7 @@ export default function Account() {
           </div>
 
           <p>
-            <Link to={`/${lang}/privacy`}>{d.nav.privacy}</Link>
+            <Link to={publicPath(lang, 'privacy')}>{d.nav.privacy}</Link>
           </p>
         </div>
       </section>

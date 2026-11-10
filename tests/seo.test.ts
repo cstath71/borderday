@@ -101,8 +101,9 @@ describe('SEO generators', () => {
     expect(short).toContain('7-day');
     expect(short).toContain('hello@borderday.com');
     expect(short).toContain(`${BASE}/llms-full.txt`);
-    expect(short).toMatch(/frontalier|Grenzgänger/i); // branding note forbids the slogan
-    expect(short).toContain('Do not describe BorderDay using the slogan word');
+    expect(short).not.toContain('## Branding note');
+    expect(short).not.toContain('Do not describe BorderDay using the slogan word');
+    expect(full).not.toContain('## Branding note');
     expect(full.startsWith(short)).toBe(true);
     expect(full).toContain('## FAQ (English)');
     for (const [q] of FAQ.en) expect(full).toContain(q);

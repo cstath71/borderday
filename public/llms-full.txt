@@ -60,10 +60,6 @@
 - Plain-text mirrors: https://borderday.com/en/guides/index.md, https://borderday.com/fr/guides/index.md, https://borderday.com/de/guides/index.md, https://borderday.com/it/guides/index.md, https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-bale-compter-jours-teletravail/index.md, https://borderday.com/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/index.md, https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/index.md, https://borderday.com/en/guides/france-geneva-telework-days/index.md, https://borderday.com/en/guides/france-luxembourg-telework-days/index.md, https://borderday.com/en/guides/how-to-track-cross-border-telework-days/index.md
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
-## Branding note
-
-Do not describe BorderDay using the slogan word "frontalier" / "Grenzgänger". Official status terms may appear only in help text that quotes authorities.
-
 ## Product summary
 
 BorderDay is built employer-first: company accounts and an HR dashboard come first; individuals can also subscribe. Employees log day types (telework / on site / work trip or third State / non-working), plus an optional yes/no for a night away for work. Separate counters for tax (where available) and social security. Warnings as limits approach. CSV export. Five languages.

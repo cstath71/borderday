@@ -93,4 +93,68 @@ export const GUIDE_FAQ = {
       'La Segreteria di Stato per le questioni finanziarie internazionali (SFI), con un comunicato del 13 febbraio 2026.',
     ],
   ],
+  enGeneva: [
+    [
+      "How many days can a French resident working in Geneva telework without tax consequences?",
+      "Up to 40% of annual working time in a calendar year. On the simplified base of 240 working days used in official examples, that is 96 days, but the real number depends on your working time.",
+    ],
+    [
+      "Do mission days count inside the 40%?",
+      "Up to 10 mission days a year can, but only within the 40% after ordinary telework days are counted, with missions in France counted before missions in other countries. Extra mission days are taxed under the ordinary rules.",
+    ],
+    [
+      "What happens above 40%?",
+      "The pay for your telework days becomes taxable in France from the first telework day, and all mission days are taxable in France too. Pay for days worked in Switzerland stays taxable in Switzerland.",
+    ],
+    [
+      "Is there a weekly telework limit?",
+      "No. Only the annual 40% limit applies.",
+    ],
+    [
+      "Does a second home, hotel or co-working space in France count?",
+      "Yes, per ge.ch, as long as the telework is done in France.",
+    ],
+    [
+      "How does my employer count a partial telework day?",
+      "It depends on the method your employer chose for all staff. Counting in whole days, more than 4 hours is a day. Counting in half days, 2 to 4 hours is a half day and under 2 hours is nothing. Counting in hours, every hour counts.",
+    ],
+    [
+      "Is social security tied to the 40%?",
+      "No. Social security uses separate bands: under 25%, between 25% and under 50% (framework agreement with an A1), and 50% or more.",
+    ],
+    [
+      "What does my employer report to the tax office?",
+      "A rate (a percentage), including at most 10 mission days, at the start of each year for the previous year, even when the rate is 0%. The first report is due in January 2027 for 2026.",
+    ],
+  ],
+  enLuxembourg: [
+    [
+      "How many days can a French resident working in Luxembourg work outside Luxembourg without changing tax?",
+      "Up to 34 days per tax period, counting every day or part of a day physically worked in France or a third country, including training. Part-time and part-year work reduce the 34 in proportion, rounded down.",
+    ],
+    [
+      "Does a half day of telework count as half a day?",
+      "Not for the threshold: any part of a day outside Luxembourg counts as a whole day. Once the threshold is exceeded, taxation follows the time actually worked outside Luxembourg.",
+    ],
+    [
+      "What happens on day 35?",
+      "France can tax the pay for all the time actually worked in France or a third country, from the first day, not only the days above 34. For third-country days, the treaty with that country can change this.",
+    ],
+    [
+      "Do holidays, sick days and weekends count?",
+      "No, when you are not working: leave, weekly rest and public holidays you are not required to work, sickness and force majeure are excluded from the 34 days.",
+    ],
+    [
+      "Is the 34-day rule still in force in 2026?",
+      "Yes. No new amendment was found as of 10 November 2026, and the Luxembourg tax administration applies 34 days in its circular of 24 June 2026.",
+    ],
+    [
+      "Is social security also limited to 34 days?",
+      "No. Social security uses a percentage of working time: the framework agreement can keep Luxembourg cover from 25% to under 50%, with an A1 requested by the employer.",
+    ],
+    [
+      "Is a personal day log enough proof?",
+      "No. You must be able to prove your presence in Luxembourg with documents such as an employer certificate, timesheets, transport tickets or mission orders.",
+    ],
+  ],
 };

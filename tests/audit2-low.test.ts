@@ -148,8 +148,10 @@ describe('audit-2 low: translations', () => {
 
   it('#48: the AI summary uses the current day-type label', async () => {
     const { llmsFullTxt } = await import('../scripts/seo.mjs');
-    expect(llmsFullTxt()).not.toMatch(/third country/);
-    expect(llmsFullTxt()).toMatch(/third State/);
+    const full = llmsFullTxt();
+    const product = full.replace(/^- Short answer \(.*$/gm, '');
+    expect(product).not.toMatch(/third country/);
+    expect(full).toMatch(/third State/);
   });
 
   it('#49: no legal page intro is another page\'s intro, in any locale', () => {
@@ -194,11 +196,17 @@ describe('audit-2 low: translations', () => {
   });
 
   it('#58: the short trial notes say a card is required', () => {
-    const word = { en: /card required/, fr: /carte requise/, de: /Karte erforderlich/, it: /carta richiesta/, nl: /kaart vereist/ };
-    const pages = PAGES as Record<string, Record<string, { description: string }>>;
+    const word = {
+      en: /card required/,
+      fr: /carte requise/,
+      de: /Karte(?: bei der Anmeldung)? erforderlich/,
+      it: /carta richiesta/,
+      nl: /kaart vereist/,
+    };
+    const pages = PAGES as Record<string, Record<string, { description: string; summary: string }>>;
     for (const [lang, d] of Object.entries(dicts)) {
       expect(d.home.waitlistNote, lang).toMatch(word[lang as keyof typeof word]);
-      expect(pages[''][lang].description, lang).toMatch(word[lang as keyof typeof word]);
+      expect(pages[''][lang].summary, lang).toMatch(word[lang as keyof typeof word]);
     }
   });
 

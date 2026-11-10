@@ -49,11 +49,15 @@ describe('approved French guide text', () => {
       expect(urls.length).toBeGreaterThanOrEqual(8);
       for (const url of urls) expect(parsed.bodyHtml).toContain(`href="${url}"`);
       if (guide.id === 'geneva') {
-        const sentence = guide.description.replace(/ Sources officielles : ge\.ch et AFC\.$/, '');
-        const folded = sentence[0].toLowerCase() + sentence.slice(1);
-        const plain = markdownPlain(onDisk);
-        expect(plain.includes(sentence) || plain.includes(folded)).toBe(true);
-        expect(guide.description).toContain('Sources officielles : ge.ch et AFC.');
+        expect(guide.description).toBe(
+          "France-Genève : le télétravail frontalier en France peut rester imposé en Suisse jusqu'à 40% du temps d'activité par année civile. Sources : ge.ch et AFC.",
+        );
+        expect(markdownPlain(onDisk)).toContain('y compris lorsque le taux est de 0 %');
+        expect(onDisk).toContain('jusqu’à 40 %');
+        expect(onDisk).toContain('https://www.getax.ch/guide-is/isel/Declareruntauxdeteletravailpouru.html');
+        expect(onDisk).toContain(
+          'https://www.estv.admin.ch/dam/it/sd-web/sYfqlykWLoU6/Avenant-CH-FR-Explications-Attestation-employeur-fr.pdf',
+        );
       } else if (guide.id === 'luxembourg') {
         expect(guide.description).toContain('34 jours');
         expect(onDisk).toContain('34 jours');
@@ -95,16 +99,15 @@ describe('French-only routes and discovery', () => {
       expect(block).not.toContain('hreflang="it"');
       expect(block).not.toContain('hreflang="nl"');
     }
-    for (const lang of LANGS) {
-      if (lang === 'fr' || lang === 'de' || lang === 'it') continue;
-      expect(xml).not.toContain(`${BASE}/${lang}/guides/`);
-    }
+    expect(xml).toContain(`${BASE}/en/guides/`);
+    expect(xml).not.toContain(`${BASE}/nl/guides/`);
     const llms = llmsTxt();
     expect(llms).toContain(absUrl('fr', 'guides/france-luxembourg-compter-jours-teletravail'));
     expect(llms).toContain(absUrl('fr', 'guides/france-geneve-compter-jours-teletravail'));
     expect(llms).toContain(absUrl('fr', 'guides/france-bale-compter-jours-teletravail'));
+    expect(llms).toContain(`${BASE}/en/guides/`);
     expect(llms).toContain('no translated version');
-    expect(llms).not.toContain('/en/guides/');
+    expect(llms).not.toContain('/nl/guides/');
     expect(llms).not.toMatch(PRIVATE);
   });
 
@@ -117,7 +120,10 @@ describe('French-only routes and discovery', () => {
       expect(parts.head).toContain(`rel="canonical" href="${loc}"`);
       expect(parts.head).toContain(`hreflang="${guide.lang}"`);
       expect(parts.head).toContain(`hreflang="x-default" href="${loc}"`);
-      expect(parts.head).not.toContain('hreflang="en"');
+      for (const other of LANGS) {
+        if (other === guide.lang) continue;
+        expect(parts.head).not.toContain(`hreflang="${other}"`);
+      }
       expect(parts.head).toContain('og:type" content="article"');
       expect(parts.body).toContain(guide.h1);
       if (guide.lang === 'fr') expect(parts.body).toContain(guide.id === 'luxembourg' ? '34 jours' : '40 %');
@@ -214,7 +220,12 @@ describe('French-only routes and discovery', () => {
       expect(untranslatedLocalePath(lu, lang)).toBe(`/${lang}/employers/luxembourg/`);
       expect(untranslatedLocalePath(ge, lang)).toBe(`/${lang}/employers/geneva/`);
     }
-    expect(untranslatedLocalePath('/fr/guides/', 'en')).toBe('/en/');
+    expect(untranslatedLocalePath('/fr/guides/', 'en')).toBe('/en/guides/');
+    expect(untranslatedLocalePath('/en/guides/', 'fr')).toBe('/fr/guides/');
+    expect(untranslatedLocalePath('/en/guides/', 'nl')).toBe('/nl/');
+    expect(untranslatedLocalePath('/en/guides/france-geneva-telework-days/', 'fr')).toBe('/fr/employers/geneva/');
+    expect(untranslatedLocalePath('/en/guides/france-luxembourg-telework-days/', 'de')).toBe('/de/employers/luxembourg/');
+    expect(untranslatedLocalePath('/en/guides/how-to-track-cross-border-telework-days/', 'it')).toBe('/it/');
     expect(untranslatedLocalePath('/fr/guides', 'de')).toBe('/de/guides/');
     expect(untranslatedLocalePath('/fr/guides/', 'it')).toBe('/it/guides/');
     expect(untranslatedLocalePath('/de/guides/', 'nl')).toBe('/nl/');
@@ -256,7 +267,7 @@ describe('answer-first guide HTML', () => {
       const hub = HUB_BY_LANG[guide.lang];
       const brief = guide.markdown.match(hub.briefRe);
       expect(brief).toBeTruthy();
-      const expected = `${hub.briefLabel} : ${brief![1].replace(/\*\*/g, '').trim()}`;
+      const expected = `${hub.briefLabel}${hub.briefColon} ${brief![1].replace(/\*\*/g, '').trim()}`;
       const first = document.querySelector('p');
       const proseFirst = document.querySelector('.article-prose p');
       expect(first).toBe(proseFirst);
@@ -276,8 +287,17 @@ describe('answer-first guide HTML', () => {
 });
 
 describe('guide ids stay the approved routes', () => {
-  it('publishes the five written guides', () => {
+  it('publishes the written guides', () => {
     const ids: GuideId[] = GUIDES.map((guide) => guide.id);
-    expect(ids).toEqual(['luxembourg', 'geneva', 'bale', 'deCh', 'ticinoIt']);
+    expect(ids).toEqual([
+      'luxembourg',
+      'geneva',
+      'bale',
+      'deCh',
+      'ticinoIt',
+      'enGeneva',
+      'enLuxembourg',
+      'enTrack',
+    ]);
   });
 });

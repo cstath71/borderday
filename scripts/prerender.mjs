@@ -28,8 +28,8 @@ import {
   breadcrumbLd,
   esc,
   faqLd,
-  ldScript,
   hubIndexMarkdown,
+  ldScript,
   llmsFullTxt,
   llmsTxt,
   organizationLd,
@@ -148,12 +148,14 @@ function graphFor(lang, path, extras = []) {
 }
 
 const GUIDE_MONTHS = {
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
   de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
   it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
 };
 
 const GUIDE_UI = {
+  en: { home: 'Home', guides: 'Guides' },
   fr: { home: 'Accueil', guides: 'Guides' },
   de: { home: 'Start', guides: 'Leitfäden' },
   it: { home: 'Home', guides: 'Guide' },

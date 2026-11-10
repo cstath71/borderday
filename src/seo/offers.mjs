@@ -118,6 +118,12 @@ const COPY = {
   },
 };
 
+export const ORG_DESCRIPTION =
+  'BorderDay is a cross-border telework day tracker for employers and employees. It counts telework, on-site and travel day types against published social-security and tax limits: social-security counters on nine border routes, tax counters on seven. Day types only, no GPS. A tracking tool, not tax or legal advice.';
+
+export const ORG_DISAMBIGUATING_DESCRIPTION =
+  'A day-type tracker for cross-border telework, on-site and travel days against published tax and social-security limits. Not a residency, 183-day or Schengen travel-day counter.';
+
 const PRICES = ['5.00', '390.00', '4.99', '49.00'];
 
 export function offersFor(lang, pricingUrl) {

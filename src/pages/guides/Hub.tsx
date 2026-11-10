@@ -9,6 +9,7 @@ import { publicPath } from '../../lib/publicPath';
 const BASE = 'https://borderday.com';
 
 const CRUMBS: Record<string, string> = {
+  en: 'Breadcrumb',
   fr: "Fil d'Ariane",
   de: 'Brotkrumen',
   it: 'Percorso',
@@ -22,13 +23,13 @@ function briefText(markdown: string, pattern: RegExp): string {
 
 export default function GuidesHub() {
   const lang = useLang();
-  const hub = HUB_BY_LANG[lang as 'fr' | 'de' | 'it'];
+  const hub = HUB_BY_LANG[lang as 'en' | 'fr' | 'de' | 'it'];
   if (!hub) {
     return <Navigate to={publicPath(lang)} replace />;
   }
   const d = getDict(lang);
   const guides = guidesFor(lang);
-  const only = [lang] as ['fr'] | ['de'] | ['it'];
+  const only = [lang] as ['en'] | ['fr'] | ['de'] | ['it'];
   const itemList = {
     '@type': 'ItemList',
     itemListElement: guides.map((guide, index) => ({
@@ -87,7 +88,7 @@ export default function GuidesHub() {
               <li key={guide.id}>
                 <Link to={publicPath(lang, guide.path)}>{guide.h1}</Link>
                 <p>
-                  <strong>{hub.briefLabel} :</strong> {briefText(guide.markdown, hub.briefRe)}
+                  <strong>{hub.briefLabel}{hub.briefColon}</strong> {briefText(guide.markdown, hub.briefRe)}
                 </p>
               </li>
             ))}

@@ -119,7 +119,7 @@ export default function Pricing() {
           <h1>{d.pricing.title}</h1>
           <p id="summary"><strong>{d.home.inShortLabel}:</strong> {d.home.inShort}</p>
           <p>{d.pricing.subtitle}</p>
-          {(lang === 'fr' || lang === 'de' || lang === 'it') && (
+          {(lang === 'en' || lang === 'fr' || lang === 'de' || lang === 'it') && (
             <p>
               <Link to={publicPath(lang, 'guides')}>{d.nav.guides}</Link>
             </p>

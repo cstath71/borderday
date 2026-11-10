@@ -109,6 +109,8 @@ Si votre employeur utilise déjà BorderDay, rejoignez-le via son lien d’invit
 - Texte de l’avenant (protocole additionnel, limite de 40 %, missions de 10 jours, dépassement dès le premier jour) : [Fedlex FF 2023 2746](https://www.fedlex.admin.ch/eli/fga/2023/2746/fr)
 - Accord amiable du 29 avril 2026 (imputation des missions, astreinte, prorata des 10 jours) : [PDF impots.gouv.fr](https://www.impots.gouv.fr/sites/default/files/media/10_conventions/suisse/nid_28341_suisse_accord_interpretatif_teletravail_convention_1966.pdf) et [PDF ESTV](https://www.estv.admin.ch/dam/fr/sd-web/Bibcb06jL1wG/int-laender-fr-dba-ai-cdi-20260429-fr.pdf)
 - Fiche pratique DGFiP, hors régime de 1983, exemples Annemasse–Genève : [PDF impots.gouv.fr](https://www.impots.gouv.fr/sites/default/files/media/1_metier/1_particulier/EV/4_changements_de_situation/480_depart_arrivee_france/fiche-pratique-accords-interpretatifs-10-jours-cdi.pdf)
+- Guide ISeL de l’AFC Genève, déclaration d’un taux de télétravail : [getax.ch](https://www.getax.ch/guide-is/isel/Declareruntauxdeteletravailpouru.html)
+- Explications de l’ESTV sur l’attestation de l’employeur : [PDF ESTV](https://www.estv.admin.ch/dam/it/sd-web/sYfqlykWLoU6/Avenant-CH-FR-Explications-Attestation-employeur-fr.pdf)
 - Pages AFC Genève / ge.ch (consultées le 8 novembre 2026 ; dates de mise à jour indiquées sur chaque page) :
   - [Vue d’ensemble](https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres) (mise à jour 7 juillet 2026)
   - [Jusqu’à 40 %](https://www.ge.ch/imposition-du-teletravail-personnes-frontalieres/40-activite-teletravail) (16 avril 2026)

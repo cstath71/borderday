@@ -15,6 +15,7 @@ export default function FrenchGuideLinks({
 }) {
   const lang = useLang();
   const defaults: Record<string, string> = {
+    en: 'Guides in English',
     fr: 'Guides en français',
     de: 'Leitfäden auf Deutsch',
     it: 'Guide in italiano',

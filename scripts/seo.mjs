@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
-import { ORG_SAME_AS, offersFor } from '../src/seo/offers.mjs';
+import { ORG_DISAMBIGUATING_DESCRIPTION, ORG_DESCRIPTION, ORG_SAME_AS, offersFor } from '../src/seo/offers.mjs';
 import { ROUTES_COVERED_PROSE } from '../src/seo/routesCovered.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -19,7 +19,7 @@ export const LANGS = ['en', 'fr', 'de', 'it', 'nl'];
 export const LASTMOD = CFG.lastmod;
 export const ALL_GUIDES = JSON.parse(readFileSync(join(ROOT, 'src/content/guides.json'), 'utf8'));
 export const FRENCH_GUIDES = ALL_GUIDES.filter((guide) => (guide.lang || 'fr') === 'fr');
-export const GUIDE_HUB_LANGS = ['fr', 'de', 'it'];
+export const GUIDE_HUB_LANGS = ['en', 'fr', 'de', 'it'];
 
 export const IN_SHORT_LABEL = {
   en: 'In short',
@@ -119,36 +119,36 @@ export function pageFile(lang, path) {
 export const PAGES = {
   '': {
     en: {
-      title: 'BorderDay — Cross-border day limits for HR and employees',
+      title: 'BorderDay: cross-border telework day tracker for HR',
       description:
-        'Employer-first day counting for cross-border staff: social-security counters on nine border routes, tax counters on seven. Company from €5/employee/month (min €39), excl. VAT. 7-day free trial (card required), then charged automatically on day 8 and renewing until you cancel.',
+        'Employer telework day tracker. Social-security counters on nine border routes, tax on seven. Day types only, no GPS. Not a residency or Schengen counter.',
       h1: 'One place for every border your people work across',
       summary:
         'BorderDay helps HR track telework, on-site and travel days per employee: social-security counters on all nine border routes in five regions, tax counters on seven of them. Company plan: €5 per active employee per month (€39 minimum), excl. VAT; individuals €4.99/month or €49/year, incl. VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. A tracking tool — not tax or legal advice.',
       crumbs: [['Home', '']],
     },
     fr: {
-      title: 'BorderDay — Seuils de jours fiscaux et sociaux pour les RH',
+      title: 'BorderDay : télétravail frontalier pour les RH',
       description:
-        'Comptage des jours pour les équipes qui travaillent par-delà les frontières : sécurité sociale sur neuf situations frontalières, fiscalité sur sept. Entreprise dès 5 €/collaborateur actif/mois (min. 39 €), hors TVA. Essai gratuit de 7 jours (carte requise), puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
+        'Compteur de télétravail pour les RH. Sécurité sociale sur neuf situations, fiscalité sur sept. Types de jours, pas de GPS. Pas un compteur de résidence.',
       h1: 'Un seul outil pour toutes les frontières de vos équipes',
       summary:
         'BorderDay aide les RH à suivre télétravail, jours sur site et déplacements par collaborateur : compteurs de sécurité sociale sur les neuf situations frontalières de cinq régions, compteurs fiscaux sur sept d’entre eux. Offre entreprise : 5 € par collaborateur actif et par mois (minimum 39 €), hors TVA ; particuliers 4,99 €/mois ou 49 €/an, TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Outil de suivi — pas un conseil fiscal ou juridique.',
       crumbs: [['Accueil', '']],
     },
     de: {
-      title: 'BorderDay — Grenzüberschreitende Tagesgrenzen für HR',
+      title: 'BorderDay: Tracker für Telearbeitstage über die Grenze',
       description:
-        'Tageszählung für Teams über Landesgrenzen: Sozialversicherung auf neun Grenzrouten, Steuer auf sieben. Unternehmen ab 5 € je aktive mitarbeitende Person/Monat (min. 39 €), zzgl. MWST. 7 Tage kostenlos testen (Karte erforderlich), danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Tracker für Telearbeitstage. Sozialversicherung auf neun Grenzrouten, Steuer auf sieben. Nur Tagesarten, kein GPS. Kein Wohnsitz- oder Schengen-Zähler.',
       h1: 'Ein Tool für alle Grenzen, über die Ihre Teams arbeiten',
       summary:
         'BorderDay hilft HR, Telearbeit, Vor-Ort- und Reisetage je Mitarbeitenden zu erfassen: Sozialversicherungszähler auf allen neun Grenzrouten in fünf Regionen, Steuerzähler auf sieben davon. Unternehmensplan: 5 € je aktive mitarbeitende Person und Monat (Minimum 39 €), zzgl. MWST; Einzelpersonen 4,99 €/Monat oder 49 €/Jahr, inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, automatische Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Erfassungstool — keine Steuer- oder Rechtsberatung.',
       crumbs: [['Start', '']],
     },
     it: {
-      title: 'BorderDay — Soglie di giorni fiscali e previdenziali per HR',
+      title: 'BorderDay: tracker dei giorni di telelavoro per HR',
       description:
-        'Conteggio giorni per team che lavorano oltre confine: sicurezza sociale su nove situazioni di frontiera, fisco su sette. Azienda da 5 €/dipendente attivo/mese (min. 39 €), IVA esclusa. Prova gratuita di 7 giorni (carta richiesta), poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Tracker di telelavoro per HR. Previdenza su nove situazioni, fisco su sette. Solo tipologie di giorno, niente GPS. Non un contatore di residenza.',
       h1: 'Un solo strumento per tutti i confini dei vostri team',
       summary:
         'BorderDay aiuta HR a registrare telelavoro, giorni in sede e trasferte per dipendente: contatori di sicurezza sociale su tutte le nove situazioni di frontiera in cinque regioni, contatori fiscali su sette di essi. Piano aziendale: 5 € per dipendente attivo al mese (minimo 39 €), IVA esclusa; individuali 4,99 €/mese o 49 €/anno, IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Strumento di registrazione — non consulenza fiscale o legale.',
@@ -157,9 +157,9 @@ export const PAGES = {
   },
   pricing: {
     en: {
-      title: 'Pricing — BorderDay',
+      title: 'BorderDay pricing: telework day tracker plans',
       description:
-        'Company: €5 per active employee per month, €39 minimum, yearly minimum €390, excl. VAT. Individual: €4.99/month or €49/year incl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
+        'Company: €5/active employee/month (min €39 or €390/year), excl. VAT. Individual: €4.99/month or €49/year incl. VAT. 7-day trial, then charged on day 8.',
       h1: 'Pricing',
       summary:
         'Company / HR: €5 per active employee per month with a €39 monthly minimum (covers up to 7 active employees); yearly billing is €390 minimum (2 months free). Individual: €4.99 per month or €49 per year (about two months free). Company prices exclude VAT; individual prices include VAT. 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. Checkout via Stripe Managed Payments (sold through Link).',
@@ -169,9 +169,9 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Tarifs — BorderDay',
+      title: 'Tarifs BorderDay : compteur de télétravail frontalier',
       description:
-        'Entreprise : 5 € / collaborateur actif / mois, minimum 39 €, annuel minimum 390 €, hors TVA. Particulier : 4,99 €/mois ou 49 €/an TVA incluse. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
+        'Entreprise : 5 €/collaborateur/mois (min. 39 € ou 390 €/an), hors TVA. Particulier : 4,99 €/mois ou 49 €/an TVA incluse. Essai 7 jours, débit le 8e jour.',
       h1: 'Tarifs',
       summary:
         'Entreprise / RH : 5 € par collaborateur actif et par mois, minimum 39 € / mois (couvre jusqu’à 7 collaborateurs actifs) ; annuel minimum 390 € (2 mois offerts). Particulier : 4,99 € / mois ou 49 € / an. Prix entreprise hors TVA ; prix particulier TVA incluse. Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Paiement via Stripe Managed Payments (vendu via Link).',
@@ -181,9 +181,9 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'Preise — BorderDay',
+      title: 'BorderDay Preise: Pläne für den Telearbeitstracker',
       description:
-        'Unternehmen: 5 € je aktive mitarbeitende Person / Monat, Minimum 39 €, jährlich mindestens 390 €, zzgl. MWST Einzelperson: 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Unternehmen: 5 €/Person/Monat (min. 39 € oder 390 €/Jahr), zzgl. MWST. Einzelperson: 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage, Abbuchung am 8. Tag.',
       h1: 'Preise',
       summary:
         'Unternehmen / HR: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 € / Monat (deckt bis zu 7 aktive mitarbeitende Personen ab); jährlich mindestens 390 € (2 Monate gratis). Einzelperson: 4,99 € / Monat oder 49 € / Jahr. Unternehmenspreise zzgl. MWST; Einzelpreise inkl. MWST. 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Checkout über Stripe Managed Payments (verkauft über Link).',
@@ -193,9 +193,9 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Prezzi — BorderDay',
+      title: 'Prezzi BorderDay: piani del tracker di telelavoro',
       description:
-        'Azienda: 5 € per dipendente attivo / mese, minimo 39 €, annuale minimo 390 €, IVA esclusa. Individuale: 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Azienda: 5 €/dipendente/mese (min. 39 € o 390 €/anno), IVA esclusa. Individuale: 4,99 €/mese o 49 €/anno IVA inclusa. Prova 7 giorni, addebito l\'8° giorno.',
       h1: 'Prezzi',
       summary:
         'Azienda / HR: 5 € per dipendente attivo al mese, minimo 39 € / mese (copre fino a 7 dipendenti attivi); annuale minimo 390 € (2 mesi gratis). Individuale: 4,99 € / mese o 49 € / anno. Prezzi azienda IVA esclusa; individuali IVA inclusa. Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Checkout tramite Stripe Managed Payments (venduto tramite Link).',
@@ -219,7 +219,7 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Questions fréquentes : compter ses jours frontaliers | BorderDay',
+      title: 'FAQ BorderDay : jours de télétravail frontalier',
       description:
         'BorderDay est-il un conseil fiscal ? Où est le journal ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?',
       h1: 'FAQ',
@@ -231,7 +231,7 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'Häufige Fragen: grenzüberschreitende Arbeitstage zählen | BorderDay',
+      title: 'FAQ BorderDay: Telearbeitstage über die Grenze',
       description:
         'Ist BorderDay Steuerberatung? Wo liegt das Tagesprotokoll? Welche Grenzen? Wie funktionieren Zahlung und die 7-tägige Testphase?',
       h1: 'FAQ',
@@ -243,7 +243,7 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Domande frequenti: contare i giorni di lavoro oltre confine | BorderDay',
+      title: 'FAQ BorderDay: giorni di telelavoro oltre confine',
       description:
         'BorderDay è consulenza fiscale? Dove si trova il diario? Quali confini? Come funzionano pagamenti e prova di 7 giorni?',
       h1: 'FAQ',
@@ -257,9 +257,9 @@ export const PAGES = {
   },
   'for-individuals': {
     en: {
-      title: 'For individuals — BorderDay',
+      title: 'BorderDay for individuals: log your telework days',
       description:
-        'Log your own telework and border days: social-security counters on every border route, tax counters where the rule can be counted today. €4.99/month or €49/year incl. VAT. 7-day free trial, then charged automatically on day 8 and renewing until you cancel.',
+        'Log your telework and border days. Social-security counters on every route, tax counters where a rule can be counted. €4.99/month or €49/year incl. VAT.',
       h1: 'Log your own border days',
       summary:
         'Employees and individual users can log telework, on-site, trip and non-working days. Social-security counters run on every border route; tax counters run on seven. Individual plan: €4.99/month or €49/year (incl. VAT). 7-day free trial, then the plan you chose at the stated price, charged automatically on day 8 and renewing until you cancel; card required at signup. If your employer uses BorderDay, join via their invite link to share the same counters with HR.',
@@ -269,9 +269,9 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Pour les particuliers — BorderDay',
+      title: 'Particuliers : télétravail frontalier | BorderDay',
       description:
-        'Enregistrez vos jours de télétravail et de déplacement. 4,99 €/mois ou 49 €/an TVA incluse. Essai gratuit de 7 jours, puis débit automatique le 8e jour et renouvellement jusqu’à résiliation.',
+        'Consignez télétravail et déplacements. Compteurs sociaux sur chaque situation, fiscaux où la règle peut être comptée. 4,99 €/mois ou 49 €/an TVA incluse.',
       h1: 'Enregistrez vos propres jours de travail',
       summary:
         'Salariés et utilisateurs individuels peuvent enregistrer télétravail, jours sur site, déplacements et jours non travaillés. Compteurs de sécurité sociale sur chaque situation frontalière, compteurs fiscaux sur sept. Offre individuelle : 4,99 €/mois ou 49 €/an (TVA incluse). Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription. Si votre employeur utilise BorderDay, rejoignez-le via son lien d’invitation pour partager les mêmes compteurs avec les RH.',
@@ -281,9 +281,9 @@ export const PAGES = {
       ],
     },
     de: {
-      title: 'Für Einzelpersonen — BorderDay',
+      title: 'Einzelpersonen: Telearbeitstage erfassen | BorderDay',
       description:
-        'Eigene Telearbeits- und Reisetage erfassen. 4,99 €/Monat oder 49 €/Jahr inkl. MWST. 7 Tage kostenlos testen, danach automatische Abbuchung am 8. Tag und Verlängerung bis zur Kündigung.',
+        'Eigene Telearbeits- und Reisetage erfassen. Sozialversicherungszähler auf jeder Route, Steuerzähler wo zählbar. 4,99 €/Monat oder 49 €/Jahr inkl. MWST.',
       h1: 'Eigene Arbeitstage über die Grenze erfassen',
       summary:
         'Mitarbeitende erfassen Telearbeit, Vor-Ort-, Reise- und arbeitsfreie Tage selbst. Sozialversicherungszähler auf jeder Grenzroute, Steuerzähler auf sieben. Einzelplan: 4,99 €/Monat oder 49 €/Jahr (inkl. MWST). 7 Tage kostenlos testen, danach der gewählte Plan zum angegebenen Preis, mit automatischer Abbuchung am 8. Tag und Verlängerung bis zu Ihrer Kündigung; Karte bei der Anmeldung erforderlich. Nutzt der Arbeitgeber BorderDay, Beitritt über den Einladungslink: dieselben Zähler wie HR.',
@@ -293,9 +293,9 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Per i privati — BorderDay',
+      title: 'Privati: registrate i giorni di telelavoro | BorderDay',
       description:
-        'Registrate telelavoro e giorni sulla situazione di frontiera. 4,99 €/mese o 49 €/anno IVA inclusa. Prova gratuita di 7 giorni, poi addebito automatico l’8° giorno e rinnovo fino alla disdetta.',
+        'Registrate telelavoro e trasferte. Contatori previdenziali su ogni situazione, fiscali dove la regola è conteggiabile. 4,99 €/mese o 49 €/anno IVA inclusa.',
       h1: 'Registrate i vostri giorni sulla situazione di frontiera',
       summary:
         'Dipendenti e utenti individuali possono inserire telelavoro, giorni in sede, trasferte e giorni non lavorati. Contatori di sicurezza sociale su ogni situazione di frontiera, contatori fiscali su sette. Piano individuale: 4,99 €/mese o 49 €/anno (IVA inclusa). Prova gratuita di 7 giorni, poi il piano scelto al prezzo indicato, addebitato automaticamente l’8° giorno e rinnovato fino alla disdetta; carta richiesta all’iscrizione. Se il datore di lavoro usa BorderDay, entrate con il link di invito per condividere gli stessi contatori con HR.',
@@ -696,7 +696,7 @@ export const PAGES = {
     en: {
       title: 'Ticino employers — telework day tracking (IT→CH) — BorderDay',
       description:
-        'For Ticino HR: track telework days for staff living in Italy. Tax counters for the 25% telework share and 45 non-return days under the Italy–Switzerland agreement, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+        'Ticino HR: telework days for staff living in Italy. Tax counters for 25% telework and 45 non-return days, and EU/EEA/CH social security under 50%.',
       h1: 'Ticino employers: telework days for staff living in Italy',
       summary:
         'BorderDay helps Ticino employers log telework, on-site and overnight-away days for people who live in Italy and work in Switzerland under the Italy–Switzerland frontier-worker agreement (Accordo Art. 2 zones, as amended for telework). Tax: at most 25% telework at domicile and up to 45 non-return days per year (protocol Fedlex RU 2026 104; in force 9 Feb 2026, applying from 1 Jan 2024). Social security: EU/EEA/CH framework bands under 25%, 25% to under 50% (A1), and 50% or more. Not tax or legal advice.',
@@ -708,7 +708,7 @@ export const PAGES = {
     fr: {
       title: 'Employeurs Tessin — suivi télétravail (IT→CH) — BorderDay',
       description:
-        'Pour les RH tessinoises: suivre les jours de télétravail du personnel résidant en Italie. Compteurs fiscaux 25% télétravail et 45 jours de non-retour selon l’accord Italie–Suisse, plus le cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+        'RH tessinoises : télétravail frontalier du personnel en Italie. Compteurs 25% et 45 jours de non-retour, et sécurité sociale UE/EEE/CH sous 50%.',
       h1: 'Employeurs au Tessin: jours de télétravail pour le personnel résidant en Italie',
       summary:
         'BorderDay aide les employeurs tessinois à enregistrer télétravail, jours sur site et nuits hors domicile pour les personnes qui résident en Italie et travaillent en Suisse selon l’accord Italie–Suisse (Accordo Art. 2, tel que modifié pour le télétravail). Fiscalité: au plus 25% de télétravail au domicile et jusqu’à 45 jours de non-retour par an (protocole Fedlex RU 2026 104; en vigueur le 9 février 2026, applicable dès le 1er janvier 2024). Sécurité sociale: bandes du cadre UE/EEE/CH sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Pas un conseil fiscal ou juridique.',
@@ -720,7 +720,7 @@ export const PAGES = {
     de: {
       title: 'Arbeitgeber Tessin — Telearbeitstage (IT→CH) — BorderDay',
       description:
-        'Für HR im Tessin: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Italien erfassen. Steuerzähler 25% Telearbeit und 45 Nicht-Rückkehrtage laut Abkommen Italien–Schweiz, plus EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+        'HR im Tessin: Telearbeitstage bei Wohnsitz in Italien. Steuerzähler 25% und 45 Nicht-Rückkehrtage, plus EU/EWR/CH-Sozialversicherung unter 50%. Kein GPS.',
       h1: 'Arbeitgeber im Tessin: Telearbeitstage für Mitarbeitende mit Wohnsitz in Italien',
       summary:
         'BorderDay hilft Tessiner Arbeitgebern, Telearbeit, Vor-Ort-Tage und Übernachtungen auswärts für Personen zu erfassen, die in Italien wohnen und in der Schweiz arbeiten — gemäss dem Abkommen Italien–Schweiz (Accordo Art. 2, geändert für Telearbeit). Steuer: höchstens 25% Telearbeit am Wohnsitz und bis 45 Nicht-Rückkehrtage pro Jahr (Protokoll Fedlex RU 2026 104; in Kraft 9. Feb 2026, anwendbar ab 1. Jan 2024). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Keine Steuer- oder Rechtsberatung.',
@@ -730,9 +730,9 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Datori di lavoro Ticino — giorni di telelavoro (IT→CH) — BorderDay',
+      title: 'Datori di lavoro Ticino: telelavoro IT-CH | BorderDay',
       description:
-        'Per le HR in Ticino: registrare i giorni di telelavoro del personale residente in Italia. Contatori fiscali 25% telelavoro e 45 giorni di non rientro dell’accordo Italia–Svizzera, più il quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+        'HR in Ticino: telelavoro del personale in Italia. Contatori 25% e 45 giorni di non rientro, più previdenza UE/SEE/CH sotto il 50%. Niente GPS.',
       h1: 'Datori di lavoro in Ticino: giorni di telelavoro per il personale residente in Italia',
       summary:
         'BorderDay aiuta i datori di lavoro in Ticino a registrare telelavoro, giorni in sede e notti fuori casa per chi risiede in Italia e lavora in Svizzera secondo l’accordo Italia–Svizzera (Accordo Art. 2, come modificato per il telelavoro). Fisco: al massimo il 25% di telelavoro al domicilio e fino a 45 giorni di non rientro all’anno (protocollo Fedlex RU 2026 104; in vigore dal 9 febbraio 2026, con effetto dal 1° gennaio 2024). Previdenza: fasce del quadro UE/SEE/CH sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Non è consulenza fiscale o legale.',
@@ -744,7 +744,7 @@ export const PAGES = {
     nl: {
       title: 'Werkgevers Ticino — telewerkdagen (IT→CH) — BorderDay',
       description:
-        'Voor HR in Ticino: telewerkdagen bijhouden van medewerkers die in Italië wonen. Belastingstellers 25% telewerk en 45 niet-terugkeerdagen volgens het akkoord Italië–Zwitserland, plus EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+        'HR in Ticino: telewerkdagen van medewerkers in Italië. Tellers 25% telewerk en 45 niet-terugkeerdagen, plus EU/EER/CH-socialezekerheid onder 50%. Geen GPS.',
       h1: 'Werkgevers in Ticino: telewerkdagen voor medewerkers die in Italië wonen',
       summary:
         'BorderDay helpt Ticinese werkgevers telewerk-, ter-plaatse- en overnachtingsdagen elders te registreren voor mensen die in Italië wonen en in Zwitserland werken volgens het grenswerkersakkoord Italië–Zwitserland (Accordo Art. 2, gewijzigd voor telewerk). Fiscaal: hoogstens 25% telewerk aan de woonplaats en tot 45 niet-terugkeerdagen per jaar (protocol Fedlex RU 2026 104; in werking 9 feb 2026, toepasselijk vanaf 1 jan 2024). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Geen belasting- of juridisch advies.',
@@ -758,7 +758,7 @@ export const PAGES = {
     en: {
       title: 'Geneva employers — telework day tracking (FR→CH) — BorderDay',
       description:
-        'For Geneva HR: track telework days for staff living in France. Tax counters for the 40% telework share and 10 mission days, plus the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+        'Geneva HR: telework days for staff living in France. Tax counters for 40% telework and 10 mission days, and EU/EEA/CH social security under 50%.',
       h1: 'Geneva employers: telework days for staff living in France',
       summary:
         'BorderDay helps Geneva employers log telework, on-site and trip days for people who live in France and work in Switzerland. Tax: up to 40% telework and 10 temporary mission days (ge.ch / ESTV). Social security: framework bands under 25%, 25% to under 50% (A1), and 50% or more. Employer telework-rate duty: first AFC transmission planned for January 2027 for 2026 data. Not tax or legal advice.',
@@ -770,7 +770,7 @@ export const PAGES = {
     fr: {
       title: 'Employeurs Genève — suivi télétravail (FR→CH) — BorderDay',
       description:
-        'Pour les RH genevoises: suivre les jours de télétravail du personnel résidant en France. Compteurs fiscaux 40% / 10 jours de mission et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+        'RH genevoises : télétravail frontalier du personnel en France. Compteurs 40% / 10 jours de mission, et sécurité sociale UE/EEE/CH sous 50%. Pas de GPS.',
       h1: 'Employeurs à Genève: jours de télétravail pour le personnel résidant en France',
       summary:
         'BorderDay aide les employeurs genevois à enregistrer télétravail, jours sur site et déplacements pour les personnes qui résident en France et travaillent en Suisse. Fiscalité: jusqu’à 40% de télétravail et 10 jours de missions (ge.ch / AFC). Sécurité sociale: bandes sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Obligation employeur: première transmission AFC prévue en janvier 2027 pour 2026. Pas un conseil fiscal ou juridique.',
@@ -782,7 +782,7 @@ export const PAGES = {
     de: {
       title: 'Arbeitgeber Genf — Telearbeitstage (FR→CH) — BorderDay',
       description:
-        'Für HR in Genf: Telearbeitstage von Mitarbeitenden mit Wohnsitz in Frankreich erfassen. Steuerzähler 40% / 10 temporäre Einsatztage und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+        'HR in Genf: Telearbeitstage bei Wohnsitz in Frankreich. Steuerzähler 40% / 10 Einsatztage, plus EU/EWR/CH-Sozialversicherung unter 50%. Kein GPS.',
       h1: 'Arbeitgeber in Genf: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich',
       summary:
         'BorderDay hilft Genfer Arbeitgebern, Telearbeit, Vor-Ort- und Reisetage für Personen zu erfassen, die in Frankreich wohnen und in der Schweiz arbeiten. Steuer: bis 40% Telearbeit und 10 temporäre Einsatztage (ge.ch / ESTV). Sozialversicherung: Rahmen-Bänder unter 25%, 25% bis unter 50% (A1) und 50% oder mehr. Arbeitgeberpflicht: erste AFC-Übermittlung laut ge.ch für Januar 2027 (Daten 2026). Keine Steuer- oder Rechtsberatung.',
@@ -792,9 +792,9 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Datori di lavoro Ginevra — giorni di telelavoro (FR→CH) — BorderDay',
+      title: 'Datori di lavoro Ginevra: telelavoro FR-CH | BorderDay',
       description:
-        'Per HR a Ginevra: registrare i giorni di telelavoro del personale residente in Francia. Contatori fiscali 40% / 10 giorni di impiego temporaneo e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+        'HR a Ginevra: telelavoro del personale in Francia. Contatori 40% / 10 giorni di impiego temporaneo, più previdenza UE/SEE/CH sotto il 50%. Niente GPS.',
       h1: 'Datori di lavoro a Ginevra: giorni di telelavoro per il personale residente in Francia',
       summary:
         'BorderDay aiuta i datori di lavoro ginevrini a registrare telelavoro, giorni in sede e trasferte per chi risiede in Francia e lavora in Svizzera. Fisco: fino al 40% di telelavoro e 10 giorni di missioni (ge.ch / AFC). Previdenza: fasce sotto il 25%, dal 25% a meno del 50% (A1) e 50% o più. Obbligo del datore di lavoro: prima trasmissione AFC a gennaio 2027 per il 2026. Non è consulenza fiscale o legale.',
@@ -806,7 +806,7 @@ export const PAGES = {
     nl: {
       title: 'Werkgevers Genève — telewerkdagen (FR→CH) — BorderDay',
       description:
-        'Voor HR in Genève: telewerkdagen bijhouden van medewerkers die in Frankrijk wonen. Belastingstellers 40% / 10 missiedagen en EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+        'HR in Genève: telewerkdagen van medewerkers in Frankrijk. Tellers 40% / 10 missiedagen, plus EU/EER/CH-socialezekerheid onder 50%. Geen GPS.',
       h1: 'Werkgevers in Genève: telewerkdagen voor medewerkers die in Frankrijk wonen',
       summary:
         'BorderDay helpt Geneefse werkgevers telewerk-, ter-plaatse- en reisdagen te registreren voor mensen die in Frankrijk wonen en in Zwitserland werken. Fiscaal: tot 40% telewerk en 10 missiedagen (ge.ch / ESTV). Sociale zekerheid: kaderbanden onder 25%, 25% tot onder 50% (A1) en 50% of meer. Werkgeversplicht: eerste AFC-indiening in januari 2027 voor 2026. Geen belasting- of juridisch advies.',
@@ -820,7 +820,7 @@ export const PAGES = {
     en: {
       title: 'Luxembourg employers — FR/BE/DE telework days — BorderDay',
       description:
-        'One employer page for France→LU, Belgium→LU and Germany→LU: 34-day tax tolerance and the EU/EEA/CH social-security framework under 50%. Day types only — no GPS. Company from €5/seat (min €39).',
+        'Luxembourg HR: staff in France, Belgium or Germany. 34-day tax tolerance and EU/EEA/CH social security under 50%. Day types only, no GPS.',
       h1: 'Luxembourg employers: telework days for staff living in France, Belgium or Germany',
       summary:
         'BorderDay covers all three Luxembourg residence routes in one company account: France→LU, Belgium→LU and Germany→LU. Each has a 34-day tax tolerance counter (with pack-specific part-time rules) plus the shared social-security framework under 50%. Day types only — no location tracking. Not tax or legal advice.',
@@ -832,7 +832,7 @@ export const PAGES = {
     fr: {
       title: 'Employeurs Luxembourg — télétravail FR/BE/DE — BorderDay',
       description:
-        'Une page employeur pour France→LU, Belgique→LU et Allemagne→LU: tolérance fiscale de 34 jours et cadre de sécurité sociale UE/EEE/CH sous 50%. Types de jours uniquement — pas de GPS. Entreprise dès 5 €/siège (min. 39 €).',
+        'Employeurs au Luxembourg : frontaliers en France, Belgique ou Allemagne. Tolérance fiscale de 34 jours et sécurité sociale UE/EEE/CH sous 50%. Pas de GPS.',
       h1: 'Employeurs au Luxembourg: jours de télétravail pour le personnel résidant en France, Belgique ou Allemagne',
       summary:
         'BorderDay couvre les trois situations frontalières de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de 34 jours (règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique.',
@@ -844,7 +844,7 @@ export const PAGES = {
     de: {
       title: 'Arbeitgeber Luxemburg — Telearbeit FR/BE/DE — BorderDay',
       description:
-        'Eine Arbeitgeberseite für Frankreich→LU, Belgien→LU und Deutschland→LU: steuerliche 34-Tage-Toleranz und EU/EWR/CH-Sozialversicherungsrahmen unter 50%. Nur Tagesarten — kein GPS. Unternehmen ab 5 € je aktive mitarbeitende Person (Minimum 39 €).',
+        'Arbeitgeber in Luxemburg: Wohnsitz Frankreich, Belgien oder Deutschland. 34-Tage-Steuertoleranz und EU/EWR/CH-Sozialversicherung unter 50%. Kein GPS.',
       h1: 'Arbeitgeber in Luxemburg: Telearbeitstage für Mitarbeitende mit Wohnsitz in Frankreich, Belgien oder Deutschland',
       summary:
         'BorderDay deckt alle drei Wohnsitzrouten nach Luxemburg in einem Unternehmenskonto ab: Frankreich→LU, Belgien→LU und Deutschland→LU. Jede hat einen 34-Tage-Steuerzähler (packspezifische Teilzeitregeln) plus den Sozialversicherungsrahmen unter 50%. Nur Tagesarten. Keine Steuer- oder Rechtsberatung.',
@@ -854,9 +854,9 @@ export const PAGES = {
       ],
     },
     it: {
-      title: 'Datori di lavoro Lussemburgo — telelavoro FR/BE/DE — BorderDay',
+      title: 'Datori di lavoro Lussemburgo: telelavoro | BorderDay',
       description:
-        'Una pagina datore di lavoro per Francia→LU, Belgio→LU e Germania→LU: tolleranza fiscale di 34 giorni e quadro previdenziale UE/SEE/CH sotto il 50%. Solo tipologie di giorno — niente GPS. Azienda da 5 €/posto (min. 39 €).',
+        'HR in Lussemburgo: personale in Francia, Belgio o Germania. Tolleranza fiscale di 34 giorni e previdenza UE/SEE/CH sotto il 50%. Niente GPS.',
       h1: 'Datori di lavoro in Lussemburgo: giorni di telelavoro per personale residente in Francia, Belgio o Germania',
       summary:
         'BorderDay copre le tre situazioni di frontiera di residenza verso il Lussemburgo in un unico account aziendale: Francia→LU, Belgio→LU e Germania→LU. Ognuno ha un contatore fiscale di 34 giorni (regole part-time del pack) e il quadro previdenziale sotto il 50%. Solo tipologie di giorno. Non è consulenza fiscale o legale.',
@@ -868,7 +868,7 @@ export const PAGES = {
     nl: {
       title: 'Werkgevers Luxemburg — telewerk FR/BE/DE — BorderDay',
       description:
-        'Eén werkgevers pagina voor Frankrijk→LU, België→LU en Duitsland→LU: fiscale tolerantie van 34 dagen en EU/EER/CH-socialezekerheidskader onder 50%. Alleen dagtypes — geen GPS. Bedrijf vanaf €5/plaats (min. €39).',
+        'Werkgevers in Luxemburg: medewerkers in Frankrijk, België of Duitsland. Fiscale 34-dagentolerantie en EU/EER/CH-socialezekerheid onder 50%. Geen GPS.',
       h1: 'Werkgevers in Luxemburg: telewerkdagen voor medewerkers die in Frankrijk, België of Duitsland wonen',
       summary:
         'BorderDay dekt alle drie de woonroutes naar Luxemburg in één bedrijfsaccount: Frankrijk→LU, België→LU en Duitsland→LU. Elk heeft een fiscale 34-dagen-teller (pack-specifieke deeltijdregels) plus het socialezekerheidskader onder 50%. Alleen dagtypes. Geen belasting- of juridisch advies.',
@@ -937,25 +937,25 @@ PAGES.accessibility.nl = {
   summary: 'Korte openbare toegankelijkheidsverklaring voor BorderDay.',
 };
 PAGES[''].nl = {
-  title: 'BorderDay — Grensoverschrijdende daglimieten voor HR en medewerkers',
+  title: 'BorderDay: tracker voor grensoverschrijdende telewerkdagen',
   description:
-    'Dagtelling voor werkgevers van grensoverschrijdend personeel: socialezekerheidstellers op negen grensroutes, belastingtellers op zeven. Bedrijf vanaf €5/medewerker/maand (min. €39), excl. btw. 7 dagen gratis proberen (kaart vereist), daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+    'Tracker voor telewerkdagen. Sociale zekerheid op negen routes, belasting op zeven. Alleen dagtypes, geen GPS. Geen woonplaats- of Schengen-teller.',
   h1: 'Eén plek voor elke grens waarover uw mensen werken',
   summary:
     'BorderDay helpt HR telewerk-, ter-plaatse- en reisdagen per medewerker bij te houden: socialezekerheidstellers op alle negen grensroutes in vijf regio’s, belastingtellers op zeven daarvan. Bedrijfsabonnement: €5 per actieve medewerker per maand (minimum €39), excl. btw; particulieren €4,99/maand of €49/jaar, incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Een registratietool — geen belasting- of juridisch advies.',
   crumbs: [['Home', '']],
 };
 PAGES.pricing.nl = {
-  title: 'BorderDay — Prijzen',
+  title: 'BorderDay prijzen: plannen voor de telewerk-tracker',
   description:
-    'Bedrijf: €5 per actieve medewerker per maand, minimum €39; jaarlijks minimum €390. Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+    'Bedrijf: €5/actieve medewerker/maand (min. €39 of €390/jaar), excl. btw. Particulier: €4,99/maand of €49/jaar incl. btw. 7 dagen, incasso op dag 8.',
   h1: 'Prijzen',
   summary:
     'Bedrijf / HR: €5 per actieve medewerker per maand, minimum €39/maand (dekt tot 7 actieve medewerkers); jaarlijks minimum €390 (2 maanden gratis). Particulier: €4,99/maand of €49/jaar. Bedrijfsprijzen excl. btw; particulier incl. btw. 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Checkout via Stripe Managed Payments (verkocht via Link).',
   crumbs: [['Home', ''], ['Prijzen', 'pricing']],
 };
 PAGES.faq.nl = {
-  title: 'Veelgestelde vragen: grensoverschrijdende werkdagen tellen | BorderDay',
+  title: 'FAQ BorderDay: grensoverschrijdende telewerkdagen',
   description:
     'Veelgestelde vragen over BorderDay: opslag, locatie, grensroutes, prijzen, betalingen en wat de tool niet dekt.',
   h1: 'FAQ',
@@ -964,9 +964,9 @@ PAGES.faq.nl = {
   crumbs: [['Home', ''], ['FAQ', 'faq']],
 };
 PAGES['for-individuals'].nl = {
-  title: 'BorderDay — Voor particulieren',
+  title: 'Particulieren: registreer uw telewerkdagen | BorderDay',
   description:
-    'Registreer zelf telewerk- en reisdagen. €4,99/maand of €49/jaar incl. btw. 7 dagen gratis proberen, daarna automatisch geïncasseerd op dag 8 en verlengd tot u opzegt.',
+    'Registreer telewerk- en reisdagen. Socialezekerheidstellers op elke route, belastingtellers waar de regel telt. €4,99/maand of €49/jaar incl. btw.',
   h1: 'Registreer uw eigen grensdagen',
   summary:
     'Medewerkers registreren zelf telewerk-, ter-plaatse-, reis- en niet-werkdagen. Socialezekerheidstellers op elke grensroute, belastingtellers op zeven. Particulier abonnement: €4,99/maand of €49/jaar (incl. btw). 7 dagen gratis proberen, daarna het gekozen abonnement tegen de vermelde prijs, automatisch geïncasseerd op dag 8 en verlengd tot u opzegt; kaart vereist bij registratie. Gebruikt de werkgever BorderDay, aansluiten via de uitnodigingslink: dezelfde tellers als HR.',
@@ -1237,6 +1237,7 @@ export function hubLastmod() {
   return latestGitDay([
     'src/pages/guides/Hub.tsx',
     'src/content/guideHub.mjs',
+    'src/i18n/en.ts',
     'src/i18n/fr.ts',
     'src/i18n/de.ts',
     'src/i18n/it.ts',
@@ -1330,6 +1331,8 @@ export function organizationLd() {
     url: `${BASE}/`,
     logo: `${BASE}${CFG.logo}`,
     email: CFG.contact_email,
+    description: ORG_DESCRIPTION,
+    disambiguatingDescription: ORG_DISAMBIGUATING_DESCRIPTION,
     sameAs: ORG_SAME_AS,
   };
 }
@@ -1562,6 +1565,13 @@ export function llmsTxt() {
 - ${BASE}/en/terms/ — Terms and legal notice
 - ${BASE}/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - ${BASE}/en/cancel/ — Cancel subscription
+- ${BASE}/en/guides/ — English only, no translated version: guide hub for the France-resident Geneva and Luxembourg day-count guides, and how employers track those days
+- ${absUrl('en', ALL_GUIDES.find((g) => g.id === 'enGeneva').path)} — English only, no translated version: how a France resident employed in Geneva counts telework and temporary missions
+- Short answer (Geneva): ${enBref('enGeneva')}
+- ${absUrl('en', ALL_GUIDES.find((g) => g.id === 'enLuxembourg').path)} — English only, no translated version: how a France resident employed in Luxembourg counts telework days
+- Short answer (Luxembourg): ${enBref('enLuxembourg')}
+- ${absUrl('en', ALL_GUIDES.find((g) => g.id === 'enTrack').path)} — English only, no translated version: how employers can keep a day-by-day record of cross-border telework
+- Short answer (tracking): ${enBref('enTrack')}
 - ${BASE}/fr/guides/ — French only, no translated version: guide hub for the France-resident guides (Luxembourg, Geneva, Basel)
 - ${absUrl('fr', FRENCH_GUIDES.find((g) => g.id === 'luxembourg').path)} — French only, no translated version: how a France resident employed in Luxembourg counts telework days
 - En bref (France–Luxembourg): ${enBref('luxembourg')}

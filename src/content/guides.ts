@@ -3,15 +3,26 @@ import lu from './articles/fr-luxembourg.md?raw';
 import bale from './articles/fr-bale.md?raw';
 import deCh from './articles/de-basel.md?raw';
 import ticinoIt from './articles/it-ticino.md?raw';
+import enGeneva from './articles/en-geneva.md?raw';
+import enLuxembourg from './articles/en-luxembourg.md?raw';
+import enTrack from './articles/en-track.md?raw';
 import { markdownToArticle } from './articleMarkdown.mjs';
 import { articleJsonLd } from './articleSchema.mjs';
 import meta from './guides.json';
 
 export const SITE = 'https://borderday.com';
 
-export type GuideLang = 'fr' | 'de' | 'it';
+export type GuideLang = 'en' | 'fr' | 'de' | 'it';
 
-export type GuideId = 'luxembourg' | 'geneva' | 'bale' | 'deCh' | 'ticinoIt';
+export type GuideId =
+  | 'luxembourg'
+  | 'geneva'
+  | 'bale'
+  | 'deCh'
+  | 'ticinoIt'
+  | 'enGeneva'
+  | 'enLuxembourg'
+  | 'enTrack';
 
 export interface GuideMeta {
   id: GuideId;
@@ -34,6 +45,9 @@ const RAW: Record<GuideId, string> = {
   bale,
   deCh,
   ticinoIt,
+  enGeneva,
+  enLuxembourg,
+  enTrack,
 };
 
 export interface Guide extends GuideMeta {
@@ -63,6 +77,20 @@ export function articleLd(guide: Guide) {
 }
 
 const MONTHS: Record<GuideLang, string[]> = {
+  en: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
   fr: [
     'janvier',
     'février',

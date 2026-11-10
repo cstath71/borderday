@@ -38,7 +38,7 @@ export default function ForIndividuals() {
             <p>{d.individuals.point3}</p>
           </article>
         </div>
-        {(lang === 'fr' || lang === 'de' || lang === 'it') && (
+        {(lang === 'en' || lang === 'fr' || lang === 'de' || lang === 'it') && (
           <div className="container">
             <FrenchGuideLinks />
           </div>

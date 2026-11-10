@@ -58,6 +58,9 @@ export default function App() {
         <Route path="guides/france-bale-compter-jours-teletravail" element={<FrenchGuide id="bale" />} />
         <Route path="guides/deutschland-schweiz-grenzgaenger-tage-zaehlen" element={<FrenchGuide id="deCh" />} />
         <Route path="guides/italia-ticino-contare-giorni-telelavoro" element={<FrenchGuide id="ticinoIt" />} />
+        <Route path="guides/france-geneva-telework-days" element={<FrenchGuide id="enGeneva" />} />
+        <Route path="guides/france-luxembourg-telework-days" element={<FrenchGuide id="enLuxembourg" />} />
+        <Route path="guides/how-to-track-cross-border-telework-days" element={<FrenchGuide id="enTrack" />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />

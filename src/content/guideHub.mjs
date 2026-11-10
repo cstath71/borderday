@@ -2,7 +2,7 @@
 export const FRENCH_HUB = {
   lang: 'fr',
   path: 'guides',
-  title: 'Guides télétravail: Luxembourg, Genève, Bâle | BorderDay',
+  title: 'Guides frontaliers : Luxembourg, Genève, Bâle | BorderDay',
   description:
     'Trois guides : 34 jours France-Luxembourg ; Genève 40% et 10 jours de missions ; Bâle (accord de 1983) 40%, 10 missions et 45 nuitées. Sources officielles.',
   h1: 'Guides',

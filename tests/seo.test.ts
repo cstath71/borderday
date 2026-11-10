@@ -188,13 +188,45 @@ describe('SEO generators', () => {
         expect(page.summary).not.toMatch(OWNER);
         expect(page.title).not.toMatch(OWNER);
         expect(page.summary).not.toMatch(SLOGAN);
-        if (page.title !== 'FAQ BorderDay : jours de télétravail frontalier') {
-          expect(page.title).not.toMatch(SLOGAN);
-        }
+        // French HTML titles may use frontalier as the search term. Summaries and other languages stay clear of it.
+        if (lang !== 'fr') expect(page.title).not.toMatch(SLOGAN);
         titles.add(`${lang}:${page.title}`);
       }
     }
     expect(titles.size).toBe(PUBLIC_PATHS.length * LANGS.length);
+  });
+
+  it('French HTML titles or descriptions use frontalier within the length limits', () => {
+    const word = /frontaliers?/i;
+    const dash = /[\u2014\u2013]/;
+    const pages: Array<[string, 'title' | 'description']> = [
+      ['', 'title'],
+      ['pricing', 'title'],
+      ['faq', 'title'],
+      ['for-individuals', 'title'],
+      ['employers/ticino', 'description'],
+      ['employers/geneva', 'description'],
+      ['employers/luxembourg', 'description'],
+    ];
+    for (const [path, field] of pages) {
+      const page = PAGES[path].fr;
+      expect(`${page.title} ${page.description}`, path).toMatch(word);
+      expect([...page.title].length, path).toBeLessThanOrEqual(60);
+      expect([...page.description].length, path).toBeLessThanOrEqual(155);
+      expect(page[field], path).not.toMatch(dash);
+    }
+    const hub = HUB_BY_LANG.fr;
+    expect(`${hub.title} ${hub.description}`).toMatch(word);
+    expect([...hub.title].length).toBeLessThanOrEqual(60);
+    expect(hub.title).not.toMatch(dash);
+    for (const id of ['luxembourg', 'geneva', 'bale']) {
+      const guide = ALL_GUIDES.find((item) => item.id === id);
+      expect(guide, id).toBeTruthy();
+      expect(`${guide!.title} ${guide!.description}`, id).toMatch(word);
+      expect([...guide!.title].length, id).toBeLessThanOrEqual(60);
+      expect([...guide!.description].length, id).toBeLessThanOrEqual(155);
+      expect(`${guide!.title} ${guide!.description}`, id).not.toMatch(dash);
+    }
   });
 
   it('IndexNow key is a public hex string and config has verify hooks', () => {
@@ -252,7 +284,7 @@ describe('employer SEO landing pages', () => {
       expect(PAGES[path]).toBeTruthy();
       for (const lang of LANGS) {
         const page = PAGES[path][lang];
-        expect(page.title).not.toMatch(SLOGAN);
+        if (lang !== 'fr') expect(page.title).not.toMatch(SLOGAN);
         expect(page.summary).not.toMatch(SLOGAN);
         expect(page.summary).not.toMatch(OWNER);
       }

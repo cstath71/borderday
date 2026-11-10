@@ -49,7 +49,7 @@ describe('approved French guide text', () => {
       for (const url of urls) expect(parsed.bodyHtml).toContain(`href="${url}"`);
       if (guide.id === 'geneva') {
         expect(guide.description).toBe(
-          "France-Genève : le télétravail en France peut rester imposé en Suisse jusqu'à 40% du temps d'activité par année civile. Sources : ge.ch et AFC.",
+          "France-Genève : le télétravail frontalier en France peut rester imposé en Suisse jusqu'à 40% du temps d'activité par année civile. Sources : ge.ch et AFC.",
         );
         expect(markdownPlain(onDisk)).toContain('y compris lorsque le taux est de 0 %');
         expect(onDisk).toContain('jusqu’à 40 %');

@@ -129,7 +129,7 @@ export const PAGES = {
       crumbs: [['Home', '']],
     },
     fr: {
-      title: 'BorderDay : compteur de jours de télétravail pour les RH',
+      title: 'BorderDay : télétravail frontalier pour les RH',
       description:
         'Compteur de télétravail pour les RH. Sécurité sociale sur neuf situations, fiscalité sur sept. Types de jours, pas de GPS. Pas un compteur de résidence.',
       h1: 'Un seul outil pour toutes les frontières de vos équipes',
@@ -170,7 +170,7 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Tarifs BorderDay : compteur de jours de télétravail',
+      title: 'Tarifs BorderDay : compteur de télétravail frontalier',
       description:
         'Entreprise : 5 €/collaborateur/mois (min. 39 € ou 390 €/an), hors TVA. Particulier : 4,99 €/mois ou 49 €/an TVA incluse. Essai 7 jours, débit le 8e jour.',
       h1: 'Tarifs',
@@ -222,7 +222,7 @@ export const PAGES = {
     fr: {
       title: 'FAQ BorderDay : jours de télétravail frontalier',
       description:
-        'BorderDay est-il un conseil fiscal ? Où est le journal ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?',
+        'BorderDay est-il un conseil fiscal ? Où est le journal des frontaliers ? Quelles frontières ? Comment marchent le paiement et l’essai de 7 jours ?',
       h1: 'FAQ',
       summary:
         'BorderDay est un outil de suivi et de rappel, pas un conseil fiscal ou juridique. Avec un abonnement, le journal est enregistré dans votre compte ; l’aperçu gratuit reste sur l’appareil ; ni GPS ni localisation de l’appareil. Neuf situations frontalières : compteurs de sécurité sociale sur tous, compteurs fiscaux sur sept (Genève et autres cantons hors accord de 1983, cantons de l’accord de 1983, Allemagne→Suisse, France→Luxembourg, Belgique→Luxembourg, Allemagne→Luxembourg, Italie→Suisse). Essai gratuit de 7 jours, puis l’offre choisie au prix indiqué, débitée automatiquement le 8e jour et renouvelée jusqu’à votre résiliation ; carte requise à l’inscription.',
@@ -270,7 +270,7 @@ export const PAGES = {
       ],
     },
     fr: {
-      title: 'Particuliers : journal de télétravail | BorderDay',
+      title: 'Particuliers : télétravail frontalier | BorderDay',
       description:
         'Consignez télétravail et déplacements. Compteurs sociaux sur chaque situation, fiscaux où la règle peut être comptée. 4,99 €/mois ou 49 €/an TVA incluse.',
       h1: 'Enregistrez vos propres jours de travail',
@@ -709,7 +709,7 @@ export const PAGES = {
     fr: {
       title: 'Employeurs Tessin — suivi télétravail (IT→CH) — BorderDay',
       description:
-        'RH tessinoises : télétravail du personnel en Italie. Compteurs 25% et 45 jours de non-retour, et sécurité sociale UE/EEE/CH sous 50%.',
+        'RH tessinoises : télétravail frontalier du personnel en Italie. Compteurs 25% et 45 jours de non-retour, et sécurité sociale UE/EEE/CH sous 50%.',
       h1: 'Employeurs au Tessin: jours de télétravail pour le personnel résidant en Italie',
       summary:
         'BorderDay aide les employeurs tessinois à enregistrer télétravail, jours sur site et nuits hors domicile pour les personnes qui résident en Italie et travaillent en Suisse selon l’accord Italie–Suisse (Accordo Art. 2, tel que modifié pour le télétravail). Fiscalité: au plus 25% de télétravail au domicile et jusqu’à 45 jours de non-retour par an (protocole Fedlex RU 2026 104; en vigueur le 9 février 2026, applicable dès le 1er janvier 2024). Sécurité sociale: bandes du cadre UE/EEE/CH sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Pas un conseil fiscal ou juridique.',
@@ -771,7 +771,7 @@ export const PAGES = {
     fr: {
       title: 'Employeurs Genève — suivi télétravail (FR→CH) — BorderDay',
       description:
-        'RH genevoises : télétravail du personnel en France. Compteurs 40% / 10 jours de mission, et sécurité sociale UE/EEE/CH sous 50%. Pas de GPS.',
+        'RH genevoises : télétravail frontalier du personnel en France. Compteurs 40% / 10 jours de mission, et sécurité sociale UE/EEE/CH sous 50%. Pas de GPS.',
       h1: 'Employeurs à Genève: jours de télétravail pour le personnel résidant en France',
       summary:
         'BorderDay aide les employeurs genevois à enregistrer télétravail, jours sur site et déplacements pour les personnes qui résident en France et travaillent en Suisse. Fiscalité: jusqu’à 40% de télétravail et 10 jours de missions (ge.ch / AFC). Sécurité sociale: bandes sous 25%, 25% à moins de 50% (A1), et 50% ou plus. Obligation employeur: première transmission AFC prévue en janvier 2027 pour 2026. Pas un conseil fiscal ou juridique.',
@@ -833,7 +833,7 @@ export const PAGES = {
     fr: {
       title: 'Employeurs Luxembourg — télétravail FR/BE/DE — BorderDay',
       description:
-        'Employeurs au Luxembourg : personnel en France, Belgique ou Allemagne. Tolérance fiscale de 34 jours et sécurité sociale UE/EEE/CH sous 50%. Pas de GPS.',
+        'Employeurs au Luxembourg : frontaliers en France, Belgique ou Allemagne. Tolérance fiscale de 34 jours et sécurité sociale UE/EEE/CH sous 50%. Pas de GPS.',
       h1: 'Employeurs au Luxembourg: jours de télétravail pour le personnel résidant en France, Belgique ou Allemagne',
       summary:
         'BorderDay couvre les trois situations frontalières de résidence vers le Luxembourg dans un seul compte entreprise: France→LU, Belgique→LU et Allemagne→LU. Chacun a un compteur fiscal de 34 jours (règles de temps partiel propres au pack) et le cadre de sécurité sociale sous 50%. Types de jours uniquement. Pas un conseil fiscal ou juridique.',

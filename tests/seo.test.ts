@@ -8,6 +8,7 @@ import {
   CFG,
   FAQ,
   ALL_GUIDES,
+  GUIDE_HUB_LANGS,
   INDEXNOW_KEY,
   LANGS,
   SITEMAP_PATHS,
@@ -19,8 +20,10 @@ import {
   absUrl,
   breadcrumbLd,
   faqLd,
+  hubIndexMarkdown,
   llmsFullTxt,
   llmsTxt,
+  sitemapLocs,
   organizationLd,
   robotsTxt,
   sitemapXml,
@@ -29,6 +32,7 @@ import {
 } from '../scripts/seo.mjs';
 
 import { BORDER_PACKS, hasTaxCounter } from '../src/borders/packs';
+import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
 
 const OWNER = /PrimeLogic|Stathopoulos|CHE-312\.418\.158|Cours des Bastions/i;
 const SLOGAN = /\bfrontalier\b|\bGrenzgänger\b/i;
@@ -100,6 +104,40 @@ describe('SEO generators', () => {
     for (const [q] of FAQ.en) expect(full).toContain(q);
     expect(short).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
     expect(full).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
+    const locs = sitemapLocs();
+    expect(locs).toHaveLength(43);
+    expect(locs).toEqual([...sitemapXml().matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]));
+    const listed = full.split('## Sitemap\n\n')[1].trim().split('\n').map((line) => line.replace(/^- /, ''));
+    expect(listed).toEqual(locs);
+    for (const lang of GUIDE_HUB_LANGS) {
+      expect(listed).toContain(`${BASE}/${lang}/guides/`);
+      expect(short).toContain(`${BASE}/${lang}/guides/`);
+      expect(short).toContain(`${absUrl(lang, 'guides')}index.md`);
+    }
+    for (const guide of ALL_GUIDES) {
+      const loc = absUrl(guide.lang || 'fr', guide.path);
+      expect(listed).toContain(loc);
+      expect(short).toContain(loc);
+      expect(short).toContain(`${loc}index.md`);
+    }
+  });
+
+  it('guide hub index.md lists each guide title, summary and canonical URL', () => {
+    for (const lang of GUIDE_HUB_LANGS) {
+      const hub = HUB_BY_LANG[lang as 'fr' | 'de' | 'it'];
+      const md = hubIndexMarkdown(lang);
+      expect(md.startsWith(`# ${hub.h1}\n`)).toBe(true);
+      expect(md).toContain(hub.intro);
+      const guides = ALL_GUIDES.filter((guide) => (guide.lang || 'fr') === lang);
+      expect(guides.length).toBeGreaterThan(0);
+      for (const guide of guides) {
+        expect(md).toContain(`## ${guide.title}`);
+        expect(md).toContain(guide.description);
+        expect(md).toContain(absUrl(lang, guide.path));
+      }
+      expect(md).not.toMatch(OWNER);
+      expect(readFileSync(join(ROOT, 'public', lang, 'guides', 'index.md'), 'utf8')).toBe(md);
+    }
   });
 
   it('JSON-LD Organization, SoftwareApplication offers, FAQ, Breadcrumb', () => {
@@ -319,5 +357,26 @@ describe('SEO artifacts on disk', () => {
     // noindex shells
     const appHtml = readFileSync(join(dist, 'en/app/index.html'), 'utf8');
     expect(appHtml).toContain('noindex');
+
+    const full = readFileSync(join(dist, 'llms-full.txt'), 'utf8');
+    const listed = full.split('## Sitemap\n\n')[1].trim().split('\n');
+    expect(listed).toHaveLength(43);
+
+    for (const guide of ALL_GUIDES) {
+      const lang = guide.lang || 'fr';
+      const html = readFileSync(join(dist, lang, guide.path, 'index.html'), 'utf8');
+      const firstP = html.match(/<p\b[^>]*>([\s\S]*?)<\/p>/);
+      expect(firstP, guide.path).toBeTruthy();
+      const text = firstP![1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+      expect(text.startsWith(guide.lang === 'de' ? 'Kurz gesagt' : guide.lang === 'it' ? 'In breve' : 'En bref')).toBe(true);
+      expect(html).toContain(`<time class="article-kicker" datetime="${guide.datePublished}">`);
+      expect(html).not.toContain('<p class="article-kicker"');
+      expect(html).toContain(`"datePublished":"${guide.datePublished}"`);
+      expect(html).toContain(`"dateModified":"${guide.dateModified || guide.datePublished}"`);
+      expect(readFileSync(join(dist, lang, guide.path, 'index.md'), 'utf8').length).toBeGreaterThan(80);
+    }
+    for (const lang of GUIDE_HUB_LANGS) {
+      expect(readFileSync(join(dist, lang, 'guides', 'index.md'), 'utf8')).toBe(hubIndexMarkdown(lang));
+    }
   });
 });

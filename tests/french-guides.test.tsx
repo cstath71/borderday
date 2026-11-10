@@ -5,7 +5,8 @@ import { join } from 'node:path';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import { htmlPlain, markdownPlain, markdownToArticle } from '../src/content/articleMarkdown.mjs';
-import { GUIDES, type GuideId } from '../src/content/guides';
+import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
+import { GUIDES, guideLongDate, type GuideId } from '../src/content/guides';
 import { untranslatedLocalePath } from '../src/lib/localeSwitch';
 import ForIndividuals from '../src/pages/ForIndividuals';
 import EmployersGeneva from '../src/pages/employers/Geneva';
@@ -123,8 +124,15 @@ describe('French-only routes and discovery', () => {
       const article = parts.graph.find((node) => node['@type'] === 'Article');
       expect(article.inLanguage).toBe(guide.lang);
       expect(article.datePublished).toBe(guide.datePublished);
+      expect(article.dateModified).toBe(guide.dateModified || guide.datePublished);
       expect(article.author).toEqual({ '@id': `${BASE}/#org` });
       expect(JSON.stringify(article)).not.toMatch(PRIVATE);
+      const firstP = parts.body.slice(parts.body.indexOf('<p'), parts.body.indexOf('</p>'));
+      const label = HUB_BY_LANG[guide.lang].briefLabel;
+      expect(firstP).toContain(label);
+      expect(parts.body).toContain(`<time class="article-kicker" datetime="${guide.datePublished}">`);
+      expect(parts.body).toContain(guideLongDate(guide.lang, guide.datePublished));
+      expect(parts.body).not.toContain('<p class="article-kicker"');
     }
   });
 
@@ -238,6 +246,32 @@ describe('Basel, Germany and Ticino guides', () => {
     expect(it.markdown).toContain('240');
     expect(it.markdown).toContain('SFI');
     expect(it.markdown).not.toMatch(/FSIO|regole normali dell’accordo/);
+  });
+});
+
+describe('answer-first guide HTML', () => {
+  it('puts the short answer in the first paragraph and the date in a time element', () => {
+    for (const guide of GUIDES) {
+      at(`/${guide.lang}/${guide.path}`, <FrenchGuide id={guide.id} />);
+      const hub = HUB_BY_LANG[guide.lang];
+      const brief = guide.markdown.match(hub.briefRe);
+      expect(brief).toBeTruthy();
+      const expected = `${hub.briefLabel} : ${brief![1].replace(/\*\*/g, '').trim()}`;
+      const first = document.querySelector('p');
+      const proseFirst = document.querySelector('.article-prose p');
+      expect(first).toBe(proseFirst);
+      expect(first?.classList.contains('lede')).toBe(true);
+      expect(first?.textContent?.replace(/\s+/g, ' ').trim()).toBe(expected);
+      const time = document.querySelector('article time');
+      expect(time?.getAttribute('datetime')).toBe(guide.datePublished);
+      expect(time?.textContent).toBe(guideLongDate(guide.lang, guide.datePublished));
+      expect(time?.closest('p')).toBeNull();
+      const graph = JSON.parse(document.getElementById('bd-jsonld')!.textContent!)['@graph'];
+      const article = graph.find((node: { '@type': string }) => node['@type'] === 'Article');
+      expect(article.datePublished).toBe(guide.datePublished);
+      expect(article.dateModified).toBe(guide.dateModified || guide.datePublished);
+      cleanup();
+    }
   });
 });
 

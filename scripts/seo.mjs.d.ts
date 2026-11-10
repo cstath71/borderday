@@ -21,8 +21,10 @@ export const ALL_GUIDES: {
   lang?: string;
   path: string;
   file: string;
+  title: string;
   description: string;
   datePublished: string;
+  dateModified?: string;
   fallbackPath: string;
 }[];
 export const GUIDE_HUB_LANGS: string[];
@@ -46,7 +48,15 @@ export function esc(s: string): string;
 export function absUrl(lang: string, path: string): string;
 export function pageFile(lang: string, path: string): string;
 export function robotsTxt(): string;
+export function sitemapEntries(): {
+  loc: string;
+  lastmod: string;
+  alternates: { hreflang: string; href: string }[];
+  xDefault: string;
+}[];
+export function sitemapLocs(): string[];
 export function sitemapXml(): string;
+export function hubIndexMarkdown(lang: string): string;
 export function organizationLd(): Record<string, unknown>;
 export function websiteLd(): Record<string, unknown> & { publisher: { '@id': string } };
 export function softwareApplicationLd(): {

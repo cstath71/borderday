@@ -6,7 +6,6 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { markdownToArticle } from '../src/content/articleMarkdown.mjs';
 import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
 import { ORG_DISAMBIGUATING_DESCRIPTION, ORG_DESCRIPTION, ORG_SAME_AS, offersFor } from '../src/seo/offers.mjs';
 import { ROUTES_COVERED_PROSE } from '../src/seo/routesCovered.mjs';
@@ -1246,6 +1245,7 @@ export function hubLastmod() {
   ]);
 }
 
+/** One row per sitemap <url>. llms-full.txt lists these same locs. */
 export function sitemapEntries() {
   const entries = [];
   for (const path of SITEMAP_PATHS) {
@@ -1254,10 +1254,8 @@ export function sitemapEntries() {
       entries.push({
         loc,
         lastmod: lastmodFor(lang, path),
-        links: [
-          ...LANGS.map((l) => ({ hreflang: l, href: absUrl(l, path) })),
-          { hreflang: 'x-default', href: absUrl('en', path) },
-        ],
+        alternates: LANGS.map((l) => ({ hreflang: l, href: absUrl(l, path) })),
+        xDefault: absUrl('en', path),
       });
     }
   }
@@ -1267,10 +1265,8 @@ export function sitemapEntries() {
     entries.push({
       loc,
       lastmod: hubLastmod(),
-      links: [
-        { hreflang: lang, href: loc },
-        { hreflang: 'x-default', href: loc },
-      ],
+      alternates: [{ hreflang: lang, href: loc }],
+      xDefault: loc,
     });
   }
   for (const guide of ALL_GUIDES) {
@@ -1279,13 +1275,15 @@ export function sitemapEntries() {
     entries.push({
       loc,
       lastmod: guide.datePublished,
-      links: [
-        { hreflang: lang, href: loc },
-        { hreflang: 'x-default', href: loc },
-      ],
+      alternates: [{ hreflang: lang, href: loc }],
+      xDefault: loc,
     });
   }
   return entries;
+}
+
+export function sitemapLocs() {
+  return sitemapEntries().map((entry) => entry.loc);
 }
 
 export function sitemapXml() {
@@ -1297,13 +1295,32 @@ export function sitemapXml() {
     out += '  <url>\n';
     out += `    <loc>${esc(entry.loc)}</loc>\n`;
     out += `    <lastmod>${esc(entry.lastmod)}</lastmod>\n`;
-    for (const link of entry.links) {
-      out += `    <xhtml:link rel="alternate" hreflang="${link.hreflang}" href="${esc(link.href)}"/>\n`;
+    for (const alt of entry.alternates) {
+      out += `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${esc(alt.href)}"/>\n`;
     }
+    out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(entry.xDefault)}"/>\n`;
     out += '  </url>\n';
   }
   out += '</urlset>\n';
   return out;
+}
+
+/** Plain-text mirror of a guide hub: each guide's title, one-line summary, canonical URL. */
+export function hubIndexMarkdown(lang) {
+  const hub = HUB_BY_LANG[lang];
+  if (!hub) throw new Error(`No guide hub for ${lang}`);
+  const guides = ALL_GUIDES.filter((guide) => (guide.lang || 'fr') === lang);
+  const parts = [`# ${hub.h1}`, '', hub.intro, ''];
+  for (const guide of guides) {
+    parts.push(`## ${guide.title}`, '', guide.description, '', absUrl(lang, guide.path), '');
+  }
+  return `${parts.join('\n').trimEnd()}\n`;
+}
+
+function plainTextMirrorUrls() {
+  const hubs = GUIDE_HUB_LANGS.map((lang) => `${absUrl(lang, HUB_BY_LANG[lang].path)}index.md`);
+  const articles = ALL_GUIDES.map((guide) => `${absUrl(guide.lang || 'fr', guide.path)}index.md`);
+  return [...hubs, ...articles];
 }
 
 export function organizationLd() {
@@ -1508,21 +1525,6 @@ function enBref(id) {
   return guideBrief(guide);
 }
 
-export function hubIndexMarkdown(lang) {
-  const hub = HUB_BY_LANG[lang];
-  if (!hub) return '';
-  const lines = [`# ${hub.h1}`, '', hub.intro, ''];
-  for (const guide of ALL_GUIDES.filter((item) => (item.lang || 'fr') === lang)) {
-    const markdown = readFileSync(join(ROOT, 'src/content/articles', guide.file), 'utf8');
-    const { h1 } = markdownToArticle(markdown);
-    const brief = (markdown.match(hub.briefRe) || [])[1]?.replace(/\*\*/g, '').trim() || '';
-    lines.push(`- [${h1}](${absUrl(lang, guide.path)})`);
-    lines.push(`  ${hub.briefLabel}${hub.briefColon} ${brief}`);
-    lines.push('');
-  }
-  return `${lines.join('\n')}\n`;
-}
-
 export function llmsTxt() {
   return `# BorderDay
 
@@ -1583,7 +1585,7 @@ export function llmsTxt() {
 - ${BASE}/it/guides/ — Italian only, no translated version: guide hub for the Italy–Ticino day-count guide
 - ${absUrl('it', ALL_GUIDES.find((g) => g.id === 'ticinoIt').path)} — Italian only, no translated version: how an Italy resident working in Ticino counts telework and non-return days
 - In breve (Italia–Ticino): ${enBref('ticinoIt')}
-- Plain-text mirrors: ${[...ALL_GUIDES.map((g) => `${absUrl(g.lang || 'fr', g.path)}index.md`), `${BASE}/en/guides/index.md`].join(', ')}
+- Plain-text mirrors: ${plainTextMirrorUrls().join(', ')}
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note
@@ -1615,12 +1617,7 @@ ${faqBlock}
 
 ## Sitemap
 
-${[
-  ...PUBLIC_PATHS.map((p) => `- ${absUrl('en', p)}`),
-  ...sitemapEntries()
-    .filter((entry) => entry.loc.startsWith(`${BASE}/en/guides`))
-    .map((entry) => `- ${entry.loc}`),
-].join('\n')}
+${sitemapLocs().map((loc) => `- ${loc}`).join('\n')}
 `
   );
 }

@@ -76,7 +76,7 @@ describe('English guides', () => {
     expect(document.body.textContent).not.toContain('Short answer :');
     const md = hubIndexMarkdown('en');
     expect(md.startsWith('# Guides\n')).toBe(true);
-    expect(md).toContain('Short answer:');
+    expect(md).toContain('## How to track cross-border telework days | BorderDay');
     expect(md).toContain(`${BASE}/en/guides/how-to-track-cross-border-telework-days/`);
   });
 
@@ -95,12 +95,11 @@ describe('English guides', () => {
     expect(llms).toContain('En bref (France');
     expect(llms).not.toContain('En bref :');
     const sitemap = llmsFullTxt().split('## Sitemap\n')[1];
-    expect(sitemap).toContain(`${BASE}/en/privacy/`);
     expect(sitemap).toContain(`${BASE}/en/guides/`);
     expect(sitemap).toContain(`${BASE}/en/guides/france-geneva-telework-days/`);
     expect(sitemap).toContain(`${BASE}/en/guides/france-luxembourg-telework-days/`);
     expect(sitemap).toContain(`${BASE}/en/guides/how-to-track-cross-border-telework-days/`);
-    expect(sitemap).not.toContain(`${BASE}/fr/guides/`);
+    expect(sitemap).toContain(`${BASE}/fr/guides/`);
   });
 
   it('puts the approved Organization and WebSite descriptions on the homepage', () => {

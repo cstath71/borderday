@@ -20,8 +20,10 @@ import {
   absUrl,
   breadcrumbLd,
   faqLd,
+  hubIndexMarkdown,
   llmsFullTxt,
   llmsTxt,
+  sitemapLocs,
   organizationLd,
   robotsTxt,
   sitemapXml,
@@ -106,6 +108,40 @@ describe('SEO generators', () => {
     for (const [q] of FAQ.en) expect(full).toContain(q);
     expect(short).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
     expect(full).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
+    const locs = sitemapLocs();
+    expect(locs).toHaveLength(47);
+    expect(locs).toEqual([...sitemapXml().matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]));
+    const listed = full.split('## Sitemap\n\n')[1].trim().split('\n').map((line) => line.replace(/^- /, ''));
+    expect(listed).toEqual(locs);
+    for (const lang of GUIDE_HUB_LANGS) {
+      expect(listed).toContain(`${BASE}/${lang}/guides/`);
+      expect(short).toContain(`${BASE}/${lang}/guides/`);
+      expect(short).toContain(`${absUrl(lang, 'guides')}index.md`);
+    }
+    for (const guide of ALL_GUIDES) {
+      const loc = absUrl(guide.lang || 'fr', guide.path);
+      expect(listed).toContain(loc);
+      expect(short).toContain(loc);
+      expect(short).toContain(`${loc}index.md`);
+    }
+  });
+
+  it('guide hub index.md lists each guide title, summary and canonical URL', () => {
+    for (const lang of GUIDE_HUB_LANGS) {
+      const hub = HUB_BY_LANG[lang as 'fr' | 'de' | 'it'];
+      const md = hubIndexMarkdown(lang);
+      expect(md.startsWith(`# ${hub.h1}\n`)).toBe(true);
+      expect(md).toContain(hub.intro);
+      const guides = ALL_GUIDES.filter((guide) => (guide.lang || 'fr') === lang);
+      expect(guides.length).toBeGreaterThan(0);
+      for (const guide of guides) {
+        expect(md).toContain(`## ${guide.title}`);
+        expect(md).toContain(guide.description);
+        expect(md).toContain(absUrl(lang, guide.path));
+      }
+      expect(md).not.toMatch(OWNER);
+      expect(readFileSync(join(ROOT, 'public', lang, 'guides', 'index.md'), 'utf8')).toBe(md);
+    }
   });
 
   it('JSON-LD Organization, SoftwareApplication offers, FAQ, Breadcrumb', () => {
@@ -409,13 +445,35 @@ describe('SEO artifacts on disk', () => {
       expect(html).toContain('hreflang="en"');
       expect(html).not.toContain('hreflang="fr"');
       if (rel === 'en/guides/index.html') continue;
-      expect(html).toMatch(/<time dateTime="2026-11-10">/);
+      expect(html).toMatch(/<time class="article-kicker" datetime="2026-11-10">/);
       expect(html).toMatch(/<p class="lede"><strong>Short answer:<\/strong>/);
     }
-    expect(readFileSync(join(dist, 'en/guides/index.md'), 'utf8')).toContain('Short answer:');
+    expect(readFileSync(join(dist, 'en/guides/index.md'), 'utf8')).toContain('How to track cross-border telework days | BorderDay');
 
     // noindex shells
     const appHtml = readFileSync(join(dist, 'en/app/index.html'), 'utf8');
     expect(appHtml).toContain('noindex');
+
+    const full = readFileSync(join(dist, 'llms-full.txt'), 'utf8');
+    const listed = full.split('## Sitemap\n\n')[1].trim().split('\n');
+    expect(listed).toHaveLength(47);
+
+    for (const guide of ALL_GUIDES) {
+      const lang = guide.lang || 'fr';
+      const html = readFileSync(join(dist, lang, guide.path, 'index.html'), 'utf8');
+      const firstP = html.match(/<p\b[^>]*>([\s\S]*?)<\/p>/);
+      expect(firstP, guide.path).toBeTruthy();
+      const text = firstP![1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+      const lead = guide.lang === 'de' ? 'Kurz gesagt' : guide.lang === 'it' ? 'In breve' : guide.lang === 'en' ? 'Short answer' : 'En bref';
+      expect(text.startsWith(lead)).toBe(true);
+      expect(html).toContain(`<time class="article-kicker" datetime="${guide.datePublished}">`);
+      expect(html).not.toContain('<p class="article-kicker"');
+      expect(html).toContain(`"datePublished":"${guide.datePublished}"`);
+      expect(html).toContain(`"dateModified":"${guide.dateModified || guide.datePublished}"`);
+      expect(readFileSync(join(dist, lang, guide.path, 'index.md'), 'utf8').length).toBeGreaterThan(80);
+    }
+    for (const lang of GUIDE_HUB_LANGS) {
+      expect(readFileSync(join(dist, lang, 'guides', 'index.md'), 'utf8')).toBe(hubIndexMarkdown(lang));
+    }
   });
 });

@@ -200,7 +200,7 @@ export function frenchGuideDocumentParts(guide, h1, bodyHtml) {
       <header class="hero article-hero">
         <div class="container article-wrap">
           <nav class="crumbs" aria-label="${esc(PRERENDER_UI[lang].breadcrumb)}"><ol>${crumbHtml}</ol></nav>
-          <p class="article-kicker"><time datetime="${esc(guide.datePublished)}">${esc(guideLongDate(lang, guide.datePublished))}</time></p>
+          <time class="article-kicker" datetime="${esc(guide.datePublished)}">${esc(guideLongDate(lang, guide.datePublished))}</time>
           <h1>${esc(h1)}</h1>
         </div>
       </header>
@@ -247,6 +247,11 @@ async function loadRenderer() {
   }
   const entry = await import(pathToFileURL(bundle).href);
   return { renderRoute: entry.renderRoute, faqPagePairs: entry.faqPagePairs, employerFaqPairs: entry.employerFaqPairs };
+}
+
+/** React SSR prints the DOM property name. HTML crawlers look for the datetime attribute. */
+function htmlTimeDatetime(html) {
+  return html.replaceAll(' dateTime="', ' datetime="');
 }
 
 function renderedBody(renderRoute, url) {
@@ -403,7 +408,7 @@ async function main() {
     const out = join(DIST, pageFile(lang, hub.path));
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);
-    if (lang === 'en') writeBoth(pageFile(lang, hub.path).replace(/index\.html$/, 'index.md'), hubIndexMarkdown(lang));
+    writeBoth(pageFile(lang, hub.path).replace(/index\.html$/, 'index.md'), hubIndexMarkdown(lang));
   }
 
   for (const guide of ALL_GUIDES) {
@@ -412,7 +417,7 @@ async function main() {
     const { h1 } = markdownToArticle(markdown);
     const withMarkdown = { ...guide, markdown, h1 };
     const parts = frenchGuideDocumentParts(withMarkdown, h1, '');
-    const html = injectHtml(template, {
+    const html = htmlTimeDatetime(injectHtml(template, {
       lang,
       path: guide.path,
       title: parts.title,
@@ -425,7 +430,7 @@ async function main() {
       publishedTime: guide.datePublished,
       modifiedTime: guide.dateModified || guide.datePublished,
       ogImage: guide.ogImage,
-    });
+    }));
     const out = join(DIST, pageFile(lang, guide.path));
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);

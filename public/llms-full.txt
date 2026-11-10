@@ -57,7 +57,7 @@
 - https://borderday.com/it/guides/ — Italian only, no translated version: guide hub for the Italy–Ticino day-count guide
 - https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/ — Italian only, no translated version: how an Italy resident working in Ticino counts telework and non-return days
 - In breve (Italia–Ticino): per chi abita in Italia in un Comune della fascia di 20 km dal confine e lavora come dipendente nell’area di frontiera svizzera (Ticino, Grigioni o Vallese), l’Accordo italo-svizzero sui frontalieri del 23 dicembre 2020 fissa due limiti per anno civile senza cambiare lo status di frontaliere: al massimo il 25 % dell’attività in telelavoro presso il proprio domicilio in Italia, e al massimo 45 giorni di mancato rientro quotidiano per motivi professionali, esclusi ferie e malattia. Il Protocollo di modifica che fissa queste regole è in vigore dal 9 febbraio 2026 e si applica dal 1° gennaio 2024. La sicurezza sociale segue un altro contatore, in percentuale del tempo di lavoro.
-- Plain-text mirrors: https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-bale-compter-jours-teletravail/index.md, https://borderday.com/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/index.md, https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/index.md, https://borderday.com/en/guides/france-geneva-telework-days/index.md, https://borderday.com/en/guides/france-luxembourg-telework-days/index.md, https://borderday.com/en/guides/how-to-track-cross-border-telework-days/index.md, https://borderday.com/en/guides/index.md
+- Plain-text mirrors: https://borderday.com/en/guides/index.md, https://borderday.com/fr/guides/index.md, https://borderday.com/de/guides/index.md, https://borderday.com/it/guides/index.md, https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-bale-compter-jours-teletravail/index.md, https://borderday.com/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/index.md, https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/index.md, https://borderday.com/en/guides/france-geneva-telework-days/index.md, https://borderday.com/en/guides/france-luxembourg-telework-days/index.md, https://borderday.com/en/guides/how-to-track-cross-border-telework-days/index.md
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note
@@ -102,21 +102,49 @@ The self-employed, public-sector special rules, people with employers in several
 ## Sitemap
 
 - https://borderday.com/en/
+- https://borderday.com/fr/
+- https://borderday.com/de/
+- https://borderday.com/it/
+- https://borderday.com/nl/
 - https://borderday.com/en/pricing/
+- https://borderday.com/fr/pricing/
+- https://borderday.com/de/pricing/
+- https://borderday.com/it/pricing/
+- https://borderday.com/nl/pricing/
 - https://borderday.com/en/faq/
+- https://borderday.com/fr/faq/
+- https://borderday.com/de/faq/
+- https://borderday.com/it/faq/
+- https://borderday.com/nl/faq/
 - https://borderday.com/en/for-individuals/
-- https://borderday.com/en/privacy/
-- https://borderday.com/en/dpa/
-- https://borderday.com/en/disclaimer/
-- https://borderday.com/en/accessibility/
-- https://borderday.com/en/terms/
-- https://borderday.com/en/withdrawal/
-- https://borderday.com/en/cancel/
-- https://borderday.com/en/company/signup/
+- https://borderday.com/fr/for-individuals/
+- https://borderday.com/de/for-individuals/
+- https://borderday.com/it/for-individuals/
+- https://borderday.com/nl/for-individuals/
 - https://borderday.com/en/employers/ticino/
+- https://borderday.com/fr/employers/ticino/
+- https://borderday.com/de/employers/ticino/
+- https://borderday.com/it/employers/ticino/
+- https://borderday.com/nl/employers/ticino/
 - https://borderday.com/en/employers/geneva/
+- https://borderday.com/fr/employers/geneva/
+- https://borderday.com/de/employers/geneva/
+- https://borderday.com/it/employers/geneva/
+- https://borderday.com/nl/employers/geneva/
 - https://borderday.com/en/employers/luxembourg/
+- https://borderday.com/fr/employers/luxembourg/
+- https://borderday.com/de/employers/luxembourg/
+- https://borderday.com/it/employers/luxembourg/
+- https://borderday.com/nl/employers/luxembourg/
 - https://borderday.com/en/guides/
+- https://borderday.com/fr/guides/
+- https://borderday.com/de/guides/
+- https://borderday.com/it/guides/
+- https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/
+- https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/
+- https://borderday.com/fr/guides/france-bale-compter-jours-teletravail/
+- https://borderday.com/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/
+- https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/
 - https://borderday.com/en/guides/france-geneva-telework-days/
 - https://borderday.com/en/guides/france-luxembourg-telework-days/
 - https://borderday.com/en/guides/how-to-track-cross-border-telework-days/

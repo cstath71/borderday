@@ -61,9 +61,9 @@ export default function FrenchGuide({ id }: { id: GuideId }) {
                 <li aria-current="page">{guide.h1}</li>
               </ol>
             </nav>
-            <p className="article-kicker">
-              <time dateTime={guide.datePublished}>{guideLongDate(guide.lang, guide.datePublished)}</time>
-            </p>
+            <time className="article-kicker" dateTime={guide.datePublished}>
+              {guideLongDate(guide.lang, guide.datePublished)}
+            </time>
             <h1>{guide.h1}</h1>
           </div>
         </header>

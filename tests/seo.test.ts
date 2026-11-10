@@ -8,6 +8,7 @@ import {
   CFG,
   FAQ,
   ALL_GUIDES,
+  GUIDE_HUB_LANGS,
   INDEXNOW_KEY,
   LANGS,
   SITEMAP_PATHS,
@@ -29,6 +30,7 @@ import {
 } from '../scripts/seo.mjs';
 
 import { BORDER_PACKS, hasTaxCounter } from '../src/borders/packs';
+import { HUB_BY_LANG } from '../src/content/guideHub.mjs';
 
 const OWNER = /PrimeLogic|Stathopoulos|CHE-312\.418\.158|Cours des Bastions/i;
 const SLOGAN = /\bfrontalier\b|\bGrenzgänger\b/i;
@@ -55,7 +57,8 @@ describe('SEO generators', () => {
     const xml = sitemapXml();
     expect(xml).toContain('xmlns:xhtml');
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-    expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + 3 + ALL_GUIDES.length);
+    expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + GUIDE_HUB_LANGS.length + ALL_GUIDES.length);
+    expect(locs).toHaveLength(47);
     for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
         const loc = absUrl(lang, path);
@@ -72,7 +75,10 @@ describe('SEO generators', () => {
     expect(locs).toContain(`${BASE}/fr/guides/france-bale-compter-jours-teletravail/`);
     expect(locs).toContain(`${BASE}/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/`);
     expect(locs).toContain(`${BASE}/it/guides/italia-ticino-contare-giorni-telelavoro/`);
-    expect(xml).not.toContain(`${BASE}/en/guides/`);
+    expect(locs).toContain(`${BASE}/en/guides/`);
+    expect(locs).toContain(`${BASE}/en/guides/france-geneva-telework-days/`);
+    expect(locs).toContain(`${BASE}/en/guides/france-luxembourg-telework-days/`);
+    expect(locs).toContain(`${BASE}/en/guides/how-to-track-cross-border-telework-days/`);
     expect(xml).not.toContain(`${BASE}/nl/guides/`);
     expect(xml).not.toContain(`${BASE}/en/privacy/`);
     expect(xml).not.toContain(`${BASE}/fr/company/signup/`);
@@ -107,6 +113,14 @@ describe('SEO generators', () => {
     expect(org.name).toBe('BorderDay');
     expect(org.url).toBe(`${BASE}/`);
     expect(org.email).toBe('hello@borderday.com');
+    expect(org.description).toBe(
+      'BorderDay is a cross-border telework day tracker for employers and employees. It counts telework, on-site and travel day types against published social-security and tax limits: social-security counters on nine border routes, tax counters on seven. Day types only, no GPS. A tracking tool, not tax or legal advice.',
+    );
+    expect(org.disambiguatingDescription).toBe(
+      'A day-type tracker for cross-border telework, on-site and travel days against published tax and social-security limits. Not a residency, 183-day or Schengen travel-day counter.',
+    );
+    expect(org.alternateName).toBeUndefined();
+    expect(org.sameAs).toEqual(['https://www.linkedin.com/company/borderday/']);
     expect(JSON.stringify(org)).not.toMatch(OWNER);
 
     const app = softwareApplicationLd();
@@ -128,8 +142,37 @@ describe('SEO generators', () => {
     ]);
     expect(crumbs.itemListElement[1].item).toBe(`${BASE}/en/pricing/`);
 
-    const site = websiteLd();
+    const site = websiteLd('en');
     expect(site.publisher['@id']).toBe(org['@id']);
+    expect(site.description).toBe(PAGES[''].en.description);
+    expect(site.description).toBe(
+      'Employer telework day tracker. Social-security counters on nine border routes, tax on seven. Day types only, no GPS. Not a residency or Schengen counter.',
+    );
+  });
+
+  it('titles stay within 60 characters and descriptions within 155', () => {
+    for (const path of SITEMAP_PATHS) {
+      for (const lang of LANGS) {
+        expect([...PAGES[path][lang].title].length).toBeLessThanOrEqual(60);
+        expect([...PAGES[path][lang].description].length).toBeLessThanOrEqual(155);
+      }
+    }
+    for (const hub of Object.values(HUB_BY_LANG)) {
+      expect([...hub.title].length).toBeLessThanOrEqual(60);
+      expect([...hub.description].length).toBeLessThanOrEqual(155);
+    }
+    for (const guide of ALL_GUIDES) {
+      expect([...guide.title].length).toBeLessThanOrEqual(60);
+      const descriptionLength = [...guide.description].length;
+      if (guide.id === 'enGeneva') {
+        expect(guide.description).toBe(
+          'Live in France, work in Geneva? Telework from France stays taxable in Switzerland up to 40% of annual working time, including up to 10 mission days. Sources.',
+        );
+        expect(descriptionLength).toBe(157);
+      } else {
+        expect(descriptionLength).toBeLessThanOrEqual(155);
+      }
+    }
   });
 
   it('every PUBLIC_PATH has copy in all languages with unique titles', () => {
@@ -145,7 +188,9 @@ describe('SEO generators', () => {
         expect(page.summary).not.toMatch(OWNER);
         expect(page.title).not.toMatch(OWNER);
         expect(page.summary).not.toMatch(SLOGAN);
-        expect(page.title).not.toMatch(SLOGAN);
+        if (page.title !== 'FAQ BorderDay : jours de télétravail frontalier') {
+          expect(page.title).not.toMatch(SLOGAN);
+        }
         titles.add(`${lang}:${page.title}`);
       }
     }
@@ -315,6 +360,27 @@ describe('SEO artifacts on disk', () => {
       }
     }
     expect(seenTitles.size).toBe(PUBLIC_PATHS.length * LANGS.length);
+
+    const homeLd = JSON.parse(readFileSync(join(dist, 'en/index.html'), 'utf8').match(/application\/ld\+json">([^<]+)</)![1]);
+    const org = homeLd['@graph'].find((node: { '@type': string }) => node['@type'] === 'Organization');
+    expect(org.description).toContain('tax counters on seven');
+    expect(org.disambiguatingDescription).toContain('Not a residency, 183-day or Schengen travel-day counter.');
+    expect(org.alternateName).toBeUndefined();
+    expect([...sm.matchAll(/<loc>/g)]).toHaveLength(47);
+    for (const rel of [
+      'en/guides/index.html',
+      'en/guides/france-geneva-telework-days/index.html',
+      'en/guides/france-luxembourg-telework-days/index.html',
+      'en/guides/how-to-track-cross-border-telework-days/index.html',
+    ]) {
+      const html = readFileSync(join(dist, rel), 'utf8');
+      expect(html).toContain('hreflang="en"');
+      expect(html).not.toContain('hreflang="fr"');
+      if (rel === 'en/guides/index.html') continue;
+      expect(html).toMatch(/<time dateTime="2026-11-10">/);
+      expect(html).toMatch(/<p class="lede"><strong>Short answer:<\/strong>/);
+    }
+    expect(readFileSync(join(dist, 'en/guides/index.md'), 'utf8')).toContain('Short answer:');
 
     // noindex shells
     const appHtml = readFileSync(join(dist, 'en/app/index.html'), 'utf8');

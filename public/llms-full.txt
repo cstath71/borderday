@@ -37,6 +37,13 @@
 - https://borderday.com/en/terms/ — Terms and legal notice
 - https://borderday.com/en/withdrawal/ — Withdraw from contract (EU/EEA consumers)
 - https://borderday.com/en/cancel/ — Cancel subscription
+- https://borderday.com/en/guides/ — English only, no translated version: guide hub for the France-resident Geneva and Luxembourg day-count guides, and how employers track those days
+- https://borderday.com/en/guides/france-geneva-telework-days/ — English only, no translated version: how a France resident employed in Geneva counts telework and temporary missions
+- Short answer (Geneva): If you live in France and work for an employer in Geneva, telework from France stays taxable in Switzerland up to 40% of your annual working time in a calendar year. That 40% can include up to 10 days of temporary missions in France or another country. Above 40%, the pay for your telework days becomes taxable in France from the first telework day, not just the excess.
+- https://borderday.com/en/guides/france-luxembourg-telework-days/ — English only, no translated version: how a France resident employed in Luxembourg counts telework days
+- Short answer (Luxembourg): If you are tax resident in France and employed in Luxembourg, you can spend up to 34 days per tax year physically working in France or a third country and your whole salary stays taxable in Luxembourg. Any part of a day counts as a full day, and part-time or part-year work reduces the 34 in proportion. Above 34 days, France can tax the pay for the time you actually worked outside Luxembourg, from the first day.
+- https://borderday.com/en/guides/how-to-track-cross-border-telework-days/ — English only, no translated version: how employers can keep a day-by-day record of cross-border telework
+- Short answer (tracking): Employers of cross-border staff need a day-by-day record of where and how each employee worked, because tax and social security rules each use their own count. In Switzerland, employers of France residents (outside the 1983 cross-border agreement) must track telework and mission days actually worked and report an annual rate, even when it is 0%. In Luxembourg, every telework arrangement of a non-resident employee must be declared to social security.
 - https://borderday.com/fr/guides/ — French only, no translated version: guide hub for the France-resident guides (Luxembourg, Geneva, Basel)
 - https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/ — French only, no translated version: how a France resident employed in Luxembourg counts telework days
 - En bref (France–Luxembourg): si vous résidez fiscalement en France et êtes employé au Luxembourg, le télétravail et les jours travaillés hors du Luxembourg ne relèvent pas d’un seul plafond. Le seuil fiscal publié est de 34 jours par période imposable passés physiquement en France et/ou dans un État tiers pour y exercer l’emploi. La sécurité sociale suit un autre compteur, en pourcentage du temps de travail, avec un accord-cadre possible entre 25 % et moins de 50 %. Ces deux seuils ne se compensent pas. Un tableur, un calendrier ou un export n’est pas, à lui seul, une preuve de votre présence physique.
@@ -50,7 +57,7 @@
 - https://borderday.com/it/guides/ — Italian only, no translated version: guide hub for the Italy–Ticino day-count guide
 - https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/ — Italian only, no translated version: how an Italy resident working in Ticino counts telework and non-return days
 - In breve (Italia–Ticino): per chi abita in Italia in un Comune della fascia di 20 km dal confine e lavora come dipendente nell’area di frontiera svizzera (Ticino, Grigioni o Vallese), l’Accordo italo-svizzero sui frontalieri del 23 dicembre 2020 fissa due limiti per anno civile senza cambiare lo status di frontaliere: al massimo il 25 % dell’attività in telelavoro presso il proprio domicilio in Italia, e al massimo 45 giorni di mancato rientro quotidiano per motivi professionali, esclusi ferie e malattia. Il Protocollo di modifica che fissa queste regole è in vigore dal 9 febbraio 2026 e si applica dal 1° gennaio 2024. La sicurezza sociale segue un altro contatore, in percentuale del tempo di lavoro.
-- Plain-text mirrors: https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-bale-compter-jours-teletravail/index.md, https://borderday.com/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/index.md, https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/index.md
+- Plain-text mirrors: https://borderday.com/fr/guides/france-luxembourg-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-geneve-compter-jours-teletravail/index.md, https://borderday.com/fr/guides/france-bale-compter-jours-teletravail/index.md, https://borderday.com/de/guides/deutschland-schweiz-grenzgaenger-tage-zaehlen/index.md, https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/index.md, https://borderday.com/en/guides/france-geneva-telework-days/index.md, https://borderday.com/en/guides/france-luxembourg-telework-days/index.md, https://borderday.com/en/guides/how-to-track-cross-border-telework-days/index.md, https://borderday.com/en/guides/index.md
 - https://borderday.com/llms-full.txt — Longer plain-text summary for AI assistants
 
 ## Branding note
@@ -109,3 +116,7 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/en/employers/ticino/
 - https://borderday.com/en/employers/geneva/
 - https://borderday.com/en/employers/luxembourg/
+- https://borderday.com/en/guides/
+- https://borderday.com/en/guides/france-geneva-telework-days/
+- https://borderday.com/en/guides/france-luxembourg-telework-days/
+- https://borderday.com/en/guides/how-to-track-cross-border-telework-days/

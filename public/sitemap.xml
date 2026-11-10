@@ -352,6 +352,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/employers/luxembourg/"/>
   </url>
   <url>
+    <loc>https://borderday.com/en/guides/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/guides/"/>
+  </url>
+  <url>
     <loc>https://borderday.com/fr/guides/</loc>
     <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/guides/"/>
@@ -398,5 +404,23 @@
     <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/it/guides/italia-ticino-contare-giorni-telelavoro/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/guides/france-geneva-telework-days/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/guides/france-geneva-telework-days/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/guides/france-geneva-telework-days/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/guides/france-luxembourg-telework-days/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/guides/france-luxembourg-telework-days/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/guides/france-luxembourg-telework-days/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/guides/how-to-track-cross-border-telework-days/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/guides/how-to-track-cross-border-telework-days/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/guides/how-to-track-cross-border-telework-days/"/>
   </url>
 </urlset>

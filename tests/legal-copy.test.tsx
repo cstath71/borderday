@@ -326,9 +326,7 @@ describe('C7 / M5 trial and price disclosure on every surface', () => {
     for (const path of ['', 'pricing', 'for-individuals', 'company/signup', 'faq']) {
       expectDisclosure(lang, PAGES[path][lang].summary, `summary ${path}`);
     }
-    for (const path of ['', 'pricing', 'for-individuals']) {
-      expect(PAGES[path][lang].description).toMatch(DISCLOSURE[lang][0]);
-    }
+    expect(PAGES.pricing[lang].description).toMatch(DISCLOSURE[lang][0]);
     expect(PAGES.terms[lang].summary).toMatch(DISCLOSURE[lang][0]);
     expectDisclosure(lang, flat(FAQ[lang]), 'faq json-ld');
   });

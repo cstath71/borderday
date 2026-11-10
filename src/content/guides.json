@@ -4,12 +4,16 @@
     "lang": "fr",
     "path": "guides/france-luxembourg-compter-jours-teletravail",
     "file": "fr-luxembourg.md",
-    "title": "France-Luxembourg : compter ses 34 jours de télétravail (frontaliers) | BorderDay",
-    "description": "Seuil fiscal de 34 jours par an, compteur sécurité sociale séparé (25 % à moins de 50 % avec accord-cadre). Ce qui compte, ce qui ne compte pas, sources officielles.",
+    "title": "France-Luxembourg: 34 jours de télétravail | BorderDay",
+    "description": "Seuil fiscal de 34 jours par an et compteur social séparé (25% à moins de 50% avec accord-cadre). Ce qui compte, ce qui ne compte pas, sources officielles.",
     "datePublished": "2026-11-08",
     "dateModified": "2026-11-08",
     "ogImage": "/og-guide-luxembourg.png",
-    "about": ["télétravail transfrontalier", "Luxembourg", "France"],
+    "about": [
+      "télétravail transfrontalier",
+      "Luxembourg",
+      "France"
+    ],
     "audience": "Personnes résidant en France et travaillant au Luxembourg",
     "fallbackPath": "employers/luxembourg"
   },
@@ -18,12 +22,16 @@
     "lang": "fr",
     "path": "guides/france-geneve-compter-jours-teletravail",
     "file": "fr-geneve.md",
-    "title": "Genève : 40 % de télétravail et 10 jours de missions, comment compter | BorderDay",
-    "description": "Pour un salarié résidant en France et travaillant à Genève, le télétravail effectué en France peut rester imposé en Suisse jusqu’à 40 % du temps d’activité par année civile. Sources officielles : ge.ch et AFC.",
+    "title": "Genève : 40% télétravail et 10 jours de missions | BorderDay",
+    "description": "France-Genève : le télétravail en France peut rester imposé en Suisse jusqu'à 40% du temps d'activité par année civile. Sources : ge.ch et AFC.",
     "datePublished": "2026-11-08",
     "dateModified": "2026-11-08",
     "ogImage": "/og-guide-geneva.png",
-    "about": ["télétravail transfrontalier", "Genève", "France"],
+    "about": [
+      "télétravail transfrontalier",
+      "Genève",
+      "France"
+    ],
     "audience": "Personnes résidant en France et travaillant à Genève",
     "fallbackPath": "employers/geneva"
   },
@@ -32,12 +40,16 @@
     "lang": "fr",
     "path": "guides/france-bale-compter-jours-teletravail",
     "file": "fr-bale.md",
-    "title": "Bâle : 40 % de télétravail, 10 jours de missions et 45 nuitées | BorderDay",
-    "description": "Pour un salarié résidant en France et travaillant à Bâle-Ville ou Bâle-Campagne, l’accord de 1983 impose le salaire en France. Télétravail jusqu’à 40 %, dont 10 jours de missions, et 45 nuitées hors de l’État de résidence. Sources officielles.",
+    "title": "Bâle : 40% télétravail, 10 missions, 45 nuitées | BorderDay",
+    "description": "Bâle-Ville ou Bâle-Campagne : l'accord de 1983 impose le salaire en France. Télétravail jusqu'à 40%, 10 jours de missions, et 45 nuitées hors résidence.",
     "datePublished": "2026-11-09",
     "dateModified": "2026-11-09",
     "ogImage": "/og-guide-bale.png",
-    "about": ["télétravail transfrontalier", "Bâle", "France"],
+    "about": [
+      "télétravail transfrontalier",
+      "Bâle",
+      "France"
+    ],
     "audience": "Personnes résidant en France et travaillant à Bâle-Ville ou Bâle-Campagne",
     "fallbackPath": ""
   },
@@ -46,12 +58,16 @@
     "lang": "de",
     "path": "guides/deutschland-schweiz-grenzgaenger-tage-zaehlen",
     "file": "de-basel.md",
-    "title": "Deutschland–Schweiz: Nichtrückkehrtage, Pendeltage und Homeoffice zählen | BorderDay",
-    "description": "Wer in Deutschland wohnt und in der Schweiz arbeitet: höchstens 60 Nichtrückkehrtage, mindestens 20 % Pendeltage. Volle Homeoffice-Tage sind keines von beidem. Amtliche Quellen.",
+    "title": "Nichtrückkehrtage und Homeoffice DE-CH | BorderDay",
+    "description": "DE-CH: höchstens 60 Nichtrückkehrtage, mindestens 20% Pendeltage. Volle Homeoffice-Tage sind keines von beidem. Amtliche Quellen.",
     "datePublished": "2026-11-09",
     "dateModified": "2026-11-09",
     "ogImage": "/og-guide-de-ch.png",
-    "about": ["Nichtrückkehrtage", "Deutschland", "Schweiz"],
+    "about": [
+      "Nichtrückkehrtage",
+      "Deutschland",
+      "Schweiz"
+    ],
     "audience": "Personen mit Wohnsitz in Deutschland und Arbeitsort in der Schweiz",
     "fallbackPath": ""
   },
@@ -60,13 +76,69 @@
     "lang": "it",
     "path": "guides/italia-ticino-contare-giorni-telelavoro",
     "file": "it-ticino.md",
-    "title": "Italia–Ticino: contare telelavoro e giorni di mancato rientro | BorderDay",
-    "description": "Per chi abita in Italia nella fascia di 20 km e lavora in Ticino, Grigioni o Vallese: al massimo il 25 % di telelavoro al domicilio e 45 giorni di mancato rientro. Fonti ufficiali.",
+    "title": "Italia-Ticino: telelavoro e mancato rientro | BorderDay",
+    "description": "20 km in Italia, lavoro in Ticino, Grigioni o Vallese: massimo 25% di telelavoro al domicilio e 45 giorni di mancato rientro. Fonti ufficiali.",
     "datePublished": "2026-11-09",
     "dateModified": "2026-11-09",
     "ogImage": "/og-guide-ticino.png",
-    "about": ["telelavoro transfrontaliero", "Ticino", "Italia"],
+    "about": [
+      "telelavoro transfrontaliero",
+      "Ticino",
+      "Italia"
+    ],
     "audience": "Persone residenti in Italia che lavorano in Ticino, nei Grigioni o in Vallese",
     "fallbackPath": "employers/ticino"
+  },
+  {
+    "id": "enGeneva",
+    "lang": "en",
+    "path": "guides/france-geneva-telework-days",
+    "file": "en-geneva.md",
+    "title": "Geneva: 40% telework and 10 mission days | BorderDay",
+    "description": "Live in France, work in Geneva? Telework from France stays taxable in Switzerland up to 40% of annual working time, including up to 10 mission days. Sources.",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "ogImage": "/og-guide-geneva.png",
+    "about": [
+      "cross-border telework",
+      "Geneva",
+      "France"
+    ],
+    "audience": "People living in France and working in Geneva",
+    "fallbackPath": "employers/geneva"
+  },
+  {
+    "id": "enLuxembourg",
+    "lang": "en",
+    "path": "guides/france-luxembourg-telework-days",
+    "file": "en-luxembourg.md",
+    "title": "France-Luxembourg: the 34-day telework rule | BorderDay",
+    "description": "Live in France, work in Luxembourg? Up to 34 days a year working outside Luxembourg stay taxed there. Social security uses 25% and 50% bands. Sources.",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "ogImage": "/og-guide-luxembourg.png",
+    "about": [
+      "cross-border telework",
+      "Luxembourg",
+      "France"
+    ],
+    "audience": "People living in France and working in Luxembourg",
+    "fallbackPath": "employers/luxembourg"
+  },
+  {
+    "id": "enTrack",
+    "lang": "en",
+    "path": "guides/how-to-track-cross-border-telework-days",
+    "file": "en-track.md",
+    "title": "How to track cross-border telework days | BorderDay",
+    "description": "Employers of cross-border staff: which telework records Swiss and Luxembourg rules call for, and how spreadsheets, HR systems and trackers compare.",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "ogImage": "/og.png",
+    "about": [
+      "cross-border telework"
+    ],
+    "audience": "Employers of cross-border staff",
+    "fallbackPath": ""
   }
 ]

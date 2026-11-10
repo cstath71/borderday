@@ -28,6 +28,7 @@ import {
   breadcrumbLd,
   esc,
   faqLd,
+  hubIndexMarkdown,
   ldScript,
   llmsFullTxt,
   llmsTxt,
@@ -147,12 +148,14 @@ function graphFor(lang, path, extras = []) {
 }
 
 const GUIDE_MONTHS = {
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
   de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
   it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
 };
 
 const GUIDE_UI = {
+  en: { home: 'Home', guides: 'Guides' },
   fr: { home: 'Accueil', guides: 'Guides' },
   de: { home: 'Start', guides: 'Leitfäden' },
   it: { home: 'Home', guides: 'Guide' },
@@ -400,6 +403,7 @@ async function main() {
     const out = join(DIST, pageFile(lang, hub.path));
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);
+    if (lang === 'en') writeBoth(pageFile(lang, hub.path).replace(/index\.html$/, 'index.md'), hubIndexMarkdown(lang));
   }
 
   for (const guide of ALL_GUIDES) {

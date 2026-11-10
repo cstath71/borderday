@@ -57,7 +57,7 @@ export default function Layout() {
             <NavLink to={publicPath(lang, 'pricing')} className="hide-sm">
               {d.nav.pricing}
             </NavLink>
-            {(lang === 'fr' || lang === 'de' || lang === 'it') && (
+            {(lang === 'en' || lang === 'fr' || lang === 'de' || lang === 'it') && (
               <NavLink to={publicPath(lang, 'guides')} className="hide-sm">
                 {d.nav.guides}
               </NavLink>
@@ -134,7 +134,7 @@ export default function Layout() {
             <Link to={publicPath(lang, 'employers/geneva')}>{d.employersHub.linkGeneva}</Link>
             {' · '}
             <Link to={publicPath(lang, 'employers/luxembourg')}>{d.employersHub.linkLuxembourg}</Link>
-            {(lang === 'fr' || lang === 'de' || lang === 'it') && (
+            {(lang === 'en' || lang === 'fr' || lang === 'de' || lang === 'it') && (
               <>
                 {' · '}
                 <Link to={publicPath(lang, 'guides')}>{d.nav.guides}</Link>

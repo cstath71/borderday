@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getDict, LANGS, type Lang } from '../i18n';
 import heads from '../seo/heads.json';
-import { ORG_SAME_AS, offersFor } from '../seo/offers.mjs';
+import { ORG_DISAMBIGUATING_DESCRIPTION, ORG_DESCRIPTION, ORG_SAME_AS, offersFor } from '../seo/offers.mjs';
 
 const BASE = 'https://borderday.com';
 
@@ -67,6 +67,8 @@ function orgGraph() {
     url: `${BASE}/`,
     logo: `${BASE}/icons/icon-512.png`,
     email: 'hello@borderday.com',
+    description: ORG_DESCRIPTION,
+    disambiguatingDescription: ORG_DISAMBIGUATING_DESCRIPTION,
     sameAs: ORG_SAME_AS,
   };
 }

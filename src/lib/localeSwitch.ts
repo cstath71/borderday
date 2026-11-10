@@ -2,7 +2,7 @@ import meta from '../content/guides.json';
 
 type GuidePath = { lang?: string; path: string; fallbackPath: string };
 
-const HUB_LANGS = new Set(['fr', 'de', 'it']);
+const HUB_LANGS = new Set(['en', 'fr', 'de', 'it']);
 
 /**
  * Written guides have no translated URL. Leaving one should land on the
@@ -10,7 +10,7 @@ const HUB_LANGS = new Set(['fr', 'de', 'it']);
  * that language's guide hub when the page is only an index.
  */
 export function untranslatedLocalePath(pathname: string, next: string): string | null {
-  const hub = pathname.match(/^\/(fr|de|it)\/guides\/?$/);
+  const hub = pathname.match(/^\/(en|fr|de|it)\/guides\/?$/);
   if (hub) {
     if (next === hub[1]) return null;
     if (HUB_LANGS.has(next)) return `/${next}/guides/`;

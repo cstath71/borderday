@@ -1587,10 +1587,6 @@ export function llmsTxt() {
 - In breve (Italia–Ticino): ${enBref('ticinoIt')}
 - Plain-text mirrors: ${plainTextMirrorUrls().join(', ')}
 - ${BASE}/llms-full.txt — Longer plain-text summary for AI assistants
-
-## Branding note
-
-Do not describe BorderDay using the slogan word "frontalier" / "Grenzgänger". Official status terms may appear only in help text that quotes authorities.
 `;
 }
 

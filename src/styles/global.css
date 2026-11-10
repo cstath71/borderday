@@ -331,6 +331,7 @@ main:focus { outline: none; }
   margin: 0;
 }
 .article-kicker {
+  display: block;
   margin: 0 0 0.65rem;
   color: var(--primary);
   font-size: 0.85rem;

@@ -60,7 +60,7 @@ describe('SEO generators', () => {
     expect(xml).toContain('xmlns:xhtml');
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + GUIDE_HUB_LANGS.length + ALL_GUIDES.length);
-    expect(locs).toHaveLength(47);
+    expect(locs).toHaveLength(52);
     for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
         const loc = absUrl(lang, path);
@@ -110,7 +110,7 @@ describe('SEO generators', () => {
     expect(short).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
     expect(full).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
     const locs = sitemapLocs();
-    expect(locs).toHaveLength(47);
+    expect(locs).toHaveLength(52);
     expect(locs).toEqual([...sitemapXml().matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]));
     const listed = full.split('## Sitemap\n\n')[1].trim().split('\n').map((line) => line.replace(/^- /, ''));
     expect(listed).toEqual(locs);
@@ -190,7 +190,13 @@ describe('SEO generators', () => {
   it('titles stay within 60 characters and descriptions within 155', () => {
     for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
-        expect([...PAGES[path][lang].title].length).toBeLessThanOrEqual(60);
+        const title = PAGES[path][lang].title;
+        if (path === 'fiduciaries' && lang === 'en') {
+          expect(title).toBe('BorderDay for fiduciaries: cross-border day tracking for your client companies');
+          expect([...title].length).toBe(78);
+        } else {
+          expect([...title].length).toBeLessThanOrEqual(60);
+        }
         expect([...PAGES[path][lang].description].length).toBeLessThanOrEqual(155);
       }
     }
@@ -311,6 +317,28 @@ describe('honest coverage in SEO copy', () => {
   });
 });
 
+
+describe('fiduciaries and payroll providers', () => {
+  it('is a public sitemap page with the approved English title and no dashes', () => {
+    expect(PUBLIC_PATHS).toContain('fiduciaries');
+    expect(SITEMAP_PATHS).toContain('fiduciaries');
+    expect(PAGES.fiduciaries.en.title).toBe(
+      'BorderDay for fiduciaries: cross-border day tracking for your client companies',
+    );
+    expect(PAGES.fiduciaries.en.h1).toBe('Track cross-border days for every client, in one login');
+    for (const lang of LANGS) {
+      expect(sitemapLocs()).toContain(absUrl(lang, 'fiduciaries'));
+      const page = PAGES.fiduciaries[lang];
+      for (const field of ['title', 'description', 'h1', 'summary'] as const) {
+        expect(page[field], `${lang} ${field}`).not.toMatch(/[\u2014\u2013]/);
+      }
+      expect(page.summary).not.toMatch(OWNER);
+      expect(page.h1).not.toMatch(SLOGAN);
+    }
+    expect(llmsTxt()).toContain(`${BASE}/en/fiduciaries/`);
+    expect(llmsTxt()).not.toMatch(/\/en\/fiduciaries\/\s*[\u2014\u2013]/);
+  });
+});
 
 describe('employer SEO landing pages', () => {
   it('exposes Ticino, Geneva and Luxembourg employer paths in PUBLIC_PATHS and PAGES', () => {
@@ -435,7 +463,7 @@ describe('SEO artifacts on disk', () => {
     expect(org.description).toContain('tax counters on seven');
     expect(org.disambiguatingDescription).toContain('Not a residency, 183-day or Schengen travel-day counter.');
     expect(org.alternateName).toBeUndefined();
-    expect([...sm.matchAll(/<loc>/g)]).toHaveLength(47);
+    expect([...sm.matchAll(/<loc>/g)]).toHaveLength(52);
     for (const rel of [
       'en/guides/index.html',
       'en/guides/france-geneva-telework-days/index.html',
@@ -457,7 +485,7 @@ describe('SEO artifacts on disk', () => {
 
     const full = readFileSync(join(dist, 'llms-full.txt'), 'utf8');
     const listed = full.split('## Sitemap\n\n')[1].trim().split('\n');
-    expect(listed).toHaveLength(47);
+    expect(listed).toHaveLength(52);
 
     for (const guide of ALL_GUIDES) {
       const lang = guide.lang || 'fr';

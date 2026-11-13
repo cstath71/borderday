@@ -30,6 +30,7 @@
 - https://borderday.com/en/employers/ticino/ — Ticino employers (IT→CH, 25% telework + 45 non-return days)
 - https://borderday.com/en/employers/geneva/ — Geneva employers (FR→CH telework days)
 - https://borderday.com/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
+- https://borderday.com/en/fiduciaries/: fiduciaries and payroll providers, one login, each client company kept separate
 - https://borderday.com/en/privacy/ — Privacy
 - https://borderday.com/en/dpa/ — Data processing agreement (company accounts)
 - https://borderday.com/en/disclaimer/ — Legal disclaimer

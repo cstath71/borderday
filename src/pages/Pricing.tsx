@@ -124,6 +124,9 @@ export default function Pricing() {
               <Link to={publicPath(lang, 'guides')}>{d.nav.guides}</Link>
             </p>
           )}
+          <p>
+            <Link to={publicPath(lang, 'fiduciaries')}>{d.pricing.fiduciaryLink}</Link>
+          </p>
           {bannerText && (
             <p
               className="meta"

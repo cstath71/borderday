@@ -96,6 +96,29 @@ const fr: Dict = {
     routesRoute: 'Situation',
     routesTax: 'Compteur fiscal',
     routesSs: 'Compteur de sécurité sociale',
+    hrDeskTitle: 'Ce que BorderDay retire du quotidien des RH',
+    hrDeskIntro:
+      'Fini le tableur pour savoir qui a travaillé où. Les collaborateurs enregistrent eux-mêmes leurs types de jours, BorderDay tient les compteurs, et les RH voient qui s’approche d’un plafond avant qu’il ne soit dépassé.',
+    hrDesk1Title: 'Aucun rapprochement manuel.',
+    hrDesk1Body:
+      'Chaque collaborateur enregistre en quelques secondes télétravail, jour sur site, déplacement ou jour non travaillé. Les RH lisent un seul tableau de bord, au lieu de relancer les e-mails.',
+    hrDesk2Title: 'Des alertes avant un plafond, pas après.',
+    hrDesk2Body:
+      'Les compteurs fiscaux et de sécurité sociale alertent à 75 % et 90 % du plafond applicable, ce qui laisse le temps de planifier des jours sur site.',
+    hrDesk3Title: 'Les chiffres de fin d’année sont prêts.',
+    hrDesk3Body:
+      'Exportez les jours et les compteurs de chaque collaborateur en CSV, prêts pour vos propres contrôles et pour vos déclarations.',
+    hrDeskExampleTitle: 'Exemple : un employeur genevois, en novembre',
+    hrDeskExample1:
+      'Les RH créent le compte entreprise et invitent par lien e-mail le personnel résidant en France.',
+    hrDeskExample2:
+      'Les RH importent un CSV avec les jours de 2026 à ce jour. Les collaborateurs voient ces jours marqués comme saisis par les RH et les confirment ou les corrigent.',
+    hrDeskExample3:
+      'Le tableau de bord affiche, pour chaque collaborateur, le compteur fiscal à 40 % et la bande de sécurité sociale. Deux personnes proches du plafond reçoivent une alerte pour prévoir davantage de jours sur site en décembre.',
+    hrDeskExample4:
+      'En janvier, les RH exportent l’année en CSV, comme document de travail pour l’attestation du taux de télétravail transmise à l’autorité fiscale cantonale.',
+    hrDeskExampleNote:
+      'À titre d’illustration seulement. Le CSV est un document de travail, pas l’attestation elle-même.',
   },
   borders: {
     geneva_fr: 'Genève et autres cantons hors accord de 1983 ← France',
@@ -438,6 +461,7 @@ const fr: Dict = {
     approxChf: '≈ {chf}',
     chfBillingNote:
       'La facturation est en EUR. Les montants en CHF sont indicatifs, selon le taux de référence euro de la BCE du {date} (1 EUR = {rate} CHF). Source : Banque centrale européenne.',
+    fiduciaryLink: 'Fiduciaire ou prestataire de paie ? Voyez comment BorderDay fonctionne pour plusieurs clients.',
   },
   faq: {
     title: 'FAQ',
@@ -1159,6 +1183,34 @@ const fr: Dict = {
     faq5q: 'BorderDay est-il un conseil juridique ou fiscal?',
     faq5a:
       'Non. Il suit les jours par rapport à des seuils publics liés ici et dans l’app. Confirmez les dépôts avec votre conseiller ou l’administration compétente.',
+  },
+
+  fiduciaries: {
+    footerLink: 'Pour les fiduciaires et les prestataires de paie',
+    heroTitle: 'Suivez les jours de chaque client depuis une seule connexion',
+    intro:
+      'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre, depuis un seul compte, les collaborateurs de chaque client qui travaillent de part et d’autre d’une frontière, chaque client restant entièrement séparé.',
+    howTitle: 'Fonctionnement',
+    point1Title: 'Un compte, plusieurs clients.',
+    point1Body:
+      'Vous pouvez être RH de plusieurs entreprises avec la même connexion, et choisir le client dans une liste au moment de vous connecter.',
+    point2Title: 'Chaque client reste séparé.',
+    point2Body:
+      'Chaque entreprise a ses propres collaborateurs, son propre tableau de bord et son propre export CSV. Les données ne sont jamais mélangées entre les clients.',
+    point3Title: 'Chargez l’année en cours.',
+    point3Body:
+      'Pour un client qui arrive en cours d’année, importez un CSV des jours déjà passés. Les collaborateurs voient ces jours marqués comme saisis par les RH et peuvent les confirmer ou les corriger.',
+    point4Title: 'Les mêmes compteurs que le collaborateur.',
+    point4Body:
+      'Des compteurs fiscaux et de sécurité sociale sur les situations couvertes, avec des alertes à 75 % et 90 % d’un plafond.',
+    point5Title: 'Le client peut rester responsable.',
+    point5Body:
+      'L’entreprise cliente peut être l’administrateur du compte et vous inviter comme RH, ou vous pouvez créer le compte entreprise et inviter son personnel.',
+    pricing:
+      'Chaque entreprise cliente a sa propre offre : 5 € par collaborateur actif et par mois, minimum 39 € par mois, hors TVA. Des questions pour plusieurs clients ? Écrivez à hello@borderday.com.',
+    dataProtection:
+      'Un accord de traitement des données s’applique à chaque compte entreprise. Ni GPS ni localisation de l’appareil, uniquement des types de jours.',
+    ctaAccount: 'Créer un compte entreprise',
   },
 };
 

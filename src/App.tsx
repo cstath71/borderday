@@ -6,6 +6,7 @@ import Cancel from './pages/Cancel';
 import Accessibility from './pages/Accessibility';
 import Disclaimer from './pages/Disclaimer';
 import Faq from './pages/Faq';
+import Fiduciaries from './pages/Fiduciaries';
 import ForIndividuals from './pages/ForIndividuals';
 import EmployersTicino from './pages/employers/Ticino';
 import EmployersGeneva from './pages/employers/Geneva';
@@ -49,6 +50,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="app" element={lazyPage(<AppPage />)} />
         <Route path="for-individuals" element={<ForIndividuals />} />
+        <Route path="fiduciaries" element={<Fiduciaries />} />
         <Route path="employers/ticino" element={<EmployersTicino />} />
         <Route path="employers/geneva" element={<EmployersGeneva />} />
         <Route path="employers/luxembourg" element={<EmployersLuxembourg />} />

@@ -42,6 +42,44 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section">
+        <div className="container">
+          <h2>{d.home.hrDeskTitle}</h2>
+          <p>{d.home.hrDeskIntro}</p>
+          <div className="grid-3" style={{ marginTop: '1rem' }}>
+            <article className="card">
+              <h3>{d.home.hrDesk1Title}</h3>
+              <p>{d.home.hrDesk1Body}</p>
+            </article>
+            <article className="card">
+              <h3>{d.home.hrDesk2Title}</h3>
+              <p>{d.home.hrDesk2Body}</p>
+            </article>
+            <article className="card">
+              <h3>{d.home.hrDesk3Title}</h3>
+              <p>{d.home.hrDesk3Body}</p>
+            </article>
+          </div>
+          <article className="card" style={{ marginTop: '1.5rem' }}>
+            <h3>{d.home.hrDeskExampleTitle}</h3>
+            <ol>
+              <li>{d.home.hrDeskExample1}</li>
+              <li>{d.home.hrDeskExample2}</li>
+              <li>{d.home.hrDeskExample3}</li>
+              <li>{d.home.hrDeskExample4}</li>
+            </ol>
+            <p className="meta" style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
+              {d.home.hrDeskExampleNote}
+            </p>
+          </article>
+          <div className="hero-cta">
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
+              {d.home.ctaPrimary}
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {(lang === 'en' || lang === 'fr' || lang === 'de' || lang === 'it') && (
         <section className="section">
           <div className="container">

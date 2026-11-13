@@ -68,6 +68,7 @@ export const PUBLIC_PATHS = [
   'employers/ticino',
   'employers/geneva',
   'employers/luxembourg',
+  'fiduciaries',
 ];
 
 /**
@@ -82,6 +83,7 @@ export const SITEMAP_PATHS = [
   'employers/ticino',
   'employers/geneva',
   'employers/luxembourg',
+  'fiduciaries',
 ];
 
 /** SPA shells that must exist for GitHub Pages but stay noindex. */
@@ -878,6 +880,68 @@ export const PAGES = {
       ],
     },
   },
+  fiduciaries: {
+    en: {
+      title: 'BorderDay for fiduciaries: cross-border day tracking for your client companies',
+      description:
+        "If you run payroll or HR administration for several companies, BorderDay lets you follow each client's cross-border staff from one account.",
+      h1: 'Track cross-border days for every client, in one login',
+      summary:
+        "If you run payroll or HR administration for several companies, BorderDay lets you follow each client's cross-border staff from one account, with every client kept fully separate.",
+      crumbs: [
+        ['Home', ''],
+        ['Fiduciaries', 'fiduciaries'],
+      ],
+    },
+    fr: {
+      title: 'Fiduciaires : suivi des jours frontaliers | BorderDay',
+      description:
+        'Paie ou RH de plusieurs entreprises : suivez le personnel frontalier de chaque client depuis un seul compte. Chaque client reste séparé.',
+      h1: 'Suivez les jours de chaque client au-delà des frontières, avec une seule connexion',
+      summary:
+        'Si vous assurez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre le personnel de chaque client qui travaille au-delà des frontières depuis un seul compte, chaque client restant entièrement séparé.',
+      crumbs: [
+        ['Accueil', ''],
+        ['Fiduciaires', 'fiduciaries'],
+      ],
+    },
+    de: {
+      title: 'Treuhänder: grenzüberschreitende Tage je Kunde | BorderDay',
+      description:
+        'Lohnabrechnung oder HR für mehrere Unternehmen: grenzüberschreitendes Personal jedes Kunden von einem Konto aus, jeder Kunde vollständig getrennt.',
+      h1: 'Grenzüberschreitende Tage für jeden Kunden erfassen, in einer Anmeldung',
+      summary:
+        'Wenn Sie die Lohnabrechnung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay das grenzüberschreitende Personal jedes Kunden von einem Konto aus verfolgen, und jeder Kunde bleibt vollständig getrennt.',
+      crumbs: [
+        ['Start', ''],
+        ['Treuhänder', 'fiduciaries'],
+      ],
+    },
+    it: {
+      title: 'Fiduciari: giorni oltre confine per i clienti | BorderDay',
+      description:
+        'Paghe o HR per più aziende: seguite il personale oltre confine di ogni cliente da un solo account. Ogni cliente resta separato.',
+      h1: 'Registrate i giorni oltre confine di ogni cliente, con un solo accesso',
+      summary:
+        'Se gestite le paghe o l’amministrazione HR di più aziende, BorderDay vi permette di seguire da un solo account il personale oltre confine di ogni cliente, con ogni cliente tenuto completamente separato.',
+      crumbs: [
+        ['Home', ''],
+        ['Fiduciari', 'fiduciaries'],
+      ],
+    },
+    nl: {
+      title: 'Fiduciaires: grensoverschrijdende dagen | BorderDay',
+      description:
+        'Loon- of HR-administratie voor meerdere bedrijven: volg het grensoverschrijdende personeel van elke klant vanuit één account, klanten gescheiden.',
+      h1: 'Houd de grensoverschrijdende dagen van elke klant bij, in één login',
+      summary:
+        'Als u de loonadministratie of de HR-administratie voor meerdere bedrijven doet, laat BorderDay u het grensoverschrijdende personeel van elke klant volgen vanuit één account, waarbij elke klant volledig gescheiden blijft.',
+      crumbs: [
+        ['Home', ''],
+        ['Fiduciaires', 'fiduciaries'],
+      ],
+    },
+  },
 };
 
 // Dutch legal locale: clone EN SEO for every path, then override legal pages.
@@ -1214,6 +1278,7 @@ const PAGE_SOURCES = {
     'src/borders/packs.ts',
     'src/components/FrenchGuideLinks.tsx',
   ],
+  fiduciaries: ['src/pages/Fiduciaries.tsx'],
 };
 
 function latestGitDay(files) {
@@ -1558,6 +1623,7 @@ export function llmsTxt() {
 - ${BASE}/en/employers/ticino/ — Ticino employers (IT→CH, 25% telework + 45 non-return days)
 - ${BASE}/en/employers/geneva/ — Geneva employers (FR→CH telework days)
 - ${BASE}/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
+- ${BASE}/en/fiduciaries/ - For fiduciaries and payroll providers: follow each client's cross-border staff from one account, with every client kept fully separate
 - ${BASE}/en/privacy/ — Privacy
 - ${BASE}/en/dpa/ — Data processing agreement (company accounts)
 - ${BASE}/en/disclaimer/ — Legal disclaimer

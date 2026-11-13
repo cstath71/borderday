@@ -96,6 +96,27 @@ const de: Dict = {
     routesRoute: 'Route',
     routesTax: 'Steuerzähler',
     routesSs: 'Sozialversicherungszähler',
+    hrDeskTitle: 'Was BorderDay der HR vom Schreibtisch nimmt',
+    hrDeskIntro:
+      'Schluss mit der Tabelle, wer wo gearbeitet hat. Mitarbeitende erfassen ihre Tagesarten selbst, BorderDay führt die Zähler, und HR sieht, wer sich einer Grenze nähert, bevor sie überschritten wird.',
+    hrDesk1Title: 'Keine manuelle Abstimmung.',
+    hrDesk1Body:
+      'Jede Person erfasst in wenigen Sekunden Telearbeit, vor Ort, Dienstreise oder nicht gearbeitet. HR liest ein Dashboard, statt E-Mails hinterherzulaufen.',
+    hrDesk2Title: 'Warnungen vor einer Grenze, nicht danach.',
+    hrDesk2Body:
+      'Steuer- und Sozialversicherungszähler warnen bei 75 % und 90 % der geltenden Grenze, sodass Zeit bleibt, Vor-Ort-Tage zu planen.',
+    hrDesk3Title: 'Die Zahlen zum Jahresende sind bereit.',
+    hrDesk3Body:
+      'Exportieren Sie die Tage und Zähler jeder Person als CSV, bereit für Ihre eigenen Kontrollen und Ihre Meldungen.',
+    hrDeskExampleTitle: 'Beispiel: ein Genfer Arbeitgeber, November',
+    hrDeskExample1: 'HR legt das Unternehmenskonto an und lädt Personal mit Wohnsitz in Frankreich per E-Mail-Link ein.',
+    hrDeskExample2:
+      'HR lädt eine CSV mit den bisherigen Tagen von 2026 hoch. Mitarbeitende sehen diese Tage als von HR erfasst markiert und bestätigen oder korrigieren sie.',
+    hrDeskExample3:
+      'Das Dashboard zeigt den Steuerzähler von 40 % und das Sozialversicherungsband jeder Person. Zwei Personen nahe der Grenze erhalten einen Hinweis, im Dezember mehr Vor-Ort-Tage zu planen.',
+    hrDeskExample4:
+      'Im Januar exportiert HR das Jahr als CSV als Arbeitsunterlage für die Bescheinigung der Telearbeitsquote bei der kantonalen Steuerbehörde.',
+    hrDeskExampleNote: 'Nur eine Illustration. Die CSV ist eine Arbeitsunterlage, nicht die Bescheinigung selbst.',
   },
   borders: {
     geneva_fr:
@@ -445,6 +466,7 @@ const de: Dict = {
     approxChf: '≈ {chf}',
     chfBillingNote:
       'Abrechnung in EUR. CHF-Beträge sind Näherungswerte nach dem EZB-Euro-Referenzkurs vom {date} (1 EUR = {rate} CHF). Quelle: Europäische Zentralbank.',
+    fiduciaryLink: 'Treuhänder oder Lohnbüro? Sehen Sie, wie BorderDay für mehrere Kunden funktioniert.',
   },
   faq: {
     title: 'FAQ',
@@ -1051,6 +1073,7 @@ const de: Dict = {
   footer: {
     tagline: 'Tageserfassung für grenzüberschreitende Teams und Mitarbeitende.',
     rights: '© {year} BorderDay',
+    fiduciaries: 'Für Treuhänder und Lohnbüros',
   },
   auth: {
     signInTitle: 'Anmelden',
@@ -1227,6 +1250,35 @@ const de: Dict = {
     faq5q: 'Ist BorderDay Rechts- oder Steuerberatung?',
     faq5a:
       'Nein. Es trackt Tage gegen öffentliche Schwellen, die hier und in der App verlinkt sind. Meldungen mit Berater oder zuständiger Verwaltung bestätigen.',
+  },
+  fiduciaries: {
+    crumb: 'Treuhänder',
+    heroTitle: 'Grenzüberschreitende Tage für jeden Kunden erfassen, in einer Anmeldung',
+    intro:
+      'Wenn Sie die Lohnabrechnung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay das grenzüberschreitende Personal jedes Kunden von einem Konto aus verfolgen, und jeder Kunde bleibt vollständig getrennt.',
+    howTitle: 'So funktioniert es',
+    how1Title: 'Ein Konto, mehrere Kunden.',
+    how1Body:
+      'Sie können HR für mehrere Unternehmen mit derselben Anmeldung sein und den Kunden beim Anmelden aus einer Liste wählen.',
+    how2Title: 'Jeder Kunde bleibt getrennt.',
+    how2Body:
+      'Jedes Unternehmen hat eigene Mitarbeitende, ein eigenes Dashboard und einen eigenen CSV-Export. Daten werden nie zwischen Kunden vermischt.',
+    how3Title: 'Das bisherige Jahr laden.',
+    how3Body:
+      'Kommt ein Kunde im laufenden Jahr dazu, laden Sie eine CSV der bisherigen Tage hoch. Mitarbeitende sehen die Tage als von HR erfasst markiert und können sie bestätigen oder korrigieren.',
+    how4Title: 'Dieselben Zähler wie die mitarbeitende Person.',
+    how4Body:
+      'Steuer- und Sozialversicherungszähler auf den unterstützten Grenzrouten, mit Warnungen bei 75 % und 90 % einer Grenze.',
+    how5Title: 'Der Kunde kann die Führung behalten.',
+    how5Body:
+      'Das Kundenunternehmen kann Kontoinhaber sein und Sie als HR einladen, oder Sie legen das Unternehmenskonto an und laden dessen Personal ein.',
+    pricingTitle: 'Preise',
+    pricingBody:
+      'Jedes Kundenunternehmen hat seinen eigenen Plan: 5 € je aktive mitarbeitende Person und Monat, mindestens 39 € pro Monat, zzgl. MWST. Fragen zu mehreren Kunden? Schreiben Sie an hello@borderday.com.',
+    dataBody:
+      'Für jedes Unternehmenskonto gilt ein Auftragsverarbeitungsvertrag. Kein GPS und kein Gerätestandort, nur Tagesarten.',
+    ctaPrimary: 'Unternehmenskonto erstellen',
+    ctaPricing: 'Unternehmenspreise ansehen',
   },
 };
 

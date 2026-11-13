@@ -12,6 +12,7 @@ import EmployersGeneva from './pages/employers/Geneva';
 import EmployersLuxembourg from './pages/employers/Luxembourg';
 import FrenchGuide from './pages/guides/FrenchGuide';
 import GuidesHub from './pages/guides/Hub';
+import Fiduciaries from './pages/Fiduciaries';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
@@ -49,6 +50,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="app" element={lazyPage(<AppPage />)} />
         <Route path="for-individuals" element={<ForIndividuals />} />
+        <Route path="fiduciaries" element={<Fiduciaries />} />
         <Route path="employers/ticino" element={<EmployersTicino />} />
         <Route path="employers/geneva" element={<EmployersGeneva />} />
         <Route path="employers/luxembourg" element={<EmployersLuxembourg />} />

@@ -74,6 +74,9 @@ describe('i18n key parity', () => {
           if (!s) continue;
           // French HTML titles and meta descriptions may use frontalier as the search term.
           if (lang === 'fr' && (field === 'title' || field === 'description')) continue;
+          // Translation review: this page names the audience in its own market terms.
+          if (path === 'fiduciaries' && lang === 'fr' && (field === 'h1' || field === 'summary')) continue;
+          if (path === 'fiduciaries' && lang === 'de' && field === 'h1') continue;
           expect(s, `${lang} ${path} ${field}`).not.toMatch(banned);
         }
       }

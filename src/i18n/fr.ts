@@ -96,12 +96,12 @@ const fr: Dict = {
     routesRoute: 'Situation',
     routesTax: 'Compteur fiscal',
     routesSs: 'Compteur de sécurité sociale',
-    hrDeskTitle: 'Ce que BorderDay retire du bureau des RH',
+    hrDeskTitle: 'Ce dont BorderDay décharge les RH',
     hrDeskIntro:
-      'Fini le tableur de qui a travaillé où. Les collaborateurs consignent eux-mêmes leurs types de jours, BorderDay tient les compteurs, et les RH voient qui approche d’un seuil avant qu’il soit franchi.',
+      'Fini le tableur pour savoir qui a travaillé où. Les collaborateurs consignent eux-mêmes leurs types de jours, BorderDay tient les compteurs, et les RH voient qui approche d’un seuil avant qu’il soit franchi.',
     hrDesk1Title: 'Fini le rapprochement manuel.',
     hrDesk1Body:
-      'Chaque collaborateur consigne en quelques secondes télétravail, sur site, déplacement ou jour non travaillé. Les RH lisent un seul tableau de bord au lieu de relancer les e-mails.',
+      'Chaque collaborateur consigne en quelques secondes télétravail, sur site, déplacement ou jour non travaillé. Les RH consultent un seul tableau de bord, au lieu de relancer chacun par e-mail.',
     hrDesk2Title: 'Des alertes avant un seuil, pas après.',
     hrDesk2Body:
       'Les compteurs fiscaux et de sécurité sociale alertent à 75 % et 90 % du seuil applicable, ce qui laisse le temps de planifier des jours sur site.',
@@ -116,7 +116,7 @@ const fr: Dict = {
       'Le tableau de bord montre le compteur fiscal de 40 % et la tranche de sécurité sociale de chaque collaborateur. Deux personnes proches du seuil reçoivent un avertissement pour planifier plus de jours sur site en décembre.',
     hrDeskExample4:
       'En janvier, les RH exportent l’année en CSV comme document de travail pour l’attestation du taux de télétravail transmise à l’autorité fiscale cantonale.',
-    hrDeskExampleNote: 'Illustration seulement. Le CSV est un document de travail, pas l’attestation elle-même.',
+    hrDeskExampleNote: 'À titre d’illustration seulement. Le CSV est un document de travail, pas l’attestation elle-même.',
   },
   borders: {
     geneva_fr: 'Genève et autres cantons hors accord de 1983 ← France',
@@ -465,7 +465,7 @@ const fr: Dict = {
     approxChf: '≈ {chf}',
     chfBillingNote:
       'La facturation est en EUR. Les montants en CHF sont indicatifs, selon le taux de référence euro de la BCE du {date} (1 EUR = {rate} CHF). Source : Banque centrale européenne.',
-    fiduciaryLink: 'Fiduciaire ou gestionnaire de paie ? Voyez comment BorderDay fonctionne pour plusieurs clients.',
+    fiduciaryLink: 'Fiduciaire ou prestataire de paie ? Découvrez comment BorderDay fonctionne pour plusieurs clients.',
   },
   faq: {
     title: 'FAQ',
@@ -1073,7 +1073,7 @@ const fr: Dict = {
     tagline:
       'Suivi des jours pour les équipes et les collaborateurs qui travaillent par-delà les frontières.',
     rights: '© {year} BorderDay',
-    fiduciaries: 'Pour les fiduciaires et les gestionnaires de paie',
+    fiduciaries: 'Pour les fiduciaires et les prestataires de paie',
   },
   auth: {
     signInTitle: 'Connexion',
@@ -1255,23 +1255,23 @@ const fr: Dict = {
   },
   fiduciaries: {
     crumb: 'Fiduciaires',
-    heroTitle: 'Suivez les jours de chaque client au-delà des frontières, avec une seule connexion',
+    heroTitle: 'Suivez les jours frontaliers de chaque client, avec une seule connexion',
     intro:
-      'Si vous assurez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre le personnel de chaque client qui travaille au-delà des frontières depuis un seul compte, chaque client restant entièrement séparé.',
-    howTitle: 'Comment ça marche',
+      'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre les frontaliers de chaque client depuis un seul compte, chaque client restant entièrement séparé.',
+    howTitle: 'Comment cela fonctionne',
     how1Title: 'Un compte, plusieurs clients.',
     how1Body:
       'Vous pouvez être RH de plusieurs entreprises avec la même connexion, et choisir le client dans une liste au moment de vous connecter.',
     how2Title: 'Chaque client reste séparé.',
     how2Body:
-      'Chaque entreprise a ses propres collaborateurs, son propre tableau de bord et son propre export CSV. Les données ne sont jamais mélangées entre clients.',
-    how3Title: 'Chargez l’année en cours.',
+      'Chaque entreprise a ses propres collaborateurs, son propre tableau de bord et son propre export CSV. Les données ne sont jamais mélangées entre les clients.',
+    how3Title: 'Chargez l’année à ce jour.',
     how3Body:
       'Pour un client qui arrive en cours d’année, téléversez un CSV des jours passés. Les collaborateurs voient les jours marqués comme saisis par les RH et peuvent les confirmer ou les corriger.',
     how4Title: 'Les mêmes compteurs que le collaborateur.',
     how4Body:
       'Compteurs fiscaux et de sécurité sociale sur les itinéraires pris en charge, avec des alertes à 75 % et 90 % d’un seuil.',
-    how5Title: 'Le client peut rester aux commandes.',
+    how5Title: 'Le client peut garder la main.',
     how5Body:
       'L’entreprise cliente peut être l’administrateur du compte et vous inviter comme RH, ou vous pouvez créer le compte entreprise et inviter son personnel.',
     pricingTitle: 'Tarifs',

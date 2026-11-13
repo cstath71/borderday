@@ -897,48 +897,48 @@ export const PAGES = {
       title: 'Fiduciaires : suivi des jours frontaliers | BorderDay',
       description:
         'Paie ou RH de plusieurs entreprises : suivez le personnel frontalier de chaque client depuis un seul compte. Chaque client reste séparé.',
-      h1: 'Suivez les jours de chaque client au-delà des frontières, avec une seule connexion',
+      h1: 'Suivez les jours frontaliers de chaque client, avec une seule connexion',
       summary:
-        'Si vous assurez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre le personnel de chaque client qui travaille au-delà des frontières depuis un seul compte, chaque client restant entièrement séparé.',
+        'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre les frontaliers de chaque client depuis un seul compte, chaque client restant entièrement séparé.',
       crumbs: [
         ['Accueil', ''],
         ['Fiduciaires', 'fiduciaries'],
       ],
     },
     de: {
-      title: 'Treuhänder: grenzüberschreitende Tage je Kunde | BorderDay',
+      title: 'BorderDay für Treuhandbüros: Tageserfassung Ihrer Mandanten',
       description:
-        'Lohnabrechnung oder HR für mehrere Unternehmen: grenzüberschreitendes Personal jedes Kunden von einem Konto aus, jeder Kunde vollständig getrennt.',
-      h1: 'Grenzüberschreitende Tage für jeden Kunden erfassen, in einer Anmeldung',
+        'Lohnbuchhaltung oder HR für mehrere Unternehmen. Personal jedes Mandanten von einem Konto aus, jeder Mandant bleibt getrennt. Nur Tagesarten, kein GPS.',
+      h1: 'Grenzgängertage aller Mandanten, mit einem einzigen Login',
       summary:
-        'Wenn Sie die Lohnabrechnung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay das grenzüberschreitende Personal jedes Kunden von einem Konto aus verfolgen, und jeder Kunde bleibt vollständig getrennt.',
+        'Wenn Sie die Lohnbuchhaltung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay das grenzüberschreitende Personal jedes Mandanten von einem Konto aus verfolgen, und jeder Mandant bleibt vollständig getrennt.',
       crumbs: [
         ['Start', ''],
-        ['Treuhänder', 'fiduciaries'],
+        ['Treuhandbüros', 'fiduciaries'],
       ],
     },
     it: {
-      title: 'Fiduciari: giorni oltre confine per i clienti | BorderDay',
+      title: 'Fiduciarie: giorni oltre confine per i clienti | BorderDay',
       description:
         'Paghe o HR per più aziende: seguite il personale oltre confine di ogni cliente da un solo account. Ogni cliente resta separato.',
-      h1: 'Registrate i giorni oltre confine di ogni cliente, con un solo accesso',
+      h1: 'I giorni oltre confine di ogni cliente, in un solo accesso',
       summary:
-        'Se gestite le paghe o l’amministrazione HR di più aziende, BorderDay vi permette di seguire da un solo account il personale oltre confine di ogni cliente, con ogni cliente tenuto completamente separato.',
+        'Se gestite le paghe o l’amministrazione HR di più aziende, con BorderDay seguite da un solo account il personale oltre confine di ogni cliente, e ogni cliente resta completamente separato.',
       crumbs: [
         ['Home', ''],
-        ['Fiduciari', 'fiduciaries'],
+        ['Fiduciarie', 'fiduciaries'],
       ],
     },
     nl: {
-      title: 'Fiduciaires: grensoverschrijdende dagen | BorderDay',
+      title: 'Boekhouders: grensoverschrijdende dagen | BorderDay',
       description:
-        'Loon- of HR-administratie voor meerdere bedrijven: volg het grensoverschrijdende personeel van elke klant vanuit één account, klanten gescheiden.',
-      h1: 'Houd de grensoverschrijdende dagen van elke klant bij, in één login',
+        'Loon- of HR-beheer voor meerdere bedrijven: volg het grensoverschrijdende personeel van elke klant vanuit één account. Elke klant blijft gescheiden.',
+      h1: 'De grensoverschrijdende dagen van al uw klanten, met één login',
       summary:
-        'Als u de loonadministratie of de HR-administratie voor meerdere bedrijven doet, laat BorderDay u het grensoverschrijdende personeel van elke klant volgen vanuit één account, waarbij elke klant volledig gescheiden blijft.',
+        'Als u voor meerdere bedrijven de loonadministratie of het HR-beheer voert, kunt u met BorderDay het grensoverschrijdende personeel van elke klant vanuit één account volgen, terwijl elke klant volledig gescheiden blijft.',
       crumbs: [
         ['Home', ''],
-        ['Fiduciaires', 'fiduciaries'],
+        ['Boekhouders', 'fiduciaries'],
       ],
     },
   },

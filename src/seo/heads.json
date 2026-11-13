@@ -413,10 +413,10 @@
     "fr": {
       "title": "BorderDay pour fiduciaires : jours frontaliers",
       "description": "Une connexion pour plusieurs clients séparés, chacun avec son tableau de bord et son export CSV. Types de jours, pas de GPS.",
-      "summary": "Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre, depuis un seul compte, les collaborateurs de chaque client qui travaillent de part et d’autre d’une frontière, chaque client restant entièrement séparé."
+      "summary": "Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre les frontaliers de chaque client depuis un seul compte, chaque client restant entièrement séparé."
     },
     "de": {
-      "title": "BorderDay für Treuhänder: Tageserfassung für Ihre Mandanten",
+      "title": "BorderDay für Treuhandbüros: Tageserfassung Ihrer Mandanten",
       "description": "Eine Anmeldung für mehrere Mandanten. Jedes Unternehmen bleibt getrennt, mit eigenen Mitarbeitenden, Dashboard und CSV-Export. Nur Tagesarten, kein GPS.",
       "summary": "Wenn Sie die Lohnbuchhaltung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay die grenzüberschreitend tätigen Mitarbeitenden jedes Mandanten von einem Konto aus verfolgen, wobei jeder Mandant vollständig getrennt bleibt."
     },

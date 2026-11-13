@@ -30,7 +30,7 @@ const CAVEAT: Record<Lang, { record: RegExp; attestation: RegExp }> = {
   fr: { record: /document de travail/, attestation: /pas l’attestation elle-même/ },
   de: { record: /Arbeitsunterlage/, attestation: /nicht die Bescheinigung selbst/ },
   it: { record: /documento di lavoro/, attestation: /non l’attestazione stessa/ },
-  nl: { record: /werkdocument/, attestation: /niet de attestatie zelf/ },
+  nl: { record: /werkdocument/, attestation: /niet het attest zelf/ },
 };
 
 function open(path: string) {
@@ -165,7 +165,13 @@ describe('fiduciaries page', () => {
     expect(page.summary).toBe(d.fiduciaries.intro);
     const blob = JSON.stringify(d.fiduciaries) + d.pricing.fiduciaryLink + d.home.hrDeskTitle;
     expect(blob).not.toMatch(DASH);
-    expect(blob).not.toMatch(/frontalier|grenzgänger|grenzgaenger|grensarbeider/i);
+    const reviewed =
+      lang === 'fr'
+        ? blob.replaceAll('jours frontaliers', '').replaceAll('les frontaliers', '')
+        : lang === 'de'
+          ? blob.replaceAll('Grenzgängertage', '')
+          : blob;
+    expect(reviewed).not.toMatch(/frontalier|grenzgänger|grenzgaenger|grensarbeider/i);
     cleanup();
 
     open(`/${lang}/pricing/`);

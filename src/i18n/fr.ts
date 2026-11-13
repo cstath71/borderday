@@ -96,12 +96,12 @@ const fr: Dict = {
     routesRoute: 'Situation',
     routesTax: 'Compteur fiscal',
     routesSs: 'Compteur de sécurité sociale',
-    hrDeskTitle: 'Ce que BorderDay retire du quotidien des RH',
+    hrDeskTitle: 'Ce dont BorderDay décharge les RH',
     hrDeskIntro:
       'Fini le tableur pour savoir qui a travaillé où. Les collaborateurs enregistrent eux-mêmes leurs types de jours, BorderDay tient les compteurs, et les RH voient qui s’approche d’un plafond avant qu’il ne soit dépassé.',
     hrDesk1Title: 'Aucun rapprochement manuel.',
     hrDesk1Body:
-      'Chaque collaborateur enregistre en quelques secondes télétravail, jour sur site, déplacement ou jour non travaillé. Les RH lisent un seul tableau de bord, au lieu de relancer les e-mails.',
+      'Chaque collaborateur enregistre en quelques secondes télétravail, jour sur site, déplacement ou jour non travaillé. Les RH consultent un seul tableau de bord, au lieu de relancer chacun par e-mail.',
     hrDesk2Title: 'Des alertes avant un plafond, pas après.',
     hrDesk2Body:
       'Les compteurs fiscaux et de sécurité sociale alertent à 75 % et 90 % du plafond applicable, ce qui laisse le temps de planifier des jours sur site.',
@@ -461,7 +461,7 @@ const fr: Dict = {
     approxChf: '≈ {chf}',
     chfBillingNote:
       'La facturation est en EUR. Les montants en CHF sont indicatifs, selon le taux de référence euro de la BCE du {date} (1 EUR = {rate} CHF). Source : Banque centrale européenne.',
-    fiduciaryLink: 'Fiduciaire ou prestataire de paie ? Voyez comment BorderDay fonctionne pour plusieurs clients.',
+    fiduciaryLink: 'Fiduciaire ou prestataire de paie ? Découvrez comment BorderDay fonctionne pour plusieurs clients.',
   },
   faq: {
     title: 'FAQ',
@@ -1187,23 +1187,23 @@ const fr: Dict = {
 
   fiduciaries: {
     footerLink: 'Pour les fiduciaires et les prestataires de paie',
-    heroTitle: 'Suivez les jours de chaque client depuis une seule connexion',
+    heroTitle: 'Suivez les jours frontaliers de chaque client, avec une seule connexion',
     intro:
-      'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre, depuis un seul compte, les collaborateurs de chaque client qui travaillent de part et d’autre d’une frontière, chaque client restant entièrement séparé.',
-    howTitle: 'Fonctionnement',
+      'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre les frontaliers de chaque client depuis un seul compte, chaque client restant entièrement séparé.',
+    howTitle: 'Comment cela fonctionne',
     point1Title: 'Un compte, plusieurs clients.',
     point1Body:
       'Vous pouvez être RH de plusieurs entreprises avec la même connexion, et choisir le client dans une liste au moment de vous connecter.',
     point2Title: 'Chaque client reste séparé.',
     point2Body:
       'Chaque entreprise a ses propres collaborateurs, son propre tableau de bord et son propre export CSV. Les données ne sont jamais mélangées entre les clients.',
-    point3Title: 'Chargez l’année en cours.',
+    point3Title: 'Chargez l’année à ce jour.',
     point3Body:
       'Pour un client qui arrive en cours d’année, importez un CSV des jours déjà passés. Les collaborateurs voient ces jours marqués comme saisis par les RH et peuvent les confirmer ou les corriger.',
     point4Title: 'Les mêmes compteurs que le collaborateur.',
     point4Body:
       'Des compteurs fiscaux et de sécurité sociale sur les situations couvertes, avec des alertes à 75 % et 90 % d’un plafond.',
-    point5Title: 'Le client peut rester responsable.',
+    point5Title: 'Le client peut garder la main.',
     point5Body:
       'L’entreprise cliente peut être l’administrateur du compte et vous inviter comme RH, ou vous pouvez créer le compte entreprise et inviter son personnel.',
     pricing:

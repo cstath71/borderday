@@ -95,7 +95,7 @@ const it: Dict = {
     routesRoute: 'Situazione',
     routesTax: 'Contatore fiscale',
     routesSs: 'Contatore previdenziale',
-    hrDeskTitle: 'Quello che BorderDay toglie dal lavoro quotidiano dell’HR',
+    hrDeskTitle: 'Il lavoro che BorderDay toglie all’HR',
     hrDeskIntro:
       'Niente più fogli di calcolo per sapere chi ha lavorato dove. I dipendenti registrano da soli le proprie tipologie di giorno, BorderDay tiene i contatori e l’HR vede chi si avvicina a un limite prima che venga superato.',
     hrDesk1Title: 'Nessuna riconciliazione manuale.',
@@ -1193,16 +1193,16 @@ const it: Dict = {
       'Potete essere HR di più aziende con lo stesso accesso e scegliere il cliente da un elenco quando accedete.',
     point2Title: 'Ogni cliente resta separato.',
     point2Body:
-      'Ogni azienda ha i propri dipendenti, la propria dashboard e il proprio export CSV. I dati non sono mai mescolati tra i clienti.',
-    point3Title: 'Caricate l’anno fino a oggi.',
+      'Ogni azienda ha i propri dipendenti, la propria dashboard e il proprio export CSV. I dati non vengono mai mescolati tra i clienti.',
+    point3Title: 'Caricate l’anno in corso fino a oggi.',
     point3Body:
       'Per un cliente che entra in corso d’anno, caricate un CSV dei giorni già trascorsi. I dipendenti vedono i giorni contrassegnati come inseriti dall’HR e possono confermarli o correggerli.',
     point4Title: 'Gli stessi contatori del dipendente.',
     point4Body:
       'Contatori fiscali e di sicurezza sociale sulle situazioni di frontiera coperte, con avvisi al 75% e al 90% di un limite.',
-    point5Title: 'Il cliente può restare responsabile.',
+    point5Title: 'Il cliente può mantenere il controllo.',
     point5Body:
-      'L’azienda cliente può essere amministratore dell’account e invitarvi come HR, oppure potete creare l’account aziendale e invitare il suo personale.',
+      'L’azienda cliente può essere titolare dell’account e invitarvi come HR, oppure potete creare voi l’account aziendale e invitare il suo personale.',
     pricing:
       'Ogni azienda cliente ha il proprio piano: 5 € per dipendente attivo al mese, minimo 39 € al mese, IVA esclusa. Domande su più clienti? Scrivete a hello@borderday.com.',
     dataProtection:

@@ -711,24 +711,24 @@ export const PAGES = {
       title: 'BorderDay pour fiduciaires : jours frontaliers',
       description:
         'Une connexion pour plusieurs clients séparés, chacun avec son tableau de bord et son export CSV. Types de jours, pas de GPS.',
-      h1: 'Suivez les jours de chaque client depuis une seule connexion',
+      h1: 'Suivez les jours frontaliers de chaque client, avec une seule connexion',
       summary:
-        'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre, depuis un seul compte, les collaborateurs de chaque client qui travaillent de part et d’autre d’une frontière, chaque client restant entièrement séparé.',
+        'Si vous gérez la paie ou l’administration RH de plusieurs entreprises, BorderDay vous permet de suivre les frontaliers de chaque client depuis un seul compte, chaque client restant entièrement séparé.',
       crumbs: [
         ['Accueil', ''],
         ['Fiduciaires', 'fiduciaries'],
       ],
     },
     de: {
-      title: 'BorderDay für Treuhänder: Tageserfassung für Ihre Mandanten',
+      title: 'BorderDay für Treuhandbüros: Tageserfassung Ihrer Mandanten',
       description:
         'Eine Anmeldung für mehrere Mandanten. Jedes Unternehmen bleibt getrennt, mit eigenen Mitarbeitenden, Dashboard und CSV-Export. Nur Tagesarten, kein GPS.',
-      h1: 'Grenzüberschreitende Tage für jeden Mandanten, in einer Anmeldung',
+      h1: 'Grenzgängertage aller Mandanten, mit einem einzigen Login',
       summary:
         'Wenn Sie die Lohnbuchhaltung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay die grenzüberschreitend tätigen Mitarbeitenden jedes Mandanten von einem Konto aus verfolgen, wobei jeder Mandant vollständig getrennt bleibt.',
       crumbs: [
         ['Start', ''],
-        ['Treuhand', 'fiduciaries'],
+        ['Treuhandbüros', 'fiduciaries'],
       ],
     },
     it: {
@@ -747,7 +747,7 @@ export const PAGES = {
       title: 'BorderDay voor boekhouders: dagen van uw klantbedrijven',
       description:
         'Eén login voor meerdere klantbedrijven. Elke klant blijft gescheiden, met eigen medewerkers, dashboard en CSV-export. Alleen dagtypes, geen GPS.',
-      h1: 'De grensoverschrijdende dagen van elke klant, in één login',
+      h1: 'De grensoverschrijdende dagen van al uw klanten, met één login',
       summary:
         'Als u voor meerdere bedrijven de loonadministratie of het HR-beheer voert, kunt u met BorderDay het grensoverschrijdende personeel van elke klant vanuit één account volgen, terwijl elke klant volledig gescheiden blijft.',
       crumbs: [

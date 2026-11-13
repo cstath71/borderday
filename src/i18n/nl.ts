@@ -102,8 +102,8 @@ const nl: Dict = {
     hrDeskExample3:
       "Het dashboard toont per medewerker de 40%-belastingteller en de socialezekerheidsband. Twee personen dicht bij de limiet worden erop gewezen om in december meer dagen ter plaatse in te plannen.",
     hrDeskExample4:
-      "In januari exporteert HR het jaar als CSV, als werkdocument voor de telewerkpercentage-attestatie die bij de kantonale belastingdienst wordt ingediend.",
-    hrDeskExampleNote: "Alleen ter illustratie. De CSV is een werkdocument, niet de attestatie zelf.",
+      "In januari exporteert HR het jaar als CSV, als werkdocument voor het attest over het telewerkpercentage dat bij de kantonale belastingdienst wordt ingediend.",
+    hrDeskExampleNote: "Alleen ter illustratie. De CSV is een werkdocument, niet het attest zelf.",
   },
   borders: {
     geneva_fr: "Genève en andere niet-1983-kantons ← Frankrijk",
@@ -990,7 +990,7 @@ const nl: Dict = {
 
   fiduciaries: {
     footerLink: "Voor boekhouders en sociale secretariaten",
-    heroTitle: "De grensoverschrijdende dagen van elke klant, in één login",
+    heroTitle: "De grensoverschrijdende dagen van al uw klanten, met één login",
     intro:
       "Als u voor meerdere bedrijven de loonadministratie of het HR-beheer voert, kunt u met BorderDay het grensoverschrijdende personeel van elke klant vanuit één account volgen, terwijl elke klant volledig gescheiden blijft.",
     howTitle: "Hoe het werkt",
@@ -999,7 +999,7 @@ const nl: Dict = {
       "U kunt met dezelfde login HR zijn voor meerdere bedrijven en bij het inloggen de klant uit een lijst kiezen.",
     point2Title: "Elke klant blijft gescheiden.",
     point2Body:
-      "Elk bedrijf heeft eigen medewerkers, een eigen dashboard en een eigen CSV-export. Gegevens worden nooit tussen klanten gemengd.",
+      "Elk bedrijf heeft eigen medewerkers, een eigen dashboard en een eigen CSV-export. De gegevens van verschillende klanten raken nooit door elkaar.",
     point3Title: "Laad het jaar tot nu toe.",
     point3Body:
       "Voor een klant die pas laat in het jaar instapt, uploadt u één CSV met voorbije dagen. Medewerkers zien de dagen gemarkeerd als ingevoerd door HR en kunnen ze bevestigen of corrigeren.",
@@ -1008,7 +1008,7 @@ const nl: Dict = {
       "Belasting- en socialezekerheidstellers op de ondersteunde grensroutes, met waarschuwingen bij 75% en 90% van een limiet.",
     point5Title: "De klant kan de leiding houden.",
     point5Body:
-      "Het klantbedrijf kan eigenaar zijn en u als HR uitnodigen, of u maakt het bedrijfsaccount aan en nodigt hun medewerkers uit.",
+      "Het klantbedrijf kan eigenaar zijn en u als HR uitnodigen, of u maakt het bedrijfsaccount aan en nodigt de medewerkers uit.",
     pricing:
       "Elk klantbedrijf heeft een eigen abonnement: €5 per actieve medewerker per maand, minimum €39 per maand, excl. btw. Vragen over meerdere klanten? Schrijf naar hello@borderday.com.",
     dataProtection:

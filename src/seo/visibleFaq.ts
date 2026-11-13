@@ -14,6 +14,7 @@ export function faqPagePairs(lang: Lang): FaqPairs {
     [d.faq.q6, d.faq.a6],
     [d.faq.q7, d.faq.a7],
     [d.faq.q8, d.faq.a8],
+    [d.faq.q9, d.faq.a9],
   ];
 }
 

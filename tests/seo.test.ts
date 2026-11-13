@@ -192,12 +192,13 @@ describe('SEO generators', () => {
       for (const lang of LANGS) {
         const title = PAGES[path][lang].title;
         if (path === 'fiduciaries' && lang === 'en') {
-          expect(title).toBe('BorderDay for fiduciaries: cross-border day tracking for your client companies');
-          expect([...title].length).toBe(78);
+          expect(title).toBe(
+            'BorderDay for fiduciaries: cross-border day tracking for your client companies',
+          );
         } else {
-          expect([...title].length).toBeLessThanOrEqual(60);
+          expect([...title].length, `${lang} ${path}`).toBeLessThanOrEqual(60);
         }
-        expect([...PAGES[path][lang].description].length).toBeLessThanOrEqual(155);
+        expect([...PAGES[path][lang].description].length, `${lang} ${path}`).toBeLessThanOrEqual(155);
       }
     }
     for (const hub of Object.values(HUB_BY_LANG)) {
@@ -317,28 +318,6 @@ describe('honest coverage in SEO copy', () => {
   });
 });
 
-
-describe('fiduciaries and payroll providers', () => {
-  it('is a public sitemap page with the approved English title and no dashes', () => {
-    expect(PUBLIC_PATHS).toContain('fiduciaries');
-    expect(SITEMAP_PATHS).toContain('fiduciaries');
-    expect(PAGES.fiduciaries.en.title).toBe(
-      'BorderDay for fiduciaries: cross-border day tracking for your client companies',
-    );
-    expect(PAGES.fiduciaries.en.h1).toBe('Track cross-border days for every client, in one login');
-    for (const lang of LANGS) {
-      expect(sitemapLocs()).toContain(absUrl(lang, 'fiduciaries'));
-      const page = PAGES.fiduciaries[lang];
-      for (const field of ['title', 'description', 'h1', 'summary'] as const) {
-        expect(page[field], `${lang} ${field}`).not.toMatch(/[\u2014\u2013]/);
-      }
-      expect(page.summary).not.toMatch(OWNER);
-      expect(page.h1).not.toMatch(SLOGAN);
-    }
-    expect(llmsTxt()).toContain(`${BASE}/en/fiduciaries/`);
-    expect(llmsTxt()).not.toMatch(/\/en\/fiduciaries\/\s*[\u2014\u2013]/);
-  });
-});
 
 describe('employer SEO landing pages', () => {
   it('exposes Ticino, Geneva and Luxembourg employer paths in PUBLIC_PATHS and PAGES', () => {

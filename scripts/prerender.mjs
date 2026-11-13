@@ -126,7 +126,7 @@ function prerenderBody(lang, path, page) {
     })
     .join('');
   const cta =
-    path.startsWith('employers/')
+    path.startsWith('employers/') || path === 'fiduciaries'
       ? ` · <a href="${esc(absUrl(lang, 'company/signup'))}">${esc(ui.companySignup)}</a>`
       : '';
   return `

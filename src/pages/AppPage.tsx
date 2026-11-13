@@ -11,6 +11,7 @@ import { getDict, t } from '../i18n';
 import { useAuth } from '../lib/auth';
 import { publicPath } from '../lib/publicPath';
 import {
+  confirmImportedDay,
   isDayLogOtherCompany,
   listFormerCompanies,
   resolveAppAccess,
@@ -19,6 +20,7 @@ import {
   type AppAccess,
   type FormerCompany,
 } from '../lib/companyApi';
+import { provenanceOf } from '../lib/dayImport';
 import { annualBaseFor, evaluatePack, usesContractDays, usesPartYearFormula, zurichToday } from '../lib/counting';
 import { dayStoreFor, localOnlyDays } from '../lib/dayStore';
 import { download } from '../lib/download';
@@ -255,15 +257,31 @@ export default function AppPage() {
     }
   }
 
+  function withEmployeeEdit(prev: DayEntry | undefined, next: DayEntry): DayEntry {
+    if (prev?.entrySource !== 'hr') return next;
+    const changed =
+      prev.type !== next.type ||
+      (prev.dayShare === 0.5) !== (next.dayShare === 0.5) ||
+      !!prev.overnightAway !== !!next.overnightAway ||
+      (prev.note ?? '') !== (next.note ?? '');
+    return {
+      ...next,
+      entrySource: 'hr',
+      importedAt: prev.importedAt ?? null,
+      employeeConfirmedAt: changed ? null : (prev.employeeConfirmedAt ?? null),
+      employeeCorrectedAt: changed ? new Date().toISOString() : (prev.employeeCorrectedAt ?? null),
+    };
+  }
+
   async function logDay(type: DayType, overnightAway: boolean, dayShare: 0.5 | 1) {
     if (!store || !canLogSelected) return;
-    const nextEntry: DayEntry = {
+    const nextEntry = withEmployeeEdit(selectedEntry, {
       date: selectedDate,
       type,
       overnightAway,
       dayShare,
       note: selectedEntry?.note,
-    };
+    });
     // F30: optimistic UI, then reconcile from the store.
     setDays((prev) => {
       const others = prev.filter((e) => e.date !== selectedDate);
@@ -308,7 +326,7 @@ export default function AppPage() {
     setBusy(true);
     setError(null);
     try {
-      await store.put({ ...entry, note: note.trim() }, borderId);
+      await store.put(withEmployeeEdit(entry, { ...entry, note: note.trim() }), borderId);
       await refresh();
     } catch {
       setError(d.app.saveError);
@@ -327,6 +345,23 @@ export default function AppPage() {
       alert(d.app.deleted);
     } catch {
       setError(d.app.saveError);
+    }
+  }
+
+  async function confirmHrDay() {
+    if (access?.mode !== 'company' || !selectedEntry || selectedEntry.entrySource !== 'hr') return;
+    setBusy(true);
+    setError(null);
+    try {
+      await confirmImportedDay(access.company.id, selectedDate);
+      setDays((prev) =>
+        prev.map((e) => (e.date === selectedDate ? { ...e, employeeConfirmedAt: new Date().toISOString() } : e)),
+      );
+      await refresh();
+    } catch {
+      setError(d.app.saveError);
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -539,6 +574,32 @@ export default function AppPage() {
             </p>
           )}
           {pack?.logHintKey && <p className="meta">{(d.dayTypes as Record<string, string>)[pack.logHintKey]}</p>}
+          {selectedEntry?.entrySource === 'hr' && (
+            <p className="meta" role="status" data-testid="hr-import-mark">
+              {selectedEntry.employeeCorrectedAt
+                ? d.app.importedCorrected
+                : selectedEntry.employeeConfirmedAt
+                  ? d.app.importedConfirmed
+                  : d.app.importedByHr}
+            </p>
+          )}
+          {access?.mode === 'company' &&
+            selectedEntry?.entrySource === 'hr' &&
+            !selectedEntry.employeeCorrectedAt &&
+            !selectedEntry.employeeConfirmedAt &&
+            canLogSelected && (
+              <p>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  disabled={busy}
+                  data-testid="confirm-imported-day"
+                  onClick={() => void confirmHrDay()}
+                >
+                  {d.app.confirmImportedDay}
+                </button>
+              </p>
+            )}
           <div className="day-type-grid">
             {DAY_TYPES.map((type) => (
               <button
@@ -684,6 +745,15 @@ export default function AppPage() {
               const isHalf = entry?.dayShare === 0.5 && canBeHalfDay(entry.type);
               const typeLabel = entry ? (d.dayTypes as Record<string, string>)[entry.type] : d.app.notLogged;
               const dayLabel = isHalf ? `${typeLabel}, ${d.dayTypes.halfDay}` : typeLabel;
+              const hrImported = entry?.entrySource === 'hr';
+              const hrWords = hrImported
+                ? provenanceOf(entry) === 'hr_import_corrected'
+                  ? d.company.dayImport.provenanceHrCorrected
+                  : provenanceOf(entry) === 'hr_import_confirmed'
+                    ? d.company.dayImport.provenanceHrConfirmed
+                    : d.company.dayImport.provenanceHr
+                : '';
+              const ariaType = hrWords ? `${dayLabel}, ${hrWords}` : dayLabel;
               return (
                 <button
                   type="button"
@@ -691,7 +761,7 @@ export default function AppPage() {
                   className={`cal-cell ${entry?.type ?? ''} ${isHalf ? 'half' : ''} ${iso === selectedDate ? 'selected' : ''}`}
                   aria-label={t(d.app.calendarDay, {
                     date: longDate(dt),
-                    type: dayLabel,
+                    type: ariaType,
                   })}
                   aria-pressed={iso === selectedDate}
                   aria-current={iso === todayIso() ? 'date' : undefined}
@@ -703,6 +773,7 @@ export default function AppPage() {
                       {' '}
                       {DAY_MARKS[entry.type]}
                       {isHalf && ' ½'}
+                      {hrImported && ' HR'}
                     </span>
                   )}
                 </button>

@@ -11,7 +11,9 @@ import { usesContractDays, usesPartYearFormula } from '../../lib/counting';
 import ProfileFields, { type ProfileValues } from '../ProfileFields';
 import type { ResendResult } from '../../lib/companyApi';
 import CounterTable, { statusLabel } from './CounterTable';
+import DayImport from './DayImport';
 import PendingInvites from './PendingInvites';
+import type { ImportExisting, ImportMember, ImportRpcResult, ImportRpcRow } from '../../lib/dayImport';
 
 const STATUSES: AggregateStatus[] = ['ok', 'warn', 'critical', 'at_limit', 'over', 'disabled'];
 
@@ -21,16 +23,25 @@ export interface TeamMember {
   email: string;
 }
 
-export type EmployeeProfileValues = ProfileValues & { annualWorkingDays?: number | null };
+export type EmployeeProfileValues = ProfileValues & {
+  annualWorkingDays?: number | null;
+  employedFrom?: string | null;
+  employedUntil?: string | null;
+};
 
 /** HR records what an employee's limits depend on. Status shows only after a real save. */
 function EmployeeProfileForm(props: {
   d: Dict;
   row: EmployeeDashboardRow;
+  employment?: { employedFrom: string | null; employedUntil: string | null };
   onSave: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
 }) {
   const { d, row, onSave } = props;
   const pack = row.borderPackId ? getBorderPack(row.borderPackId) : undefined;
+  const dates = props.employment;
+  const [from, setFrom] = useState(dates?.employedFrom ?? '');
+  const [until, setUntil] = useState(dates?.employedUntil ?? '');
+  const [orderError, setOrderError] = useState(false);
   const [base, setBase] = useState<number | null>(row.storedAnnualWorkingDays);
   const [value, setValue] = useState<ProfileValues>({
     employmentPercent: row.profile.employmentPercent ?? null,
@@ -55,6 +66,40 @@ function EmployeeProfileForm(props: {
         showContractDays={!!pack && usesContractDays(pack)}
         showPartYear={!!pack && usesPartYearFormula(pack)}
       />
+      {dates && (
+        <>
+          <label style={{ display: 'block', marginTop: '0.75rem' }} htmlFor={`profile-${row.userId}-from`}>
+            <strong>{d.company.employedFrom}</strong>
+            <div className="meta">{d.company.employedFromHint}</div>
+          </label>
+          <input
+            id={`profile-${row.userId}-from`}
+            type="date"
+            style={{ marginTop: '0.35rem' }}
+            value={from}
+            onChange={(e) => {
+              setFrom(e.target.value);
+              setOrderError(false);
+              setState('idle');
+            }}
+          />
+          <label style={{ display: 'block', marginTop: '0.75rem' }} htmlFor={`profile-${row.userId}-until`}>
+            <strong>{d.company.employedUntil}</strong>
+            <div className="meta">{d.company.employedUntilHint}</div>
+          </label>
+          <input
+            id={`profile-${row.userId}-until`}
+            type="date"
+            style={{ marginTop: '0.35rem' }}
+            value={until}
+            onChange={(e) => {
+              setUntil(e.target.value);
+              setOrderError(false);
+              setState('idle');
+            }}
+          />
+        </>
+      )}
       {pack && (
         <>
           <label style={{ display: 'block', marginTop: '0.75rem' }} htmlFor={`profile-${row.userId}-base`}>
@@ -81,17 +126,27 @@ function EmployeeProfileForm(props: {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() =>
-            onSave(row.userId, { ...value, annualWorkingDays: base }).then(
+          onClick={() => {
+            if (dates && from && until && from > until) {
+              setOrderError(true);
+              setState('idle');
+              return;
+            }
+            setOrderError(false);
+            const employment = dates
+              ? { employedFrom: from || null, employedUntil: until || null }
+              : {};
+            onSave(row.userId, { ...value, annualWorkingDays: base, ...employment }).then(
               () => setState('saved'),
               () => setState('error'),
-            )
-          }
+            );
+          }}
         >
           {d.company.saveProfile}
         </button>{' '}
         {state === 'saved' && <span role="status">{d.company.profileSaved}</span>}
         {state === 'error' && <span role="alert">{d.app.saveError}</span>}
+        {orderError && <span role="alert">{d.company.employedOrder}</span>}
       </p>
     </details>
   );
@@ -173,7 +228,16 @@ export default function DashboardView(props: {
   /** Soft-deactivated employees with retained day history (F32). */
   formerRows?: EmployeeDashboardRow[];
   /** What the optional day-level CSV is built from. It has no note field. */
-  dayLogs?: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>;
+  dayLogs?: Array<{
+    employeeUserId: string;
+    workDate: string;
+    dayType: DayType;
+    overnightAway?: boolean;
+    dayShare?: 0.5 | 1;
+    entrySource?: 'employee' | 'hr' | null;
+    employeeConfirmedAt?: string | null;
+    employeeCorrectedAt?: string | null;
+  }>;
   invites: Invitation[];
   year: number;
   onYearChange?: (year: number) => void;
@@ -194,8 +258,17 @@ export default function DashboardView(props: {
   onResendInvite?: (invite: Invitation) => Promise<ResendResult>;
   onSaveProfile: (userId: string, profile: EmployeeProfileValues) => Promise<void>;
   onSaveRetention?: (months: number) => Promise<void>;
+  /** Real company dashboard only. The demo leaves this unset, so it shows no import. */
+  importContext?: {
+    members: ImportMember[];
+    existing: ImportExisting[];
+    today: string;
+    onImport: (rows: ImportRpcRow[]) => Promise<ImportRpcResult>;
+  };
+  /** When set, each employee profile can record employment start and end. */
+  employmentByUser?: Record<string, { employedFrom: string | null; employedUntil: string | null }>;
 }) {
-  const { d, companyName, rows, formerRows = [], dayLogs, invites, year, onYearChange, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention } = props;
+  const { d, companyName, rows, formerRows = [], dayLogs, invites, year, onYearChange, isDemo, companyBase, joinBase, retentionMonths, canEditRetention, hrViewers, canRevokeInvite, onRefresh, onDeactivateMember, onRevokeInvite, onResendInvite, onSaveProfile, onSaveRetention, importContext, employmentByUser } = props;
   const [borderFilter, setBorderFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [busy, setBusy] = useState(false);
@@ -294,6 +367,16 @@ export default function DashboardView(props: {
         </p>
       )}
 
+      {importContext && (
+        <DayImport
+          d={d}
+          members={importContext.members}
+          existing={importContext.existing}
+          today={importContext.today}
+          onImport={importContext.onImport}
+        />
+      )}
+
       <div className="filters">
         <label>
           {d.company.filterBorder}
@@ -350,7 +433,16 @@ export default function DashboardView(props: {
               </div>
               <h3 className="meta">{d.company.countersHeading}</h3>
               <CounterTable d={d} counters={row.counters} />
-              <EmployeeProfileForm d={d} row={row} onSave={onSaveProfile} />
+              <EmployeeProfileForm
+                d={d}
+                row={row}
+                employment={
+                  employmentByUser
+                    ? (employmentByUser[row.userId] ?? { employedFrom: null, employedUntil: null })
+                    : undefined
+                }
+                onSave={onSaveProfile}
+              />
               <Link className="btn btn-ghost" to={`${companyBase}/employee/${row.userId}`} style={{ marginTop: '0.75rem' }}>
                 {d.company.viewHistory}
               </Link>

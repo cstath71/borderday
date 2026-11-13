@@ -30,7 +30,7 @@
 - https://borderday.com/en/employers/ticino/ — Ticino employers (IT→CH, 25% telework + 45 non-return days)
 - https://borderday.com/en/employers/geneva/ — Geneva employers (FR→CH telework days)
 - https://borderday.com/en/employers/luxembourg/ — Luxembourg employers (FR/BE/DE→LU, 34-day tax + SS framework)
-- https://borderday.com/en/fiduciaries/: fiduciaries and payroll providers, one login, each client company kept separate
+- https://borderday.com/en/fiduciaries/ - For fiduciaries and payroll providers: follow each client's cross-border staff from one account, with every client kept fully separate
 - https://borderday.com/en/privacy/ — Privacy
 - https://borderday.com/en/dpa/ — Data processing agreement (company accounts)
 - https://borderday.com/en/disclaimer/ — Legal disclaimer
@@ -118,11 +118,6 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/de/for-individuals/
 - https://borderday.com/it/for-individuals/
 - https://borderday.com/nl/for-individuals/
-- https://borderday.com/en/fiduciaries/
-- https://borderday.com/fr/fiduciaries/
-- https://borderday.com/de/fiduciaries/
-- https://borderday.com/it/fiduciaries/
-- https://borderday.com/nl/fiduciaries/
 - https://borderday.com/en/employers/ticino/
 - https://borderday.com/fr/employers/ticino/
 - https://borderday.com/de/employers/ticino/
@@ -138,6 +133,11 @@ The self-employed, public-sector special rules, people with employers in several
 - https://borderday.com/de/employers/luxembourg/
 - https://borderday.com/it/employers/luxembourg/
 - https://borderday.com/nl/employers/luxembourg/
+- https://borderday.com/en/fiduciaries/
+- https://borderday.com/fr/fiduciaries/
+- https://borderday.com/de/fiduciaries/
+- https://borderday.com/it/fiduciaries/
+- https://borderday.com/nl/fiduciaries/
 - https://borderday.com/en/guides/
 - https://borderday.com/fr/guides/
 - https://borderday.com/de/guides/

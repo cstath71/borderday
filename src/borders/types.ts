@@ -104,6 +104,11 @@ export interface DayEntry {
   overnightAway?: boolean;
   /** Share of the day for this type: 1 = full (default), 0.5 = half. */
   dayShare?: 0.5 | 1;
+  /** hr: the company imported this day. Absent or employee: the person logged it. */
+  entrySource?: 'employee' | 'hr';
+  importedAt?: string | null;
+  employeeConfirmedAt?: string | null;
+  employeeCorrectedAt?: string | null;
 }
 
 /** Per-person facts some rules depend on. Null or absent means not provided. */

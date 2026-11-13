@@ -202,56 +202,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/for-individuals/"/>
   </url>
   <url>
-    <loc>https://borderday.com/en/fiduciaries/</loc>
-    <lastmod>2026-11-13</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
-  </url>
-  <url>
-    <loc>https://borderday.com/fr/fiduciaries/</loc>
-    <lastmod>2026-11-13</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
-  </url>
-  <url>
-    <loc>https://borderday.com/de/fiduciaries/</loc>
-    <lastmod>2026-11-13</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
-  </url>
-  <url>
-    <loc>https://borderday.com/it/fiduciaries/</loc>
-    <lastmod>2026-11-13</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
-  </url>
-  <url>
-    <loc>https://borderday.com/nl/fiduciaries/</loc>
-    <lastmod>2026-11-13</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
-  </url>
-  <url>
     <loc>https://borderday.com/en/employers/ticino/</loc>
     <lastmod>2026-11-13</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/employers/ticino/"/>
@@ -400,6 +350,56 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/employers/luxembourg/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/employers/luxembourg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/employers/luxembourg/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/en/fiduciaries/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/fr/fiduciaries/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/de/fiduciaries/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/it/fiduciaries/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
+  </url>
+  <url>
+    <loc>https://borderday.com/nl/fiduciaries/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderday.com/en/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://borderday.com/fr/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://borderday.com/de/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://borderday.com/it/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://borderday.com/nl/fiduciaries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderday.com/en/fiduciaries/"/>
   </url>
   <url>
     <loc>https://borderday.com/en/guides/</loc>

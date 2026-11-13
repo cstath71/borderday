@@ -97,25 +97,24 @@ const it: Dict = {
     routesSs: 'Contatore previdenziale',
     hrDeskTitle: 'Il lavoro che BorderDay toglie all’HR',
     hrDeskIntro:
-      'Niente più fogli di calcolo per sapere chi ha lavorato dove. I dipendenti registrano da soli le proprie tipologie di giorno, BorderDay tiene i contatori e l’HR vede chi si avvicina a un limite prima che venga superato.',
-    hrDesk1Title: 'Nessuna riconciliazione manuale.',
+      'Basta con il foglio di calcolo per sapere chi ha lavorato dove. I dipendenti registrano da soli le proprie tipologie di giorno, BorderDay tiene i contatori e l’HR vede chi si avvicina a una soglia prima che sia superata.',
+    hrDesk1Title: 'Niente riconciliazione manuale.',
     hrDesk1Body:
       'Ogni dipendente registra in pochi secondi telelavoro, in sede, trasferta o giorno non lavorato. L’HR legge una sola dashboard, invece di sollecitare via e-mail.',
-    hrDesk2Title: 'Avvisi prima di un limite, non dopo.',
+    hrDesk2Title: 'Avvisi prima di una soglia, non dopo.',
     hrDesk2Body:
-      'I contatori fiscali e di sicurezza sociale avvisano al 75% e al 90% del limite applicabile, così resta il tempo per programmare giorni in sede.',
+      'I contatori fiscali e di sicurezza sociale avvisano al 75% e al 90% della soglia applicabile, così c’è tempo per pianificare giorni in sede.',
     hrDesk3Title: 'Le cifre di fine anno sono pronte.',
     hrDesk3Body:
-      'Esportate i giorni e i contatori di ogni dipendente in CSV, pronti per i vostri controlli e per i vostri adempimenti.',
+      'Esportate i giorni e i contatori di ogni dipendente in CSV, pronti per i vostri controlli e per il lavoro di dichiarazione.',
     hrDeskExampleTitle: 'Esempio: un datore di lavoro ginevrino, a novembre',
-    hrDeskExample1:
-      'L’HR crea l’account aziendale e invita con un link e-mail il personale residente in Francia.',
+    hrDeskExample1: 'L’HR crea l’account aziendale e invita con un link e-mail il personale residente in Francia.',
     hrDeskExample2:
-      'L’HR carica un CSV con i giorni del 2026 fino a oggi. I dipendenti vedono quei giorni contrassegnati come inseriti dall’HR e li confermano o li correggono.',
+      'L’HR carica un CSV con i giorni del 2026 già trascorsi. I dipendenti vedono quei giorni contrassegnati come inseriti dall’HR e li confermano o li correggono.',
     hrDeskExample3:
-      'La dashboard mostra, per ogni dipendente, il contatore fiscale del 40% e la fascia di sicurezza sociale. Due persone vicine al limite ricevono un avviso per programmare più giorni in sede a dicembre.',
+      'La dashboard mostra il contatore fiscale del 40% e la fascia di sicurezza sociale di ogni dipendente. Due persone vicine alla soglia ricevono un avviso per pianificare più giorni in sede a dicembre.',
     hrDeskExample4:
-      'A gennaio, l’HR esporta l’anno in CSV come documento di lavoro per l’attestazione del tasso di telelavoro trasmessa all’autorità fiscale cantonale.',
+      'A gennaio l’HR esporta l’anno in CSV come documento di lavoro per l’attestazione del tasso di telelavoro trasmessa all’autorità fiscale cantonale.',
     hrDeskExampleNote: 'Solo a titolo illustrativo. Il CSV è un documento di lavoro, non l’attestazione stessa.',
   },
   borders: {
@@ -375,6 +374,12 @@ const it: Dict = {
     saveError: 'Salvataggio non riuscito. Riprovate.',
     deleteAllAccountConfirm: 'Eliminare tutti i giorni salvati nel vostro account? Azione irreversibile.',
     importLocal: 'Copiate {count} giorni da questo dispositivo al vostro account',
+    importedByHr:
+      'Importato dalle HR. Confermatelo se è corretto, oppure modificate il giorno. La vostra versione sostituisce allora la voce HR per i contatori.',
+    importedConfirmed: 'Importato dalle HR, e da voi confermato.',
+    importedCorrected: 'Avete corretto questo giorno. Le HR lo hanno inserito per prime; conta la vostra versione.',
+    confirmImportedDay: 'Conferma questa voce HR',
+    importConfirmed: 'Voce HR confermata.',
     disclaimerBanner:
       'Solo strumento di registrazione — non consulenza fiscale o legale. Verificate le soglie presso l’autorità competente.',
     employmentPercent: 'Percentuale d’impiego quest’anno',
@@ -486,10 +491,13 @@ const it: Dict = {
     q8: 'Cosa non copre BorderDay?',
     a8:
       'Gli indipendenti, le regole speciali del settore pubblico, chi ha datori di lavoro in più Stati e il lavoro senza collegamento informatico ai sensi dell’accordo quadro. Le situazioni di frontiera non elencate, come Francia→Germania o Paesi Bassi→Germania. I contatori vedono solo i giorni registrati qui: altri impieghi dell’anno non sono inclusi. I contatori fiscali non esistono su ogni situazione di frontiera. L’export CSV è un documento di lavoro, non una dichiarazione ufficiale come l’attestazione annuale del tasso di telelavoro che tutti i datori di lavoro svizzeri di residenti fiscali in Francia devono trasmettere (anche allo 0 %). In caso di dubbio, verificate con la vostra autorità.',
+    q9: 'Le HR possono importare giorni passati?',
+    a9:
+      'Sì. Un amministratore o le HR possono caricare un CSV di giorni passati per le persone che sono membri dell’azienda, per esempio il resto di un anno quando l’azienda si iscrive tardi. Ogni giorno importato è memorizzato come inserito dalle HR, con chi lo ha importato e quando. Non è memorizzato come se lo avesse registrato il dipendente. I giorni già registrati dal dipendente restano invariati. Il dipendente vede il giorno importato sul calendario e può confermarlo o correggerlo. Una correzione sostituisce i valori HR per i contatori. Una nota facoltativa nel file è visibile solo a quel dipendente: non è nell’export HR e le HR non possono rileggerla. Il file è una registrazione di lavoro. Non è l’attestazione del tasso di telelavoro né la dichiarazione ufficiale.',
   },
   privacy: {
     title: 'Privacy',
-    updated: 'Ultimo aggiornamento: 1° nov. 2026 (Europe/Zurich)',
+    updated: 'Ultimo aggiornamento: 13 nov. 2026 (Europe/Zurich)',
     intro:
       'Questa informativa spiega quali dati personali tratta BorderDay, perché, chi li riceve, dove vanno e per quanto tempo sono conservati, e quali sono i vostri diritti secondo il GDPR e la legge federale svizzera sulla protezione dei dati (LPD).',
     controllerTitle: 'Titolare del trattamento',
@@ -497,13 +505,13 @@ const it: Dict = {
       'PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDI CHE-312.418.158) è il titolare del trattamento ai sensi del GDPR e della legge federale svizzera sulla protezione dei dati (LPD) per questo sito, i piani individuali, gli account utente, l’amministrazione degli account aziendali, la fatturazione, il supporto e la sicurezza. Contatto: hello@borderday.com · Privacy: privacy@borderday.com (alias attivo di hello@). Le persone nell’UE/SEE usano gli stessi indirizzi per le richieste di protezione dei dati.',
     rolesTitle: 'Chi è responsabile dei registri dei giorni dei dipendenti',
     rolesBody:
-      'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni).',
+      'In un account aziendale, il datore di lavoro decide perché e come registrare i giorni dei suoi dipendenti. Il datore di lavoro è quindi titolare del trattamento di questi registri e del loro uso da parte dell’HR, compresa la base giuridica, e BorderDay li tratta per suo conto come responsabile del trattamento. Le domande sul motivo della registrazione o sui documenti da conservare vanno rivolte anzitutto al datore di lavoro; inoltriamo le richieste inviate a privacy@borderday.com. L’accordo pubblico sul trattamento dei dati per gli account aziendali è disponibile su /dpa/ (collegato da Prezzi, iscrizione aziendale e Condizioni). Ciò include i giorni che le HR inseriscono per un dipendente. Il datore di lavoro resta titolare del trattamento di quei giorni.',
     s1Title: 'Cosa raccogliamo',
     s1Body:
-      'Anteprima gratuita, sul vostro dispositivo: situazione di frontiera, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: situazione di frontiera, tipo e data di ogni giorno segni di mezza giornata e di notte fuori e note sono salvati nel vostro account. Gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, situazione di frontiera, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note private (salvate con il giorno, mai mostrate all’HR), giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
+      'Anteprima gratuita, sul vostro dispositivo: situazione di frontiera, tipo di ogni giorno (telelavoro, in sede, trasferta / Stato terzo, non lavorato), eventuale mezza giornata, segno di notte fuori per lavoro, note facoltative, giorni lavorativi contrattuali all’anno, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti. Piano individuale: situazione di frontiera, tipo e data di ogni giorno segni di mezza giornata e di notte fuori e note sono salvati nel vostro account. Gli altri campi restano sul vostro dispositivo. Account aziendali: nome dell’azienda, e-mail e nomi dei membri, ruoli, situazione di frontiera, tipi e date dei giorni, segni di mezza giornata e di notte fuori, note private (salvate con il giorno, mai mostrate all’HR), giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e la prova che l’avviso su ciò che vede l’HR vi è stato mostrato. Il datore di lavoro può anche fornire, per un membro, un tipo di giorno storico, una data, un segno di mezza giornata, un segno di notte fuori e una nota facoltativa. BorderDay memorizza chi ha inserito il giorno (il dipendente, o le HR), chi lo ha importato, quando, e se il dipendente lo ha poi confermato o corretto. La nota è mostrata solo al dipendente. Le HR non possono rileggerla. Account e fatturazione: e-mail, nome, metodo di accesso, stato dell’abbonamento e riferimento cliente Stripe. Non riceviamo il numero completo della carta.',
     s2Title: 'Cosa non raccogliamo',
     s2Body:
-      'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. L’HR vede anche giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
+      'Nessun GPS né posizione del dispositivo. L’HR vede per ogni data il tipo di giorno (e mezza giornata e notte fuori sì/no): una categoria di paese, mai coordinate. Le note restano private per il dipendente. Un giorno importato è indicato come inserito dalle HR. Le HR non possono comunque leggere la nota. L’HR vede anche giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, e i conteggi: gli stessi contatori del dipendente. Nessun indirizzo IP viene memorizzato come luogo di lavoro. Nessun tracker pubblicitario. Nessuna vendita di dati personali.',
     tableTitle: 'Finalità, basi giuridiche, destinatari, trasferimenti e conservazione',
     tableIntro:
       'I numeri di articolo si riferiscono al GDPR. La LPD svizzera non elenca le basi giuridiche allo stesso modo; valgono le stesse finalità, gli stessi destinatari e paesi.',
@@ -550,7 +558,7 @@ const it: Dict = {
       },
       {
         purpose: 'Account aziendale: registri dei dipendenti e contatori HR (il datore di lavoro è titolare, BorderDay il suo responsabile del trattamento)',
-        data: 'Nome, e-mail, situazione di frontiera, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012, tipo e data del giorno, segni di mezza giornata e di notte fuori, contatori. Le note restano private per il dipendente.',
+        data: 'Nome, e-mail, situazione di frontiera, giorni lavorativi, giorni contrattuali, percentuale d’impiego, A1, status Francia–Belgio prima del 2012, tipo e data del giorno, segni di mezza giornata e di notte fuori, contatori. Le note restano private per il dipendente. Inizio e fine dell’impiego se le HR li indicano. Per un giorno importato: che le HR lo hanno inserito, chi lo ha importato, quando, e se il dipendente lo ha poi confermato o corretto. Una nota facoltativa su un giorno importato resta privata per il dipendente.',
         basis: 'Stabilita dal datore di lavoro come titolare, per esempio un obbligo di legge o legittimi interessi. BorderDay non si basa qui sul consenso del dipendente.',
         recipients: 'Gli amministratori dell’account e i lettori HR del datore di lavoro; Supabase',
         transfer: 'Hosting nell’UE (eu-central-1); fornitore con sede negli Stati Uniti; garanzie qui sotto',
@@ -637,7 +645,7 @@ const it: Dict = {
   },
   company: {
     exportDaysCsv: "Esporta i giorni (CSV)",
-    exportDaysNote: "Export dei giorni: data, tipo di giornata, mezza giornata e notte fuori per verificare i conteggi, mai note o posizione. Una mezza giornata conta 0,5, salvo che una regola tratti ogni frazione di giorno come un giorno intero.",
+    exportDaysNote: "Export dei giorni: data, tipo di giornata, mezza giornata e notte fuori per verificare i conteggi, mai note o posizione. Una mezza giornata conta 0,5, salvo che una regola tratti ogni frazione di giorno come un giorno intero. La colonna provenienza indica se il dipendente ha registrato il giorno o se le HR lo hanno importato, e se in seguito il dipendente ha confermato o corretto quell’importazione.",
     signupRouteNote: "Qui serve solo il nome dell’azienda. La situazione di frontiera si sceglie per ogni dipendente, quando si unisce.",
     inviteNeedsPlan: "Nessun piano o prova attivi: l’invito verrà creato e riceverete un link da condividere, ma non verrà inviato via e-mail. Avviate un piano nella pagina Prezzi per inviare e-mail.",
     sendingInvite: "Invio in corso…",
@@ -701,7 +709,7 @@ const it: Dict = {
     viewHistory: 'Cronologia giorni',
     historyTitle: 'Cronologia giorni del dipendente',
     historySubtitle:
-      'Solo tipo di giorno, data, mezza giornata e segno di notte fuori. Non vengono memorizzati GPS né posizione del dispositivo, e le note non sono mostrate.',
+      'Tipo di giorno, data, mezza giornata, notte fuori e chi ha inserito il giorno. Non vengono memorizzati GPS né posizione del dispositivo, e le note non sono mostrate.',
     backDashboard: 'Torna alla dashboard',
     joinTitle: 'Unitevi alla vostra azienda',
     joinSubtitle:
@@ -755,12 +763,12 @@ const it: Dict = {
     profileSaved: 'Salvato.',
     noticeTitle: 'Avviso — cosa può vedere l’HR',
     noticeBody:
-      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, situazione di frontiera scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se si tratta di una mezza giornata, se è segnato come notte fuori per lavoro, sulla situazione di frontiera Francia–Belgio lo status di frontaliere prima del 2012 se inserito, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego, la base di giorni lavorativi, i giorni contrattuali, il vostro A1 e questo status Francia–Belgio. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare il registro in qualsiasi momento. Dopo aver lasciato l’azienda potete ancora esportare o cancellare la vostra copia da Account; la copia del datore di lavoro resta secondo il suo periodo di conservazione. Chiedete al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 13–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
+      'Questa è un’informazione, non una richiesta di consenso: il datore di lavoro decide perché e su quale base giuridica registra questi giorni, e ne è responsabile. Se entrate, gli amministratori dell’account e i lettori HR del datore di lavoro possono vedere: nome, e-mail, situazione di frontiera scelto, giorni lavorativi contrattuali, percentuale d’impiego e A1 se inseriti, tipo e data di ogni giorno registrato, se si tratta di una mezza giornata, se è segnato come notte fuori per lavoro, sulla situazione di frontiera Francia–Belgio lo status di frontaliere prima del 2012 se inserito, e gli stessi contatori fiscali e di sicurezza sociale che vedete voi. Possono anche inserire la vostra percentuale d’impiego, la base di giorni lavorativi, i giorni contrattuali, il vostro A1 e questo status Francia–Belgio. Le HR o un amministratore possono inserire giorni passati per voi. Quei giorni sono segnati come inseriti dalle HR, con chi ha importato e quando. Potete confermare un giorno o correggerlo. La vostra correzione sostituisce i valori HR per i contatori. Una nota in quel file è visibile solo a voi. Non vedono GPS né posizione del dispositivo, perché BorderDay non li raccoglie, e le note restano private. Il tipo di giorno indica però una categoria di paese per data. Potete esportare il registro in qualsiasi momento. Dopo aver lasciato l’azienda potete ancora esportare o cancellare la vostra copia da Account; la copia del datore di lavoro resta secondo il suo periodo di conservazione. Chiedete al datore di lavoro o a privacy@borderday.com informazioni sui vostri diritti. Conservazione: 24 mesi per impostazione predefinita (impostazione aziendale, 13–120 mesi); i registri aziendali più vecchi di tale finestra sono cancellati automaticamente ogni giorno. Strumento di registrazione, non consulenza fiscale o legale. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
     noticeAck: 'Ho letto questo avviso',
     noticeRequired: 'Confermate di aver letto l’avviso per continuare.',
     noticePrivacyLink: 'Informativa privacy completa',
     dpaVersionNote:
-      'La creazione di questo account aziendale applica il nostro accordo sul trattamento dei dati, come indicato in quella pagina (versione del 1° nov. 2026). Registriamo la versione e l’ora.',
+      'La creazione di questo account aziendale applica il nostro accordo sul trattamento dei dati, come indicato in quella pagina (versione del 13 nov. 2026). Registriamo la versione e l’ora.',
     retentionConfirm:
       'Ridurre la conservazione a {months} mesi? I registri aziendali più vecchi sono cancellati definitivamente alla prossima pulizia giornaliera. L’operazione è irreversibile.',
     retentionConfirmShort:
@@ -778,11 +786,72 @@ const it: Dict = {
     inviteAlreadyMember: 'Questo indirizzo è già un membro attivo di questa azienda.',
     inviteReused: 'Esiste già un invito in sospeso per questo indirizzo. Non l’abbiamo reinviato via e-mail perché è stato inviato nell’ultima ora; condividi il link o riprova più tardi.',
     inviteReusedEmailed: 'Invito già in sospeso; e-mail inviata di nuovo.',
+    colEnteredBy: 'Inserito da',
+    employedFrom: 'Inizio impiego',
+    employedFromHint:
+      'Primo giorno di impiego di questa persona in azienda. Vuoto: è ammesso qualsiasi giorno passato, anche prima dell’ingresso in BorderDay.',
+    employedUntil: 'Fine impiego',
+    employedUntilHint: 'Ultimo giorno di impiego qui. Vuoto: nessuna data di fine, salvo che la persona sia stata rimossa.',
+    employedOrder: 'L’inizio dell’impiego deve essere il giorno della fine o prima.',
+    dayImport: {
+      title: 'Importa giorni passati',
+      intro:
+        'Caricate un CSV di giorni che i dipendenti non hanno registrato da soli, per esempio il resto del 2026 se l’azienda entra a fine anno. Ogni giorno importato è salvato come inserito dalle HR, con chi ha importato e quando. Non appare mai come registrato dal dipendente. I giorni già registrati dal dipendente sono saltati e lasciati invariati. Nel calendario il dipendente vede che le HR hanno inserito il giorno e può confermarlo o correggerlo. Una correzione sostituisce i valori HR per i contatori. La nota facoltativa è visibile solo a quel dipendente: non è nell’export HR e le HR non possono rileggerla. Questo file è un documento di lavoro, non l’attestazione del tasso di telelavoro. I nomi delle colonne nel file restano in inglese.',
+      template: 'Scarica il modello CSV',
+      choose: 'File CSV',
+      employmentHint:
+        'Una data è rifiutata se è prima dell’inizio impiego di quella persona, o dopo la fine impiego o il giorno della rimozione. Impostate le date nel profilo del dipendente qui sotto. Lasciatele vuote per ammettere qualsiasi giorno passato. Le date future sono rifiutate.',
+      summary: '{ready} pronti, {skipped} saltati, {errors} con errore.',
+      previewCaption: 'Anteprima importazione',
+      colEmail: 'E-mail',
+      colDate: 'Data',
+      colType: 'Tipo di giorno',
+      colStatus: 'Esito',
+      colDetail: 'Dettaglio',
+      statusReady: 'Pronto',
+      statusSkipped: 'Saltato',
+      statusError: 'Errore',
+      statusImported: 'Importato',
+      confirm: 'Importa {count} giorni',
+      confirmHint: 'Non viene scritto nulla finché non confermate. Si importano solo le righe segnate come pronte.',
+      working: 'Importazione…',
+      done: '{imported} importati, {skipped} saltati, {errors} non importati.',
+      noneReady: 'Nessuna riga è pronta per l’importazione.',
+      failed: 'L’importazione non è riuscita. Se è stata rifiutata, non è stato scritto nulla di nuovo.',
+      noPlan: 'Questa azienda non ha un piano o una prova attivi: i giorni non possono ancora essere importati.',
+      tooBig: 'Questo file ha più di {max} righe di dati. Dividetelo e importate ogni parte.',
+      empty: 'Il file non ha righe di dati.',
+      badFile:
+        'Il file deve avere una riga di intestazione con employee_email, date e day_type. Colonne facoltative: overnight_away, half_day, note.',
+      showing: 'Prime {shown} di {total} righe. Ogni riga è stata controllata.',
+      provenanceEmployee: 'Dipendente',
+      provenanceHr: 'Import HR',
+      provenanceHrConfirmed: 'Import HR, confermato dal dipendente',
+      provenanceHrCorrected: 'Import HR, corretto dal dipendente',
+      errors: {
+        unknown_email: 'Nessun account usa questa e-mail.',
+        not_member: 'Questa e-mail non è membro di questa azienda.',
+        ambiguous_email: 'Più di un account usa questa e-mail.',
+        bad_date: 'Usate una data reale nel formato AAAA-MM-GG.',
+        future_date: 'Le date future non possono essere importate.',
+        duplicate_in_file: 'Questa e-mail e questa data compaiono più di una volta nel file.',
+        outside_employment: 'Questa data è fuori dal periodo di impiego del dipendente.',
+        invalid_type: 'Il tipo di giorno deve essere telework, onsite, third_country o non_working.',
+        invalid_half_day: 'Un giorno non lavorativo non può essere una mezza giornata.',
+        invalid_overnight: 'Una notte fuori vale solo per un giorno in sede o un viaggio.',
+        invalid_flag: 'Notte fuori e mezza giornata devono essere yes o no.',
+        note_too_long: 'La nota supera i 500 caratteri.',
+        other_company: 'Questa persona ha già questa data in un’altra azienda. Non è stata modificata.',
+        skipped_employee: 'Il dipendente ha già inserito questa data. Non è stata sovrascritta.',
+        skipped_already_imported: 'Questa data è già stata importata. Non è stata sovrascritta.',
+        invalid_note: 'La nota deve essere testo.',
+      },
+    },
   },
 
   terms: {
     title: 'Condizioni di servizio e note legali',
-    updated: 'Ultimo aggiornamento: 1 nov. 2026 (Europe/Zurich)',
+    updated: 'Ultimo aggiornamento: 13 nov. 2026 (Europe/Zurich)',
     providerTitle: 'Note legali: fornitore e parte contraente',
     providerBody:
       'Il servizio BorderDay e questo sito sono forniti da PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Svizzera (IDI CHE-312.418.158; numero di identificazione delle imprese svizzero), che è la parte contraente del servizio. La società è iscritta nel registro di commercio di Ginevra con tale IDI ed è rappresentata dai suoi amministratori iscritti. Contatto: hello@borderday.com · Privacy: privacy@borderday.com · Telefono: +41 22 510 27 00. Indirizzo postale come sopra. Il checkout usa Stripe Managed Payments: in questo prodotto Stripe svolge le funzioni di merchant of record per il pagamento, la riscossione e il versamento dell’IVA e i rimborsi a livello di ordine ove Managed Payments si applica; al checkout il cliente può vedere Link come merchant of record (Sold through Link).',
@@ -792,7 +861,7 @@ const it: Dict = {
       'BorderDay è uno strumento di registrazione e promemoria delle classificazioni giornaliere per datori di lavoro e dipendenti su determinatle situazioni di frontiera transfrontalieri. Non è consulenza fiscale o legale, né sostituisce il datore di lavoro, un consulente qualificato o un’autorità competente. Vedete l’Avvertenza.',
     s2Title: 'Account e uso aziendale',
     s2Body:
-      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono una situazione di frontiera e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Gli obblighi del datore di lavoro possono impedire un uso lecito finché non sono adempiuti: ad esempio la codecisione del consiglio di fabbrica sui sistemi tecnici di controllo (Germania BetrVG § 87 cpv. 1 n. 6), le regole di consultazione dei rappresentanti del personale o dei CCT in Francia, Belgio, Lussemburgo e Svizzera, e ogni norma locale sul monitoraggio dei dipendenti o sulla privacy sul luogo di lavoro. BorderDay non conduce tali consultazioni al posto vostro. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
+      'Dovete fornire dati di account corretti. Gli amministratori dell’account aziendale invitano i dipendenti; questi scelgono una situazione di frontiera e registrano solo il tipo di giorno (niente GPS né posizione del dispositivo). L’HR vede gli stessi contatori del dipendente. In un account aziendale il datore di lavoro decide perché e come registrare i giorni: è titolare del trattamento di questi registri ed è responsabile della base giuridica, dell’informazione ai dipendenti e di ogni consultazione richiesta dal suo diritto, e il fornitore agisce come suo responsabile del trattamento. Gli obblighi del datore di lavoro possono impedire un uso lecito finché non sono adempiuti: ad esempio la codecisione del consiglio di fabbrica sui sistemi tecnici di controllo (Germania BetrVG § 87 cpv. 1 n. 6), le regole di consultazione dei rappresentanti del personale o dei CCT in Francia, Belgio, Lussemburgo e Svizzera, e ogni norma locale sul monitoraggio dei dipendenti o sulla privacy sul luogo di lavoro. BorderDay non conduce tali consultazioni al posto vostro. Il fornitore è titolare del trattamento per account, fatturazione e sicurezza. L’accordo sul trattamento dei dati per i registri dei giorni dei dipendenti è pubblicato su /dpa/. Siete responsabili dell’accuratezza dei giorni registrati. Se le HR importano un giorno passato, è segnato come inserito dalle HR. Il dipendente può confermarlo o correggerlo, e la correzione sostituisce i valori HR per i contatori. Il datore di lavoro resta responsabile dell’accuratezza dei giorni che importa. L’Art. 328b CO limita il trattamento dei dati dei lavoratori da parte del datore di lavoro a quanto riguarda l’idoneità al rapporto di lavoro o è necessario per l’esecuzione del contratto di lavoro.',
     s3Title: 'Abbonamenti, prova, rinnovo e disdetta',
     s3Body:
       'I piani a pagamento sono abbonamenti. I piani azienda e individuale iniziano con una prova gratuita di 7 giorni; è richiesta una carta di pagamento all’iscrizione. La prova gratuita è offerta una sola volta per persona e per azienda: se voi o l’azienda ne avete già avuta una, anche disdetta, il piano inizia e viene addebitato al checkout. Dopo 7 giorni il piano diventa a pagamento al prezzo indicato: la carta viene addebitata automaticamente l’8° giorno e l’abbonamento si rinnova poi ogni mese o anno fino alla disdetta. Con la disdetta prima dell’8° giorno non viene addebitato nulla. Senza un metodo di pagamento valido al termine della prova, l’abbonamento viene disdetto. Potete disdire in qualsiasi momento tramite il link «Disdire il contratto» in fondo a ogni pagina, che porta al portale clienti, agli strumenti d’ordine Link o a una richiesta via e-mail. La disdetta ha effetto alla fine del periodo pagato in corso o della prova gratuita: il piano resta attivo fino ad allora e non si rinnova. Gli importi già riscossi per un periodo di fatturazione iniziato non sono rimborsati pro rata, salvo obblighi di legge o condizioni di rimborso di Link. Secondo la causa C-565/22 (Sofatutor), un contratto con periodo gratuito iniziale che si prolunga automaticamente in un periodo a pagamento — se il prezzo è stato comunicato in modo chiaro, comprensibile ed esplicito alla conclusione — è un solo contratto con un solo diritto legale di recesso per l’intero periodo, non un secondo diritto all’inizio dell’addebito.',
@@ -940,7 +1009,7 @@ const it: Dict = {
   },
   dpa: {
     title: 'Accordo sul trattamento dei dati (account aziendali)',
-    updated: 'Ultimo aggiornamento: 1° nov. 2026 (Europe/Zurich)',
+    updated: 'Ultimo aggiornamento: 13 nov. 2026 (Europe/Zurich)',
     intro:
       'Il presente accordo sul trattamento dei dati («ATD») si applica quando un datore di lavoro usa un account aziendale BorderDay affinché BorderDay tratti dati personali dei dipendenti di quel datore di lavoro (registri dei giorni e dati di appartenenza correlati). È offerto ai sensi dell’articolo 28 del GDPR e della legge federale svizzera sulla protezione dei dati (LPD) per il trattamento da parte di un responsabile del trattamento. La creazione o l’uso di un account aziendale, o la prosecuzione dell’uso dopo la pubblicazione di questa pagina, costituisce accettazione di questo ATD da parte del datore di lavoro per tale trattamento.',
     partiesTitle: 'Parti',
@@ -951,13 +1020,13 @@ const it: Dict = {
       'Per i registri dei giorni dei dipendenti, gli inviti e i contatori HR da essi derivati, il datore di lavoro è titolare e PrimeLogic Advisory Sàrl è responsabile del trattamento. Per il sito BorderDay, i piani individuali, gli account utente, l’amministrazione dell’account aziendale, la fatturazione, il supporto e la sicurezza, PrimeLogic Advisory Sàrl resta titolare ai sensi dell’informativa sulla privacy. Stripe e Link agiscono come titolari indipendenti per il pagamento secondo le proprie informative; non sono responsabili del trattamento dei registri dei giorni ai sensi del presente ATD.',
     subjectTitle: 'Oggetto e natura del trattamento',
     subjectBody:
-      'Oggetto: hosting, archiviazione, recupero, trasmissione e visualizzazione dei dati di appartenenza e dei registri dei giorni affinché il datore di lavoro possa gestire i contatori di telelavoro e fiscali. Natura: trattamento automatizzato in un’applicazione ospitata (creazione, lettura, aggiornamento, cancellazione; aggregazione in contatori; e-mail di invito). Finalità: solo le finalità indicate dal datore di lavoro tramite le funzioni aziendali BorderDay, e come descritte nell’informativa sulla privacy. Categorie di interessati: dipendenti e altre persone fisiche che il datore di lavoro invita all’account aziendale. Categorie di dati: nome, e-mail, ruolo, situazione di frontiera, giorni lavorativi contrattuali, base di giorni lavorativi, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, tipo e data del giorno, segno di mezza giornata, segno di notte fuori, contatori, e la prova che è stato mostrato l’avviso su ciò che vede l’HR. Le note restano private del dipendente. Non viene raccolta alcuna localizzazione GPS o del dispositivo.',
+      'Oggetto: hosting, archiviazione, recupero, trasmissione e visualizzazione dei dati di appartenenza e dei registri dei giorni affinché il datore di lavoro possa gestire i contatori di telelavoro e fiscali. Natura: trattamento automatizzato in un’applicazione ospitata (creazione, lettura, aggiornamento, cancellazione; aggregazione in contatori; e-mail di invito). Finalità: solo le finalità indicate dal datore di lavoro tramite le funzioni aziendali BorderDay, e come descritte nell’informativa sulla privacy. Categorie di interessati: dipendenti e altre persone fisiche che il datore di lavoro invita all’account aziendale. Categorie di dati: nome, e-mail, ruolo, situazione di frontiera, giorni lavorativi contrattuali, base di giorni lavorativi, percentuale d’impiego, A1 e status Francia–Belgio prima del 2012 se inseriti, tipo e data del giorno, segno di mezza giornata, segno di notte fuori, contatori, e la prova che è stato mostrato l’avviso su ciò che vede l’HR. Inizio e fine dell’impiego se il datore di lavoro li indica. Quando il datore di lavoro importa giorni storici: che le HR hanno inserito il giorno, chi ha importato, il momento e una successiva conferma o correzione del dipendente. Le note restano private del dipendente. Non viene raccolta alcuna localizzazione GPS o del dispositivo.',
     durationTitle: 'Durata',
     durationBody:
       'Il trattamento dura per la vita dell’account aziendale e dell’appartenenza e, successivamente, solo quanto necessario per cancellare o restituire i dati ai sensi del presente ATD e dei periodi di conservazione dell’informativa sulla privacy (incluse eventuali impostazioni di conservazione aziendali).',
     instructionsTitle: 'Istruzioni documentate (art. 28, par. 3, lett. a)',
     instructionsBody:
-      'Il responsabile tratta i registri dei giorni solo su istruzioni documentate del titolare. Le Condizioni BorderDay, il presente ATD, l’informativa sulla privacy e le azioni degli amministratori dell’account nel prodotto (invito, rimozione, impostazione di conservazione, richieste di esportazione) costituiscono le istruzioni. Il responsabile informa il datore di lavoro se, a suo parere, un’istruzione viola il GDPR o la LPD.',
+      'Il responsabile tratta i registri dei giorni solo su istruzioni documentate del titolare. Le Condizioni BorderDay, il presente ATD, l’informativa sulla privacy e le azioni degli amministratori dell’account nel prodotto (invito, rimozione, impostazione di conservazione, richieste di esportazione e import di giorni storici per i membri) costituiscono le istruzioni. BorderDay scrive quei giorni solo per i membri di quell’azienda, li segna come inseriti dalle HR e non sovrascrive un giorno che il dipendente ha già inserito. Il responsabile informa il datore di lavoro se, a suo parere, un’istruzione viola il GDPR o la LPD.',
     securityTitle: 'Sicurezza (art. 28, par. 3, lett. c; art. 8 LPD)',
     securityBody:
       'Il responsabile adotta misure tecniche e organizzative appropriate, tra cui controllo degli accessi e cifratura in transito verso il database ospitato, isolamento basato sui ruoli tra account aziendali (RLS) e limitazione dell’accesso del personale a quanto necessario per supporto e sicurezza. I dettagli di hosting figurano sotto i sub-responsabili.',
@@ -1003,6 +1072,7 @@ const it: Dict = {
   footer: {
     tagline: 'Registrazione dei giorni per team e dipendenti che lavorano oltre confine.',
     rights: '© {year} BorderDay',
+    fiduciaries: 'Per fiduciarie e servizi paghe',
   },
   auth: {
     signInTitle: 'Accedi',
@@ -1181,33 +1251,34 @@ const it: Dict = {
     faq5a:
       'No. Traccia i giorni rispetto a soglie pubbliche collegate qui e nell’app. Confermate i depositi con il consulente o l’amministrazione competente.',
   },
-
   fiduciaries: {
-    footerLink: 'Per fiduciarie e servizi paghe',
+    crumb: 'Fiduciarie',
     heroTitle: 'I giorni oltre confine di ogni cliente, in un solo accesso',
     intro:
       'Se gestite le paghe o l’amministrazione HR di più aziende, con BorderDay seguite da un solo account il personale oltre confine di ogni cliente, e ogni cliente resta completamente separato.',
     howTitle: 'Come funziona',
-    point1Title: 'Un account, più clienti.',
-    point1Body:
-      'Potete essere HR di più aziende con lo stesso accesso e scegliere il cliente da un elenco quando accedete.',
-    point2Title: 'Ogni cliente resta separato.',
-    point2Body:
-      'Ogni azienda ha i propri dipendenti, la propria dashboard e il proprio export CSV. I dati non vengono mai mescolati tra i clienti.',
-    point3Title: 'Caricate l’anno in corso fino a oggi.',
-    point3Body:
+    how1Title: 'Un account, più clienti.',
+    how1Body:
+      'Potete essere HR di più aziende con lo stesso accesso e scegliere il cliente da un elenco all’accesso.',
+    how2Title: 'Ogni cliente resta separato.',
+    how2Body:
+      'Ogni azienda ha i propri dipendenti, la propria dashboard e il proprio export CSV. I dati non si mescolano mai tra clienti.',
+    how3Title: 'Caricate l’anno in corso fino a oggi.',
+    how3Body:
       'Per un cliente che entra in corso d’anno, caricate un CSV dei giorni già trascorsi. I dipendenti vedono i giorni contrassegnati come inseriti dall’HR e possono confermarli o correggerli.',
-    point4Title: 'Gli stessi contatori del dipendente.',
-    point4Body:
-      'Contatori fiscali e di sicurezza sociale sulle situazioni di frontiera coperte, con avvisi al 75% e al 90% di un limite.',
-    point5Title: 'Il cliente può mantenere il controllo.',
-    point5Body:
+    how4Title: 'Gli stessi contatori del dipendente.',
+    how4Body:
+      'Contatori fiscali e di sicurezza sociale sulle situazioni di frontiera supportate, con avvisi al 75% e al 90% di una soglia.',
+    how5Title: 'Il cliente può mantenere il controllo.',
+    how5Body:
       'L’azienda cliente può essere titolare dell’account e invitarvi come HR, oppure potete creare voi l’account aziendale e invitare il suo personale.',
-    pricing:
+    pricingTitle: 'Prezzi',
+    pricingBody:
       'Ogni azienda cliente ha il proprio piano: 5 € per dipendente attivo al mese, minimo 39 € al mese, IVA esclusa. Domande su più clienti? Scrivete a hello@borderday.com.',
-    dataProtection:
-      'Un accordo sul trattamento dei dati si applica a ogni account aziendale. Niente GPS né posizione del dispositivo, solo tipologie di giorno.',
-    ctaAccount: 'Crea un account aziendale',
+    dataBody:
+      'Un accordo sul trattamento dei dati si applica a ogni account aziendale. Niente GPS né posizione del dispositivo, solo tipi di giorno.',
+    ctaPrimary: 'Crea un account aziendale',
+    ctaPricing: 'Vedi prezzi azienda',
   },
 };
 

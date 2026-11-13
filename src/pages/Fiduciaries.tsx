@@ -9,16 +9,22 @@ export default function Fiduciaries() {
   const d = getDict(lang);
   const p = d.fiduciaries;
   const points = [
-    [p.point1Title, p.point1Body],
-    [p.point2Title, p.point2Body],
-    [p.point3Title, p.point3Body],
-    [p.point4Title, p.point4Body],
-    [p.point5Title, p.point5Body],
+    [p.how1Title, p.how1Body],
+    [p.how2Title, p.how2Body],
+    [p.how3Title, p.how3Body],
+    [p.how4Title, p.how4Body],
+    [p.how5Title, p.how5Body],
   ] as const;
 
   return (
     <>
-      <PublicSeo path="fiduciaries" />
+      <PublicSeo
+        path="fiduciaries"
+        breadcrumb={[
+          { name: d.nav.home, path: '' },
+          { name: p.crumb, path: 'fiduciaries' },
+        ]}
+      />
       <section className="hero">
         <div className="container">
           <h1>{p.heroTitle}</h1>
@@ -27,16 +33,16 @@ export default function Fiduciaries() {
           </p>
           <div className="hero-cta">
             <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
-              {p.ctaAccount}
+              {p.ctaPrimary}
             </Link>
             <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
-              {d.home.ctaSecondary}
+              {p.ctaPricing}
             </Link>
           </div>
         </div>
       </section>
       <section className="section">
-        <div className="container">
+        <div className="container prose">
           <h2>{p.howTitle}</h2>
           <ul>
             {points.map(([title, body]) => (
@@ -45,8 +51,17 @@ export default function Fiduciaries() {
               </li>
             ))}
           </ul>
-          <p>{p.pricing}</p>
-          <p>{p.dataProtection}</p>
+          <h2>{p.pricingTitle}</h2>
+          <p>{p.pricingBody}</p>
+          <p>{p.dataBody}</p>
+          <div className="hero-cta">
+            <Link className="btn btn-primary" to={publicPath(lang, 'company/signup')}>
+              {p.ctaPrimary}
+            </Link>
+            <Link className="btn btn-secondary" to={publicPath(lang, 'pricing')}>
+              {p.ctaPricing}
+            </Link>
+          </div>
         </div>
       </section>
     </>

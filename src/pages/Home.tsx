@@ -42,9 +42,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" aria-labelledby="hr-desk-title">
         <div className="container">
-          <h2>{d.home.hrDeskTitle}</h2>
+          <h2 id="hr-desk-title">{d.home.hrDeskTitle}</h2>
           <p>{d.home.hrDeskIntro}</p>
           <div className="grid-3" style={{ marginTop: '1rem' }}>
             <article className="card">

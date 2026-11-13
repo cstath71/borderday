@@ -99,20 +99,19 @@ const de: Dict = {
     hrDeskTitle: 'Was BorderDay HR abnimmt',
     hrDeskIntro:
       'Schluss mit der Tabelle, wer wo gearbeitet hat. Mitarbeitende erfassen ihre Tagesarten selbst, BorderDay führt die Zähler, und HR sieht, wer sich einer Grenze nähert, bevor sie überschritten wird.',
-    hrDesk1Title: 'Kein manueller Abgleich.',
+    hrDesk1Title: 'Keine manuelle Abstimmung.',
     hrDesk1Body:
       'Jede mitarbeitende Person erfasst in wenigen Sekunden Telearbeits-, Vor-Ort-, Reise- oder arbeitsfreie Tage. HR liest ein einziges Dashboard, statt per E-Mail nachzufragen.',
     hrDesk2Title: 'Warnungen vor einer Grenze, nicht danach.',
     hrDesk2Body:
       'Steuer- und Sozialversicherungszähler warnen bei 75 % und 90 % der geltenden Grenze, sodass Zeit bleibt, Vor-Ort-Tage zu planen.',
-    hrDesk3Title: 'Die Zahlen zum Jahresende liegen bereit.',
+    hrDesk3Title: 'Die Zahlen zum Jahresende sind bereit.',
     hrDesk3Body:
       'Exportieren Sie die Tage und Zähler jeder mitarbeitenden Person als CSV, bereit für Ihre eigenen Kontrollen und Ihre Meldungen.',
     hrDeskExampleTitle: 'Beispiel: ein Genfer Arbeitgeber, November',
-    hrDeskExample1:
-      'HR legt das Unternehmenskonto an und lädt Mitarbeitende mit Wohnsitz in Frankreich per E-Mail-Link ein.',
+    hrDeskExample1: 'HR legt das Unternehmenskonto an und lädt Personal mit Wohnsitz in Frankreich per E-Mail-Link ein.',
     hrDeskExample2:
-      'HR lädt eine CSV mit den Tagen von 2026 bis heute hoch. Mitarbeitende sehen diese Tage als von HR erfasst markiert und bestätigen oder korrigieren sie.',
+      'HR lädt eine CSV mit den bisherigen Tagen von 2026 hoch. Mitarbeitende sehen diese Tage als von HR erfasst markiert und bestätigen oder korrigieren sie.',
     hrDeskExample3:
       'Das Dashboard zeigt für jede mitarbeitende Person den 40-%-Steuerzähler und das Sozialversicherungsband. Zwei Personen nahe an der Grenze erhalten einen Hinweis, im Dezember mehr Vor-Ort-Tage einzuplanen.',
     hrDeskExample4:
@@ -376,6 +375,12 @@ const de: Dict = {
     saveError: 'Speichern fehlgeschlagen. Bitte versuchen Sie es erneut.',
     deleteAllAccountConfirm: 'Alle in Ihrem Konto gespeicherten Tage löschen? Das kann nicht rückgängig gemacht werden.',
     importLocal: '{count} Tage von diesem Gerät in Ihr Konto kopieren',
+    importedByHr:
+      'Von HR importiert. Bestätigen Sie den Tag, wenn er stimmt, oder ändern Sie ihn. Ihre Fassung ersetzt dann den HR-Eintrag für die Zähler.',
+    importedConfirmed: 'Von HR importiert, und von Ihnen bestätigt.',
+    importedCorrected: 'Sie haben diesen Tag korrigiert. HR hat ihn zuerst erfasst; es zählt Ihre Fassung.',
+    confirmImportedDay: 'Diesen HR-Eintrag bestätigen',
+    importConfirmed: 'HR-Eintrag bestätigt.',
     disclaimerBanner:
       'Nur Erfassungstool — keine Steuer- oder Rechtsberatung. Schwellen bei der zuständigen Behörde prüfen.',
     employmentPercent: 'Beschäftigungsgrad dieses Jahr',
@@ -487,10 +492,13 @@ const de: Dict = {
     q8: 'Was deckt BorderDay nicht ab?',
     a8:
       'Selbständige, Sonderregeln des öffentlichen Sektors, Personen mit Arbeitgebern in mehreren Staaten und Arbeit ohne IT-Anbindung im Sinne des Rahmenübereinkommens. Nicht aufgeführte Grenzrouten wie Frankreich→Deutschland oder Niederlande→Deutschland. Zähler sehen nur hier erfasste Tage, andere Stellen im Jahr sind nicht enthalten. Steuerzähler gibt es nicht auf jeder Grenzroute. Der CSV-Export ist eine Arbeitsunterlage, keine amtliche Meldung wie die jährliche Telearbeitsquoten-Bescheinigung, die alle Schweizer Arbeitgeber von in Frankreich ansässigen Personen einreichen müssen (auch bei 0 %). Im Zweifel fragen Sie Ihre Behörde.',
+    q9: 'Kann HR vergangene Tage importieren?',
+    a9:
+      'Ja. Ein Kontoinhaber oder HR kann eine CSV mit vergangenen Tagen für Personen hochladen, die Mitglieder des Unternehmens sind, zum Beispiel den Rest eines Jahres, wenn das Unternehmen spät beitritt. Jeder importierte Tag wird als von HR erfasst gespeichert, mit der Person, die importiert hat, und dem Zeitpunkt. Er wird nicht so gespeichert, als hätte die mitarbeitende Person ihn erfasst. Tage, die die mitarbeitende Person bereits erfasst hat, bleiben unverändert. Die mitarbeitende Person sieht den importierten Tag im Kalender und kann ihn bestätigen oder korrigieren. Eine Korrektur ersetzt die HR-Werte für die Zähler. Eine optionale Notiz in der Datei ist nur für diese Person sichtbar: sie ist nicht im HR-Export, und HR kann sie nicht zurücklesen. Die Datei ist eine Arbeitsaufzeichnung. Sie ist nicht die Bescheinigung des Telearbeitsanteils und nicht die amtliche Meldung.',
   },
   privacy: {
     title: 'Datenschutz',
-    updated: 'Zuletzt aktualisiert: 1. Nov. 2026 (Europe/Zurich)',
+    updated: 'Zuletzt aktualisiert: 13. Nov. 2026 (Europe/Zurich)',
     intro:
       'Dieser Hinweis erklärt, welche Personendaten BorderDay bearbeitet, warum, wer sie erhält, wohin sie gehen und wie lange sie aufbewahrt werden, sowie Ihre Rechte nach der DSGVO und dem schweizerischen Bundesgesetz über den Datenschutz (DSG).',
     controllerTitle: 'Verantwortlicher',
@@ -498,13 +506,13 @@ const de: Dict = {
       'Die PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (UID CHE-312.418.158) ist Verantwortliche im Sinne der DSGVO und des schweizerischen Bundesgesetzes über den Datenschutz (DSG) für diese Website, Einzelpläne, Benutzerkonten, die Verwaltung von Unternehmenskonten, die Abrechnung, den Support und die Sicherheit. Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com (aktiver Alias von hello@). Personen in der EU/im EWR nutzen dieselben Adressen für Datenschutzanfragen.',
     rolesTitle: 'Wer für die Tagesprotokolle der Mitarbeitenden verantwortlich ist',
     rolesBody:
-      'In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage seiner Mitarbeitenden erfasst werden. Der Arbeitgeber ist daher Verantwortlicher für diese Tagesprotokolle und deren Nutzung durch HR, einschliesslich der Rechtsgrundlage, und BorderDay bearbeitet sie für ihn als Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Fragen dazu, warum Ihr Arbeitgeber diese Tage erfasst oder welche Unterlagen er aufbewahren muss, richten Sie zuerst an ihn; an privacy@borderday.com gesendete Anfragen leiten wir weiter. Der öffentliche Auftragsverarbeitungsvertrag für Unternehmenskonten steht unter /dpa/ (verlinkt von Preisen, Unternehmensanmeldung und den Nutzungsbedingungen).',
+      'In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage seiner Mitarbeitenden erfasst werden. Der Arbeitgeber ist daher Verantwortlicher für diese Tagesprotokolle und deren Nutzung durch HR, einschliesslich der Rechtsgrundlage, und BorderDay bearbeitet sie für ihn als Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Fragen dazu, warum Ihr Arbeitgeber diese Tage erfasst oder welche Unterlagen er aufbewahren muss, richten Sie zuerst an ihn; an privacy@borderday.com gesendete Anfragen leiten wir weiter. Der öffentliche Auftragsverarbeitungsvertrag für Unternehmenskonten steht unter /dpa/ (verlinkt von Preisen, Unternehmensanmeldung und den Nutzungsbedingungen). Das umfasst Tage, die HR für eine mitarbeitende Person erfasst. Der Arbeitgeber bleibt Verantwortlicher für diese Tage.',
     s1Title: 'Was wir erheben',
     s1Body:
-      'Kostenlose Vorschau, auf Ihrem Gerät: Grenzroute, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), ob es ein halber Tag war, Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen. Einzelplan: Grenzroute, Art und Datum jedes Tages Markierungen halber Tage und auswärtiger Übernachtung sowie Notizen werden in Ihrem Konto gespeichert. Die übrigen Felder bleiben auf Ihrem Gerät. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzroute, Tagesarten und Daten, Markierungen halber Tage und auswärtiger Übernachtung, private Notizen (mit dem Tag gespeichert, HR nie angezeigt), Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
+      'Kostenlose Vorschau, auf Ihrem Gerät: Grenzroute, Art jedes Tages (Telearbeit, vor Ort, Dienstreise / Drittstaat, arbeitsfrei), ob es ein halber Tag war, Markierung auswärtiger beruflicher Übernachtung, optionale Notizen, vertragliche Arbeitstage pro Jahr, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen. Einzelplan: Grenzroute, Art und Datum jedes Tages Markierungen halber Tage und auswärtiger Übernachtung sowie Notizen werden in Ihrem Konto gespeichert. Die übrigen Felder bleiben auf Ihrem Gerät. Unternehmenskonten: Name des Unternehmens, E-Mails und Namen der Mitglieder, Rollen, Grenzroute, Tagesarten und Daten, Markierungen halber Tage und auswärtiger Übernachtung, private Notizen (mit dem Tag gespeichert, HR nie angezeigt), Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, sowie der Nachweis, dass Ihnen der Hinweis zu den HR-Einsichten angezeigt wurde. Der Arbeitgeber kann für ein Mitglied auch eine historische Tagesart, ein Datum, eine Markierung halber Tag, eine Markierung auswärtige Übernachtung und eine optionale Notiz liefern. BorderDay speichert, wer den Tag erfasst hat (die mitarbeitende Person oder HR), wer importiert hat, wann, und ob die mitarbeitende Person ihn später bestätigt oder korrigiert hat. Die Notiz wird nur der mitarbeitenden Person gezeigt. HR kann sie nicht zurücklesen. Konten und Abrechnung: E-Mail, Name, Anmeldemethode, Abostatus und Stripe-Kundenreferenz. Ihre vollständige Kartennummer erhalten wir nicht.',
     s2Title: 'Was wir nicht erheben',
     s2Body:
-      'Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und halber Tag und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat. HR sieht zudem Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, und Anzahlen: dieselben Zähler wie die Mitarbeitenden. Keine IP-Adresse wird als Arbeitsort gespeichert. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
+      'Kein GPS und kein Gerätestandort. HR sieht je Datum die Tagesart (und halber Tag und auswärtige Übernachtung ja/nein): eine Länderkategorie, nie Koordinaten. Notizen bleiben für die mitarbeitende Person privat. Ein importierter Tag ist als von HR erfasst gekennzeichnet. HR kann die Notiz weiterhin nicht lesen. HR sieht zudem Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1 und Status Frankreich–Belgien vor 2012, falls eingetragen, und Anzahlen: dieselben Zähler wie die Mitarbeitenden. Keine IP-Adresse wird als Arbeitsort gespeichert. Keine Werbe-Tracker. Kein Verkauf personenbezogener Daten.',
     tableTitle: 'Zwecke, Rechtsgrundlagen, Empfänger, Übermittlungen und Aufbewahrung',
     tableIntro:
       'Artikelangaben beziehen sich auf die DSGVO. Das schweizerische DSG zählt Rechtsgrundlagen nicht auf dieselbe Weise auf; es gelten dieselben Zwecke, Empfänger und Länder.',
@@ -551,7 +559,7 @@ const de: Dict = {
       },
       {
         purpose: 'Unternehmenskonto: Tagesprotokolle der Mitarbeitenden und HR-Zähler (der Arbeitgeber ist Verantwortlicher, BorderDay sein Auftragsverarbeiter / Auftragsbearbeiter)',
-        data: 'Name, E-Mail, Grenzroute, Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1, Status Frankreich–Belgien vor 2012, Tagesart und Datum, Markierungen halber Tage und auswärtiger Übernachtung, Zähler. Notizen bleiben für die mitarbeitende Person privat.',
+        data: 'Name, E-Mail, Grenzroute, Arbeitstage, vertragliche Arbeitstage, Beschäftigungsgrad, A1, Status Frankreich–Belgien vor 2012, Tagesart und Datum, Markierungen halber Tage und auswärtiger Übernachtung, Zähler. Notizen bleiben für die mitarbeitende Person privat. Beschäftigungsbeginn und -ende, wenn HR sie setzt. Für einen importierten Tag: dass HR ihn erfasst hat, wer importiert hat, wann, und ob die mitarbeitende Person ihn später bestätigt oder korrigiert hat. Eine optionale Notiz zu einem importierten Tag bleibt für die mitarbeitende Person privat.',
         basis: 'Vom Arbeitgeber als Verantwortlichem festgelegt, zum Beispiel eine rechtliche Verpflichtung oder berechtigte Interessen. BorderDay stützt sich hier nicht auf eine Einwilligung der Mitarbeitenden.',
         recipients: 'Die Kontoinhaber und HR des Arbeitgebers; Supabase',
         transfer: 'Hosting in der EU (eu-central-1); Anbieter mit Sitz in den USA; Garantien siehe unten',
@@ -638,7 +646,7 @@ const de: Dict = {
   },
   company: {
     exportDaysCsv: "Tage exportieren (CSV)",
-    exportDaysNote: "Tage-Export: Datum, Tagesart, halber Tag und auswärtige Übernachtung zum Prüfen der Zähler, nie Notizen oder Standort. Ein halber Tag zählt als 0,5, ausser eine Regel behandelt jeden Tagesteil als ganzen Tag.",
+    exportDaysNote: "Tage-Export: Datum, Tagesart, halber Tag und auswärtige Übernachtung zum Prüfen der Zähler, nie Notizen oder Standort. Ein halber Tag zählt als 0,5, ausser eine Regel behandelt jeden Tagesteil als ganzen Tag. Die Spalte Herkunft sagt, ob die Person den Tag erfasst hat oder HR ihn importiert hat, und ob die Person den Import später bestätigt oder korrigiert hat.",
     signupRouteNote: "Hier brauchen Sie nur den Namen des Unternehmens. Die Grenzroute wird pro mitarbeitende Person gewählt, wenn sie beitritt.",
     inviteNeedsPlan: "Kein aktiver Plan und keine Testphase: Die Einladung wird erstellt und Sie erhalten einen Link zum Teilen, aber sie wird nicht per E-Mail versendet. Starten Sie auf der Preisseite einen Plan, um E-Mails zu senden.",
     sendingInvite: "Wird gesendet…",
@@ -700,7 +708,7 @@ const de: Dict = {
     viewHistory: 'Tageshistorie',
     historyTitle: 'Tageshistorie der Person',
     historySubtitle:
-      'Nur Tagesart, Datum, Markierung halber Tage und auswärtiger Übernachtung. Es werden weder GPS noch Gerätestandort gespeichert, und Notizen werden nicht angezeigt.',
+      'Tagesart, Datum, halber Tag, auswärtige Übernachtung und wer den Tag erfasst hat. Es werden weder GPS noch Gerätestandort gespeichert, und Notizen werden nicht angezeigt.',
     backDashboard: 'Zurück zum Dashboard',
     joinTitle: 'Unternehmen beitreten',
     joinSubtitle: 'Einladung annehmen, Hinweis lesen, was HR sehen kann, und Grenzroute wählen.',
@@ -752,12 +760,12 @@ const de: Dict = {
     profileSaved: 'Gespeichert.',
     noticeTitle: 'Hinweis — was HR sehen kann',
     noticeBody:
-      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob es ein halber Tag war, ob er als auswärtige berufliche Übernachtung markiert ist, auf der Route Frankreich–Belgien den Status als Grenzgänger vor 2012, falls eingetragen, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad, Ihre Arbeitstage-Basis, Ihre vertraglichen Arbeitstage, Ihre A1 und diesen Status Frankreich–Belgien eintragen. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll jederzeit exportieren. Nach dem Verlassen des Unternehmens können Sie Ihre eigene Kopie im Konto weiterhin exportieren oder löschen; die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist. Fragen Sie Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 13–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist. Erfassungstool, keine Steuer- oder Rechtsberatung.',
+      'Dies ist eine Information, keine Bitte um Einwilligung: Ihr Arbeitgeber entscheidet, warum und auf welcher Rechtsgrundlage er diese Tage erfasst, und ist dafür verantwortlich. Wenn Sie beitreten, können die Kontoinhaber und HR Ihres Arbeitgebers sehen: Ihren Namen, Ihre E-Mail, die gewählte Grenzroute, die vertraglichen Arbeitstage, Beschäftigungsgrad und A1, falls eingetragen, Art und Datum jedes erfassten Tages, ob es ein halber Tag war, ob er als auswärtige berufliche Übernachtung markiert ist, auf der Route Frankreich–Belgien den Status als Grenzgänger vor 2012, falls eingetragen, sowie dieselben Steuer- und Sozialversicherungszähler wie Sie. Sie können auch Ihren Beschäftigungsgrad, Ihre Arbeitstage-Basis, Ihre vertraglichen Arbeitstage, Ihre A1 und diesen Status Frankreich–Belgien eintragen. HR oder ein Kontoinhaber kann vergangene Tage für Sie erfassen. Diese Tage sind als von HR erfasst markiert, mit der Person, die importiert hat, und dem Zeitpunkt. Sie können einen Tag bestätigen oder korrigieren. Ihre Korrektur ersetzt die HR-Werte für die Zähler. Eine Notiz in dieser Datei ist nur für Sie sichtbar. Sie sehen weder GPS noch Gerätestandort, weil BorderDay diese nicht erhebt, und Ihre Notizen bleiben privat. Die Tagesart zeigt allerdings je Datum eine Länderkategorie. Sie können Ihr Protokoll jederzeit exportieren. Nach dem Verlassen des Unternehmens können Sie Ihre eigene Kopie im Konto weiterhin exportieren oder löschen; die Kopie des Arbeitgebers bleibt gemäss seiner Aufbewahrungsfrist. Fragen Sie Ihren Arbeitgeber oder privacy@borderday.com zu Ihren Rechten. Aufbewahrung: standardmässig 24 Monate (Unternehmenseinstellung, 13–120 Monate); Unternehmens-Tagesprotokolle älter als dieses Fenster werden täglich automatisch gelöscht. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist. Erfassungstool, keine Steuer- oder Rechtsberatung.',
     noticeAck: 'Ich habe diesen Hinweis gelesen',
     noticeRequired: 'Bestätigen Sie, dass Sie den Hinweis gelesen haben, um fortzufahren.',
     noticePrivacyLink: 'Vollständige Datenschutzerklärung',
     dpaVersionNote:
-      'Mit der Erstellung dieses Unternehmenskontos gilt unser Auftragsverarbeitungsvertrag, wie auf jener Seite angegeben (Fassung vom 1. Nov. 2026). Wir speichern die Fassung und den Zeitpunkt.',
+      'Mit der Erstellung dieses Unternehmenskontos gilt unser Auftragsverarbeitungsvertrag, wie auf jener Seite angegeben (Fassung vom 13. Nov. 2026). Wir speichern die Fassung und den Zeitpunkt.',
     retentionConfirm:
       'Aufbewahrung auf {months} Monate senken? Ältere Unternehmens-Tagesprotokolle werden bei der nächsten täglichen Löschung endgültig gelöscht. Das kann nicht rückgängig gemacht werden.',
     retentionConfirmShort:
@@ -776,11 +784,72 @@ const de: Dict = {
     inviteAlreadyMember: 'Diese Adresse ist bereits aktives Mitglied dieses Unternehmens.',
     inviteReused: 'Für diese Adresse gibt es bereits eine ausstehende Einladung. Wir haben sie nicht erneut per E-Mail gesendet, weil in der letzten Stunde schon eine gesendet wurde; teilen Sie den Link oder versuchen Sie es später.',
     inviteReusedEmailed: 'Einladung bereits ausstehend; E-Mail erneut gesendet.',
+    colEnteredBy: 'Erfasst von',
+    employedFrom: 'Beschäftigungsbeginn',
+    employedFromHint:
+      'Erster Beschäftigungstag dieser Person im Unternehmen. Leer: jeder vergangene Tag ist zulässig, auch vor dem Beitritt zu BorderDay.',
+    employedUntil: 'Beschäftigungsende',
+    employedUntilHint: 'Letzter Beschäftigungstag hier. Leer: kein Enddatum, ausser die Person wurde entfernt.',
+    employedOrder: 'Der Beschäftigungsbeginn muss am oder vor dem Beschäftigungsende liegen.',
+    dayImport: {
+      title: 'Vergangene Tage importieren',
+      intro:
+        'Laden Sie eine CSV mit Tagen hoch, die Mitarbeitende nicht selbst erfasst haben, zum Beispiel den Rest von 2026, wenn das Unternehmen erst spät im Jahr beitritt. Jeder importierte Tag wird als von HR erfasst gespeichert, mit Person und Zeitpunkt. Er sieht nie so aus, als hätte die mitarbeitende Person ihn selbst erfasst. Bereits selbst erfasste Tage werden übersprungen und nicht verändert. Im Kalender sieht die Person, dass HR den Tag erfasst hat, und kann ihn bestätigen oder korrigieren. Eine Korrektur ersetzt die HR-Werte für die Zähler. Die optionale Notiz sieht nur diese Person: sie steht nicht im HR-Export, und HR kann sie nicht wieder lesen. Diese Datei ist eine Arbeitsunterlage, nicht die Bescheinigung der Telearbeitsquote. Die Spaltennamen in der Datei bleiben Englisch.',
+      template: 'CSV-Vorlage herunterladen',
+      choose: 'CSV-Datei',
+      employmentHint:
+        'Ein Datum wird abgelehnt, wenn es vor dem Beschäftigungsbeginn dieser Person liegt oder nach dem Beschäftigungsende oder dem Tag der Entfernung. Tragen Sie die Daten im Profil unten ein. Leer lassen heisst: jeder vergangene Tag ist zulässig. Zukünftige Daten werden abgelehnt.',
+      summary: '{ready} bereit, {skipped} übersprungen, {errors} mit Fehler.',
+      previewCaption: 'Importvorschau',
+      colEmail: 'E-Mail',
+      colDate: 'Datum',
+      colType: 'Tagesart',
+      colStatus: 'Ergebnis',
+      colDetail: 'Detail',
+      statusReady: 'Bereit',
+      statusSkipped: 'Übersprungen',
+      statusError: 'Fehler',
+      statusImported: 'Importiert',
+      confirm: '{count} Tage importieren',
+      confirmHint: 'Es wird nichts geschrieben, bis Sie bestätigen. Nur als bereit markierte Zeilen werden importiert.',
+      working: 'Import läuft…',
+      done: '{imported} importiert, {skipped} übersprungen, {errors} nicht importiert.',
+      noneReady: 'Keine Zeile ist bereit für den Import.',
+      failed: 'Der Import konnte nicht abgeschlossen werden. Wurde er abgelehnt, wurde nichts Neues geschrieben.',
+      noPlan: 'Dieses Unternehmen hat keinen aktiven Plan oder Testzeitraum, Tage können noch nicht importiert werden.',
+      tooBig: 'Diese Datei hat mehr als {max} Datenzeilen. Teilen Sie sie und importieren Sie jeden Teil.',
+      empty: 'Die Datei hat keine Datenzeilen.',
+      badFile:
+        'Die Datei braucht eine Kopfzeile mit employee_email, date und day_type. Optionale Spalten: overnight_away, half_day, note.',
+      showing: 'Die ersten {shown} von {total} Zeilen. Jede Zeile wurde geprüft.',
+      provenanceEmployee: 'Mitarbeitende Person',
+      provenanceHr: 'HR-Import',
+      provenanceHrConfirmed: 'HR-Import, von der Person bestätigt',
+      provenanceHrCorrected: 'HR-Import, von der Person korrigiert',
+      errors: {
+        unknown_email: 'Kein Konto verwendet diese E-Mail.',
+        not_member: 'Diese E-Mail ist kein Mitglied dieses Unternehmens.',
+        ambiguous_email: 'Mehr als ein Konto verwendet diese E-Mail.',
+        bad_date: 'Verwenden Sie ein echtes Datum als JJJJ-MM-TT.',
+        future_date: 'Zukünftige Daten können nicht importiert werden.',
+        duplicate_in_file: 'Diese E-Mail und dieses Datum stehen mehr als einmal in der Datei.',
+        outside_employment: 'Dieses Datum liegt ausserhalb der Beschäftigungszeit der Person.',
+        invalid_type: 'Die Tagesart muss telework, onsite, third_country oder non_working sein.',
+        invalid_half_day: 'Ein arbeitsfreier Tag kann kein halber Tag sein.',
+        invalid_overnight: 'Eine auswärtige Übernachtung gilt nur für einen Tag vor Ort oder eine Reise.',
+        invalid_flag: 'Auswärtige Übernachtung und halber Tag müssen yes oder no sein.',
+        note_too_long: 'Die Notiz ist länger als 500 Zeichen.',
+        other_company: 'Diese Person hat dieses Datum schon bei einem anderen Unternehmen. Es wurde nicht geändert.',
+        skipped_employee: 'Die Person hat dieses Datum schon erfasst. Es wurde nicht überschrieben.',
+        skipped_already_imported: 'Dieses Datum wurde schon importiert. Es wurde nicht überschrieben.',
+        invalid_note: 'Die Notiz muss Text sein.',
+      },
+    },
   },
 
   terms: {
     title: 'Nutzungsbedingungen & Impressum',
-    updated: 'Zuletzt aktualisiert: 1. Nov. 2026 (Europe/Zurich)',
+    updated: 'Zuletzt aktualisiert: 13. Nov. 2026 (Europe/Zurich)',
     providerTitle: 'Impressum: Anbieter und Vertragspartner',
     providerBody:
       'Der BorderDay-Dienst und diese Website werden von PrimeLogic Advisory Sàrl, Cours des Bastions 13, 1205 Genève, Schweiz (UID CHE-312.418.158; schweizerische Unternehmens-Identifikationsnummer), bereitgestellt; sie ist Vertragspartnerin für den Dienst. Die Gesellschaft ist unter dieser UID im Handelsregister Genf eingetragen und wird durch ihre dort eingetragenen Geschäftsführer vertreten. Kontakt: hello@borderday.com · Datenschutz: privacy@borderday.com · Telefon: +41 22 510 27 00. Postanschrift wie oben. Checkout nutzt Stripe Managed Payments: in diesem Produkt übernimmt Stripe Merchant-of-Record-Funktionen für Zahlung, Erhebung und Abführung der MWST sowie Erstattungen auf Bestellebene, soweit Managed Payments gilt; im Checkout kann der Kunde Link als Merchant of Record sehen (Sold through Link).',
@@ -790,7 +859,7 @@ const de: Dict = {
       'BorderDay ist ein Werkzeug zur Erfassung und Erinnerung an Tagesklassifikationen für Arbeitgeber und Mitarbeitende auf ausgewählten Grenzrouten. Es ist keine Steuer- oder Rechtsberatung und kein Ersatz für Ihren Arbeitgeber, eine qualifizierte Beratung oder eine zuständige Behörde. Siehe Rechtlicher Hinweis.',
     s2Title: 'Konten und Unternehmensnutzung',
     s2Body:
-      'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen eine Grenzroute und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Arbeitgeberseitige Pflichten können die rechtmässige Nutzung blockieren, solange sie nicht erfüllt sind: beispielsweise die Mitbestimmung des Betriebsrats bei technischen Einrichtungen zur Überwachung (Deutschland BetrVG § 87 Abs. 1 Nr. 6), Anhörungs- oder Gesamtarbeitsvertragsregeln in Frankreich, Belgien, Luxemburg und der Schweiz sowie örtliche Regeln zur Mitarbeiterüberwachung oder zum Persönlichkeitsschutz am Arbeitsplatz. BorderDay führt diese Konsultationen nicht für Sie durch. Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist.',
+      'Sie müssen korrekte Kontodaten angeben. Kontoinhaber des Unternehmens laden Mitarbeitende ein; diese wählen eine Grenzroute und erfassen nur die Tagesart (kein GPS und kein Gerätestandort). HR sieht dieselben Zähler wie die mitarbeitende Person. In einem Unternehmenskonto entscheidet der Arbeitgeber, warum und wie die Tage erfasst werden: Er ist Verantwortlicher für diese Tagesprotokolle und zuständig für die Rechtsgrundlage, die Information der Mitarbeitenden und jede nach seinem Recht erforderliche Mitwirkung, und der Anbieter handelt als sein Auftragsverarbeiter (DSGVO) / Auftragsbearbeiter (DSG). Arbeitgeberseitige Pflichten können die rechtmässige Nutzung blockieren, solange sie nicht erfüllt sind: beispielsweise die Mitbestimmung des Betriebsrats bei technischen Einrichtungen zur Überwachung (Deutschland BetrVG § 87 Abs. 1 Nr. 6), Anhörungs- oder Gesamtarbeitsvertragsregeln in Frankreich, Belgien, Luxemburg und der Schweiz sowie örtliche Regeln zur Mitarbeiterüberwachung oder zum Persönlichkeitsschutz am Arbeitsplatz. BorderDay führt diese Konsultationen nicht für Sie durch. Der Anbieter ist Verantwortlicher für Konten, Abrechnung und Sicherheit. Der Auftragsverarbeitungsvertrag für die Tagesprotokolle der Mitarbeitenden ist unter /dpa/ veröffentlicht. Sie sind für die Richtigkeit der erfassten Tage verantwortlich. Wenn HR einen vergangenen Tag importiert, ist er als von HR erfasst markiert. Die mitarbeitende Person kann ihn bestätigen oder korrigieren, und die Korrektur ersetzt die HR-Werte für die Zähler. Der Arbeitgeber bleibt für die Richtigkeit der Tage verantwortlich, die er importiert. Art. 328b OR begrenzt die Bearbeitung von Arbeitnehmerdaten durch den Arbeitgeber auf das, was die Eignung für das Arbeitsverhältnis betrifft oder zur Durchführung des Arbeitsvertrags erforderlich ist.',
     s3Title: 'Abonnements, Testphase, Verlängerung und Kündigung',
     s3Body:
       'Bezahlte Pläne sind Abonnements. Unternehmens- und Einzelpläne beginnen mit einer 7-tägigen kostenlosen Testphase; bei der Anmeldung ist eine Zahlungskarte erforderlich. Die kostenlose Testphase gibt es einmal pro Person und einmal pro Unternehmen: Hatten Sie oder das Unternehmen bereits eine, auch eine gekündigte, beginnt der Plan beim Checkout und wird dann belastet. Nach 7 Tagen wird der Plan zum angegebenen Preis kostenpflichtig: Ihre Karte wird am 8. Tag automatisch belastet, und das Abo verlängert sich danach jeden Monat oder jedes Jahr bis zu Ihrer Kündigung. Kündigen Sie vor dem 8. Tag, wird nichts abgebucht. Ohne gültiges Zahlungsmittel zum Ende der Testphase wird das Abo beendet. Sie können jederzeit über den Link «Verträge hier kündigen» in der Fusszeile jeder Seite kündigen; er führt zum Kundenportal, zu den Link-Bestellwerkzeugen oder zu einer Anfrage per E-Mail. Die Kündigung wird am Ende der laufenden bezahlten Periode oder der kostenlosen Testphase wirksam: der Plan bleibt bis dahin aktiv und verlängert sich nicht. Bereits eingezogene Beträge für eine begonnene Abrechnungsperiode werden nicht anteilig erstattet, sofern nicht das Gesetz oder die Erstattungsbedingungen von Link es verlangen. Nach der Rechtssache C-565/22 (Sofatutor) ist ein Vertrag mit kostenloser Testphase, der sich automatisch in einen kostenpflichtigen Zeitraum verlängert, und bei dem der Preis bei Vertragsschluss klar, verständlich und ausdrücklich mitgeteilt wurde, ein Vertrag mit einem gesetzlichen Widerrufsrecht für die gesamte Periode — kein zweites Recht bei Beginn der Belastung.',
@@ -941,7 +1010,7 @@ const de: Dict = {
   },
   dpa: {
     title: 'Auftragsverarbeitungsvertrag (Unternehmenskonten)',
-    updated: 'Zuletzt aktualisiert: 1. Nov. 2026 (Europe/Zurich)',
+    updated: 'Zuletzt aktualisiert: 13. Nov. 2026 (Europe/Zurich)',
     intro:
       'Dieser Auftragsverarbeitungsvertrag («AVV») gilt, wenn ein Arbeitgeber ein BorderDay-Unternehmenskonto nutzt, damit BorderDay personenbezogene Daten der Mitarbeitenden dieses Arbeitgebers (Tagesprotokolle und zugehörige Mitgliedschaftsdaten) verarbeitet. Er wird nach Artikel 28 DSGVO und nach dem schweizerischen Datenschutzgesetz (DSG) für die Verarbeitung durch einen Auftragsbearbeiter angeboten. Das Anlegen oder Nutzen eines Unternehmenskontos bzw. die weitere Nutzung nach Veröffentlichung dieser Seite gilt als Annahme dieses AVV durch den Arbeitgeber für diese Verarbeitung.',
     partiesTitle: 'Parteien',
@@ -952,13 +1021,13 @@ const de: Dict = {
       'Für Tagesprotokolle der Mitarbeitenden, Einladungen und die daraus abgeleiteten HR-Zähler ist der Arbeitgeber Verantwortlicher und PrimeLogic Advisory Sàrl Auftragsbearbeiterin. Für die BorderDay-Website, Einzelangebote, Benutzerkonten, Verwaltung des Unternehmenskontos, Abrechnung, Support und Sicherheit bleibt PrimeLogic Advisory Sàrl Verantwortliche im Sinne der Datenschutzerklärung. Stripe und Link handeln als unabhängige Verantwortliche für den Zahlungsvorgang nach ihren eigenen Hinweisen; sie sind keine Auftragsbearbeiter der Tagesprotokolle unter diesem AVV.',
     subjectTitle: 'Gegenstand und Art der Verarbeitung',
     subjectBody:
-      'Gegenstand: Hosting, Speicherung, Abruf, Übermittlung und Anzeige von Mitgliedschafts- und Tagesprotokolldaten, damit der Arbeitgeber Telearbeits- und Steuerzähler führen kann. Art: automatisierte Verarbeitung in einer gehosteten Anwendung (Erstellen, Lesen, Aktualisieren, Löschen; Aggregation zu Zählern; Einladungs-E-Mail). Zweck: nur die Zwecke, die der Arbeitgeber über die BorderDay-Unternehmensfunktionen anweist, und wie in der Datenschutzerklärung beschrieben. Betroffene: Mitarbeitende und andere natürliche Personen, die der Arbeitgeber zum Unternehmenskonto einlädt. Datenkategorien: Name, E-Mail, Rolle, Grenzroute, vertragliche Arbeitstage, Arbeitstage-Basis, Beschäftigungsgrad, A1-Angabe und Status Frankreich–Belgien vor 2012 falls erfasst, Tagesart und Datum, Markierung halber Tage, Markierung auswärtiger Übernachtung, Zähler sowie der Vermerk, dass der Hinweis «was HR sieht» gezeigt wurde. Notizen bleiben privat beim Mitarbeitenden. Es werden keine GPS- oder Gerätestandortdaten erhoben.',
+      'Gegenstand: Hosting, Speicherung, Abruf, Übermittlung und Anzeige von Mitgliedschafts- und Tagesprotokolldaten, damit der Arbeitgeber Telearbeits- und Steuerzähler führen kann. Art: automatisierte Verarbeitung in einer gehosteten Anwendung (Erstellen, Lesen, Aktualisieren, Löschen; Aggregation zu Zählern; Einladungs-E-Mail). Zweck: nur die Zwecke, die der Arbeitgeber über die BorderDay-Unternehmensfunktionen anweist, und wie in der Datenschutzerklärung beschrieben. Betroffene: Mitarbeitende und andere natürliche Personen, die der Arbeitgeber zum Unternehmenskonto einlädt. Datenkategorien: Name, E-Mail, Rolle, Grenzroute, vertragliche Arbeitstage, Arbeitstage-Basis, Beschäftigungsgrad, A1-Angabe und Status Frankreich–Belgien vor 2012 falls erfasst, Tagesart und Datum, Markierung halber Tage, Markierung auswärtiger Übernachtung, Zähler sowie der Vermerk, dass der Hinweis «was HR sieht» gezeigt wurde. Beschäftigungsbeginn und -ende, wenn der Arbeitgeber sie setzt. Wenn der Arbeitgeber historische Tage importiert: dass HR den Tag erfasst hat, die importierende Person, der Zeitpunkt und eine spätere Bestätigung oder Korrektur durch die mitarbeitende Person. Notizen bleiben privat beim Mitarbeitenden. Es werden keine GPS- oder Gerätestandortdaten erhoben.',
     durationTitle: 'Dauer',
     durationBody:
       'Die Verarbeitung dauert für die Lebensdauer des Unternehmenskontos und der Mitgliedschaft und danach nur so lange, wie zur Löschung oder Rückgabe nach diesem AVV und den in der Datenschutzerklärung genannten Aufbewahrungsfristen (einschliesslich einer Unternehmens-Aufbewahrungseinstellung) erforderlich.',
     instructionsTitle: 'Dokumentierte Weisungen (Art. 28 Abs. 3 lit. a DSGVO)',
     instructionsBody:
-      'Die Auftragsbearbeiterin verarbeitet Tagesprotokolldaten nur auf dokumentierte Weisungen des Verantwortlichen. Die BorderDay-Nutzungsbedingungen, dieser AVV, die Datenschutzerklärung und die Handlungen der Kontoinhaber im Produkt (Einladen, Entfernen, Aufbewahrungseinstellung, Exportanfragen) sind die Weisungen. Die Auftragsbearbeiterin informiert den Arbeitgeber, wenn eine Weisung ihrer Ansicht nach gegen die DSGVO oder das DSG verstösst.',
+      'Die Auftragsbearbeiterin verarbeitet Tagesprotokolldaten nur auf dokumentierte Weisungen des Verantwortlichen. Die BorderDay-Nutzungsbedingungen, dieser AVV, die Datenschutzerklärung und die Handlungen der Kontoinhaber im Produkt (Einladen, Entfernen, Aufbewahrungseinstellung, Exportanfragen und Import historischer Tage für Mitglieder) sind die Weisungen. BorderDay schreibt diese Tage nur für Mitglieder dieses Unternehmens, markiert sie als von HR erfasst und überschreibt keinen Tag, den die mitarbeitende Person bereits erfasst hat. Die Auftragsbearbeiterin informiert den Arbeitgeber, wenn eine Weisung ihrer Ansicht nach gegen die DSGVO oder das DSG verstösst.',
     securityTitle: 'Sicherheit (Art. 28 Abs. 3 lit. c DSGVO; Art. 8 DSG)',
     securityBody:
       'Die Auftragsbearbeiterin trifft angemessene technische und organisatorische Massnahmen, einschliesslich Zugangskontrolle und Verschlüsselung bei der Übertragung zur gehosteten Datenbank, rollenbasierter Isolation zwischen Unternehmenskonten (RLS) und Beschränkung des Mitarbeiterzugangs auf das für Support und Sicherheit Erforderliche. Hosting-Details stehen unter Unterauftragsbearbeitern.',
@@ -1004,6 +1073,7 @@ const de: Dict = {
   footer: {
     tagline: 'Tageserfassung für grenzüberschreitende Teams und Mitarbeitende.',
     rights: '© {year} BorderDay',
+    fiduciaries: 'Für Treuhandbüros und Lohnbuchhaltungen',
   },
   auth: {
     signInTitle: 'Anmelden',
@@ -1181,33 +1251,34 @@ const de: Dict = {
     faq5a:
       'Nein. Es trackt Tage gegen öffentliche Schwellen, die hier und in der App verlinkt sind. Meldungen mit Berater oder zuständiger Verwaltung bestätigen.',
   },
-
   fiduciaries: {
-    footerLink: 'Für Treuhandbüros und Lohnbuchhaltungen',
+    crumb: 'Treuhandbüros',
     heroTitle: 'Grenzgängertage aller Mandanten, mit einem einzigen Login',
     intro:
-      'Wenn Sie die Lohnbuchhaltung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay die grenzüberschreitend tätigen Mitarbeitenden jedes Mandanten von einem Konto aus verfolgen, wobei jeder Mandant vollständig getrennt bleibt.',
+      'Wenn Sie die Lohnbuchhaltung oder die HR-Administration für mehrere Unternehmen führen, können Sie mit BorderDay das grenzüberschreitende Personal jedes Mandanten von einem Konto aus verfolgen, und jeder Mandant bleibt vollständig getrennt.',
     howTitle: 'So funktioniert es',
-    point1Title: 'Ein Konto, mehrere Mandanten.',
-    point1Body:
-      'Sie können mit derselben Anmeldung HR mehrerer Unternehmen sein und beim Anmelden den Mandanten aus einer Liste wählen.',
-    point2Title: 'Jeder Mandant bleibt getrennt.',
-    point2Body:
+    how1Title: 'Ein Konto, mehrere Mandanten.',
+    how1Body:
+      'Sie können HR für mehrere Unternehmen mit derselben Anmeldung sein und den Mandanten beim Anmelden aus einer Liste wählen.',
+    how2Title: 'Jeder Mandant bleibt getrennt.',
+    how2Body:
       'Jedes Unternehmen hat eigene Mitarbeitende, ein eigenes Dashboard und einen eigenen CSV-Export. Daten der Mandanten werden nie vermischt.',
-    point3Title: 'Das bisherige Jahr laden.',
-    point3Body:
-      'Kommt ein Mandant erst im laufenden Jahr dazu, laden Sie eine CSV der bisherigen Tage hoch. Mitarbeitende sehen die Tage als von HR erfasst markiert und können sie bestätigen oder korrigieren.',
-    point4Title: 'Dieselben Zähler wie die mitarbeitende Person.',
-    point4Body:
-      'Steuer- und Sozialversicherungszähler auf den abgedeckten Grenzrouten, mit Warnungen bei 75 % und 90 % einer Grenze.',
-    point5Title: 'Der Mandant kann die Leitung behalten.',
-    point5Body:
+    how3Title: 'Das bisherige Jahr laden.',
+    how3Body:
+      'Kommt ein Mandant im laufenden Jahr dazu, laden Sie eine CSV der bisherigen Tage hoch. Mitarbeitende sehen die Tage als von HR erfasst markiert und können sie bestätigen oder korrigieren.',
+    how4Title: 'Dieselben Zähler wie die mitarbeitende Person.',
+    how4Body:
+      'Steuer- und Sozialversicherungszähler auf den unterstützten Grenzrouten, mit Warnungen bei 75 % und 90 % einer Grenze.',
+    how5Title: 'Der Mandant kann die Führung behalten.',
+    how5Body:
       'Der Mandant kann Kontoinhaber sein und Sie als HR einladen, oder Sie legen das Unternehmenskonto an und laden dessen Mitarbeitende ein.',
-    pricing:
-      'Jeder Mandant hat einen eigenen Plan: 5 € je aktive mitarbeitende Person und Monat, Minimum 39 € pro Monat, zzgl. MWST. Fragen zu mehreren Mandanten? Schreiben Sie an hello@borderday.com.',
-    dataProtection:
+    pricingTitle: 'Preise',
+    pricingBody:
+      'Jeder Mandant hat einen eigenen Plan: 5 € je aktive mitarbeitende Person und Monat, mindestens 39 € pro Monat, zzgl. MWST. Fragen zu mehreren Mandanten? Schreiben Sie an hello@borderday.com.',
+    dataBody:
       'Für jedes Unternehmenskonto gilt ein Auftragsverarbeitungsvertrag. Kein GPS und kein Gerätestandort, nur Tagesarten.',
-    ctaAccount: 'Unternehmenskonto erstellen',
+    ctaPrimary: 'Unternehmenskonto erstellen',
+    ctaPricing: 'Unternehmenspreise ansehen',
   },
 };
 

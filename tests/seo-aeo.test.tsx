@@ -18,7 +18,7 @@ import { LANGS, PAGES, organizationLd, sitemapXml } from '../scripts/seo.mjs';
 const ROOT = join(import.meta.dirname, '..');
 const PACK_IDS = /geneva_fr|luxembourg_fr|luxembourg_be|luxembourg_de|ticino_it/;
 const PUBLIC_TAIL =
-  '(?:pricing|faq|for-individuals|fiduciaries|privacy|dpa|disclaimer|accessibility|terms|withdrawal|cancel|company\\/signup|employers\\/(?:ticino|geneva|luxembourg)|guides(?:\\/(?:france-(?:luxembourg|geneve|bale)-compter-jours-teletravail|deutschland-schweiz-grenzgaenger-tage-zaehlen|italia-ticino-contare-giorni-telelavoro|france-geneva-telework-days|france-luxembourg-telework-days|how-to-track-cross-border-telework-days))?)';
+  '(?:pricing|faq|for-individuals|privacy|dpa|disclaimer|accessibility|terms|withdrawal|cancel|company\\/signup|employers\\/(?:ticino|geneva|luxembourg)|fiduciaries|guides(?:\\/(?:france-(?:luxembourg|geneve|bale)-compter-jours-teletravail|deutschland-schweiz-grenzgaenger-tage-zaehlen|italia-ticino-contare-giorni-telelavoro|france-geneva-telework-days|france-luxembourg-telework-days|how-to-track-cross-border-telework-days))?)';
 
 afterEach(() => {
   cleanup();

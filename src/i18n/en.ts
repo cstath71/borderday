@@ -92,6 +92,26 @@ const en = {
     routesRoute: 'Route',
     routesTax: 'Tax counter',
     routesSs: 'Social-security counter',
+    hrDeskTitle: "What BorderDay takes off HR's desk",
+    hrDeskIntro:
+      'No more spreadsheet of who worked where. Employees log their own day types, BorderDay keeps the counters, and HR sees who is getting close to a limit before it is crossed.',
+    hrDesk1Title: 'No manual reconciliation.',
+    hrDesk1Body:
+      'Each employee logs telework, on site, work trip or non-working days in a few seconds. HR reads one dashboard instead of chasing emails.',
+    hrDesk2Title: 'Warnings before a limit, not after.',
+    hrDesk2Body:
+      'Tax and social-security counters warn at 75% and 90% of the applicable limit, so there is time to plan on-site days.',
+    hrDesk3Title: 'Year-end figures ready.',
+    hrDesk3Body: "Export every employee's days and counters as CSV, ready for your own checks and your filing work.",
+    hrDeskExampleTitle: 'Example: a Geneva employer, November',
+    hrDeskExample1: 'HR creates the company account and invites staff living in France by email link.',
+    hrDeskExample2:
+      'HR uploads one CSV with the days of 2026 so far. Employees see those days marked as entered by HR and confirm or correct them.',
+    hrDeskExample3:
+      "The dashboard shows each employee's 40% tax counter and social-security band. Two people near the limit get a heads-up to plan more on-site days in December.",
+    hrDeskExample4:
+      'In January, HR exports the year as CSV as the working record for the telework-rate attestation filed with the cantonal tax authority.',
+    hrDeskExampleNote: 'Illustration only. The CSV is a working record, not the attestation itself.',
   },
   borders: {
     geneva_fr: 'Geneva and other non-1983 cantons ← France',
@@ -438,6 +458,7 @@ const en = {
     approxChf: '≈ {chf}',
     chfBillingNote:
       'Billing is in EUR. CHF amounts are approximate, using the ECB euro reference rate of {date} (1 EUR = {rate} CHF). Source: European Central Bank.',
+    fiduciaryLink: 'Fiduciary or payroll provider? See how BorderDay works for several clients.',
   },
   faq: {
     title: 'FAQ',
@@ -1040,6 +1061,7 @@ const en = {
   footer: {
     tagline: 'Day tracking for cross-border teams and employees.',
     rights: '© {year} BorderDay',
+    fiduciaries: 'For fiduciaries and payroll providers',
   },
   auth: {
     signInTitle: 'Sign in',
@@ -1217,6 +1239,32 @@ const en = {
     faq5q: 'Is BorderDay legal or tax advice?',
     faq5a:
       'No. It tracks days against public thresholds linked here and in the app. Confirm filings with your adviser or the competent administration.',
+  },
+  fiduciaries: {
+    crumb: 'Fiduciaries',
+    heroTitle: 'Track cross-border days for every client, in one login',
+    intro:
+      "If you run payroll or HR administration for several companies, BorderDay lets you follow each client's cross-border staff from one account, with every client kept fully separate.",
+    howTitle: 'How it works',
+    how1Title: 'One account, several clients.',
+    how1Body: 'You can be HR for several companies with the same login, and pick the client from a list when you sign in.',
+    how2Title: 'Each client stays separate.',
+    how2Body:
+      'Each company has its own employees, its own dashboard and its own CSV export. Data is never mixed between clients.',
+    how3Title: 'Load the year so far.',
+    how3Body:
+      'For a client joining late in the year, upload one CSV of past days. Employees see the days marked as entered by HR and can confirm or correct them.',
+    how4Title: 'Same counters as the employee.',
+    how4Body: 'Tax and social-security counters on the supported border routes, with warnings at 75% and 90% of a limit.',
+    how5Title: 'The client can stay in charge.',
+    how5Body:
+      'The client company can be the owner and invite you as HR, or you can set up the company account and invite their staff.',
+    pricingTitle: 'Pricing',
+    pricingBody:
+      'Each client company has its own plan: €5 per active employee per month, minimum €39 per month, excl. VAT. Questions about several clients? Write to hello@borderday.com.',
+    dataBody: 'A data processing agreement applies to each company account. No GPS or device location, only day types.',
+    ctaPrimary: 'Create a company account',
+    ctaPricing: 'See company pricing',
   },
 };
 

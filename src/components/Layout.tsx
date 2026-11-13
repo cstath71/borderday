@@ -134,6 +134,8 @@ export default function Layout() {
             <Link to={publicPath(lang, 'employers/geneva')}>{d.employersHub.linkGeneva}</Link>
             {' · '}
             <Link to={publicPath(lang, 'employers/luxembourg')}>{d.employersHub.linkLuxembourg}</Link>
+            {' · '}
+            <Link to={publicPath(lang, 'fiduciaries')}>{d.footer.fiduciaries}</Link>
             {(lang === 'en' || lang === 'fr' || lang === 'de' || lang === 'it') && (
               <>
                 {' · '}

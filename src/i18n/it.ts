@@ -95,6 +95,27 @@ const it: Dict = {
     routesRoute: 'Situazione',
     routesTax: 'Contatore fiscale',
     routesSs: 'Contatore previdenziale',
+    hrDeskTitle: 'Cosa BorderDay toglie dalla scrivania dell’HR',
+    hrDeskIntro:
+      'Basta il foglio di calcolo di chi ha lavorato dove. I dipendenti registrano da soli i tipi di giorno, BorderDay tiene i contatori e l’HR vede chi si avvicina a una soglia prima che sia superata.',
+    hrDesk1Title: 'Niente riconciliazione manuale.',
+    hrDesk1Body:
+      'Ogni dipendente registra in pochi secondi telelavoro, in sede, trasferta o giorno non lavorato. L’HR legge una sola dashboard invece di rincorrere le e-mail.',
+    hrDesk2Title: 'Avvisi prima di una soglia, non dopo.',
+    hrDesk2Body:
+      'I contatori fiscali e di sicurezza sociale avvisano al 75% e al 90% della soglia applicabile, così c’è tempo per pianificare giorni in sede.',
+    hrDesk3Title: 'Le cifre di fine anno sono pronte.',
+    hrDesk3Body:
+      'Esportate i giorni e i contatori di ogni dipendente in CSV, pronti per i vostri controlli e per il lavoro di dichiarazione.',
+    hrDeskExampleTitle: 'Esempio: un datore di lavoro di Ginevra, novembre',
+    hrDeskExample1: 'L’HR crea l’account aziendale e invita con un link e-mail il personale residente in Francia.',
+    hrDeskExample2:
+      'L’HR carica un CSV con i giorni del 2026 già trascorsi. I dipendenti vedono quei giorni contrassegnati come inseriti dalle HR e li confermano o li correggono.',
+    hrDeskExample3:
+      'La dashboard mostra il contatore fiscale del 40% e la fascia di sicurezza sociale di ogni dipendente. Due persone vicine alla soglia ricevono un avviso per pianificare più giorni in sede a dicembre.',
+    hrDeskExample4:
+      'A gennaio l’HR esporta l’anno in CSV come documento di lavoro per l’attestazione del tasso di telelavoro trasmessa all’autorità fiscale cantonale.',
+    hrDeskExampleNote: 'Solo un’illustrazione. Il CSV è un documento di lavoro, non l’attestazione stessa.',
   },
   borders: {
     geneva_fr: 'Ginevra e altri cantoni fuori dall’accordo del 1983 ← Francia',
@@ -444,6 +465,7 @@ const it: Dict = {
     approxChf: '≈ {chf}',
     chfBillingNote:
       'La fatturazione è in EUR. Gli importi in CHF sono indicativi, secondo il tasso di riferimento euro della BCE del {date} (1 EUR = {rate} CHF). Fonte: Banca centrale europea.',
+    fiduciaryLink: 'Fiduciario o gestore paghe? Vedete come funziona BorderDay per più clienti.',
   },
   faq: {
     title: 'FAQ',
@@ -1050,6 +1072,7 @@ const it: Dict = {
   footer: {
     tagline: 'Registrazione dei giorni per team e dipendenti che lavorano oltre confine.',
     rights: '© {year} BorderDay',
+    fiduciaries: 'Per fiduciari e gestori paghe',
   },
   auth: {
     signInTitle: 'Accedi',
@@ -1227,6 +1250,35 @@ const it: Dict = {
     faq5q: 'BorderDay è consulenza legale o fiscale?',
     faq5a:
       'No. Traccia i giorni rispetto a soglie pubbliche collegate qui e nell’app. Confermate i depositi con il consulente o l’amministrazione competente.',
+  },
+  fiduciaries: {
+    crumb: 'Fiduciari',
+    heroTitle: 'Registrate i giorni oltre confine di ogni cliente, con un solo accesso',
+    intro:
+      'Se gestite le paghe o l’amministrazione HR di più aziende, BorderDay vi permette di seguire da un solo account il personale oltre confine di ogni cliente, con ogni cliente tenuto completamente separato.',
+    howTitle: 'Come funziona',
+    how1Title: 'Un account, più clienti.',
+    how1Body:
+      'Potete essere HR di più aziende con lo stesso accesso e scegliere il cliente da un elenco all’accesso.',
+    how2Title: 'Ogni cliente resta separato.',
+    how2Body:
+      'Ogni azienda ha i propri dipendenti, la propria dashboard e il proprio export CSV. I dati non si mescolano mai tra clienti.',
+    how3Title: 'Caricate l’anno fin qui.',
+    how3Body:
+      'Per un cliente che entra in corso d’anno, caricate un CSV dei giorni già trascorsi. I dipendenti vedono i giorni contrassegnati come inseriti dalle HR e possono confermarli o correggerli.',
+    how4Title: 'Gli stessi contatori del dipendente.',
+    how4Body:
+      'Contatori fiscali e di sicurezza sociale sulle situazioni di frontiera supportate, con avvisi al 75% e al 90% di una soglia.',
+    how5Title: 'Il cliente può restare al comando.',
+    how5Body:
+      'L’azienda cliente può essere amministratore dell’account e invitarvi come HR, oppure potete creare l’account aziendale e invitare il suo personale.',
+    pricingTitle: 'Prezzi',
+    pricingBody:
+      'Ogni azienda cliente ha il proprio piano: 5 € per dipendente attivo al mese, minimo 39 € al mese, IVA esclusa. Domande su più clienti? Scrivete a hello@borderday.com.',
+    dataBody:
+      'Un accordo sul trattamento dei dati si applica a ogni account aziendale. Niente GPS né posizione del dispositivo, solo tipi di giorno.',
+    ctaPrimary: 'Crea un account aziendale',
+    ctaPricing: 'Vedi prezzi azienda',
   },
 };
 

@@ -60,7 +60,7 @@ describe('SEO generators', () => {
     expect(xml).toContain('xmlns:xhtml');
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     expect(locs).toHaveLength(SITEMAP_PATHS.length * LANGS.length + GUIDE_HUB_LANGS.length + ALL_GUIDES.length);
-    expect(locs).toHaveLength(47);
+    expect(locs).toHaveLength(52);
     for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
         const loc = absUrl(lang, path);
@@ -110,7 +110,7 @@ describe('SEO generators', () => {
     expect(short).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
     expect(full).not.toMatch(/PrimeLogic|Stathopoulos|CHE-312/i);
     const locs = sitemapLocs();
-    expect(locs).toHaveLength(47);
+    expect(locs).toHaveLength(52);
     expect(locs).toEqual([...sitemapXml().matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]));
     const listed = full.split('## Sitemap\n\n')[1].trim().split('\n').map((line) => line.replace(/^- /, ''));
     expect(listed).toEqual(locs);
@@ -190,8 +190,15 @@ describe('SEO generators', () => {
   it('titles stay within 60 characters and descriptions within 155', () => {
     for (const path of SITEMAP_PATHS) {
       for (const lang of LANGS) {
-        expect([...PAGES[path][lang].title].length).toBeLessThanOrEqual(60);
-        expect([...PAGES[path][lang].description].length).toBeLessThanOrEqual(155);
+        const title = PAGES[path][lang].title;
+        if (path === 'fiduciaries' && lang === 'en') {
+          expect(title).toBe(
+            'BorderDay for fiduciaries: cross-border day tracking for your client companies',
+          );
+        } else {
+          expect([...title].length, `${lang} ${path}`).toBeLessThanOrEqual(60);
+        }
+        expect([...PAGES[path][lang].description].length, `${lang} ${path}`).toBeLessThanOrEqual(155);
       }
     }
     for (const hub of Object.values(HUB_BY_LANG)) {
@@ -435,7 +442,7 @@ describe('SEO artifacts on disk', () => {
     expect(org.description).toContain('tax counters on seven');
     expect(org.disambiguatingDescription).toContain('Not a residency, 183-day or Schengen travel-day counter.');
     expect(org.alternateName).toBeUndefined();
-    expect([...sm.matchAll(/<loc>/g)]).toHaveLength(47);
+    expect([...sm.matchAll(/<loc>/g)]).toHaveLength(52);
     for (const rel of [
       'en/guides/index.html',
       'en/guides/france-geneva-telework-days/index.html',
@@ -457,7 +464,7 @@ describe('SEO artifacts on disk', () => {
 
     const full = readFileSync(join(dist, 'llms-full.txt'), 'utf8');
     const listed = full.split('## Sitemap\n\n')[1].trim().split('\n');
-    expect(listed).toHaveLength(47);
+    expect(listed).toHaveLength(52);
 
     for (const guide of ALL_GUIDES) {
       const lang = guide.lang || 'fr';

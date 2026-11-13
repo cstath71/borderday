@@ -697,7 +697,10 @@ describe('real Postgres: day logs', () => {
       [company, emp],
     );
     const { rows } = await as(hr, `select * from public.bd_list_day_records($1, $2)`, [company, emp]);
-    expect(Object.keys(rows[0]).sort()).toEqual(['corrected_at', 'day_share', 'day_type', 'employee_label', 'employee_user_id', 'overnight_away_for_work', 'prior_day_type', 'voided_at', 'work_date']);
+    expect(Object.keys(rows[0]).sort()).toEqual([
+      'corrected_at', 'day_share', 'day_type', 'employee_confirmed_at', 'employee_corrected_at', 'employee_label',
+      'employee_user_id', 'entry_source', 'imported_at', 'overnight_away_for_work', 'prior_day_type', 'voided_at', 'work_date',
+    ]);
     expect(rows[0].overnight_away_for_work).toBe(true);
     expect(JSON.stringify(rows)).not.toContain('Lugano');
     const self = await as(emp, `select * from public.bd_list_day_records($1)`, [company]);
@@ -1080,7 +1083,7 @@ describe('real Postgres: paid access (C8)', () => {
 
 describe('real Postgres: audit-2 low hardening', () => {
   const tables = [
-    'bd_profiles', 'bd_companies', 'bd_company_members', 'bd_invitations', 'bd_day_logs',
+    'bd_profiles', 'bd_companies', 'bd_company_members', 'bd_invitations', 'bd_day_logs', 'bd_day_import_batches',
     'bd_consents', 'bd_personal_day_logs', 'bd_subscriptions', 'bd_contract_requests', 'bd_stripe_events',
   ];
 
@@ -1294,5 +1297,270 @@ describe('real Postgres: A3-34 account export reads', () => {
     expect(subs.rows[0]).toMatchObject({ plan_kind: 'individual', status: 'active' });
     expect((await as(employee, `select id from public.bd_subscriptions where user_id = $1`, [other])).rowCount).toBe(0);
     expect((await as(employee, `select id from public.bd_consents where user_id = $1`, [other])).rowCount).toBe(0);
+  });
+});
+
+describe('real Postgres: HR day import', () => {
+  async function emailOf(userId: string): Promise<string> {
+    const { rows } = await db.query(`select email from public.bd_profiles where id = $1`, [userId]);
+    return rows[0].email as string;
+  }
+
+  function payload(email: string, date: string, type = 'telework', extra: Record<string, unknown> = {}) {
+    return [{ email, work_date: date, day_type: type, overnight_away: false, half_day: false, note: '', ...extra }];
+  }
+
+  async function importDays(caller: string, companyId: string, rows: unknown[]) {
+    const { rows: out } = await as(
+      caller,
+      `select public.bd_import_company_day_logs($1, $2::jsonb) as result`,
+      [companyId, JSON.stringify(rows)],
+    );
+    return out[0].result as {
+      batch_id: string;
+      imported: number;
+      skipped: number;
+      errors: number;
+      rows: Array<{ index: number; status: string; code: string | null }>;
+    };
+  }
+
+  async function batchCount(companyId: string): Promise<number> {
+    const { rows } = await db.query(`select count(*)::int as n from public.bd_day_import_batches where company_id = $1`, [companyId]);
+    return rows[0].n as number;
+  }
+
+  it('refuses anon, employees, other-company HR, inactive HR and a company with no plan', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const emp = await addMember(owner, company);
+    const outsider = await newUser(`${randomUUID()}@example.com`);
+    const otherOwner = await newUser(`${randomUUID()}@example.com`);
+    const other = await newCompany(otherOwner);
+    const otherHr = await addMember(otherOwner, other, 'hr_viewer');
+    const email = await emailOf(emp);
+
+    await expect(as(null, `select public.bd_import_company_day_logs($1, '[]'::jsonb)`, [company])).rejects.toThrow(/permission denied/);
+    await expect(importDays(emp, company, payload(email, '2026-01-15'))).rejects.toThrow(/day import denied/);
+    await expect(importDays(otherHr, company, payload(email, '2026-01-15'))).rejects.toThrow(/day import denied/);
+    await expect(importDays(outsider, company, payload(email, '2026-01-15'))).rejects.toThrow(/day import denied/);
+
+    await as(owner, `update public.bd_company_members set active = false where company_id = $1 and user_id = $2`, [company, hr]);
+    await expect(importDays(hr, company, payload(email, '2026-01-15'))).rejects.toThrow(/day import denied/);
+    expect(await batchCount(company)).toBe(0);
+
+    const unpaidOwner = await newUser(`${randomUUID()}@example.com`);
+    const unpaid = await newCompany(unpaidOwner, 'Unpaid Co', false);
+    const unpaidEmp = await addMember(unpaidOwner, unpaid);
+    await expect(importDays(unpaidOwner, unpaid, payload(await emailOf(unpaidEmp), '2026-01-15'))).rejects.toThrow(/no active plan/);
+    expect(await batchCount(unpaid)).toBe(0);
+  });
+
+  it('HR cannot insert another person’s day directly, and a forged employee source is forced back', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const hr = await addMember(owner, company, 'hr_viewer');
+    const emp = await addMember(owner, company);
+    await expect(
+      as(hr, `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type, entry_source) values ($1, $2, '2026-04-01', 'telework', 'hr')`, [company, emp]),
+    ).rejects.toThrow(/row-level security|permission denied/);
+    await as(
+      emp,
+      `insert into public.bd_day_logs (company_id, employee_user_id, work_date, day_type, entry_source, imported_by, imported_at)
+       values ($1, $2, '2026-04-02', 'telework', 'hr', $3, now())`,
+      [company, emp, hr],
+    );
+    const forged = await db.query(
+      `select entry_source, imported_by, imported_at from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-04-02'`,
+      [emp],
+    );
+    expect(forged.rows[0]).toMatchObject({ entry_source: 'employee', imported_by: null, imported_at: null });
+  });
+
+  it('imports a past day before joined_at, marks it as HR, and does not overwrite an employee day', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    const email = await emailOf(emp);
+    await logDay(emp, company, '2026-02-02', 'dentist appointment');
+
+    const result = await importDays(owner, company, [
+      ...payload(email, '2026-01-15', 'onsite', { overnight_away: true, half_day: true, note: '=1+1' }),
+      ...payload(email, '2026-02-02', 'telework', { note: 'should not land' }),
+    ]);
+    expect(result.imported).toBe(1);
+    expect(result.skipped).toBe(1);
+    expect(result.rows.map((r) => r.status)).toEqual(['imported', 'skipped']);
+    expect(result.rows[1].code).toBe('skipped_employee');
+
+    const kept = await db.query(
+      `select day_type, note, entry_source from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-02-02'`,
+      [emp],
+    );
+    expect(kept.rows[0]).toMatchObject({ day_type: 'telework', note: 'dentist appointment', entry_source: 'employee' });
+
+    const imported = await db.query(
+      `select day_type, day_share, overnight_away_for_work, note, entry_source, imported_by, imported_at, import_batch_id
+       from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-01-15'`,
+      [emp],
+    );
+    expect(Number(imported.rows[0].day_share)).toBe(0.5);
+    expect(imported.rows[0]).toMatchObject({
+      day_type: 'onsite',
+      overnight_away_for_work: true,
+      note: "'=1+1",
+      entry_source: 'hr',
+      imported_by: owner,
+      import_batch_id: result.batch_id,
+    });
+    expect(imported.rows[0].imported_at).toBeTruthy();
+
+    const listed = await as(owner, `select entry_source, imported_at from public.bd_list_day_records($1, $2)`, [company, emp]);
+    const hrRow = listed.rows.find((r) => r.entry_source === 'hr');
+    expect(JSON.stringify(listed.rows)).not.toContain('=1+1');
+    expect(hrRow.entry_source).toBe('hr');
+    const ownNote = await as(emp, `select note from public.bd_day_logs where work_date = '2026-01-15'`);
+    expect(ownNote.rows[0].note).toBe("'=1+1");
+
+    const again = await importDays(owner, company, payload(email, '2026-01-15', 'telework'));
+    expect(again.rows[0]).toMatchObject({ status: 'skipped', code: 'skipped_already_imported' });
+    const still = await db.query(`select day_type from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-01-15'`, [emp]);
+    expect(still.rows[0].day_type).toBe('onsite');
+  });
+
+  it('lets the employee confirm or correct, and ignores a direct stamp of confirmation', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    const email = await emailOf(emp);
+    await importDays(owner, company, payload(email, '2026-03-03'));
+    await importDays(owner, company, payload(email, '2026-03-04'));
+
+    await as(emp, `update public.bd_day_logs set employee_confirmed_at = now() where work_date = '2026-03-03'`);
+    const ignored = await db.query(
+      `select employee_confirmed_at from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-03-03'`,
+      [emp],
+    );
+    expect(ignored.rows[0].employee_confirmed_at).toBeNull();
+
+    await as(emp, `select public.bd_confirm_imported_day($1, '2026-03-03')`, [company]);
+    const confirmed = await db.query(
+      `select entry_source, employee_confirmed_at from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-03-03'`,
+      [emp],
+    );
+    expect(confirmed.rows[0].entry_source).toBe('hr');
+    expect(confirmed.rows[0].employee_confirmed_at).toBeTruthy();
+
+    await as(emp, `update public.bd_day_logs set day_type = 'onsite' where work_date = '2026-03-04'`);
+    const corrected = await db.query(
+      `select entry_source, day_type, employee_corrected_at, employee_confirmed_at
+       from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-03-04'`,
+      [emp],
+    );
+    expect(corrected.rows[0]).toMatchObject({ entry_source: 'hr', day_type: 'onsite', employee_confirmed_at: null });
+    expect(corrected.rows[0].employee_corrected_at).toBeTruthy();
+
+    const retry = await importDays(owner, company, payload(email, '2026-03-04', 'telework'));
+    expect(retry.rows[0].code).toBe('skipped_employee');
+    const unchanged = await db.query(`select day_type from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-03-04'`, [emp]);
+    expect(unchanged.rows[0].day_type).toBe('onsite');
+  });
+
+  it('rejects dates outside employment, unknown and non-member emails, duplicates and invalid rows', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    const email = await emailOf(emp);
+    const stranger = await newUser(`${randomUUID()}@example.com`);
+    await db.query(
+      `update public.bd_company_members set employed_from = '2026-06-01', employed_until = '2026-08-31' where company_id = $1 and user_id = $2`,
+      [company, emp],
+    );
+    await logDay(emp, company, '2026-07-08');
+    await as(emp, `select public.bd_void_my_day_log($1, '2026-07-08')`, [company]);
+
+    const result = await importDays(owner, company, [
+      ...payload(email, '2026-05-15'),
+      ...payload(email, '2026-07-01'),
+      ...payload(email, '2026-07-08'),
+      ...payload('nobody.example@example.com', '2026-07-02'),
+      ...payload(await emailOf(stranger), '2026-07-02'),
+      { email, work_date: '2026-07-03', day_type: 'telework', overnight_away: false, half_day: false, note: '' },
+      { email, work_date: '2026-07-03', day_type: 'onsite', overnight_away: false, half_day: false, note: '' },
+      ...payload(email, '2026-02-31'),
+      ...payload(email, '2027-01-01'),
+      ...payload(email, '2026-07-04', 'vacation'),
+      ...payload(email, '2026-07-05', 'non_working', { half_day: true }),
+      ...payload(email, '2026-07-06', 'telework', { overnight_away: true }),
+    ]);
+    expect(result.rows.map((r) => r.code)).toEqual([
+      'outside_employment',
+      null,
+      'skipped_employee',
+      'unknown_email',
+      'not_member',
+      'duplicate_in_file',
+      'duplicate_in_file',
+      'bad_date',
+      'future_date',
+      'invalid_type',
+      'invalid_half_day',
+      'invalid_overnight',
+    ]);
+    expect(result.imported).toBe(1);
+    const written = await db.query(`select work_date::text from public.bd_day_logs where employee_user_id = $1 and entry_source = 'hr'`, [emp]);
+    expect(written.rows.map((r) => r.work_date)).toEqual(['2026-07-01']);
+  });
+
+  it('does not touch a day that already belongs to another company', async () => {
+    const ownerA = await newUser(`${randomUUID()}@example.com`);
+    const companyA = await newCompany(ownerA);
+    const person = await addMember(ownerA, companyA);
+    const ownerB = await newUser(`${randomUUID()}@example.com`);
+    const companyB = await newCompany(ownerB);
+    await db.query(
+      `insert into public.bd_company_members (company_id, user_id, role) values ($1, $2, 'employee')`,
+      [companyB, person],
+    );
+    await logDay(person, companyA, '2026-03-09', 'kept');
+    const result = await importDays(ownerB, companyB, payload(await emailOf(person), '2026-03-09', 'onsite'));
+    expect(result.rows[0]).toMatchObject({ status: 'error', code: 'other_company' });
+    const kept = await db.query(
+      `select company_id, day_type, note, entry_source from public.bd_day_logs where employee_user_id = $1 and work_date = '2026-03-09'`,
+      [person],
+    );
+    expect(kept.rows[0]).toMatchObject({ company_id: companyA, day_type: 'telework', note: 'kept', entry_source: 'employee' });
+  });
+
+  it('rejects a date after removal and still allows a day before joined_at when employment start is open', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    const email = await emailOf(emp);
+    await db.query(
+      `update public.bd_company_members set active = false, removed_at = '2026-02-01T00:00:00Z' where company_id = $1 and user_id = $2`,
+      [company, emp],
+    );
+    const result = await importDays(owner, company, [
+      ...payload(email, '2026-01-20'),
+      ...payload(email, '2026-03-01'),
+    ]);
+    expect(result.rows.map((r) => [r.status, r.code])).toEqual([
+      ['imported', null],
+      ['error', 'outside_employment'],
+    ]);
+  });
+
+  it('stores the batch without the file body, and members cannot read it', async () => {
+    const owner = await newUser(`${randomUUID()}@example.com`);
+    const company = await newCompany(owner);
+    const emp = await addMember(owner, company);
+    const result = await importDays(owner, company, payload(await emailOf(emp), '2026-01-21', 'telework', { note: 'private note' }));
+    const batch = await db.query(`select imported_by, imported_count, submitted_count from public.bd_day_import_batches where id = $1`, [result.batch_id]);
+    expect(batch.rows[0]).toMatchObject({ imported_by: owner, imported_count: 1, submitted_count: 1 });
+    expect(JSON.stringify(batch.rows[0])).not.toContain('private note');
+    await expect(as(emp, `select id from public.bd_day_import_batches`)).rejects.toThrow(/permission denied/);
+    await expect(as(owner, `select id from public.bd_day_import_batches`)).rejects.toThrow(/permission denied/);
   });
 });

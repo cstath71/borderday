@@ -81,15 +81,15 @@ describe('A3-12 HR-visible data is disclosed', () => {
   }
 
   it('the notice version moved with the copy', () => {
-    expect(CONSENT_VERSION).toBe('2026-11-01-v6');
+    expect(CONSENT_VERSION).toBe('2026-11-13-v7');
   });
 });
 
 describe('A3-13 DPA version on company creation', () => {
   it('the recorded version is the date the DPA page shows', () => {
-    expect(DPA_VERSION).toBe('2026-11-01');
-    expect(en.dpa.updated).toContain('1 Nov 2026');
-    expect(en.company.dpaVersionNote).toContain('1 Nov 2026');
+    expect(DPA_VERSION).toBe('2026-11-13');
+    expect(en.dpa.updated).toContain('13 Nov 2026');
+    expect(en.company.dpaVersionNote).toContain('13 Nov 2026');
   });
 
   it('every language says the same version and only restates what the DPA page says', () => {

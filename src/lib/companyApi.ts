@@ -8,6 +8,7 @@ import { companyHasPaidAccess, planIsCancellable } from './billing';
 import { supabase } from './supabase';
 import { DPA_VERSION, type Invitation, type CompanyRole, type InviteStatus } from '../company/types';
 import type { BorderId, DayEntry, DayType } from '../borders/types';
+import type { ImportRpcResult, ImportRpcRow } from './dayImport';
 
 /** PostgREST caps responses (default max-rows 1000); longer lists must be paged or counters undercount. */
 const PAGE_SIZE = 1000;
@@ -47,6 +48,7 @@ export function isSchemaLag(error: unknown): boolean {
 
 const MEMBER_PROFILE_COLUMNS =
   'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012, contract_days_per_year, employment_full_months, employment_full_weeks';
+const MEMBER_PROFILE_WITH_EMPLOYMENT_DATES = `employed_from, employed_until, ${MEMBER_PROFILE_COLUMNS}`;
 const PROFILE_WITHOUT_PART_YEAR =
   'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012, contract_days_per_year';
 const PROFILE_WITHOUT_CONTRACT_DAYS = 'employment_percent, a1_in_place, a1_valid_until, frontier_before_2012';
@@ -57,7 +59,8 @@ async function selectWithProfileFallback(
   base: string,
   query: (columns: string) => PromiseLike<{ data: unknown; error: unknown }>,
 ): Promise<any> {
-  let { data, error } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`);
+  let { data, error } = await query(`${base}, ${MEMBER_PROFILE_WITH_EMPLOYMENT_DATES}`);
+  if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${MEMBER_PROFILE_COLUMNS}`));
   if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_PART_YEAR}`));
   if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_CONTRACT_DAYS}`));
   if (isSchemaLag(error)) ({ data, error } = await query(`${base}, ${PROFILE_WITHOUT_FRONTIER}`));
@@ -74,6 +77,9 @@ export interface MemberProfile {
   a1InPlace: boolean;
   a1ValidUntil: string | null;
   frontierBefore2012?: boolean;
+  /** Null when the column is not deployed yet, or when HR has not set a bound. */
+  employedFrom?: string | null;
+  employedUntil?: string | null;
 }
 
 function mapProfile(m: any): MemberProfile {
@@ -166,6 +172,9 @@ export interface CompanyMemberRow {
   a1ValidUntil: string | null;
   frontierBefore2012: boolean;
   contractDaysPerYear?: number | null;
+  /** First / last employment day for historical import. Null means that bound is open. */
+  employedFrom: string | null;
+  employedUntil: string | null;
 }
 
 export async function updateCompanyRetention(companyId: string, months: number) {
@@ -191,6 +200,8 @@ export async function listMembers(companyId: string): Promise<CompanyMemberRow[]
     active: m.active,
     removedAt: m.removed_at ?? null,
     joinedAt: m.joined_at,
+    employedFrom: m.employed_from ?? null,
+    employedUntil: m.employed_until ?? null,
     email: m.bd_profiles?.email ?? '',
     displayName: m.bd_profiles?.display_name?.trim() || m.bd_profiles?.email || '',
     ...mapProfile(m),
@@ -282,11 +293,13 @@ export async function updateEmployeeProfile(
     frontier_before_2012: !!profile.frontierBefore2012,
     ...(profile.annualWorkingDays === undefined ? {} : { annual_working_days: profile.annualWorkingDays }),
   };
-  const extra: Record<string, number | null> = {};
+  const extra: Record<string, number | string | null> = {};
   if (profile.contractDaysPerYear !== undefined) extra.contract_days_per_year = profile.contractDaysPerYear;
   if (profile.employmentFullMonths !== undefined) extra.employment_full_months = profile.employmentFullMonths;
   if (profile.employmentFullWeeks !== undefined) extra.employment_full_weeks = profile.employmentFullWeeks;
-  const run = (patch: Record<string, number | null>) =>
+  if (profile.employedFrom !== undefined) extra.employed_from = profile.employedFrom;
+  if (profile.employedUntil !== undefined) extra.employed_until = profile.employedUntil;
+  const run = (patch: Record<string, number | string | null>) =>
     client()
       .from('bd_company_members')
       .update({ ...fields, ...patch })
@@ -295,19 +308,25 @@ export async function updateEmployeeProfile(
       .select('id');
   let { data, error } = await run(extra);
   // Clearing a value the database cannot hold yet is harmless; setting one must fail visibly.
-  if (isSchemaLag(error)) {
-    const clearing =
-      (profile.contractDaysPerYear == null || profile.contractDaysPerYear === undefined) &&
-      (profile.employmentFullMonths == null || profile.employmentFullMonths === undefined) &&
-      (profile.employmentFullWeeks == null || profile.employmentFullWeeks === undefined);
-    if (clearing) ({ data, error } = await run({}));
-    else if ('employment_full_months' in extra || 'employment_full_weeks' in extra) {
-      const withoutPy = { ...extra };
-      delete withoutPy.employment_full_months;
-      delete withoutPy.employment_full_weeks;
-      ({ data, error } = await run(withoutPy));
-      if (isSchemaLag(error) && (profile.contractDaysPerYear == null || profile.contractDaysPerYear === undefined)) {
-        ({ data, error } = await run({}));
+  if (isSchemaLag(error) && profile.employedFrom == null && profile.employedUntil == null) {
+    const rest = { ...extra };
+    delete rest.employed_from;
+    delete rest.employed_until;
+    ({ data, error } = await run(rest));
+    if (isSchemaLag(error)) {
+      const clearing =
+        (profile.contractDaysPerYear == null || profile.contractDaysPerYear === undefined) &&
+        (profile.employmentFullMonths == null || profile.employmentFullMonths === undefined) &&
+        (profile.employmentFullWeeks == null || profile.employmentFullWeeks === undefined);
+      if (clearing) ({ data, error } = await run({}));
+      else if ('employment_full_months' in rest || 'employment_full_weeks' in rest) {
+        const withoutPy = { ...rest };
+        delete withoutPy.employment_full_months;
+        delete withoutPy.employment_full_weeks;
+        ({ data, error } = await run(withoutPy));
+        if (isSchemaLag(error) && (profile.contractDaysPerYear == null || profile.contractDaysPerYear === undefined)) {
+          ({ data, error } = await run({}));
+        }
       }
     }
   }
@@ -534,6 +553,11 @@ export interface DayLogView {
   correctedAt?: string | null;
   /** Kept when the employee account is deleted (AR3-03). */
   employeeLabel?: string | null;
+  /** employee: the person logged it. hr: HR imported it. Missing on an old RPC means employee. */
+  entrySource?: 'employee' | 'hr';
+  importedAt?: string | null;
+  employeeConfirmedAt?: string | null;
+  employeeCorrectedAt?: string | null;
 }
 
 /**
@@ -610,6 +634,10 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     prior_day_type?: DayType | null;
     corrected_at?: string | null;
     employee_label?: string | null;
+    entry_source?: 'employee' | 'hr' | null;
+    imported_at?: string | null;
+    employee_confirmed_at?: string | null;
+    employee_corrected_at?: string | null;
   };
   const read = (rpc: 'bd_list_day_records' | 'bd_list_day_types') =>
     allPages<Row>((from, to) =>
@@ -631,7 +659,29 @@ export async function listDayLogs(companyId: string, employeeUserId?: string): P
     priorDayType: r.prior_day_type ?? null,
     correctedAt: r.corrected_at ?? null,
     employeeLabel: r.employee_label ?? null,
+    entrySource: r.entry_source === 'hr' ? 'hr' : 'employee',
+    importedAt: r.imported_at ?? null,
+    employeeConfirmedAt: r.employee_confirmed_at ?? null,
+    employeeCorrectedAt: r.employee_corrected_at ?? null,
   }));
+}
+
+export async function importCompanyDayLogs(companyId: string, rows: ImportRpcRow[]): Promise<ImportRpcResult> {
+  const { data, error } = await client().rpc('bd_import_company_day_logs', {
+    p_company_id: companyId,
+    p_rows: rows,
+  });
+  if (error) throw error;
+  return data as ImportRpcResult;
+}
+
+/** The employee agrees an HR-imported day is right. A later edit still wins. */
+export async function confirmImportedDay(companyId: string, workDate: string): Promise<void> {
+  const { error } = await client().rpc('bd_confirm_imported_day', {
+    p_company_id: companyId,
+    p_work_date: workDate,
+  });
+  if (error) throw error;
 }
 
 /**

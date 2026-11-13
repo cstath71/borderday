@@ -11,6 +11,7 @@ import type {
 } from '../borders/types';
 import { annualBaseFor, evaluatePack, zurichToday } from '../lib/counting';
 import { csvCell } from '../lib/csvCell';
+import { provenanceOf } from '../lib/dayImport';
 import type { DayLog } from './types';
 
 export type AggregateStatus = 'ok' | 'warn' | 'critical' | 'at_limit' | 'over' | 'disabled' | 'mixed';
@@ -274,12 +275,21 @@ export function rowsToCsv(rows: EmployeeDashboardRow[], year: number): string {
  */
 export function dayRowsToCsv(
   rows: Pick<EmployeeDashboardRow, 'userId' | 'displayName' | 'email' | 'borderPackId' | 'isDemo'>[],
-  logs: Array<{ employeeUserId: string; workDate: string; dayType: DayType; overnightAway?: boolean; dayShare?: 0.5 | 1 }>,
+  logs: Array<{
+    employeeUserId: string;
+    workDate: string;
+    dayType: DayType;
+    overnightAway?: boolean;
+    dayShare?: 0.5 | 1;
+    entrySource?: 'employee' | 'hr' | null;
+    employeeConfirmedAt?: string | null;
+    employeeCorrectedAt?: string | null;
+  }>,
   year: number,
 ): string {
   const note =
-    '# BorderDay day-level working export — dates, day types, half-day and night-away marks only, never location or notes. A half day counts as 0.5 in used_days, except where a rule counts any part of a day as a whole day and on the night and non-return counters. Not an official filing.';
-  const lines = [note, 'demo,employee_name,employee_email,route,date,day_type,half_day,night_away'];
+    '# BorderDay day-level working export — dates, day types, half-day and night-away marks, and provenance (employee, hr_import, hr_import_confirmed, hr_import_corrected). Never location or notes. A half day counts as 0.5 in used_days, except where a rule counts any part of a day as a whole day and on the night and non-return counters. Not an official filing.';
+  const lines = [note, 'demo,employee_name,employee_email,route,date,day_type,half_day,night_away,provenance'];
   const byUser = new Map(rows.map((r) => [r.userId, r]));
   const inYear = logs
     .filter((l) => byUser.has(l.employeeUserId) && Number(l.workDate.slice(0, 4)) === year)
@@ -296,6 +306,7 @@ export function dayRowsToCsv(
         l.dayType,
         l.dayShare === 0.5 ? 'yes' : 'no',
         l.overnightAway ? 'yes' : 'no',
+        provenanceOf(l),
       ].join(','),
     );
   }

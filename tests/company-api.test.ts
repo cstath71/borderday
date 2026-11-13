@@ -105,7 +105,7 @@ describe('companyApi', () => {
     expect(state.calls[0].args).toEqual({ cid: 'c1', employee: 'e1' });
     expect(op(state.calls[1], 'range')[0]).toEqual([1000, 1999]);
     expect(logs).toHaveLength(1001);
-    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null, employeeLabel: null });
+    expect(logs[0]).toEqual({ employeeUserId: 'e1', workDate: 'd0', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null, employeeLabel: null, entrySource: 'employee', importedAt: null, employeeConfirmedAt: null, employeeCorrectedAt: null });
     expect(JSON.stringify(logs)).not.toContain('secret');
   });
 
@@ -179,7 +179,7 @@ describe('companyApi', () => {
           : { data: [{ employee_user_id: 'e1', work_date: '2026-01-05', day_type: 'telework' }], error: null };
       const logs = await api.listDayLogs('c1');
       expect(state.calls.map((c) => c.rpc)).toEqual(['bd_list_day_records', 'bd_list_day_types']);
-      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null, employeeLabel: null }]);
+      expect(logs).toEqual([{ employeeUserId: 'e1', workDate: '2026-01-05', dayType: 'telework', overnightAway: false, dayShare: 1, voidedAt: null, priorDayType: null, correctedAt: null, employeeLabel: null, entrySource: 'employee', importedAt: null, employeeConfirmedAt: null, employeeCorrectedAt: null }]);
     });
 
     it('listDayLogs still throws on a real error', async () => {
@@ -525,6 +525,23 @@ describe('companyApi', () => {
     expect(api.sameEmail(' A@b.com', 'a@B.com ')).toBe(true);
     expect(api.sameEmail('a@b.com', 'c@b.com')).toBe(false);
     expect(api.sameEmail(undefined, undefined)).toBe(false);
+  });
+
+  it('imports days only through the HR RPC, never a direct day-log write', async () => {
+    const result = { batch_id: 'b1', imported: 1, skipped: 0, errors: 0, rows: [] };
+    state.respond = () => ({ data: result, error: null });
+    const rows = [{ email: 'ada.example@example.com', work_date: '2026-03-02', day_type: 'telework', overnight_away: false, half_day: false, note: '' }];
+    await expect(api.importCompanyDayLogs('c1', rows)).resolves.toEqual(result);
+    expect(state.calls[0].rpc).toBe('bd_import_company_day_logs');
+    expect(state.calls[0].args).toEqual({ p_company_id: 'c1', p_rows: rows });
+    expect(state.calls.some((c) => c.table === 'bd_day_logs')).toBe(false);
+  });
+
+  it('confirms an imported day through its RPC', async () => {
+    await api.confirmImportedDay('c1', '2026-03-02');
+    expect(state.calls[0].rpc).toBe('bd_confirm_imported_day');
+    expect(state.calls[0].args).toEqual({ p_company_id: 'c1', p_work_date: '2026-03-02' });
+    expect(state.calls.some((c) => c.table === 'bd_day_logs')).toBe(false);
   });
 });
 

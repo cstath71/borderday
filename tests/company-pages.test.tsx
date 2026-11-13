@@ -37,6 +37,8 @@ vi.mock('../src/lib/companyApi', async (original) => {
     updateMemberSelf: vi.fn(),
     updateMyProfile: vi.fn(),
     updateEmployeeProfile: vi.fn(async () => undefined),
+    importCompanyDayLogs: vi.fn(async () => ({ batch_id: 'b1', imported: 0, skipped: 0, errors: 0, rows: [] })),
+    confirmImportedDay: vi.fn(async () => undefined),
     updateMyDisplayName: vi.fn(),
     listDayLogs: vi.fn(async () => []),
     listMyDayNotes: vi.fn(async () => new Map()),
@@ -166,6 +168,8 @@ describe('Dashboard', () => {
       a1ValidUntil: null,
       frontierBefore2012: false,
       annualWorkingDays: 240,
+      employedFrom: null,
+      employedUntil: null,
     });
     await waitFor(() => expect(mocked.listMembers.mock.calls.length).toBeGreaterThan(calls));
   });
@@ -631,10 +635,13 @@ describe('History', () => {
     asHr();
     mocked.listDayLogs.mockResolvedValue([
       { employeeUserId: 'emp1', workDate: '2026-03-02', dayType: 'telework', note: 'dentist' } as any,
+      { employeeUserId: 'emp1', workDate: '2026-03-03', dayType: 'onsite', entrySource: 'hr' } as any,
     ]);
     const { container } = open('/en/company/c1/employee/emp1');
     await screen.findByText(new Date('2026-03-02T12:00:00').toLocaleDateString('en-CH', { year: 'numeric', month: 'short', day: 'numeric' }));
     expect(screen.getByRole('cell', { name: en.dayTypes.telework })).toBeTruthy();
+    expect(screen.getByRole('columnheader', { name: en.company.colEnteredBy })).toBeTruthy();
+    expect(screen.getByRole('cell', { name: en.company.dayImport.provenanceHr })).toBeTruthy();
     expect(screen.getByText(en.company.countersHeading, { selector: 'h2' })).toBeTruthy();
     expect(container.textContent).not.toContain('dentist');
     expect(mocked.listDayLogs).toHaveBeenCalledWith('c1', 'emp1');

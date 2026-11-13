@@ -38,7 +38,18 @@ export function dayStoreFor(access: AppAccess, userId: string | null): DayStore 
         return logs
           .map((l) => {
             const note = notes.get(l.workDate);
-            return { date: l.workDate, type: l.dayType, overnightAway: l.overnightAway, dayShare: l.dayShare, ...(note ? { note } : {}) };
+            const entrySource: 'employee' | 'hr' = l.entrySource === 'hr' ? 'hr' : 'employee';
+            return {
+              date: l.workDate,
+              type: l.dayType,
+              overnightAway: l.overnightAway,
+              dayShare: l.dayShare,
+              entrySource,
+              importedAt: l.importedAt ?? null,
+              employeeConfirmedAt: l.employeeConfirmedAt ?? null,
+              employeeCorrectedAt: l.employeeCorrectedAt ?? null,
+              ...(note ? { note } : {}),
+            };
           })
           .sort((a, b) => a.date.localeCompare(b.date));
       },

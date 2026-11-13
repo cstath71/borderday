@@ -11,6 +11,8 @@ import { getDict, t } from '../../i18n';
 import { useAuth } from '../../lib/auth';
 import { publicPath } from '../../lib/publicPath';
 import { companyHasPaidAccess, planStatus, type PlanStatus } from '../../lib/billing';
+import { zurichToday } from '../../lib/counting';
+import type { ImportMember } from '../../lib/dayImport';
 import * as api from '../../lib/companyApi';
 
 /** Stripe's webhook usually lands within seconds of the return from checkout. */
@@ -24,6 +26,7 @@ type Loaded = {
   rows: EmployeeDashboardRow[];
   formerRows: EmployeeDashboardRow[];
   dayLogs: api.DayLogView[];
+  members: api.CompanyMemberRow[];
   invites: Invitation[];
   retentionMonths: number;
   isOwner: boolean;
@@ -119,6 +122,7 @@ export default function CompanyDashboard() {
             ...buildDetachedDashboardRows({ logs, year }),
           ],
           dayLogs: logs,
+          members,
           invites,
           retentionMonths: company.data_retention_months ?? 24,
           isOwner: membership?.role === 'owner',
@@ -266,6 +270,34 @@ export default function CompanyDashboard() {
                 }
               : undefined
           }
+          employmentByUser={Object.fromEntries(
+            data.members.map((m) => [m.userId, { employedFrom: m.employedFrom ?? null, employedUntil: m.employedUntil ?? null }]),
+          )}
+          importContext={{
+            today: zurichToday(),
+            members: data.members.map(
+              (m): ImportMember => ({
+                userId: m.userId,
+                email: m.email,
+                active: m.active !== false,
+                removedAt: m.removedAt ?? null,
+                employedFrom: m.employedFrom ?? null,
+                employedUntil: m.employedUntil ?? null,
+              }),
+            ),
+            existing: data.dayLogs.map((l) => ({
+              employeeUserId: l.employeeUserId,
+              workDate: l.workDate,
+              entrySource: l.entrySource,
+              employeeCorrectedAt: l.employeeCorrectedAt,
+              voidedAt: l.voidedAt,
+            })),
+            onImport: async (rows) => {
+              const result = await api.importCompanyDayLogs(companyId!, rows);
+              setTick((x) => x + 1);
+              return result;
+            },
+          }}
         />
       </>
     );

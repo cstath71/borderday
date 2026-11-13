@@ -291,9 +291,9 @@ describe('E23: day-level CSV', () => {
 
   it('has one sorted row per day of the listed employees in that year, with half day and night away', () => {
     expect(lines.slice(1)).toEqual([
-      'demo,employee_name,employee_email,route,date,day_type,half_day,night_away',
-      'no,"Ann","a@x.com",geneva_fr,2026-02-02,onsite,no,yes',
-      'no,"Ann","a@x.com",geneva_fr,2026-02-03,telework,yes,no',
+      'demo,employee_name,employee_email,route,date,day_type,half_day,night_away,provenance',
+      'no,"Ann","a@x.com",geneva_fr,2026-02-02,onsite,no,yes,employee',
+      'no,"Ann","a@x.com",geneva_fr,2026-02-03,telework,yes,no,employee',
     ]);
   });
   it('says how half days count and never carries a note, even if one is passed in', () => {
@@ -301,9 +301,18 @@ describe('E23: day-level CSV', () => {
     expect(csv).not.toContain('secret');
     expect(lines[1]).not.toMatch(/note|location|gps/i);
   });
-  it('every column is already disclosed to the employee: names, route, type, date, half day, night away', () => {
+  it('marks an HR import, including a later confirmation, and still omits the note', () => {
+    const imported = dayRowsToCsv(
+      [r],
+      [{ employeeUserId: 'u1', workDate: '2026-04-01', dayType: 'telework', entrySource: 'hr', employeeConfirmedAt: '2026-04-02T00:00:00Z', note: 'secret' }],
+      2026,
+    );
+    expect(imported).toContain('hr_import_confirmed');
+    expect(imported).not.toContain('secret');
+  });
+  it('every column is already disclosed to the employee: names, route, type, date, half day, night away, provenance', () => {
     for (const col of lines[1].split(',')) {
-      expect(['demo', 'employee_name', 'employee_email', 'route', 'date', 'day_type', 'half_day', 'night_away']).toContain(col);
+      expect(['demo', 'employee_name', 'employee_email', 'route', 'date', 'day_type', 'half_day', 'night_away', 'provenance']).toContain(col);
     }
   });
 });
